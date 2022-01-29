@@ -48,26 +48,26 @@ width: 250;
 <tr><td colspan=5><h4>Арифметические (CTYPE=0)</h4></td></tr>
 <tr><td colspan=5>Бинарная команда DST := DST OP SRC</td></tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
-<tr><td>AND</td><td>0000</td><td>AND R0, R1</td><td>Побитовое И</td><td>1/2</td></tr>
-<tr><td>OR</td><td>0001</td><td>OR R0, R1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
-<tr><td>XOR</td><td>0010</td><td>XOR R0, R1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>MUL?</td><td>0011</td><td>MUL R0, R1</td><td>-</td><td>1/2</td></tr>
-<tr><td>ADD</td><td>0100</td><td>ADD R0, R1</td><td>Сложение</td><td>1/2</td></tr>
-<tr><td>ADDC</td><td>0101</td><td>ADDC R0, R1</td><td>Сложение с переносом</td><td>1/2</td></tr>
-<tr><td>CMP</td><td>0110</td><td>CMP R0, R1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
-<tr><td>CMPC</td><td>0111</td><td>CMPC R0, R1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
+<tr><td>AND</td><td>0000</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
+<tr><td>OR</td><td>0001</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
+<tr><td>XOR</td><td>0010</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
+<tr><td>MUL?</td><td>0011</td><td>MUL r0, r1</td><td>-</td><td>1/2</td></tr>
+<tr><td>ADD</td><td>0100</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
+<tr><td>ADDC</td><td>0101</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
+<tr><td>CMP</td><td>0110</td><td>CMP r0, r1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
+<tr><td>CMPC</td><td>0111</td><td>CMPC r0, r1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
 <tr><td colspan=5>Унарные команды DST := OP SRC, по умолчанию DST := OP DST,<br>
-например CLR R1, значит то же, что и CLR R1, R1,<br> то же что и R1 := CLR R1.<br>
-Пример с NEG лучше: NEG R1 - это то же, что и: R1 := NEG R1<br>
-Можно использовать и два регистра: R2 := NEG R1 - или NEG R2, R1</td></tr>
-<tr><td>CLR</td><td>1000</td><td>CLR R1</td><td>Сброс всех битов</td><td>1</td></tr>
-<tr><td>NEG</td><td>1001</td><td>NEG R1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
-<tr><td>LSL</td><td>1010</td><td>LSL R1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
-<tr><td>LSR</td><td>1011</td><td>LSR R1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
-<tr><td>MIR</td><td>1100</td><td>MIR R1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
-<tr><td>COPY</td><td>1101</td><td>COPY R1, R2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td>SWAB</td><td>1110</td><td>SWAB R1</td><td>Перестановка ниблов местами</td><td>1</td></tr>
-<tr><td>SET</td><td>1111</td><td>SET R1</td><td>Установка всех битов регистра в 1</td><td>1</td></tr>
+например CLR r1, значит то же, что и CLR r1, r1,<br> то же что и r1 := CLR r1.<br>
+Пример с NEG лучше: NEG r1 - это то же, что и: r1 := NEG r1<br>
+Можно использовать и два регистра: r2 := NEG r1 - или NEG r2, r1</td></tr>
+<tr><td>CLR</td><td>1000</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
+<tr><td>NEG</td><td>1001</td><td>NEG r1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
+<tr><td>LSL</td><td>1010</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
+<tr><td>LSR</td><td>1011</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
+<tr><td>MIR</td><td>1100</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
+<tr><td>MOV</td><td>1101</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
+<tr><td>SWAB</td><td>1110</td><td>SWAB r1</td><td>Перестановка ниблов местами</td><td>1</td></tr>
+<tr><td>SET</td><td>1111</td><td>SET r1</td><td>Установка всех битов регистра в 1</td><td>1</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=1)</h4></td></tr>
 <tr><td>JZ</td><td>0000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
 <tr><td>JNZ</td><td>0001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
@@ -75,8 +75,8 @@ width: 250;
 <tr><td>JG</td><td>0011</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
 <tr><td>JL</td><td>0100</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
 <tr><td>JC</td><td>0101</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
-<tr><td>JS</td><td>0110</td><td>JS ADDR</td><td>Переход, если флаг S установлен</td><td>2</td></tr>
-<tr><td>JNS</td><td>0111</td><td>JNS ADDR</td><td>Переход, если флаг S сброшен</td><td>2</td></tr>
+<tr><td>JNC</td><td>0110</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
+<tr><td>JS</td><td>0111</td><td>JS ADDR</td><td>Переход, если флаг S установлен</td><td>2</td></tr>
 <tr><td>JMP</td><td>1000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>1001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td>RET</td><td>1010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
@@ -89,12 +89,12 @@ width: 250;
 <tr><td>EI</td><td>0011</td><td>EI</td><td>Enable interrupt</td><td>1</td></tr>
 <tr><td>RESET</td><td>0100</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
 <tr><td colspan=5><h4>Передачи (CTYPE=3)</h4></td></tr>
-<tr><td>LOAD</td><td>0000</td><td>LOAD R0</td><td>Загрузка из RAM[R7:R6] в регистр</td><td>1</td></tr>
-<tr><td>STORE</td><td>0001</td><td>STORE R0</td><td>Запись в RAM[R7:R6] указанного регистра</td><td>1</td></tr>
-<tr><td>IN</td><td>0010</td><td>IN R0, PORTx</td><td>Чтение из порта в R0 (требует доработки логики АЛУ)</td><td>1</td></tr>
-<tr><td>OUT</td><td>0011</td><td>OUT PORTx, R0</td><td>Вывод регистра R0 в заданный порт</td><td>1</td></tr>
-<tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, R1</td><td>Вывод регистра R1 XOR R0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1</td></tr>
-<tr><td>CFG</td><td>0101</td><td>CFG ADDR, R0</td><td>Вывод регистра R0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
+<tr><td>LOAD</td><td>0000</td><td>LOAD r0</td><td>Загрузка из RAM[r7:r6] в регистр</td><td>1</td></tr>
+<tr><td>STORE</td><td>0001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра</td><td>1</td></tr>
+<tr><td>IN</td><td>0010</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
+<tr><td>OUT</td><td>0011</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1</td></tr>
+<tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1</td></tr>
+<tr><td>CFG</td><td>0101</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
@@ -119,25 +119,25 @@ width: 250;
 <h3>Регистры</h3>
 <table border=1 width=250>
 <tr><td>Имя</td><td>Назначение</td></tr>
-<tr><td>R0-R7</td><td>Регистр общего назначения</td></tr>
-<tr><td>R7:R6</td><td>Регистр адреса ОЗУ</td></tr>
+<tr><td>r0-r7</td><td>Регистр общего назначения</td></tr>
+<tr><td>r7:r6</td><td>Регистр адреса ОЗУ</td></tr>
 <tr><td>CONST</td><td>Регистр константы</td></tr>
 </table>
 
 <h3>Нумерация регистров</h3>
 <table border=1>
 <tr><td colspan=2>A(DST)</td><td colspan=2>B(SRC)</td><td class="big">Примечание</td></tr>
-<tr><td>R0</td><td>000</td><td>R0</td><td>000</td><td></td></tr>
-<tr><td>R1</td><td>001</td><td>R1</td><td>001</td><td></td></tr>
-<tr><td>R2</td><td>010</td><td>R2</td><td>010</td><td></td></tr>
-<tr><td>R3</td><td>011</td><td>R3</td><td>011</td><td></td></tr>
-<tr><td>R4</td><td>100</td><td>CONST</td><td>100</td><td>Константа, иногда лежит во втором слове команды</td></tr>
-<tr><td>R5</td><td>101</td><td>PIN0</td><td>101</td><td>Входной порт 0</td></tr>
-<tr><td>R6</td><td>110</td><td>PIN1</td><td>110</td><td>Входной порт 1</td></tr>
-<tr><td>R7</td><td>111</td><td>PORT0</td><td>111</td><td>Выходной порт 0! Позволяет сэкономить на команде IN и использовать данные порта сразу как операнд.</td></tr>
+<tr><td>r0</td><td>000</td><td>r0</td><td>000</td><td></td></tr>
+<tr><td>r1</td><td>001</td><td>r1</td><td>001</td><td></td></tr>
+<tr><td>r2</td><td>010</td><td>r2</td><td>010</td><td></td></tr>
+<tr><td>r3</td><td>011</td><td>r3</td><td>011</td><td></td></tr>
+<tr><td>r4</td><td>100</td><td>CONST</td><td>100</td><td>Константа, иногда лежит во втором слове команды</td></tr>
+<tr><td>r5</td><td>101</td><td>PIN0</td><td>101</td><td>Входной порт 0</td></tr>
+<tr><td>r6</td><td>110</td><td>PIN1</td><td>110</td><td>Входной порт 1</td></tr>
+<tr><td>r7</td><td>111</td><td>PORT0</td><td>111</td><td>Выходной порт 0! Позволяет сэкономить на команде IN и использовать данные порта сразу как операнд.</td></tr>
 </table>
 
-<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры R4-R7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! R6-R7 подключены к шине адреса ОЗУ.</p>
+<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры R4-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
 
 <h3>Порты</h3>
 <table border=1 width=250>
@@ -243,27 +243,27 @@ width: 250;
 
 <h3>Примеры команд</h3>
 <pre>
-MOV R0, R1    ; R0 := R1
-ADD R0, R1    ; R0 += R1
-AND R3, CONST ; R3 &= CONST
-MOV R7, R1    ; R7 := R1
-OR R7, CONST  ; R7 |= CONST
-MOV R2, PIN0  ; R2 := PIN0  == in
+MOV r0, r1    ; r0 := r1
+ADD r0, r1    ; r0 += r1
+AND r3, CONST ; r3 &= CONST
+MOV r7, r1    ; r7 := r1
+OR r7, CONST  ; r7 |= CONST
+MOV r2, PIN0  ; r2 := PIN0  == in
 
-OUT PORT1, R1 ; PORT1 := R1
+OUT PORT1, r1 ; PORT1 := r1
 OUT PORT1, CONST ; PORT1 := CONST
 
-MOV R3, CONST ; R3:= CONST
-AND R3, PIN0  ; R3 = R3 & PIN0
+MOV r3, CONST ; r3:= CONST
+AND r3, PIN0  ; r3 = r3 & PIN0
 
-MOV R3, R7    ; ошибка! R7 нельзя просто прочитать
+MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
 
-ADD R6, 1     ; инкремент пары регистров
-ADDC R7, 0
+ADD r6, 1     ; инкремент пары регистров
+ADDC r7, 0
 
-NEG R0        ; R0 := ~R0
-NEG R0, R1    ; R0 := ~R1
-NEG R0, PIN1  ; R0 := ~PIN1
+NEG r0        ; r0 := ~r0
+NEG r0, r1    ; r0 := ~r1
+NEG r0, PIN1  ; r0 := ~PIN1
 
 CALL F1       ; вызвать функцию со смещением F1
 
@@ -272,16 +272,16 @@ NOP
 JMP M1
 
 F1:
-ADD R0, R1
+ADD r0, r1
 RET
 
-LOAD R0  ; R0 := RAM[R6:R7]
-STORE R1 ; RAM[R6:R7] := R1
+LOAD r0  ; r0 := RAM[r6:r7]
+STORE r1 ; RAM[r6:r7] := r1
 
-MOV R3, 10
+MOV r3, 10
 L1:
 ; do something
-ADD R3, 255
+ADD r3, 255
 JZ L1
 </pre>
 
@@ -320,7 +320,7 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
-<tr><td>АЛУ</td><td></td><td>вычисляет</td><td>Latch IR, Latch Flags</td><td>Latch R0-R7</td></tr>
+<tr><td>АЛУ</td><td></td><td>вычисляет</td><td>Latch IR, Latch Flags</td><td>Latch r0-r7</td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
@@ -331,7 +331,7 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td>пока выполняется арифметическая команда</td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
 <tr><td>Стек</td><td></td><td>Push Addr<br>(сумматора, не мультиплексора). Стек должен быть на 573, чтобы изменяющийся сумматор таки попал в него!</td><td>SP++ (такой необычный стек)</td><td></td></tr>
-<tr><td>АЛУ</td><td></td><td></td><td>Latch IR, Latch Flags</td><td>Latch R0-R7</td></tr>
+<tr><td>АЛУ</td><td></td><td></td><td>Latch IR, Latch Flags</td><td>Latch r0-r7</td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td>MUX <= COP[SEL] = 2<br>передумали ;)</td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
@@ -346,7 +346,7 @@ JZ L1
 <tr><td>CMP/CMPC</td><td>74HC85*2, 74HC08, лучше в SO</td><td>3</td></tr>
 <tr><td>NEG</td><td>74HC00*2, 74HC573, SO</td><td>3</td></tr>
 <tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
-<tr><td>COPY</td><td>74HC573, SO</td><td>1</td></tr>
+<tr><td>MOV</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>ADD Flag</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP Flags</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CLR</td><td>74HC573, SO</td><td>1</td></tr>
