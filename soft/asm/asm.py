@@ -32,54 +32,94 @@ cmds = {
 "OUT": {"COP": 9, "TP": 3, "ARGS": 2},
 }
 
-labels = []
+regs = {
+"R0": 0,
+"R1": 1,
+"R2": 2,
+"R3": 3,
+"R4": 4,
+"R5": 5,
+"R6": 6,
+"R7": 7,
+"CONST": 4,
+"PIN0": 5,
+"PIN1": 6,
+"PORT0": 7,
+}
+
+labels = {}
 label_of_line = {}
 parsed_cmd = []
 have_errors = False
 
 def cmd_ok(parts):
-  name = parts[0].upper()
+  name = parts[0]
   cmd = cmds[name]
   args = cmd["ARGS"]
   if len(parts) - 1 != args:
-    print("Wait for %d args in %s" % (args, name))
+    print("Error. Wait for %d args in %s" % (args, name))
     return False
+  if args > 1 and parts[1] not in regs:
+    print("Unknown register %s in '%s'" % (parts[1], " ".join(parts)))
+
   return True
 
-def first(fname):
-  print("Assembling: " + fname)
-  if os.path.isfile(fname):
-    with open(fname) as f:
-      lines = f.readlines()
-      last_label = ""
-      for l in lines:
-        pos = l.find(';')
-        if pos != -1:  # remove comments
-          l = l[:pos]
-        l = l.strip()  # remove spaces
-        pos = l.find(':')
-        if pos != -1:
-          label = l[:pos]
-          l = l[pos+1:]
-          print(label)
-          if len(label) > 0:
-            labels.append(label)
-            last_label = label
-        p = l.split()  # get command parts
-        if len(p) == 0:
-          continue
-        if p[0].upper() not in cmds:
-          print("Unknown cmd: " + p[0])
-        if cmd_ok(p):
-          parsed_cmd.append(p)
-          if len(last_label) > 0:
-            label_of_line[len(parsed_cmd)-1] = last_label
-            last_label = ""
-        else:
-          have_errors = True
-  else:
-    print("File not exist")
-    #with 
+def read_and_prepare(fname):
+  res = []
+  with open(fname) as f:
+    lines = f.readlines()
+    for l in lines:
+      pos = l.find(';')
+      if pos != -1:  # remove comments
+        l = l[:pos]
+      l = l.strip()  # remove spaces
+      l = l.upper()
+      pos = l.find(':')
+      if pos != -1: # split comments into two lines
+        label = l[:pos+1]
+        res.append(label)
+        l = l[pos+1:].strip()
+      if len(l) > 0:
+        l = l.replace(',', ' ')
+        res.append(l)
+  return res
+
+def extract_labels(lines):
+  res = []
+  if lines[-1].find(':') != -1:
+    print("Error. Labels in last line is not allowed.")
+    return res
+  for idx, l in enumerate(lines):
+    if idx + 1 < len(lines) and \
+       l.find(':') != -1 and \
+       lines[idx + 1].find(':') != -1:
+      print("Error. Only one label per code line allowed.")
+      return res
+
+  for idx, l in enumerate(lines):
+    if idx + 1 < len(lines) and \
+       l.find(':') != -1:
+      label = l[0:-1]  # remove colon
+      if label in labels:
+        print("Error. Label %s already exist." % label)
+      else:
+        # use index of CLEARED code line because label will be removed from code
+        labels[label] = len(res)
+        label_of_line[len(res)] = label
+    else:
+      res.append(l)
+
+  return res
+
+def first(lines):
+  for l in lines:
+    p = l.split()
+    if p[0] not in cmds:
+      print("Error. Unknown cmd: " + p[0])
+    if cmd_ok(p):
+      parsed_cmd.append(p)
+    else:
+      have_errors = True
   return
 
 def second():
@@ -94,15 +134,34 @@ def second():
   return
 
 def asm(fname):
-  first(fname)
-  second()
-  #print(parsed_cmd)
+  print("Assembling: " + fname)
+  if not os.path.isfile(fname):
+    print("Error. File not exist.")
+    return
+
+  lines = read_and_prepare(fname)
+  if len(lines) == 0:
+    print("No useful code in file!")
+    return
+
+  lines = extract_labels(lines)
+  for idx, l in enumerate(lines):
+    if idx in label_of_line:
+      print("%d: %s # %s" % (idx, l, label_of_line[idx]))
+    else:
+      print("%d: %s" % (idx, l))
+  first(lines)
+
+  for p in parsed_cmd:
+    print(p)
 
 def main():
   if len(sys.argv) != 2:
     print("To use type:\nasm.py your_source.asm\n")
     return
   asm(sys.argv[1])
+  print("")
   print("labels: ", labels)
+  print("label_of_line: ", label_of_line)
 
 main()
