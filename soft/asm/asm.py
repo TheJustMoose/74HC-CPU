@@ -52,16 +52,63 @@ label_of_line = {}
 parsed_cmd = []
 have_errors = False
 
+def to_num(val):
+  res = 0
+  if val.find("0X") == 0 and len(val) > 2:
+    val = val[2:]
+    res = int(val, 16)
+  elif val.find("0") == 0 and len(val) > 1:
+    val = val[1:]
+    res = int(val, 8)
+  elif val.isdigit():
+    res = int(val)
+  return res
+
+def is_num(val):
+  try:
+    res = to_num(val)
+    return True
+  except ValueError:
+    return False
+
+def get_num(val):
+  try:
+    to_num(val)
+    print("%s -> %d" % (val, res))
+  except ValueError:
+    print("Not a valid number: %s" % val)
+    return 0
+
 def cmd_ok(parts):
   name = parts[0]
+  dst = parts[1] if len(parts) > 1 else ""
+  src = parts[2] if len(parts) > 2 else ""
+
   cmd = cmds[name]
   args = cmd["ARGS"]
+  ct = cmd["TP"]  # command type
   if len(parts) - 1 != args:
     print("Error. Wait for %d args in %s" % (args, name))
     return False
-  if args > 1 and parts[1] not in regs:
-    print("Unknown register %s in '%s'" % (parts[1], " ".join(parts)))
 
+  if ct == 0:  # arithm
+    if args > 0:
+      if dst not in regs:
+        print("Unknown register %s in '%s'" % (dst, " ".join(parts)))
+        return False
+    if args > 1:
+      if src in regs or is_num(src):
+        # src is ok
+        dummy = ""
+      elif src not in regs:
+        print("Unknown register %s in '%s'" % (src, " ".join(parts)))
+        return False
+      elif not is_num(src):
+        print("Unknown value %s in '%s'" % (src, " ".join(parts)))
+  elif ct == 1:  # jumps
+    if args > 0 and dst not in labels:
+      print("Unknown label %s in '%s'" % (parts[1], " ".join(parts)))
+      return False
   return True
 
 def read_and_prepare(fname):
@@ -116,7 +163,7 @@ def first(lines):
     p = l.split()
     if p[0] not in cmds:
       print("Error. Unknown cmd: " + p[0])
-    if cmd_ok(p):
+    elif cmd_ok(p):
       parsed_cmd.append(p)
     else:
       have_errors = True
