@@ -73,8 +73,8 @@ dst_regs = {
 "R7": 7,
 }
 
-labels = {}
-label_of_line = {}
+label_to_line = {}
+line_to_label = {}
 parsed_cmd = []
 have_errors = False
 
@@ -141,11 +141,11 @@ def cmd_ok(parts):
         return False
   elif ct == 1:  # jumps
     if args > 0:
-      if dst in labels or is_num(dst):
+      if dst in label_to_line or is_num(dst):
         if is_num(dst) and get_num(dst) > 65535:
           print("Too big address %s in '%s'" % (dst, " ".join(parts)))
           return False
-      elif dst not in labels:
+      elif dst not in label_to_line:
         print("Unknown label %s in '%s'" % (dst, " ".join(parts)))
         print(" Plz use address or label")
         return False
@@ -227,12 +227,12 @@ def extract_labels(lines):
     if idx + 1 < len(lines) and \
        l.find(':') != -1:
       label = l[0:-1]  # remove colon
-      if label in labels:
+      if label in label_to_line:
         print("Error. Label %s already exist." % label)
       else:
         # use index of CLEARED code line because label will be removed from code
-        labels[label] = len(res)
-        label_of_line[len(res)] = label
+        label_to_line[label] = len(res)
+        line_to_label[len(res)] = label
     else:
       res.append(l)
 
@@ -252,9 +252,9 @@ def first(lines):
 def second():
   line_index = 0
   for c in parsed_cmd:
-    if line_index in label_of_line:
-      l = label_of_line[line_index]
-      print(l, c)
+    if line_index in line_to_label:
+      lab = line_to_label[line_index]
+      print(lab, c)
     else:
       print(c)
     line_index += 1
@@ -273,16 +273,18 @@ def asm(fname):
 
   lines = extract_labels(lines)
   for idx, l in enumerate(lines):
-    if idx in label_of_line:
-      print("%d: %s # %s" % (idx, l, label_of_line[idx]))
+    if idx in line_to_label:
+      print("%d: %s # %s" % (idx, l, line_to_label[idx]))
     else:
       print("%d: %s" % (idx, l))
   first(lines)
 
   print("")
   print("Parsed commands:")
+  addr = 0
   for p in parsed_cmd:
-    print(p, cmd_size(p))
+    print("%04X %s %d" % (addr, p, cmd_size(p)))
+    addr += cmd_size(p)
 
 def main():
   if len(sys.argv) != 2:
@@ -291,7 +293,7 @@ def main():
   asm(sys.argv[1])
 
   print("")
-  print("labels: ", labels)
-  print("label_of_line: ", label_of_line)
+  print("labels: ", label_to_line)
+  print("line_to_label: ", line_to_label)
 
 main()
