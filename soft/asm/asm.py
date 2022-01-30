@@ -78,6 +78,7 @@ label_to_addr = {}
 line_to_label = {}
 parsed_cmd = []
 have_errors = False
+res_bin = []
 
 def to_num(val):
   res = 0
@@ -275,6 +276,7 @@ def to_bin(val, dig):
 
 def out(code):
   print("     " + to_bin(code, 12))
+  res_bin.append(to_bin(code, 12))
   return
 
 def make_command(ctype, cop, dst, src):
@@ -317,8 +319,8 @@ def assemble():
     elif ctype == 1:
       if args == 1:
         param = p[1]
-        addr = get_num(param) if is_num(param) else label_to_addr[param]
-        make_jump(ctype, cop, addr)
+        tgt_addr = get_num(param) if is_num(param) else label_to_addr[param]
+        make_jump(ctype, cop, tgt_addr)
         print("     CTcnst..cope")
       else:
         make_command(ctype, cop, 0, 0)
@@ -352,14 +354,19 @@ def asm(fname):
   print("label_to_addr: ", label_to_addr)
   assemble()
 
+  print("Machine code:")
+  addr = 0
+  for b in res_bin:
+    print("%04X %s" %(addr, b))
+    addr += 1
+
 def main():
   if len(sys.argv) != 2:
     print("To use type:\nasm.py your_source.asm\n")
     return
   asm(sys.argv[1])
 
-  print("")
-  print("labels: ", label_to_line)
-  print("line_to_label: ", line_to_label)
+  #print("labels: ", label_to_line)
+  #print("line_to_label: ", line_to_label)
 
 main()
