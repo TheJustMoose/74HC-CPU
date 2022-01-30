@@ -124,7 +124,7 @@ def cmd_ok(parts):
     if args > 0:
       if dst not in dst_regs:
         print("Unknown register %s in '%s'" % (dst, " ".join(parts)))
-        print("Plz use this registers: %s" % (" ".join(dst_regs)))
+        print(" Plz use this registers: %s" % (" ".join(dst_regs)))
         return False
     if args > 1:
       if src in src_regs or is_num(src):
@@ -134,7 +134,7 @@ def cmd_ok(parts):
           return False
       elif src not in src_regs:
         print("Unknown register %s in '%s'" % (src, " ".join(parts)))
-        print("Plz use this registers: %s" % (" ".join(src_regs)))
+        print(" Plz use this registers: %s" % (" ".join(src_regs)))
         return False
       elif not is_num(src):
         print("Unknown value %s in '%s'" % (src, " ".join(parts)))
@@ -147,6 +147,7 @@ def cmd_ok(parts):
           return False
       elif dst not in labels:
         print("Unknown label %s in '%s'" % (dst, " ".join(parts)))
+        print(" Plz use address or label")
         return False
       elif not is_num(dst):
         print("Unknown value %s in '%s'" % (dst, " ".join(parts)))
