@@ -56,7 +56,7 @@ src_regs = {
 "R1": 1,
 "R2": 2,
 "R3": 3,
-# const have index 4
+"CONST": 4,
 "PIN0": 5,
 "PIN1": 6,
 "PORT0": 7,
@@ -74,6 +74,7 @@ dst_regs = {
 }
 
 label_to_line = {}
+label_to_addr = {}
 line_to_label = {}
 parsed_cmd = []
 have_errors = False
@@ -238,6 +239,14 @@ def extract_labels(lines):
 
   return res
 
+def calc_addr():
+  addr = 0
+  for idx, p in enumerate(parsed_cmd):
+    if idx in line_to_label:
+      lab = line_to_label[idx]
+      label_to_addr[lab] = addr
+    addr += cmd_size(p)
+
 def first(lines):
   for l in lines:
     p = l.split()
@@ -260,6 +269,67 @@ def second():
     line_index += 1
   return
 
+def to_bin(val, dig):
+  fmt = '0' + str(dig) + 'b'
+  return format(val, fmt)
+
+def out(code):
+  print("     " + to_bin(code, 12))
+  return
+
+def make_command(ctype, cop, dst, src):
+  res = 0
+  res |= ctype << 10
+  res |= dst << 7
+  res |= src << 4
+  res |= cop
+  out(res)
+
+def make_jump(ctype, cop, addr):
+  res = 0
+  res |= ctype << 10
+  res |= (addr & 0xF000) >> 6
+  res |= cop
+  out(res)
+  out(addr & 0x0FFF)
+
+def assemble():
+  print("")
+  print("Parsed commands:")
+  print("ADDR TP      COP")
+  addr = 0
+  for p in parsed_cmd:
+    cmd = cmds[p[0]]
+    ctype = cmd["TP"]
+    cop = cmd["COP"]
+    args = cmd["ARGS"]
+    print("%04X %s      %s ; %s %d" % (addr, to_bin(ctype, 2), to_bin(cop, 4), p, cmd_size(p)))
+    if ctype == 0:
+      if args == 2:
+        dst = p[1]
+        src = p[2]
+        if is_num(src):
+          make_command(ctype, cop, dst_regs[dst], src_regs["CONST"])
+          out(get_num(src))
+        else:
+          make_command(ctype, cop, dst_regs[dst], src_regs[src])
+        print("     CTdstSRCcope")
+    elif ctype == 1:
+      if args == 1:
+        param = p[1]
+        addr = get_num(param) if is_num(param) else label_to_addr[param]
+        make_jump(ctype, cop, addr)
+        print("     CTcnst..cope")
+      else:
+        make_command(ctype, cop, 0, 0)
+        print("     CTcnst..cope")
+    else:
+      make_command(ctype, cop, 0, 0)
+
+    #machine_code = make_command(cmd["TP"], cmd["COP"], 0, 0)
+    #print("     " + to_bin(machine_code, 12))
+    addr += cmd_size(p)
+
 def asm(fname):
   print("Assembling: " + fname)
   if not os.path.isfile(fname):
@@ -278,13 +348,9 @@ def asm(fname):
     else:
       print("%d: %s" % (idx, l))
   first(lines)
-
-  print("")
-  print("Parsed commands:")
-  addr = 0
-  for p in parsed_cmd:
-    print("%04X %s %d" % (addr, p, cmd_size(p)))
-    addr += cmd_size(p)
+  calc_addr()
+  print("label_to_addr: ", label_to_addr)
+  assemble()
 
 def main():
   if len(sys.argv) != 2:

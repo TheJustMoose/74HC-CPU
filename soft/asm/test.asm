@@ -21,3 +21,7 @@ m1:
   out PORT0, r1 ; print(v)
   jnc  m1       ; while (v < 255)
   ret
+
+;  call 0xFFFF
+;  call 0177777
+;  call 0xAFAF
