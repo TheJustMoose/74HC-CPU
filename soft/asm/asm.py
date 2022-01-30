@@ -51,7 +51,18 @@ cmds = {
 "CFG": {"COP": 5, "TP": 3, "ARGS": 2},
 }
 
-regs = {
+src_regs = {
+"R0": 0,
+"R1": 1,
+"R2": 2,
+"R3": 3,
+# const have index 4
+"PIN0": 5,
+"PIN1": 6,
+"PORT0": 7,
+}
+
+dst_regs = {
 "R0": 0,
 "R1": 1,
 "R2": 2,
@@ -60,10 +71,6 @@ regs = {
 "R5": 5,
 "R6": 6,
 "R7": 7,
-"CONST": 4,
-"PIN0": 5,
-"PIN1": 6,
-"PORT0": 7,
 }
 
 labels = {}
@@ -81,6 +88,8 @@ def to_num(val):
     res = int(val, 8)
   elif val.isdigit():
     res = int(val)
+  else:
+    raise ValueError
   return res
 
 def is_num(val):
@@ -113,17 +122,19 @@ def cmd_ok(parts):
 
   if ct == 0:  # arithm
     if args > 0:
-      if dst not in regs:
+      if dst not in dst_regs:
         print("Unknown register %s in '%s'" % (dst, " ".join(parts)))
+        print("Plz use this registers: %s" % (" ".join(dst_regs)))
         return False
     if args > 1:
-      if src in regs or is_num(src):
+      if src in src_regs or is_num(src):
         # src is ok
         if is_num(src) and get_num(src) > 255:
           print("Too big value %s in '%s'" % (src, " ".join(parts)))
           return False
-      elif src not in regs:
+      elif src not in src_regs:
         print("Unknown register %s in '%s'" % (src, " ".join(parts)))
+        print("Plz use this registers: %s" % (" ".join(src_regs)))
         return False
       elif not is_num(src):
         print("Unknown value %s in '%s'" % (src, " ".join(parts)))
@@ -140,8 +151,44 @@ def cmd_ok(parts):
       elif not is_num(dst):
         print("Unknown value %s in '%s'" % (dst, " ".join(parts)))
         return False
+  elif ct == 3:  # transfer
+    if name == "LOAD" or name == "STORE":
+      if dst not in dst_regs:
+        print("Memory command require register. Here: %s" % (" ".join(parts)))
 
   return True
+
+def cmd_size(parts):
+  name = parts[0]
+  dst = parts[1] if len(parts) > 1 else ""
+  src = parts[2] if len(parts) > 2 else ""
+
+  cmd = cmds[name]
+  ct = cmd["TP"]
+
+  if ct == 0:  # arithm
+    if is_num(src):
+      return 2
+    else:
+      return 1
+  elif ct == 1:  # jump
+    if name == "RET" or name == "IRET" or name == "SPE":
+      return 1
+    else:
+      return 2  # cmd + address constant
+  elif ct == 2:  # control
+    return 1
+  elif ct == 3:  # transfer
+    if name == "LOAD" or name == "STORE" or name == "IN":
+      return 1
+    elif name == "CFG":
+      return 2
+    elif is_num(src):  # check args for OUT|XOUT
+      return 2
+    else:
+      return 1
+
+  return 0
 
 def read_and_prepare(fname):
   res = []
@@ -231,14 +278,17 @@ def asm(fname):
       print("%d: %s" % (idx, l))
   first(lines)
 
+  print("")
+  print("Parsed commands:")
   for p in parsed_cmd:
-    print(p)
+    print(p, cmd_size(p))
 
 def main():
   if len(sys.argv) != 2:
     print("To use type:\nasm.py your_source.asm\n")
     return
   asm(sys.argv[1])
+
   print("")
   print("labels: ", labels)
   print("label_of_line: ", label_of_line)
