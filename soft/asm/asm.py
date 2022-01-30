@@ -23,13 +23,32 @@ cmds = {
 "SWAB": {"COP": 14, "TP": 0, "ARGS": 1},
 "SET": {"COP": 15, "TP": 0, "ARGS": 1},
 # jump
+"JZ": {"COP": 0, "TP": 1, "ARGS": 1},
+"JNZ": {"COP": 1, "TP": 1, "ARGS": 1},
+"JE": {"COP": 2, "TP": 1, "ARGS": 1},
+"JG": {"COP": 3, "TP": 1, "ARGS": 1},
+"JL": {"COP": 4, "TP": 1, "ARGS": 1},
 "JC": {"COP": 5, "TP": 1, "ARGS": 1},
 "JNC": {"COP": 6, "TP": 1, "ARGS": 1},
+"JS": {"COP": 7, "TP": 1, "ARGS": 1},
 "JMP": {"COP": 8, "TP": 1, "ARGS": 1},
 "CALL": {"COP": 9, "TP": 1, "ARGS": 1},
 "RET": {"COP": 10, "TP": 1, "ARGS": 0},
+"IRET": {"COP": 11, "TP": 1, "ARGS": 0},
+"SPE": {"COP": 12, "TP": 1, "ARGS": 0},
+# control
+"CLRF": {"COP": 0, "TP": 2, "ARGS": 0},
+"NOP": {"COP": 1, "TP": 2, "ARGS": 0},
+"DI": {"COP": 2, "TP": 2, "ARGS": 0},
+"EI": {"COP": 3, "TP": 2, "ARGS": 0},
+"RESET": {"COP": 4, "TP": 2, "ARGS": 0},
 # transfer
-"OUT": {"COP": 9, "TP": 3, "ARGS": 2},
+"LOAD": {"COP": 0, "TP": 3, "ARGS": 1},
+"STORE": {"COP": 1, "TP": 3, "ARGS": 1},
+"IN": {"COP": 2, "TP": 3, "ARGS": 2},
+"OUT": {"COP": 3, "TP": 3, "ARGS": 2},
+"XOUT": {"COP": 4, "TP": 3, "ARGS": 2},
+"CFG": {"COP": 5, "TP": 3, "ARGS": 2},
 }
 
 regs = {
@@ -66,15 +85,16 @@ def to_num(val):
 
 def is_num(val):
   try:
-    res = to_num(val)
+    to_num(val)
     return True
   except ValueError:
     return False
 
 def get_num(val):
   try:
-    to_num(val)
+    res = to_num(val)
     print("%s -> %d" % (val, res))
+    return res
   except ValueError:
     print("Not a valid number: %s" % val)
     return 0
@@ -99,16 +119,28 @@ def cmd_ok(parts):
     if args > 1:
       if src in regs or is_num(src):
         # src is ok
-        dummy = ""
+        if is_num(src) and get_num(src) > 255:
+          print("Too big value %s in '%s'" % (src, " ".join(parts)))
+          return False
       elif src not in regs:
         print("Unknown register %s in '%s'" % (src, " ".join(parts)))
         return False
       elif not is_num(src):
         print("Unknown value %s in '%s'" % (src, " ".join(parts)))
+        return False
   elif ct == 1:  # jumps
-    if args > 0 and dst not in labels:
-      print("Unknown label %s in '%s'" % (parts[1], " ".join(parts)))
-      return False
+    if args > 0:
+      if dst in labels or is_num(dst):
+        if is_num(dst) and get_num(dst) > 65535:
+          print("Too big address %s in '%s'" % (dst, " ".join(parts)))
+          return False
+      elif dst not in labels:
+        print("Unknown label %s in '%s'" % (dst, " ".join(parts)))
+        return False
+      elif not is_num(dst):
+        print("Unknown value %s in '%s'" % (dst, " ".join(parts)))
+        return False
+
   return True
 
 def read_and_prepare(fname):
@@ -140,7 +172,7 @@ def extract_labels(lines):
     if idx + 1 < len(lines) and \
        l.find(':') != -1 and \
        lines[idx + 1].find(':') != -1:
-      print("Error. Only one label per code line allowed.")
+      print("Error. Only one label per code line allowed. See %s" % l)
       return res
 
   for idx, l in enumerate(lines):
@@ -162,7 +194,7 @@ def first(lines):
   for l in lines:
     p = l.split()
     if p[0] not in cmds:
-      print("Error. Unknown cmd: " + p[0])
+      print("Error. Unknown command: " + p[0])
     elif cmd_ok(p):
       parsed_cmd.append(p)
     else:
