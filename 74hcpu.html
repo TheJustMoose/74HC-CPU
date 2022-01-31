@@ -230,6 +230,15 @@ width: 250;
 </table>
 <p>Адрес порта (0-7), в который надо произвести запись (пока PORT0-7)</p>
 
+<p>или</p>
+
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td><td colspan=4>COP</td></tr>
+<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>Rx</td><td colspan=4>OUT</td></tr>
+<tr><td colspan=12>CONST[11:0]</td></tr>
+</table>
+
 <h3>CFG</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
