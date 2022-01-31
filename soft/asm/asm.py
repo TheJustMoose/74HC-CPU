@@ -139,11 +139,13 @@ class Instruction:
   def cut(self, s):
     return s if len(s) <= 5 else s[:4] + "~"
 
-  def log(self):
-    common = "%5s %-5s %5s" % (self.name, self.cut(self.dst), self.cut(self.src))
-    size = self.get_size()
+  def log(self, addr = None):
+    addr_str = "%04X:" % addr if addr else "     "
+    common = "%s %5s %-5s %5s" % (addr_str, self.name, self.cut(self.dst), self.cut(self.src))
+    need_align = "need align" if self.need_align(addr) else ""
     if self.is_valid():
-      print("%s | %2d %2d | %d | %s" % (common, self.ctype, self.cop, self.get_size(), self.label))
+      print("%s | %2d %2d | %d | %s %s" % \
+            (common, self.ctype, self.cop, self.get_size(), self.label, need_align))
     else:
       print("%s |  -  - | 0 | %s" % (common, self.error))
     return
@@ -153,6 +155,9 @@ class Instruction:
 
   def get_size(self):
     return 1
+
+  def need_align(self, addr):
+    return (self.get_size() == 2) and (addr % 2)
 
 class ArithmInstruction(Instruction):
   def __init__(self, parts):
@@ -333,6 +338,19 @@ def extract_labels_and_code(lines):
 
   return res
 
+def fix_alignment(instructions):
+  res = []
+  addr = 0
+  for i in instructions:
+    if i.need_align(addr):
+      res.append(CreateInstruction(["NOP"]))
+      addr +=1
+      if i.need_align(addr):
+        print("ASSEMBLER ERROR! HALT!!")
+    addr += i.get_size()
+    res.append(i)
+  return res
+
 def calc_addr():
   addr = 0
   for idx, p in enumerate(parsed_cmd):
@@ -340,28 +358,6 @@ def calc_addr():
       lab = line_to_label[idx]
       label_to_addr[lab] = addr
     addr += cmd_size(p)
-
-def first(lines):
-  for l in lines:
-    p = l.split()
-    if p[0] not in cmds:
-      print("Error. Unknown command: " + p[0])
-    elif cmd_ok(p):
-      parsed_cmd.append(p)
-    else:
-      have_errors = True
-  return
-
-def second():
-  line_index = 0
-  for c in parsed_cmd:
-    if line_index in line_to_label:
-      lab = line_to_label[line_index]
-      print(lab, c)
-    else:
-      print(c)
-    line_index += 1
-  return
 
 def to_bin(val, dig):
   fmt = '0' + str(dig) + 'b'
@@ -437,10 +433,12 @@ def asm(fname):
     return
 
   instructions = extract_labels_and_code(lines)
+  instructions = fix_alignment(instructions)
+  addr = 0
   for i in instructions:
-    i.log()
+    i.log(addr)
+    addr += i.get_size()
 
-  #first(lines)
   #calc_addr()
   #print("label_to_addr: ", label_to_addr)
   #assemble()
