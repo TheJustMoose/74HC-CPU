@@ -73,6 +73,76 @@ dst_regs = {
 "R7": 7,
 }
 
+class Instruction:
+  name = ""
+  dst = ""
+  src = ""
+
+  ctype = 0
+  cop = 0
+  label = ""
+
+  error = ""
+
+  def __init__(self, parts):
+    if len(parts) == 0:
+      self.error = "No instruction found in: " + text
+      return
+    self.name = parts[0]
+    try:
+      cmd = cmds[self.name]
+    except KeyError:
+      self.error = "Error. Unknown command: " + self.name
+      return
+
+    if cmd["ARGS"] != len(parts) - 1:
+      self.error = "Error. Wait for %d args in %s" % (cmd["ARGS"], self.name)
+      return
+
+    self.ctype = cmd["TP"]
+    self.cop = cmd["COP"]
+    self.dst = parts[1] if len(parts) > 1 else ""
+    self.src = parts[2] if len(parts) > 2 else ""
+
+  def cut(self, s):
+    return s if len(s) <= 5 else s[:4] + "~"
+
+  def log(self):
+    common = "%5s %-5s %5s" % (self.name, self.cut(self.dst), self.cut(self.src))
+    if self.error:
+      print("%s | -  -  | %s" % (common, self.error))
+    else:
+      print("%s | %2d %2d | %s" % (common, self.ctype, self.cop, self.label))
+    return
+
+  def is_valid():
+    return len(self.error) == 0
+
+  def get_size():
+    return 1
+
+class ArithmInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+
+  def log(self):
+    super().log()
+
+def CreateInstruction(parts):
+  ctype = -1
+  try:
+    cmd = cmds[parts[0]]
+    ctype = cmd["TP"]
+  except KeyError:
+    #print("Key error: " + parts[0])
+    pass
+
+  if ctype == 0:
+    return ArithmInstruction(parts)
+  else:
+    return Instruction(parts)
+
+
 label_to_line = {}
 label_to_addr = {}
 line_to_label = {}
@@ -128,6 +198,10 @@ def cmd_ok(parts):
         print("Unknown register %s in '%s'" % (dst, " ".join(parts)))
         print(" Plz use this registers: %s" % (" ".join(dst_regs)))
         return False
+      if args == 1 and len(parts) == 2:  # unary command with 1 arg
+        if dst not in src_regs:
+          print("Plz use this registers R0, R1, R2, R3 or use cmd with suffix 2")
+          return False
     if args > 1:
       if src in src_regs or is_num(src):
         # src is ok
@@ -213,30 +287,32 @@ def read_and_prepare(fname):
         res.append(l)
   return res
 
-def extract_labels(lines):
+def extract_labels_and_code(lines):
   res = []
   if lines[-1].find(':') != -1:
     print("Error. Labels in last line is not allowed.")
     return res
-  for idx, l in enumerate(lines):
+  for idx, line in enumerate(lines):
     if idx + 1 < len(lines) and \
-       l.find(':') != -1 and \
+       line.find(':') != -1 and \
        lines[idx + 1].find(':') != -1:
-      print("Error. Only one label per code line allowed. See %s" % l)
+      print("Error. Only one label per code line allowed. See %s" % line)
       return res
 
-  for idx, l in enumerate(lines):
-    if idx + 1 < len(lines) and \
-       l.find(':') != -1:
-      label = l[0:-1]  # remove colon
+  last_label = ""
+  for line in lines:
+    if line.find(':') != -1:
+      label = line[0:-1]  # remove colon
       if label in label_to_line:
         print("Error. Label %s already exist." % label)
       else:
-        # use index of CLEARED code line because label will be removed from code
-        label_to_line[label] = len(res)
-        line_to_label[len(res)] = label
-    else:
-      res.append(l)
+        last_label = label
+    elif len(line) > 0:
+      i = CreateInstruction(line.split())
+      if len(last_label):
+        i.label = last_label
+        last_label = ""
+      res.append(i)
 
   return res
 
@@ -343,22 +419,20 @@ def asm(fname):
     print("No useful code in file!")
     return
 
-  lines = extract_labels(lines)
-  for idx, l in enumerate(lines):
-    if idx in line_to_label:
-      print("%d: %s # %s" % (idx, l, line_to_label[idx]))
-    else:
-      print("%d: %s" % (idx, l))
-  first(lines)
-  calc_addr()
-  print("label_to_addr: ", label_to_addr)
-  assemble()
+  instructions = extract_labels_and_code(lines)
+  for i in instructions:
+    i.log()
 
-  print("Machine code:")
-  addr = 0
-  for b in res_bin:
-    print("%04X %s" %(addr, b))
-    addr += 1
+  #first(lines)
+  #calc_addr()
+  #print("label_to_addr: ", label_to_addr)
+  #assemble()
+
+  #print("Machine code:")
+  #addr = 0
+  #for b in res_bin:
+  #  print("%04X %s" %(addr, b))
+  #  addr += 1
 
 def main():
   if len(sys.argv) != 2:
