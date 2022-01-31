@@ -25,5 +25,3 @@ m1:
 ;  call 0xFFFF
 ;  call 0177777
 ;  call 0xAFAF
-bla
-mov 1

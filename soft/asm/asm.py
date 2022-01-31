@@ -153,6 +153,9 @@ class Instruction:
       print("%s |  -  - | 0 | %s" % (common, self.error))
     return
 
+  def check(self):
+    return
+
   def is_valid(self):
     return len(self.error) == 0
 
@@ -160,6 +163,7 @@ class Instruction:
     if self.error:
       self.error += " / "
     self.error += e
+    return
 
   def get_size(self):
     return 1
@@ -180,7 +184,16 @@ class Instruction:
     return format(val, fmt)
 
   def out(self, code):
-    print("     " + to_bin(code, 12))
+    print("     " + self.to_bin(code, 12))
+    return
+
+  def base_mcode(self):
+    res = self.ctype << 10
+    res |= self.cop
+    return res
+
+  def make_command(self, addr):
+    return
 
 class ArithmInstruction(Instruction):
   def __init__(self, parts):
@@ -210,13 +223,19 @@ class ArithmInstruction(Instruction):
     else:
       return 1
 
-  def make_command(self):
-    res = 0
-    res |= ctype << 10
-    res |= dst << 7
-    res |= src << 4
-    res |= cop
-    out(res)
+  def make_command(self, addr):
+    dst_val = dst_regs[self.dst]
+    if self.arg_num == 2:
+      src_val = src_regs["CONST"] if is_num(self.src) else src_regs[self.src]
+    else:
+      src_val = dst_val
+    res = self.base_mcode()
+    res |= dst_val << 7
+    res |= src_val << 4
+    self.out(res)
+    if src_val == src_regs["CONST"]:
+      self.out(get_num(self.src))
+    #print("     CTdstSRCcope")
 
 class JumpInstruction(Instruction):
   def __init__(self, parts):
@@ -225,7 +244,7 @@ class JumpInstruction(Instruction):
       if is_num(self.dst) and get_num(self.dst) > 65535:
         self.set_err("Too big address %s in '%s'" % (self.dst, self.get_cmd()))
 
-  def is_valid(self):
+  def check(self):
     if self.arg_num == 1:
       if not is_num(self.dst) and self.dst not in glabels:
         self.err("Unknown label %s in '%s'" % (self.dst, self.get_cmd()))
@@ -239,12 +258,31 @@ class JumpInstruction(Instruction):
     else:
       return 2  # cmd + address constant
 
+  def make_command(self, addr):
+    if self.arg_num == 1:
+      taddr = get_num(self.dst) if is_num(self.dst) else glabels[self.dst]
+      print(taddr)
+      res = self.base_mcode()
+      res |= (taddr & 0xF000) >> 6
+      self.out(res)
+      self.out(taddr & 0x0FFF)
+      #print("     CTcnst..cope")
+    else:
+      res = self.base_mcode()
+      self.out(res)
+      #print("     CT......cope")
+
 class ControlInstruction(Instruction):
   def __init__(self, parts):
     super().__init__(parts)
 
   def get_size(self):
     return 1
+
+  def make_command(self, addr):
+    res = self.base_mcode()
+    self.out(res)
+    #print("     CT......cope")
 
 class TransferInstruction(Instruction):
   def __init__(self, parts):
@@ -266,6 +304,12 @@ class TransferInstruction(Instruction):
       return 2
     else:
       return 1
+
+  def make_command(self, addr):
+    # not implemented yet :((
+    res = self.base_mcode()
+    self.out(res)
+    #print("     CT......cope")
 
 class UnknownInstruction(Instruction):
   def __init__(self, parts):
@@ -364,50 +408,15 @@ def calc_labels_addr(instructions):
     addr += i.get_size()
   return res
 
-def make_jump(ctype, cop, addr):
-  res = 0
-  res |= ctype << 10
-  res |= (addr & 0xF000) >> 6
-  res |= cop
-  out(res)
-  out(addr & 0x0FFF)
-
-def assemble():
+def assemble(instructions):
   print("")
   print("Parsed commands:")
   print("ADDR TP      COP")
   addr = 0
-  for p in parsed_cmd:
-    cmd = cmds[p[0]]
-    ctype = cmd["TP"]
-    cop = cmd["COP"]
-    args = cmd["ARGS"]
-    print("%04X %s      %s ; %s %d" % (addr, to_bin(ctype, 2), to_bin(cop, 4), p, cmd_size(p)))
-    if ctype == 0:
-      if args == 2:
-        dst = p[1]
-        src = p[2]
-        if is_num(src):
-          make_command(ctype, cop, dst_regs[dst], src_regs["CONST"])
-          out(get_num(src))
-        else:
-          make_command(ctype, cop, dst_regs[dst], src_regs[src])
-        print("     CTdstSRCcope")
-    elif ctype == 1:
-      if args == 1:
-        param = p[1]
-        tgt_addr = get_num(param) if is_num(param) else label_to_addr[param]
-        make_jump(ctype, cop, tgt_addr)
-        print("     CTcnst..cope")
-      else:
-        make_command(ctype, cop, 0, 0)
-        print("     CTcnst..cope")
-    else:
-      make_command(ctype, cop, 0, 0)
-
-    #machine_code = make_command(cmd["TP"], cmd["COP"], 0, 0)
-    #print("     " + to_bin(machine_code, 12))
-    addr += cmd_size(p)
+  for i in instructions:
+    i.make_command(addr)
+    i.log(addr)
+    addr += i.get_size()
 
 def asm(fname):
   print("Assembling: " + fname)
@@ -426,13 +435,15 @@ def asm(fname):
   glabels = calc_labels_addr(instructions)
   addr = 0
   for i in instructions:
+    i.check()
     i.log(addr)
     addr += i.get_size()
 
+  print("")
   for l in glabels:
     print("%04X %s" % (glabels[l], l))
 
-  #assemble()
+  code = assemble(instructions)
 
   #print("Machine code:")
   #addr = 0
