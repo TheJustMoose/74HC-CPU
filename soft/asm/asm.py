@@ -73,82 +73,6 @@ dst_regs = {
 "R7": 7,
 }
 
-class Instruction:
-  name = ""
-  dst = ""
-  src = ""
-
-  ctype = 0
-  cop = 0
-  label = ""
-
-  error = ""
-
-  def __init__(self, parts):
-    if len(parts) == 0:
-      self.error = "No instruction found in: " + text
-      return
-    self.name = parts[0]
-    try:
-      cmd = cmds[self.name]
-    except KeyError:
-      self.error = "Error. Unknown command: " + self.name
-      return
-
-    if cmd["ARGS"] != len(parts) - 1:
-      self.error = "Error. Wait for %d args in %s" % (cmd["ARGS"], self.name)
-      return
-
-    self.ctype = cmd["TP"]
-    self.cop = cmd["COP"]
-    self.dst = parts[1] if len(parts) > 1 else ""
-    self.src = parts[2] if len(parts) > 2 else ""
-
-  def cut(self, s):
-    return s if len(s) <= 5 else s[:4] + "~"
-
-  def log(self):
-    common = "%5s %-5s %5s" % (self.name, self.cut(self.dst), self.cut(self.src))
-    if self.error:
-      print("%s | -  -  | %s" % (common, self.error))
-    else:
-      print("%s | %2d %2d | %s" % (common, self.ctype, self.cop, self.label))
-    return
-
-  def is_valid():
-    return len(self.error) == 0
-
-  def get_size():
-    return 1
-
-class ArithmInstruction(Instruction):
-  def __init__(self, parts):
-    super().__init__(parts)
-
-  def log(self):
-    super().log()
-
-def CreateInstruction(parts):
-  ctype = -1
-  try:
-    cmd = cmds[parts[0]]
-    ctype = cmd["TP"]
-  except KeyError:
-    #print("Key error: " + parts[0])
-    pass
-
-  if ctype == 0:
-    return ArithmInstruction(parts)
-  else:
-    return Instruction(parts)
-
-
-label_to_line = {}
-label_to_addr = {}
-line_to_label = {}
-parsed_cmd = []
-have_errors = False
-res_bin = []
 
 def to_num(val):
   res = 0
@@ -179,6 +103,131 @@ def get_num(val):
   except ValueError:
     print("Not a valid number: %s" % val)
     return 0
+
+
+class Instruction:
+  name = ""
+  dst = ""
+  src = ""
+
+  ctype = 0
+  cop = 0
+  label = ""
+
+  error = ""
+
+  def __init__(self, parts):
+    if len(parts) == 0:
+      self.error = "No instruction found in: " + text
+      return
+
+    self.name = parts[0]
+    self.dst = parts[1] if len(parts) > 1 else ""
+    self.src = parts[2] if len(parts) > 2 else ""
+    try:
+      cmd = cmds[self.name]
+    except:
+      return
+
+    if cmd["ARGS"] != len(parts) - 1:
+      self.error = "Error. Wait for %d args in %s" % (cmd["ARGS"], self.name)
+      return
+
+    self.ctype = cmd["TP"]
+    self.cop = cmd["COP"]
+
+  def cut(self, s):
+    return s if len(s) <= 5 else s[:4] + "~"
+
+  def log(self):
+    common = "%5s %-5s %5s" % (self.name, self.cut(self.dst), self.cut(self.src))
+    size = self.get_size()
+    if self.is_valid():
+      print("%s | %2d %2d | %d | %s" % (common, self.ctype, self.cop, self.get_size(), self.label))
+    else:
+      print("%s |  -  - | 0 | %s" % (common, self.error))
+    return
+
+  def is_valid(self):
+    return len(self.error) == 0
+
+  def get_size(self):
+    return 1
+
+class ArithmInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+
+  def get_size(self):
+    if is_num(self.src):
+      return 2
+    else:
+      return 1
+
+class JumpInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+
+  def get_size(self):
+    if self.name == "RET" or self.name == "IRET" or self.name == "SPE":
+      return 1
+    else:
+      return 2  # cmd + address constant
+
+class ControlInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+
+  def get_size(self):
+    return 1
+
+class TransferInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+
+  def get_size(self):
+    if self.name == "LOAD" or self.name == "STORE" or self.name == "IN":
+      return 1
+    elif self.name == "CFG":
+      return 2
+    elif is_num(self.src):  # check args for OUT|XOUT
+      return 2
+    else:
+      return 1
+
+class UnknownInstruction(Instruction):
+  def __init__(self, parts):
+    super().__init__(parts)
+    self.error = "Error. Unknown command: " + self.name
+
+
+def CreateInstruction(parts):
+  ctype = -1
+  try:
+    cmd = cmds[parts[0]]
+    ctype = cmd["TP"]
+  except KeyError:
+    #print("Key error: " + parts[0])
+    pass
+
+  if ctype == 0:
+    return ArithmInstruction(parts)
+  elif ctype == 1:
+    return JumpInstruction(parts)
+  elif ctype == 2:
+    return ControlInstruction(parts)
+  elif ctype == 3:
+    return TransferInstruction(parts)
+  else:
+    return UnknownInstruction(parts)
+
+
+label_to_line = {}
+label_to_addr = {}
+line_to_label = {}
+parsed_cmd = []
+have_errors = False
+res_bin = []
 
 def cmd_ok(parts):
   name = parts[0]
@@ -234,38 +283,6 @@ def cmd_ok(parts):
         print("Memory command require register. Here: %s" % (" ".join(parts)))
 
   return True
-
-def cmd_size(parts):
-  name = parts[0]
-  dst = parts[1] if len(parts) > 1 else ""
-  src = parts[2] if len(parts) > 2 else ""
-
-  cmd = cmds[name]
-  ct = cmd["TP"]
-
-  if ct == 0:  # arithm
-    if is_num(src):
-      return 2
-    else:
-      return 1
-  elif ct == 1:  # jump
-    if name == "RET" or name == "IRET" or name == "SPE":
-      return 1
-    else:
-      return 2  # cmd + address constant
-  elif ct == 2:  # control
-    return 1
-  elif ct == 3:  # transfer
-    if name == "LOAD" or name == "STORE" or name == "IN":
-      return 1
-    elif name == "CFG":
-      return 2
-    elif is_num(src):  # check args for OUT|XOUT
-      return 2
-    else:
-      return 1
-
-  return 0
 
 def read_and_prepare(fname):
   res = []
