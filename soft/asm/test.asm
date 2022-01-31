@@ -8,12 +8,12 @@
 ;   p = t
 ;   print(v)
 
-  call fibo     ; 0
-finish:  jmp finish ; 1
+  call fibo
+finish:  jmp finish
 
 fibo:
-  mov r1, 1     ; v ; 2
-  clr r0        ; p ; 3
+  mov r1, 1     ; v
+  clr r0        ; p
 m1:
   mov r2, r1    ; t = v
   add r1, r0    ; v += p (модифицирует флаг CF)
