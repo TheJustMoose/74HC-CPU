@@ -235,7 +235,7 @@ class Instruction:
   def make_command(self, addr):
     self.out(self.mcode1())
     if self.get_size() == 2:
-      self.out(self.mcode1())
+      self.out(self.mcode2())
 
 class ArithmInstruction(Instruction):
   def __init__(self, parts):
@@ -486,6 +486,7 @@ def assemble(instructions):
     i.make_command(addr)
     i.log(addr)
     addr += i.get_size()
+    print("")
 
 def asm(fname):
   print("Assembling: " + fname)
@@ -512,13 +513,7 @@ def asm(fname):
   for l in glabels:
     print("%04X %s" % (glabels[l], l))
 
-  code = assemble(instructions)
-
-  #print("Machine code:")
-  #addr = 0
-  #for b in res_bin:
-  #  print("%04X %s" %(addr, b))
-  #  addr += 1
+  assemble(instructions)
 
 def main():
   if __name__ == "__main__":

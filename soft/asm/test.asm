@@ -8,8 +8,9 @@
 ;   p = t
 ;   print(v)
 
+in:
   call fibo
-finish:  jmp finish
+  jmp in
 
 fibo:
   mov r1, 1     ; v
@@ -21,7 +22,3 @@ m1:
   out PORT0, r1 ; print(v)
   jnc  m1       ; while (v < 255)
   ret
-jmp 100
-;  call 0xFFFF
-;  call 0177777
-;  call 0xAFAF
