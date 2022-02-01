@@ -3,6 +3,9 @@ import os
 
 glabels = []
 verbose = False
+have_errors = False
+
+machine_code = []
 
 # available command
 # name | code | ctype | args
@@ -218,7 +221,8 @@ class Instruction:
     return format(val, fmt)
 
   def out(self, code):
-    print("     " + self.to_bin(code, 12))
+    print("     %s   %03X" % (self.to_bin(code, 12), code))
+    machine_code.append(code)
     return
 
   def base_mcode(self):
@@ -426,14 +430,17 @@ def read_and_prepare(fname):
 
 def extract_labels_and_code(lines):
   res = []
+  global have_errors
   if lines[-1].find(':') != -1:
     print("Error. Labels in last line is not allowed.")
+    have_errors = True
     return res
   for idx, line in enumerate(lines):
     if idx + 1 < len(lines) and \
        line.find(':') != -1 and \
        lines[idx + 1].find(':') != -1:
       print("Error. Only one label per code line allowed. See %s" % line)
+      have_errors = True
       return res
 
   last_label = ""
@@ -442,6 +449,7 @@ def extract_labels_and_code(lines):
       label = line[0:-1]  # remove colon
       if label in glabels:
         print("Error. Label %s already exist." % label)
+        have_errors = True
       else:
         last_label = label
     elif len(line) > 0:
@@ -457,12 +465,14 @@ def extract_labels_and_code(lines):
 def fix_alignment(instructions):
   res = []
   addr = 0
+  global have_errors
   for i in instructions:
     if i.need_align(addr):
       res.append(CreateInstruction(["NOP"]))
       addr +=1
       if i.need_align(addr):
         print("ASSEMBLER ERROR! HALT!!")
+        have_errors = True
         return
     addr += i.get_size()
     res.append(i)
@@ -480,13 +490,41 @@ def calc_labels_addr(instructions):
 def assemble(instructions):
   print("")
   print("Parsed commands:")
-  print("ADDR TP      COP")
+  print("ADDR TP       COP")
   addr = 0
   for i in instructions:
     i.make_command(addr)
     i.log(addr)
     addr += i.get_size()
     print("")
+  return
+
+def print_instructions(instructions):
+  addr = 0
+  for i in instructions:
+    i.check()
+    i.log(addr)
+    addr += i.get_size()
+  return
+
+def check_errors(instructions):
+  global have_errors
+  for i in instructions:
+    i.check()
+    if not i.is_valid():
+      have_errors = True
+  return
+
+def print_dump():
+  print("Machine code:")
+  cnt = len(machine_code)
+  if cnt == 0:
+    print("No code found")
+    return
+  for i in range(0, cnt & 0xFFFE, 2):
+    print("%03X %03X" % (machine_code[i], machine_code[i+1]))
+  if cnt & 1:
+    print("%03X" % machine_code[-1])
 
 def asm(fname):
   print("Assembling: " + fname)
@@ -503,17 +541,19 @@ def asm(fname):
   global glabels
   instructions = fix_alignment(instructions)
   glabels = calc_labels_addr(instructions)
-  addr = 0
-  for i in instructions:
-    i.check()
-    i.log(addr)
-    addr += i.get_size()
+  check_errors(instructions)
+  print_instructions(instructions)
+
+  if have_errors:
+    print("\nCan't assemble.There are some errors.\n")
+    return
 
   print("")
   for l in glabels:
     print("%04X %s" % (glabels[l], l))
 
   assemble(instructions)
+  print_dump()
 
 def main():
   if __name__ == "__main__":
