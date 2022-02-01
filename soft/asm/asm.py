@@ -284,18 +284,20 @@ class JumpInstruction(Instruction):
     else:
       return 2  # cmd + address constant
 
-  def make_command(self, addr):
+  def target_addr(self):
+    return get_num(self.dst) if is_num(self.dst) else glabels[self.dst]
+
+  def mcode1(self):
+    res = self.base_mcode()
     if self.arg_num == 1:
-      taddr = get_num(self.dst) if is_num(self.dst) else glabels[self.dst]
-      res = self.base_mcode()
-      res |= (taddr & 0xF000) >> 6
-      self.out(res)
-      self.out(taddr & 0x0FFF)
-      #print("     CTcnst..cope")
+      res |= (self.target_addr() & 0xF000) >> 6
+    return res
+
+  def mcode2(self):
+    if self.arg_num == 1:
+      return self.target_addr() & 0x0FFF
     else:
-      res = self.base_mcode()
-      self.out(res)
-      #print("     CT......cope")
+      return 0
 
 class ControlInstruction(Instruction):
   def __init__(self, parts):

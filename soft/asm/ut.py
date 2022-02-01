@@ -33,6 +33,11 @@ def CLR(v):
 def B2(v):
   return int(CLR(v), 2)
 
+def S(p, s):
+  i = CreateInstruction(p)
+  if i.get_size() != s:
+    print("Instruction %s should have size %d" % (p[0], s))
+
 def M1(p, m1):
   i = CreateInstruction(p)
   if i.mcode1() != B2(m1):
@@ -125,7 +130,20 @@ V(["INV2", "R5", "R3"])
 
 M1(["CLRF"], "10|000000|0000")
 M1(["NOP"], "10|000000|0001")
+S(["NOP"], 1)
 
 M1(["RET"], "01|000000|1010")
+S(["RET"], 1)
+
+M1(["JMP", "100"], "01|000000|1000")
+M2(["JMP", "100"], "0000|0110|0100")
+
+M1(["JMP", "0xAAAA"], "01|1010|00|1000")
+M2(["JMP", "0xAAAA"], "1010|1010|1010")
+S(["JMP", "0xAAAA"], 2)
+
+M1(["CALL", "0xAAAA"], "01|1010|00|1001")
+M2(["CALL", "0xAAAA"], "1010|1010|1010")
+S(["CALL", "0xAAAA"], 2)
 
 print("Finished")
