@@ -87,7 +87,7 @@ dst_regs = {
 
 def to_num(val):
   res = 0
-  if val.find("0X") == 0 and len(val) > 2:
+  if val.upper().find("0X") == 0 and len(val) > 2:
     val = val[2:]
     res = int(val, 16)
   elif val.find("0") == 0 and len(val) > 1:
@@ -287,7 +287,6 @@ class JumpInstruction(Instruction):
   def make_command(self, addr):
     if self.arg_num == 1:
       taddr = get_num(self.dst) if is_num(self.dst) else glabels[self.dst]
-      print(taddr)
       res = self.base_mcode()
       res |= (taddr & 0xF000) >> 6
       self.out(res)

@@ -13,8 +13,15 @@ def T(p, t):
 
 def V(p):
   i = CreateInstruction(p)
+  i.check()
   if not i.is_valid():
     print("Instruction %s is not valid. Error:\n%s" % (p[0], i.error))
+
+def NV(p):
+  i = CreateInstruction(p)
+  i.check()
+  if i.is_valid():
+    print("Instruction %s SHOULD NOT be valid." % (p[0]))
 
 def CLR(v):
   res = ""
@@ -59,6 +66,7 @@ A(to_num("0177777"), 65535)
 A(to_num("0X1"), 1)
 A(to_num("0X10"), 16)
 A(to_num("0XFFFF"), 65535)
+A(to_num("0xFFFF"), 65535)
 
 A(is_num("123"), True)
 A(is_num("abc"), False)
@@ -80,6 +88,14 @@ T(["INV2", "R1", "R2"], 0)
 
 T(["JZ", "R1"], 1)
 
+# have to use CAPS, see asm.py
+T(["JMP", "M1"], 1)
+glabels.append("M1")
+V(["JMP", "M1"])
+
+T(["CALL", "0xFFFF"], 1)
+V(["CALL", "0xFFFF"])
+
 T(["CLRF"], 2)
 T(["LOAD", "R1"], 3)
 
@@ -98,8 +114,18 @@ M1(["CLR", "R0"], "00|000|000|1000")
 M1(["CLR", "R7"], "00|111|111|1000")
 
 M1(["INV", "R3"], "00|011|011|1001")
+M1(["INV2", "R5", "R3"], "00|101|011|1001")
+
+# only R0-R3 allowed in this instructions
+NV(["INV", "R5"])
+V(["INV", "R3"])
+# but dst may be R0-R7
+NV(["INV", "R5", "R3"])
+V(["INV2", "R5", "R3"])
 
 M1(["CLRF"], "10|000000|0000")
 M1(["NOP"], "10|000000|0001")
+
+M1(["RET"], "01|000000|1010")
 
 print("Finished")
