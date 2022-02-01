@@ -306,16 +306,18 @@ class ControlInstruction(Instruction):
   def get_size(self):
     return 1
 
-
 class TransferInstruction(Instruction):
   def __init__(self, parts):
     super().__init__(parts)
-    if self.name == "LOAD" or self.name == "STORE":
+    if self.name == "LOAD":
       if self.dst not in dst_regs:
-        self.err("Memory command require register. Here: %s" % (get_cmd()))
+        self.err("Load command require DST register. Here: %s" % (self.get_cmd()))
+    elif self.name == "STORE":  # STORE cmd has only one argument. It's left and dst
+      if self.dst not in src_regs: # but we should use src regs
+        self.err("Store command require SRC register. Here: %s" % (self.get_cmd()))
     elif self.name == "CFG":
       if self.src not in src_regs:
-        self.err("Unknown register %s in '%s'" % (src, get_cmd()))
+        self.err("Unknown register %s in '%s'" % (self.src, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
 
   def get_size(self):
@@ -328,11 +330,19 @@ class TransferInstruction(Instruction):
     else:
       return 1
 
-  def make_command(self, addr):
-    # not implemented yet :((
+  def mcode1(self):
     res = self.base_mcode()
-    self.out(res)
-    #print("     CT......cope")
+    if self.name == "LOAD":
+      res |= dst_regs[self.dst] << 7
+    elif self.name == "STORE":
+      res |= src_regs[self.dst] << 4
+    return res
+
+  def mcode2(self):
+    if self.name == "CFG":
+      return get_num(self.dst)
+    else:
+      return 0
 
 class UnknownInstruction(Instruction):
   def __init__(self, parts):
