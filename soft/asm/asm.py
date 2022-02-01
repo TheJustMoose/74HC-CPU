@@ -2,6 +2,7 @@ import sys
 import os
 
 glabels = []
+verbose = False
 
 # available command
 # name | code | ctype | args
@@ -16,6 +17,7 @@ cmds = {
 "CMP": {"COP": 6, "TP": 0, "ARGS": 2},
 "CMPC": {"COP": 7, "TP": 0, "ARGS": 2},
 # unary
+# example: NEG R1     | R1 := NEG R1
 "CLR": {"COP": 8, "TP": 0, "ARGS": 1},
 "NEG": {"COP": 9, "TP": 0, "ARGS": 1},
 "LSL": {"COP": 10, "TP": 0, "ARGS": 1},
@@ -24,6 +26,14 @@ cmds = {
 "MOV": {"COP": 13, "TP": 0, "ARGS": 2},
 "SWAB": {"COP": 14, "TP": 0, "ARGS": 1},
 "SET": {"COP": 15, "TP": 0, "ARGS": 1},
+# unary2 - same as unary, but we can use different SRC and DST
+# example: NEG R2, R1     | R2 := NEG R1
+# some pointless operations was removed
+"NEG2": {"COP": 9, "TP": 0, "ARGS": 2},
+"LSL2": {"COP": 10, "TP": 0, "ARGS": 2},
+"LSR2": {"COP": 11, "TP": 0, "ARGS": 2},
+"MIR2": {"COP": 12, "TP": 0, "ARGS": 2},
+"SWAB2": {"COP": 14, "TP": 0, "ARGS": 2},
 # jump
 "JZ": {"COP": 0, "TP": 1, "ARGS": 1},
 "JNZ": {"COP": 1, "TP": 1, "ARGS": 1},
@@ -99,10 +109,12 @@ def is_num(val):
 def get_num(val):
   try:
     res = to_num(val)
-    print("%s -> %d" % (val, res))
+    if verbose:
+      print("%s -> %d" % (val, res))
     return res
   except ValueError:
-    print("Not a valid number: %s" % val)
+    if verbose:
+      print("Not a valid number: %s" % val)
     return 0
 
 
@@ -452,9 +464,13 @@ def asm(fname):
   #  addr += 1
 
 def main():
-  if len(sys.argv) != 2:
-    print("To use type:\nasm.py your_source.asm\n")
-    return
-  asm(sys.argv[1])
+  if __name__ == "__main__":
+    if len(sys.argv) < 2:
+      print("To use type:\nasm.py your_source.asm\n")
+      return
+    if len(sys.argv) == 3:
+      if sys.argv[2] == "-v":
+        verbose = True
+    asm(sys.argv[1])
 
 main()
