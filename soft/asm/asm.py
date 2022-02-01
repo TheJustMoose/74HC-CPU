@@ -85,6 +85,28 @@ dst_regs = {
 "R7": 7,
 }
 
+src_ports = {
+"PIN0": 0,
+"PIN1": 1,
+"PIN2": 2,
+"PIN3": 3,
+"PIN4": 4,
+"PIN5": 5,
+"PIN6": 6,
+"PIN7": 7,
+}
+
+dst_ports = {
+"PORT0": 0,
+"PORT1": 1,
+"PORT2": 2,
+"PORT3": 3,
+"PORT4": 4,
+"PORT5": 5,
+"PORT6": 6,
+"PORT7": 7,
+}
+
 def to_num(val):
   res = 0
   if val.upper().find("0X") == 0 and len(val) > 2:
@@ -211,7 +233,9 @@ class Instruction:
     return 0
 
   def make_command(self, addr):
-    return
+    self.out(self.mcode1())
+    if self.get_size() == 2:
+      self.out(self.mcode1())
 
 class ArithmInstruction(Instruction):
   def __init__(self, parts):
@@ -244,8 +268,8 @@ class ArithmInstruction(Instruction):
   def mcode1(self):
     dst_val = dst_regs[self.dst]
     if self.arg_num == 2:
-      src_val = src_regs["CONST"] if is_num(self.src) else src_regs[self.src]
-    else:
+      src_val = src_regs["CONST" if is_num(self.src) else self.src]
+    else:  # default arg for unary instruction
       src_val = dst_val
     res = self.base_mcode()
     res |= dst_val << 7
@@ -256,12 +280,6 @@ class ArithmInstruction(Instruction):
     if is_num(self.src):
       return get_num(self.src)
     return 0
-
-  def make_command(self, addr):
-    self.out(self.mcode1())
-    if self.get_size() == 2:
-      self.out(self.mcode1())
-    #print("     CTdstSRCcope")
 
 class JumpInstruction(Instruction):
   def __init__(self, parts):
@@ -316,6 +334,8 @@ class TransferInstruction(Instruction):
       if self.dst not in src_regs: # but we should use src regs
         self.err("Store command require SRC register. Here: %s" % (self.get_cmd()))
     elif self.name == "CFG":
+      if is_num(self.src):
+        self.err("CFG command use const as port address, so you should use only r0-r3, PORT0, PIN0, PIN1 as source")
       if self.src not in src_regs:
         self.err("Unknown register %s in '%s'" % (self.src, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
@@ -325,8 +345,11 @@ class TransferInstruction(Instruction):
       return 1
     elif self.name == "CFG":
       return 2
-    elif is_num(self.src):  # check args for OUT|XOUT
-      return 2
+    elif self.name == "OUT" or self.name == "XOUT":
+      if is_num(self.src):
+        return 2
+      else:
+        return 1
     else:
       return 1
 
@@ -336,11 +359,19 @@ class TransferInstruction(Instruction):
       res |= dst_regs[self.dst] << 7
     elif self.name == "STORE":
       res |= src_regs[self.dst] << 4
+    elif self.name == "OUT" or self.name == "XOUT":
+      src_reg = src_regs["CONST" if is_num(self.src) else self.src]
+      res |= src_reg << 4
+      res |= dst_ports[self.dst] << 7
+    elif self.name == "CFG":
+      res |= src_regs[self.src] << 4
     return res
 
   def mcode2(self):
+    if self.name == "OUT" or self.name == "XOUT":
+      return get_num(self.src) & 0xFF  # OUT PORT0, 20
     if self.name == "CFG":
-      return get_num(self.dst)
+      return get_num(self.dst)  # CFG 20, R0
     else:
       return 0
 
@@ -350,6 +381,9 @@ class UnknownInstruction(Instruction):
     self.ctype = -1
     self.cop = 0
     self.err("Error. Unknown command: " + self.name)
+
+  def make_command(self, addr):
+    return
 
 def CreateInstruction(parts):
   ctype = -1
