@@ -137,13 +137,13 @@ width: 250;
 <tr><td>r7</td><td>111</td><td>PORT0</td><td>111</td><td>Выходной порт 0! Позволяет сэкономить на команде IN и использовать данные порта сразу как операнд.</td></tr>
 </table>
 
-<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры R4-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
+<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры r4-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
 
 <h3>Порты</h3>
-<table border=1 width=250>
-<tr><td>Имя</td><td>Назначение</td></tr>
-<tr><td>PORT0-7</td><td>Порт вывода 0-7</td></tr>
-<tr><td>PIN0-1</td><td>Порт ввода 0-1</td></tr>
+<table border=1 width=400>
+<tr><td>Имя</td><td class="big">Назначение</td></tr>
+<tr><td>PORT0-7</td><td>Порт вывода 0-7, доступен через команду OUT, частично доступен через арифметические команды</td></tr>
+<tr><td>PIN0-7</td><td>Порт ввода 0-7, доступен через команду IN, частично доступен через арифметические команды</td></tr>
 </table>
 
 <h3>Шины</h3>
@@ -172,7 +172,7 @@ width: 250;
 <tr><td>11</td><td>внешнего источника (IRQ)</td></tr>
 </table>
 
-<p>Селектор анализируется только если установлен бит CTYPE == 1, то есть имеет смысл только для команд перехода. Ибо зачем нужен селектор, если после команды сложения обычно нужно просто выполнить следующую команду?</p>
+<p>Селектор анализируется только если CTYPE == 1, то есть имеет смысл только для команд перехода. Ибо зачем нужен селектор, если после команды сложения обычно нужно просто выполнить следующую команду?</p>
 
 <p>Вообще-то селектор не нужно хранить в команде, ибо сама команда и определяет селектор. Для арифметической команды SEL=0, для команды RET SEL=3, для прерывания, которое вообще не команда, SEL=2. Все команды перехода имеют SEL=1, то есть абсолютную адресацию. Если конечно переход случится!</p>
 
@@ -217,16 +217,16 @@ width: 250;
 <h3>IN</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td>-</td><td colspan=2>ADDR</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>Rx</td><td>-</td><td colspan=2>2 бита</td><td colspan=4>IN</td></tr>
+<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td colspan=3>ADDR</td><td colspan=4>COP</td></tr>
+<tr><td>1</td><td>1</td><td colspan=3>r0-r7</td><td colspan=3>3 бита</td><td colspan=4>IN</td></tr>
 </table>
-<p>Адрес порта (0-3), из которого надо произвести чтение (PORT0/1, PIN0/1)</p>
+<p>Адрес порта (0-7), из которого надо произвести чтение</p>
 
 <h3>[X]OUT</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>Rx</td><td colspan=4>OUT</td></tr>
+<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>r0-r3, PORT0, PIN0, PIN1</td><td colspan=4>OUT</td></tr>
 </table>
 <p>Адрес порта (0-7), в который надо произвести запись (пока PORT0-7)</p>
 
@@ -235,7 +235,7 @@ width: 250;
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>Rx</td><td colspan=4>OUT</td></tr>
+<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>CONST</td><td colspan=4>OUT</td></tr>
 <tr><td colspan=12>CONST[11:0]</td></tr>
 </table>
 
@@ -243,7 +243,7 @@ width: 250;
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=2>CTYPE == 3</td><td colspan=3>reserved</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>0</td><td colspan=3>reserved</td><td colspan=3>Rx</td><td colspan=4>CFG</td></tr>
+<tr><td>1</td><td>0</td><td colspan=3>reserved</td><td colspan=3>r0-r3, PORT0, PIN0, PIN1</td><td colspan=4>CFG</td></tr>
 <tr><td colspan=12>CONST[11:0]</td></tr>
 </table>
 <p>Биты 7-9 можно использовать как недостающие. Пока адрес будет 12 битный == 4096 регистров конфигурации ;))<br>
