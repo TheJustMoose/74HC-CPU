@@ -19,7 +19,7 @@ cmds = {
 # unary
 # example: NEG R1     | R1 := NEG R1
 "CLR": {"COP": 8, "TP": 0, "ARGS": 1},
-"NEG": {"COP": 9, "TP": 0, "ARGS": 1},
+"INV": {"COP": 9, "TP": 0, "ARGS": 1},
 "LSL": {"COP": 10, "TP": 0, "ARGS": 1},
 "LSR": {"COP": 11, "TP": 0, "ARGS": 1},
 "MIR": {"COP": 12, "TP": 0, "ARGS": 1},
@@ -29,7 +29,7 @@ cmds = {
 # unary2 - same as unary, but we can use different SRC and DST
 # example: NEG R2, R1     | R2 := NEG R1
 # some pointless operations was removed
-"NEG2": {"COP": 9, "TP": 0, "ARGS": 2},
+"INV2": {"COP": 9, "TP": 0, "ARGS": 2},
 "LSL2": {"COP": 10, "TP": 0, "ARGS": 2},
 "LSR2": {"COP": 11, "TP": 0, "ARGS": 2},
 "MIR2": {"COP": 12, "TP": 0, "ARGS": 2},
@@ -204,6 +204,12 @@ class Instruction:
     res |= self.cop
     return res
 
+  def mcode1(self):
+    return 0
+
+  def mcode2(self):
+    return 0
+
   def make_command(self, addr):
     return
 
@@ -235,7 +241,7 @@ class ArithmInstruction(Instruction):
     else:
       return 1
 
-  def make_command(self, addr):
+  def mcode1(self):
     dst_val = dst_regs[self.dst]
     if self.arg_num == 2:
       src_val = src_regs["CONST"] if is_num(self.src) else src_regs[self.src]
@@ -244,9 +250,17 @@ class ArithmInstruction(Instruction):
     res = self.base_mcode()
     res |= dst_val << 7
     res |= src_val << 4
-    self.out(res)
+    return res
+
+  def mcode2(self):
     if src_val == src_regs["CONST"]:
-      self.out(get_num(self.src))
+      return get_num(self.src)
+    return 0
+
+  def make_command(self, addr):
+    self.out(self.mcode1())
+    if self.get_size() == 2:
+      self.out(self.mcode1())
     #print("     CTdstSRCcope")
 
 class JumpInstruction(Instruction):
@@ -326,6 +340,8 @@ class TransferInstruction(Instruction):
 class UnknownInstruction(Instruction):
   def __init__(self, parts):
     super().__init__(parts)
+    self.ctype = -1
+    self.cop = 0
     self.err("Error. Unknown command: " + self.name)
 
 def CreateInstruction(parts):

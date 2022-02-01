@@ -31,10 +31,14 @@ A(is_num("abc"), False)
 A(get_num("123"), 123)
 A(get_num("abc"), 0)
 
+T(["UNK", "R1"], -1)
+
 T(["MOV", "R1", "R2"], 0)
 T(["ADD", "R1", "R2"], 0)
 T(["CLR", "R1"], 0)
-T(["NEG", "R1"], 0)
+T(["INV", "R1"], 0)
+
+T(["INV2", "R1", "R2"], 0)
 
 T(["JZ", "R1"], 1)
 
