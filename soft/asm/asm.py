@@ -177,7 +177,7 @@ class Instruction:
     return s if len(s) <= 5 else s[:4] + "~"
 
   def log(self, addr = None):
-    addr_str = "%04X:" % addr if addr else "     "
+    addr_str = "%04X:" % addr if addr != None else "     "
     common = "%s %5s %-5s %5s" % (addr_str, self.name, self.cut(self.dst), self.cut(self.src))
     need_align = "need align" if self.need_align(addr) else ""
     if self.is_valid():
