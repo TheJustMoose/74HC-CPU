@@ -205,7 +205,7 @@ class Instruction:
     return res
 
   def mcode1(self):
-    return 0
+    return self.base_mcode()
 
   def mcode2(self):
     return 0
@@ -253,7 +253,7 @@ class ArithmInstruction(Instruction):
     return res
 
   def mcode2(self):
-    if src_val == src_regs["CONST"]:
+    if is_num(self.src):
       return get_num(self.src)
     return 0
 
@@ -305,10 +305,6 @@ class ControlInstruction(Instruction):
   def get_size(self):
     return 1
 
-  def make_command(self, addr):
-    res = self.base_mcode()
-    self.out(res)
-    #print("     CT......cope")
 
 class TransferInstruction(Instruction):
   def __init__(self, parts):
