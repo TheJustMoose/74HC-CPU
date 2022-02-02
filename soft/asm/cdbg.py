@@ -10,17 +10,9 @@ src_to_name = {}
 port_to_name = {}
 pin_to_name = {}
 
-class State:
-  R0 = 0
-  R1 = 0
-  R2 = 0
-  R3 = 0
-  R4 = 0
-  R5 = 0
-  R6 = 0
-  R7 = 0
-
-state = State()
+regs = [0, 0, 0, 0, 0, 0, 0, 0]
+CF = False
+IP = 0
 
 cop_mask = 0x0F
 src_mask = 0x07 << 4
@@ -147,42 +139,74 @@ def disasm(w, w2):
 
   return res
 
-def regs():
-  res = "%02X " % state.R0
-  res += "%02X " % state.R1
-  res += "%02X " % state.R2
-  res += "%02X " % state.R3
-  res += "%02X " % state.R4
-  res += "%02X " % state.R5
-  res += "%02X " % state.R6
-  res += "%02X " % state.R7
+def dump_regs():
+  res = ""
+  for r in regs:
+    res += "%02X " % r
   return res
 
-def dbg(bin):
+def execute_cmd(w, w2):
+  ctype = get_ctype(w)
+  cop = get_cop(w)
+  name = cop_to_name[(ctype << 10) + cop]
+
+  if ctype == arithm_cmd():
+    dst = get_dst(w)
+    src = get_src(w)
+    rval = w2 & 0xFF if src == src_regs["CONST"] else regs[src]
+    if name == "AND":
+      regs[dst] = regs[dst] & rval
+    elif name == "OR":
+      regs[dst] = regs[dst] | rval
+    elif name == "XOR":
+      regs[dst] = regs[dst] ^ rval
+    elif name == "ADD":
+      regs[dst] = regs[dst] + rval
+      if regs[dst] > 0xFF:
+        regs[dst] &= 0xFF
+        CF = True
+      else:
+        CF = False
+    elif name == "MOV":
+      regs[dst] = rval
+
+  if ctype == ctrl_cmd():
+    if name == "NOP":
+      print("NOP!")
+
+  global IP
+  IP += get_cmd_size(w)
+
+  return
+
+def dump(bin):
   addr = 0
   while addr < len(bin):
     w = bin[addr]
     w2 = bin[addr + 1] if addr < len(bin) - 1 else 0
     sz = get_cmd_size(w)
-    print("%04X:  %03X %d  %-20s | %s" % (addr, w, sz, disasm(w, w2), regs()))
+    print("%04X:  %03X %d  %-20s | %s" % (addr, w, sz, disasm(w, w2), dump_regs()))
     addr += sz
 
   print("")
 
-  addr = 0
+def dbg(bin):
   while True:
-    if addr < len(bin):
-      w = bin[addr]
-      w2 = bin[addr + 1] if addr < len(bin) - 1 else 0
+    if IP < len(bin):
+      w = bin[IP]
+      w2 = bin[IP + 1] if IP < len(bin) - 1 else 0
       sz = get_cmd_size(w)
-      print("%04X:  %03X %d  %-20s | %s" % (addr, w, sz, disasm(w, w2), regs()))
+      print("%04X:  %03X %d  %-20s | %s" % (IP, w, sz, disasm(w, w2), dump_regs()))
       print("step - g, abort - a")
 
       answ = msvcrt.getch()
-      print(answ, type(answ))
       if answ == b'a':
         return
-      addr += sz
+      execute_cmd(w, w2)
+      print("")
+    else:
+      print("Finished")
+      break
 
   return
 
@@ -211,6 +235,7 @@ def main():
     extract_regs()
 
     bin = load(fname)
+    #dump(bin)
     dbg(bin)
 
 main()
