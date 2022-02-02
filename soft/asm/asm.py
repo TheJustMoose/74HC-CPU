@@ -244,8 +244,13 @@ class TransferInstruction(Instruction):
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
 
   def get_size(self):
-    if self.name == "LOAD" or self.name == "STORE" or self.name == "IN":
+    if self.name == "LOAD" or self.name == "IN":
       return 1
+    elif self.name == "STORE":
+      if is_num(self.dst): # see comments above
+        return 2
+      else:
+        return 1
     elif self.name == "CFG":
       return 2
     elif self.name == "OUT" or self.name == "XOUT":
@@ -261,7 +266,8 @@ class TransferInstruction(Instruction):
     if self.name == "LOAD":
       res |= dst_regs[self.dst] << 7
     elif self.name == "STORE":
-      res |= src_regs[self.dst] << 4
+      src_reg = src_regs["CONST" if is_num(self.dst) else self.dst]
+      res |= src_reg << 4
     elif self.name == "OUT" or self.name == "XOUT":
       src_reg = src_regs["CONST" if is_num(self.src) else self.src]
       res |= src_reg << 4
@@ -273,6 +279,8 @@ class TransferInstruction(Instruction):
   def mcode2(self):
     if self.name == "OUT" or self.name == "XOUT":
       return get_num(self.src) & 0xFF  # OUT PORT0, 20
+    if self.name == "STORE":
+      return get_num(self.dst) & 0xFF
     if self.name == "CFG":
       return get_num(self.dst)  # CFG 20, R0
     else:

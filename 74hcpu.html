@@ -91,10 +91,10 @@ width: 250;
 <tr><td>RESET</td><td>0100</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
 <tr><td colspan=5><h4>Передачи (CTYPE=3)</h4></td></tr>
 <tr><td>LOAD</td><td>0000</td><td>LOAD r0</td><td>Загрузка из RAM[r7:r6] в регистр</td><td>1</td></tr>
-<tr><td>STORE</td><td>0001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра</td><td>1</td></tr>
+<tr><td>STORE</td><td>0001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра</td><td>1/2</td></tr>
 <tr><td>IN</td><td>0010</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
-<tr><td>OUT</td><td>0011</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1</td></tr>
-<tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1</td></tr>
+<tr><td>OUT</td><td>0011</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
+<tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
 <tr><td>CFG</td><td>0101</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
 
@@ -215,6 +215,7 @@ width: 250;
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=2>CTYPE == 3</td><td colspan=3>-</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
 <tr><td>1</td><td>1</td><td colspan=3>-</td><td colspan=3>Rx</td><td colspan=4>STORE</td></tr>
+<tr><td colspan=12>CONST[7:0] - опционально, только для SRC==100</td></tr>
 </table>
 
 <h3>IN</h3>
