@@ -1,5 +1,6 @@
 import os
 import sys
+import msvcrt  # plz fiz it to use in Linux *ROFL*
 
 from cpu import *
 
@@ -146,14 +147,43 @@ def disasm(w, w2):
 
   return res
 
+def regs():
+  res = "%02X " % state.R0
+  res += "%02X " % state.R1
+  res += "%02X " % state.R2
+  res += "%02X " % state.R3
+  res += "%02X " % state.R4
+  res += "%02X " % state.R5
+  res += "%02X " % state.R6
+  res += "%02X " % state.R7
+  return res
+
 def dbg(bin):
   addr = 0
   while addr < len(bin):
     w = bin[addr]
     w2 = bin[addr + 1] if addr < len(bin) - 1 else 0
     sz = get_cmd_size(w)
-    print("%04X:  %03X %d  %s" % (addr, w, sz, disasm(w, w2)))
+    print("%04X:  %03X %d  %-20s | %s" % (addr, w, sz, disasm(w, w2), regs()))
     addr += sz
+
+  print("")
+
+  addr = 0
+  while True:
+    if addr < len(bin):
+      w = bin[addr]
+      w2 = bin[addr + 1] if addr < len(bin) - 1 else 0
+      sz = get_cmd_size(w)
+      print("%04X:  %03X %d  %-20s | %s" % (addr, w, sz, disasm(w, w2), regs()))
+      print("step - g, abort - a")
+
+      answ = msvcrt.getch()
+      print(answ, type(answ))
+      if answ == b'a':
+        return
+      addr += sz
+
   return
 
 def load(fname):
@@ -179,8 +209,6 @@ def main():
 
     extract_cops()
     extract_regs()
-
-    print("ret size: %d" % get_cmd_size(0x40B))
 
     bin = load(fname)
     dbg(bin)
