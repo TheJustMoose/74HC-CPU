@@ -1,6 +1,6 @@
 import os
 import sys
-import msvcrt  # plz fiz it to use in Linux *ROFL*
+import msvcrt  # plz fix it to use in Linux *ROFL*
 
 from cpu import *
 
@@ -10,14 +10,23 @@ src_to_name = {}
 port_to_name = {}
 pin_to_name = {}
 
-regs = [0, 0, 0, 0, 0, 0, 0, 0]
+REGS = [0, 0, 0, 0, 0, 0, 0, 0]
+PORT = [0, 0, 0, 0, 0, 0, 0, 0]
 CF = False
 IP = 0
+stack = []
 
 cop_mask = 0x0F
 src_mask = 0x07 << 4
 dst_mask = 0x07 << 7
 ctype_mask = 0x03 << 10
+
+def push(addr):
+  stack.append(addr)
+  return
+
+def pop():
+  return stack.pop(-1)
 
 def arithm_cmd():
   return 0
@@ -141,11 +150,16 @@ def disasm(w, w2):
 
 def dump_regs():
   res = ""
-  for r in regs:
+  for r in REGS:
     res += "%02X " % r
+  res += " | "
+  for p in PORT:
+    res += "%02X " % p
   return res
 
 def execute_cmd(w, w2):
+  global IP, CF
+
   ctype = get_ctype(w)
   cop = get_cop(w)
   name = cop_to_name[(ctype << 10) + cop]
@@ -153,28 +167,52 @@ def execute_cmd(w, w2):
   if ctype == arithm_cmd():
     dst = get_dst(w)
     src = get_src(w)
-    rval = w2 & 0xFF if src == src_regs["CONST"] else regs[src]
+    rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
     if name == "AND":
-      regs[dst] = regs[dst] & rval
+      REGS[dst] = REGS[dst] & rval
     elif name == "OR":
-      regs[dst] = regs[dst] | rval
+      REGS[dst] = REGS[dst] | rval
     elif name == "XOR":
-      regs[dst] = regs[dst] ^ rval
+      REGS[dst] = REGS[dst] ^ rval
     elif name == "ADD":
-      regs[dst] = regs[dst] + rval
-      if regs[dst] > 0xFF:
-        regs[dst] &= 0xFF
+      REGS[dst] = REGS[dst] + rval
+      if REGS[dst] > 0xFF:
+        REGS[dst] &= 0xFF
         CF = True
       else:
         CF = False
     elif name == "MOV":
-      regs[dst] = rval
+      REGS[dst] = rval
+
+  if ctype == jump_cmd():
+    if name == "JMP":
+      IP = w2
+      return
+    if name == "JNC" and not CF:
+      IP = w2
+      return
+    if name == "JC" and CF:
+      IP = w2
+      return
+    if name == "CALL":
+      push(IP + 2)  # call cmd size should be 2
+      IP = w2
+      return
+    if name == "RET" or name == "IRET":
+      IP = pop()
+      return
 
   if ctype == ctrl_cmd():
     if name == "NOP":
       print("NOP!")
 
-  global IP
+  if ctype == transfer_cmd():
+    if name == "OUT":
+      dst = get_dst(w)
+      src = get_src(w)
+      rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
+      PORT[dst] = rval
+
   IP += get_cmd_size(w)
 
   return

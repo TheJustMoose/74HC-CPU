@@ -8,8 +8,8 @@
 ;   p = t
 ;   print(v)
 
-in:
   call fibo
+in:
   jmp in
 
 fibo:
@@ -18,7 +18,7 @@ fibo:
 m1:
   mov r2, r1    ; t = v
   add r1, r0    ; v += p (модифицирует флаг CF)
-  mov r0, r1    ; p = t
+  mov r0, r2    ; p = t
   out PORT0, r1 ; print(v)
   jnc  m1       ; while (v < 255)
   ret
