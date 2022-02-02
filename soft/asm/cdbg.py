@@ -190,8 +190,10 @@ def execute_cmd(w, w2):
       REGS[dst] = REGS[dst] | rval
     elif name == "XOR":
       REGS[dst] = REGS[dst] ^ rval
-    elif name == "ADD":
+    elif name == "ADD" or name == "ADDC":
       REGS[dst] = REGS[dst] + rval
+      if name == "ADDC" and CF:
+        REGS[dst] += 1
       if REGS[dst] > 0xFF:
         REGS[dst] &= 0xFF
         CF = True
@@ -215,6 +217,11 @@ def execute_cmd(w, w2):
       LF = REGS[dst] < rval
       EF = REGS[dst] == rval
       GF = REGS[dst] > rval
+    elif name == "MUL":
+      res = REGS[dst]*rval
+      reg_num = dst & 0x6
+      REGS[reg_num] = res & 0xFF
+      REGS[reg_num + 1] = (res >> 8) & 0xFF
 
   if ctype == jump_cmd():
     if name == "JMP":
