@@ -523,8 +523,8 @@ def print_dump():
     return
   for i in range(0, cnt & 0xFFFE, 2):
     print("%03X %03X" % (machine_code[i], machine_code[i+1]))
-  if cnt & 1:
-    print("%03X" % machine_code[-1])
+  if cnt & 1: # real device will have 3 ROM by 8 bit so we always have even word count
+    print("%03X 801" % machine_code[-1])
 
 def asm(fname):
   print("Assembling: " + fname)
