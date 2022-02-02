@@ -13,6 +13,7 @@ pin_to_name = {}
 REGS = [0, 0, 0, 0, 0, 0, 0, 0]
 PORT = [0, 0, 0, 0, 0, 0, 0, 0]
 CF = False
+SF = False
 IP = 0
 stack = []
 
@@ -155,10 +156,13 @@ def dump_regs():
   res += " | "
   for p in PORT:
     res += "%02X " % p
+  res += " | "
+  res += "CF:1" if CF else "CF:0"
+  res += " SF:1" if SF else " SF:0"
   return res
 
 def execute_cmd(w, w2):
-  global IP, CF
+  global IP, CF, SF
 
   ctype = get_ctype(w)
   cop = get_cop(w)
@@ -183,6 +187,18 @@ def execute_cmd(w, w2):
         CF = False
     elif name == "MOV":
       REGS[dst] = rval
+    elif name == "CLR" or name == "CLR2":
+      REGS[dst] = 0
+    elif name == "INV" or name == "INV2":
+      REGS[dst] = ~rval
+    elif name == "LSL" or name == "LSL2":
+      SF = (rval & 0x80) > 0
+      REGS[dst] = (rval << 1) & 0xFF
+    elif name == "LSR" or name == "LSR2":
+      SF = (rval & 0x01) > 0
+      REGS[dst] = (rval >> 1) & 0xFF
+    elif name == "SET" or name == "SET2":
+      REGS[dst] = 0xFF
 
   if ctype == jump_cmd():
     if name == "JMP":
@@ -192,6 +208,9 @@ def execute_cmd(w, w2):
       IP = w2
       return
     if name == "JC" and CF:
+      IP = w2
+      return
+    if name == "JS" and SF:
       IP = w2
       return
     if name == "CALL":
