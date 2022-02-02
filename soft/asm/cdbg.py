@@ -59,7 +59,7 @@ def extract_cops():
     cmd = cmds[c]
     uid = (cmd["TP"] << 10) + cmd["COP"]
     cop_to_name[uid] = c
-    print(uid, cmd)
+    #print(uid, cmd)
 
 def extract_regs():
   for r in dst_regs:
@@ -81,7 +81,8 @@ def extract_regs():
 def get_cmd_size(w):
   ctype = get_ctype(w)
   cop = get_cop(w)
-  name = cop_to_name[cop]
+  name = cop_to_name[(ctype << 10) + cop]
+
   if ctype == arithm_cmd():  # arithm instruction with const?
     return 2 if get_src(w) == src_regs["CONST"] else 1
 
@@ -123,8 +124,11 @@ def disasm(w, w2):
       res += " " + str(w2)
 
   if ctype == transfer_cmd():
-    if name == "LOAD" or name == "IN":
+    if name == "LOAD":
       res += " " + dst_to_name[get_dst(w)]
+    elif name == "IN":
+      res += " " + dst_to_name[get_dst(w)]
+      res += ", " + pin_to_name[get_src(w)]
     elif name == "CFG":
       res += " " + str(w2)
       res += ", " + src_to_name[get_src(w)]
@@ -147,8 +151,9 @@ def dbg(bin):
   while addr < len(bin):
     w = bin[addr]
     w2 = bin[addr + 1] if addr < len(bin) - 1 else 0
-    print("%04X:  %03X   %s" % (addr, w, disasm(w, w2)))
-    addr += get_cmd_size(w)
+    sz = get_cmd_size(w)
+    print("%04X:  %03X %d  %s" % (addr, w, sz, disasm(w, w2)))
+    addr += sz
   return
 
 def load(fname):
@@ -174,6 +179,8 @@ def main():
 
     extract_cops()
     extract_regs()
+
+    print("ret size: %d" % get_cmd_size(0x40B))
 
     bin = load(fname)
     dbg(bin)

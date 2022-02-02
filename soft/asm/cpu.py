@@ -41,7 +41,7 @@ cmds = {
 "CALL": {"COP": 9, "TP": 1, "ARGS": 1},
 "RET": {"COP": 10, "TP": 1, "ARGS": 0},
 "IRET": {"COP": 11, "TP": 1, "ARGS": 0},
-"SPE": {"COP": 12, "TP": 1, "ARGS": 0},
+"CSIE": {"COP": 12, "TP": 1, "ARGS": 0},
 # control
 "CLRF": {"COP": 0, "TP": 2, "ARGS": 0},
 "NOP": {"COP": 1, "TP": 2, "ARGS": 0},

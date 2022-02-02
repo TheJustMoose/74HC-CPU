@@ -200,13 +200,18 @@ class JumpInstruction(Instruction):
     return True
 
   def get_size(self):
-    if self.name == "RET" or self.name == "IRET" or self.name == "SPE":
+    if self.name == "RET" or self.name == "IRET" or self.name == "CSIE":
       return 1
     else:
       return 2  # cmd + address constant
 
   def target_addr(self):
-    return get_num(self.dst) if is_num(self.dst) else glabels[self.dst]
+    if self.dst in glabels:
+      return glabels[self.dst]
+    if is_num(self.dst):
+      return get_num(self.dst)
+    self.err("Unknown target %s" % self.dst)
+    return 0
 
   def mcode1(self):
     res = self.base_mcode()
@@ -242,7 +247,16 @@ class TransferInstruction(Instruction):
       if self.src not in src_regs:
         self.err("Unknown register %s in '%s'" % (self.src, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
-    # todo: add OUT params checking
+    elif self.name == "IN":
+      if self.dst not in dst_regs:
+        self.err("IN command require DST register: %s" % (" ".join(src_regs)))
+      if self.src not in src_ports:
+        self.err("IN command require SRC ports: %s" % (" ".join(src_ports)))
+    elif self.name == "OUT" or self.name == "XOUT":
+      if self.dst not in dst_ports:
+        self.err("OUT command require DST ports: %s" % (" ".join(dst_ports)))
+      if self.src not in src_regs and not is_num(self.src):
+        self.err("OUT command require SRC register: %s" % (" ".join(src_regs)))
 
   def get_size(self):
     if self.name == "LOAD" or self.name == "IN":
