@@ -11,9 +11,16 @@ port_to_name = {}
 pin_to_name = {}
 
 REGS = [0, 0, 0, 0, 0, 0, 0, 0]
-PORT = [0, 0, 0, 0, 0, 0, 0, 0]
-CF = False
-SF = False
+PORT = [0, 0, 0, 0]
+
+CF = False  # carry flag
+ZF = False  # zero flag
+SF = False  # shift flag
+
+LF = False  # less flag
+EF = False  # equal flag
+GF = False  # greater flag
+
 IP = 0
 stack = []
 
@@ -156,13 +163,18 @@ def dump_regs():
   res += " | "
   for p in PORT:
     res += "%02X " % p
-  res += " | "
-  res += "CF:1" if CF else "CF:0"
+  res += " |"
+  res += " CF:1" if CF else " CF:0"
+  res += " ZF:1" if GF else " ZF:0"
   res += " SF:1" if SF else " SF:0"
+
+  res += " LF:1" if LF else " LF:0"
+  res += " EF:1" if EF else " EF:0"
+  res += " GF:1" if GF else " GF:0"
   return res
 
 def execute_cmd(w, w2):
-  global IP, CF, SF
+  global IP, CF, ZF, SF, LF, EF, GF
 
   ctype = get_ctype(w)
   cop = get_cop(w)
@@ -199,20 +211,44 @@ def execute_cmd(w, w2):
       REGS[dst] = (rval >> 1) & 0xFF
     elif name == "SET" or name == "SET2":
       REGS[dst] = 0xFF
+    elif name == "CMP":
+      LF = REGS[dst] < rval
+      EF = REGS[dst] == rval
+      GF = REGS[dst] > rval
 
   if ctype == jump_cmd():
     if name == "JMP":
       IP = w2
       return
+
     if name == "JNC" and not CF:
       IP = w2
       return
     if name == "JC" and CF:
       IP = w2
       return
+
     if name == "JS" and SF:
       IP = w2
       return
+
+    if name == "JL" and LF:
+      IP = w2
+      return
+    if name == "JE" and EF:
+      IP = w2
+      return
+    if name == "JG" and GF:
+      IP = w2
+      return
+
+    if name == "JZ" and ZF:
+      IP = w2
+      return
+    if name == "JNZ" and not ZF:
+      IP = w2
+      return
+
     if name == "CALL":
       push(IP + 2)  # call cmd size should be 2
       IP = w2
