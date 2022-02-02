@@ -81,7 +81,8 @@ width: 250;
 <tr><td>CALL</td><td>1001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td>RET</td><td>1010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
 <tr><td>IRET</td><td>1011</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
-<tr><td>SPE</td><td>1100</td><td>SPE</td><td>SKIP if Equal: пропускает следующую команду, если стоит флаг EF (как тебе такое, Атмел?)</td><td>1</td></tr>
+<tr><td>CSIE</td><td>1100</td><td>СSIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF (как тебе такое, Атмел?)<br>
+нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер CSPE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
 <tr><td colspan=5><h4>Управления (CTYPE=2)</h4></td></tr>
 <tr><td>CLRF</td><td>0000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
 <tr><td>NOP</td><td>0001</td><td>NOP</td><td>No operation</td><td>1</td></tr>
@@ -96,6 +97,8 @@ width: 250;
 <tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1</td></tr>
 <tr><td>CFG</td><td>0101</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
+
+<i>CSIE - Compare Skip If Equal</i>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
 Константы могут располагаться только по нечётным адресам.<br>
@@ -300,6 +303,16 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 2</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL]<br>0|1 в зависимости от результатов проверки флагов</td><td></td><td></td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды CSIE</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td>Addr += (ещё)2<br>передумали, пропускаем след команду ;)</td><td></td></tr>
+<tr><td>АЛУ</td><td></td><td>сравнивает</td><td>Latch Flags</td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
