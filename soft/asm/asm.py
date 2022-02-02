@@ -234,7 +234,7 @@ class TransferInstruction(Instruction):
       if self.dst not in dst_regs:
         self.err("Load command require DST register. Here: %s" % (self.get_cmd()))
     elif self.name == "STORE":  # STORE cmd has only one argument. It's left and dst
-      if self.dst not in src_regs: # but we should use src regs
+      if self.dst not in src_regs and not is_num(self.dst): # but we should use src regs
         self.err("Store command require SRC register. Here: %s" % (self.get_cmd()))
     elif self.name == "CFG":
       if is_num(self.src):
@@ -242,6 +242,7 @@ class TransferInstruction(Instruction):
       if self.src not in src_regs:
         self.err("Unknown register %s in '%s'" % (self.src, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
+    # todo: add OUT params checking
 
   def get_size(self):
     if self.name == "LOAD" or self.name == "IN":
