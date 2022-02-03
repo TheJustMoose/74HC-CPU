@@ -154,7 +154,7 @@ width: 250;
 <h3>Шины</h3>
 <table border=1 width=400>
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
-<tr><td>A</td><td>Шина A - это выход мультиплексора по регистрам DST</td></tr>
+<tr><td>A</td><td>Шина A - это выход мультиплексора по регистрам DST, вход для RAM (то есть, STORE может сохранять любые регистры)</td></tr>
 <tr><td>B</td><td>Шина B - это выход мультиплексора по регистрам SRC, вход для унарных команд</td></tr>
 <tr><td>OUT</td><td>Шина OUT - это, фактически, выход АЛУ, то есть выход унарных и бинарных команд</td></tr>
 </table>
@@ -222,9 +222,8 @@ width: 250;
 <h3>STORE</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>-</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>-</td><td colspan=3>Rx</td><td colspan=4>STORE</td></tr>
-<tr><td colspan=12>CONST[7:0] - опционально, только для SRC==100</td></tr>
+<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
+<tr><td>1</td><td>1</td><td colspan=3>Rx</td><td colspan=3></td><td colspan=4>STORE</td></tr>
 </table>
 
 <h3>IN</h3>

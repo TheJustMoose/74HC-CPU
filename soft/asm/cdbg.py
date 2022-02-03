@@ -107,11 +107,11 @@ def get_cmd_size(w):
     return 1
 
   if ctype == transfer_cmd():
-    if name == "LOAD" or name == "IN":
+    if name == "LOAD" or name == "STORE" or name == "IN":
       return 1
     elif name == "CFG":
       return 2
-    else:  # STORE/OUT/XOUT
+    else:  # OUT/XOUT
       if get_src(w) == src_regs["CONST"]:
         return 2
       else:
@@ -135,7 +135,7 @@ def disasm(w, w2):
       res += " " + str(w2)
 
   if ctype == transfer_cmd():
-    if name == "LOAD":
+    if name == "LOAD" or name == "STORE":
       res += " " + dst_to_name[get_dst(w)]
     elif name == "IN":
       res += " " + dst_to_name[get_dst(w)]
@@ -143,11 +143,6 @@ def disasm(w, w2):
     elif name == "CFG":
       res += " " + str(w2)
       res += ", " + src_to_name[get_src(w)]
-    elif name == "STORE":
-      if get_src(w) == src_regs["CONST"]:
-        res += ", " + str(w2)
-      else:
-        res += ", " + src_to_name[get_src(w)]
     else:  # OUT/XOUT
       res += " " + port_to_name[get_dst(w)]
       if get_src(w) == src_regs["CONST"]:
@@ -304,10 +299,9 @@ def execute_cmd(w, w2):
       rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
       PORT[dst] = rval
     if name == "STORE":
-      src = get_src(w)
-      rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
+      dst = get_dst(w)
       addr = (REGS[7] << 8) + REGS[6]
-      RAM[addr] = rval
+      RAM[addr] = REGS[dst]
     if name == "LOAD":
       dst = get_dst(w)
       addr = (REGS[7] << 8) + REGS[6]

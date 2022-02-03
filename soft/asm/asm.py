@@ -244,7 +244,7 @@ class TransferInstruction(Instruction):
       if self.dst not in dst_regs:
         self.err("Load command require DST register. Here: %s" % (self.get_cmd()))
     elif self.name == "STORE":  # STORE cmd has only one argument. It's left and dst
-      if self.dst not in src_regs and not is_num(self.dst): # but we should use src regs
+      if self.dst not in dst_regs:
         self.err("Store command require SRC register. Here: %s" % (self.get_cmd()))
     elif self.name == "CFG":
       if is_num(self.src):
@@ -267,10 +267,7 @@ class TransferInstruction(Instruction):
     if self.name == "LOAD" or self.name == "IN":
       return 1
     elif self.name == "STORE":
-      if is_num(self.dst): # see comments above
-        return 2
-      else:
-        return 1
+      return 1
     elif self.name == "CFG":
       return 2
     elif self.name == "OUT" or self.name == "XOUT":
@@ -286,8 +283,7 @@ class TransferInstruction(Instruction):
     if self.name == "LOAD":
       res |= dst_regs[self.dst] << 7
     elif self.name == "STORE":
-      src_reg = src_regs["CONST" if is_num(self.dst) else self.dst]
-      res |= src_reg << 4
+      res |= dst_regs[self.dst] << 7
     elif self.name == "OUT" or self.name == "XOUT":
       src_reg = src_regs["CONST" if is_num(self.src) else self.src]
       res |= src_reg << 4
@@ -299,8 +295,6 @@ class TransferInstruction(Instruction):
   def mcode2(self):
     if self.name == "OUT" or self.name == "XOUT":
       return get_num(self.src) & 0xFF  # OUT PORT0, 20
-    if self.name == "STORE":
-      return get_num(self.dst) & 0xFF
     if self.name == "CFG":
       return get_num(self.dst)  # CFG 20, R0
     else:

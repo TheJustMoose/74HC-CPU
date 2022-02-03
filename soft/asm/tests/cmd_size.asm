@@ -62,7 +62,7 @@ ei
 reset
 
 load r4
-store r3 ; we can write into memory regs, const, pin0-1, port1
+store r3 ; we can write into memory only regs
 in r0, pin0
 out port1, r1
 xout port7, 10
