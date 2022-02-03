@@ -148,7 +148,9 @@ class ArithmInstruction(Instruction):
         self.err("Unknown register %s in '%s'" % (self.dst, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(dst_regs)))
       if self.arg_num == 1 and not self.src:  # unary command with 1 arg
-        if self.dst not in src_regs:
+        if self.name == "CLR" or self.name == "SET":
+          self.src = "R0"
+        elif self.dst not in src_regs:
           self.err("Plz use this registers R0, R1, R2, R3 or use cmd with suffix 2")
 
     if self.arg_num > 1:
@@ -172,6 +174,8 @@ class ArithmInstruction(Instruction):
     dst_val = dst_regs[self.dst]
     if self.arg_num == 2:
       src_val = src_regs["CONST" if is_num(self.src) else self.src]
+    elif self.name == "CLR" or self.name == "SET":
+      src_val = src_regs[self.src]  # will use r0 in CLR/SET, cause it let us do clr r7
     else:  # default arg for unary instruction
       src_val = dst_val
     res = self.base_mcode()
