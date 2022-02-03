@@ -3,6 +3,7 @@ import os
 
 from cpu import *
 
+gmacro = {}
 glabels = []
 verbose = False
 have_errors = False
@@ -352,7 +353,23 @@ def read_and_prepare(fname):
       if len(l) > 0:
         l = l.replace(',', ' ')
         res.append(l)
-  return res
+
+  global gmacro
+  res2 = []
+  for l in res:
+    if l.find(".DEF") == 0:
+      def_len = len(".DEF")
+      t = l[def_len:].strip()
+      p = t.split("=")
+      if len(p) != 2:
+        print("Error in macro: %s" % l)
+        have_errors = True
+        continue
+      gmacro[p[0]] = p[1]
+    else:
+      res2.append(l)
+
+  return res2
 
 def extract_labels_and_code(lines):
   res = []
@@ -379,7 +396,12 @@ def extract_labels_and_code(lines):
       else:
         last_label = label
     elif len(line) > 0:
-      i = CreateInstruction(line.split())
+      p = line.split()
+      for i, v in enumerate(p):
+        if v in gmacro:
+          p[i] = gmacro[v]
+
+      i = CreateInstruction(p)
       if len(last_label):
         i.label = last_label
         glabels.append(last_label)
