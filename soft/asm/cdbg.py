@@ -177,7 +177,7 @@ def dump_regs():
   return res
 
 def dump_mem():
-  tail = RAM[65536 - 8:]
+  tail = RAM[65536 - 24:]
   res = "m "
   for t in tail:
     res += "%02X " % t
@@ -295,6 +295,15 @@ def execute_cmd(w, w2):
       src = get_src(w)
       rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
       PORT[dst] = rval
+    if name == "STORE":
+      src = get_src(w)
+      rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
+      addr = (REGS[7] << 8) + REGS[6]
+      RAM[addr] = rval
+    if name == "LOAD":
+      dst = get_dst(w)
+      addr = (REGS[7] << 8) + REGS[6]
+      REGS[dst] = RAM[addr]
 
   IP += get_cmd_size(w)
 
