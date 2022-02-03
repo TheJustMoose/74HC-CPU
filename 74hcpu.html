@@ -371,22 +371,20 @@ JZ L1
 <table border=1>
 <tr><td>Модуль</td><td class="big">Что нужно для сборки</td><td>Корпусов</td></tr>
 <tr><td>AND</td><td>74HC08*2, 74HC573, всё в SO</td><td>3</td></tr>
-<tr><td>OR</td><td>74HC32*2, 74HC573, всё в SO</td><td>3</td></tr>
-<tr><td>XOR</td><td>74HC86*2, 74HC573, всё в SO</td><td>3</td></tr>
 <tr><td>ADD/ADDC</td><td>74HC283*2, 74HC08, 74HC573 увы в DIP</td><td>4</td></tr>
-<tr><td>CMP/CMPC</td><td>74HC85*2, 74HC08, лучше в SO</td><td>3</td></tr>
-<tr><td>NEG</td><td>74HC00*2, 74HC573, SO</td><td>3</td></tr>
-<tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
 <tr><td>MOV</td><td>74HC573, SO</td><td>1</td></tr>
+<tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
 <tr><td>ADD Flag</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP Flags</td><td>74HC175, 74HC04</td><td>2</td></tr>
+<tr><td>CMP/CMPC</td><td>74HC85*2, 74HC08, лучше в SO</td><td>3</td></tr>
+<tr><td>RW Reg</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
 <tr><td>CLR</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>LSL</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>LSR</td><td>74HC573, SO</td><td>1</td></tr>
+<tr><td>INV</td><td>74HC00*2, 74HC573, SO</td><td>3</td></tr>
+<tr><td>OR</td><td>74HC32*2, 74HC573, всё в SO</td><td>3</td></tr>
+<tr><td>XOR</td><td>74HC86*2, 74HC573, всё в SO</td><td>3</td></tr>
 <tr><td>SET</td><td>74HC573, SO</td><td>1</td></tr>
-<tr><td>SWAB</td><td>74HC573, SO</td><td>1</td></tr>
-<tr><td>MIR</td><td>74HC573, SO</td><td>1</td></tr>
-<tr><td>RW Reg</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
 <tr><td>MUX1</td><td>74HC151*8</td><td>8</td></tr>
 <tr><td>MUX1</td><td>74HC151*8</td><td>8</td></tr>
 <tr><td>OUT</td><td>74HC573*4, 74HC238</td><td>5</td></tr>
@@ -395,15 +393,17 @@ JZ L1
 <tr><td>ROM</td><td>W27C512*3, 74HC573*3, 74HC157*3</td><td>9</td></tr>
 <tr><td>ADDR MUX</td><td>74HC153*8</td><td>8</td></tr>
 <tr><td>OSC</td><td>74HC04, 74HC161, 74HC139, 74HC00</td><td>4</td></tr>
-<tr><td>STACK</td><td>74HC573*16, SO, 74HC193, 74HC238</td><td>18</td></tr>
-<tr><td>MUL</td><td>74HC283*16, 74HC08*16, 74HC573*2</td><td>34!</td></tr>
-<tr><td>IN</td><td>74HC573, ?</td><td>1</td></tr>
-<tr><td>Timer ;)</td><td>74HC193*4, 74HC573*2, 74HC00, ... считает в минус, загружается сам</td><td>7</td></tr>
-<tr><td>CFG</td><td>74HC238</td><td>1</td></tr>
-<tr><td>Interrupt Logic</td><td>74HC00*3, 74HC21 (или 74HC20)</td><td>4</td></tr>
-<tr><td>Jump Logic</td><td>74HC238, 74HC08*2, 74HC4078</td><td>4</td></tr>
 <tr><td>RAM</td><td>UT62256*2, 74HC573*2, 74HC00</td><td>5</td></tr>
+<tr><td>STACK</td><td>74HC573*16, SO, 74HC193, 74HC238</td><td>18</td></tr>
+<tr><td>IN</td><td>74HC573, ?</td><td>1</td></tr>
+<tr><td>Jump Logic</td><td>74HC238, 74HC08*2, 74HC4078</td><td>4</td></tr>
+<tr><td>Interrupt Logic</td><td>74HC00*3, 74HC21 (или 74HC20)</td><td>4</td></tr>
 <tr><td>CMD decoder</td><td>мелкая логика, которая связывает все предыдущие модули: 74HC21, 74HC139, ...</td><td>3+</td></tr>
+<tr><td>MUL</td><td>74HC283*16, 74HC08*16, 74HC573*2</td><td>34!</td></tr>
+<tr><td>MIR</td><td>74HC573, SO</td><td>1</td></tr>
+<tr><td>SWAB</td><td>74HC573, SO</td><td>1</td></tr>
+<tr><td>CFG</td><td>74HC238</td><td>1</td></tr>
+<tr><td>Timer ;)</td><td>74HC193*4, 74HC573*2, 74HC00, ... считает в минус, загружается сам</td><td>7</td></tr>
 <tr><td colspan=3>Итого - 170 корпусов</td></tr>
 </table>
 
