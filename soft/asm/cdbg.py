@@ -98,7 +98,7 @@ def get_cmd_size(w):
     return 2 if get_src(w) == src_regs["CONST"] else 1
 
   if ctype == jump_cmd():
-    if name == "RET" or name == "IRET" or name == "CSIE":
+    if name == "RET" or name == "IRET" or name == "SIE" or name == "SIZ":
       return 1
     else:
       return 2
@@ -238,10 +238,10 @@ def execute_cmd(w, w2):
       IP = w2
       return
 
-    if name == "JNC" and not CF:
+    if name == "JC" and CF:
       IP = w2
       return
-    if name == "JC" and CF:
+    if name == "JNC" and not CF:
       IP = w2
       return
 
@@ -249,10 +249,14 @@ def execute_cmd(w, w2):
       IP = w2
       return
 
-    if name == "JL" and LF:
+    if name == "JE" and EF:
       IP = w2
       return
-    if name == "JE" and EF:
+    if name == "NJE" and not EF:
+      IP = w2
+      return
+
+    if name == "JL" and LF:
       IP = w2
       return
     if name == "JG" and GF:
@@ -272,6 +276,10 @@ def execute_cmd(w, w2):
       return
     if name == "RET" or name == "IRET":
       IP = pop()
+      return
+
+    if name == "SIE" and EF:
+      IP += get_cmd_size(w) + 2 # += 3
       return
 
   if ctype == ctrl_cmd():

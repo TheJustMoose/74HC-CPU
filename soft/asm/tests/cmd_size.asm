@@ -53,7 +53,7 @@ call f1
 call 0xFFF
 ret
 iret
-csie
+sie
 
 clrf
 nop

@@ -72,17 +72,19 @@ width: 250;
 <tr><td>JZ</td><td>0000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
 <tr><td>JNZ</td><td>0001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
 <tr><td>JE</td><td>0010</td><td>JE ADDR</td><td>Переход если флаг E установлен</td><td>2</td></tr>
-<tr><td>JG</td><td>0011</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
-<tr><td>JL</td><td>0100</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
-<tr><td>JC</td><td>0101</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
-<tr><td>JNC</td><td>0110</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
-<tr><td>JS</td><td>0111</td><td>JS ADDR</td><td>Переход, если флаг S установлен</td><td>2</td></tr>
+<tr><td>JNE</td><td>0011</td><td>JNE ADDR</td><td>Переход если флаг E сброшен</td><td>2</td></tr>
+<tr><td>JG</td><td>0100</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
+<tr><td>JL</td><td>0101</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
+<tr><td>JC</td><td>0110</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
+<tr><td>JNC</td><td>0111</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
+<tr><td>JS</td><td>?</td><td>JS ADDR</td><td>Переход, если флаг S установлен (эта команда не лезет, ибо у дешифратора обычно 8 выходов, а у ИЛИ 8 входов)</td><td>2</td></tr>
 <tr><td>JMP</td><td>1000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>1001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td>RET</td><td>1010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
 <tr><td>IRET</td><td>1011</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
-<tr><td>CSIE</td><td>1100</td><td>СSIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF (как тебе такое, Атмел?)<br>
-нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер CSPE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
+<tr><td>SIE</td><td>1100</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное. (как тебе такое, Атмел?)<br>
+нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
+<tr><td>SIZ</td><td>1101</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
 <tr><td colspan=5><h4>Управления (CTYPE=2)</h4></td></tr>
 <tr><td>CLRF</td><td>0000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
 <tr><td>NOP</td><td>0001</td><td>NOP</td><td>No operation</td><td>1</td></tr>
@@ -98,7 +100,7 @@ width: 250;
 <tr><td>CFG</td><td>0101</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
 
-<i>CSIE - Compare Skip If Equal</i>
+<i>SIE - Skip If Equal</i>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
 Константы могут располагаться только по нечётным адресам.<br>
@@ -187,6 +189,13 @@ width: 250;
 <tr><td colspan=12>CONST[11:0]</td></tr>
 </table>
 <p>Биты 6-9 можно использовать как недостающие. Вместе с 12 бит константой они дадут полный 16 битный адрес.</p>
+<br>
+
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=2>CTYPE == 1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
+<tr><td>0</td><td>1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>SIE</td></tr>
+</table>
 <br>
 
 <table border=1>
@@ -307,13 +316,13 @@ JZ L1
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
-<h3>Выполнение команды CSIE</h3>
+<h3>Выполнение команды SIE (JE через одну следующую команду)</h3>
 <table border=1>
 <tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
-<tr><td>Счётчик адреса</td><td></td><td>Addr += 1</td><td></td><td></td></tr>
-<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td>Addr += (ещё)2<br>передумали, пропускаем след команду ;)</td><td></td></tr>
-<tr><td>АЛУ</td><td></td><td>сравнивает</td><td>Latch Flags</td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|3, 3 если EF, 1 если not EF</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>АЛУ</td><td></td><td></td><td></td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 

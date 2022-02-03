@@ -204,7 +204,7 @@ class JumpInstruction(Instruction):
     return True
 
   def get_size(self):
-    if self.name == "RET" or self.name == "IRET" or self.name == "CSIE":
+    if self.name == "RET" or self.name == "IRET" or self.name == "SIE" or self.name == "SIZ":
       return 1
     else:
       return 2  # cmd + address constant
