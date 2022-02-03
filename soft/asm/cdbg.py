@@ -12,6 +12,7 @@ pin_to_name = {}
 
 REGS = [0, 0, 0, 0, 0, 0, 0, 0]
 PORT = [0, 0, 0, 0]
+RAM = [0]*65536
 
 CF = False  # carry flag
 ZF = False  # zero flag
@@ -157,20 +158,29 @@ def disasm(w, w2):
   return res
 
 def dump_regs():
-  res = ""
+  res = "r "
   for r in REGS:
     res += "%02X " % r
-  res += " | "
+  res += " | p "
   for p in PORT:
     res += "%02X " % p
-  res += " |"
-  res += " CF:1" if CF else " CF:0"
-  res += " ZF:1" if GF else " ZF:0"
-  res += " SF:1" if SF else " SF:0"
 
-  res += " LF:1" if LF else " LF:0"
-  res += " EF:1" if EF else " EF:0"
-  res += " GF:1" if GF else " GF:0"
+  bub = chr(4)
+  res += " |"
+  res += " CF:" + bub if CF else " CF: "
+  res += " ZF:" + bub if GF else " ZF: "
+  res += " SF:" + bub if SF else " SF: "
+
+  res += " LF:" + bub if LF else " LF: "
+  res += " EF:" + bub if EF else " EF: "
+  res += " GF:" + bub if GF else " GF: "
+  return res
+
+def dump_mem():
+  tail = RAM[65536 - 8:]
+  res = "m "
+  for t in tail:
+    res += "%02X " % t
   return res
 
 def execute_cmd(w, w2):
@@ -213,15 +223,15 @@ def execute_cmd(w, w2):
       REGS[dst] = (rval >> 1) & 0xFF
     elif name == "SET" or name == "SET2":
       REGS[dst] = 0xFF
-    elif name == "CMP":
-      LF = REGS[dst] < rval
-      EF = REGS[dst] == rval
-      GF = REGS[dst] > rval
     elif name == "MUL":
       res = REGS[dst]*rval
       reg_num = dst & 0x6
       REGS[reg_num] = res & 0xFF
       REGS[reg_num + 1] = (res >> 8) & 0xFF
+    elif name == "CMP":
+      LF = REGS[dst] < rval
+      EF = REGS[dst] == rval
+      GF = REGS[dst] > rval
 
   if ctype == jump_cmd():
     if name == "JMP":
@@ -265,8 +275,19 @@ def execute_cmd(w, w2):
       return
 
   if ctype == ctrl_cmd():
+    if name == "CLRF":
+      CF = False
+      ZF = False
+      LF = False
+      EF = True
+      GF = False
+
     if name == "NOP":
       print("NOP!")
+
+    if name == "RESET":
+      IP = 0
+      return
 
   if ctype == transfer_cmd():
     if name == "OUT":
@@ -297,7 +318,7 @@ def dbg(bin):
       w2 = bin[IP + 1] if IP < len(bin) - 1 else 0
       sz = get_cmd_size(w)
       print("%04X:  %03X %d  %-20s | %s" % (IP, w, sz, disasm(w, w2), dump_regs()))
-      print("step - g, abort - a")
+      print("step - g, abort - a                | %s" % dump_mem())
 
       answ = msvcrt.getch()
       if answ == b'a':
