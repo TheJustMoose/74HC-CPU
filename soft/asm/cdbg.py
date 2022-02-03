@@ -152,13 +152,24 @@ def disasm(w, w2):
 
   return res
 
+def dump_human_regs():
+  a = (REGS[7] << 8) + REGS[6]
+  b = (REGS[5] << 8) + REGS[4]
+  c = (REGS[3] << 8) + REGS[2]
+  d = (REGS[1] << 8) + REGS[0]
+  res = "%5d %5d %5d %5d" % (a, b, c, d)
+  return res
+
 def dump_regs():
-  res = "r "
+  regs = ""
   for r in REGS:
-    res += "%02X " % r
-  res += " | p "
+    regs = ("%02X " % r) + regs
+  res = "r " + regs
+
+  port = ""
   for p in PORT:
-    res += "%02X " % p
+    port = ("%02X " % p) + port
+  res += " | p " + port
 
   bub = chr(4)
   res += " |"
@@ -303,6 +314,7 @@ def execute_cmd(w, w2):
       LF = False
       EF = True
       GF = False
+      SF = False
 
     if name == "NOP":
       print("NOP!")
@@ -347,6 +359,7 @@ def dbg(bin):
       w = bin[IP]
       w2 = bin[IP + 1] if IP < len(bin) - 1 else 0
       sz = get_cmd_size(w)
+      print(" " * 39 + dump_human_regs())
       print("%04X:  %03X %d  %-20s | %s" % (IP, w, sz, disasm(w, w2), dump_regs()))
       print("step - g, abort - a                | %s" % dump_mem())
 
