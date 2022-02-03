@@ -132,7 +132,7 @@ def disasm(w, w2):
 
   if ctype == jump_cmd():
     if name[0] == "J" or name == "CALL":
-      res += " " + str(w2)
+      res += " %04X" % w2
 
   if ctype == transfer_cmd():
     if name == "LOAD" or name == "STORE":
@@ -191,12 +191,16 @@ def execute_cmd(w, w2):
     rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
     if name == "AND":
       REGS[dst] = REGS[dst] & rval
+      ZF = REGS[dst] == 0
     elif name == "OR":
       REGS[dst] = REGS[dst] | rval
+      ZF = REGS[dst] == 0
     elif name == "XOR":
       REGS[dst] = REGS[dst] ^ rval
+      ZF = REGS[dst] == 0
     elif name == "ADD" or name == "ADDC":
       REGS[dst] = REGS[dst] + rval
+      ZF = REGS[dst] == 0
       if name == "ADDC" and CF:
         REGS[dst] += 1
       if REGS[dst] > 0xFF:
@@ -206,18 +210,30 @@ def execute_cmd(w, w2):
         CF = False
     elif name == "MOV":
       REGS[dst] = rval
+      ZF = REGS[dst] == 0
     elif name == "CLR" or name == "CLR2":
       REGS[dst] = 0
+      ZF = REGS[dst] == 0
     elif name == "INV" or name == "INV2":
       REGS[dst] = ~rval
+      ZF = REGS[dst] == 0
     elif name == "LSL" or name == "LSL2":
+      t = SF
       SF = (rval & 0x80) > 0
       REGS[dst] = (rval << 1) & 0xFF
+      if t:
+        REGS[dst] |= 0x01
+      ZF = REGS[dst] == 0
     elif name == "LSR" or name == "LSR2":
+      t = SF
       SF = (rval & 0x01) > 0
       REGS[dst] = (rval >> 1) & 0xFF
+      if t:
+        REGS[dst] |= 0x80
+      ZF = REGS[dst] == 0
     elif name == "SET" or name == "SET2":
       REGS[dst] = 0xFF
+      ZF = REGS[dst] == 0
     elif name == "MUL":
       res = REGS[dst]*rval
       reg_num = dst & 0x6
@@ -274,6 +290,9 @@ def execute_cmd(w, w2):
       return
 
     if name == "SIE" and EF:
+      IP += get_cmd_size(w) + 2 # += 3
+      return
+    if name == "SIZ" and ZF:
       IP += get_cmd_size(w) + 2 # += 3
       return
 
