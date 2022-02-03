@@ -50,6 +50,8 @@ cmds = {
 "DI": {"COP": 2, "TP": 2, "ARGS": 0},
 "EI": {"COP": 3, "TP": 2, "ARGS": 0},
 "RESET": {"COP": 4, "TP": 2, "ARGS": 0},
+"BANK0": {"COP": 5, "TP": 2, "ARGS": 0},
+"BANK1": {"COP": 6, "TP": 2, "ARGS": 0},
 # transfer
 "LOAD": {"COP": 0, "TP": 3, "ARGS": 1},
 "STORE": {"COP": 1, "TP": 3, "ARGS": 1},

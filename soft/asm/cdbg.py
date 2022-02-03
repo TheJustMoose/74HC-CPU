@@ -1,6 +1,7 @@
 import os
 import sys
 import msvcrt  # plz fix it to use in Linux *ROFL*
+import random
 
 from cpu import *
 
@@ -10,9 +11,12 @@ src_to_name = {}
 port_to_name = {}
 pin_to_name = {}
 
-REGS = [0, 0, 0, 0, 0, 0, 0, 0]
+REGS0 = [0, 0, 0, 0, 0, 0, 0, 0]
+REGS1 = [0, 0, 0, 0, 0, 0, 0, 0]
 PORT = [0, 0, 0, 0]
 RAM = [0]*65536
+
+bank0 = True
 
 CF = False  # carry flag
 ZF = False  # zero flag
@@ -153,18 +157,23 @@ def disasm(w, w2):
   return res
 
 def dump_human_regs():
-  a = (REGS[7] << 8) + REGS[6]
-  b = (REGS[5] << 8) + REGS[4]
-  c = (REGS[3] << 8) + REGS[2]
-  d = (REGS[1] << 8) + REGS[0]
+  global bank0
+  bank = REGS0 if bank0 else REGS1
+  a = (bank[7] << 8) + bank[6]
+  b = (bank[5] << 8) + bank[4]
+  c = (bank[3] << 8) + bank[2]
+  d = (bank[1] << 8) + bank[0]
   res = "%5d %5d %5d %5d" % (a, b, c, d)
   return res
 
 def dump_regs():
   regs = ""
-  for r in REGS:
+  global bank0
+  bank = REGS0 if bank0 else REGS1
+  for r in bank:
     regs = ("%02X " % r) + regs
-  res = "r " + regs
+  pre = "b0 " if bank0 else "b1 "
+  res = pre + regs
 
   port = ""
   for p in PORT:
@@ -184,7 +193,7 @@ def dump_regs():
 
 def dump_mem():
   tail = RAM[65536 - 24:]
-  res = "m "
+  res = " m "
   for t in tail:
     res += "%02X " % t
   return res
@@ -196,64 +205,74 @@ def execute_cmd(w, w2):
   cop = get_cop(w)
   name = cop_to_name[(ctype << 10) + cop]
 
+  global bank0
+  bank = REGS0 if bank0 else REGS1
+
   if ctype == arithm_cmd():
     dst = get_dst(w)
     src = get_src(w)
-    rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
+    rval = w2 & 0xFF if src == src_regs["CONST"] else bank[src]
     if name == "AND":
-      REGS[dst] = REGS[dst] & rval
-      ZF = REGS[dst] == 0
+      bank[dst] = bank[dst] & rval
+      ZF = bank[dst] == 0
     elif name == "OR":
-      REGS[dst] = REGS[dst] | rval
-      ZF = REGS[dst] == 0
+      bank[dst] = bank[dst] | rval
+      ZF = bank[dst] == 0
     elif name == "XOR":
-      REGS[dst] = REGS[dst] ^ rval
-      ZF = REGS[dst] == 0
+      bank[dst] = bank[dst] ^ rval
+      ZF = bank[dst] == 0
     elif name == "ADD" or name == "ADDC":
-      REGS[dst] = REGS[dst] + rval
-      ZF = REGS[dst] == 0
+      bank[dst] = bank[dst] + rval
+      ZF = bank[dst] == 0
       if name == "ADDC" and CF:
-        REGS[dst] += 1
-      if REGS[dst] > 0xFF:
-        REGS[dst] &= 0xFF
+        bank[dst] += 1
+      if bank[dst] > 0xFF:
+        bank[dst] &= 0xFF
         CF = True
       else:
         CF = False
     elif name == "MOV":
-      REGS[dst] = rval
-      ZF = REGS[dst] == 0
+      bank[dst] = rval
+      ZF = bank[dst] == 0
     elif name == "CLR" or name == "CLR2":
-      REGS[dst] = 0
-      ZF = REGS[dst] == 0
+      bank[dst] = 0
+      ZF = bank[dst] == 0
     elif name == "INV" or name == "INV2":
-      REGS[dst] = ~rval
-      ZF = REGS[dst] == 0
+      bank[dst] = ~rval
+      ZF = bank[dst] == 0
     elif name == "LSL" or name == "LSL2":
       t = SF
       SF = (rval & 0x80) > 0
-      REGS[dst] = (rval << 1) & 0xFF
+      bank[dst] = (rval << 1) & 0xFF
       if t:
-        REGS[dst] |= 0x01
-      ZF = REGS[dst] == 0
+        bank[dst] |= 0x01
+      ZF = bank[dst] == 0
     elif name == "LSR" or name == "LSR2":
       t = SF
       SF = (rval & 0x01) > 0
-      REGS[dst] = (rval >> 1) & 0xFF
+      bank[dst] = (rval >> 1) & 0xFF
       if t:
-        REGS[dst] |= 0x80
-      ZF = REGS[dst] == 0
+        bank[dst] |= 0x80
+      ZF = bank[dst] == 0
     elif name == "SET" or name == "SET2":
-      REGS[dst] = 0xFF
-      ZF = REGS[dst] == 0
+      bank[dst] = 0xFF
+      ZF = bank[dst] == 0
     elif name == "MUL":
-      res = REGS[dst]*rval
+      res = bank[dst]*rval
       reg_num = dst & 0x6
-      REGS[reg_num] = res & 0xFF
-      REGS[reg_num + 1] = (res >> 8) & 0xFF
+      bank[reg_num] = res & 0xFF
+      bank[reg_num + 1] = (res >> 8) & 0xFF
     elif name == "CMP":
-      LF = REGS[dst] < rval
-      EF = REGS[dst] == rval
-      GF = REGS[dst] > rval
+      LF = bank[dst] < rval
+      EF = bank[dst] == rval
+      GF = bank[dst] > rval
+    # copy r0:r1 cause in real life it's one pair without banks
+    if bank0:
+      REGS1[0] = REGS0[0]
+      REGS1[1] = REGS0[1]
+    else:
+      REGS0[0] = REGS1[0]
+      REGS0[1] = REGS1[1]
 
   if ctype == jump_cmd():
     if name == "JMP":
@@ -319,6 +338,11 @@ def execute_cmd(w, w2):
     if name == "NOP":
       print("NOP!")
 
+    if name == "BANK0":
+      bank0 = True
+    if name == "BANK1":
+      bank0 = False
+
     if name == "RESET":
       IP = 0
       return
@@ -327,16 +351,23 @@ def execute_cmd(w, w2):
     if name == "OUT":
       dst = get_dst(w)
       src = get_src(w)
-      rval = w2 & 0xFF if src == src_regs["CONST"] else REGS[src]
+      rval = w2 & 0xFF if src == src_regs["CONST"] else bank[src]
       PORT[dst] = rval
     if name == "STORE":
       dst = get_dst(w)
-      addr = (REGS[7] << 8) + REGS[6]
-      RAM[addr] = REGS[dst]
+      addr = (bank[7] << 8) + bank[6]
+      RAM[addr] = bank[dst]
     if name == "LOAD":
       dst = get_dst(w)
-      addr = (REGS[7] << 8) + REGS[6]
-      REGS[dst] = RAM[addr]
+      addr = (bank[7] << 8) + bank[6]
+      bank[dst] = RAM[addr]
+    # copy r0:r1 cause in real life it's one pair without banks
+    if bank0:
+      REGS1[0] = REGS0[0]
+      REGS1[1] = REGS0[1]
+    else:
+      REGS0[0] = REGS1[0]
+      REGS0[1] = REGS1[1]
 
   IP += get_cmd_size(w)
 
@@ -374,6 +405,11 @@ def dbg(bin):
 
   return
 
+def init_ram():
+  global RAM
+  for i in range(0, 65536):
+    RAM[i] = random.randint(0, 255)
+
 def load(fname):
   with open(fname, "r") as f:
     s = f.read()
@@ -397,7 +433,7 @@ def main():
 
     extract_cops()
     extract_regs()
-
+    init_ram()
     bin = load(fname)
     #dump(bin)
     dbg(bin)
