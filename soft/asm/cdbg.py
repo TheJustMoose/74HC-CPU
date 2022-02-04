@@ -34,6 +34,17 @@ src_mask = 0x07 << 4
 dst_mask = 0x07 << 7
 ctype_mask = 0x03 << 10
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def push(addr):
   stack.append(addr)
   return
@@ -191,11 +202,17 @@ def dump_regs():
   res += " GF:" + bub if GF else " GF: "
   return res
 
+ram_prev = [0]*24
+
 def dump_mem():
   tail = RAM[65536 - 24:]
   res = " m "
-  for t in tail:
-    res += "%02X " % t
+  for i in range(0, len(tail)):
+    if tail[i] != ram_prev[i]:
+      res += f"{bcolors.WARNING}%02X{bcolors.ENDC} " % tail[i]
+      ram_prev[i] = tail[i]
+    else:
+      res += f"%02X " % tail[i]
   return res
 
 def execute_cmd(w, w2):
@@ -426,9 +443,11 @@ def main():
       print("To use type:\ncdbg.py your_source.bin\n")
       return
 
+    os.system('color')
+
     fname = sys.argv[1]
     if not os.path.exists(fname):
-      print("%s file doesn't exist" % fname)
+      print(f"{bcolors.WARNING}%s file doesn't exist{bcolors.ENDC}" % fname)
       return
 
     extract_cops()
