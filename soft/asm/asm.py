@@ -410,7 +410,12 @@ def fix_alignment(instructions):
   global have_errors
   for i in instructions:
     if i.need_align(addr):
-      res.append(CreateInstruction(["NOP"]))
+      if res[-1].name == "SIE":  # SIE skip exactly 2 instructions
+        # so we should align current instruction
+        # by inserting NOP *before* SIE, not after!
+        res.insert(-1, CreateInstruction(["NOP"]))
+      else:
+        res.append(CreateInstruction(["NOP"]))
       addr +=1
       if i.need_align(addr):
         print("ASSEMBLER ERROR! HALT!!")
