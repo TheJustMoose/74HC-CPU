@@ -10,6 +10,8 @@ bank1
 mov r6, 0xF0 ; ptr1
 mov r7, 0xFF
 
+clr r3 ; flag
+
 loop:
 bank0
 load r0
@@ -18,7 +20,8 @@ bank1
 load r1
 
 cmp r0, r1
-jl skip
+jg skip
+set r3   ; flag := 1
 store r0 ; into ptr1
 bank0
 store r1 ; into ptr0
@@ -34,9 +37,13 @@ addc r7, 0
 cmp r6, 0xFF
 jl loop
 
+cmp r3, 0 ; no one swap happened
+je stop
+
 bank0
 add r2, 0xFF
 jnz pass
 
+stop:
 nop
 nop
