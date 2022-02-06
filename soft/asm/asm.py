@@ -152,7 +152,7 @@ class ArithmInstruction(Instruction):
         if self.name == "CLR" or self.name == "SET":
           self.src = "R0"
         elif self.dst not in src_regs:
-          self.err("Plz use this registers R0, R1, R2, R3 or use cmd with suffix 2")
+          self.err("Plz use this registers r0, r1, r2, r3, r4 or use cmd with suffix 2")
 
     if self.arg_num > 1:
       if self.src in src_regs or is_num(self.src):
@@ -248,7 +248,7 @@ class TransferInstruction(Instruction):
         self.err("Store command require SRC register. Here: %s" % (self.get_cmd()))
     elif self.name == "CFG":
       if is_num(self.src):
-        self.err("CFG command use const as port address, so you should use only r0-r3, PORT0, PIN0, PIN1 as source")
+        self.err("CFG command use const as port address, so you should use only r0-r4, PORT0, PIN0 as source")
       if self.src not in src_regs:
         self.err("Unknown register %s in '%s'" % (self.src, self.get_cmd()))
         self.err("Plz use this registers: %s" % (" ".join(src_regs)))
