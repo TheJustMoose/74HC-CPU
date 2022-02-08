@@ -43,18 +43,18 @@ width: 250;
 
 <h3>Список команд</h3>
 <table border=1>
-<tr><td colspan=5><h4>Арифметические (CTYPE=0)</h4></td></tr>
+<tr><td colspan=5><h4>Бинарные команды (CTYPE=0)</h4></td></tr>
 <tr><td colspan=5>Бинарная команда DST := DST OP SRC</td></tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
-<tr><td>AND</td><td>0000</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
-<tr><td>OR</td><td>0001</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
-<tr><td>XOR</td><td>0010</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>MUL?</td><td>0011</td><td>MUL r0, r1</td><td>Умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
-<tr><td>ADD</td><td>0100</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
-<tr><td>ADDC</td><td>0101</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
-<tr><td>CMP</td><td>0110</td><td>CMP r0, r1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
-<tr><td>CMPC</td><td>0111</td><td>CMPC r0, r1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
-<tr><td colspan=5>Унарные команды DST := OP SRC, по умолчанию DST := OP DST,<br>
+<tr><td>AND</td><td>000</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
+<tr><td>OR</td><td>001</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
+<tr><td>XOR</td><td>010</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
+<tr><td>MUL?</td><td>011</td><td>MUL r0, r1</td><td>Умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
+<tr><td>ADD</td><td>100</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
+<tr><td>ADDC</td><td>101</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
+<tr><td>CMP</td><td>110</td><td>CMP r0, r1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
+<tr><td>CMPC</td><td>111</td><td>CMPC r0, r1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
+<tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4> DST := OP SRC, по умолчанию DST := OP DST,<br>
 например CLR r1, значит то же, что и CLR r1, r1,<br> то же что и r1 := CLR r1.<br>
 Пример с NEG лучше: NEG r1 - это то же, что и: r1 := NEG r1<br>
 Можно использовать и два регистра: r2 := NEG r1 - или NEG r2, r1</td></tr>
@@ -66,38 +66,41 @@ width: 250;
 <tr><td>MOV</td><td>1101</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
 <tr><td>SWAB</td><td>1110</td><td>SWAB r1</td><td>Перестановка ниблов местами</td><td>1</td></tr>
 <tr><td>SET</td><td>1111</td><td>SET r1</td><td>Установка всех битов регистра в 1</td><td>1</td></tr>
-<tr><td colspan=5><h4>Перехода (CTYPE=1)</h4></td></tr>
-<tr><td>JZ</td><td>0000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
-<tr><td>JNZ</td><td>0001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
-<tr><td>JE</td><td>0010</td><td>JE ADDR</td><td>Переход если флаг E установлен</td><td>2</td></tr>
-<tr><td>JNE</td><td>0011</td><td>JNE ADDR</td><td>Переход если флаг E сброшен</td><td>2</td></tr>
-<tr><td>JG</td><td>0100</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
-<tr><td>JL</td><td>0101</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
-<tr><td>JC</td><td>0110</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
-<tr><td>JNC</td><td>0111</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
+<tr><td colspan=5><h4>Условного перехода (CTYPE=3)</h4></td></tr>
+<tr><td>JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
+<tr><td>JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
+<tr><td>JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг E установлен</td><td>2</td></tr>
+<tr><td>JNE</td><td>011</td><td>JNE ADDR</td><td>Переход если флаг E сброшен</td><td>2</td></tr>
+<tr><td>JG</td><td>100</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
+<tr><td>JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
+<tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
+<tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
 <tr><td>JS</td><td>?</td><td>JS ADDR</td><td>Переход, если флаг S установлен (эта команда не лезет, ибо у дешифратора обычно 8 выходов, а у ИЛИ 8 входов)</td><td>2</td></tr>
-<tr><td>JMP</td><td>1000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
-<tr><td>CALL</td><td>1001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
-<tr><td>RET</td><td>1010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
-<tr><td>IRET</td><td>1011</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
-<tr><td>SIE</td><td>1100</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное. (как тебе такое, Атмел?)<br>
+<tr><td colspan=5><h4>Безусловного перехода (CTYPE=4)</h4></td></tr>
+<tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
+<tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
+<tr><td>RET</td><td>010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
+<tr><td>IRET</td><td>011</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
+<tr><td>SIE</td><td>100</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное. (как тебе такое, Атмел?)<br>
 нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
-<tr><td>SIZ</td><td>1101</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
-<tr><td colspan=5><h4>Управления (CTYPE=2)</h4></td></tr>
-<tr><td>CLRF</td><td>0000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
-<tr><td>NOP</td><td>0001</td><td>NOP</td><td>No operation</td><td>1</td></tr>
-<tr><td>DI</td><td>0010</td><td>DI</td><td>Disable interrupt</td><td>1</td></tr>
-<tr><td>EI</td><td>0011</td><td>EI</td><td>Enable interrupt</td><td>1</td></tr>
-<tr><td>RESET</td><td>0100</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
-<tr><td>BANK0</td><td>0101</td><td>BANK0</td><td>Connect BANK0 of registers</td><td>1</td></tr>
-<tr><td>BANK1</td><td>0110</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
-<tr><td colspan=5><h4>Передачи (CTYPE=3)</h4></td></tr>
-<tr><td>LOAD</td><td>0000</td><td>LOAD r0</td><td>Загрузка из RAM[r7:r6] в регистр</td><td>1</td></tr>
-<tr><td>STORE</td><td>0001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра</td><td>1/2</td></tr>
-<tr><td>IN</td><td>0010</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
-<tr><td>OUT</td><td>0011</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
-<tr><td>XOUT</td><td>0100</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
-<tr><td>CFG</td><td>0101</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
+<tr><td>SIZ</td><td>101</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
+<tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
+<tr><td>NOP</td><td>111</td><td>NOP</td><td>No operation</td><td>1</td></tr>
+<tr><td colspan=5><h4>Управления (CTYPE=5)</h4></td></tr>
+<tr><td>CLRF</td><td>000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
+<tr><td>DI</td><td>001</td><td>DI</td><td>Disable interrupt</td><td>1</td></tr>
+<tr><td>EI</td><td>010</td><td>EI</td><td>Enable interrupt</td><td>1</td></tr>
+<tr><td>BANK0</td><td>011</td><td>BANK0</td><td>Connect BANK0 of registers</td><td>1</td></tr>
+<tr><td>BANK1</td><td>100</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
+<tr><td colspan=5><h4>Передачи (CTYPE=6)</h4></td></tr>
+<tr><td>LOADX</td><td>000</td><td>LOAD r0</td><td>Загрузка из RAM[r7:r6] в регистр</td><td>1</td></tr>
+<tr><td>STOREX</td><td>001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра</td><td>1/2</td></tr>
+<tr><td>LOADY</td><td>010</td><td>LOAD r0</td><td>Загрузка из RAM[r5:r4] в регистр</td><td>1</td></tr>
+<tr><td>STOREY</td><td>011</td><td>STORE r0</td><td>Запись в RAM[r5:r4] указанного регистра</td><td>1/2</td></tr>
+<tr><td>IN</td><td>100</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
+<tr><td>OUT</td><td>101</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
+<tr><td>XOUT</td><td>110</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
+<tr><td>CFG</td><td>111</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
 
 <i>SIE - Skip If Equal</i>
