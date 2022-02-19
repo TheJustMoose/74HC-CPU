@@ -322,4 +322,26 @@ F 3 "http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf" H 4300 6050 50  0001 C CNN
 	1    4300 6050
 	1    0    0    1   
 $EndComp
+$Comp
+L Device:R R3
+U 1 1 62101683
+P 2500 5150
+F 0 "R3" H 2570 5196 50  0000 L CNN
+F 1 "R" H 2570 5105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2430 5150 50  0001 C CNN
+F 3 "~" H 2500 5150 50  0001 C CNN
+	1    2500 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0109
+U 1 1 62101689
+P 2500 5300
+F 0 "#PWR0109" H 2500 5050 50  0001 C CNN
+F 1 "GND" H 2505 5127 50  0000 C CNN
+F 2 "" H 2500 5300 50  0001 C CNN
+F 3 "" H 2500 5300 50  0001 C CNN
+	1    2500 5300
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
