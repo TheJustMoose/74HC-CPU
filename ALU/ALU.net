@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\ALU\ALU.sch)
-    (date "21/02/2022 21:39:13")
+    (date "07/03/2022 01:15:29")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -139,7 +139,7 @@
       (tstamp 621566AE))
     (comp (ref J4)
       (value Conn_01x01_Male)
-      (footprint Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical)
+      (footprint Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal)
       (datasheet ~)
       (libsource (lib Connector) (part Conn_01x01_Male) (description "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"))
       (sheetpath (names /) (tstamps /))

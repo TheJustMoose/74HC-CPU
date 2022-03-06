@@ -1350,7 +1350,7 @@ U 1 1 621D0C4C
 P 1200 8000
 F 0 "J4" H 1308 8181 50  0000 C CNN
 F 1 "Conn_01x01_Male" H 1308 8090 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1200 8000 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 1200 8000 50  0001 C CNN
 F 3 "~" H 1200 8000 50  0001 C CNN
 	1    1200 8000
 	1    0    0    -1  
