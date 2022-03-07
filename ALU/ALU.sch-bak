@@ -1859,34 +1859,142 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J15
 U 1 1 625AB9EB
-P 4200 8100
-F 0 "J15" H 4280 8092 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 4280 8001 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 4200 8100 50  0001 C CNN
-F 3 "~" H 4200 8100 50  0001 C CNN
-	1    4200 8100
+P 1900 8375
+F 0 "J15" H 1980 8367 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 1980 8276 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1900 8375 50  0001 C CNN
+F 3 "~" H 1900 8375 50  0001 C CNN
+	1    1900 8375
 	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0101
 U 1 1 625AD84F
-P 4000 8100
-F 0 "#PWR0101" H 4000 7850 50  0001 C CNN
-F 1 "GND" H 4005 7927 50  0000 C CNN
-F 2 "" H 4000 8100 50  0001 C CNN
-F 3 "" H 4000 8100 50  0001 C CNN
-	1    4000 8100
+P 1700 8375
+F 0 "#PWR0101" H 1700 8125 50  0001 C CNN
+F 1 "GND" H 1705 8202 50  0000 C CNN
+F 2 "" H 1700 8375 50  0001 C CNN
+F 3 "" H 1700 8375 50  0001 C CNN
+	1    1700 8375
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:VCC #PWR0102
 U 1 1 625AE604
-P 4000 8000
-F 0 "#PWR0102" H 4000 7850 50  0001 C CNN
-F 1 "VCC" H 4015 8173 50  0000 C CNN
-F 2 "" H 4000 8000 50  0001 C CNN
-F 3 "" H 4000 8000 50  0001 C CNN
-	1    4000 8000
+P 1700 8275
+F 0 "#PWR0102" H 1700 8125 50  0001 C CNN
+F 1 "VCC" H 1715 8448 50  0000 C CNN
+F 2 "" H 1700 8275 50  0001 C CNN
+F 3 "" H 1700 8275 50  0001 C CNN
+	1    1700 8275
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x08_Male J16
+U 1 1 622750EC
+P 3500 5800
+F 0 "J16" H 3608 6281 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3575 5275 50  0000 C CNN
+F 2 "" H 3500 5800 50  0001 C CNN
+F 3 "~" H 3500 5800 50  0001 C CNN
+	1    3500 5800
+	1    0    0    -1  
+$EndComp
+Text Label 3700 5500 0    50   ~ 0
+A0
+Text Label 3700 5600 0    50   ~ 0
+A1
+Text Label 3700 5700 0    50   ~ 0
+A2
+Text Label 3700 5800 0    50   ~ 0
+A3
+Text Label 3700 5900 0    50   ~ 0
+A4
+Text Label 3700 6000 0    50   ~ 0
+A5
+Text Label 3700 6100 0    50   ~ 0
+A6
+Text Label 3700 6200 0    50   ~ 0
+A7
+Text Notes 3925 5850 0    50   ~ 0
+To RAM
+$Comp
+L Connector:Conn_01x08_Male J17
+U 1 1 6227BA70
+P 3500 6925
+F 0 "J17" H 3608 7406 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3575 6400 50  0000 C CNN
+F 2 "" H 3500 6925 50  0001 C CNN
+F 3 "~" H 3500 6925 50  0001 C CNN
+	1    3500 6925
+	1    0    0    -1  
+$EndComp
+Text Label 3700 6625 0    50   ~ 0
+O0
+Text Label 3700 6725 0    50   ~ 0
+O1
+Text Label 3700 6825 0    50   ~ 0
+O2
+Text Label 3700 6925 0    50   ~ 0
+O3
+Text Label 3700 7025 0    50   ~ 0
+O4
+Text Label 3700 7125 0    50   ~ 0
+O5
+Text Label 3700 7225 0    50   ~ 0
+O6
+Text Label 3700 7325 0    50   ~ 0
+O7
+Text Notes 3950 6975 0    50   ~ 0
+From RAM
+$Comp
+L Connector:Conn_01x05_Male J18
+U 1 1 6229A6E1
+P 3500 7975
+F 0 "J18" H 3608 8356 50  0000 C CNN
+F 1 "Conn_01x05_Male" H 3425 7700 50  0000 C CNN
+F 2 "" H 3500 7975 50  0001 C CNN
+F 3 "~" H 3500 7975 50  0001 C CNN
+	1    3500 7975
+	1    0    0    -1  
+$EndComp
+Text Label 3700 7775 0    50   ~ 0
+Latch
+$Comp
+L power:VCC #PWR0103
+U 1 1 622B4298
+P 3700 7875
+F 0 "#PWR0103" H 3700 7725 50  0001 C CNN
+F 1 "VCC" V 3700 8000 50  0000 L CNN
+F 2 "" H 3700 7875 50  0001 C CNN
+F 3 "" H 3700 7875 50  0001 C CNN
+	1    3700 7875
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 622B4A7A
+P 3700 7975
+F 0 "#PWR0104" H 3700 7725 50  0001 C CNN
+F 1 "GND" V 3700 7850 50  0000 R CNN
+F 2 "" H 3700 7975 50  0001 C CNN
+F 3 "" H 3700 7975 50  0001 C CNN
+	1    3700 7975
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J19
+U 1 1 622B59C9
+P 3875 8275
+F 0 "J19" V 4029 8187 50  0000 R CNN
+F 1 "Conn_01x01_Male" V 3900 8175 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 3875 8275 50  0001 C CNN
+F 3 "~" H 3875 8275 50  0001 C CNN
+	1    3875 8275
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3700 8075 3875 8075
+Text Notes 4075 7975 0    50   ~ 0
+To RAM
 $EndSCHEMATC
