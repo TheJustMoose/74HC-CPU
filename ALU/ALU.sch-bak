@@ -1895,7 +1895,7 @@ U 1 1 622750EC
 P 3500 5800
 F 0 "J16" H 3608 6281 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 3575 5275 50  0000 C CNN
-F 2 "" H 3500 5800 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 3500 5800 50  0001 C CNN
 F 3 "~" H 3500 5800 50  0001 C CNN
 	1    3500 5800
 	1    0    0    -1  
@@ -1924,7 +1924,7 @@ U 1 1 6227BA70
 P 3500 6925
 F 0 "J17" H 3608 7406 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 3575 6400 50  0000 C CNN
-F 2 "" H 3500 6925 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 3500 6925 50  0001 C CNN
 F 3 "~" H 3500 6925 50  0001 C CNN
 	1    3500 6925
 	1    0    0    -1  
@@ -1953,7 +1953,7 @@ U 1 1 6229A6E1
 P 3500 7975
 F 0 "J18" H 3608 8356 50  0000 C CNN
 F 1 "Conn_01x05_Male" H 3425 7700 50  0000 C CNN
-F 2 "" H 3500 7975 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical" H 3500 7975 50  0001 C CNN
 F 3 "~" H 3500 7975 50  0001 C CNN
 	1    3500 7975
 	1    0    0    -1  
@@ -1997,4 +1997,34 @@ Wire Wire Line
 	3700 8075 3875 8075
 Text Notes 4075 7975 0    50   ~ 0
 To RAM
+NoConn ~ 3700 8175
+$Comp
+L Connector:Conn_01x08_Male J?
+U 1 1 623240DA
+P 3500 9050
+F 0 "J?" H 3608 9531 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3575 8525 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 3500 9050 50  0001 C CNN
+F 3 "~" H 3500 9050 50  0001 C CNN
+	1    3500 9050
+	1    0    0    -1  
+$EndComp
+Text Label 3700 8750 0    50   ~ 0
+O0
+Text Label 3700 8850 0    50   ~ 0
+O1
+Text Label 3700 8950 0    50   ~ 0
+O2
+Text Label 3700 9050 0    50   ~ 0
+O3
+Text Label 3700 9150 0    50   ~ 0
+O4
+Text Label 3700 9250 0    50   ~ 0
+O5
+Text Label 3700 9350 0    50   ~ 0
+O6
+Text Label 3700 9450 0    50   ~ 0
+O7
+Text Notes 3925 9100 0    50   ~ 0
+Reserved
 $EndSCHEMATC

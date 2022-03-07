@@ -1998,4 +1998,33 @@ Wire Wire Line
 Text Notes 4075 7975 0    50   ~ 0
 To RAM
 NoConn ~ 3700 8175
+$Comp
+L Connector:Conn_01x08_Male J20
+U 1 1 623240DA
+P 3500 9050
+F 0 "J20" H 3608 9531 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3575 8525 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 3500 9050 50  0001 C CNN
+F 3 "~" H 3500 9050 50  0001 C CNN
+	1    3500 9050
+	1    0    0    -1  
+$EndComp
+Text Label 3700 8750 0    50   ~ 0
+O0
+Text Label 3700 8850 0    50   ~ 0
+O1
+Text Label 3700 8950 0    50   ~ 0
+O2
+Text Label 3700 9050 0    50   ~ 0
+O3
+Text Label 3700 9150 0    50   ~ 0
+O4
+Text Label 3700 9250 0    50   ~ 0
+O5
+Text Label 3700 9350 0    50   ~ 0
+O6
+Text Label 3700 9450 0    50   ~ 0
+O7
+Text Notes 3925 9100 0    50   ~ 0
+Reserved
 $EndSCHEMATC
