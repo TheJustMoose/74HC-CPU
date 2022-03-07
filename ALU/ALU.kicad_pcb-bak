@@ -2421,7 +2421,7 @@
   (gr_text B (at 34.29 46.0375) (layer F.SilkS) (tstamp 621205E0)
     (effects (font (size 1.5 1.5) (thickness 0.2)))
   )
-  (gr_text A (at 34.29 71.12) (layer F.SilkS) (tstamp 621205DC)
+  (gr_text A (at 34.29 71.755) (layer F.SilkS) (tstamp 621205DC)
     (effects (font (size 1.5 1.5) (thickness 0.2)))
   )
   (gr_text 7 (at 34.29 55.88) (layer F.SilkS) (tstamp 621205D4)
