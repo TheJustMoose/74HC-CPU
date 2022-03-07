@@ -417,37 +417,37 @@ F 3 "" H 2125 5950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 2625 2250 0    50   ~ 0
-A0
-Text Label 2625 2350 0    50   ~ 0
-A1
-Text Label 2625 2450 0    50   ~ 0
-A2
-Text Label 2625 2550 0    50   ~ 0
-A3
-Text Label 2625 2650 0    50   ~ 0
-A4
-Text Label 2625 2750 0    50   ~ 0
-A5
-Text Label 2625 2850 0    50   ~ 0
-A6
-Text Label 2625 2950 0    50   ~ 0
-A7
-Text Label 2625 4250 0    50   ~ 0
 B0
-Text Label 2625 4350 0    50   ~ 0
+Text Label 2625 2350 0    50   ~ 0
 B1
-Text Label 2625 4450 0    50   ~ 0
+Text Label 2625 2450 0    50   ~ 0
 B2
-Text Label 2625 4550 0    50   ~ 0
+Text Label 2625 2550 0    50   ~ 0
 B3
-Text Label 2625 4650 0    50   ~ 0
+Text Label 2625 2650 0    50   ~ 0
 B4
-Text Label 2625 4750 0    50   ~ 0
+Text Label 2625 2750 0    50   ~ 0
 B5
-Text Label 2625 4850 0    50   ~ 0
+Text Label 2625 2850 0    50   ~ 0
 B6
-Text Label 2625 4950 0    50   ~ 0
+Text Label 2625 2950 0    50   ~ 0
 B7
+Text Label 2625 4250 0    50   ~ 0
+A0
+Text Label 2625 4350 0    50   ~ 0
+A1
+Text Label 2625 4450 0    50   ~ 0
+A2
+Text Label 2625 4550 0    50   ~ 0
+A3
+Text Label 2625 4650 0    50   ~ 0
+A4
+Text Label 2625 4750 0    50   ~ 0
+A5
+Text Label 2625 4850 0    50   ~ 0
+A6
+Text Label 2625 4950 0    50   ~ 0
+A7
 Text Label 2625 6250 0    50   ~ 0
 O0
 Text Label 2625 6350 0    50   ~ 0
@@ -657,21 +657,21 @@ Wire Wire Line
 Wire Wire Line
 	3625 3700 3500 3700
 Text Label 3500 3000 0    50   ~ 0
-A0
+B0
 Text Label 3500 3100 0    50   ~ 0
-A1
+B1
 Text Label 3500 3200 0    50   ~ 0
-A2
+B2
 Text Label 3500 3300 0    50   ~ 0
-A3
+B3
 Text Label 3500 3400 0    50   ~ 0
-A4
+B4
 Text Label 3500 3500 0    50   ~ 0
-A5
+B5
 Text Label 3500 3600 0    50   ~ 0
-A6
+B6
 Text Label 3500 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	3625 3800 3500 3800
 Wire Wire Line
@@ -689,21 +689,21 @@ Wire Wire Line
 Wire Wire Line
 	3625 4500 3500 4500
 Text Label 3500 3800 0    50   ~ 0
-B0
+A0
 Text Label 3500 3900 0    50   ~ 0
-B1
+A1
 Text Label 3500 4000 0    50   ~ 0
-B2
+A2
 Text Label 3500 4100 0    50   ~ 0
-B3
+A3
 Text Label 3500 4200 0    50   ~ 0
-B4
+A4
 Text Label 3500 4300 0    50   ~ 0
-B5
+A5
 Text Label 3500 4400 0    50   ~ 0
-B6
+A6
 Text Label 3500 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	5375 3000 5250 3000
 Wire Wire Line
@@ -721,21 +721,21 @@ Wire Wire Line
 Wire Wire Line
 	5375 3700 5250 3700
 Text Label 5250 3000 0    50   ~ 0
-A0
+B0
 Text Label 5250 3100 0    50   ~ 0
-A1
+B1
 Text Label 5250 3200 0    50   ~ 0
-A2
+B2
 Text Label 5250 3300 0    50   ~ 0
-A3
+B3
 Text Label 5250 3400 0    50   ~ 0
-A4
+B4
 Text Label 5250 3500 0    50   ~ 0
-A5
+B5
 Text Label 5250 3600 0    50   ~ 0
-A6
+B6
 Text Label 5250 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	5375 3800 5250 3800
 Wire Wire Line
@@ -753,21 +753,21 @@ Wire Wire Line
 Wire Wire Line
 	5375 4500 5250 4500
 Text Label 5250 3800 0    50   ~ 0
-B0
+A0
 Text Label 5250 3900 0    50   ~ 0
-B1
+A1
 Text Label 5250 4000 0    50   ~ 0
-B2
+A2
 Text Label 5250 4100 0    50   ~ 0
-B3
+A3
 Text Label 5250 4200 0    50   ~ 0
-B4
+A4
 Text Label 5250 4300 0    50   ~ 0
-B5
+A5
 Text Label 5250 4400 0    50   ~ 0
-B6
+A6
 Text Label 5250 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	7125 3000 7000 3000
 Wire Wire Line
@@ -785,21 +785,21 @@ Wire Wire Line
 Wire Wire Line
 	7125 3700 7000 3700
 Text Label 7000 3000 0    50   ~ 0
-A0
+B0
 Text Label 7000 3100 0    50   ~ 0
-A1
+B1
 Text Label 7000 3200 0    50   ~ 0
-A2
+B2
 Text Label 7000 3300 0    50   ~ 0
-A3
+B3
 Text Label 7000 3400 0    50   ~ 0
-A4
+B4
 Text Label 7000 3500 0    50   ~ 0
-A5
+B5
 Text Label 7000 3600 0    50   ~ 0
-A6
+B6
 Text Label 7000 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	7125 3800 7000 3800
 Wire Wire Line
@@ -817,21 +817,21 @@ Wire Wire Line
 Wire Wire Line
 	7125 4500 7000 4500
 Text Label 7000 3800 0    50   ~ 0
-B0
+A0
 Text Label 7000 3900 0    50   ~ 0
-B1
+A1
 Text Label 7000 4000 0    50   ~ 0
-B2
+A2
 Text Label 7000 4100 0    50   ~ 0
-B3
+A3
 Text Label 7000 4200 0    50   ~ 0
-B4
+A4
 Text Label 7000 4300 0    50   ~ 0
-B5
+A5
 Text Label 7000 4400 0    50   ~ 0
-B6
+A6
 Text Label 7000 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	8875 3000 8750 3000
 Wire Wire Line
@@ -849,21 +849,21 @@ Wire Wire Line
 Wire Wire Line
 	8875 3700 8750 3700
 Text Label 8750 3000 0    50   ~ 0
-A0
+B0
 Text Label 8750 3100 0    50   ~ 0
-A1
+B1
 Text Label 8750 3200 0    50   ~ 0
-A2
+B2
 Text Label 8750 3300 0    50   ~ 0
-A3
+B3
 Text Label 8750 3400 0    50   ~ 0
-A4
+B4
 Text Label 8750 3500 0    50   ~ 0
-A5
+B5
 Text Label 8750 3600 0    50   ~ 0
-A6
+B6
 Text Label 8750 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	8875 3800 8750 3800
 Wire Wire Line
@@ -881,21 +881,21 @@ Wire Wire Line
 Wire Wire Line
 	8875 4500 8750 4500
 Text Label 8750 3800 0    50   ~ 0
-B0
+A0
 Text Label 8750 3900 0    50   ~ 0
-B1
+A1
 Text Label 8750 4000 0    50   ~ 0
-B2
+A2
 Text Label 8750 4100 0    50   ~ 0
-B3
+A3
 Text Label 8750 4200 0    50   ~ 0
-B4
+A4
 Text Label 8750 4300 0    50   ~ 0
-B5
+A5
 Text Label 8750 4400 0    50   ~ 0
-B6
+A6
 Text Label 8750 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	10625 3000 10500 3000
 Wire Wire Line
@@ -913,21 +913,21 @@ Wire Wire Line
 Wire Wire Line
 	10625 3700 10500 3700
 Text Label 10500 3000 0    50   ~ 0
-A0
+B0
 Text Label 10500 3100 0    50   ~ 0
-A1
+B1
 Text Label 10500 3200 0    50   ~ 0
-A2
+B2
 Text Label 10500 3300 0    50   ~ 0
-A3
+B3
 Text Label 10500 3400 0    50   ~ 0
-A4
+B4
 Text Label 10500 3500 0    50   ~ 0
-A5
+B5
 Text Label 10500 3600 0    50   ~ 0
-A6
+B6
 Text Label 10500 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	10625 3800 10500 3800
 Wire Wire Line
@@ -945,21 +945,21 @@ Wire Wire Line
 Wire Wire Line
 	10625 4500 10500 4500
 Text Label 10500 3800 0    50   ~ 0
-B0
+A0
 Text Label 10500 3900 0    50   ~ 0
-B1
+A1
 Text Label 10500 4000 0    50   ~ 0
-B2
+A2
 Text Label 10500 4100 0    50   ~ 0
-B3
+A3
 Text Label 10500 4200 0    50   ~ 0
-B4
+A4
 Text Label 10500 4300 0    50   ~ 0
-B5
+A5
 Text Label 10500 4400 0    50   ~ 0
-B6
+A6
 Text Label 10500 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	12375 3000 12250 3000
 Wire Wire Line
@@ -977,21 +977,21 @@ Wire Wire Line
 Wire Wire Line
 	12375 3700 12250 3700
 Text Label 12250 3000 0    50   ~ 0
-A0
+B0
 Text Label 12250 3100 0    50   ~ 0
-A1
+B1
 Text Label 12250 3200 0    50   ~ 0
-A2
+B2
 Text Label 12250 3300 0    50   ~ 0
-A3
+B3
 Text Label 12250 3400 0    50   ~ 0
-A4
+B4
 Text Label 12250 3500 0    50   ~ 0
-A5
+B5
 Text Label 12250 3600 0    50   ~ 0
-A6
+B6
 Text Label 12250 3700 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	12375 3800 12250 3800
 Wire Wire Line
@@ -1009,21 +1009,21 @@ Wire Wire Line
 Wire Wire Line
 	12375 4500 12250 4500
 Text Label 12250 3800 0    50   ~ 0
-B0
+A0
 Text Label 12250 3900 0    50   ~ 0
-B1
+A1
 Text Label 12250 4000 0    50   ~ 0
-B2
+A2
 Text Label 12250 4100 0    50   ~ 0
-B3
+A3
 Text Label 12250 4200 0    50   ~ 0
-B4
+A4
 Text Label 12250 4300 0    50   ~ 0
-B5
+A5
 Text Label 12250 4400 0    50   ~ 0
-B6
+A6
 Text Label 12250 4500 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	12375 5500 12250 5500
 Wire Wire Line
@@ -1041,21 +1041,21 @@ Wire Wire Line
 Wire Wire Line
 	12375 6200 12250 6200
 Text Label 12250 5500 0    50   ~ 0
-A0
+B0
 Text Label 12250 5600 0    50   ~ 0
-A1
+B1
 Text Label 12250 5700 0    50   ~ 0
-A2
+B2
 Text Label 12250 5800 0    50   ~ 0
-A3
+B3
 Text Label 12250 5900 0    50   ~ 0
-A4
+B4
 Text Label 12250 6000 0    50   ~ 0
-A5
+B5
 Text Label 12250 6100 0    50   ~ 0
-A6
+B6
 Text Label 12250 6200 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	12375 6300 12250 6300
 Wire Wire Line
@@ -1073,21 +1073,21 @@ Wire Wire Line
 Wire Wire Line
 	12375 7000 12250 7000
 Text Label 12250 6300 0    50   ~ 0
-B0
+A0
 Text Label 12250 6400 0    50   ~ 0
-B1
+A1
 Text Label 12250 6500 0    50   ~ 0
-B2
+A2
 Text Label 12250 6600 0    50   ~ 0
-B3
+A3
 Text Label 12250 6700 0    50   ~ 0
-B4
+A4
 Text Label 12250 6800 0    50   ~ 0
-B5
+A5
 Text Label 12250 6900 0    50   ~ 0
-B6
+A6
 Text Label 12250 7000 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	10625 5500 10500 5500
 Wire Wire Line
@@ -1105,21 +1105,21 @@ Wire Wire Line
 Wire Wire Line
 	10625 6200 10500 6200
 Text Label 10500 5500 0    50   ~ 0
-A0
+B0
 Text Label 10500 5600 0    50   ~ 0
-A1
+B1
 Text Label 10500 5700 0    50   ~ 0
-A2
+B2
 Text Label 10500 5800 0    50   ~ 0
-A3
+B3
 Text Label 10500 5900 0    50   ~ 0
-A4
+B4
 Text Label 10500 6000 0    50   ~ 0
-A5
+B5
 Text Label 10500 6100 0    50   ~ 0
-A6
+B6
 Text Label 10500 6200 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	10625 6300 10500 6300
 Wire Wire Line
@@ -1137,21 +1137,21 @@ Wire Wire Line
 Wire Wire Line
 	10625 7000 10500 7000
 Text Label 10500 6300 0    50   ~ 0
-B0
+A0
 Text Label 10500 6400 0    50   ~ 0
-B1
+A1
 Text Label 10500 6500 0    50   ~ 0
-B2
+A2
 Text Label 10500 6600 0    50   ~ 0
-B3
+A3
 Text Label 10500 6700 0    50   ~ 0
-B4
+A4
 Text Label 10500 6800 0    50   ~ 0
-B5
+A5
 Text Label 10500 6900 0    50   ~ 0
-B6
+A6
 Text Label 10500 7000 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	8875 5500 8750 5500
 Wire Wire Line
@@ -1169,21 +1169,21 @@ Wire Wire Line
 Wire Wire Line
 	8875 6200 8750 6200
 Text Label 8750 5500 0    50   ~ 0
-A0
+B0
 Text Label 8750 5600 0    50   ~ 0
-A1
+B1
 Text Label 8750 5700 0    50   ~ 0
-A2
+B2
 Text Label 8750 5800 0    50   ~ 0
-A3
+B3
 Text Label 8750 5900 0    50   ~ 0
-A4
+B4
 Text Label 8750 6000 0    50   ~ 0
-A5
+B5
 Text Label 8750 6100 0    50   ~ 0
-A6
+B6
 Text Label 8750 6200 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	8875 6300 8750 6300
 Wire Wire Line
@@ -1201,21 +1201,21 @@ Wire Wire Line
 Wire Wire Line
 	8875 7000 8750 7000
 Text Label 8750 6300 0    50   ~ 0
-B0
+A0
 Text Label 8750 6400 0    50   ~ 0
-B1
+A1
 Text Label 8750 6500 0    50   ~ 0
-B2
+A2
 Text Label 8750 6600 0    50   ~ 0
-B3
+A3
 Text Label 8750 6700 0    50   ~ 0
-B4
+A4
 Text Label 8750 6800 0    50   ~ 0
-B5
+A5
 Text Label 8750 6900 0    50   ~ 0
-B6
+A6
 Text Label 8750 7000 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	7125 5500 7000 5500
 Wire Wire Line
@@ -1233,21 +1233,21 @@ Wire Wire Line
 Wire Wire Line
 	7125 6200 7000 6200
 Text Label 7000 5500 0    50   ~ 0
-A0
+B0
 Text Label 7000 5600 0    50   ~ 0
-A1
+B1
 Text Label 7000 5700 0    50   ~ 0
-A2
+B2
 Text Label 7000 5800 0    50   ~ 0
-A3
+B3
 Text Label 7000 5900 0    50   ~ 0
-A4
+B4
 Text Label 7000 6000 0    50   ~ 0
-A5
+B5
 Text Label 7000 6100 0    50   ~ 0
-A6
+B6
 Text Label 7000 6200 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	7125 6300 7000 6300
 Wire Wire Line
@@ -1265,21 +1265,21 @@ Wire Wire Line
 Wire Wire Line
 	7125 7000 7000 7000
 Text Label 7000 6300 0    50   ~ 0
-B0
+A0
 Text Label 7000 6400 0    50   ~ 0
-B1
+A1
 Text Label 7000 6500 0    50   ~ 0
-B2
+A2
 Text Label 7000 6600 0    50   ~ 0
-B3
+A3
 Text Label 7000 6700 0    50   ~ 0
-B4
+A4
 Text Label 7000 6800 0    50   ~ 0
-B5
+A5
 Text Label 7000 6900 0    50   ~ 0
-B6
+A6
 Text Label 7000 7000 0    50   ~ 0
-B7
+A7
 Wire Wire Line
 	5375 5500 5250 5500
 Wire Wire Line
@@ -1297,21 +1297,21 @@ Wire Wire Line
 Wire Wire Line
 	5375 6200 5250 6200
 Text Label 5250 5500 0    50   ~ 0
-A0
+B0
 Text Label 5250 5600 0    50   ~ 0
-A1
+B1
 Text Label 5250 5700 0    50   ~ 0
-A2
+B2
 Text Label 5250 5800 0    50   ~ 0
-A3
+B3
 Text Label 5250 5900 0    50   ~ 0
-A4
+B4
 Text Label 5250 6000 0    50   ~ 0
-A5
+B5
 Text Label 5250 6100 0    50   ~ 0
-A6
+B6
 Text Label 5250 6200 0    50   ~ 0
-A7
+B7
 Wire Wire Line
 	5375 6300 5250 6300
 Wire Wire Line
@@ -1329,28 +1329,28 @@ Wire Wire Line
 Wire Wire Line
 	5375 7000 5250 7000
 Text Label 5250 6300 0    50   ~ 0
-B0
+A0
 Text Label 5250 6400 0    50   ~ 0
-B1
+A1
 Text Label 5250 6500 0    50   ~ 0
-B2
+A2
 Text Label 5250 6600 0    50   ~ 0
-B3
+A3
 Text Label 5250 6700 0    50   ~ 0
-B4
+A4
 Text Label 5250 6800 0    50   ~ 0
-B5
+A5
 Text Label 5250 6900 0    50   ~ 0
-B6
+A6
 Text Label 5250 7000 0    50   ~ 0
-B7
+A7
 $Comp
 L Connector:Conn_01x01_Male J4
 U 1 1 621D0C4C
 P 1200 8000
 F 0 "J4" H 1308 8181 50  0000 C CNN
 F 1 "Conn_01x01_Male" H 1308 8090 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1200 8000 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 1200 8000 50  0001 C CNN
 F 3 "~" H 1200 8000 50  0001 C CNN
 	1    1200 8000
 	1    0    0    -1  
