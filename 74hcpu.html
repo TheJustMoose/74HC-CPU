@@ -143,9 +143,9 @@ width: 250;
 <tr><td colspan=2>A(DST)</td><td colspan=2>B(SRC)</td><td class="big">Примечание</td></tr>
 <tr><td>r0</td><td>000</td><td>r0</td><td>000</td><td></td></tr>
 <tr><td>r1</td><td>001</td><td>r1</td><td>001</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r2</td><td>010</td><td>r2</td><td>010</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r3</td><td>011</td><td>r3</td><td>011</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r4</td><td>100</td><td>r4</td><td>100</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r2</td><td>010</td><td bgcolor="#D5F5E3">r2</td><td>010</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r3</td><td>011</td><td bgcolor="#D5F5E3">r3</td><td>011</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r4</td><td>100</td><td bgcolor="#D5F5E3">r4</td><td>100</td><td></td></tr>
 <tr><td bgcolor="#D5F5E3">r5</td><td>101</td><td>CONST</td><td>101</td><td>Константа, иногда лежит во втором слове команды</td></tr>
 <tr><td bgcolor="#D5F5E3">r6</td><td>110</td><td>PIN0</td><td>110</td><td>Входной порт 0</td></tr>
 <tr><td bgcolor="#D5F5E3">r7</td><td>111</td><td>PORT0</td><td>111</td><td>Выходной порт 0! Позволяет сэкономить на команде IN и использовать данные порта сразу как операнд.</td></tr>
@@ -384,11 +384,11 @@ JZ L1
 <tr><td>AND</td><td>74HC08*2, 74HC573, всё в SO</td><td>3</td></tr>
 <tr><td>ADD/ADDC</td><td>74HC283*2, 74HC08, 74HC573 увы в DIP</td><td>4</td></tr>
 <tr><td>MOV</td><td>74HC573, SO</td><td>1</td></tr>
-<tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
 <tr><td>ADD Flag</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP Flags</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP/CMPC</td><td>74HC85*2, 74HC08, лучше в SO</td><td>3</td></tr>
 <tr><td>RW Reg, Bank0</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
+<tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
 <tr><td>RW Reg, Bank1</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
 <tr><td>CLR</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>LSL</td><td>74HC573, SO</td><td>1</td></tr>
