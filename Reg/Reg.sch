@@ -24,87 +24,18 @@ F 3 "74xx/74hc573.pdf" H 4000 3000 50  0001 C CNN
 	1    4000 3000
 	1    0    0    -1  
 $EndComp
-$Comp
-L 74xx:74LS10 U2
-U 1 1 628D5FE9
-P 2525 3950
-F 0 "U2" H 2525 4275 50  0000 C CNN
-F 1 "74LS10" H 2525 4184 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2525 3950 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 2525 3950 50  0001 C CNN
-	1    2525 3950
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS10 U2
-U 2 1 628D6DC1
-P 2175 3400
-F 0 "U2" H 2175 3725 50  0000 C CNN
-F 1 "74LS10" H 2175 3634 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2175 3400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 2175 3400 50  0001 C CNN
-	2    2175 3400
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS10 U2
-U 3 1 628D7DBA
-P 2950 3400
-F 0 "U2" H 2950 3725 50  0000 C CNN
-F 1 "74LS10" H 2950 3634 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2950 3400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 2950 3400 50  0001 C CNN
-	3    2950 3400
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS10 U2
-U 4 1 628D8A76
-P 4000 5000
-F 0 "U2" H 4230 5046 50  0000 L CNN
-F 1 "74LS10" H 4230 4955 50  0000 L CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 4000 5000 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 4000 5000 50  0001 C CNN
-	4    4000 5000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	1750 3300 1875 3300
+	2525 3300 2650 3300
 Wire Wire Line
-	1750 3400 1875 3400
+	2525 3400 2650 3400
 Wire Wire Line
-	1750 3500 1875 3500
-Wire Wire Line
-	2650 3300 2650 3400
-Wire Wire Line
-	2650 3400 2650 3500
-Connection ~ 2650 3400
-Wire Wire Line
-	2475 3400 2650 3400
-Wire Wire Line
-	3250 3400 3500 3400
-Wire Wire Line
-	2825 3950 3375 3950
-Wire Wire Line
-	3375 3950 3375 3500
-Wire Wire Line
-	3375 3500 3500 3500
-Wire Wire Line
-	2225 3850 2225 3950
-Wire Wire Line
-	2225 3950 2225 4050
-Connection ~ 2225 3950
-Wire Wire Line
-	1875 3500 1875 3950
-Wire Wire Line
-	1875 3950 2225 3950
-Connection ~ 1875 3500
-Text Label 1750 3300 0    50   ~ 0
-Col
-Text Label 1750 3400 0    50   ~ 0
-Row
-Text Label 1750 3500 0    50   ~ 0
-CS
+	2525 3500 2650 3500
+Text Label 2525 3300 0    50   ~ 0
+~Col
+Text Label 2525 3400 0    50   ~ 0
+~Row
+Text Label 2525 3500 0    50   ~ 0
+~CS
 Wire Wire Line
 	3250 2500 3500 2500
 Wire Wire Line
@@ -389,9 +320,40 @@ F 3 "" H 7700 5000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 7700 5725 0    50   ~ 0
-Col
+~Col
 Text Label 7700 5625 0    50   ~ 0
-Row
+~Row
 Text Label 7700 5825 0    50   ~ 0
-CS
+~CS
+$Comp
+L 74xx:74LS27 U3
+U 2 1 6296B95D
+P 2950 3400
+F 0 "U3" H 2950 3725 50  0000 C CNN
+F 1 "74LS27" H 2950 3634 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2950 3400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2950 3400 50  0001 C CNN
+	2    2950 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS27 U3
+U 4 1 6296D90D
+P 4000 5000
+F 0 "U3" H 4230 5046 50  0000 L CNN
+F 1 "74LS27" H 4230 4955 50  0000 L CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 4000 5000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 4000 5000 50  0001 C CNN
+	4    4000 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 3400 3500 3400
+Wire Wire Line
+	2650 3500 2650 3700
+Wire Wire Line
+	2650 3700 3500 3700
+Wire Wire Line
+	3500 3700 3500 3500
+Connection ~ 2650 3500
 $EndSCHEMATC
