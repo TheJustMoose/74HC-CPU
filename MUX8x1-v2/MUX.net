@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\MUX8x1-v2\MUX.sch)
-    (date "28/05/2022 23:33:30")
+    (date "29/05/2022 16:40:05")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -406,7 +406,7 @@
       (node (ref U2) (pin 7))
       (node (ref C7) (pin 2))
       (node (ref C8) (pin 2))
-      (node (ref J9) (pin 1))
+      (node (ref J9) (pin 2))
       (node (ref C4) (pin 2))
       (node (ref C5) (pin 2))
       (node (ref U5) (pin 7))
@@ -474,7 +474,7 @@
       (node (ref C6) (pin 1))
       (node (ref U7) (pin 16))
       (node (ref C7) (pin 1))
-      (node (ref J9) (pin 2))
+      (node (ref J9) (pin 1))
       (node (ref C8) (pin 1))
       (node (ref C4) (pin 1))
       (node (ref C5) (pin 1))

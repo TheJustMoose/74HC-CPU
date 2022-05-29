@@ -465,13 +465,13 @@ S2
 $Comp
 L Connector:Screw_Terminal_01x02 J9
 U 1 1 62880E7E
-P 9325 5850
-F 0 "J9" H 9405 5842 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 9405 5751 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 9325 5850 50  0001 C CNN
-F 3 "~" H 9325 5850 50  0001 C CNN
-	1    9325 5850
-	1    0    0    1   
+P 9325 5750
+F 0 "J9" H 9405 5742 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 9405 5651 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 9325 5750 50  0001 C CNN
+F 3 "~" H 9325 5750 50  0001 C CNN
+	1    9325 5750
+	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR022

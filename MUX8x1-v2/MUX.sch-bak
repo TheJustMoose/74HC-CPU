@@ -1006,17 +1006,6 @@ F 3 "~" H 2250 7000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H6
-U 1 1 628DAA14
-P 2250 7250
-F 0 "H6" H 2350 7296 50  0000 L CNN
-F 1 "MountingHole" H 2350 7205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7250 50  0001 C CNN
-F 3 "~" H 2250 7250 50  0001 C CNN
-	1    2250 7250
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C C1
 U 1 1 628DDE66
 P 3925 7025
