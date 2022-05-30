@@ -69,6 +69,9 @@ width: 250;
 <tr><td colspan=5><h4>Дополнительные унарные команды (CTYPE=2)</h4></td></tr>
 <tr><td>MIR</td><td>000</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
 <tr><td>SWAB</td><td>001</td><td>SWAB r1</td><td>Перестановка ниблов местами</td><td>1</td></tr>
+<tr><td>[NEG]</td><td>010</td><td>NEG r1</td><td>Изменение знака (инверсия и добавление единицы)</td><td>1</td></tr>
+<tr><td>[INC]</td><td>011</td><td>INC r1</td><td>Инкремент. То же, что и ADD r1, 1 но занимает одно слово команды</td><td>1</td></tr>
+<tr><td>[DEC]</td><td>100</td><td>DEC r1</td><td>Декремент. То же, что и ADD r1, 0xFF но занимает одно слово команды</td><td>1</td></tr>
 <tr><td colspan=5><h4>Условного перехода (CTYPE=3)</h4></td></tr>
 <tr><td>JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
 <tr><td>JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
@@ -87,7 +90,6 @@ width: 250;
 <tr><td>SIE</td><td>100</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное. (как тебе такое, Атмел?)<br>
 нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
 <tr><td>SIZ</td><td>101</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
-<tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
 <tr><td>NOP</td><td>111</td><td>NOP</td><td>No operation</td><td>1</td></tr>
 <tr><td colspan=5><h4>Управления (CTYPE=5)</h4></td></tr>
 <tr><td>CLRF</td><td>000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
@@ -95,13 +97,15 @@ width: 250;
 <tr><td>EI</td><td>010</td><td>EI</td><td>Enable interrupt</td><td>1</td></tr>
 <tr><td>BANK0</td><td>011</td><td>BANK0</td><td>Connect BANK0 of registers</td><td>1</td></tr>
 <tr><td>BANK1</td><td>100</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
+<tr><td>HALT</td><td>101</td><td>HALT</td><td>Зависнуть!</td><td>1</td></tr>
+<tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
 <tr><td colspan=5><h4>Передачи (CTYPE=6)</h4> Вход RAM подключен к шине A(DST), выход к шине OUT.</td></tr>
 <tr><td>LOADX</td><td>000</td><td>LOAD r0</td><td>Загрузка из RAM[r7:r6] в регистр (r0-r3)</td><td>1</td></tr>
 <tr><td>STOREX</td><td>001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра (r0-r7)</td><td>1/2</td></tr>
 <tr><td>LOADY</td><td>010</td><td>LOAD r0</td><td>Загрузка из RAM[r5:r4] в регистр</td><td>1</td></tr>
 <tr><td>STOREY</td><td>011</td><td>STORE r0</td><td>Запись в RAM[r5:r4] указанного регистра</td><td>1/2</td></tr>
-<tr><td>RLOAD</td><td>10x</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r3)</td><td>1</td></tr>
-<tr><td>RSTORE</td><td>11x</td><td>RSTORE [Y+10], r0</td><td>Запись в RAM[r5:r4 + 10] указанного регистра (r0-r7)</td><td>1/2</td></tr>
+<tr><td>RLOAD</td><td>1x0</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r3)</td><td>1</td></tr>
+<tr><td>RSTORE</td><td>1x1</td><td>RSTORE [Y+10], r0</td><td>Запись в RAM[r5:r4 + 10] указанного регистра (r0-r7)</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Ввода-вывода (CTYPE=7)</h4></td></tr>
 <tr><td>IN</td><td>00</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
 <tr><td>OUT</td><td>001</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
