@@ -369,7 +369,47 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
-<tr><td>АЛУ</td><td></td><td>вычисляет</td><td>Latch IR, Latch Flags</td><td>Latch r0-r7</td></tr>
+<tr><td>АЛУ</td><td>(выход команды подключается к шине OUT)</td><td>вычисляет</td><td>Latch IR, Latch Flags</td><td>Latch r0-r7</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды IN</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>IN</td><td>(выход регистра подключается к шине OUT)<br>Latch PINx</td><td></td><td>Latch r0-r7</td><td></td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды [X]OUT</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>АЛУ</td><td>(выход команды подключается к шине OUT)</td><td>вычисляет<br>(команду XOR/MOV)</td><td>Latch IR</td><td>Latch PORTx</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды LOAD</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>RAM</td><td></td><td>CS = 1</td><td>RD = 1<br>RAM соединён с шиной OUT<br>Latch r0-r7</td><td>CS = 0, RD = 0</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды STORE</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>RAM</td><td>Вход RAM подключен к DST</td><td>CS = 1</td><td>WR = 1</td><td>CS = 0, WR = 0</td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
