@@ -107,10 +107,9 @@ width: 250;
 <tr><td>RLOAD</td><td>1x0</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r3)</td><td>1</td></tr>
 <tr><td>RSTORE</td><td>1x1</td><td>RSTORE [Y+10], r0</td><td>Запись в RAM[r5:r4 + 10] указанного регистра (r0-r7)</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Ввода-вывода (CTYPE=7)</h4></td></tr>
-<tr><td>IN</td><td>00</td><td>IN r0, PORTx</td><td>Чтение из порта в r0 (требует доработки логики АЛУ)</td><td>1</td></tr>
+<tr><td>IN</td><td>00</td><td>IN r0, PORTx</td><td>Чтение из порта в r0</td><td>1</td></tr>
 <tr><td>OUT</td><td>001</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
 <tr><td>XOUT</td><td>010</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
-<tr><td>CFG</td><td>011</td><td>CFG ADDR, r0</td><td>Вывод регистра r0 в регистр конфигурации. По сути, это OUT, но к данному адресному пространству будут подключены устройства, которые надо конфигурировать. Таймер, ... Константа в данном случае используется как адрес, поэтому в качестве SRC может быть только какой-то регистр, но не константа. Пичалька.</td><td>2</td></tr>
 </table>
 
 <i>SIE - Skip If Equal</i>
@@ -266,19 +265,10 @@ width: 250;
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td><td colspan=4>COP</td></tr>
 <tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>CONST</td><td colspan=4>OUT</td></tr>
-<tr><td colspan=12>CONST[11:0]</td></tr>
+<tr><td colspan=4>CONST[11:8] - старшие 4 бита адреса</td><td colspan=8>CONST[7:0] - значение</td></tr>
 </table>
 
-<h3>CFG</h3>
-<table border=1>
-<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>reserved</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>0</td><td colspan=3>reserved</td><td colspan=3>r0-r4, <strike>CONST</strike>, PIN0, PORT0</td><td colspan=4>CFG</td></tr>
-<tr><td colspan=12>CONST[11:0]</td></tr>
-</table>
-<p>Биты 7-9 можно использовать как недостающие. Пока адрес будет 12 битный == 4096 регистров конфигурации ;))<br>
-В константе хранится адрес, поэтому SRC=100 (CFG 123, CONST) не допустим.</p>
-<br>
+<p>во втором варианте получается 128 портов</p>
 
 <h3>Примеры команд</h3>
 <pre>
@@ -461,7 +451,6 @@ JZ L1
 <tr><td>MUL</td><td>74HC283*16, 74HC08*16, 74HC573*2</td><td>34!</td></tr>
 <tr><td>MIR</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>SWAB</td><td>74HC573, SO</td><td>1</td></tr>
-<tr><td>CFG</td><td>74HC238</td><td>1</td></tr>
 <tr><td>Timer ;)</td><td>74HC193*4, 74HC573*2, 74HC00, ... считает в минус, загружается сам</td><td>7</td></tr>
 <tr><td colspan=3>Итого - 170 корпусов</td></tr>
 </table>
