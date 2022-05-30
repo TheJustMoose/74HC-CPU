@@ -105,7 +105,7 @@ width: 250;
 <tr><td>STOREX</td><td>001</td><td>STORE r0</td><td>Запись в RAM[r7:r6] указанного регистра (r0-r7)</td><td>1/2</td></tr>
 <tr><td>LOADY</td><td>010</td><td>LOAD r0</td><td>Загрузка из RAM[r5:r4] в регистр</td><td>1</td></tr>
 <tr><td>STOREY</td><td>011</td><td>STORE r0</td><td>Запись в RAM[r5:r4] указанного регистра</td><td>1/2</td></tr>
-<tr><td>RLOAD</td><td>1x0</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r3)</td><td>1</td></tr>
+<tr><td>RLOAD</td><td>1x0</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r3)<br>74HC157/74HC151 имеет вход G, который позволяет занулять выходы, а значит можно очень легко суммировать с нулём и менять LOAD <-> RLOAD</td><td>1</td></tr>
 <tr><td>RSTORE</td><td>1x1</td><td>RSTORE [Y+10], r0</td><td>Запись в RAM[r5:r4 + 10] указанного регистра (r0-r7)</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Ввода-вывода (CTYPE=7)</h4></td></tr>
 <tr><td>IN</td><td>00</td><td>IN r0, PORTx</td><td>Чтение из порта в r0</td><td>1/2</td></tr>
