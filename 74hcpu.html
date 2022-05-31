@@ -59,29 +59,27 @@ width: 250;
 Пример с NEG лучше: NEG r1 - это то же, что и: r1 := NEG r1<br>
 Можно использовать и два регистра: r2 := NEG r1 - или NEG r2, r1</td></tr>
 <tr><td>CLR</td><td>000</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
-<tr><td>SET</td><td>001</td><td>SET r1</td><td>Установка всех битов регистра в 1</td><td>1</td></tr>
+<tr><td>MIR</td><td>001</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
 <tr><td>LSL</td><td>010</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
 <tr><td>LSLС</td><td>011</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
 <tr><td>LSR</td><td>100</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
 <tr><td>LSRС</td><td>101</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
 <tr><td>INV</td><td>110</td><td>INV r1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
 <tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td colspan=5><h4>Дополнительные унарные команды (CTYPE=2)</h4></td></tr>
-<tr><td>MIR</td><td>000</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
-<tr><td>SWAB</td><td>001</td><td>SWAB r1</td><td>Перестановка ниблов местами</td><td>1</td></tr>
-<tr><td>[NEG]</td><td>010</td><td>NEG r1</td><td>Изменение знака (инверсия и добавление единицы)</td><td>1</td></tr>
-<tr><td>[INC]</td><td>011</td><td>INC r1</td><td>Инкремент. То же, что и ADD r1, 1 но занимает одно слово команды</td><td>1</td></tr>
-<tr><td>[DEC]</td><td>100</td><td>DEC r1</td><td>Декремент. То же, что и ADD r1, 0xFF но занимает одно слово команды</td><td>1</td></tr>
-<tr><td colspan=5><h4>Условного перехода (CTYPE=3)</h4></td></tr>
-<tr><td>JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг Z установлен</td><td>2</td></tr>
-<tr><td>JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг Z сброшен</td><td>2</td></tr>
-<tr><td>JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг E установлен</td><td>2</td></tr>
-<tr><td>JNE</td><td>011</td><td>JNE ADDR</td><td>Переход если флаг E сброшен</td><td>2</td></tr>
-<tr><td>JG</td><td>100</td><td>JG ADDR</td><td>Переход если флаг G установлен</td><td>2</td></tr>
-<tr><td>JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг L установлен</td><td>2</td></tr>
-<tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
-<tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
-<tr><td>JS</td><td>?</td><td>JS ADDR</td><td>Переход, если флаг S установлен (эта команда не лезет, ибо у дешифратора обычно 8 выходов, а у ИЛИ 8 входов)</td><td>2</td></tr>
+<tr><td colspan=5><h4>Условного перехода (CTYPE=2)</h4></td></tr>
+<tr><td>JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
+<tr><td>JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
+<tr><td>JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг EF установлен</td><td>2</td></tr>
+<tr><td>JNE</td><td>011</td><td>JNE ADDR</td><td>Переход если флаг EF сброшен</td><td>2</td></tr>
+<tr><td>JG</td><td>100</td><td>JG ADDR</td><td>Переход если флаг GF установлен</td><td>2</td></tr>
+<tr><td>JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг LF установлен</td><td>2</td></tr>
+<tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг CF установлен</td><td>2</td></tr>
+<tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг CF сброшен</td><td>2</td></tr>
+<tr><td colspan=5><h4>Дополнительные команды условного перехода (CTYPE=3)</h4></td></tr>
+<tr><td>JSL</td><td>000</td><td>JSL ADDR</td><td>Переход, если флаг SLF установлен</td><td>2</td></tr>
+<tr><td>JNSL</td><td>001</td><td>JNSL ADDR</td><td>Переход, если флаг SLF сброшен</td><td>2</td></tr>
+<tr><td>JSR</td><td>000</td><td>JSR ADDR</td><td>Переход, если флаг SRF установлен</td><td>2</td></tr>
+<tr><td>JNSR</td><td>001</td><td>JNSR ADDR</td><td>Переход, если флаг SRF сброшен</td><td>2</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
 <tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
@@ -169,8 +167,9 @@ width: 250;
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
 <tr><td>ZF (zero flag)</td><td>устанавливается после выполнения любой арифметической операции, если результат операции ноль</td></tr>
 <tr><td>CF (carry flag)</td><td>устанавливается после выполнения сложения, если случился перенос</td></tr>
-<tr><td>E/G/L (equal/great/less)</td><td>устанавливается после выполнения операции CMP</td></tr>
-<tr><td>SF (shift flag)</td><td>устанавливается после выполнения сдвига, если логическая 1 вышла за пределы регистра</td></tr>
+<tr><td>EF/GF/LF (equal/great/less)</td><td>устанавливается после выполнения операции CMP</td></tr>
+<tr><td>SLF (shift left flag)</td><td>устанавливается после выполнения сдвига влево, если логическая 1 вышла за пределы регистра</td></tr>
+<tr><td>SRF (shift right flag)</td><td>устанавливается после выполнения сдвига вправо, если логическая 1 вышла за пределы регистра</td></tr>
 </table>
 
 <h3>Значение селектора</h3>
