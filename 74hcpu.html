@@ -120,20 +120,6 @@ width: 250;
 Константы могут быть в любой команде, кроме унарных, CLRF, RET, IRET.<br>
 Команда CMP не меняет регистры (только флаги).</p>
 
-<h3>Структура арифметической команды</h3>
-<table border=1>
-<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 0</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-</table>
-
-<p>или</p>
-
-<table border=1>
-<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 0</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC) == 100</td><td colspan=4>COP</td></tr>
-<tr><td colspan=12>CONST</td></tr>
-</table>
-
 <h3>Регистры</h3>
 <table border=1>
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
@@ -200,65 +186,79 @@ width: 250;
 
 <p>Вообще-то селектор не нужно хранить в команде, ибо сама команда и определяет селектор. Для арифметической команды SEL=0, для команды RET SEL=3, для прерывания, которое вообще не команда, SEL=2. Все команды перехода имеют SEL=1, то есть абсолютную адресацию. Если конечно переход случится!</p>
 
+<h3>Структура арифметической команды</h3>
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td></tr>
+</table>
+
+<p>или</p>
+
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC) == 100</td></tr>
+<tr><td colspan=12>CONST</td></tr>
+</table>
+
 <h3>Переходы</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 1</td><td colspan=4>CONST[15:12]</td><td>-</td><td>-</td><td colspan=4>COP</td></tr>
-<tr><td>0</td><td>1</td><td colspan=4>const higher bits</td><td>-</td><td>-</td><td colspan=4>JMP, Jx, CALL</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td>-</td><td>-</td><td colspan=4>CONST[15:12]</td></tr>
+<tr><td colspan=3>011|100</td><td colspan=3>JMP, Jx, CALL</td><td>-</td><td>-</td><td colspan=4>const higher bits</td></tr>
 <tr><td colspan=12>CONST[11:0]</td></tr>
 </table>
-<p>Биты 6-9 можно использовать как недостающие. Вместе с 12 бит константой они дадут полный 16 битный адрес.</p>
+<p>Биты 0-3 можно использовать как недостающие. Вместе с 12 бит константой они дадут полный 16 битный адрес.</p>
 <br>
 
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
-<tr><td>0</td><td>1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>SIE</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>-</td><td colspan=3>-</td></tr>
+<tr><td colspan=3>011|100</td><td colspan=3>SIE</td><td colspan=3>-</td><td colspan=3>-</td></tr>
 </table>
 <br>
 
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
-<tr><td>0</td><td>1</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>RET, IRET</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>-</td><td colspan=3>-</td></tr>
+<tr><td colspan=3>011|100</td><td colspan=3>RET, IRET</td><td colspan=3>-</td><td colspan=3>-</td></tr>
 </table>
 
 <h3>Управления</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 2</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>0</td><td colspan=3>-</td><td colspan=3>-</td><td colspan=4>CLRF, NOP, EI, DI</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>-</td><td colspan=3>-</td></tr>
+<tr><td colspan=3>101</td><td colspan=3>CLRF, NOP, EI, DI</td><td colspan=3>-</td><td colspan=3>-</td></tr>
 </table>
 <br>
 
 <h3>LOAD</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>Rx</td><td colspan=3>-</td><td colspan=4>LOAD</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>-</td></tr>
+<tr><td colspan=3>110</td><td colspan=3>LOAD</td><td colspan=3>Rx</td><td colspan=3>-</td></tr>
 </table>
 
 <h3>STORE</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td colspan=3>-</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>Rx</td><td colspan=3></td><td colspan=4>STORE</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>-</td></tr>
+<tr><td colspan=3>110</td><td colspan=3>STORE</td><td colspan=3>Rx</td><td colspan=3></td></tr>
 </table>
 <p>Вход RAM подключен (намертво припаян) к мультиплексору DST, поэтому здесь именно DST, а не SRC.</p>
 
 <h3>IN</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>A(DST)</td><td colspan=3>ADDR</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>r0-r7</td><td colspan=3>3 бита</td><td colspan=4>IN</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>ADDR</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>IN</td><td colspan=3>r0-r7</td><td colspan=3>3 бита</td></tr>
 </table>
 <p>Адрес порта (0-7), из которого надо произвести чтение</p>
 
 <h3>[X]OUT</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC)</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>r0-r4, CONST, PIN0, PORT0</td><td colspan=4>OUT</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC)</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>r0-r4, CONST, PIN0, PORT0</td></tr>
 </table>
 <p>Адрес порта (0-7), в который надо произвести запись (пока PORT0-7)</p>
 
@@ -266,8 +266,8 @@ width: 250;
 
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=2>CTYPE == 3</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td><td colspan=4>COP</td></tr>
-<tr><td>1</td><td>1</td><td colspan=3>3 бита</td><td colspan=3>CONST</td><td colspan=4>OUT</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>CONST</td></tr>
 <tr><td colspan=4>CONST[11:8] - старшие 4 бита адреса</td><td colspan=8>CONST[7:0] - значение</td></tr>
 </table>
 
