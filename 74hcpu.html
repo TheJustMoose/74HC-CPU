@@ -76,10 +76,8 @@ width: 250;
 <tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг CF установлен</td><td>2</td></tr>
 <tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг CF сброшен</td><td>2</td></tr>
 <tr><td colspan=5><h4>Дополнительные команды условного перехода (CTYPE=3)</h4></td></tr>
-<tr><td>JSL</td><td>000</td><td>JSL ADDR</td><td>Переход, если флаг SLF установлен</td><td>2</td></tr>
-<tr><td>JNSL</td><td>001</td><td>JNSL ADDR</td><td>Переход, если флаг SLF сброшен</td><td>2</td></tr>
-<tr><td>JSR</td><td>000</td><td>JSR ADDR</td><td>Переход, если флаг SRF установлен</td><td>2</td></tr>
-<tr><td>JNSR</td><td>001</td><td>JNSR ADDR</td><td>Переход, если флаг SRF сброшен</td><td>2</td></tr>
+<tr><td>JS</td><td>000</td><td>JS ADDR</td><td>Переход, если флаг SF установлен</td><td>2</td></tr>
+<tr><td>JNS</td><td>001</td><td>JNS ADDR</td><td>Переход, если флаг SF сброшен</td><td>2</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
 <tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
@@ -168,8 +166,9 @@ width: 250;
 <tr><td>ZF (zero flag)</td><td>устанавливается после выполнения любой арифметической операции, если результат операции ноль</td></tr>
 <tr><td>CF (carry flag)</td><td>устанавливается после выполнения сложения, если случился перенос</td></tr>
 <tr><td>EF/GF/LF (equal/great/less)</td><td>устанавливается после выполнения операции CMP</td></tr>
-<tr><td>SLF (shift left flag)</td><td>устанавливается после выполнения сдвига влево, если логическая 1 вышла за пределы регистра</td></tr>
-<tr><td>SRF (shift right flag)</td><td>устанавливается после выполнения сдвига вправо, если логическая 1 вышла за пределы регистра</td></tr>
+<tr><td>SF (shift flag)</td><td>устанавливается после выполнения сдвига, если логическая 1 вышла за пределы регистра</td></tr>
+<tr><td>BF (bank flag)</td><td>устанавливается командной BANK1, сбрасывается командой BANK0</td></tr>
+<tr><td>IF (interrupt flag)</td><td>устанавливается при входе в прерывание, сбрасывается при выходе (?) или командами EI/DI</td></tr>
 </table>
 
 <h3>Значение селектора</h3>
