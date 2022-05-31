@@ -82,7 +82,7 @@ width: 250;
 <tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг C установлен</td><td>2</td></tr>
 <tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг C сброшен</td><td>2</td></tr>
 <tr><td>JS</td><td>?</td><td>JS ADDR</td><td>Переход, если флаг S установлен (эта команда не лезет, ибо у дешифратора обычно 8 выходов, а у ИЛИ 8 входов)</td><td>2</td></tr>
-<tr><td colspan=5><h4>Безусловного перехода (CTYPE=4)</h4></td></tr>
+<tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
 <tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td>RET</td><td>010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
@@ -196,7 +196,7 @@ width: 250;
 
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC) == 100</td></tr>
+<tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC) == 111</td></tr>
 <tr><td colspan=12>CONST</td></tr>
 </table>
 
@@ -258,7 +258,7 @@ width: 250;
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC)</td></tr>
-<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>r0-r4, CONST, PIN0, PORT0</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>r0-r4, PIN0, PORT0</td></tr>
 </table>
 <p>Адрес порта (0-7), в который надо произвести запись (пока PORT0-7)</p>
 
@@ -266,7 +266,7 @@ width: 250;
 
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
-<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 100</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC) == 111</td></tr>
 <tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>CONST</td></tr>
 <tr><td colspan=4>CONST[11:8] - старшие 4 бита адреса</td><td colspan=8>CONST[7:0] - значение</td></tr>
 </table>
