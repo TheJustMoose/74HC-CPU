@@ -362,7 +362,7 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 2<br>следующая за CALL команда</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0|1</td><td></td><td></td></tr>
-<tr><td>Стек</td><td></td><td></td><td>Push Addr<br>(сумматора, не мультиплексора)</td><td>SP++ (такой необычный стек)</td></tr>
+<tr><td>Стек</td><td></td><td></td><td>Push Addr<br>(сумматора, не мультиплексора)</td><td>HWSP++ (такой необычный стек)</td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
@@ -371,7 +371,7 @@ JZ L1
 <tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1<br>будет потерян, ибо после RET ничего не выполняется</td><td></td><td></td></tr>
-<tr><td>Стек</td><td></td><td>SP--</td><td>Pop Addr<br>(просто читаем вершину стека)</td><td></td></tr>
+<tr><td>Стек</td><td></td><td>HWSP--</td><td>Pop Addr<br>(просто читаем вершину стека)</td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 3?</td><td>в этот момент адрес доедет из стека до мультиплексора</td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
@@ -422,7 +422,37 @@ JZ L1
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
-<tr><td>RAM</td><td>Вход RAM подключен к DST</td><td>CS = 1, WR = 1</td><td>WR = 0, происходит запись в RAM</td><td>CS = 0</td></tr>
+<tr><td>RAM</td><td>Вход RAM подключен к OUT</td><td>CS = 1, WR = 1</td><td>WR = 0, происходит запись в RAM</td><td>CS = 0</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды PUSH</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>RAM</td><td>Вход RAM подключен к OUT, шина DST соединена с OUT</td><td>CS = 1, WR = 1</td><td>WR = 0, происходит запись в RAM</td><td>CS = 0, SP++</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды PUSHF</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>RAM</td><td>Вход RAM подключен к OUT, регистр Flags соединен с OUT</td><td>CS = 1, WR = 1</td><td>WR = 0, происходит запись в RAM</td><td>CS = 0, SP++</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды POP[F]</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td></td><td></td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
+<tr><td>RAM</td><td>SP--</td><td>CS = 1</td><td>RD = 1<br>RAM соединён с шиной OUT<br>Latch r0-r7|Flags</td><td>CS = 0, RD = 0</td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
@@ -432,7 +462,7 @@ JZ L1
 <tr><td>Логика прерываний</td><td>if (CTYPE==1|3??) T1 := 1</td><td>if (T1) T2 := 1<br>if (T2) Push Next Addr</td><td>-</td><td>if (T2) Latch IRQ Addr</td></tr>
 <tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td>пока выполняется арифметическая команда</td><td></td><td></td></tr>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
-<tr><td>Стек</td><td></td><td>Push Addr<br>(сумматора, не мультиплексора). Стек должен быть на 573, чтобы изменяющийся сумматор таки попал в него!</td><td>SP++ (такой необычный стек)</td><td></td></tr>
+<tr><td>Стек</td><td></td><td>Push Addr<br>(сумматора, не мультиплексора). Стек должен быть на 573, чтобы изменяющийся сумматор таки попал в него!</td><td>HWSP++ (такой необычный стек)</td><td></td></tr>
 <tr><td>АЛУ</td><td></td><td></td><td>Latch IR, Latch Flags</td><td>Latch r0-r7</td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td>MUX <= COP[SEL] = 2<br>передумали ;)</td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
