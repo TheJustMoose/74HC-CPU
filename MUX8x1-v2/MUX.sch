@@ -770,29 +770,29 @@ S2
 $Comp
 L Connector:Conn_01x08_Male J11
 U 1 1 628959C0
-P 3250 6950
-F 0 "J11" H 3358 7431 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 3350 6450 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 3250 6950 50  0001 C CNN
-F 3 "~" H 3250 6950 50  0001 C CNN
-	1    3250 6950
+P 2625 6925
+F 0 "J11" H 2733 7406 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 2650 6425 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 2625 6925 50  0001 C CNN
+F 3 "~" H 2625 6925 50  0001 C CNN
+	1    2625 6925
 	1    0    0    -1  
 $EndComp
-Text Label 3450 6750 0    50   ~ 0
+Text Label 2825 6725 0    50   ~ 0
 O1
-Text Label 3450 6650 0    50   ~ 0
+Text Label 2825 6625 0    50   ~ 0
 O0
-Text Label 3450 6850 0    50   ~ 0
+Text Label 2825 6825 0    50   ~ 0
 O2
-Text Label 3450 6950 0    50   ~ 0
+Text Label 2825 6925 0    50   ~ 0
 O3
-Text Label 3450 7050 0    50   ~ 0
+Text Label 2825 7025 0    50   ~ 0
 O4
-Text Label 3450 7150 0    50   ~ 0
+Text Label 2825 7125 0    50   ~ 0
 O5
-Text Label 3450 7250 0    50   ~ 0
+Text Label 2825 7225 0    50   ~ 0
 O6
-Text Label 3450 7350 0    50   ~ 0
+Text Label 2825 7325 0    50   ~ 0
 O7
 Text Label 1875 1125 0    50   ~ 0
 O0
@@ -865,56 +865,56 @@ $EndComp
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 628D9A25
-P 1250 6750
-F 0 "H1" H 1350 6796 50  0000 L CNN
-F 1 "MountingHole" H 1350 6705 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1250 6750 50  0001 C CNN
-F 3 "~" H 1250 6750 50  0001 C CNN
-	1    1250 6750
+P 750 6750
+F 0 "H1" H 850 6796 50  0000 L CNN
+F 1 "MountingHole" H 850 6705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 6750 50  0001 C CNN
+F 3 "~" H 750 6750 50  0001 C CNN
+	1    750  6750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 628DA0C7
-P 1250 7000
-F 0 "H3" H 1350 7046 50  0000 L CNN
-F 1 "MountingHole" H 1350 6955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1250 7000 50  0001 C CNN
-F 3 "~" H 1250 7000 50  0001 C CNN
-	1    1250 7000
+P 750 7000
+F 0 "H3" H 850 7046 50  0000 L CNN
+F 1 "MountingHole" H 850 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 7000 50  0001 C CNN
+F 3 "~" H 750 7000 50  0001 C CNN
+	1    750  7000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H5
 U 1 1 628DA34D
-P 1250 7250
-F 0 "H5" H 1350 7296 50  0000 L CNN
-F 1 "MountingHole" H 1350 7205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1250 7250 50  0001 C CNN
-F 3 "~" H 1250 7250 50  0001 C CNN
-	1    1250 7250
+P 750 7250
+F 0 "H5" H 850 7296 50  0000 L CNN
+F 1 "MountingHole" H 850 7205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 7250 50  0001 C CNN
+F 3 "~" H 750 7250 50  0001 C CNN
+	1    750  7250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 628DA5B9
-P 2250 6750
-F 0 "H2" H 2350 6796 50  0000 L CNN
-F 1 "MountingHole" H 2350 6705 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 6750 50  0001 C CNN
-F 3 "~" H 2250 6750 50  0001 C CNN
-	1    2250 6750
+P 1750 6750
+F 0 "H2" H 1850 6796 50  0000 L CNN
+F 1 "MountingHole" H 1850 6705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1750 6750 50  0001 C CNN
+F 3 "~" H 1750 6750 50  0001 C CNN
+	1    1750 6750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 628DA819
-P 2250 7000
-F 0 "H4" H 2350 7046 50  0000 L CNN
-F 1 "MountingHole" H 2350 6955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7000 50  0001 C CNN
-F 3 "~" H 2250 7000 50  0001 C CNN
-	1    2250 7000
+P 1750 7000
+F 0 "H4" H 1850 7046 50  0000 L CNN
+F 1 "MountingHole" H 1850 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1750 7000 50  0001 C CNN
+F 3 "~" H 1750 7000 50  0001 C CNN
+	1    1750 7000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1469,4 +1469,31 @@ F 3 "" H 7300 6250 50  0001 C CNN
 	1    7300 6250
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x08_Male J21
+U 1 1 629B9DFC
+P 3225 6925
+F 0 "J21" H 3333 7406 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3425 6425 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 3225 6925 50  0001 C CNN
+F 3 "~" H 3225 6925 50  0001 C CNN
+	1    3225 6925
+	1    0    0    -1  
+$EndComp
+Text Label 3425 6725 0    50   ~ 0
+O1
+Text Label 3425 6625 0    50   ~ 0
+O0
+Text Label 3425 6825 0    50   ~ 0
+O2
+Text Label 3425 6925 0    50   ~ 0
+O3
+Text Label 3425 7025 0    50   ~ 0
+O4
+Text Label 3425 7125 0    50   ~ 0
+O5
+Text Label 3425 7225 0    50   ~ 0
+O6
+Text Label 3425 7325 0    50   ~ 0
+O7
 $EndSCHEMATC
