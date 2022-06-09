@@ -48,8 +48,8 @@ width: 250;
 <tr><td colspan=5>Бинарная команда DST := DST OP SRC</td></tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
 <tr><td>MUL?</td><td>000</td><td>MUL r0, r1</td><td>Умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
-<tr><td>ADD</td><td>001</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
-<tr><td>ADDC</td><td>010</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
+<tr><td>ADDC</td><td>001</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
+<tr><td>ADD</td><td>010</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
 <tr><td>AND</td><td>011</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
 <tr><td>OR</td><td>100</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
 <tr><td>XOR</td><td>101</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
@@ -61,10 +61,10 @@ width: 250;
 Можно использовать и два регистра: r2 := NEG r1 - или NEG r2, r1</td></tr>
 <tr><td>CLR</td><td>000</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
 <tr><td>MIR</td><td>001</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
-<tr><td>LSL</td><td>010</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
-<tr><td>LSLС</td><td>011</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
-<tr><td>LSR</td><td>100</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
-<tr><td>LSRС</td><td>101</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
+<tr><td>LSLС</td><td>010</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
+<tr><td>LSL</td><td>011</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
+<tr><td>LSRС</td><td>100</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
+<tr><td>LSR</td><td>101</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
 <tr><td>INV</td><td>110</td><td>INV r1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
 <tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Условного перехода (CTYPE=2)</h4></td></tr>
