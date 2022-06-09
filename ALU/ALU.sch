@@ -1751,9 +1751,9 @@ F 3 "" H 6325 8200 50  0001 C CNN
 $EndComp
 Text Label 7850 8000 0    50   ~ 0
 ~MUL
-Text Label 7850 8100 0    50   ~ 0
-~ADD
 Text Label 7850 8200 0    50   ~ 0
+~ADD
+Text Label 7850 8100 0    50   ~ 0
 ~ADDC
 Text Label 7850 8300 0    50   ~ 0
 ~AND
@@ -1769,13 +1769,13 @@ Text Label 7850 9250 0    50   ~ 0
 ~CLR
 Text Label 7850 9350 0    50   ~ 0
 ~MIR
-Text Label 7850 9450 0    50   ~ 0
-~LSL
 Text Label 7850 9550 0    50   ~ 0
+~LSL
+Text Label 7850 9450 0    50   ~ 0
 ~LSLC
-Text Label 7850 9650 0    50   ~ 0
-~LSR
 Text Label 7850 9750 0    50   ~ 0
+~LSR
+Text Label 7850 9650 0    50   ~ 0
 ~LSRC
 Text Label 7850 9850 0    50   ~ 0
 ~INV
