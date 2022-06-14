@@ -2624,7 +2624,7 @@ $Comp
 L 74xx:74LS10 U22
 U 2 1 62FCD13B
 P 17000 8750
-F 0 "U22" H 17150 8900 50  0000 C CNN
+F 0 "U22" H 16975 8975 50  0000 C CNN
 F 1 "74LS10" H 16950 8550 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 17000 8750 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 17000 8750 50  0001 C CNN
@@ -2718,7 +2718,6 @@ Text Label 16100 13850 0    50   ~ 0
 ~CMPC
 NoConn ~ 19075 6800
 NoConn ~ 19075 7800
-NoConn ~ 18500 8825
 NoConn ~ 18500 11700
 Text Label 15500 11850 0    50   ~ 0
 ZF
@@ -3788,7 +3787,7 @@ $Comp
 L 74xx:74LS10 U22
 U 1 1 62D94EF1
 P 17575 7675
-F 0 "U22" H 17475 7875 50  0000 C CNN
+F 0 "U22" H 17525 7875 50  0000 C CNN
 F 1 "74LS10" H 17525 7475 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 17575 7675 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 17575 7675 50  0001 C CNN
@@ -3934,4 +3933,38 @@ F 3 "~" H 13250 11500 50  0001 C CNN
 $EndComp
 Text Label 13450 11500 0    50   ~ 0
 ~EQ_OUT
+Text Label 18600 8625 0    50   ~ 0
+~Bank0
+Text Label 18600 8825 0    50   ~ 0
+~Bank1
+Wire Wire Line
+	18500 8825 18600 8825
+Text Notes 9125 14750 0    100  ~ 0
+To Regs
+$Comp
+L Connector:Conn_01x01_Male J35
+U 1 1 62B0CC6D
+P 9750 15000
+F 0 "J35" H 9950 14925 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 9475 14925 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 9750 15000 50  0001 C CNN
+F 3 "~" H 9750 15000 50  0001 C CNN
+	1    9750 15000
+	1    0    0    -1  
+$EndComp
+Text Label 9950 15000 0    50   ~ 0
+~Bank0
+$Comp
+L Connector:Conn_01x01_Male J40
+U 1 1 62B43002
+P 9750 15250
+F 0 "J40" H 9950 15175 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 9475 15175 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 9750 15250 50  0001 C CNN
+F 3 "~" H 9750 15250 50  0001 C CNN
+	1    9750 15250
+	1    0    0    -1  
+$EndComp
+Text Label 9950 15250 0    50   ~ 0
+~Bank1
 $EndSCHEMATC
