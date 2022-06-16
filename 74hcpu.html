@@ -84,9 +84,10 @@ width: 250;
 <tr><td colspan=5><h4>Дополнительные команды условного перехода (CTYPE=3)</h4></td></tr>
 <tr><td>JS</td><td>000</td><td>JS ADDR</td><td>Переход, если флаг SF установлен</td><td>2</td></tr>
 <tr><td>JNS</td><td>001</td><td>JNS ADDR</td><td>Переход, если флаг SF сброшен</td><td>2</td></tr>
-<tr><td>SIE</td><td>010</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
+<tr><td>JGE</td><td>010</td><td>JGE ADDR</td><td>Переход, если флаг GF или EF установлен</td><td>2</td></tr>
+<tr><td>SIE</td><td>011</td><td>SIE</td><td>SKIP if Equal: пропускает следующую двухсловную команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
 нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
-<tr><td>SIZ</td><td>011</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
+<tr><td>SIZ</td><td>100</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
 <tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
 <tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
@@ -104,7 +105,7 @@ width: 250;
 <tr><td>BANK1</td><td>100</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
 <tr><td>HALT</td><td>101</td><td>HALT</td><td>Зависнуть!</td><td>1</td></tr>
 <tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
-<tr><td colspan=5><h4>Передачи (CTYPE=6)</h4> Вход RAM подключен к шине A(DST), выход к шине OUT.</td></tr>
+<tr><td colspan=5><h4>Передачи (CTYPE=6)</h4></td></tr>
 <tr><td>LOAD[X|Y|SP]</td><td>000</td><td>LOADY r0</td><td>Загрузка из RAM[r7:r6] в регистр (r0-r7)</td><td>1</td></tr>
 <tr><td>STORE[X|Y|SP]</td><td>001</td><td>STOREX r0</td><td>Запись в RAM[r5:r4] указанного регистра (r0-r7)</td><td>1</td></tr>
 <tr><td>RLOAD[X|Y|SP]</td><td>010</td><td>RLOAD r0, [X+10]</td><td>Загрузка из RAM[r7:r6 + 10] в регистр (r0-r7)<br>74HC157/74HC151 имеет вход G, который позволяет занулять выходы, а значит можно очень легко суммировать с нулём и менять LOAD <-> RLOAD</td><td>2</td></tr>
@@ -114,7 +115,7 @@ width: 250;
 <tr><td>PUSHF</td><td>110</td><td>PUSHF</td><td>Записать регистр флагов в стек</td><td>1</td></tr>
 <tr><td>POPF</td><td>111</td><td>POPF</td><td>Прочитать регистр флагов из стека</td><td>1</td></tr>
 <tr><td colspan=5><h4>Ввода-вывода (CTYPE=7)</h4></td></tr>
-<tr><td>IN</td><td>00</td><td>IN r0, PORTx</td><td>Чтение из порта в r0</td><td>1/2</td></tr>
+<tr><td>IN</td><td>000</td><td>IN r0, PINx</td><td>Чтение из порта в r0</td><td>1/2</td></tr>
 <tr><td>OUT</td><td>001</td><td>OUT PORTx, r0</td><td>Вывод регистра r0 в заданный порт</td><td>1/2</td></tr>
 <tr><td>XOUT</td><td>010</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
 </table>
@@ -178,6 +179,44 @@ width: 250;
 А константа всегда лежит вторым словом по нечётному адресу.</p>
 
 <img src="ROM.png" />
+
+<h4>Побитовое размещение команд</h4>
+<table border=1>
+<tr><td colspan=8>ROM 2</td><td colspan=8>ROM 1</td><td colspan=8>ROM 0</td></tr>
+<tr>
+<td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+<td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+<td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr><td colspan=12>Word 1</td><td colspan=12>Word 0</td></tr>
+<tr>
+<td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+<td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr><td colspan=12>CMD | CONST</td><td colspan=12>CMD</td></tr>
+</table>
+
+<h4>Пример размещения команд</h4>
+<p>Адреса растут справа налево, сверху вниз</p>
+<table border=1>
+<tr><td class="mid">Нечётные адреса</td><td class="mid">Чётные адреса</td><td class="big">Пояснения</td></tr>
+<tr><td>CLR r0</td><td>BANK0</td><td>две команды в одной "строке" ROM</td></tr>
+<tr><td>CONST (10)</td><td>ADD R0, 10</td><td>одна двухсловная команда</td></tr>
+<tr><td>NOP</td><td>OUT PORT0, R0</td><td>опять две команды</td></tr>
+</table>
+
+<p>С точки зрения процессора команды будут размещаться так:</p>
+<table border=1>
+<tr><td class="mid">Адрес</td><td class="mid">Команда</td></tr>
+<tr><td>0</td><td>BANK0</td></tr>
+<tr><td>1</td><td>CLR r0</td></tr>
+<tr><td>2</td><td>ADD R0,</td></tr>
+<tr><td>3</td><td>CONST (10)</td></tr>
+<tr><td>4</td><td>OUT PORT0, R0</td></tr>
+<tr><td>5</td><td>NOP</td></tr>
+</table>
+<p>Сухой остаток: команды выбираются из ROM всегда по две за раз, младший бит адреса лишь перекидывает входы мультиплексора между ними.</p>
+<p>В качестве ROM используется wc512 (?) на 64КБ, значит сумарно 192КБ или 128 Килослова (128К однословных команд).</p>
 
 <h3>Регистр флагов</h3>
 <table border=1>
