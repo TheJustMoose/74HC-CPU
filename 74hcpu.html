@@ -47,6 +47,39 @@ width: 250;
 <li>Поддержка прерываний - один адрес. Нереентерабельные.</li>
 </ul>
 
+<h3>Регистры</h3>
+<table border=1>
+<tr><td>Имя</td><td class="big">Назначение</td></tr>
+<tr><td>r0-r7</td><td>Регистр общего назначения</td></tr>
+<tr><td>r7:r6</td><td>Регистр Y адреса ОЗУ</td></tr>
+<tr><td>r5:r4</td><td>Регистр X адреса ОЗУ</td></tr>
+<tr><td>CONST</td><td>Регистр константы</td></tr>
+</table>
+
+<h3>Нумерация регистров</h3>
+<table border=1>
+<tr><td colspan=2>A(DST)</td><td colspan=2>B(SRC)</td><td class="big">Примечание</td></tr>
+<tr><td>r0</td><td>000</td><td>r0</td><td>000</td><td></td></tr>
+<tr><td>r1</td><td>001</td><td>r1</td><td>001</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r2</td><td>010</td><td bgcolor="#D5F5E3">r2</td><td>010</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r3</td><td>011</td><td bgcolor="#D5F5E3">r3</td><td>011</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r4</td><td>100</td><td bgcolor="#D5F5E3">r4</td><td>100</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r5</td><td>101</td><td>PORT0</td><td>101</td><td>Выходной порт 0! Позволяет не запоминать состояние порта и использовать данные порта сразу как операнд.</td></tr>
+<tr><td bgcolor="#D5F5E3">r6</td><td>110</td><td>PIN0</td><td>110</td><td>Входной порт 0</td></tr>
+<tr><td bgcolor="#D5F5E3">r7</td><td>111</td><td>CONST</td><td>111</td><td>Константа, иногда лежит во втором слове команды</td></tr>
+</table>
+
+<p style="background-color:#D5F5E3">Можно переключить на другой банк!</p>
+
+<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры r5-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
+
+<h3>Порты</h3>
+<table border=1 width=400>
+<tr><td>Имя</td><td class="big">Назначение</td></tr>
+<tr><td>PORT0-7</td><td>Порт вывода 0-7, доступен через команду OUT, частично доступен через арифметические команды</td></tr>
+<tr><td>PIN0-7</td><td>Порт ввода 0-7, доступен через команду IN, частично доступен через арифметические команды</td></tr>
+</table>
+
 <h3>Список команд</h3>
 <table border=1>
 <tr><td colspan=5><h4>Бинарные команды (CTYPE=0)</h4></td></tr>
@@ -127,39 +160,6 @@ width: 250;
 Константы могут быть в любой арифметической команде, а также в командах перехода.<br>
 Команда CMP не меняет регистры (только флаги).</p>
 
-<h3>Регистры</h3>
-<table border=1>
-<tr><td>Имя</td><td class="big">Назначение</td></tr>
-<tr><td>r0-r7</td><td>Регистр общего назначения</td></tr>
-<tr><td>r7:r6</td><td>Регистр Y адреса ОЗУ</td></tr>
-<tr><td>r5:r4</td><td>Регистр X адреса ОЗУ</td></tr>
-<tr><td>CONST</td><td>Регистр константы</td></tr>
-</table>
-
-<h3>Нумерация регистров</h3>
-<table border=1>
-<tr><td colspan=2>A(DST)</td><td colspan=2>B(SRC)</td><td class="big">Примечание</td></tr>
-<tr><td>r0</td><td>000</td><td>r0</td><td>000</td><td></td></tr>
-<tr><td>r1</td><td>001</td><td>r1</td><td>001</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r2</td><td>010</td><td bgcolor="#D5F5E3">r2</td><td>010</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r3</td><td>011</td><td bgcolor="#D5F5E3">r3</td><td>011</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r4</td><td>100</td><td bgcolor="#D5F5E3">r4</td><td>100</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r5</td><td>101</td><td>PORT0</td><td>101</td><td>Выходной порт 0! Позволяет не запоминать состояние порта и использовать данные порта сразу как операнд.</td></tr>
-<tr><td bgcolor="#D5F5E3">r6</td><td>110</td><td>PIN0</td><td>110</td><td>Входной порт 0</td></tr>
-<tr><td bgcolor="#D5F5E3">r7</td><td>111</td><td>CONST</td><td>111</td><td>Константа, иногда лежит во втором слове команды</td></tr>
-</table>
-
-<p style="background-color:#D5F5E3">Можно переключить на другой банк!</p>
-
-<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры r5-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
-
-<h3>Порты</h3>
-<table border=1 width=400>
-<tr><td>Имя</td><td class="big">Назначение</td></tr>
-<tr><td>PORT0-7</td><td>Порт вывода 0-7, доступен через команду OUT, частично доступен через арифметические команды</td></tr>
-<tr><td>PIN0-7</td><td>Порт ввода 0-7, доступен через команду IN, частично доступен через арифметические команды</td></tr>
-</table>
-
 <h3>Шины</h3>
 <table border=1 width=400>
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
@@ -216,7 +216,7 @@ width: 250;
 <tr><td>5</td><td>NOP</td></tr>
 </table>
 <p>Сухой остаток: команды выбираются из ROM всегда по две за раз, младший бит адреса лишь перекидывает входы мультиплексора между ними.</p>
-<p>В качестве ROM используется wc512 (?) на 64КБ, значит сумарно 192КБ или 128 Килослова (128К однословных команд).</p>
+<p>В качестве ROM используется W27C512-45Z на 64КБ, значит сумарно 192КБ или 128 Килослова (128К однословных команд).</p>
 
 <h3>Регистр флагов</h3>
 <table border=1>
@@ -351,50 +351,6 @@ width: 250;
 </table>
 
 <p>во втором варианте получается 128 портов</p>
-
-<h3>Примеры команд</h3>
-<pre>
-MOV r0, r1    ; r0 := r1
-ADD r0, r1    ; r0 += r1
-AND r3, CONST ; r3 &= CONST
-MOV r7, r1    ; r7 := r1
-OR r7, CONST  ; r7 |= CONST
-MOV r2, PIN0  ; r2 := PIN0  == in
-
-OUT PORT1, r1 ; PORT1 := r1
-OUT PORT1, CONST ; PORT1 := CONST
-
-MOV r3, CONST ; r3:= CONST
-AND r3, PIN0  ; r3 = r3 & PIN0
-
-MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
-
-ADD r6, 1     ; инкремент пары регистров
-ADDC r7, 0
-
-NEG r0        ; r0 := ~r0
-NEG r0, r1    ; r0 := ~r1
-NEG r0, PIN1  ; r0 := ~PIN1
-
-CALL F1       ; вызвать функцию со смещением F1
-
-M1:
-NOP
-JMP M1
-
-F1:
-ADD r0, r1
-RET
-
-LOAD r0  ; r0 := RAM[r6:r7]
-STORE r1 ; RAM[r6:r7] := r1
-
-MOV r3, 10
-L1:
-; do something
-ADD r3, 255
-JZ L1
-</pre>
 
 <h3>Выполнение команды JMP/Jx</h3>
 <table border=1>
@@ -536,9 +492,8 @@ JZ L1
 <tr><td>ADD Flag</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP Flags</td><td>74HC175, 74HC04</td><td>2</td></tr>
 <tr><td>CMP/CMPC</td><td>74HC85*2, 74HC08, лучше в SO</td><td>3</td></tr>
-<tr><td>RW Reg, Bank0</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
+<tr><td>Regs, Bank0+1</td><td>74HC573*14, 74HC238, LEDs</td><td>9</td></tr>
 <tr><td>ALU</td><td>74HC245*2, 74HC138*2, stripboard</td><td>4</td></tr>
-<tr><td>RW Reg, Bank1</td><td>74HC573*8, 74HC238, LEDs</td><td>9</td></tr>
 <tr><td>CLR</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>LSL</td><td>74HC573, SO</td><td>1</td></tr>
 <tr><td>LSR</td><td>74HC573, SO</td><td>1</td></tr>
@@ -566,6 +521,50 @@ JZ L1
 <tr><td>Timer ;)</td><td>74HC193*4, 74HC573*2, 74HC00, ... считает в минус, загружается сам</td><td>7</td></tr>
 <tr><td colspan=3>Итого - 170 корпусов</td></tr>
 </table>
+
+<h3>Примеры команд</h3>
+<pre>
+MOV r0, r1    ; r0 := r1
+ADD r0, r1    ; r0 += r1
+AND r3, CONST ; r3 &= CONST
+MOV r7, r1    ; r7 := r1
+OR r7, CONST  ; r7 |= CONST
+MOV r2, PIN0  ; r2 := PIN0  == in
+
+OUT PORT1, r1 ; PORT1 := r1
+OUT PORT1, CONST ; PORT1 := CONST
+
+MOV r3, CONST ; r3:= CONST
+AND r3, PIN0  ; r3 = r3 & PIN0
+
+MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
+
+ADD r6, 1     ; инкремент пары регистров
+ADDC r7, 0
+
+NEG r0        ; r0 := ~r0
+NEG r0, r1    ; r0 := ~r1
+NEG r0, PIN1  ; r0 := ~PIN1
+
+CALL F1       ; вызвать функцию со смещением F1
+
+M1:
+NOP
+JMP M1
+
+F1:
+ADD r0, r1
+RET
+
+LOAD r0  ; r0 := RAM[r6:r7]
+STORE r1 ; RAM[r6:r7] := r1
+
+MOV r3, 10
+L1:
+; do something
+ADD r3, 255
+JZ L1
+</pre>
 
 </body>
 </html>
