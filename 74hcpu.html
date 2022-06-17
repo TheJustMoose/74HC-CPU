@@ -114,27 +114,30 @@ tr.opt {
 <tr><td>LSR</td><td>101</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
 <tr><td>INV</td><td>110</td><td>INV r1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
 <tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td colspan=5><h4>Условного перехода (CTYPE=2)</h4></td></tr>
-<tr><td>JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
-<tr><td>JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
-<tr><td>JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг EF установлен</td><td>2</td></tr>
-<tr><td>JNE</td><td>011</td><td>JNE ADDR</td><td>Переход если флаг EF сброшен</td><td>2</td></tr>
-<tr><td>JG</td><td>100</td><td>JG ADDR</td><td>Переход если флаг GF установлен</td><td>2</td></tr>
-<tr><td>JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг LF установлен</td><td>2</td></tr>
-<tr><td>JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг CF установлен</td><td>2</td></tr>
-<tr><td>JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг CF сброшен</td><td>2</td></tr>
-<tr><td colspan=5><h4>Дополнительные команды условного перехода (CTYPE=3)</h4></td></tr>
-<tr><td>JS</td><td>000</td><td>JS ADDR</td><td>Переход, если флаг SF установлен</td><td>2</td></tr>
-<tr><td>JNS</td><td>001</td><td>JNS ADDR</td><td>Переход, если флаг SF сброшен</td><td>2</td></tr>
-<tr><td>JGE</td><td>010</td><td>JGE ADDR</td><td>Переход, если флаг GF или EF установлен</td><td>2</td></tr>
-<tr><td>SIE</td><td>011</td><td>SIE</td><td>SKIP if Equal: пропускает следующую <b>двухсловную</b> команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
-нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
-<tr><td>SIZ</td><td>100</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
+<tr><td colspan=5><h4>Перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
+<tr><td>[R]JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
+<tr><td>[R]JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
+<tr><td>[R]JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг EF установлен</td><td>2</td></tr>
+<tr><td>[R]JNE</td><td>011</td><td>JNE ADDR</td><td>Переход если флаг EF сброшен</td><td>2</td></tr>
+<tr><td>[R]JG</td><td>100</td><td>JG ADDR</td><td>Переход если флаг GF установлен</td><td>2</td></tr>
+<tr><td>[R]JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг LF установлен</td><td>2</td></tr>
+<tr><td>[R]JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг CF установлен</td><td>2</td></tr>
+<tr><td>[R]JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг CF сброшен</td><td>2</td></tr>
+<tr><td colspan=5><h4>Перехода (CTYPE=3)</h4>(абсолютные и относительные адреса)</td></tr>
+<tr><td>[R]JS</td><td>000</td><td>JS ADDR</td><td>Переход, если флаг SF установлен</td><td>2</td></tr>
+<tr><td>[R]JNS</td><td>001</td><td>JNS ADDR</td><td>Переход, если флаг SF сброшен</td><td>2</td></tr>
+<tr><td>[R]JGE</td><td>010</td><td>JGE ADDR</td><td>Переход, если флаг GF или EF установлен</td><td>2</td></tr>
+<tr><td>-</td><td>011</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>[R]JMP</td><td>110</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
+<tr><td>[R]CALL</td><td>111</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
-<tr><td>JMP</td><td>000</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
-<tr><td>CALL</td><td>001</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
-<tr><td>RET</td><td>010</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
-<tr><td>IRET</td><td>011</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
+<tr><td>RET</td><td>000</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
+<tr><td>IRET</td><td>001</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
+<tr><td>SIE</td><td>010</td><td>SIE</td><td>SKIP if Equal: пропускает следующую <b>двухсловную</b> команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
+нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
+<tr><td>SIZ</td><td>011</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
 <tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>-</td><td>110</td><td>-</td><td>reserved</td><td>1</td></tr>
@@ -164,8 +167,6 @@ tr.opt {
 <tr><td>INI</td><td>011</td><td>IN r0, [r1]</td><td>Чтение из порта с номером, который лежит в r1, и сохранение в регистр r0</td><td>1/2</td></tr>
 <tr><td>OUTI</td><td>100</td><td>OUT [r1], r0</td><td>Вывод регистра r0 в порт, номер которого лежит в r1</td><td>1/2</td></tr>
 </table>
-
-<i>SIE - Skip If Equal</i>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
 Константы могут располагаться только по нечётным адресам.<br>
