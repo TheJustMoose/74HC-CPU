@@ -102,8 +102,8 @@ tr.opt {
 <tr><td>AND</td><td>011</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
 <tr><td>OR</td><td>100</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
 <tr><td>XOR</td><td>101</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>CMP</td><td>110</td><td>CMP r0, r1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
-<tr><td>CMPC</td><td>111</td><td>CMPC r0, r1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
+<tr><td>INC</td><td>110</td><td>INC r6</td><td>Вообще, это унарная команда, но, подключенная к шине DST, вместо SRC. Поэтому может инкрементить <b>любой</b> регистр. (Можно сделать из команды ADD, просто занулив один из операндов и зафорсить CF)</td><td>1</td></tr>
+<tr><td>INCC</td><td>111</td><td>INCC r7</td><td>Тоже инкремент, но вторым аргументом берёт CF, а не единицу. В результате можно инкрементировать пару регистров (старший и младший).</td><td>1</td></tr>
 <tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
 <b>Бля! Справа (SRC) могут быть не все регистры, ибо хвост занят портами и константой</b><br>
 DST := OP SRC, по умолчанию DST := OP DST,<br>
@@ -152,7 +152,7 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <tr><td>EI</td><td>010</td><td>EI</td><td>Enable interrupt</td><td>1</td></tr>
 <tr><td>BANK0</td><td>011</td><td>BANK0</td><td>Connect BANK0 of registers</td><td>1</td></tr>
 <tr><td>BANK1</td><td>100</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
-<tr><td>HALT</td><td>101</td><td>HALT</td><td>Зависнуть!</td><td>1</td></tr>
+<tr><td>STOP</td><td>101</td><td>STOP</td><td>Зависнуть!</td><td>1</td></tr>
 <tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
 <tr><td>-</td><td>111</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td colspan=5><h4>Передачи (CTYPE=6)</h4></td></tr>
@@ -170,6 +170,10 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <tr><td>XOUT</td><td>010</td><td>XOUT PORTx, r1</td><td>Вывод регистра r1 XOR r0 в заданный порт (справа может быть любой SRC, включая PORT0)</td><td>1/2</td></tr>
 <tr><td>INI</td><td>011</td><td>IN r0, [r1]</td><td>Чтение из порта с номером, который лежит в r1, и сохранение в регистр r0</td><td>1/2</td></tr>
 <tr><td>OUTI</td><td>100</td><td>OUT [r1], r0</td><td>Вывод регистра r0 в порт, номер которого лежит в r1</td><td>1/2</td></tr>
+<tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1/2</td></tr>
+<tr><td colspan=5><h4>Last but not least (CTYPE=7)</h4>(вынесены сюда, т.к. не должны портить регистры, хотя и похожи на арифметические)</td></tr>
+<tr><td>CMP</td><td>110</td><td>CMP r0, r1</td><td>Сравнение (устанавливает флаги, не портит регистры)</td><td>1/2</td></tr>
+<tr><td>CMPC</td><td>111</td><td>CMPC r0, r1</td><td>Сравнение с учётом "переноса": проверяет флаги E/G/L от предыдущей операции</td><td>1/2</td></tr>
 </table>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
@@ -188,7 +192,7 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 </table>
 
 <h3>Структура</h3>
-<img src="CPU.png" />
+<img src="CPU.png" width="730" />
 
 <h3>Структура памяти программ</h3>
 <p>Так как ROM на 12 бит ширины не существует, нужна альтернатива. Ближайшее кратное к 12 - это 24. И оно хорошо ложится на 3 байта.
@@ -336,7 +340,7 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <tr><td colspan=12>CONST[11:0]</td></tr>
 </table>
 
-<p>Вход RAM подключен (намертво припаян) к мультиплексору DST, поэтому здесь именно DST, а не SRC.</p>
+<p>Вход RAM подключен к шине OUT, а через неё к мультиплексору DST, поэтому здесь именно DST, а не SRC.</p>
 
 <h3>IN</h3>
 <table border=1>
@@ -351,7 +355,7 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td></tr>
 <tr><td colspan=3>111</td><td colspan=3>IN</td><td colspan=3>r0-r7</td><td colspan=3>[r0-r4, PORT0, PIN0, CONST]</td></tr>
-<tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение</td></tr>
+<tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение, только для B(SRC) = 7</td></tr>
 </table>
 <p>Адрес порта (0-255), берётся из регистра SRC, и из него производится чтение</p>
 
@@ -546,14 +550,14 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <h3>Ассемблер врукопашную</h3>
 <table border=1>
 <tr><td>COP/CTYPE</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>DST</td><td>SRC</td></tr>
-<tr><td>0</td><td>MUL</td><td>CLR</td><td>JZ</td><td>JS</td><td>JMP</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
-<tr><td>1</td><td>ADDC</td><td>MIR</td><td>JNZ</td><td>JNS</td><td>CALL</td><td>DI</td><td>STORE</td><td>OUT</td><td>r1</td><td>r1</td></tr>
-<tr><td>2</td><td>ADD</td><td>LSLC</td><td>JE</td><td>JGE</td><td>RET</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
-<tr><td>3</td><td>AND</td><td>LSL</td><td>JNE</td><td>SIE</td><td>IRET</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
-<tr><td>4</td><td>OR</td><td>LSRC</td><td>JG</td><td>SIZ</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
+<tr><td>0</td><td>MUL</td><td>CLR</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
+<tr><td>1</td><td>ADDC</td><td>MIR</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>OUT</td><td>r1</td><td>r1</td></tr>
+<tr><td>2</td><td>ADD</td><td>LSLC</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
+<tr><td>3</td><td>AND</td><td>LSL</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
+<tr><td>4</td><td>OR</td><td>LSRC</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
 <tr><td>5</td><td>XOR</td><td>LSR</td><td>JL</td><td>-</td><td>-</td><td>HALT</td><td>POP</td><td>-</td><td>r5</td><td>PORT0</td></tr>
-<tr><td>6</td><td>CMP</td><td>INV</td><td>JC</td><td>-</td><td>-</td><td>RESET</td><td>PUSHF</td><td>-</td><td>r6</td><td>PIN0</td></tr>
-<tr><td>7</td><td>CMPC</td><td>MOV</td><td>JNC</td><td>-</td><td>NOP</td><td>-</td><td>POPF</td><td>-</td><td>r7</td><td>CONST</td></tr>
+<tr><td>6</td><td>INC</td><td>INV</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PIN0</td></tr>
+<tr><td>7</td><td>INCC</td><td>MOV</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
 <p>Переведём в машинный код команду ADD r0, 10:</p>
@@ -596,11 +600,22 @@ MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
 ADD r6, 1     ; инкремент пары регистров
 ADDC r7, 0
 
+INC r4         ; инкремент пары регистров
+INCC r5        ; (можно использовать любой регистр)
+
+CMP  r4, 0xFFFF ; сравнение указателя с константой
+CMPC r5, 0xFFFF
+
+CMP  r4, r0     ; сравнение указателей
+CMPC r5, r1     ; справа может быть только r0-r4
+
 NEG r0        ; r0 := ~r0
 NEG r0, r1    ; r0 := ~r1
 NEG r0, PIN1  ; r0 := ~PIN1
 
-CALL F1       ; вызвать функцию со смещением F1
+RCALL 100     ; вызвать функцию со смещением 100 от текущего адреса
+CALL F1       ; вызвать функцию с адресом F1
+RJMP 100      ; прыгнуть на 100 команд вперёд
 
 M1:
 NOP
