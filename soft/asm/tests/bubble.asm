@@ -1,4 +1,11 @@
 
+; r0 - value 1
+; r1 - value 2
+; r2 - pass counter
+; r3 - repeat flag
+; r7:r6 (bank0) - ptr0
+; r7:r6 (bank1) - ptr1
+
 bank0
 mov r2, 16   ; pass counter
 

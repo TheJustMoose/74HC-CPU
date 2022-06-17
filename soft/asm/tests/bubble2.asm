@@ -2,6 +2,12 @@
 ; F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 FA FB FC FD FF
 ;  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
 
+; r0    - value 1
+; r1    - value 2
+; r2    - repeat flag
+; r5:r4 - ptr
+; r7:r6 - ptr_end
+
 ; array end
 mov r6, 0xFF
 mov r7, 0xFF
