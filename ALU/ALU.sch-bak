@@ -1614,9 +1614,9 @@ F 3 "" H 5500 7900 50  0001 C CNN
 $EndComp
 Text Label 4775 4600 0    50   ~ 0
 ~MUL
-Text Label 5750 4875 0    50   ~ 0
+Text Label 5900 4950 0    50   ~ 0
 ~ADDC
-Text Label 7325 4875 0    50   ~ 0
+Text Label 6725 4425 0    50   ~ 0
 ~ADD
 Text Label 8275 4600 0    50   ~ 0
 ~AND
@@ -1988,17 +1988,6 @@ F 1 "VCC" H 16315 11623 50  0000 C CNN
 F 2 "" H 16300 11450 50  0001 C CNN
 F 3 "" H 16300 11450 50  0001 C CNN
 	1    16300 11450
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS08 U27
-U 3 1 62CE5A64
-P 17900 9375
-F 0 "U27" H 17850 9575 50  0000 C CNN
-F 1 "74LS08" H 17900 9175 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 17900 9375 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 17900 9375 50  0001 C CNN
-	3    17900 9375
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -3770,7 +3759,7 @@ F 1 "74LS27" H 1675 4125 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 1675 4325 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 1675 4325 50  0001 C CNN
 	3    1675 4325
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 Wire Wire Line
 	1375 4975 1375 5075
@@ -3907,55 +3896,18 @@ F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 14475 7500 50  0001 C CNN
 	4    14475 7500
 	1    0    0    -1  
 $EndComp
-$Comp
-L 74xx:74LS08 U19
-U 1 1 62F08667
-P 6300 4975
-F 0 "U19" H 6275 5175 50  0000 R CNN
-F 1 "74LS08" H 6425 4775 50  0000 R CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 6300 4975 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6300 4975 50  0001 C CNN
-	1    6300 4975
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS08 U19
-U 2 1 62F0C83A
-P 7025 4975
-F 0 "U19" H 7025 4775 50  0000 R CNN
-F 1 "74LS08" H 7150 5175 50  0000 R CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 7025 4975 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 7025 4975 50  0001 C CNN
-	2    7025 4975
-	-1   0    0    1   
-$EndComp
-Text Label 5750 5075 0    50   ~ 0
+Text Label 5900 5150 0    50   ~ 0
 ~INCC
-Wire Wire Line
-	6600 4500 6600 4975
 Wire Wire Line
 	6375 4500 6600 4500
 Wire Wire Line
-	5750 4875 6000 4875
+	5900 4950 6150 4950
 Wire Wire Line
-	5750 5075 6000 5075
-Wire Wire Line
-	6725 4425 6725 4975
+	5900 5150 6150 5150
 Wire Wire Line
 	6375 4425 6725 4425
-Text Label 7325 5075 0    50   ~ 0
+Text Label 5900 5050 0    50   ~ 0
 ~INC
-$Comp
-L 74xx:74LS08 U19
-U 5 1 63153809
-P 2950 13050
-F 0 "U19" H 3180 13096 50  0000 L CNN
-F 1 "74LS08" H 3180 13005 50  0000 L CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 2950 13050 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 2950 13050 50  0001 C CNN
-	5    2950 13050
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:VCC #PWR038
 U 1 1 63154C64
@@ -3984,7 +3936,7 @@ U 3 1 63172CE8
 P 20550 6700
 F 0 "U17" H 20500 6900 50  0000 C CNN
 F 1 "74LS00" H 20525 6500 50  0000 C CNN
-F 2 "" H 20550 6700 50  0001 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 20550 6700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 20550 6700 50  0001 C CNN
 	3    20550 6700
 	1    0    0    -1  
@@ -3997,4 +3949,166 @@ Text Label 20000 6600 0    50   ~ 0
 ~INC
 Text Notes 20075 6375 0    50   ~ 0
 Реализация команды INC\nчерез существующую ADD
+Text Label 19875 6800 0    50   ~ 0
+~CF
+$Comp
+L 74xx:74LS10 U19
+U 2 1 62BC2A45
+P 6450 5050
+F 0 "U19" H 6425 5275 50  0000 C CNN
+F 1 "74LS10" H 6400 4850 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 6450 5050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 6450 5050 50  0001 C CNN
+	2    6450 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 5050 6150 5050
+Wire Wire Line
+	6750 4950 6750 5050
+Connection ~ 6750 5050
+Wire Wire Line
+	6750 5150 6750 5050
+Wire Wire Line
+	7350 5050 7350 4675
+Wire Wire Line
+	7350 4675 6600 4675
+Wire Wire Line
+	6600 4675 6600 4500
+Text Notes 7450 5050 0    50   ~ 0
+Инкремент реализуется как ADDC(A, 0, CF)
+$Comp
+L 74xx:74LS10 U19
+U 4 1 62D5E514
+P 2950 13050
+F 0 "U19" H 3180 13096 50  0000 L CNN
+F 1 "74LS10" H 3180 13005 50  0000 L CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 2950 13050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 2950 13050 50  0001 C CNN
+	4    2950 13050
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS10 U19
+U 1 1 62DA9131
+P 7050 5050
+F 0 "U19" H 7000 5250 50  0000 C CNN
+F 1 "74LS10" H 7000 4850 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 7050 5050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS10" H 7050 5050 50  0001 C CNN
+	1    7050 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D6
+U 1 1 631F6B00
+P 18400 10000
+F 0 "D6" H 18275 10075 50  0000 C CNN
+F 1 "LED" H 18450 10075 50  0000 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 18400 10000 50  0001 C CNN
+F 3 "~" H 18400 10000 50  0001 C CNN
+	1    18400 10000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 631F6B06
+P 18700 10000
+F 0 "R3" V 18625 9950 50  0000 C CNN
+F 1 "1k" V 18700 10000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 18630 10000 50  0001 C CNN
+F 3 "~" H 18700 10000 50  0001 C CNN
+	1    18700 10000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:LED D7
+U 1 1 6322DDE5
+P 18400 10250
+F 0 "D7" H 18275 10325 50  0000 C CNN
+F 1 "LED" H 18450 10325 50  0000 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 18400 10250 50  0001 C CNN
+F 3 "~" H 18400 10250 50  0001 C CNN
+	1    18400 10250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R13
+U 1 1 6322DDEB
+P 18700 10250
+F 0 "R13" V 18625 10200 50  0000 C CNN
+F 1 "1k" V 18700 10250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 18630 10250 50  0001 C CNN
+F 3 "~" H 18700 10250 50  0001 C CNN
+	1    18700 10250
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR0104
+U 1 1 632687D0
+P 18850 9825
+F 0 "#PWR0104" H 18850 9675 50  0001 C CNN
+F 1 "VCC" H 18865 9998 50  0000 C CNN
+F 2 "" H 18850 9825 50  0001 C CNN
+F 3 "" H 18850 9825 50  0001 C CNN
+	1    18850 9825
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18850 9825 18850 10000
+Wire Wire Line
+	18850 10000 18850 10250
+Connection ~ 18850 10000
+Wire Wire Line
+	18000 10000 18250 10000
+Wire Wire Line
+	18000 10250 18250 10250
+Text Label 18000 10000 0    50   ~ 0
+~Bank0
+Text Label 18000 10250 0    50   ~ 0
+~Bank1
+$Comp
+L Device:C C1
+U 1 1 633934B3
+P 1275 8325
+F 0 "C1" H 1390 8371 50  0000 L CNN
+F 1 "0.1uF" H 1390 8280 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 1313 8175 50  0001 C CNN
+F 3 "~" H 1275 8325 50  0001 C CNN
+	1    1275 8325
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR057
+U 1 1 633938A6
+P 1275 8175
+F 0 "#PWR057" H 1275 8025 50  0001 C CNN
+F 1 "VCC" H 1290 8348 50  0000 C CNN
+F 2 "" H 1275 8175 50  0001 C CNN
+F 3 "" H 1275 8175 50  0001 C CNN
+	1    1275 8175
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR061
+U 1 1 63393D4D
+P 1275 8475
+F 0 "#PWR061" H 1275 8225 50  0001 C CNN
+F 1 "GND" H 1280 8302 50  0000 C CNN
+F 2 "" H 1275 8475 50  0001 C CNN
+F 3 "" H 1275 8475 50  0001 C CNN
+	1    1275 8475
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U27
+U 4 1 6351EA2B
+P 17900 9375
+F 0 "U27" H 17875 9575 50  0000 C CNN
+F 1 "74LS08" H 17900 9175 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 17900 9375 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 17900 9375 50  0001 C CNN
+	4    17900 9375
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
