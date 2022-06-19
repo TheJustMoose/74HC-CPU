@@ -102,7 +102,7 @@ tr.opt {
 <table border=1>
 <tr><td colspan=5><h4>Бинарные команды (CTYPE=0)</h4></td></tr>
 <tr><td colspan=5>Бинарная команда DST := DST OP SRC<br>
-<b>Бля! Справа (SRC) могут быть не все регистры, ибо хвост занят портами и константой</b></td>
+<b>Справа (SRC) могут быть не все регистры, ибо хвост занят портами и константой</b></td>
 </tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
 <tr><td>MUL?</td><td>000</td><td>MUL r0, r1</td><td>Умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
@@ -111,22 +111,27 @@ tr.opt {
 <tr><td>AND</td><td>011</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
 <tr><td>OR</td><td>100</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
 <tr><td>XOR</td><td>101</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>INC</td><td>110</td><td>INC r6</td><td>Вообще, это унарная команда, но, подключенная к шине DST, вместо SRC. Поэтому может инкрементить <b>любой</b> регистр. (Можно сделать из команды ADD, просто занулив один из операндов и зафорсить CF)</td><td>1</td></tr>
-<tr><td>INCC</td><td>111</td><td>INCC r7</td><td>Тоже инкремент, но вторым аргументом берёт CF, а не единицу. В результате можно инкрементировать пару регистров (старший и младший).</td><td>1</td></tr>
+<tr><td>MOV</td><td>110</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
+<tr><td>-</td><td>111</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
-<b>Бля! Справа (SRC) могут быть не все регистры, ибо хвост занят портами и константой</b><br>
-DST := OP SRC, по умолчанию DST := OP DST,<br>
-например CLR r1, значит то же, что и CLR r1, r1,<br> то же что и r1 := CLR r1.<br>
-Пример с NEG лучше: NEG r1 - это то же, что и: r1 := NEG r1<br>
-Можно использовать и два регистра: r2 := NEG r1 - или NEG r2, r1</td></tr>
+DST := OP DST<br>
+Регистр SRC не используется, команда подключается к шине DST.</td></tr>
 <tr><td>CLR</td><td>000</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
-<tr><td>MIR</td><td>001</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
-<tr><td>LSLС</td><td>010</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
-<tr><td>LSL</td><td>011</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
-<tr><td>LSRС</td><td>100</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
-<tr><td>LSR</td><td>101</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
-<tr><td>INV</td><td>110</td><td>INV r1</td><td>Побитовая инверсия</td><td>1/2</td></tr>
-<tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
+<tr><td>SET</td><td>000</td><td>SET r1</td><td>Установка всех битов</td><td>1</td></tr>
+<tr><td>-</td><td>001</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>-</td><td>001</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>LSL</td><td>010</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
+<tr><td>LSLC</td><td>010</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
+<tr><td>LSR</td><td>011</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
+<tr><td>LSRC</td><td>011</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
+<tr><td>INV</td><td>100</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
+<tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>MIR</td><td>101</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
+<tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>SWAP</td><td>110</td><td>SWAP r5</td><td>Переставляет местами нибблы</td><td>1</td></tr>
+<tr><td>-</td><td>110</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>INC</td><td>111</td><td>INC r6</td><td>Может инкрементить любой регистр. (Можно сделать из команды ADD, просто занулив один из операндов и зафорсить CF)</td><td>1</td></tr>
+<tr><td>INCC</td><td>111</td><td>INCC r7</td><td>Тоже инкремент, но вторым аргументом берёт CF, а не единицу. В результате можно инкрементировать пару регистров (старший и младший).</td><td>1</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
 <tr><td>[R]JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
 <tr><td>[R]JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
@@ -283,12 +288,19 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 
 <p>Вообще-то селектор не нужно хранить в команде, ибо сама команда и определяет селектор. Для арифметической команды SEL=0, для команды RET SEL=3, для прерывания, которое вообще не команда, SEL=2. Все команды перехода имеют SEL=1, то есть абсолютную адресацию. Если конечно переход случится!</p>
 
-<h3>Структура арифметической команды</h3>
+<h3>Структура бинарной арифметической команды</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td></tr>
 <tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение, только для B(SRC) = 7</td></tr>
 </table>
+
+<h3>Структура унарной арифметической команды</h3>
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=2>-</td><td>Expand</td></tr>
+</table>
+<p>Свободные биты можно как-то использовать для расширения команды. Например, вынести туда флаг "использовать CF".</p>
 
 <h3>Переходы</h3>
 <table border=1>
@@ -563,14 +575,14 @@ DST := OP SRC, по умолчанию DST := OP DST,<br>
 <h3>Ассемблер врукопашную</h3>
 <table border=1>
 <tr><td>COP/CTYPE</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>DST</td><td>SRC</td></tr>
-<tr><td>0</td><td>MUL</td><td>CLR</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
-<tr><td>1</td><td>ADDC</td><td>MIR</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>OUT</td><td>r1</td><td>r1</td></tr>
-<tr><td>2</td><td>ADD</td><td>LSLC</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
-<tr><td>3</td><td>AND</td><td>LSL</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
-<tr><td>4</td><td>OR</td><td>LSRC</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
-<tr><td>5</td><td>XOR</td><td>LSR</td><td>JL</td><td>-</td><td>-</td><td>HALT</td><td>POP</td><td>-</td><td>r5</td><td>PORT0</td></tr>
-<tr><td>6</td><td>INC</td><td>INV</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PIN0</td></tr>
-<tr><td>7</td><td>INCC</td><td>MOV</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
+<tr><td>0</td><td>MUL</td><td>CLR/SET</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
+<tr><td>1</td><td>ADDC</td><td>-</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>OUT</td><td>r1</td><td>r1</td></tr>
+<tr><td>2</td><td>ADD</td><td>LSL/C</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
+<tr><td>3</td><td>AND</td><td>LSR/C</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
+<tr><td>4</td><td>OR</td><td>INV</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
+<tr><td>5</td><td>XOR</td><td>MIR</td><td>JL</td><td>-</td><td>-</td><td>HALT</td><td>POP</td><td>-</td><td>r5</td><td>PORT0</td></tr>
+<tr><td>6</td><td>MOV</td><td>SWAP</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PIN0</td></tr>
+<tr><td>7</td><td>-</td><td>INC/C</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
 <p>Переведём в машинный код команду ADD r0, 10:</p>
