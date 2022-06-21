@@ -74,8 +74,8 @@ tr.opt {
 <table border=1>
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
 <tr><td>r0-r7</td><td>Регистр общего назначения</td></tr>
-<tr><td>r7:r6</td><td>Регистр Y адреса ОЗУ</td></tr>
 <tr><td>r5:r4</td><td>Регистр X адреса ОЗУ</td></tr>
+<tr><td>r7:r6</td><td>Регистр Y адреса ОЗУ</td></tr>
 <tr><td>CONST</td><td>Регистр константы</td></tr>
 </table>
 
@@ -87,20 +87,20 @@ tr.opt {
 <tr><td bgcolor="#D5F5E3">r2</td><td>010</td><td bgcolor="#D5F5E3">r2</td><td>010</td><td></td></tr>
 <tr><td bgcolor="#D5F5E3">r3</td><td>011</td><td bgcolor="#D5F5E3">r3</td><td>011</td><td></td></tr>
 <tr><td bgcolor="#D5F5E3">r4</td><td>100</td><td bgcolor="#D5F5E3">r4</td><td>100</td><td></td></tr>
-<tr><td bgcolor="#D5F5E3">r5</td><td>101</td><td>PORT0</td><td>101</td><td>Выходной порт 0! Позволяет не запоминать состояние порта и использовать данные порта сразу как операнд.</td></tr>
-<tr><td bgcolor="#D5F5E3">r6</td><td>110</td><td>PIN0</td><td>110</td><td>Входной порт 0</td></tr>
+<tr><td bgcolor="#D5F5E3">r5</td><td>101</td><td bgcolor="#D5F5E3">r5</td><td>101</td><td></td></tr>
+<tr><td bgcolor="#D5F5E3">r6</td><td>110</td><td>PORT0</td><td>110</td><td>Выходной порт 0! Позволяет не запоминать состояние порта и использовать данные порта сразу как операнд.</td></tr>
 <tr><td bgcolor="#D5F5E3">r7</td><td>111</td><td>CONST</td><td>111</td><td>Константа, иногда лежит во втором слове команды</td></tr>
 </table>
 
 <p style="background-color:#D5F5E3">Можно переключить на другой банк!</p>
 
-<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры r5-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
+<p>Регистры DST доступны для записи, регистры SRC доступны для чтения. В старшие регистры r6-r7 можно писать, но, нельзя читать. Однако, они могут участвовать в арифметических операциях! И в CMP тоже! r6-r7 подключены к шине адреса ОЗУ.</p>
 
 <h3>Порты</h3>
 <table border=1 width=400>
 <tr><td>Имя</td><td class="big">Назначение</td></tr>
 <tr><td>PORT0-7</td><td>Порт вывода 0-7, доступен через команду OUT, частично доступен через арифметические команды</td></tr>
-<tr><td>PIN0-7</td><td>Порт ввода 0-7, доступен через команду IN, частично доступен через арифметические команды</td></tr>
+<tr><td>PIN0-7</td><td>Порт ввода 0-7, доступен через команду IN</td></tr>
 </table>
 
 <h3>Список команд</h3>
@@ -216,7 +216,7 @@ DST := OP DST<br>
 <tr><td>A</td><td>Шина A - это выход мультиплексора по регистрам DST.</td></tr>
 <tr><td>B</td><td>Шина B - это выход мультиплексора по регистрам SRC, вход для унарных команд</td></tr>
 <tr><td>OUT</td><td>Шина OUT - это, фактически, выход АЛУ, то есть выход унарных и бинарных команд, <b>вход/выход для RAM</b>.
-Можно было бы подлкючить вход RAM к DST, но тогда невозможно реализовать PUSHF.
+Можно было бы подключить вход RAM к DST, но тогда невозможно реализовать PUSHF.
 <br>Попробовать совместить IN + STORE, всё равно к шине OUT подключается всё подряд.</td></tr>
 </table>
 
@@ -395,7 +395,7 @@ DST := OP DST<br>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td></tr>
-<tr><td colspan=3>111</td><td colspan=3>IN</td><td colspan=3>r0-r7</td><td colspan=3>[r0-r4, PORT0, PIN0, CONST]</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>IN</td><td colspan=3>r0-r7</td><td colspan=3>[r0-r5, PORT0, CONST]</td></tr>
 <tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение, только для B(SRC) = 7</td></tr>
 </table>
 <p>Адрес порта (0-255), берётся из регистра SRC, и из него производится чтение</p>
@@ -404,7 +404,7 @@ DST := OP DST<br>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>ADDR</td><td colspan=3>B(SRC)</td></tr>
-<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>r0-r4, PIN0, PORT0, CONST</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>3 бита</td><td colspan=3>r0-r5, PORT0, CONST</td></tr>
 <tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение, только для B(SRC) = 7</td></tr>
 </table>
 <p>Адрес порта (0-7), в который надо произвести запись (PORT0-7)</p>
@@ -413,7 +413,7 @@ DST := OP DST<br>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
 <tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=3>B(SRC)</td></tr>
-<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>[r0-r7]</td><td colspan=3>r0-r4, PIN0, PORT0, CONST</td></tr>
+<tr><td colspan=3>111</td><td colspan=3>OUT</td><td colspan=3>[r0-r7]</td><td colspan=3>r0-r5, PORT0, CONST</td></tr>
 <tr class="opt"><td colspan=4>0000</td><td colspan=8>CONST[7:0] - значение, только для B(SRC) = 7</td></tr>
 </table>
 <p>Адрес порта (0-255), в который надо произвести запись, берётся из регистра DST.</p>
@@ -596,8 +596,8 @@ DST := OP DST<br>
 <tr><td>2</td><td>ADD</td><td>LSL/C</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
 <tr><td>3</td><td>AND</td><td>LSR/C</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
 <tr><td>4</td><td>OR</td><td>INV</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
-<tr><td>5</td><td>XOR</td><td>MIR</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>-</td><td>r5</td><td>PORT0</td></tr>
-<tr><td>6</td><td>MOV</td><td>SWAP</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PIN0</td></tr>
+<tr><td>5</td><td>XOR</td><td>MIR</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>-</td><td>r5</td><td>r5</td></tr>
+<tr><td>6</td><td>MOV</td><td>SWAP</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
 <tr><td>7</td><td>-</td><td>INC/C</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
@@ -628,13 +628,11 @@ ADD r0, r1    ; r0 += r1
 AND r3, CONST ; r3 &= CONST
 MOV r7, r1    ; r7 := r1
 OR r7, CONST  ; r7 |= CONST
-MOV r2, PIN0  ; r2 := PIN0  == in
 
 OUT PORT1, r1 ; PORT1 := r1
 OUT PORT1, CONST ; PORT1 := CONST
 
 MOV r3, CONST ; r3:= CONST
-AND r3, PIN0  ; r3 = r3 & PIN0
 
 MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
 
