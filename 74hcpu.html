@@ -117,7 +117,7 @@ tr.opt {
 <tr><td>OR</td><td>100</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
 <tr><td>XOR</td><td>101</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
 <tr><td>MOV</td><td>110</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td>-</td><td>111</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>LDIW</td><td>111</td><td>LDIW r1:r0, 16384</td><td>Загружает 16 бит значение в пару соседних регистров</td><td>2</td></tr>
 <tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
 DST := OP DST<br>
 Регистр SRC не используется, команда подключается к шине DST.</td></tr>
@@ -316,6 +316,15 @@ DST := OP DST<br>
 <tr><td colspan=3>CTYPE == 0</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td colspan=2>-</td><td>Expand</td></tr>
 </table>
 <p>Свободные биты можно как-то использовать для расширения команды. Например, вынести туда флаг "использовать CF".</p>
+
+<h3>LDIW</h3>
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=2>A(DST)</td><td colspan=4>CONST[15:12]</td></tr>
+<tr><td colspan=3>0</td><td colspan=3>LDIW</td><td colspan=2>r1:r0, r3:r2, r5:r4, r7:r6</td><td colspan=4>const higher bits</td></tr>
+<tr><td colspan=12>CONST[11:0]</td></tr>
+</table>
+<p>Младший бит A(DST) придётся принудительно взводить в 0, т.к. места под него в команде не хватило.</p>
 
 <h3>Переходы</h3>
 <table border=1>
@@ -598,7 +607,7 @@ DST := OP DST<br>
 <tr><td>4</td><td>OR</td><td>INV</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
 <tr><td>5</td><td>XOR</td><td>MIR</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>-</td><td>r5</td><td>r5</td></tr>
 <tr><td>6</td><td>MOV</td><td>SWAP</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
-<tr><td>7</td><td>-</td><td>INC/C</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
+<tr><td>7</td><td>LDIW</td><td>INC/C</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
 <p>Переведём в машинный код команду ADD r0, 10:</p>
