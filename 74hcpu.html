@@ -632,54 +632,67 @@ DST := OP DST<br>
 
 <h3>Примеры команд</h3>
 <pre>
-MOV r0, r1    ; r0 := r1
-ADD r0, r1    ; r0 += r1
-AND r3, CONST ; r3 &= CONST
-MOV r7, r1    ; r7 := r1
-OR r7, CONST  ; r7 |= CONST
+MOV r0, r1        ; r0 := r1
+ADD r0, r1        ; r0 += r1
+AND r3, CONST     ; r3 &= CONST
+MOV r7, r1        ; r7 := r1
+OR  r7, CONST     ; r7 |= CONST
 
-OUT PORT1, r1 ; PORT1 := r1
-OUT PORT1, CONST ; PORT1 := CONST
+OUT PORT1, r1     ; PORT1 := r1
+OUT PORT1, CONST  ; PORT1 := CONST
+OUT PORT2, r2     ; PORT2 := r2
+OUT PORT3, PORT0  ; PORT3 := PORT0
+XOUT PORT3, r2    ; PORT3 := r0 XOR r2
+XOUT PORT3, PORT0 ; PORT3 := r0 XOR PORT0 - взять PORT0, проинвертировать часть битов, вывести в PORT3
+XOUT PORT0, PORT0 ; PORT0 := r0 XOR PORT0 - фактически, это инвертирование битов порта, по маске в r0
+XOUT PORT0, r2    ; PORT0 := r0 XOR r2
 
-MOV r3, CONST ; r3:= CONST
+MOV r3, CONST     ; r3:= CONST
 
-MOV r3, r7    ; ошибка! r7 нельзя просто прочитать
+MOV r3, r7        ; ошибка! r7 нельзя просто прочитать
 
-ADD r6, 1     ; инкремент пары регистров
+ADD r6, 1         ; инкремент пары регистров
 ADDC r7, 0
 
-INC r4         ; инкремент пары регистров
-INCC r5        ; (можно использовать любой регистр)
+INC r4            ; инкремент пары регистров
+INCC r5           ; (можно использовать любой регистр)
 
-CMP  r4, 0xFFFF ; сравнение указателя с константой
-CMPC r5, 0xFFFF
+CMP  r4, 0xFF     ; сравнение указателя с константой
+CMPC r5, 0xFF
 
-CMP  r4, r0     ; сравнение указателей
-CMPC r5, r1     ; справа может быть только r0-r4
+CMP  r4, r0       ; сравнение указателей
+CMPC r5, r1       ; справа может быть только r0-r4
 
-NEG r0        ; r0 := ~r0
-NEG r0, r1    ; r0 := ~r1
-NEG r0, PIN1  ; r0 := ~PIN1
+INV r0            ; r0 := ~r0
 
-RCALL 100     ; вызвать функцию со смещением 100 от текущего адреса
-CALL F1       ; вызвать функцию с адресом F1
-RJMP 100      ; прыгнуть на 100 команд вперёд
+MOV  r2, 5        ; r3:r2 := 5
+CLR  r3
+INV  r2           ; NEG r3:r2
+INV  r3
+ADD  r2, 1
+ADDC r3, 0        ; r3:r2 == -5
+
+RCALL 100         ; вызвать функцию со смещением 100 от текущего адреса
+CALL F1           ; вызвать функцию с адресом F1
+RJMP 100          ; прыгнуть на 100 команд вперёд
 
 M1:
 NOP
-JMP M1
+RJMP M1
 
 F1:
 ADD r0, r1
 RET
 
-LOAD r0  ; r0 := RAM[r6:r7]
-STORE r1 ; RAM[r6:r7] := r1
+LOADY r0  ; r0 := RAM[r6:r7]
+STOREY r1 ; RAM[r6:r7] := r1
+
+RLOAD r0, [X+1] ; r0 := [r5:r4 + 1]
 
 MOV r3, 10
 L1:
 ; do something
-ADD r3, 255
+ADD r3, 0xFF
 JZ L1
 </pre>
 
