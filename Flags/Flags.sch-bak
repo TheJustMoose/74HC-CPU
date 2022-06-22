@@ -1020,40 +1020,29 @@ F 3 "" H 10250 5500 50  0001 C CNN
 	1    10250 5500
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:Conn_01x12_Male J2
-U 1 1 62C30518
-P 1000 2750
-F 0 "J2" H 1075 3350 50  0000 C CNN
-F 1 "Conn_01x12_Male" H 875 2050 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical" H 1000 2750 50  0001 C CNN
-F 3 "~" H 1000 2750 50  0001 C CNN
-	1    1000 2750
-	1    0    0    -1  
-$EndComp
 Text Label 1200 2250 0    50   ~ 0
 CF_IN
-Text Label 1200 2350 0    50   ~ 0
+Text Label 1200 3400 0    50   ~ 0
 CF_EN
-Text Label 1200 2450 0    50   ~ 0
+Text Label 1200 2350 0    50   ~ 0
 SF_IN
-Text Label 1200 2550 0    50   ~ 0
+Text Label 1200 3500 0    50   ~ 0
 SF_EN
-Text Label 1200 2650 0    50   ~ 0
+Text Label 1200 2450 0    50   ~ 0
 ZF_IN
-Text Label 1200 2750 0    50   ~ 0
+Text Label 1200 3600 0    50   ~ 0
 ZF_EN
-Text Label 1200 2850 0    50   ~ 0
+Text Label 1200 2550 0    50   ~ 0
 BF_IN
-Text Label 1200 2950 0    50   ~ 0
+Text Label 1200 3700 0    50   ~ 0
 BF_EN
-Text Label 1200 3350 0    50   ~ 0
+Text Label 1200 3800 0    50   ~ 0
 CMP_EN
-Text Label 1200 3050 0    50   ~ 0
+Text Label 1200 2650 0    50   ~ 0
 LT_IN
-Text Label 1200 3150 0    50   ~ 0
+Text Label 1200 2750 0    50   ~ 0
 ~EQ_IN
-Text Label 1200 3250 0    50   ~ 0
+Text Label 1200 2850 0    50   ~ 0
 GT_IN
 $Comp
 L Connector:Conn_01x09_Male J1
@@ -1218,6 +1207,28 @@ F 1 "GND" H 10755 5677 50  0000 C CNN
 F 2 "" H 10750 5850 50  0001 C CNN
 F 3 "" H 10750 5850 50  0001 C CNN
 	1    10750 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x05_Male J?
+U 1 1 62B6C12E
+P 1000 3600
+F 0 "J?" H 1108 3981 50  0000 C CNN
+F 1 "Conn_01x05_Male" H 1075 3325 50  0000 C CNN
+F 2 "" H 1000 3600 50  0001 C CNN
+F 3 "~" H 1000 3600 50  0001 C CNN
+	1    1000 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x07_Male J?
+U 1 1 62B72967
+P 1000 2550
+F 0 "J?" H 1108 3031 50  0000 C CNN
+F 1 "Conn_01x07_Male" H 1050 2175 50  0000 C CNN
+F 2 "" H 1000 2550 50  0001 C CNN
+F 3 "~" H 1000 2550 50  0001 C CNN
+	1    1000 2550
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
