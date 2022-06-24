@@ -5,7 +5,10 @@ class Token:
     self.tag = t
 
   def toString(self):
-    return str(self.tag)
+    try:
+      return str(self.tag) + ' ' + self.tag.name
+    finally:
+      return str(self.tag)
 
 class Num(Token):
   def __init__(self, v):
@@ -13,7 +16,7 @@ class Num(Token):
     self.value = v
 
   def toString(self):
-    return str(self.value)
+    return str(self.value) + ' ' + self.tag.name
 
 class Word(Token):
   def __init__(self, s, tag):
@@ -21,7 +24,7 @@ class Word(Token):
     self.lexeme = s
 
   def toString(self):
-    return self.lexeme
+    return self.lexeme + ' ' + self.tag.name
 
   @staticmethod
   def Init():
@@ -42,5 +45,5 @@ class Real(Token):
     self.value = v
 
   def toString(self):
-    return str(self.value)
+    return str(self.value) + ' ' + self.tag.name
 

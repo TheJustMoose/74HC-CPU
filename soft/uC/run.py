@@ -2,7 +2,7 @@ from lexer import *
 from token import *
 from tag import *
 
-t = Token(1)
+t = Token(Tag.EQ)
 print(t.toString())
 
 n = Num(123)
@@ -20,7 +20,7 @@ r = Real(1.33)
 print(r.toString())
 
 l = Lexer()
-l.log()
+#l.log()
 while True:
   t = l.scan()
   if t == None:

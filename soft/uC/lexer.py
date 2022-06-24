@@ -47,5 +47,38 @@ class Lexer:
         break
 
     if self.peek == '&':
-      if self.readch('&'):
-        return Word.AND
+      return Word.AND if self.readch('&') else Token('&')
+
+    if self.peek == '|':
+      return Word.OR if self.readch('|') else Token('|')
+
+    if self.peek == '=':
+      return Word.EQ if self.readch('=') else Token('=')
+
+    if self.peek == '!':
+      return Word.NE if self.readch('=') else Token('!')
+
+    if self.peek == '<':
+      return Word.LE if self.readch('=') else Token('<')
+
+    if self.peek == '>':
+      return Word.GE if self.readch('=') else Token('>')
+
+    if self.peek.isdigit():
+      v = 0;
+      while True:
+        v = 10*v + int(self.peek)
+        self.readche()
+        if not self.peek.isdigit():
+          break
+      if self.peek != '.':
+        return Num(v)
+      x = v*1.0
+      d = 10.0
+      while True:
+        self.readche()
+        if not self.peek.isdigit():
+          break
+        x += int(self.peek) / d
+        d *= 10.0
+      return Real(x)
