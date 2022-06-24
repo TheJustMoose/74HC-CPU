@@ -21,3 +21,4 @@ class Tag(enum.Enum):
   TEMP = 273
   TRUE = 274
   WHILE = 275
+  XOR = 276
