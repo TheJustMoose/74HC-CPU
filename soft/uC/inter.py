@@ -4,14 +4,14 @@ class Node:
   labels = 0
 
   def __init__(self):
-    lexline = Lexer.line
+    self.lexline = Lexer.line
 
   def error(self, s):
     raise Exception('near line {}: {}'.format(self.lexline, s))
 
   def newlabel(self):
-    labels += 1
-    return labels
+    self.labels += 1
+    return self.labels
 
   def emitlabel(self, i):
     print("L" + i + ":")
@@ -31,12 +31,73 @@ class Expr(Node):
     return self
 
   def jumping(t, f):
-    emitjumps(toString(), t, f)
+    emitjumps(self.toString(), t, f)
 
   def emitjumps(self, test, t, f):
     if t != 0 and f != 0:
       emit("if " + test + " goto L" + t)
       emit("goto L" + f)
     elif t != 0:
-      emit
+      emit("if " + test + " goto L" + t)
+    elif f != 0:
+      emit("iffalse " + test + " goto L" + f)
+    #else:
+    # nothing since both t and f fall through
 
+  def toString():
+    return self.op.toString()
+
+class Id(Expr):
+  def __init__(self, id, p, b):
+    super().__init__(id, p)
+    self.offset = b
+
+class Op(Expr):
+  def __init__(tok, p):
+    super().__init__(tok, p)
+
+  def reduce():
+    x = gen()
+    t = Temp(self.Type)
+    emit(t.toString() + " = " + x.toString())
+    return t
+
+class Arith(Op):
+  def __init__(self, tok, x1, x2):
+    super().__init__(tok, None)
+    self.expr1 = x1
+    self.expr2 = x2
+    self.Type = Type.max(self.expr1.Type, self.expr2.Type)
+    if self.Type == None:
+      self.error("type error")
+
+  def gen():
+    return Arith(self.op, self.expr1.reduce(), self.expr2.reduce())
+
+  def toString():
+    return self.expr1.toString() + " " + self.op.toString() + " " + self.expr2.toString()
+
+class Temp(Expr):
+  count = 0  # static
+  number = 0
+  def __init__(self, p):
+    super().__init__(Word.Temp, p)
+    Temp.count += 1  # static
+    self.number = Temp.count
+
+  def toString():
+    return "t" + self.number
+
+class Unary(Op):
+  def __init__(self, tok, x):  # process unari minus
+    super().__init__(tok, None)
+    self.expr = x
+    self.Type = Type.max(Type.INT, self.expr.Type)
+    if self.Type == None:
+      self.error("Type error")
+
+  def gen():
+    return Unary(self.op, self.expr.reduce())
+
+  def toString():
+    return self.op.toString() + " " + self.expr.toString()

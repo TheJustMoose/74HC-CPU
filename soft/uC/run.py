@@ -28,11 +28,14 @@ print("none in list", l.word_in_words("none"))
 #print
 l.log()
 
+print("CHAR is numeric? ", Type.Numeric(Type.CHAR))
+print("INT is numeric? ", Type.Numeric(Type.INT))
+
 while True:
   t = l.scan()
   if t == None:
     break;
-  #print("numeric? ", Type.Numeric(t))
+  print("numeric? ", Type.Numeric(t))
   print(t.toString())
 
 l.log()

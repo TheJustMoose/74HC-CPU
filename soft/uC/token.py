@@ -63,8 +63,7 @@ class Type(Word):
 
   @staticmethod
   def Numeric(p):
-    print("IMPLEMENT ME!!")
-    if p == Type.CHAR:
+    if p == Type.CHAR or p == Type.INT or p == Type.FLOAT:
       return True
     return False
 
