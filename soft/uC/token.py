@@ -47,3 +47,38 @@ class Real(Token):
   def toString(self):
     return str(self.value) + ' ' + self.tag.name
 
+class Type(Word):
+  width = 0
+
+  def __init__(self, s, tag, w):
+    super().__init__(s, tag)
+    self.width = w
+
+  @staticmethod
+  def Init():
+    Type.INT = Type("int", Tag.BASIC, 4)
+    Type.FLOAT = Type("float", Tag.BASIC, 8)
+    Type.CHAR = Type("char", Tag.BASIC, 1)
+    Type.BOOL = Type("bool", Tag.BASIC, 1)
+
+  @staticmethod
+  def Numeric(p):
+    print("IMPLEMENT ME!!")
+    if p == Type.CHAR:
+      return True
+    return False
+
+  @staticmethod
+  def max(p1, p2):
+    print("IMPLEMENT ME!!")
+    return p1
+
+class Array(Type):
+  def __init__(sz, p):
+    super().__init__("[]", Tag.Index, sz*p.width)
+    self.size = sz
+    self.of = p
+
+  def toString():
+    return "[" + str(size) + "]" + of.toString()
+

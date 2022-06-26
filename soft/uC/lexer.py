@@ -10,6 +10,12 @@ class Lexer:
   def reserve(self, w):
     self.words.append(w)
 
+  def word_in_words(self, s):
+    r = list(filter(lambda w: w.lexeme == s, self.words))
+    if len(r) == 0:
+      return None
+    return r[0]
+
   def __init__(self):
     self.reserve(Word("if", Tag.IF))
     self.reserve(Word("else", Tag.ELSE))
@@ -18,14 +24,14 @@ class Lexer:
     self.reserve(Word("break", Tag.BREAK))
     self.reserve(Word.TRUE)
     self.reserve(Word.FALSE)
-    #self.reserve(Type.INT)
-    #self.reserve(Type.CHAR)
-    #self.reserve(Type.BOOL)
-    #self.reserve(Type.FLOAT)
+    self.reserve(Type.INT)
+    self.reserve(Type.CHAR)
+    self.reserve(Type.BOOL)
+    self.reserve(Type.FLOAT)
 
   def log(self):
     for w in self.words:
-      print("word:", w.toString())
+      print("word:", w.toString(), type(w))
 
   def readche(self):
     self.peek = sys.stdin.read(1)
@@ -82,3 +88,23 @@ class Lexer:
         x += int(self.peek) / d
         d *= 10.0
       return Real(x)
+
+    if self.peek.isalpha():
+      w = ""
+      while True:
+        w += self.peek
+        self.readche()
+        if not self.peek.isalnum():
+          break
+
+      exist = self.word_in_words(w)
+      if exist:
+        return exist
+
+      w = Word(w, Tag.ID)
+      self.words.append(w)
+      return w
+
+    tok = Token(self.peek);
+    self.peek = ' '
+    return tok
