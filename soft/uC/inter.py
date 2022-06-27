@@ -101,3 +101,50 @@ class Unary(Op):
 
   def toString():
     return self.op.toString() + " " + self.expr.toString()
+
+class Constant(Expr):
+  def __init__(self, tok, p):
+    super().__init__(tok, p)
+  # alternate constructor here
+
+  @staticmethod
+  def Init():
+    Constant.TRUE = Constant(Word.TRUE, Type.BOOL)
+    Constant.FALSE = Constant(Word.FALSE, Type.BOOL)
+
+  def jumping(t, f):
+    if self == Constant.TRUE and t != 0:
+      emit("goto L" + t)
+    elif self == Constant.FALSE and f != 0:
+      emit("goto L" + f)
+
+class Logical(Expr):
+  def __init__(self, tok, x1, x2):
+    super().__init_(tok, None)
+    self.expr1 = x1
+    self.expr2 = x2
+    self.Type = check(expr1.Type, expr2.Type)
+    if self.Type == None:
+      error("Type error")
+
+  def check(p1, p2):
+    if p1 == Type.BOOL and p2 == Type.BOOL:
+      return Type.BOOL
+    else
+      return None
+
+  def gen():
+    f = newlabel()
+    a = newlabel()
+    temp = Temp(self.Type)
+    self.jumping(0, f)
+    emit(temp.toString() + " = true")
+    emit("goto L" + a)
+    emitlabel(f)
+    emit(temp.toString() + " = false")
+    emitlabel(a)
+    return temp
+
+  def toString():
+    return expr1.toString() + " " + op.toString() + " " + expr2.toString()
+

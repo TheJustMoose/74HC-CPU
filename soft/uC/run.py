@@ -13,6 +13,7 @@ print(w.toString())
 
 Word.Init()
 Type.Init()
+Constant.Init()
 
 print(Word.AND.toString())
 print(Word.OR.toString())
