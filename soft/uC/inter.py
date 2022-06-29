@@ -148,3 +148,69 @@ class Logical(Expr):
   def toString():
     return expr1.toString() + " " + op.toString() + " " + expr2.toString()
 
+class Or(Logical):
+  def __init__(self, tok, x1, x2):
+    super().__init__(tok, x1, x2)
+
+  def jumping(self, t, f):
+    label = t if t != 0 else newlabel()
+    expr1.jumping(label, 0)
+    expr2.jumping(t, f)
+    if t == 0:
+      emitlabel(label)
+
+class And(Logical):
+  def __init__(self, tok, x1, x2):
+    super().__init__(tok, x1, x2)
+
+  def jumping(self, t, f):
+    label = f if f != 0 else newlabel()
+    expr1.jumping(0, label)
+    expr2.jumping(t, f)
+    if f == 0:
+      emitlabel(label)
+
+class Not(Logical):
+  def __init__(self, tok, x1, x2):
+    super().__init__(tok, x1, x2)
+
+  def jumping(self, t, f):
+    expr2.jumping(t, f)
+
+  def toString(self):
+    return op.toString() + " " + expr2.toString()
+
+class Rel(Logical):
+  def __init__(self, tok, x1, x2):
+    super().__init__(tok, x1, x2)
+
+  def check(p1, p2):
+    if isinstance(p1, Array) or isinstance(p2, Array):
+      return None
+    elif if p1 == p2:
+      return Type.BOOL
+    else
+      return None
+
+  def jumping(t, f):
+    a = expr1.reduce()
+    b = expr2.reduce()
+    test = a.toString() + " " + op.toString() + " " + b.toString()
+    emitjumps(test, t, f)
+
+class Access(Op):
+  def __init__(self, a, i, p):
+    # p - type of the array item after align??
+    super().__init__(Word("[]", Tag.INDEX), p)
+    self.array = a
+    self.index = i
+
+  def gen():
+    return Access(array, index.reduce(), Type)
+
+  def jumping(t, f):
+    emitjumps(reduce(), toString(), t, f)
+
+  def toString():
+    return array.toString() + " [ " + index.toString() + " ]"
+
