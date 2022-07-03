@@ -199,6 +199,8 @@ DST := OP DST<br>
 <ul>
 <li>ADD -> A + B + 0</li>
 <li>ADDC -> A + B + CF</li>
+<li>SUB -> A + INV(B) + CF|1</li>
+<li>SUBC -> A + INV(B) + 0</li>
 <li>INC -> A + 0 + CF|1</li>
 <li>INCC -> A + 0 + CF</li>
 <li>DEC -> A + 0xFF</li>
