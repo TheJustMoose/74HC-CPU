@@ -111,32 +111,32 @@ tr.opt {
 </tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
 <tr><td>MUL</td><td>000</td><td>MUL r0, r1</td><td>Умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
-<tr><td>ADDC</td><td>001</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
-<tr><td>ADD</td><td>010</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
-<tr><td>AND</td><td>011</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
-<tr><td>OR</td><td>100</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
-<tr><td>XOR</td><td>101</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>MOV</td><td>110</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td>LDIW</td><td>111</td><td>LDIW r1:r0, 16384</td><td>Загружает 16 бит значение в пару соседних регистров</td><td>2</td></tr>
+<tr><td>LDIW</td><td>001</td><td>LDIW r1:r0, 16384</td><td>Загружает 16 бит значение в пару соседних регистров</td><td>2</td></tr>
+<tr><td>ADDC</td><td>010</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
+<tr><td>ADD</td><td>011</td><td>ADD r0, r1</td><td>Сложение</td><td>1/2</td></tr>
+<tr><td>AND</td><td>100</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
+<tr><td>OR</td><td>101</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
+<tr><td>XOR</td><td>110</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
+<tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
 DST := OP DST<br>
 Регистр SRC не используется, команда подключается к шине DST.</td></tr>
 <tr><td>CLR</td><td>000</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
 <tr><td>SET</td><td>000</td><td>SET r1</td><td>Установка всех битов</td><td>1</td></tr>
-<tr><td>-</td><td>001</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>-</td><td>001</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>LSL</td><td>010</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
-<tr><td>LSLC</td><td>010</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
-<tr><td>LSR</td><td>011</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
-<tr><td>LSRC</td><td>011</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
-<tr><td>INV</td><td>100</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
+<tr><td>LSL</td><td>001</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
+<tr><td>LSLC</td><td>001</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
+<tr><td>LSR</td><td>010</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
+<tr><td>LSRC</td><td>010</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
+<tr><td>INV</td><td>011</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
+<tr><td>-</td><td>011</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>MIR</td><td>100</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
 <tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>MIR</td><td>101</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
+<tr><td>SWAP</td><td>101</td><td>SWAP r5</td><td>Переставляет местами нибблы</td><td>1</td></tr>
 <tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>SWAP</td><td>110</td><td>SWAP r5</td><td>Переставляет местами нибблы</td><td>1</td></tr>
-<tr><td>-</td><td>110</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>INC</td><td>111</td><td>INC r6</td><td>Может инкрементить любой регистр. (Можно сделать из команды ADD, просто занулив один из операндов и зафорсить CF)</td><td>1</td></tr>
-<tr><td>INCC</td><td>111</td><td>INCC r7</td><td>Тоже инкремент, но вторым аргументом берёт CF, а не единицу. В результате можно инкрементировать пару регистров (старший и младший).</td><td>1</td></tr>
+<tr><td>INC</td><td>110</td><td>INC r0</td><td>Инкремент. (Можно сделать из команды ADDC, просто занулив один из операндов и зафорсить CF).</td><td>1</td></tr>
+<tr><td>DEC</td><td>110</td><td>DEC r0</td><td>Декремент. То же самое, но складываем с 0xFF</td><td>1</td></tr>
+<tr><td>INCC</td><td>111</td><td>INCC r6</td><td>Инкремент с переносом.</td><td>1</td></tr>
+<tr><td>DECC</td><td>111</td><td>DECC r7</td><td>Декремент с переносом.</td><td>1</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
 <tr><td>[R]JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
 <tr><td>[R]JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
@@ -201,10 +201,10 @@ DST := OP DST<br>
 <li>ADDC -> A + B + CF</li>
 <li>SUB -> A + INV(B) + CF|1</li>
 <li>SUBC -> A + INV(B) + CF</li>
-<li>INC -> A + 0 + CF|1</li>
-<li>INCC -> A + 0 + CF</li>
-<li>DEC -> A + 0xFF</li>
-<li>DECC -> A + 0xFF + CF</li>
+<li>INC -> A + 0 + CF|1 -> ADDC A, 0 (CF=1)</li>
+<li>INCC -> A + 0 + CF -> ADDC A, 0</li>
+<li>DEC -> A + 0xFF -> ADD A, 0xFF</li>
+<li>DECC -> A + 0xFF + CF -> ADDC A, 0xFF</li>
 </ul>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
