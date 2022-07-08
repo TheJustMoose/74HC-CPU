@@ -603,14 +603,14 @@ DST := OP DST<br>
 <h3>Ассемблер врукопашную</h3>
 <table border=1>
 <tr><td>COP/CTYPE</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>DST</td><td>SRC</td></tr>
-<tr><td>0</td><td>MUL</td><td>CLR/SET</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
-<tr><td>1</td><td>ADDC</td><td>-</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>OUT</td><td>r1</td><td>r1</td></tr>
-<tr><td>2</td><td>ADD</td><td>LSL/C</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>XOUT</td><td>r2</td><td>r2</td></tr>
-<tr><td>3</td><td>AND</td><td>LSR/C</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>INI</td><td>r3</td><td>r3</td></tr>
-<tr><td>4</td><td>OR</td><td>INV</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>OUTI</td><td>r4</td><td>r4</td></tr>
-<tr><td>5</td><td>XOR</td><td>MIR</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>-</td><td>r5</td><td>r5</td></tr>
-<tr><td>6</td><td>MOV</td><td>SWAP</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
-<tr><td>7</td><td>LDIW</td><td>INC/C</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
+<tr><td>0</td><td>ADD</td><td>CLR/SET</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
+<tr><td>1</td><td>ADDC</td><td>LSL/C</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>IIN</td><td>r1</td><td>r1</td></tr>
+<tr><td>2</td><td>SUB</td><td>LSR/C</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>OUT</td><td>r2</td><td>r2</td></tr>
+<tr><td>3</td><td>SUBC</td><td>INV</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>XOUT</td><td>r3</td><td>r3</td></tr>
+<tr><td>4</td><td>AND</td><td>INC/DEC</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>INI</td><td>r4</td><td>r4</td></tr>
+<tr><td>5</td><td>OR</td><td>INCC/DECC</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>OUTI</td><td>r5</td><td>r5</td></tr>
+<tr><td>6</td><td>XOR</td><td>-</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
+<tr><td>7</td><td>MOV</td><td>-</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
 <p>Переведём в машинный код команду ADD r0, 10:</p>
