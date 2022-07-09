@@ -132,12 +132,9 @@ DST := OP DST<br>
 <tr><td>INV</td><td>011</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
 <tr><td>-</td><td>011</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>INC</td><td>100</td><td>INC r0</td><td>Инкремент. (Можно сделать из команды ADDC, просто занулив один из операндов и зафорсить CF).</td><td>1</td></tr>
-<tr><td>DEC</td><td>100</td><td>DEC r0</td><td>Декремент. То же самое, но складываем с 0xFF</td><td>1</td></tr>
-<tr><td>INCC</td><td>101</td><td>INCC r6</td><td>Инкремент с переносом.</td><td>1</td></tr>
-<tr><td>DECC</td><td>101</td><td>DECC r7</td><td>Декремент с переносом.</td><td>1</td></tr>
-
-<tr><td><s>MIR</s></td><td>110</td><td>MIR r1</td><td>Зеркальный поворот, СЗР меняется с МЗР</td><td>1</td></tr>
-<tr><td><s>SWAP</s></td><td>111</td><td>SWAP r5</td><td>Переставляет местами нибблы</td><td>1</td></tr>
+<tr><td>INCC</td><td>101</td><td>INCC r6</td><td>Инкремент с переносом</td><td>1</td></tr>
+<tr><td>DEC</td><td>110</td><td>DEC r0</td><td>Декремент. Складываем операнд с 0xFF</td><td>1</td></tr>
+<tr><td>DECC</td><td>111</td><td>DECC r7</td><td>Декремент с переносом</td><td>1</td></tr>
 <tr><td colspan=5><h4>Перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
 <tr><td>[R]JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
 <tr><td>[R]JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
@@ -224,7 +221,7 @@ DST := OP DST<br>
 </table>
 
 <h3>Структура</h3>
-<img src="CPU.png" width="730" />
+<img src="CPU.png" />
 
 <h3>Структура памяти программ</h3>
 <p>Так как ROM на 12 бит ширины не существует, нужна альтернатива. Ближайшее кратное к 12 - это 24. И оно хорошо ложится на 3 байта.
