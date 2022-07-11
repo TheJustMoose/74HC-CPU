@@ -72,7 +72,7 @@
       (place J7 176530 -97790 front 90 (PN Screw_Terminal_01x02))
     )
     (component Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical
-      (place J14 60325 -153670 front 90 (PN Conn_01x03_Male))
+      (place J14 72390 -151765 front 90 (PN Conn_01x03_Male))
     )
     (component Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder
       (place R4 83820 -141605 back 0 (PN 10k))
@@ -87,37 +87,37 @@
       (place U6 86995 -23495 front 0 (PN CMD))
     )
     (component Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical
-      (place J4 107950 -106045 front 0 (PN Conn_01x01_Male))
+      (place J4 57785 -89535 front 0 (PN Conn_01x01_Male))
       (place J9 158750 -149860 front 90 (PN Conn_01x01_Male))
       (place J10 158750 -156210 front 90 (PN Conn_01x01_Male))
       (place J12 160020 -129540 front 90 (PN Conn_01x01_Male))
       (place J16 158750 -153035 front 0 (PN Conn_01x01_Male))
-      (place J17 53340 -134620 front 270 (PN Conn_01x01_Male))
-      (place J19 52070 -152400 front 270 (PN Conn_01x01_Male))
-      (place J21 132080 -167640 front 90 (PN Conn_01x01_Male))
-      (place J23 104775 -167005 front 180 (PN Conn_01x01_Male))
-      (place J26 66040 -165735 front 0 (PN Conn_01x01_Male))
+      (place J17 38100 -132080 front 270 (PN Conn_01x01_Male))
+      (place J19 52705 -152400 front 270 (PN Conn_01x01_Male))
+      (place J21 135255 -167640 front 90 (PN Conn_01x01_Male))
+      (place J23 104775 -166370 front 180 (PN Conn_01x01_Male))
+      (place J26 66040 -166370 front 0 (PN Conn_01x01_Male))
       (place J27 158750 -107315 front 0 (PN Conn_01x01_Male))
-      (place J30 81280 -165735 front 0 (PN Conn_01x01_Male))
-      (place J32 107315 -167005 front 0 (PN Conn_01x01_Male))
-      (place J39 76200 -165735 front 0 (PN Conn_01x01_Male))
+      (place J30 81280 -166370 front 0 (PN Conn_01x01_Male))
+      (place J32 107315 -166370 front 0 (PN Conn_01x01_Male))
+      (place J39 76200 -166370 front 0 (PN Conn_01x01_Male))
       (place J35 156210 -134620 front 0 (PN Conn_01x01_Male))
       (place J41 121920 -167640 front 0 (PN Conn_01x01_Male))
     )
     (component Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical::1
-      (place J5 142240 -167640 front 0 (PN Conn_01x01_Male))
-      (place J6 144780 -167640 front 90 (PN Conn_01x01_Male))
+      (place J5 92710 -166370 front 0 (PN Conn_01x01_Male))
+      (place J6 97790 -166370 front 90 (PN Conn_01x01_Male))
       (place J13 163195 -129540 front 90 (PN Conn_01x01_Male))
-      (place J15 38100 -124460 front 270 (PN Conn_01x01_Male))
-      (place J18 38735 -157480 front 270 (PN Conn_01x01_Male))
-      (place J20 52070 -160020 front 270 (PN Conn_01x01_Male))
-      (place J22 102235 -167005 front 180 (PN Conn_01x01_Male))
+      (place J15 38100 -157480 front 270 (PN Conn_01x01_Male))
+      (place J18 53975 -134620 front 270 (PN Conn_01x01_Male))
+      (place J20 52705 -160020 front 270 (PN Conn_01x01_Male))
+      (place J22 102235 -166370 front 180 (PN Conn_01x01_Male))
       (place J24 129540 -152400 front 0 (PN Conn_01x01_Male))
-      (place J25 69850 -165735 front 0 (PN Conn_01x01_Male))
-      (place J28 73660 -165735 front 0 (PN Conn_01x01_Male))
+      (place J25 69850 -166370 front 0 (PN Conn_01x01_Male))
+      (place J28 73660 -166370 front 0 (PN Conn_01x01_Male))
       (place J29 172720 -123190 front 90 (PN Conn_01x01_Male))
-      (place J31 83820 -165735 front 0 (PN Conn_01x01_Male))
-      (place J33 109855 -167005 front 0 (PN Conn_01x01_Male))
+      (place J31 83820 -166370 front 0 (PN Conn_01x01_Male))
+      (place J33 109855 -166370 front 0 (PN Conn_01x01_Male))
       (place J36 163195 -139700 front 0 (PN Conn_01x01_Male))
       (place J38 163195 -144780 front 180 (PN Conn_01x01_Male))
       (place J34 163195 -142240 front 90 (PN Conn_01x01_Male))
@@ -1138,22 +1138,22 @@
       (pins U1-12 J1-8)
     )
     (net /BUS0
-      (pins U20-2 U8-2 J3-2)
+      (pins U28-5 U8-2 J3-2)
     )
     (net /BUS1
-      (pins U20-5 U8-3 J3-3)
+      (pins U28-2 U8-3 J3-3)
     )
     (net /BUS2
       (pins U8-4 J3-4)
     )
     (net /BUS3
-      (pins U20-11 U8-5 J3-5)
+      (pins U20-5 U8-5 J3-5)
     )
     (net /BUS4
-      (pins U28-2 U8-6 J3-6)
+      (pins U20-14 U8-6 J3-6)
     )
     (net /BUS5
-      (pins U28-5 U8-7 J3-7)
+      (pins U20-11 U8-7 J3-7)
     )
     (net /BUS6
       (pins U28-14 U8-8 J3-8)
@@ -1227,16 +1227,16 @@
       (pins J14-3 U21-3 U25-3)
     )
     (net /ADD_COUT
-      (pins U20-3 J15-1)
+      (pins J15-1 U28-6)
     )
     (net /ADD_CIN
       (pins J16-1 U17-8)
     )
     (net /ZF
-      (pins U20-10 J17-1)
+      (pins U20-6 J17-1)
     )
     (net /LT
-      (pins J18-1 U28-6)
+      (pins U20-10 J18-1)
     )
     (net /~EQ
       (pins J19-1 U28-13)
@@ -1281,7 +1281,7 @@
       (pins J32-1 U22-3)
     )
     (net /~BANK1_CMD
-      (pins J33-1 U22-4 U28-3)
+      (pins U20-13 J33-1 U22-4)
     )
     (net "Net-(R4-Pad1)"
       (pins R4-1 U21-6)
@@ -1290,28 +1290,28 @@
       (pins R7-1 U25-6)
     )
     (net /B7
-      (pins U7-8 U3-8 U4-8 U5-8 U6-8 U23-8 U19-11)
+      (pins U7-8 U3-8 U4-8 U5-8 U6-8 U23-8 U19-8)
     )
     (net /B6
-      (pins U7-7 U3-7 U4-7 U5-7 U6-7 U23-7 U19-8)
+      (pins U7-7 U3-7 U4-7 U5-7 U6-7 U23-7 U19-6)
     )
     (net /B5
-      (pins U7-6 U3-6 U4-6 U5-6 U6-6 U23-6 U19-6)
+      (pins U7-6 U3-6 U4-6 U5-6 U6-6 U23-6 U2-8)
     )
     (net /B4
-      (pins U7-5 U3-5 U4-5 U5-5 U6-5 U23-5 U19-3)
+      (pins U7-5 U3-5 U4-5 U5-5 U6-5 U23-5 U2-6)
     )
     (net /B3
-      (pins U7-4 U3-4 U4-4 U5-4 U6-4 U23-4 U2-11)
+      (pins U7-4 U3-4 U4-4 U5-4 U6-4 U23-4 U2-3)
     )
     (net /B2
-      (pins U7-3 U3-3 U4-3 U5-3 U6-3 U23-3 U2-8)
+      (pins U7-3 U3-3 U4-3 U5-3 U6-3 U23-3 U2-11)
     )
     (net /B1
-      (pins U7-2 U3-2 U4-2 U5-2 U6-2 U23-2 U2-6)
+      (pins U7-2 U3-2 U4-2 U5-2 U6-2 U23-2 U19-3)
     )
     (net /B0
-      (pins U7-1 U3-1 U4-1 U5-1 U6-1 U23-1 U2-3)
+      (pins U7-1 U3-1 U4-1 U5-1 U6-1 U23-1 U19-11)
     )
     (net /A7
       (pins U7-16 U3-16 U4-16 U5-16 U6-16 U23-16 U10-9 U11-8 U12-8 U13-8 U14-8)
@@ -1380,7 +1380,7 @@
       (pins U9-6 U16-14)
     )
     (net "Net-(U16-Pad3)"
-      (pins U20-9 U16-3)
+      (pins U20-7 U16-3)
     )
     (net "Net-(U16-Pad11)"
       (pins U22-6 U16-11)
@@ -1406,9 +1406,6 @@
     (net "Net-(J2-Pad2)"
       (pins U10-18 J2-2)
     )
-    (net "Net-(U20-Pad12)"
-      (pins U20-12)
-    )
     (net /~EQ_OUT
       (pins U24-3 J34-1 U16-18)
     )
@@ -1427,12 +1424,6 @@
     (net "Net-(R5-Pad1)"
       (pins U24-1 R5-1)
     )
-    (net "Net-(U20-Pad14)"
-      (pins U20-14)
-    )
-    (net "Net-(U20-Pad13)"
-      (pins U20-13)
-    )
     (net /~Bank0
       (pins J35-1 U16-21)
     )
@@ -1440,13 +1431,13 @@
       (pins U24-5 J40-1 U16-20)
     )
     (net "Net-(U17-Pad11)"
-      (pins U20-6 U17-11)
+      (pins U28-3 U17-11)
     )
     (net /~CF
       (pins U17-10 U16-24)
     )
     (net /~INC
-      (pins U25-11 U17-9 U18-9)
+      (pins U25-11 U17-9 U18-10)
     )
     (net /Arithm
       (pins U16-10 U26-9 U26-10 U26-11)
@@ -1461,13 +1452,13 @@
       (pins U18-5 U26-8)
     )
     (net "Net-(U16-Pad2)"
-      (pins U20-7 U16-2)
+      (pins U28-4 U16-2)
     )
     (net "Net-(U16-Pad1)"
-      (pins U20-4 U16-1)
+      (pins U28-7 U16-1)
     )
     (net "Net-(U16-Pad4)"
-      (pins U28-4 U16-4)
+      (pins U20-12 U16-4)
     )
     (net "Net-(U16-Pad9)"
       (pins U22-12 U16-9)
@@ -1488,7 +1479,7 @@
       (pins U28-12 U16-6)
     )
     (net "Net-(U16-Pad5)"
-      (pins U28-7 U16-5)
+      (pins U20-9 U16-5)
     )
     (net /SRC[0]
       (pins J37-1 U26-5)
@@ -1539,7 +1530,7 @@
       (pins U18-8 U27-9)
     )
     (net /~INCC
-      (pins U25-10 U18-10)
+      (pins U25-10 U18-9)
     )
     (net /~DECC
       (pins U25-7 U18-12 U29-5)
@@ -1551,34 +1542,43 @@
       (pins U2-13 U2-5 U2-10 U2-2 U19-2 U19-10 U19-5 U19-13 U29-6)
     )
     (net /B7'
-      (pins U1-9 U19-12)
+      (pins U1-9 U19-9)
     )
     (net /B6'
-      (pins U1-8 U19-9)
+      (pins U1-8 U19-4)
     )
     (net /B5'
-      (pins U1-7 U19-4)
+      (pins U1-7 U2-9)
     )
     (net /B4'
-      (pins U1-6 U19-1)
+      (pins U1-6 U2-4)
     )
     (net /B3'
-      (pins U1-5 U2-12)
+      (pins U1-5 U2-1)
     )
     (net /B2'
-      (pins U1-4 U2-9)
+      (pins U1-4 U2-12)
     )
     (net /B1'
-      (pins U1-3 U2-4)
+      (pins U1-3 U19-1)
     )
     (net /B0'
-      (pins U1-2 U2-1)
+      (pins U1-2 U19-12)
     )
     (net "Net-(J1-Pad9)"
       (pins U1-11 J1-9)
     )
     (net "Net-(J2-Pad9)"
       (pins U10-11 J2-9)
+    )
+    (net "Net-(U20-Pad4)"
+      (pins U20-4)
+    )
+    (net "Net-(U20-Pad3)"
+      (pins U20-3)
+    )
+    (net "Net-(U20-Pad2)"
+      (pins U20-2)
     )
     (class kicad_default "" /A0 /A1 /A2 /A3 /A4 /A5 /A6 /A7 /ADD_CIN /ADD_COUT
       /Arithm /B0 /B0' /B1 /B1' /B2 /B2' /B3 /B3' /B4 /B4' /B5 /B5' /B6 /B6'
@@ -1597,8 +1597,8 @@
       "Net-(U16-Pad12)" "Net-(U16-Pad2)" "Net-(U16-Pad22)" "Net-(U16-Pad25)"
       "Net-(U16-Pad3)" "Net-(U16-Pad4)" "Net-(U16-Pad5)" "Net-(U16-Pad6)"
       "Net-(U16-Pad7)" "Net-(U16-Pad8)" "Net-(U16-Pad9)" "Net-(U17-Pad11)"
-      "Net-(U18-Pad6)" "Net-(U18-Pad8)" "Net-(U20-Pad12)" "Net-(U20-Pad13)"
-      "Net-(U20-Pad14)" "Net-(U23-Pad28)" "Net-(U23-Pad29)" "Net-(U26-Pad3)"
+      "Net-(U18-Pad6)" "Net-(U18-Pad8)" "Net-(U20-Pad2)" "Net-(U20-Pad3)"
+      "Net-(U20-Pad4)" "Net-(U23-Pad28)" "Net-(U23-Pad29)" "Net-(U26-Pad3)"
       "Net-(U27-Pad10)" "Net-(U27-Pad6)" "Net-(U27-Pad8)" "Net-(U4-Pad29)"
       "Net-(U5-Pad29)" "Net-(U6-Pad28)" "Net-(U6-Pad29)" VCC
       (circuit
@@ -1635,8 +1635,7 @@
     (wire (path B.Cu 600  165100 -80645  167640 -80645)(net GND)(type protect))
     (wire (path B.Cu 600  167640 -52705  165100 -52705)(net GND)(type protect))
     (wire (path B.Cu 600  165100 -57785  167640 -57785  167640 -52705)(net GND)(type protect))
-    (wire (path B.Cu 600  167640 -80645  167640 -57785)(net GND)(type protect))
-    (wire (path B.Cu 600  167640 -52705  167640 -29845  165100 -29845)(net GND)(type protect))
+    (wire (path B.Cu 600  167640 -29845  165100 -29845)(net GND)(type protect))
     (wire (path B.Cu 800  147320 -97155  158750 -97155)(net GND)(type protect))
     (wire (path B.Cu 600  121920 -39370  121920 -41275  142240 -41275  142240 -39370)(net GND)(type protect))
     (wire (path B.Cu 600  182880 -117475  180340 -117475)(net GND)(type protect))
@@ -1662,13 +1661,21 @@
     (wire (path B.Cu 800  167640 -93980  167640 -97155)(net GND)(type protect))
     (wire (path B.Cu 800  167640 -92710  167640 -93980)(net GND)(type protect))
     (wire (path B.Cu 800  164465 -97155  167640 -97155)(net GND)(type protect))
-    (wire (path B.Cu 600  153670 -52705  165100 -52705)(net GND)(type protect))
-    (wire (path B.Cu 600  142240 -41275  153670 -52705)(net GND)(type protect))
     (wire (path B.Cu 800  167640 -92710  167720 -92790)(net GND)(type protect))
     (wire (path B.Cu 800  167640 -80645  167640 -92710)(net GND)(type protect))
-    (wire (path B.Cu 600  44450 -167005  44450 -162560)(net GND)(type protect))
-    (wire (path B.Cu 600  64135 -159385  56515 -167005  44450 -167005)(net GND)(type protect))
-    (wire (path B.Cu 600  88900 -159385  64135 -159385)(net GND)(type protect))
+    (wire (path B.Cu 600  66675 -159385  88900 -159385)(net GND)(type protect))
+    (wire (path B.Cu 600  59055 -167005  66675 -159385)(net GND)(type protect))
+    (wire (path B.Cu 600  44450 -167005  59055 -167005)(net GND)(type protect))
+    (wire (path B.Cu 600  44450 -162560  44450 -167005)(net GND)(type protect))
+    (wire (path B.Cu 600  147320 -41275  158750 -52705)(net GND)(type protect))
+    (wire (path B.Cu 600  142240 -41275  147320 -41275)(net GND)(type protect))
+    (wire (path B.Cu 600  158750 -52705  165100 -52705)(net GND)(type protect))
+    (wire (path B.Cu 600  172720 -32385  177165 -32385)(net GND)(type protect))
+    (wire (path B.Cu 600  172720 -60325  177165 -60325)(net GND)(type protect))
+    (wire (path B.Cu 600  167640 -60325  172720 -60325)(net GND)(type protect))
+    (wire (path B.Cu 600  167640 -80645  167640 -60325  167640 -57785)(net GND)(type protect))
+    (wire (path B.Cu 600  167640 -52705  167640 -32385  172720 -32385)(net GND)(type protect))
+    (wire (path B.Cu 600  167640 -32385  167640 -29845)(net GND)(type protect))
     (wire (path B.Cu 600  172720 -34925  177165 -34925)(net "Net-(J1-Pad2)")(type protect))
     (wire (path B.Cu 600  172720 -37465  177165 -37465)(net "Net-(J1-Pad3)")(type protect))
     (wire (path B.Cu 600  172720 -40005  177165 -40005)(net "Net-(J1-Pad4)")(type protect))
@@ -1742,7 +1749,10 @@
     (wire (path B.Cu 800  119380 -114935  153670 -114935  157480 -114935)(net VCC)(type protect))
     (wire (path B.Cu 800  153670 -94615  165100 -94615)(net VCC)(type protect))
     (wire (path F.Cu 800  153670 -94615  153670 -99695)(net VCC)(type protect))
-    (wire (path B.Cu 800  68580 -114935  46990 -114935  46990 -119380)(net VCC)(type protect))
+    (wire (path B.Cu 600  65405 -156845  68580 -156845)(net VCC)(type protect))
+    (wire (path B.Cu 600  57150 -165100  65405 -156845)(net VCC)(type protect))
+    (wire (path B.Cu 600  46990 -165100  57150 -165100)(net VCC)(type protect))
+    (wire (path B.Cu 600  46990 -144780  46990 -165100)(net VCC)(type protect))
     (wire (path B.Cu 800  64135 -69215  153670 -69215)(net /O0)(type protect))
     (wire (path B.Cu 800  64135 -71755  153670 -71755)(net /O1)(type protect))
     (wire (path B.Cu 800  64135 -74295  153670 -74295)(net /O2)(type protect))
@@ -1751,18 +1761,11 @@
     (wire (path B.Cu 800  64135 -81915  153670 -81915)(net /O5)(type protect))
     (wire (path B.Cu 800  64135 -84455  153670 -84455)(net /O6)(type protect))
     (wire (path B.Cu 800  64135 -86995  153670 -86995)(net /O7)(type protect))
-    (wire (path B.Cu 600  38100 -124460  41910 -124460)(net /ADD_COUT)(type protect))
-    (wire (path B.Cu 600  49530 -134620  53340 -134620)(net /ZF)(type protect))
-    (wire (path B.Cu 600  38735 -157480  41910 -157480)(net /LT)(type protect))
-    (wire (path B.Cu 600  49530 -152400  52070 -152400)(net /~EQ)(type protect))
-    (wire (path B.Cu 600  49530 -160020  52070 -160020)(net /GT)(type protect))
-    (wire (path B.Cu 600  102235 -161925  102235 -167005)(net /~LSLx)(type protect))
-    (wire (path B.Cu 600  104775 -161925  104775 -167005)(net /~LSRx)(type protect))
-    (wire (path B.Cu 800  73660 -161925  73660 -165735)(net /~POPF)(type protect))
-    (wire (path B.Cu 800  81280 -161925  81280 -165735)(net /~CLRF)(type protect))
-    (wire (path B.Cu 800  83820 -161925  83820 -165735)(net /~RESET)(type protect))
-    (wire (path B.Cu 600  107315 -161925  107315 -167005)(net /~BANK0_CMD)(type protect))
-    (wire (path B.Cu 600  109855 -161925  109855 -167005)(net /~BANK1_CMD)(type protect))
+    (wire (path B.Cu 600  38100 -157480  41910 -157480)(net /ADD_COUT)(type protect))
+    (wire (path B.Cu 600  38100 -132080  41910 -132080)(net /ZF)(type protect))
+    (wire (path B.Cu 600  49530 -134620  53975 -134620)(net /LT)(type protect))
+    (wire (path B.Cu 600  49530 -152400  52705 -152400)(net /~EQ)(type protect))
+    (wire (path B.Cu 600  49530 -160020  52705 -160020)(net /GT)(type protect))
     (wire (path B.Cu 800  64135 -41275  102235 -41275)(net /B7)(type protect))
     (wire (path B.Cu 800  64135 -38735  102235 -38735)(net /B6)(type protect))
     (wire (path B.Cu 800  64135 -36195  102235 -36195)(net /B5)(type protect))
@@ -1787,8 +1790,9 @@
     (wire (path B.Cu 600  172720 -67945  177165 -67945)(net "Net-(J2-Pad4)")(type protect))
     (wire (path B.Cu 600  172720 -65405  177165 -65405)(net "Net-(J2-Pad3)")(type protect))
     (wire (path B.Cu 600  172720 -62865  177165 -62865)(net "Net-(J2-Pad2)")(type protect))
-    (wire (path B.Cu 800  76200 -161925  76200 -165735)(net /~RETI)(type protect))
     (wire (path B.Cu 800  116840 -99695  139700 -99695)(net /~Expand)(type protect))
+    (wire (path B.Cu 600  121920 -26670  149860 -26670)(net /INV_B)(type protect))
+    (wire (path B.Cu 600  121920 -34290  149860 -34290)(net /INV_B)(type protect))
     (wire (path B.Cu 600  172720 -80645  177165 -80645)(net "Net-(J2-Pad9)")(type protect))
     (via "Via[0-1]_1800:900_um"  165100 -94615 (net VCC)(type protect))
     (via "Via[0-1]_1800:900_um"  170180 -95250 (net VCC)(type protect))

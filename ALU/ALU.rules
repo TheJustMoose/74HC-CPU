@@ -11,7 +11,7 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 4561)
+    (start_pass_no 4576)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
@@ -40,30 +40,12 @@
     )
     (attach off)
   )
-  (padstack "Via[0-1]_1600:500_um"
+  (padstack "Via[0-1]_1800:900_um"
     (shape
-      (circle F.Cu 1600.0 0.0 0.0)
+      (circle F.Cu 1800.0 0.0 0.0)
     )
     (shape
-      (circle B.Cu 1600.0 0.0 0.0)
-    )
-    (attach off)
-  )
-  (padstack "Via[0-1]_800:500_um"
-    (shape
-      (circle F.Cu 800.0 0.0 0.0)
-    )
-    (shape
-      (circle B.Cu 800.0 0.0 0.0)
-    )
-    (attach off)
-  )
-  (padstack "Via[0-1]_800:400_um"
-    (shape
-      (circle F.Cu 800.0 0.0 0.0)
-    )
-    (shape
-      (circle B.Cu 800.0 0.0 0.0)
+      (circle B.Cu 1800.0 0.0 0.0)
     )
     (attach off)
   )
@@ -71,28 +53,16 @@
     "Via[0-1]_1500:500_um" "Via[0-1]_1500:500_um" default
   )
   (via 
-    "Via[0-1]_800:400_um" "Via[0-1]_800:400_um" default
-  )
-  (via 
-    "Via[0-1]_1600:500_um" "Via[0-1]_1600:500_um" default
-  )
-  (via 
-    "Via[0-1]_800:500_um" "Via[0-1]_800:500_um" default
+    "Via[0-1]_1800:900_um" "Via[0-1]_1800:900_um" default
   )
   (via 
     "Via[0-1]_1500:500_um-kicad_default" "Via[0-1]_1500:500_um" "kicad_default"
   )
   (via 
-    "Via[0-1]_800:400_um-kicad_default" "Via[0-1]_800:400_um" "kicad_default"
-  )
-  (via 
-    "Via[0-1]_1600:500_um-kicad_default" "Via[0-1]_1600:500_um" "kicad_default"
-  )
-  (via 
-    "Via[0-1]_800:500_um-kicad_default" "Via[0-1]_800:500_um" "kicad_default"
+    "Via[0-1]_1800:900_um-kicad_default" "Via[0-1]_1800:900_um" "kicad_default"
   )
   (via_rule
-    default "Via[0-1]_800:400_um"
+    default "Via[0-1]_1500:500_um"
   )
   (via_rule
     "kicad_default" "Via[0-1]_1500:500_um-kicad_default"
@@ -108,27 +78,25 @@
     )
   )
   (class "kicad_default"
-    "Net-(D1-Pad1)" GND "Net-(D2-Pad2)" "Net-(D3-Pad2)" "Net-(D4-Pad1)" "Net-(D4-Pad2)" "Net-(D5-Pad2)" "Net-(J1-Pad1)"
-    "Net-(J1-Pad2)" "Net-(J1-Pad3)" "Net-(J1-Pad4)" "Net-(J1-Pad5)" "Net-(J1-Pad6)" "Net-(J1-Pad7)" "Net-(J1-Pad8)" /BUS0
-    /BUS1 /BUS2 /BUS3 /BUS4 /BUS5 /BUS6 /BUS7 /Latch
-    "/~ACT_BIN" "/~ACT_UNO" VCC "/~LSL_COUT" "/~LSR_COUT" /O0 /O1 /O2
-    /O3 /O4 /O5 /O6 /O7 "/LSx_CIN" /COP[0] /COP[1]
-    /COP[2] "/ADD_COUT" "/ADD_CIN" /ZF /LT /~EQ /GT /~ADDx
-    /~LSLx /~LSRx /C2 /~OUT /~XOUT /~PUSHF /~POPF /IE
-    /~CLRF /~RESET "/~BANK0_CMD" "/~BANK1_CMD" "Net-(R4-Pad1)" "Net-(R7-Pad1)" /B7 /B6
-    /B5 /B4 /B3 /B2 /B1 /B0 "Net-(U2-Pad29)" /~MUL
-    /A7 /A6 /A5 /A4 /A3 /A2 /A1 /A0
-    /~ADD /~ADDC "Net-(U4-Pad29)" /~AND /~OR "Net-(U5-Pad29)" "Net-(U6-Pad28)" "Net-(U6-Pad29)"
-    /~CMPC /~CMP /~XOR "Net-(U14-Pad28)" /~MOV /~CLR /~MIR /~LSLC
-    /~LSL /~LSR /~LSRC /~INV "Net-(U15-Pad28)" "Net-(U15-Pad29)" "/~RES_FL" "Net-(U16-Pad8)"
-    "Net-(U16-Pad2)" "Net-(U16-Pad3)" "Net-(U16-Pad11)" "Net-(U16-Pad12)" "Net-(U18-Pad8)" "Net-(U18-Pad4)" "Net-(J2-Pad8)" "Net-(J2-Pad7)"
-    "Net-(J2-Pad6)" "Net-(J2-Pad5)" "Net-(J2-Pad4)" "Net-(J2-Pad3)" "Net-(J2-Pad2)" "Net-(J2-Pad1)" "Net-(R1-Pad1)" "Net-(R2-Pad1)"
-    "Net-(R9-Pad1)" "Net-(U20-Pad12)" "Net-(U20-Pad9)" "Net-(U22-Pad8)" "Net-(U23-Pad6)" "Net-(U27-Pad6)" "Net-(U28-Pad9)" "Net-(U28-Pad12)"
-    "Net-(U28-Pad7)" "Net-(U29-Pad14)" "Net-(U29-Pad15)" "/~EQ_OUT" "Net-(D5-Pad1)" "/LT_OUT" "/GT_OUT" /~RETI
-    "/~POP_FL" "Net-(U23-Pad13)" "Net-(R5-Pad1)" "Net-(U20-Pad14)" "Net-(U20-Pad13)" "Net-(U23-Pad2)" "Net-(U23-Pad5)" "Net-(U18-Pad1)"
-    "Net-(U18-Pad3)" "Net-(U17-Pad3)" "Net-(U26-Pad8)" "Net-(U26-Pad10)" "Net-(U26-Pad11)" "/EQ_OUT" /~Bank0 /~Bank1
-    /~INCC "Net-(U17-Pad11)" "Net-(U16-Pad5)" /~CF /~INC /Arithm "Net-(U19-Pad12)" "Net-(U19-Pad1)"
-    "Net-(D6-Pad2)" "Net-(D7-Pad2)"
+    GND "Net-(J1-Pad2)" "Net-(J1-Pad3)" "Net-(J1-Pad4)" "Net-(J1-Pad5)" "Net-(J1-Pad6)" "Net-(J1-Pad7)" "Net-(J1-Pad8)"
+    /BUS0 /BUS1 /BUS2 /BUS3 /BUS4 /BUS5 /BUS6 /BUS7
+    /Latch "/~ACT_BIN" "/~ACT_UNO" VCC "/~LSL_COUT" "/~LSR_COUT" /O0 /O1
+    /O2 /O3 /O4 /O5 /O6 /O7 "/LSx_CIN" /COP[0]
+    /COP[1] /COP[2] "/ADD_COUT" "/ADD_CIN" /ZF /LT /~EQ /GT
+    /~ADDx /~LSLx /~LSRx /C2 /~OUT /~XOUT /~PUSHF /~POPF
+    /IE /~CLRF /~RESET "/~BANK0_CMD" "/~BANK1_CMD" "Net-(R4-Pad1)" "Net-(R7-Pad1)" /B7
+    /B6 /B5 /B4 /B3 /B2 /B1 /B0 /A7
+    /A6 /A5 /A4 /A3 /A2 /A1 /A0 /~ADD
+    /~ADDC "Net-(U4-Pad29)" /~AND /~OR "Net-(U5-Pad29)" "Net-(U6-Pad28)" "Net-(U6-Pad29)" /~CMPC
+    /~CMP /~XOR /~MOV /~INV "/~RES_FL" "Net-(U16-Pad3)" "Net-(U16-Pad11)" "Net-(J2-Pad8)"
+    "Net-(J2-Pad7)" "Net-(J2-Pad6)" "Net-(J2-Pad5)" "Net-(J2-Pad4)" "Net-(J2-Pad3)" "Net-(J2-Pad2)" "/~EQ_OUT" "/LT_OUT"
+    "/GT_OUT" /~RETI "/~POP_FL" "Net-(R5-Pad1)" /~Bank0 /~Bank1 "Net-(U17-Pad11)" /~CF
+    /~INC /Arithm "Net-(U18-Pad6)" "Net-(U16-Pad8)" /~Arithm "Net-(U16-Pad2)" "Net-(U16-Pad1)" "Net-(U16-Pad4)"
+    "Net-(U16-Pad9)" "Net-(U16-Pad12)" "Net-(U16-Pad25)" "Net-(U16-Pad22)" "Net-(U16-Pad7)" "Net-(U16-Pad6)" "Net-(U16-Pad5)" /SRC[0]
+    "Net-(U23-Pad28)" /~CLR\SET /~Expand /~LSL[C] /~LSR[C] "Net-(U15-Pad12)" "Net-(U15-Pad13)" "Net-(U23-Pad29)"
+    /~DEC /~SUB /~SUBC "Net-(U26-Pad3)" "Net-(U27-Pad6)" "Net-(U27-Pad8)" "Net-(U18-Pad8)" /~INCC
+    /~DECC "Net-(U27-Pad10)" "/INV_B" /B7' /B6' /B5' /B4' /B3'
+    /B2' /B1' /B0' "Net-(J1-Pad9)" "Net-(J2-Pad9)" "Net-(U20-Pad4)" "Net-(U20-Pad3)" "Net-(U20-Pad2)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
