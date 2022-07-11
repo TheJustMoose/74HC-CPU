@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 7)
+    (drawings 9)
     (tracks 282)
     (zones 0)
     (modules 8)
@@ -975,6 +975,12 @@
     )
   )
 
+  (gr_text 11.07.2022 (at 133.985 41.275) (layer F.Cu)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
+  (gr_text 74HCPU (at 134.62 44.45) (layer F.Cu)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
   (gr_circle (center 69.596 44.069) (end 70.053905 44.069) (layer F.Cu) (width 0.25) (tstamp 62CC722D))
   (gr_circle (center 91.313 44.145905) (end 91.770905 44.145905) (layer F.Cu) (width 0.25) (tstamp 62CC722D))
   (gr_circle (center 125.857 44.831) (end 126.314905 44.831) (layer F.Cu) (width 0.25))
