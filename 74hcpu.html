@@ -106,7 +106,7 @@ tr.opt {
 <h3>Список команд</h3>
 <table border=1>
 <tr><td colspan=5><h4>Бинарные команды (CTYPE=0)</h4></td></tr>
-<tr><td colspan=5>Бинарная команда DST := DST OP SRC<br>
+<tr><td colspan=5>Бинарная команда DST := DST OP SRC (все на базе ADD)<br>
 <b>Справа (SRC) могут быть не все регистры, ибо хвост занят портами и константой</b></td>
 </tr>
 <tr><td>Имя</td><td>COP</td><td class="mid">Операнды</td><td class="big">Описание</td><td>Длина</td></tr>
@@ -114,26 +114,26 @@ tr.opt {
 <tr><td>ADDC</td><td>001</td><td>ADDC r0, r1</td><td>Сложение с переносом</td><td>1/2</td></tr>
 <tr><td>SUB</td><td>010</td><td>SUB r0, r1</td><td>Вычитание</td><td>1/2</td></tr>
 <tr><td>SUBC</td><td>011</td><td>SUBC r0, r1</td><td>Вычитание с переносом</td><td>1/2</td></tr>
-<tr><td>AND</td><td>100</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
-<tr><td>OR</td><td>101</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
-<tr><td>XOR</td><td>110</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
-<tr><td>MOV</td><td>111</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
-<tr><td>MUL</td><td>111</td><td>MUL r0, r1</td><td>Умножение. Выполняется если до неё была команда ALT. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
-<tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
-DST := OP DST<br>
-Регистр SRC не используется, команда подключается к шине DST.</td></tr>
-<tr><td>CLR</td><td>000 (E=0)</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
-<tr><td>SET</td><td>000 (E=1)</td><td>SET r1</td><td>Установка всех битов</td><td>1</td></tr>
-<tr><td>LSL</td><td>001 (E=0)</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
-<tr><td>LSLC</td><td>001 (E=1)</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
-<tr><td>LSR</td><td>010 (E=0)</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
-<tr><td>LSRC</td><td>010 (E=1)</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
-<tr><td>INV</td><td>011</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
-<tr><td>INC</td><td>100</td><td>INC r0</td><td>Инкремент. (Можно сделать из команды ADDC, просто занулив один из операндов и зафорсить CF).</td><td>1</td></tr>
+<tr><td>INC</td><td>100</td><td>INC r0</td><td>Инкремент. (Можно сделать из команды ADDC, просто занулив ПРАВЫЙ операнд и зафорсить CF).</td><td>1</td></tr>
 <tr><td>INCC</td><td>101</td><td>INCC r6</td><td>Инкремент с переносом</td><td>1</td></tr>
 <tr><td>DEC</td><td>110</td><td>DEC r0</td><td>Декремент. Складываем операнд с 0xFF</td><td>1</td></tr>
 <tr><td>DECC</td><td>111</td><td>DECC r7</td><td>Декремент с переносом</td><td>1</td></tr>
-<tr><td colspan=5><h4>Перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
+<tr><td colspan=5><h4>Дополнительные бинарные команды (CTYPE=1)</h4></td></tr>
+<tr><td>AND</td><td>000</td><td>AND r0, r1</td><td>Побитовое И</td><td>1/2</td></tr>
+<tr><td>OR</td><td>001</td><td>OR r0, r1</td><td>Побитовое ИЛИ</td><td>1/2</td></tr>
+<tr><td>XOR</td><td>010</td><td>XOR r0, r1</td><td>Побитовое Исключающее ИЛИ</td><td>1/2</td></tr>
+<tr><td>MOV</td><td>011</td><td>MOV r1, r2</td><td>Копирование из одного регистра в другой</td><td>1/2</td></tr>
+<tr><td colspan=5><h4>Унарные команды (CTYPE=1)</h4>
+DST := OP DST<br>
+Регистр SRC не используется, команда подключается к шине DST.</td></tr>
+<tr><td>CLR</td><td>100 (E=0)</td><td>CLR r1</td><td>Сброс всех битов</td><td>1</td></tr>
+<tr><td>SET</td><td>100 (E=1)</td><td>SET r1</td><td>Установка всех битов</td><td>1</td></tr>
+<tr><td>LSL</td><td>101 (E=0)</td><td>LSL r1</td><td>Побитовый сдвиг влево</td><td>1</td></tr>
+<tr><td>LSLC</td><td>101 (E=1)</td><td>LSLC r1</td><td>Побитовый сдвиг влево с учётом переноса</td><td>1</td></tr>
+<tr><td>LSR</td><td>110 (E=0)</td><td>LSR r1</td><td>Побитовый сдвиг вправо</td><td>1</td></tr>
+<tr><td>LSRC</td><td>110 (E=1)</td><td>LSRC r1</td><td>Побитовый сдвиг вправо с учётом переноса</td><td>1</td></tr>
+<tr><td>INV</td><td>111</td><td>INV r1</td><td>Побитовая инверсия</td><td>1</td></tr>
+<tr><td colspan=5><h4>Условного перехода (CTYPE=2)</h4>(абсолютные и относительные адреса)</td></tr>
 <tr><td>[R]JZ</td><td>000</td><td>JZ ADDR</td><td>Переход если флаг ZF установлен</td><td>2</td></tr>
 <tr><td>[R]JNZ</td><td>001</td><td>JNZ ADDR</td><td>Переход если флаг ZF сброшен</td><td>2</td></tr>
 <tr><td>[R]JE</td><td>010</td><td>JE ADDR</td><td>Переход если флаг EF установлен</td><td>2</td></tr>
@@ -142,24 +142,24 @@ DST := OP DST<br>
 <tr><td>[R]JL</td><td>101</td><td>JL ADDR</td><td>Переход если флаг LF установлен</td><td>2</td></tr>
 <tr><td>[R]JC</td><td>110</td><td>JC ADDR</td><td>Переход если флаг CF установлен</td><td>2</td></tr>
 <tr><td>[R]JNC</td><td>111</td><td>JNC ADDR</td><td>Переход, если флаг CF сброшен</td><td>2</td></tr>
-<tr><td colspan=5><h4>Перехода (CTYPE=3)</h4>(абсолютные и относительные адреса)</td></tr>
+<tr><td colspan=5><h4>Условного перехода (CTYPE=3)</h4>(абсолютные и относительные адреса)</td></tr>
 <tr><td>[R]JS</td><td>000</td><td>JS ADDR</td><td>Переход, если флаг SF установлен</td><td>2</td></tr>
 <tr><td>[R]JNS</td><td>001</td><td>JNS ADDR</td><td>Переход, если флаг SF сброшен</td><td>2</td></tr>
 <tr><td>[R]JGE</td><td>010</td><td>JGE ADDR</td><td>Переход, если флаг GF или EF установлен</td><td>2</td></tr>
 <tr><td>-</td><td>011</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>[R]JMP</td><td>110</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
-<tr><td>[R]CALL</td><td>111</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
-<tr><td colspan=5><h4>Перехода (CTYPE=4)</h4></td></tr>
+<tr><td>SIE</td><td>110</td><td>SIE</td><td>SKIP if Equal: пропускает следующую <b>двухсловную</b> команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
+нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
+<tr><td>SIZ</td><td>111</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
+<tr><td colspan=5><h4>Безусловного перехода (CTYPE=4)</h4></td></tr>
 <tr><td>RET</td><td>000</td><td>RET</td><td>Возврат из функции</td><td>1</td></tr>
 <tr><td>IRET</td><td>001</td><td>IRET</td><td>Возврат из прерывания (разрешает прерывания при выходе)</td><td>1</td></tr>
-<tr><td>SIE</td><td>010</td><td>SIE</td><td>SKIP if Equal: пропускает следующую <b>двухсловную</b> команду, если стоит флаг EF. Сравнение не производит, т.к. оно может быть как 1, так и 2-словное.<br>
-нужно доработать сумматор адреса, чтобы он выбирал +1/+2/+3 (размер SIE 1, значит можно просто вывод 1 тоже тянуть в 1).</td><td>1</td></tr>
-<tr><td>SIZ</td><td>011</td><td>SIZ</td><td>SKIP if Zero (хорошо бы выбрать наиболее подходящий флаг, ибо zero может оказаться не лучшим выбором)</td><td>1</td></tr>
+<tr><td>-</td><td>010</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>-</td><td>011</td><td>-</td><td>reserved</td><td>1</td></tr>
 <tr><td>-</td><td>100</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>-</td><td>101</td><td>-</td><td>reserved</td><td>1</td></tr>
-<tr><td>-</td><td>110</td><td>-</td><td>reserved</td><td>1</td></tr>
+<tr><td>[R]JMP</td><td>101</td><td>JMP ADDR</td><td>Безусловный переход</td><td>2</td></tr>
+<tr><td>[R]CALL</td><td>110</td><td>CALL ADDR</td><td>Вызов функции</td><td>2</td></tr>
 <tr><td>NOP</td><td>111</td><td>NOP</td><td>No operation</td><td>1</td></tr>
 <tr><td colspan=5><h4>Управления (CTYPE=5)</h4></td></tr>
 <tr><td>CLRF</td><td>000</td><td>CLRF</td><td>Очистка регистра флагов</td><td>1</td></tr>
@@ -168,9 +168,8 @@ DST := OP DST<br>
 <tr><td>BANK0</td><td>011</td><td>BANK0</td><td>Connect BANK0 of registers</td><td>1</td></tr>
 <tr><td>BANK1</td><td>100</td><td>BANK1</td><td>Connect BANK1 of registers</td><td>1</td></tr>
 <tr><td>STOP</td><td>101</td><td>STOP</td><td>Зависнуть!</td><td>1</td></tr>
-<tr><td>RESET</td><td>110</td><td>RESET</td><td>Сброс процессора и переход к выполнению кода с нулевого адреса</td><td>1</td></tr>
-<tr><td>ALT</td><td>111</td><td>ALT</td><td>Говорит о том, что следующая выполняемая команда берётся из альтернативного набора команд.
- (ну не хватило мне арифметических команд!) Пока только меняет команду ADD на MUL.</td><td>1</td></tr>
+<tr><td>LPM</td><td>110</td><td>LPM r3, [X|Y]</td><td>Прочитать байт данных из ROM по адресу, заданному в регистровой паре. Непосредственного указания адреса нет.</td><td>2</td></tr>
+<tr><td>MUL</td><td>111</td><td>MUL r0, r1</td><td>Внезапно, умножение. Результат выполнения ВСЕГДА ложится в соседнюю пару регистров, младший результат в младший регистр, старший в старший, причём используется одна из пар: r1:r0 или r3:r2, ... Пара выбирается по регистру DST.</td><td>1/2</td></tr>
 <tr><td colspan=5><h4>Передачи (CTYPE=6)</h4></td></tr>
 <tr><td>LOAD</td><td>000</td><td>LOAD r0, [X|Y|SP|0]</td><td>Загрузка из RAM[r7:r6] в регистр (r0-r7)</td><td>1</td></tr>
 <tr><td>STORE</td><td>001</td><td>STORE [X|Y|SP|0], r0</td><td>Запись в RAM[r5:r4] указанного регистра (r0-r7)</td><td>1</td></tr>
@@ -202,6 +201,8 @@ DST := OP DST<br>
 <li>INCC -> A + 0 + CF -> ADDC A, 0</li>
 <li>DEC -> A + 0xFF -> ADD A, 0xFF</li>
 <li>DECC -> A + 0xFF + CF -> ADDC A, 0xFF</li>
+<li>NEG -> INV(A) + 0 + CF|1</li>
+но, инвертора на шине A нема, а шина B подключена не ко всем регистрам :(
 </ul>
 
 <p>Длина команды может быть 1 или 2. 2 для случая, когда команда содержит константу.<br>
@@ -382,6 +383,15 @@ DST := OP DST<br>
 
 <p>Вход RAM подключен к шине OUT, а через неё к мультиплексору DST, поэтому здесь именно DST, а не SRC.</p>
 
+<h3>LPM</h3>
+<table border=1>
+<tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td colspan=3>CTYPE</td><td colspan=3>COP</td><td colspan=3>A(DST)</td><td></td><td colspan=2>X/Y/SP/?</td></tr>
+<tr><td colspan=3>101</td><td colspan=3>LPM</td><td colspan=3>Rx</td><td></td><td colspan=2>00/01/10</td></tr>
+</table>
+
+<p>Вход ROM подключен к тому же мультиплексору, что и ROM.</p>
+
 <h3>IN</h3>
 <table border=1>
 <tr><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
@@ -483,6 +493,16 @@ DST := OP DST<br>
 <tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
 <tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
 <tr><td>АЛУ</td><td>(выход команды подключается к шине OUT)</td><td>вычисляет<br>(команду XOR/MOV)</td><td>Latch IR</td><td>Latch PORTx</td></tr>
+<tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
+</table>
+
+<h3>Выполнение команды LPM</h3>
+<table border=1>
+<tr><td class="tact">Модуль</td><td class="tact">Такт 0</td><td class="tact">Такт 1</td><td class="tact">Такт 2</td><td class="tact">Такт 3</td></tr>
+<tr><td>ROM + Регистр команд</td><td>Latch COP & const</td><td></td><td>Latch data</td><td></td></tr>
+<tr><td>ROM MUX</td><td>CS = 1</td><td>Подключает адрес X/Y/SP/0</td><td></td><td>CS = 0, Подключаем счётчик адреса</td></tr>
+<tr><td>Счётчик адреса</td><td></td><td>Addr += 1|2</td><td></td><td></td></tr>
+<tr><td>Мультиплексор адреса</td><td></td><td>MUX <= COP[SEL] = 0</td><td></td><td></td></tr>
 <tr><td>Регистр адреса</td><td></td><td></td><td></td><td>Latch Addr</td></tr>
 </table>
 
@@ -593,12 +613,12 @@ DST := OP DST<br>
 <tr><td>COP/CTYPE</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>DST</td><td>SRC</td></tr>
 <tr><td>0</td><td>ADD</td><td>CLR/SET</td><td>JZ</td><td>JS</td><td>RET</td><td>CLRF</td><td>LOAD</td><td>IN</td><td>r0</td><td>r0</td></tr>
 <tr><td>1</td><td>ADDC</td><td>LSL/C</td><td>JNZ</td><td>JNS</td><td>IRET</td><td>DI</td><td>STORE</td><td>IIN</td><td>r1</td><td>r1</td></tr>
-<tr><td>2</td><td>SUB</td><td>LSR/C</td><td>JE</td><td>JGE</td><td>SIE</td><td>EI</td><td>RLOAD</td><td>OUT</td><td>r2</td><td>r2</td></tr>
-<tr><td>3</td><td>SUBC</td><td>INV</td><td>JNE</td><td>-</td><td>SIZ</td><td>BANK0</td><td>RSTORE</td><td>XOUT</td><td>r3</td><td>r3</td></tr>
-<tr><td>4</td><td>AND</td><td>INC</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>INI</td><td>r4</td><td>r4</td></tr>
-<tr><td>5</td><td>OR</td><td>INCC</td><td>JL</td><td>-</td><td>-</td><td>STOP</td><td>POP</td><td>OUTI</td><td>r5</td><td>r5</td></tr>
-<tr><td>6</td><td>XOR</td><td>DEC</td><td>JC</td><td>JMP</td><td>-</td><td>RESET</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
-<tr><td>7</td><td>MOV</td><td>DECC</td><td>JNC</td><td>CALL</td><td>NOP</td><td>-</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
+<tr><td>2</td><td>SUB</td><td>LSR/C</td><td>JE</td><td>JGE</td><td>-</td><td>EI</td><td>RLOAD</td><td>OUT</td><td>r2</td><td>r2</td></tr>
+<tr><td>3</td><td>SUBC</td><td>INV</td><td>JNE</td><td>-</td><td>-</td><td>BANK0</td><td>RSTORE</td><td>XOUT</td><td>r3</td><td>r3</td></tr>
+<tr><td>4</td><td>INC</td><td>AND</td><td>JG</td><td>-</td><td>-</td><td>BANK1</td><td>PUSH</td><td>INI</td><td>r4</td><td>r4</td></tr>
+<tr><td>5</td><td>INCC</td><td>OR</td><td>JL</td><td>-</td><td>JMP</td><td>STOP</td><td>POP</td><td>OUTI</td><td>r5</td><td>r5</td></tr>
+<tr><td>6</td><td>DEC</td><td>XOR</td><td>JC</td><td>SIE</td><td>CALL</td><td>LPM</td><td>PUSHF</td><td>CMP</td><td>r6</td><td>PORT0</td></tr>
+<tr><td>7</td><td>DECC</td><td>MOV</td><td>JNC</td><td>SIZ</td><td>NOP</td><td>MUL</td><td>POPF</td><td>CMPC</td><td>r7</td><td>CONST</td></tr>
 </table>
 
 <p>Переведём в машинный код команду ADD r0, 10:</p>
