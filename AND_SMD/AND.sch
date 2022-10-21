@@ -19,7 +19,7 @@ U 1 1 5F5004CF
 P 1750 3100
 F 0 "J1" H 1858 3581 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 1858 3490 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 1750 3100 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 1750 3100 50  0001 C CNN
 F 3 "~" H 1750 3100 50  0001 C CNN
 	1    1750 3100
 	1    0    0    -1  
@@ -30,7 +30,7 @@ U 1 1 5F5016B1
 P 1750 4100
 F 0 "J2" H 1858 4581 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 1858 4490 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 1750 4100 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 1750 4100 50  0001 C CNN
 F 3 "~" H 1750 4100 50  0001 C CNN
 	1    1750 4100
 	1    0    0    -1  
@@ -41,7 +41,7 @@ U 1 1 5F502016
 P 7200 3350
 F 0 "J3" H 7308 3831 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 7300 2775 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 7200 3350 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 7200 3350 50  0001 C CNN
 F 3 "~" H 7200 3350 50  0001 C CNN
 	1    7200 3350
 	-1   0    0    -1  
@@ -52,7 +52,7 @@ U 1 1 5F50268E
 P 1750 5150
 F 0 "J4" H 1825 4775 50  0000 C CNN
 F 1 "Conn_01x04_Male" H 1625 5375 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1750 5150 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 1750 5150 50  0001 C CNN
 F 3 "~" H 1750 5150 50  0001 C CNN
 	1    1750 5150
 	1    0    0    1   
@@ -214,7 +214,7 @@ Wire Wire Line
 Wire Wire Line
 	2025 5250 2025 5675
 Wire Wire Line
-	2025 5675 5750 5675
+	2025 5675 3725 5675
 Wire Wire Line
 	5750 5675 5750 4050
 Wire Wire Line
@@ -525,4 +525,56 @@ F 3 "" H 7325 4900 50  0001 C CNN
 	1    7325 4900
 	1    0    0    -1  
 $EndComp
+$Comp
+L Device:LED D1
+U 1 1 63459271
+P 3725 5225
+F 0 "D1" V 3672 5305 50  0000 L CNN
+F 1 "LED" V 3763 5305 50  0000 L CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3725 5225 50  0001 C CNN
+F 3 "~" H 3725 5225 50  0001 C CNN
+	1    3725 5225
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 63459C8B
+P 3725 5525
+F 0 "R1" H 3795 5571 50  0000 L CNN
+F 1 "1k" V 3725 5475 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3655 5525 50  0001 C CNN
+F 3 "~" H 3725 5525 50  0001 C CNN
+	1    3725 5525
+	1    0    0    -1  
+$EndComp
+Connection ~ 3725 5675
+Wire Wire Line
+	3725 5675 5750 5675
+$Comp
+L power:VCC #PWR03
+U 1 1 6345A840
+P 3725 5075
+F 0 "#PWR03" H 3725 4925 50  0001 C CNN
+F 1 "VCC" H 3742 5248 50  0000 C CNN
+F 2 "" H 3725 5075 50  0001 C CNN
+F 3 "" H 3725 5075 50  0001 C CNN
+	1    3725 5075
+	1    0    0    -1  
+$EndComp
+Text Label 2000 3500 0    50   ~ 0
+A0
+Text Label 2000 2800 0    50   ~ 0
+A7
+Text Label 2025 4500 0    50   ~ 0
+B0
+Text Label 1975 3800 0    50   ~ 0
+B7
+Text Label 6800 3750 0    50   ~ 0
+OUT0
+Text Label 6800 3050 0    50   ~ 0
+OUT7
+Text Label 1975 5250 0    50   ~ 0
+~OE
+Text Label 2025 4625 0    50   ~ 0
+Latch
 $EndSCHEMATC
