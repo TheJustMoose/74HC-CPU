@@ -909,4 +909,42 @@ F 3 "" H 9500 4850 50  0001 C CNN
 	1    9500 4850
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x09_Male J12
+U 1 1 6362CA47
+P 6000 6650
+F 0 "J12" H 6108 7231 50  0000 C CNN
+F 1 "Conn_01x09_Male" H 6000 6150 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 6000 6650 50  0001 C CNN
+F 3 "~" H 6000 6650 50  0001 C CNN
+	1    6000 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 6362CA4D
+P 6200 6250
+F 0 "#PWR0107" H 6200 6000 50  0001 C CNN
+F 1 "GND" H 6205 6077 50  0000 C CNN
+F 2 "" H 6200 6250 50  0001 C CNN
+F 3 "" H 6200 6250 50  0001 C CNN
+	1    6200 6250
+	-1   0    0    1   
+$EndComp
+Text Label 6200 6350 0    50   ~ 0
+O0
+Text Label 6200 6450 0    50   ~ 0
+O1
+Text Label 6200 6550 0    50   ~ 0
+O2
+Text Label 6200 6650 0    50   ~ 0
+O3
+Text Label 6200 6750 0    50   ~ 0
+O4
+Text Label 6200 6850 0    50   ~ 0
+O5
+Text Label 6200 6950 0    50   ~ 0
+O6
+Text Label 6200 7050 0    50   ~ 0
+O7
 $EndSCHEMATC
