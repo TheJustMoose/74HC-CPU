@@ -259,7 +259,7 @@ U 1 1 63626B73
 P 2725 6325
 F 0 "U2" H 2725 6425 50  0000 C CNN
 F 1 "74HC4078" H 3075 6425 50  0000 C CNN
-F 2 "CommonLibrary:SO-14_3.9x8.6mm_P1.27mm" H 2725 6325 50  0001 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2725 6325 50  0001 C CNN
 F 3 "" H 2725 6325 50  0001 C CNN
 	1    2725 6325
 	1    0    0    -1  
@@ -272,19 +272,19 @@ Text Label 1950 1700 0    50   ~ 0
 VCC
 Text Label 1950 1800 0    50   ~ 0
 Latch
-Text Label 2500 6400 0    50   ~ 0
-O0
-Text Label 2500 6350 0    50   ~ 0
-O1
-Text Label 2500 6450 0    50   ~ 0
-O2
-Text Label 2500 6500 0    50   ~ 0
-O3
-Text Label 2500 6550 0    50   ~ 0
-O4
-Text Label 2500 6600 0    50   ~ 0
-O5
 Text Label 2500 6250 0    50   ~ 0
+O0
+Text Label 2500 6300 0    50   ~ 0
+O1
+Text Label 2500 6350 0    50   ~ 0
+O2
+Text Label 2500 6400 0    50   ~ 0
+O3
+Text Label 2500 6450 0    50   ~ 0
+O4
+Text Label 2500 6500 0    50   ~ 0
+O5
+Text Label 2500 6600 0    50   ~ 0
 O7
 $Comp
 L power:GND #PWR05
@@ -369,20 +369,20 @@ $Comp
 L Connector:Conn_01x03_Male J6
 U 1 1 6363769E
 P 5200 1100
-F 0 "J6" H 5200 1300 50  0000 C CNN
-F 1 "Conn_01x03_Male" H 5200 925 50  0000 C CNN
+F 0 "J6" H 5225 925 50  0000 C CNN
+F 1 "Conn_01x03_Male" H 5200 1300 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal" H 5200 1100 50  0001 C CNN
 F 3 "~" H 5200 1100 50  0001 C CNN
 	1    5200 1100
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
-Text Label 3850 1000 0    50   ~ 0
-GT
-Text Label 3850 1100 0    50   ~ 0
-LT
 Text Label 3850 1200 0    50   ~ 0
+GT
+Text Label 3850 1000 0    50   ~ 0
+LT
+Text Label 3850 1100 0    50   ~ 0
 EQ
-Text Label 2500 6300 0    50   ~ 0
+Text Label 2500 6550 0    50   ~ 0
 O6
 Wire Wire Line
 	5500 2500 5500 5100
@@ -411,12 +411,12 @@ EQ(I)
 $Comp
 L 74xx:74LS08 U4
 U 1 1 63674782
-P 6950 850
-F 0 "U4" H 6825 1050 50  0000 C CNN
-F 1 "74LS08" H 7075 1050 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6950 850 50  0001 C CNN
-	1    6950 850 
+P 10300 1350
+F 0 "U4" H 10175 1550 50  0000 C CNN
+F 1 "74LS08" H 10425 1550 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 10300 1350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 10300 1350 50  0001 C CNN
+	1    10300 1350
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -433,24 +433,24 @@ $EndComp
 $Comp
 L 74xx:74LS08 U4
 U 3 1 636776F1
-P 6950 1850
-F 0 "U4" H 6825 2050 50  0000 C CNN
-F 1 "74LS08" H 7075 2050 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 1850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6950 1850 50  0001 C CNN
-	3    6950 1850
+P 6950 850
+F 0 "U4" H 6825 1050 50  0000 C CNN
+F 1 "74LS08" H 7075 1050 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6950 850 50  0001 C CNN
+	3    6950 850 
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS08 U4
 U 4 1 63679175
-P 10300 1350
-F 0 "U4" H 10300 1675 50  0000 C CNN
-F 1 "74LS08" H 10300 1584 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 10300 1350 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 10300 1350 50  0001 C CNN
-	4    10300 1350
-	1    0    0    -1  
+P 6950 1350
+F 0 "U4" H 6950 1675 50  0000 C CNN
+F 1 "74LS08" H 6950 1584 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 1350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6950 1350 50  0001 C CNN
+	4    6950 1350
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS08 U4
@@ -514,45 +514,45 @@ Previous\nResult\nIn
 $Comp
 L 74xx:74LS00 U5
 U 1 1 6369DF1D
-P 6050 1750
-F 0 "U5" H 5925 1950 50  0000 C CNN
-F 1 "74LS00" H 6175 1950 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6050 1750 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 6050 1750 50  0001 C CNN
-	1    6050 1750
+P 9300 1850
+F 0 "U5" H 9175 2050 50  0000 C CNN
+F 1 "74LS00" H 9425 2050 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 9300 1850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 9300 1850 50  0001 C CNN
+	1    9300 1850
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS00 U5
 U 2 1 636A1716
-P 6950 1350
-F 0 "U5" H 6825 1550 50  0000 C CNN
-F 1 "74LS00" H 7100 1550 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 1350 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 6950 1350 50  0001 C CNN
-	2    6950 1350
+P 9300 1350
+F 0 "U5" H 9175 1550 50  0000 C CNN
+F 1 "74LS00" H 9450 1550 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 9300 1350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 9300 1350 50  0001 C CNN
+	2    9300 1350
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74LS00 U5
 U 3 1 636A34E9
-P 9300 1350
-F 0 "U5" H 9300 1675 50  0000 C CNN
-F 1 "74LS00" H 9300 1584 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 9300 1350 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 9300 1350 50  0001 C CNN
-	3    9300 1350
-	1    0    0    -1  
+P 6950 1850
+F 0 "U5" H 6950 2175 50  0000 C CNN
+F 1 "74LS00" H 6950 2084 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6950 1850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 6950 1850 50  0001 C CNN
+	3    6950 1850
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS00 U5
 U 4 1 636A5509
-P 9300 1850
-F 0 "U5" H 9300 2175 50  0000 C CNN
-F 1 "74LS00" H 9300 2084 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 9300 1850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 9300 1850 50  0001 C CNN
-	4    9300 1850
+P 6050 1750
+F 0 "U5" H 6050 2075 50  0000 C CNN
+F 1 "74LS00" H 6050 1984 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 6050 1750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74ls00" H 6050 1750 50  0001 C CNN
+	4    6050 1750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -588,13 +588,13 @@ LT(I)
 Text Label 7250 1850 0    50   ~ 0
 EQ(I)
 Connection ~ 6400 950 
-Text Label 5500 1000 0    50   ~ 0
+Text Label 5475 1000 0    50   ~ 0
 GT_IN
-Text Label 5500 1100 0    50   ~ 0
+Text Label 5475 1100 0    50   ~ 0
 LT_IN
-Text Label 5500 1200 0    50   ~ 0
+Text Label 5475 1200 0    50   ~ 0
 EQ_IN
-Text Notes 5975 2275 0    50   ~ 0
+Text Notes 5825 675  0    50   ~ 0
 Expand == 0: CMP\nExpand == 1: CMPC
 NoConn ~ 9000 1250
 NoConn ~ 9000 1450
@@ -654,4 +654,27 @@ F 3 "" H 10250 3800 50  0001 C CNN
 $EndComp
 NoConn ~ 1950 1800
 NoConn ~ 3025 6375
+$Comp
+L Device:R R1
+U 1 1 63668488
+P 6400 2100
+F 0 "R1" H 6450 2150 50  0000 L CNN
+F 1 "10k" V 6400 2025 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 6330 2100 50  0001 C CNN
+F 3 "~" H 6400 2100 50  0001 C CNN
+	1    6400 2100
+	1    0    0    -1  
+$EndComp
+Connection ~ 6400 1950
+$Comp
+L power:GND #PWR0107
+U 1 1 6366A6F1
+P 6400 2250
+F 0 "#PWR0107" H 6400 2000 50  0001 C CNN
+F 1 "GND" H 6405 2077 50  0000 C CNN
+F 2 "" H 6400 2250 50  0001 C CNN
+F 3 "" H 6400 2250 50  0001 C CNN
+	1    6400 2250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
