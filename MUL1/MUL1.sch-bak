@@ -610,7 +610,7 @@ U 1 1 63790E0D
 P 1750 5750
 F 0 "J5" H 1800 5550 50  0000 R CNN
 F 1 "Conn_01x02_Male" H 2075 6075 50  0000 R CNN
-F 2 "" H 1750 5750 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 1750 5750 50  0001 C CNN
 F 3 "~" H 1750 5750 50  0001 C CNN
 	1    1750 5750
 	1    0    0    1   
