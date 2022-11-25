@@ -307,28 +307,28 @@ Wire Wire Line
 $Comp
 L Connector:Conn_01x01_Male J5
 U 1 1 62B23640
-P 1475 1800
-F 0 "J5" H 1475 1925 50  0000 C CNN
-F 1 "Conn_01x01_Male" H 1525 1725 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1475 1800 50  0001 C CNN
-F 3 "~" H 1475 1800 50  0001 C CNN
-	1    1475 1800
+P 1000 1750
+F 0 "J5" H 1000 1875 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 1050 1675 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1000 1750 50  0001 C CNN
+F 3 "~" H 1000 1750 50  0001 C CNN
+	1    1000 1750
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x01_Male J6
 U 1 1 62B24097
-P 4525 4500
-F 0 "J6" H 4497 4524 50  0000 R CNN
-F 1 "Conn_01x01_Male" H 4497 4433 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 4525 4500 50  0001 C CNN
-F 3 "~" H 4525 4500 50  0001 C CNN
-	1    4525 4500
+P 5450 4600
+F 0 "J6" H 5422 4624 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 5422 4533 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5450 4600 50  0001 C CNN
+F 3 "~" H 5450 4600 50  0001 C CNN
+	1    5450 4600
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
 	3750 4500 4325 4500
-Text Label 3850 4500 0    50   ~ 0
+Text Label 4925 4600 0    50   ~ 0
 ADD_COUT
 Text Label 5125 2000 0    50   ~ 0
 ~OE
@@ -343,13 +343,13 @@ Latch
 $Comp
 L power:GND #PWR04
 U 1 1 62B2EF0E
-P 5750 3750
-F 0 "#PWR04" H 5750 3500 50  0001 C CNN
-F 1 "GND" H 5850 3650 50  0000 C CNN
-F 2 "" H 5750 3750 50  0001 C CNN
-F 3 "" H 5750 3750 50  0001 C CNN
-	1    5750 3750
-	1    0    0    -1  
+P 5750 2150
+F 0 "#PWR04" H 5750 1900 50  0001 C CNN
+F 1 "GND" H 5850 2050 50  0000 C CNN
+F 2 "" H 5750 2150 50  0001 C CNN
+F 3 "" H 5750 2150 50  0001 C CNN
+	1    5750 2150
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR03
@@ -376,33 +376,22 @@ $EndComp
 $Comp
 L power:VCC #PWR02
 U 1 1 62B30B45
-P 5750 2150
-F 0 "#PWR02" H 5750 2000 50  0001 C CNN
-F 1 "VCC" H 5765 2323 50  0000 C CNN
-F 2 "" H 5750 2150 50  0001 C CNN
-F 3 "" H 5750 2150 50  0001 C CNN
-	1    5750 2150
-	1    0    0    -1  
+P 5750 3750
+F 0 "#PWR02" H 5750 3600 50  0001 C CNN
+F 1 "VCC" H 5765 3923 50  0000 C CNN
+F 2 "" H 5750 3750 50  0001 C CNN
+F 3 "" H 5750 3750 50  0001 C CNN
+	1    5750 3750
+	-1   0    0    1   
 $EndComp
-$Comp
-L 74xGxx:74AHC1G08 U4
-U 1 1 62B312EB
-P 2250 1750
-F 0 "U4" H 2225 2017 50  0000 C CNN
-F 1 "74AHC1G08" H 2225 1926 50  0000 C CNN
-F 2 "CommonLibrary:tssop5" H 2250 1750 50  0001 C CNN
-F 3 "http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf" H 2250 1750 50  0001 C CNN
-	1    2250 1750
-	1    0    0    -1  
-$EndComp
-Text Label 1675 1700 0    50   ~ 0
+Text Label 1200 1550 0    50   ~ 0
 UseCF
-Text Label 1675 1800 0    50   ~ 0
+Text Label 1200 1750 0    50   ~ 0
 ADD_CIN
 Wire Wire Line
-	1675 1700 1950 1700
+	1200 1550 1475 1550
 Wire Wire Line
-	1675 1800 1950 1800
+	1200 1750 1475 1750
 $Comp
 L power:VCC #PWR0103
 U 1 1 63463E30
@@ -447,8 +436,6 @@ F 3 "~" H 1750 5100 50  0001 C CNN
 	1    1750 5100
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	2500 1750 2750 1750
 $Comp
 L Device:C C1
 U 1 1 6346CBEA
@@ -567,4 +554,97 @@ Text Label 2750 6000 0    50   ~ 0
 Latch
 Text Label 3250 6000 0    50   ~ 0
 UseCF
+$Comp
+L 74xx:74HC00 U4
+U 1 1 6381ABFB
+P 1775 1650
+F 0 "U4" H 1775 1975 50  0000 C CNN
+F 1 "74HC00" H 1775 1884 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 1775 1650 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 1775 1650 50  0001 C CNN
+	1    1775 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC00 U4
+U 2 1 6381C2B0
+P 2375 1750
+F 0 "U4" H 2375 2075 50  0000 C CNN
+F 1 "74HC00" H 2375 1984 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 2375 1750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 2375 1750 50  0001 C CNN
+	2    2375 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC00 U4
+U 3 1 6381E198
+P 4625 4600
+F 0 "U4" H 4625 4800 50  0000 C CNN
+F 1 "74HC00" H 4625 4400 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 4625 4600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4625 4600 50  0001 C CNN
+	3    4625 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC00 U4
+U 4 1 6381F952
+P 4025 4900
+F 0 "U4" H 3975 5100 50  0000 C CNN
+F 1 "74HC00" H 4050 4700 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 4025 4900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4025 4900 50  0001 C CNN
+	4    4025 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC00 U4
+U 5 1 63820A9A
+P 4750 6000
+F 0 "U4" H 4980 6046 50  0000 L CNN
+F 1 "74HC00" H 4980 5955 50  0000 L CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 4750 6000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4750 6000 50  0001 C CNN
+	5    4750 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2675 1750 2750 1750
+Wire Wire Line
+	2075 1850 2075 1650
+Connection ~ 2075 1650
+Wire Wire Line
+	4925 4600 5250 4600
+Wire Wire Line
+	4325 4700 4325 4900
+Wire Wire Line
+	3725 4800 3725 5000
+Wire Wire Line
+	3725 5000 3725 5350
+Connection ~ 3725 5000
+Text Label 3725 5350 0    50   ~ 0
+~OE
+$Comp
+L power:VCC #PWR0109
+U 1 1 638433A8
+P 4750 5500
+F 0 "#PWR0109" H 4750 5350 50  0001 C CNN
+F 1 "VCC" H 4765 5673 50  0000 C CNN
+F 2 "" H 4750 5500 50  0001 C CNN
+F 3 "" H 4750 5500 50  0001 C CNN
+	1    4750 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0110
+U 1 1 63843816
+P 4750 6500
+F 0 "#PWR0110" H 4750 6250 50  0001 C CNN
+F 1 "GND" H 4755 6327 50  0000 C CNN
+F 2 "" H 4750 6500 50  0001 C CNN
+F 3 "" H 4750 6500 50  0001 C CNN
+	1    4750 6500
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
