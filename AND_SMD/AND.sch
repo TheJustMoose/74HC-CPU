@@ -57,9 +57,9 @@ F 3 "~" H 1750 5150 50  0001 C CNN
 	1    1750 5150
 	1    0    0    1   
 $EndComp
-Text Notes 1400 3150 0    50   ~ 0
+Text Notes 1525 4150 0    50   ~ 0
 A
-Text Notes 1425 4125 0    50   ~ 0
+Text Notes 1525 3150 0    50   ~ 0
 B
 Text Notes 7375 3425 0    50   ~ 0
 Out
@@ -534,7 +534,7 @@ F 1 "LED" V 3763 5305 50  0000 L CNN
 F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 3725 5225 50  0001 C CNN
 F 3 "~" H 3725 5225 50  0001 C CNN
 	1    3725 5225
-	0    1    1    0   
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R1
@@ -561,13 +561,13 @@ F 3 "" H 3725 5075 50  0001 C CNN
 	1    3725 5075
 	1    0    0    -1  
 $EndComp
-Text Label 2000 3500 0    50   ~ 0
+Text Label 2000 4500 0    50   ~ 0
 A0
-Text Label 2000 2800 0    50   ~ 0
+Text Label 2000 3800 0    50   ~ 0
 A7
-Text Label 2025 4500 0    50   ~ 0
+Text Label 1950 3500 0    50   ~ 0
 B0
-Text Label 1975 3800 0    50   ~ 0
+Text Label 1975 2800 0    50   ~ 0
 B7
 Text Label 6800 3750 0    50   ~ 0
 OUT0
