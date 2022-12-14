@@ -904,7 +904,7 @@
   (gr_text OUT (at 107.6325 73.3425) (layer F.SilkS) (tstamp 63843B19)
     (effects (font (size 1.5 1.5) (thickness 0.2)))
   )
-  (gr_text "DST(A)" (at 85.4075 73.025) (layer F.SilkS)
+  (gr_text "DST(A)" (at 85.4075 73.3425) (layer F.SilkS)
     (effects (font (size 1.5 1.5) (thickness 0.2)))
   )
   (gr_text ~OE (at 129.54 73.66 90) (layer F.SilkS)
