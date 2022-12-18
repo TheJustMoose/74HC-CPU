@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\Ports\Ports.sch)
-    (date "04/11/2022 18:51:56")
+    (date "18/12/2022 23:28:13")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -80,7 +80,7 @@
       (tstamp 6365C12F))
     (comp (ref C1)
       (value 0.1uF)
-      (footprint Capacitor_THT:C_Disc_D5.1mm_W3.2mm_P5.00mm)
+      (footprint Capacitor_THT:C_Disc_D9.0mm_W5.0mm_P10.00mm)
       (datasheet ~)
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /) (tstamps /))
