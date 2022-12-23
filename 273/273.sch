@@ -186,4 +186,35 @@ Wire Wire Line
 	1450 3300 1600 3300
 Wire Wire Line
 	1450 3400 1600 3400
+$Comp
+L Device:C C1
+U 1 1 63A69FDC
+P 2000 4150
+F 0 "C1" H 2115 4196 50  0000 L CNN
+F 1 "0.1uF" H 2115 4105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 2038 4000 50  0001 C CNN
+F 3 "~" H 2000 4150 50  0001 C CNN
+	1    2000 4150
+	1    0    0    -1  
+$EndComp
+Text Label 2000 4000 0    50   ~ 0
+VCC
+Text Label 2000 4300 0    50   ~ 0
+GND
+$Comp
+L Device:R R1
+U 1 1 63A6AC8F
+P 2750 3650
+F 0 "R1" H 2820 3696 50  0000 L CNN
+F 1 "10k" H 2820 3605 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2680 3650 50  0001 C CNN
+F 3 "~" H 2750 3650 50  0001 C CNN
+	1    2750 3650
+	1    0    0    -1  
+$EndComp
+Connection ~ 2750 3500
+Wire Wire Line
+	2750 4000 2750 3800
+Text Label 2750 4000 0    50   ~ 0
+VCC
 $EndSCHEMATC
