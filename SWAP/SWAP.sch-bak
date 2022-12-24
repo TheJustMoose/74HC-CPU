@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Connector:Conn_01x08_Male J1
-U 1 1 5F5004CF
-P 3250 2050
-F 0 "J1" H 3358 2531 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 3250 1550 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 3250 2050 50  0001 C CNN
-F 3 "~" H 3250 2050 50  0001 C CNN
-	1    3250 2050
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:Conn_01x08_Male J2
 U 1 1 5F5016B1
 P 4250 2950
@@ -59,8 +48,6 @@ F 3 "~" H 1750 5150 50  0001 C CNN
 $EndComp
 Text Notes 4125 3050 0    50   ~ 0
 A
-Text Notes 3000 2125 0    50   ~ 0
-B
 Text Notes 7375 3425 0    50   ~ 0
 Out
 Text Notes 1550 5125 0    50   ~ 0
@@ -273,10 +260,6 @@ Text Label 4450 3350 0    50   ~ 0
 A0
 Text Label 4450 2650 0    50   ~ 0
 A7
-Text Label 3450 2450 0    50   ~ 0
-B0
-Text Label 3450 1750 0    50   ~ 0
-B7
 Text Label 6800 3750 0    50   ~ 0
 OUT0
 Text Label 6800 3050 0    50   ~ 0
@@ -285,14 +268,6 @@ Text Label 1975 5250 0    50   ~ 0
 ~OE
 Text Label 2025 4625 0    50   ~ 0
 Latch
-NoConn ~ 3450 1750
-NoConn ~ 3450 1850
-NoConn ~ 3450 1950
-NoConn ~ 3450 2050
-NoConn ~ 3450 2150
-NoConn ~ 3450 2250
-NoConn ~ 3450 2350
-NoConn ~ 3450 2450
 Wire Wire Line
 	4450 3050 5750 3050
 Wire Wire Line
