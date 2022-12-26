@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\ADD\ADD.sch)
-    (date "25/11/2022 23:56:41")
+    (date "26/12/2022 07:38:35")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -316,7 +316,7 @@
       (node (ref U4) (pin 12))
       (node (ref R1) (pin 2))
       (node (ref U3) (pin 1))
-      (node (ref J4) (pin 2))
+      (node (ref J4) (pin 1))
       (node (ref U4) (pin 13)))
     (net (code 10) (name /Latch)
       (node (ref U3) (pin 11))
@@ -394,7 +394,7 @@
     (net (code 30) (name /UseCF)
       (node (ref U4) (pin 1))
       (node (ref R3) (pin 1))
-      (node (ref J4) (pin 1)))
+      (node (ref J4) (pin 2)))
     (net (code 31) (name /O0)
       (node (ref J3) (pin 8))
       (node (ref U3) (pin 12)))

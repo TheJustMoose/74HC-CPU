@@ -154,9 +154,9 @@ F 3 "~" H 1000 5200 50  0001 C CNN
 	1    1000 5200
 	1    0    0    1   
 $EndComp
-Text Label 1200 5400 0    50   ~ 0
-UseCF
 Text Label 1200 5300 0    50   ~ 0
+UseCF
+Text Label 1200 5400 0    50   ~ 0
 ~OE
 $Comp
 L power:GND #PWR0101
