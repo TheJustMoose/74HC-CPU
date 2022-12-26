@@ -59,7 +59,7 @@ U 1 1 638139F2
 P 3550 4675
 F 0 "J5" H 3575 4400 50  0000 R CNN
 F 1 "Conn_01x05_Male" H 3900 5025 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3550 4675 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal" H 3550 4675 50  0001 C CNN
 F 3 "~" H 3550 4675 50  0001 C CNN
 	1    3550 4675
 	1    0    0    1   

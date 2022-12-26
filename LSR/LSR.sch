@@ -70,9 +70,9 @@ Text Label 3750 4575 0    50   ~ 0
 VCC
 Text Label 3750 4675 0    50   ~ 0
 GND
-Text Label 3750 4775 0    50   ~ 0
-~OE
 Text Label 3750 4875 0    50   ~ 0
+~OE
+Text Label 3750 4775 0    50   ~ 0
 UseCF
 $Comp
 L Connector:Conn_01x08_Male J3

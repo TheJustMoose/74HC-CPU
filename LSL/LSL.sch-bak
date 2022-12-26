@@ -27,31 +27,29 @@ $EndComp
 $Comp
 L Connector:Conn_01x08_Male J2
 U 1 1 638169EE
-P 3550 2800
-F 0 "J2" H 3550 2325 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 3658 3190 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 3550 2800 50  0001 C CNN
-F 3 "~" H 3550 2800 50  0001 C CNN
-	1    3550 2800
+P 3550 3000
+F 0 "J2" H 3550 2525 50  0000 C CNN
+F 1 "Conn_01x08_Male" H 3658 3390 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 3550 3000 50  0001 C CNN
+F 3 "~" H 3550 3000 50  0001 C CNN
+	1    3550 3000
 	1    0    0    1   
 $EndComp
-Wire Wire Line
-	3750 2600 4500 2600
-Wire Wire Line
-	3750 2700 4500 2700
 Wire Wire Line
 	3750 2800 4500 2800
 Wire Wire Line
 	3750 2900 4500 2900
 Wire Wire Line
-	3750 2500 4500 2500
+	3750 3000 4500 3000
 Wire Wire Line
-	3750 2400 4000 2400
-Text Label 3825 2400 0    50   ~ 0
-D0
-Text Label 3825 2500 0    50   ~ 0
-D1
+	3750 3100 4500 3100
+Wire Wire Line
+	3750 2700 4500 2700
 Text Label 3825 2600 0    50   ~ 0
+D0
+Text Label 3825 2700 0    50   ~ 0
+D1
+Text Label 3825 2800 0    50   ~ 0
 D2
 $Comp
 L Connector:Conn_01x05_Male J5
@@ -117,16 +115,12 @@ Text Label 5725 3100 0    50   ~ 0
 O6
 Text Label 5725 3200 0    50   ~ 0
 O7
-Text Label 3825 2700 0    50   ~ 0
-D3
-Text Label 3825 2800 0    50   ~ 0
-D4
 Text Label 3825 2900 0    50   ~ 0
+D3
+Text Label 3825 3000 0    50   ~ 0
+D4
+Text Label 3825 3100 0    50   ~ 0
 D5
-Wire Wire Line
-	3750 3000 4500 3000
-Wire Wire Line
-	3750 3100 4500 3100
 $Comp
 L 74xx:74HC00 U1
 U 1 1 6381814B
@@ -152,23 +146,23 @@ $EndComp
 $Comp
 L 74xx:74HC00 U1
 U 3 1 6381AB86
-P 3650 3700
-F 0 "U1" H 3650 4025 50  0000 C CNN
-F 1 "74HC00" H 3650 3934 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 3650 3700 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3650 3700 50  0001 C CNN
-	3    3650 3700
+P 3700 4000
+F 0 "U1" H 3700 4325 50  0000 C CNN
+F 1 "74HC00" H 3700 4234 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 3700 4000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3700 4000 50  0001 C CNN
+	3    3700 4000
 	1    0    0    -1  
 $EndComp
 $Comp
 L 74xx:74HC00 U1
 U 4 1 6381C85E
-P 3050 3700
-F 0 "U1" H 3050 4025 50  0000 C CNN
-F 1 "74HC00" H 3050 3934 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 3050 3700 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3050 3700 50  0001 C CNN
-	4    3050 3700
+P 3100 4000
+F 0 "U1" H 3100 4325 50  0000 C CNN
+F 1 "74HC00" H 3100 4234 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 3100 4000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3100 4000 50  0001 C CNN
+	4    3100 4000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -205,33 +199,27 @@ $EndComp
 Wire Wire Line
 	4600 1650 5075 1650
 Wire Wire Line
-	3350 3600 3350 3700
+	3400 3900 3400 4000
 Wire Wire Line
-	3350 3800 3350 3700
-Connection ~ 3350 3700
+	3400 4100 3400 4000
+Connection ~ 3400 4000
 Wire Wire Line
-	3950 3700 4150 3700
+	2550 3900 2800 3900
 Wire Wire Line
-	4150 3700 4150 3200
-Wire Wire Line
-	4150 3200 4500 3200
-Wire Wire Line
-	2500 3600 2750 3600
-Wire Wire Line
-	2500 3800 2750 3800
-Text Label 2500 3600 0    50   ~ 0
+	2550 4100 2800 4100
+Text Label 2550 3900 0    50   ~ 0
 UseCF
-Text Label 2500 3800 0    50   ~ 0
+Text Label 2550 4100 0    50   ~ 0
 CF_IN
 $Comp
 L Connector:Conn_01x01_Male J4
 U 1 1 6383A97A
-P 2300 3800
-F 0 "J4" H 2275 3875 50  0000 C CNN
-F 1 "Conn_01x01_Male" H 2300 3700 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2300 3800 50  0001 C CNN
-F 3 "~" H 2300 3800 50  0001 C CNN
-	1    2300 3800
+P 2350 4100
+F 0 "J4" H 2325 4175 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 2350 4000 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2350 4100 50  0001 C CNN
+F 3 "~" H 2350 4100 50  0001 C CNN
+	1    2350 4100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -264,9 +252,9 @@ F 3 "" H 5000 3500 50  0001 C CNN
 	1    5000 3500
 	-1   0    0    1   
 $EndComp
-Text Label 3825 3000 0    50   ~ 0
+Text Label 3825 3200 0    50   ~ 0
 D6
-Text Label 3825 3100 0    50   ~ 0
+Text Label 3825 3300 0    50   ~ 0
 D7
 $Comp
 L power:GND #PWR010
@@ -428,8 +416,20 @@ F 3 "" H 8500 2225 50  0001 C CNN
 $EndComp
 Text Label 8500 1925 0    50   ~ 0
 UseCF
-Wire Wire Line
-	4000 1750 4000 2400
 Text Notes 5225 2025 0    50   ~ 0
 It's ROTATED!\nGROUND IS ABOVE!
+Wire Wire Line
+	3750 3200 4500 3200
+Wire Wire Line
+	3750 2600 4500 2600
+Wire Wire Line
+	4000 3300 3750 3300
+Wire Wire Line
+	4000 1750 4000 3300
+Wire Wire Line
+	4325 4000 4325 2500
+Wire Wire Line
+	4325 2500 4500 2500
+Wire Wire Line
+	4000 4000 4325 4000
 $EndSCHEMATC
