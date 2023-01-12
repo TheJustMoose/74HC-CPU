@@ -552,4 +552,10 @@ Wire Wire Line
 Connection ~ 3600 3250
 Wire Wire Line
 	3600 3250 3750 3250
+Text Label 3400 3250 0    50   ~ 0
+~OE
+Text Label 3400 3150 0    50   ~ 0
+CP
+Text Label 3750 2950 0    50   ~ 0
+D7
 $EndSCHEMATC
