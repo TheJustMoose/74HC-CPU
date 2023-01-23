@@ -1217,14 +1217,31 @@ Wire Wire Line
 Text Label 11500 1525 0    50   ~ 0
 ~OE
 $Comp
-L Mechanical:MountingHole H?
+L Mechanical:MountingHole H4
 U 1 1 63D8F403
 P 10000 6500
-F 0 "H?" H 10100 6546 50  0000 L CNN
+F 0 "H4" H 10100 6546 50  0000 L CNN
 F 1 "MountingHole" H 10100 6455 50  0000 L CNN
 F 2 "MountingHole:MountingHole_3.2mm_M3" H 10000 6500 50  0001 C CNN
 F 3 "~" H 10000 6500 50  0001 C CNN
 	1    10000 6500
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x03_Male J?
+U 1 1 63CF2007
+P 6750 6000
+F 0 "J?" H 6858 6281 50  0000 C CNN
+F 1 "Conn_01x03_Male" H 6750 5775 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 6750 6000 50  0001 C CNN
+F 3 "~" H 6750 6000 50  0001 C CNN
+	1    6750 6000
+	1    0    0    -1  
+$EndComp
+Text Label 6950 5900 0    50   ~ 0
+S0
+Text Label 6950 6000 0    50   ~ 0
+S1
+Text Label 6950 6100 0    50   ~ 0
+~E
 $EndSCHEMATC
