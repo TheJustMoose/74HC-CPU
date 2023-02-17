@@ -1232,7 +1232,7 @@ F 1 "Conn_01x09_Male" V 3050 6275 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3125 6275 50  0001 C CNN
 F 3 "~" H 3125 6275 50  0001 C CNN
 	1    3125 6275
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J15
@@ -1561,7 +1561,7 @@ F 1 "Conn_01x09_Male" V 3850 6275 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3925 6275 50  0001 C CNN
 F 3 "~" H 3925 6275 50  0001 C CNN
 	1    3925 6275
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR06
