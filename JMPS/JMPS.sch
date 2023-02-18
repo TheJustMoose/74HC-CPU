@@ -1,0 +1,376 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 74xx_IEEE:74HC238 U3
+U 1 1 63F1022E
+P 2550 1200
+F 0 "U3" H 2550 1716 50  0000 C CNN
+F 1 "74HC238" H 2550 1625 50  0000 C CNN
+F 2 "" H 2550 1200 50  0001 C CNN
+F 3 "" H 2550 1200 50  0001 C CNN
+	1    2550 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx_IEEE:74HC238 U4
+U 1 1 63F11C69
+P 2550 2700
+F 0 "U4" H 2550 3216 50  0000 C CNN
+F 1 "74HC238" H 2550 3125 50  0000 C CNN
+F 2 "" H 2550 2700 50  0001 C CNN
+F 3 "" H 2550 2700 50  0001 C CNN
+	1    2550 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 63F1268E
+P 1875 1000
+F 0 "#PWR01" H 1875 750 50  0001 C CNN
+F 1 "GND" V 1880 872 50  0000 R CNN
+F 2 "" H 1875 1000 50  0001 C CNN
+F 3 "" H 1875 1000 50  0001 C CNN
+	1    1875 1000
+	0    1    1    0   
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 1 1 63F13109
+P 4800 1600
+F 0 "U1" H 4800 1925 50  0000 C CNN
+F 1 "74LS08" H 4800 1834 50  0000 C CNN
+F 2 "" H 4800 1600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 1600 50  0001 C CNN
+	1    4800 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 2 1 63F13D91
+P 4800 2350
+F 0 "U1" H 4800 2675 50  0000 C CNN
+F 1 "74LS08" H 4800 2584 50  0000 C CNN
+F 2 "" H 4800 2350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 2350 50  0001 C CNN
+	2    4800 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 3 1 63F15727
+P 4800 3100
+F 0 "U1" H 4800 3425 50  0000 C CNN
+F 1 "74LS08" H 4800 3334 50  0000 C CNN
+F 2 "" H 4800 3100 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 3100 50  0001 C CNN
+	3    4800 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 4 1 63F16836
+P 4800 3850
+F 0 "U1" H 4800 4175 50  0000 C CNN
+F 1 "74LS08" H 4800 4084 50  0000 C CNN
+F 2 "" H 4800 3850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 3850 50  0001 C CNN
+	4    4800 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 5 1 63F17470
+P 9500 5750
+F 0 "U1" H 9730 5796 50  0000 L CNN
+F 1 "74LS08" H 9730 5705 50  0000 L CNN
+F 2 "" H 9500 5750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 9500 5750 50  0001 C CNN
+	5    9500 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U5
+U 1 1 63F1F0DA
+P 4800 4600
+F 0 "U5" H 4800 4925 50  0000 C CNN
+F 1 "74LS08" H 4800 4834 50  0000 C CNN
+F 2 "" H 4800 4600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 4600 50  0001 C CNN
+	1    4800 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U5
+U 2 1 63F1F0E0
+P 4800 5350
+F 0 "U5" H 4800 5675 50  0000 C CNN
+F 1 "74LS08" H 4800 5584 50  0000 C CNN
+F 2 "" H 4800 5350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 5350 50  0001 C CNN
+	2    4800 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U5
+U 3 1 63F1F0E6
+P 4800 6100
+F 0 "U5" H 4800 6425 50  0000 C CNN
+F 1 "74LS08" H 4800 6334 50  0000 C CNN
+F 2 "" H 4800 6100 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4800 6100 50  0001 C CNN
+	3    4800 6100
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U5
+U 4 1 63F1F0EC
+P 8050 5725
+F 0 "U5" H 8050 6050 50  0000 C CNN
+F 1 "74LS08" H 8050 5959 50  0000 C CNN
+F 2 "" H 8050 5725 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 8050 5725 50  0001 C CNN
+	4    8050 5725
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS08 U5
+U 5 1 63F1F0F2
+P 10500 5750
+F 0 "U5" H 10730 5796 50  0000 L CNN
+F 1 "74LS08" H 10730 5705 50  0000 L CNN
+F 2 "" H 10500 5750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 10500 5750 50  0001 C CNN
+	5    10500 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:74HC4078 U2
+U 1 1 63F2028A
+P 7225 1075
+F 0 "U2" H 7568 1021 50  0000 L CNN
+F 1 "74HC4078" H 7568 930 50  0000 L CNN
+F 2 "" H 7225 1075 50  0001 C CNN
+F 3 "" H 7225 1075 50  0001 C CNN
+	1    7225 1075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 1000 7000 1000
+Wire Wire Line
+	3100 1100 5300 1100
+Wire Wire Line
+	3100 1300 4000 1300
+Wire Wire Line
+	4000 1300 4000 1500
+Wire Wire Line
+	4000 1500 4500 1500
+Wire Wire Line
+	3100 1400 3925 1400
+Wire Wire Line
+	3925 1400 3925 2250
+Wire Wire Line
+	3925 2250 4500 2250
+Wire Wire Line
+	3100 1500 3850 1500
+Wire Wire Line
+	3850 1500 3850 3000
+Wire Wire Line
+	3850 3000 4500 3000
+Wire Wire Line
+	3100 1600 3775 1600
+Wire Wire Line
+	3775 1600 3775 3750
+Wire Wire Line
+	3775 3750 4500 3750
+Wire Wire Line
+	3100 1700 3700 1700
+Wire Wire Line
+	3700 1700 3700 4500
+Wire Wire Line
+	3700 4500 4500 4500
+Wire Wire Line
+	3100 2500 3625 2500
+Wire Wire Line
+	3625 2500 3625 5250
+Wire Wire Line
+	3625 5250 4500 5250
+Wire Wire Line
+	4250 1700 4500 1700
+Wire Wire Line
+	4250 2450 4500 2450
+Wire Wire Line
+	4250 3200 4500 3200
+Wire Wire Line
+	4250 3950 4500 3950
+Wire Wire Line
+	4250 4700 4500 4700
+Wire Wire Line
+	4250 5450 4500 5450
+Text Label 4250 1700 0    50   ~ 0
+ZF
+Text Label 4250 2450 0    50   ~ 0
+LF
+Text Label 4250 3200 0    50   ~ 0
+EF
+Text Label 4250 3950 0    50   ~ 0
+GF
+Text Label 4250 4700 0    50   ~ 0
+CF
+Text Label 4250 5450 0    50   ~ 0
+~ZF
+Wire Wire Line
+	4250 6200 4500 6200
+Text Label 4250 6200 0    50   ~ 0
+~CF
+Wire Wire Line
+	3100 2600 3550 2600
+Wire Wire Line
+	3550 2600 3550 6000
+Wire Wire Line
+	3550 6000 4500 6000
+Wire Wire Line
+	1750 1550 2000 1550
+Wire Wire Line
+	1750 1650 2000 1650
+Wire Wire Line
+	1750 1750 2000 1750
+Text Label 1750 1550 0    50   ~ 0
+DST[0]
+Text Label 1750 1150 0    50   ~ 0
+DST[1]
+Text Label 1750 1750 0    50   ~ 0
+SRC[0]
+Wire Wire Line
+	1750 1150 2000 1150
+Text Label 1750 1650 0    50   ~ 0
+SRC[1]
+Wire Wire Line
+	5300 1050 5300 1100
+Wire Wire Line
+	5300 1050 7000 1050
+Wire Wire Line
+	7000 1100 5375 1100
+Wire Wire Line
+	5375 1100 5375 1600
+Wire Wire Line
+	5375 1600 5100 1600
+Text Label 3100 1000 0    50   ~ 0
+CALL
+Text Label 3100 1100 0    50   ~ 0
+JMP
+Text Label 3100 1200 0    50   ~ 0
+RET
+Text Label 3100 1300 0    50   ~ 0
+JZ
+Text Label 3100 1400 0    50   ~ 0
+JL
+Text Label 3100 1500 0    50   ~ 0
+JE
+Text Label 3100 1600 0    50   ~ 0
+JG
+Text Label 3100 1700 0    50   ~ 0
+JC
+Text Label 3100 2500 0    50   ~ 0
+JNZ
+Text Label 3100 2600 0    50   ~ 0
+JNC
+Wire Wire Line
+	7000 1150 5450 1150
+Wire Wire Line
+	5450 1150 5450 2350
+Wire Wire Line
+	5450 2350 5100 2350
+Wire Wire Line
+	7000 1200 5525 1200
+Wire Wire Line
+	5525 1200 5525 3100
+Wire Wire Line
+	5525 3100 5100 3100
+Wire Wire Line
+	7000 1250 5600 1250
+Wire Wire Line
+	5600 1250 5600 3850
+Wire Wire Line
+	5600 3850 5100 3850
+Wire Wire Line
+	7000 1300 5675 1300
+Wire Wire Line
+	5675 1300 5675 4600
+Wire Wire Line
+	5675 4600 5100 4600
+Wire Wire Line
+	7000 1350 5750 1350
+Wire Wire Line
+	5750 1350 5750 5350
+Wire Wire Line
+	5750 5350 5100 5350
+Wire Wire Line
+	1750 3050 2000 3050
+Wire Wire Line
+	1750 3150 2000 3150
+Wire Wire Line
+	1750 3250 2000 3250
+Text Label 1750 3050 0    50   ~ 0
+DST[0]
+Text Label 1750 3250 0    50   ~ 0
+SRC[0]
+Text Label 1750 3150 0    50   ~ 0
+SRC[1]
+Text Label 1750 2800 0    50   ~ 0
+DST[1]
+Wire Wire Line
+	1750 2800 2000 2800
+$Comp
+L power:GND #PWR?
+U 1 1 63F7064B
+P 1875 2500
+F 0 "#PWR?" H 1875 2250 50  0001 C CNN
+F 1 "GND" V 1880 2372 50  0000 R CNN
+F 2 "" H 1875 2500 50  0001 C CNN
+F 3 "" H 1875 2500 50  0001 C CNN
+	1    1875 2500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1875 2500 2000 2500
+Wire Wire Line
+	2000 2500 2000 2650
+Connection ~ 2000 2500
+Wire Wire Line
+	1875 1000 2000 1000
+$Comp
+L Device:R R?
+U 1 1 63F76748
+P 1850 1300
+F 0 "R?" V 1925 1225 50  0000 C CNN
+F 1 "10k" V 1850 1300 50  0000 C CNN
+F 2 "" V 1780 1300 50  0001 C CNN
+F 3 "~" H 1850 1300 50  0001 C CNN
+	1    1850 1300
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 63F77DED
+P 1700 1300
+F 0 "#PWR?" H 1700 1150 50  0001 C CNN
+F 1 "VCC" V 1715 1427 50  0000 L CNN
+F 2 "" H 1700 1300 50  0001 C CNN
+F 3 "" H 1700 1300 50  0001 C CNN
+	1    1700 1300
+	0    -1   -1   0   
+$EndComp
+$EndSCHEMATC
