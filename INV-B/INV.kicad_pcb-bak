@@ -454,7 +454,7 @@
   (gr_text 74HCPU (at 88.9 40.005) (layer B.Cu) (tstamp 63843981)
     (effects (font (size 1.5 1.5) (thickness 0.3)) (justify mirror))
   )
-  (gr_text 29.11.2022 (at 88.265 64.135) (layer B.Cu)
+  (gr_text 02.12.2022 (at 88.265 64.135) (layer B.Cu)
     (effects (font (size 1.5 1.5) (thickness 0.3)) (justify mirror))
   )
   (gr_line (start 76.2 38.1) (end 76.2 66.04) (layer Edge.Cuts) (width 0.05) (tstamp 6383F8D8))
