@@ -96,7 +96,7 @@ U 1 1 62B68C7D
 P 3000 2050
 F 0 "R1" H 3070 2096 50  0000 L CNN
 F 1 "10k" V 3000 1975 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2930 2050 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2930 2050 50  0001 C CNN
 F 3 "~" H 3000 2050 50  0001 C CNN
 	1    3000 2050
 	1    0    0    -1  
@@ -107,7 +107,7 @@ U 1 1 62B695C7
 P 3000 3250
 F 0 "R3" H 3070 3296 50  0000 L CNN
 F 1 "10k" V 3000 3175 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2930 3250 50  0001 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2930 3250 50  0001 C CNN
 F 3 "~" H 3000 3250 50  0001 C CNN
 	1    3000 3250
 	1    0    0    -1  
@@ -473,7 +473,7 @@ U 1 1 62C27682
 P 8750 5650
 F 0 "C1" H 8865 5696 50  0000 L CNN
 F 1 "0.1uF" H 8865 5605 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 8788 5500 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L5.1mm_D3.1mm_P12.50mm_Horizontal" H 8788 5500 50  0001 C CNN
 F 3 "~" H 8750 5650 50  0001 C CNN
 	1    8750 5650
 	1    0    0    -1  
@@ -506,7 +506,7 @@ U 1 1 62C2AB4D
 P 9250 5650
 F 0 "C2" H 9365 5696 50  0000 L CNN
 F 1 "0.1uF" H 9365 5605 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 9288 5500 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L5.1mm_D3.1mm_P12.50mm_Horizontal" H 9288 5500 50  0001 C CNN
 F 3 "~" H 9250 5650 50  0001 C CNN
 	1    9250 5650
 	1    0    0    -1  
@@ -539,7 +539,7 @@ U 1 1 62C2C2EC
 P 9750 5650
 F 0 "C3" H 9865 5696 50  0000 L CNN
 F 1 "0.1uF" H 9865 5605 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 9788 5500 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L5.1mm_D3.1mm_P15.00mm_Horizontal" H 9788 5500 50  0001 C CNN
 F 3 "~" H 9750 5650 50  0001 C CNN
 	1    9750 5650
 	1    0    0    -1  
@@ -576,9 +576,9 @@ Text Label 1200 3600 0    50   ~ 0
 ZF_EN
 Text Label 1200 3500 0    50   ~ 0
 CMP_EN
-Text Label 1200 2550 0    50   ~ 0
-LT_IN
 Text Label 1200 2650 0    50   ~ 0
+LT_IN
+Text Label 1200 2550 0    50   ~ 0
 ~EQ_IN
 Text Label 1200 2750 0    50   ~ 0
 GT_IN
@@ -604,7 +604,7 @@ Text Label 7900 2025 0    50   ~ 0
 LT
 Text Label 7900 2425 0    50   ~ 0
 CF
-Text Label 7900 2525 0    50   ~ 0
+Text Label 7900 2325 0    50   ~ 0
 ~CF
 Text Label 7900 1925 0    50   ~ 0
 ZF
@@ -623,9 +623,9 @@ Wire Wire Line
 	1200 6500 1450 6500
 Wire Wire Line
 	1200 6600 1450 6600
-Text Label 1200 6500 0    50   ~ 0
-C2
 Text Label 1200 6600 0    50   ~ 0
+C2
+Text Label 1200 6500 0    50   ~ 0
 ~RES_FL
 $Comp
 L power:VCC #PWR034
@@ -699,7 +699,7 @@ F 3 "" H 10750 5850 50  0001 C CNN
 	1    10750 5850
 	1    0    0    -1  
 $EndComp
-Text Label 7900 2325 0    50   ~ 0
+Text Label 7900 2525 0    50   ~ 0
 ~ZF
 $Comp
 L 74xx:74HC74 U1
