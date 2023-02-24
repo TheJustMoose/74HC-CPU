@@ -583,30 +583,30 @@ Text Label 1200 2550 0    50   ~ 0
 Text Label 1200 2750 0    50   ~ 0
 GT_IN
 Wire Wire Line
+	7900 2325 8150 2325
+Wire Wire Line
 	7900 2425 8150 2425
 Wire Wire Line
 	7900 2525 8150 2525
 Wire Wire Line
-	7900 1925 8150 1925
-Wire Wire Line
-	7900 2325 8150 2325
-Wire Wire Line
-	7900 2025 8150 2025
-Wire Wire Line
 	7900 2225 8150 2225
 Wire Wire Line
+	7900 1925 8150 1925
+Wire Wire Line
 	7900 2125 8150 2125
-Text Label 7900 2125 0    50   ~ 0
-GT
-Text Label 7900 2225 0    50   ~ 0
-EQ
+Wire Wire Line
+	7900 2025 8150 2025
 Text Label 7900 2025 0    50   ~ 0
-LT
-Text Label 7900 2425 0    50   ~ 0
-CF
-Text Label 7900 2325 0    50   ~ 0
-~CF
+GT
+Text Label 7900 2125 0    50   ~ 0
+EQ
 Text Label 7900 1925 0    50   ~ 0
+LT
+Text Label 7900 2325 0    50   ~ 0
+CF
+Text Label 7900 2225 0    50   ~ 0
+~CF
+Text Label 7900 2525 0    50   ~ 0
 ZF
 $Comp
 L Connector:Conn_01x04_Male J3
@@ -699,7 +699,7 @@ F 3 "" H 10750 5850 50  0001 C CNN
 	1    10750 5850
 	1    0    0    -1  
 $EndComp
-Text Label 7900 2525 0    50   ~ 0
+Text Label 7900 2425 0    50   ~ 0
 ~ZF
 $Comp
 L 74xx:74HC74 U1
