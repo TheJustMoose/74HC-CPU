@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 32)
+    (drawings 33)
     (tracks 443)
     (zones 0)
     (modules 21)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.5)
+    (last_trace_width 1.2)
     (user_trace_width 0.5)
     (user_trace_width 0.6)
     (user_trace_width 0.8)
@@ -68,7 +68,7 @@
     (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 0x010f0_ffffffff)
-      (usegerberextensions true)
+      (usegerberextensions false)
       (usegerberattributes false)
       (usegerberadvancedattributes false)
       (creategerberjobfile false)
@@ -1617,6 +1617,9 @@
     )
   )
 
+  (gr_text +5V (at 153.035 85.09) (layer F.Cu)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
   (gr_text CONST (at 80.01 43.815) (layer F.SilkS)
     (effects (font (size 2 2) (thickness 0.3)))
   )
@@ -1672,9 +1675,9 @@
     (effects (font (size 2 2) (thickness 0.25)))
   )
   (gr_text SRAM (at 110.49 42.545) (layer F.SilkS)
-    (effects (font (size 3 3) (thickness 0.5)))
+    (effects (font (size 3 3) (thickness 0.4)))
   )
-  (gr_text 09.02.2023 (at 73.025 39.37) (layer F.Cu)
+  (gr_text 18.02.2023 (at 73.025 39.37) (layer F.Cu)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (gr_text 74HCPU (at 90.805 39.37) (layer F.Cu)
@@ -1755,10 +1758,10 @@
   (segment (start 142.5575 75.2475) (end 141.605 76.2) (width 0.6) (layer F.Cu) (net 2))
   (segment (start 65.04 60.325) (end 66.04 61.325) (width 0.5) (layer F.Cu) (net 2))
   (segment (start 65.04 52.705) (end 65.04 60.325) (width 0.5) (layer F.Cu) (net 2))
-  (segment (start 142.24 86.36) (end 142.24 83.185) (width 1.2) (layer F.Cu) (net 2))
-  (segment (start 139.7 80.645) (end 139.7 76.2) (width 1.2) (layer F.Cu) (net 2))
-  (segment (start 142.24 83.185) (end 139.7 80.645) (width 1.2) (layer F.Cu) (net 2))
   (segment (start 115.57 76.2) (end 134.62 76.2) (width 1.2) (layer F.Cu) (net 2))
+  (segment (start 139.7 78.105) (end 139.7 76.2) (width 1.2) (layer F.Cu) (net 2))
+  (segment (start 142.24 80.645) (end 139.7 78.105) (width 1.2) (layer F.Cu) (net 2))
+  (segment (start 142.24 86.36) (end 142.24 80.645) (width 1.2) (layer F.Cu) (net 2))
   (segment (start 86.36 83.6498) (end 86.36 86.36) (width 0.5) (layer B.Cu) (net 3) (status 20))
   (segment (start 85.4075 82.6973) (end 86.36 83.6498) (width 0.5) (layer B.Cu) (net 3))
   (segment (start 85.4075 66.3575) (end 85.4075 82.6973) (width 0.5) (layer B.Cu) (net 3))
