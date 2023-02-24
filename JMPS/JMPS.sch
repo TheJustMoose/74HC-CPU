@@ -533,19 +533,19 @@ F 3 "~" H 1000 5050 50  0001 C CNN
 	1    1000 5050
 	1    0    0    -1  
 $EndComp
-Text Label 1200 4750 0    50   ~ 0
-ZF
-Text Label 1200 4850 0    50   ~ 0
-LF
-Text Label 1200 5050 0    50   ~ 0
-EF
-Text Label 1200 4950 0    50   ~ 0
-GF
-Text Label 1200 5250 0    50   ~ 0
-CF
 Text Label 1200 5350 0    50   ~ 0
-~ZF
+ZF
+Text Label 1200 4750 0    50   ~ 0
+LF
+Text Label 1200 4950 0    50   ~ 0
+EF
+Text Label 1200 4850 0    50   ~ 0
+GF
 Text Label 1200 5150 0    50   ~ 0
+CF
+Text Label 1200 5250 0    50   ~ 0
+~ZF
+Text Label 1200 5050 0    50   ~ 0
 ~CF
 NoConn ~ 3100 2900
 NoConn ~ 3100 3000

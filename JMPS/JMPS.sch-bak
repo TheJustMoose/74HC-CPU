@@ -543,9 +543,9 @@ Text Label 1200 4950 0    50   ~ 0
 GF
 Text Label 1200 5250 0    50   ~ 0
 CF
-Text Label 1200 5150 0    50   ~ 0
-~ZF
 Text Label 1200 5350 0    50   ~ 0
+~ZF
+Text Label 1200 5150 0    50   ~ 0
 ~CF
 NoConn ~ 3100 2900
 NoConn ~ 3100 3000
