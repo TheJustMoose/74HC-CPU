@@ -36,17 +36,6 @@ F 3 "" H 2550 2700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR01
-U 1 1 63F1268E
-P 1875 1000
-F 0 "#PWR01" H 1875 750 50  0001 C CNN
-F 1 "GND" V 1880 872 50  0000 R CNN
-F 2 "" H 1875 1000 50  0001 C CNN
-F 3 "" H 1875 1000 50  0001 C CNN
-	1    1875 1000
-	0    1    1    0   
-$EndComp
-$Comp
 L 74xx:74LS08 U1
 U 1 1 63F13109
 P 5550 1600
@@ -213,12 +202,12 @@ Wire Wire Line
 	1750 1750 2000 1750
 Text Label 1750 1550 0    50   ~ 0
 DST[0]
-Text Label 1750 1150 0    50   ~ 0
+Text Label 1750 1000 0    50   ~ 0
 DST[1]
 Text Label 1750 1750 0    50   ~ 0
 SRC[0]
 Wire Wire Line
-	1750 1150 2000 1150
+	1750 1000 2000 1000
 Text Label 1750 1650 0    50   ~ 0
 SRC[1]
 Wire Wire Line
@@ -288,21 +277,14 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0101
 U 1 1 63F7064B
-P 1875 2500
-F 0 "#PWR0101" H 1875 2250 50  0001 C CNN
-F 1 "GND" V 1880 2372 50  0000 R CNN
-F 2 "" H 1875 2500 50  0001 C CNN
-F 3 "" H 1875 2500 50  0001 C CNN
-	1    1875 2500
+P 2000 2650
+F 0 "#PWR0101" H 2000 2400 50  0001 C CNN
+F 1 "GND" V 2005 2522 50  0000 R CNN
+F 2 "" H 2000 2650 50  0001 C CNN
+F 3 "" H 2000 2650 50  0001 C CNN
+	1    2000 2650
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	1875 2500 2000 2500
-Wire Wire Line
-	2000 2500 2000 2650
-Connection ~ 2000 2500
-Wire Wire Line
-	1875 1000 2000 1000
 $Comp
 L Device:R R1
 U 1 1 63F76748
@@ -968,4 +950,25 @@ F 3 "" H 9200 4500 50  0001 C CNN
 	1    9200 4500
 	1    0    0    -1  
 $EndComp
+Text Label 1650 1150 0    50   ~ 0
+~BRANCH
+Wire Wire Line
+	1650 1150 2000 1150
+Text Label 1650 2500 0    50   ~ 0
+~BRANCH
+Wire Wire Line
+	1650 2500 2000 2500
+$Comp
+L Connector:Conn_01x01_Male J7
+U 1 1 640FA758
+P 675 1000
+F 0 "J7" H 783 1181 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 825 875 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 675 1000 50  0001 C CNN
+F 3 "~" H 675 1000 50  0001 C CNN
+	1    675  1000
+	1    0    0    -1  
+$EndComp
+Text Label 875  1000 0    50   ~ 0
+~BRANCH
 $EndSCHEMATC
