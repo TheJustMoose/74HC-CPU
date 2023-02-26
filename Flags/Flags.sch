@@ -608,24 +608,13 @@ Text Label 7900 2225 0    50   ~ 0
 ~CF
 Text Label 7900 2525 0    50   ~ 0
 ZF
-$Comp
-L Connector:Conn_01x04_Male J4
-U 1 1 62C55960
-P 1650 6600
-F 0 "J4" H 1825 6825 50  0000 R CNN
-F 1 "Conn_01x04_Male" H 1825 6300 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 1650 6600 50  0001 C CNN
-F 3 "~" H 1650 6600 50  0001 C CNN
-	1    1650 6600
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
-	1200 6500 1450 6500
+	1200 6250 1450 6250
 Wire Wire Line
-	1200 6600 1450 6600
-Text Label 1200 6600 0    50   ~ 0
+	1200 6450 1450 6450
+Text Label 1200 6450 0    50   ~ 0
 C2
-Text Label 1200 6500 0    50   ~ 0
+Text Label 1200 6250 0    50   ~ 0
 ~RES_FL
 $Comp
 L power:VCC #PWR023
@@ -787,6 +776,71 @@ F 1 "Conn_01x07_Male" H 8322 2158 50  0000 R CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 8350 2225 50  0001 C CNN
 F 3 "~" H 8350 2225 50  0001 C CNN
 	1    8350 2225
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J5
+U 1 1 63FB964B
+P 5700 1750
+F 0 "J5" H 5672 1774 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 5672 1683 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5700 1750 50  0001 C CNN
+F 3 "~" H 5700 1750 50  0001 C CNN
+	1    5700 1750
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J6
+U 1 1 63FBB2B0
+P 5700 2000
+F 0 "J6" H 5672 2024 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 5672 1933 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5700 2000 50  0001 C CNN
+F 3 "~" H 5700 2000 50  0001 C CNN
+	1    5700 2000
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5250 1750 5500 1750
+Wire Wire Line
+	5250 2000 5500 2000
+Text Label 5250 1750 0    50   ~ 0
+CF
+Text Label 5250 2000 0    50   ~ 0
+CF
+Text Notes 5100 1575 0    50   ~ 0
+Back to the commands: ADD, LSR
+$Comp
+L Connector:Conn_01x02_Male J8
+U 1 1 640113A9
+P 1650 6700
+F 0 "J8" H 1622 6674 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 1622 6583 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1650 6700 50  0001 C CNN
+F 3 "~" H 1650 6700 50  0001 C CNN
+	1    1650 6700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J4
+U 1 1 64013AFE
+P 1650 6250
+F 0 "J4" H 1622 6274 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 1622 6183 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1650 6250 50  0001 C CNN
+F 3 "~" H 1650 6250 50  0001 C CNN
+	1    1650 6250
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J7
+U 1 1 6401693F
+P 1650 6450
+F 0 "J7" H 1622 6474 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 1622 6383 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1650 6450 50  0001 C CNN
+F 3 "~" H 1650 6450 50  0001 C CNN
+	1    1650 6450
 	-1   0    0    -1  
 $EndComp
 $EndSCHEMATC
