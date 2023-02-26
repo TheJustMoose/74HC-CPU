@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 38)
+    (drawings 39)
     (tracks 372)
     (zones 0)
     (modules 24)
@@ -207,7 +207,7 @@
     (descr "Through hole straight pin header, 1x01, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x01 2.54mm single row")
     (path /640FA758)
-    (fp_text reference J7 (at 0 -2.33) (layer F.SilkS)
+    (fp_text reference J7 (at 2.54 0) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value Conn_01x01_Male (at 0 2.33) (layer F.Fab)
@@ -1286,6 +1286,9 @@
     )
   )
 
+  (gr_text ~BRANCH (at 71.12 71.12) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
   (gr_text JUMPS (at 43.18 48.26) (layer F.SilkS)
     (effects (font (size 3 3) (thickness 0.4)))
   )
