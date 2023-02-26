@@ -1,0 +1,256 @@
+заказать платы:
+5 MUX4:1 v3
+5 переходник 273
+10 RegLED
+10 MUL
+
+хочется:
+Flags
+JMPS
+RAM
+ROM
+Addr Counter
+Osc
+
+MUL, ALU - похожи на stripboard
+
+
+
+ 0 1 2 3 4 5 6 7 8 9 A B C D E F
+4 + 2 + 2 + 8
+|  COP  |DST|SRC|  MAYBE CONST  | N
+---------------------------------
+|  ADD  |DST|SRC|       -       | 0
+| ADDC  |DST|SRC|       -       | 1
+|  AND  |DST|SRC|       -       | 2
+|   OR  |DST|SRC|       -       | 3
+|  XOR  |DST|SRC|       -       | 4
+|  MOV  |DST|SRC|       -       | 5
+|  UNO  |DST|TYP|       -       | 6
+|  MUL  |DST|SRC|       -       | 7
+|  LDI  |DST|SRC|       -       | 8
+|   LD  |DST|SRC|     CONST     | 9
+|   IN  |DST|SRC|       -       | A
+|  OUT  |DST|SRC|       -       | B
+|   ST  |DST|SRC|       -       | C
+| CTRL  | FLAGS |       -       | D
+|  CMP  |DST|SRC|       -       | E
+| BRANC |  TYPE |       -       | F
+
+можно попробовать сделать так:
+ 0 1 2 3 4 5 6 7 8 9 A B C D E F
+     5    +  3  +  3  = 11
+|   ADD   | DST | SRC |    -    | 0
+|  ADDC   | DST | SRC |    -    | 1
+|   AND   | DST | SRC |    -    | 2
+|    OR   | DST | SRC |    -    | 3
+|   XOR   | DST | SRC |    -    | 4
+|   MOV   | DST | SRC |    -    | 5
+|   UNO   | DST | TYP |    -    | 6
+|   MUL   | DST | SRC |    -    | 7
+|   LDI   | DST |     CONST     | 8   // 5 + 3 + 8 = 16
+|    LD   | DST | SRC |    -    | 9
+|    IN   | DST | SRC |    -    | A
+|   OUT   | DST | SRC |    -    | B
+|    ST   | DST | SRC |    -    | C
+|  CTRL   |   FLAGS   |    -    | D
+|   CMP   | DST | SRC |    -    | E
+| BRANCH  |    TYPE   |    -    | F
+
+или даже вот так:
+ 0 1 2 3 4 5 6 7 8 9 A B C D E F
+      6     + 2 + 2 = 10
+|     ADD   |DST|SRC|     -     | 0
+|    ADDC   |DST|SRC|     -     | 1
+|     AND   |DST|SRC|     -     | 2
+|      OR   |DST|SRC|     -     | 3
+|     XOR   |DST|SRC|     -     | 4
+|     MOV   |DST|SRC|     -     | 5
+|     MUL   |DST|SRC|     -     | 6
+|     UNO   |DST|TYP|     -     | 7
+|     LDI   |DST|       CONST   | 8   // 6 + 2 + 8 = 16
+|      LD   |DST|SRC|   CONST   | ?   // УПС! было смещение от 0 до 255, стало до 63 ;)
+// недостающие биты можно размазать на несколько команд: LD (оба значения), LDO (только смещение), LDA (только адрес R3:R2)
+|      LD   |DST|       CONST   | 9   // R3:R2 + CONST
+|     LDA   |DST|         -     | A   // R3:R2
+|     LDO   |DST|       CONST   | B   // CONST
+
+|      IN   |DST|SRC|     -     | C
+|     OUT   |DST|SRC|     -     | D
+|      ST   |DST|SRC|   CONST   | E/F/10
+
+|    CTRL   |  FLAGS|     -     | 11   // теперь не нужна, можно сделать CLRF
+|     CMP   |DST|SRC|     -     | 12
+|    CMPC   |DST|SRC|     -     | 13
+
+и теперь можно чего-нибудь добавить:
+|     SUB   |DST|SRC|     -     | 14
+|     SBC   |DST|SRC|     -     | 15
+|    ADDI   |DST|      CONST    | 16
+|   ADDCI   |DST|      CONST    | 17
+|    ANDI   |DST|      CONST    | 18
+|     ORI   |DST|      CONST    | 19
+|    XORI   |DST|      CONST    | 1A
+|    MOVI   |DST|      CONST    | 1B
+|    MULI   |DST|      CONST    | 1C
+|    SUBI   |DST|      CONST    | 1D
+|    SBCI   |DST|      CONST    | 1E
+|    CMPI   |DST|      CONST    | 1F
+|   CMPCI   |DST|      CONST    | 20
+
+|     INC   |DST|         -     | 21
+|    INCC   |DST|         -     | 22
+|     DEC   |DST|         -     | 23
+|    DECC   |DST|         -     | 24
+
+|     LPM   |DST|      ADDR     | 25
+|    LPMA   |DST|         -     | 26  // читаем из R3:R2, например
+
+остались не заняты: 26, 27, 28, 29, 2A
+
+|  BRANCH   | TYPE  |  OFFSET   | ?   // а вот с переходами стало как-то совсем грустно :(
+
+но можно сделать так:
+|    JMP    |       OFFSET      | 2B  // 6 + 10
+|   CALL    |       OFFSET      | 2C  // 6 + 10
+|    RET    |          -        | 2D  // 6 + 10
+|     JL    |       OFFSET      | 2E  // 6 + 10
+|     JE    |       OFFSET      | 2F  // 6 + 10
+|     JG    |       OFFSET      | 30  // 6 + 10
+|    JNE    |       OFFSET      | 3A  // 6 + 10
+|     JC    |       OFFSET      | 3B  // 6 + 10
+|    JNC    |       OFFSET      | 3C  // 6 + 10
+|     JZ    |       OFFSET      | 3D  // 6 + 10
+|    JNZ    |       OFFSET      | 3E  // 6 + 10
+|    NOP    |       OFFSET      | 3F  // 6 + 10
+
+туду: переупорядочить как-то команды, чтобы минимизировать логику
+
+------------------------------------------------------------------
+6 бит -> 64 команды -> 0..63 -> 00..3F
+         4*16
+
+собираем в кучу:
+ 0 1 2 3 4 5 6 7 8 9 A B C D E F
+      6     + 2 + 2 = 10
+
+CMD      CONST
+TYPE   REQUIRED
+ ||       ||
+ \/       \/
+// команды на 0
+|0 0   ADD 0|DST|SRC|     -     | 00  00 000 0
+|0 0  ADDI 1|DST|      CONST    | 01  00 000 1
+|0 0  ADDC 0|DST|SRC|     -     | 02  00 001 0
+|0 0 ADDCI 1|DST|      CONST    | 03  00 001 1
+|0 0   SUB 0|DST|SRC|     -     | 04  00 010 0
+|0 0  SUBI 1|DST|      CONST    | 05  00 010 1
+|0 0  SUBC 0|DST|SRC|     -     | 06  00 011 0
+|0 0 SUBCI 1|DST|      CONST    | 07  00 011 1
+
+// можно выкинуть
+|0 0   INC 0|DST|         -     | 08
+|0 0 -INCI 1|DST|         -     | 09  // такой команды не существует, она тут только для единообразия
+|0 0  INCC 0|DST|         -     | 0A
+|0 0-INCCI 1|DST|         -     | 0B  // с другой стороны, если есть команда ADDI, то нафиг вообще нужен инкремент?
+|0 0   DEC 0|DST|         -     | 0C
+|0 0 -DECI 1|DST|         -     | 0D
+|0 0  DECC 0|DST|         -     | 0E
+|0 0-DECCI 1|DST|         -     | 0F
+
+// команды на 1
+|0 1   AND 0|DST|SRC|     -     | 10  01 000 0
+|0 1  ANDI 1|DST|      CONST    | 11  01 000 1
+|0 1    OR 0|DST|SRC|     -     | 12  01 001 0
+|0 1   ORI 1|DST|      CONST    | 13  01 001 1
+|0 1   XOR 0|DST|SRC|     -     | 14  01 010 0
+|0 1  XORI 1|DST|      CONST    | 15  01 010 1
+|0 1   MUL 0|DST|SRC|     -     | 16  01 011 0
+|0 1  MULI 1|DST|      CONST    | 17  01 011 1
+
+|0 1   MOV 0|DST|SRC|     -     | 18  01 100 0
+|0 1  MOVI 1|DST|      CONST    | 19  01 100 1
+
+|0 1   UNO 0|DST|TYP|     -     | 1A  01 101 0
+|0 1 -UNOI 1|DST|TYP|  CONST    | 1B  01 101 1  // для единообразия, шина SRC всё равно физически НЕ подключена к командам UNO
+|0 1    IN 0|DST|SRC|     -     | 1C  01 110 0
+|0 1   INI 1|DST|      CONST    | 1D  01 110 1  // для единообразия, хотя какая, блин, разница, из каких битов доставать номер порта?
+|0 1   LPM 0|DST|         -     | 1E  01 111 0  // читаем из R3:R2, например
+|0 1  LPMI 1|DST|       ADDR    | 1F  01 111 1  // читаем по фиксированному адресу
+
+
+// НЕ НУЖНА, Т.К. ЕСТЬ MOVI
+|    -LDI   |DST|      CONST    | ?    // 6 + 2 + 8 = 16
+
+// команды на 2
+|1 0   -LD 0|DST|         -     | 20  10 000 0  // LD Rx, [0]
+|1 0    LD 1|DST|      CONST    | 21  10 000 1  // LD Rx, [CONST] (load by offset)
+|1 0   LDA 0|DST|         -     | 22  10 001 0  // LD Rx, [R3:R2] (load by ptr)
+|1 0   LDO 1|DST|      CONST    | 23  10 001 1  // LD Rx, [R3:R2 + CONST] (load by ptr+offset)
+
+// для команды ST выделен отдельный мультиплексор, подключенный к шине OUT
+// он получает биты S0:S1 из несколько непривычного места, а именно оттуда,
+// откуда обычно достаются биты DST
+// содержимое мультиплексора SRC, подаваемое на одноимённую шину, лучше бы занулить
+|1 0   -ST 0|S01|         -     | 24  10 010 0  // ST [0], Rx
+|1 0    ST 1|S01|      CONST    | 25  10 010 1  // ST [CONST], Rx
+|1 0   STA 0|S01|         -     | 26  10 011 0  // ST [R3:R2], Rx
+|1 0   STO 1|S01|      CONST    | 27  10 011 1  // ST [R3:R2 + CONST], Rx
+
+|1 0   CTRL |TYP|         -     | 28  10 100 0  // всё та же старая команда CTRL, за которой прячется CLRF, STOP, ...
+|1 0  -CLRF |             -     | 29  10 100 1  // просто чтобы проще декодировать
+|1 0    OUT |DST|SRC|     -     | 2A  10 101 0  // выводим регистр в порт 0-3
+|1 0   -OUT |DST|      CONST    | 2B  10 101 1  // возможно, можно как-то применить, например выводить в порт именно константу
+                                                // всё равно логика переключения шины SRC между регистром и константой "уже есть"
+|1 0   CMP 0|DST|SRC|     -     | 2C
+|1 0  CMPI 1|DST|      CONST    | 2D
+|1 0  CMPC 0|DST|SRC|     -     | 2E
+|1 0 CMPCI 1|DST|      CONST    | 2F
+
+// команды на 3
+// 6 + 10 бит
+|1 1    JMP |       OFFSET      | 30  11 0000
+|1 1   CALL |       OFFSET      | 31  11 0001
+|1 1    RET |          -        | 32  11 0010
+|1 1     JL |       OFFSET      | 33  11 0011
+|1 1     JE |       OFFSET      | 34  11 0100
+|1 1     JG |       OFFSET      | 35  11 0101
+|1 1    JNE |       OFFSET      | 36  11 0110
+|1 1     JC |       OFFSET      | 37  11 0111
+|1 1    JNC |       OFFSET      | 38  11 1000
+|1 1     JZ |       OFFSET      | 39  11 1001
+|1 1    JNZ |       OFFSET      | 3A  11 1010
+|1 1    NOP |       OFFSET      | 3B  11 1011
+
+структура команды:
+тип  команда константа
+2 бит  3 бит   1 бит
+если (CMD TYPE == 0)
+  выбираем команду ADD и логику для неё
+если (CMD TYPE == 1)
+  включаем дешифратор команд, который выбирает AND, MUL, ...
+если команда == LPM
+  переключаем генератор в режим трёх тактов
+  подключаем к OUT мультиплексор с константой, прочитанной LPM
+если (CMD TYPE == 2)
+  подключаем много разной логики управления RAM, CLRF, OUT, CMP
+если (CMD TYPE == 3)
+  включаем логику переходов
+
+карта памяти:
+FFFF
+  16550
+FFF8
+FFF7
+  ROM
+8000
+7FFF
+  RAM
+0000
+
+для 16550 доступ по указателю и смещению, наверное не нужен, достаточно кидать константу -1 == FFFF, -2 == FFFE...
+на плату RAM добавляем ещё и ROM, а также отрезаем доступ по верхним 16-ти адресам
+шины ADDR и CONST меняем местами (или всё же нет)
+
+делаем отдельную плату, на которой располагаем 16550 и PCF8584 (I2C)
+на этой плате наоборот делаем доступ по последним 16-ти адресам, и не делаем сумматора адресов
