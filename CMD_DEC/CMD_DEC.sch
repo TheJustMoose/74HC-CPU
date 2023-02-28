@@ -711,20 +711,9 @@ Text Label 7500 3450 0    50   ~ 0
 ~LSR
 Text Label 7500 3550 0    50   ~ 0
 ~LSRC
-$Comp
-L Connector:Conn_01x02_Male J2
-U 1 1 64045D93
-P 750 3000
-F 0 "J2" H 858 3181 50  0000 C CNN
-F 1 "Conn_01x02_Male" H 825 2800 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 750 3000 50  0001 C CNN
-F 3 "~" H 750 3000 50  0001 C CNN
-	1    750  3000
-	1    0    0    -1  
-$EndComp
-Text Label 950  3000 0    50   ~ 0
+Text Label 950  2775 0    50   ~ 0
 C1
-Text Label 950  3100 0    50   ~ 0
+Text Label 950  3000 0    50   ~ 0
 C2
 $Comp
 L Connector:Conn_01x02_Male J6
@@ -999,4 +988,59 @@ F 3 "~" H 8075 1900 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7600 1900 7875 1900
+$Comp
+L Connector:Screw_Terminal_01x02 J14
+U 1 1 63FB714C
+P 6725 5700
+F 0 "J14" H 6805 5692 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 6675 5475 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 6725 5700 50  0001 C CNN
+F 3 "~" H 6725 5700 50  0001 C CNN
+	1    6725 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J2
+U 1 1 63FBDB4F
+P 750 2775
+F 0 "J2" H 722 2799 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 1075 2700 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 750 2775 50  0001 C CNN
+F 3 "~" H 750 2775 50  0001 C CNN
+	1    750  2775
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J13
+U 1 1 63FC19C9
+P 750 3000
+F 0 "J13" H 722 3024 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 1075 2925 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 750 3000 50  0001 C CNN
+F 3 "~" H 750 3000 50  0001 C CNN
+	1    750  3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR020
+U 1 1 63FCF7F0
+P 6525 5700
+F 0 "#PWR020" H 6525 5550 50  0001 C CNN
+F 1 "VCC" H 6625 5800 50  0000 C CNN
+F 2 "" H 6525 5700 50  0001 C CNN
+F 3 "" H 6525 5700 50  0001 C CNN
+	1    6525 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR021
+U 1 1 63FD5095
+P 6525 5800
+F 0 "#PWR021" H 6525 5550 50  0001 C CNN
+F 1 "GND" H 6675 5725 50  0000 C CNN
+F 2 "" H 6525 5800 50  0001 C CNN
+F 3 "" H 6525 5800 50  0001 C CNN
+	1    6525 5800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
