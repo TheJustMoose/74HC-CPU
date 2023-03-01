@@ -71,24 +71,24 @@ $EndComp
 $Comp
 L 74xx:74LS08 U1
 U 1 1 63FA2759
-P 4050 1700
-F 0 "U1" H 4050 2025 50  0000 C CNN
-F 1 "74LS08" H 4050 1934 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4050 1700 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4050 1700 50  0001 C CNN
-	1    4050 1700
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS08 U1
-U 2 1 63FA358B
 P 4550 6200
 F 0 "U1" H 4550 6525 50  0000 C CNN
 F 1 "74LS08" H 4550 6434 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4550 6200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4550 6200 50  0001 C CNN
-	2    4550 6200
-	1    0    0    -1  
+	1    4550 6200
+	1    0    0    1   
+$EndComp
+$Comp
+L 74xx:74LS08 U1
+U 2 1 63FA358B
+P 4050 1700
+F 0 "U1" H 4050 2025 50  0000 C CNN
+F 1 "74LS08" H 4050 1934 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4050 1700 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4050 1700 50  0001 C CNN
+	2    4050 1700
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS08 U1
@@ -110,7 +110,7 @@ F 1 "74LS08" H 6400 2734 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 6400 2500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 6400 2500 50  0001 C CNN
 	4    6400 2500
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS08 U1
@@ -850,12 +850,12 @@ CF_EN
 $Comp
 L 74xx:74HC00 U6
 U 2 1 63FBD088
-P 4550 4550
-F 0 "U6" H 4550 4875 50  0000 C CNN
-F 1 "74HC00" H 4550 4784 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4550 4550 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4550 4550 50  0001 C CNN
-	2    4550 4550
+P 4550 5100
+F 0 "U6" H 4550 5425 50  0000 C CNN
+F 1 "74HC00" H 4550 5334 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4550 5100 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4550 5100 50  0001 C CNN
+	2    4550 5100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -910,12 +910,12 @@ Text Label 4700 3500 0    50   ~ 0
 $Comp
 L 74xx:74HC00 U6
 U 4 1 63FF9E45
-P 4550 5100
-F 0 "U6" H 4550 5425 50  0000 C CNN
-F 1 "74HC00" H 4550 5334 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4550 5100 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4550 5100 50  0001 C CNN
-	4    4550 5100
+P 4550 4550
+F 0 "U6" H 4550 4875 50  0000 C CNN
+F 1 "74HC00" H 4550 4784 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4550 4550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 4550 4550 50  0001 C CNN
+	4    4550 4550
 	1    0    0    -1  
 $EndComp
 $Comp

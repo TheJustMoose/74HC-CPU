@@ -11,18 +11,18 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 1202)
+    (start_pass_no 980)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 2.6)
+      (against_preferred_direction_trace_costs 2.4)
     )
     (layer_rule B.Cu
       (active on)
       (preferred_direction vertical)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 1.6)
+      (against_preferred_direction_trace_costs 1.7)
     )
   )
   (rule
@@ -68,7 +68,7 @@
     /~OR /~XOR /~UNO /~MOV /~MUL /~BRANCH /~CMP /~CTRL
     /~ST /~OUT /~IN /~LD /~LDI /SRC[1] /SRC[0] "/~RAM_CS"
     "/LATCH_REG" /~ADDx "Net-(R1-Pad1)" VCC "Net-(R2-Pad1)" "/WILL_WR2REG" "Net-(U5-Pad6)" "Net-(U5-Pad5)"
-    "Net-(U3-Pad4)" "Net-(U3-Pad5)" "Net-(U3-Pad6)" "Net-(U3-Pad7)" "/~RAM_WR" "/CMP_EN" "/CF_EN" "Net-(U6-Pad6)"
+    "Net-(U3-Pad4)" "Net-(U3-Pad5)" "Net-(U3-Pad6)" "Net-(U3-Pad7)" "/~RAM_WR" "/CMP_EN" "/CF_EN" "Net-(U6-Pad11)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
