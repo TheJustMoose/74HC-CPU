@@ -88,7 +88,7 @@ F 1 "74LS08" H 4050 1934 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm_Socket" H 4050 1700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS08" H 4050 1700 50  0001 C CNN
 	2    4050 1700
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS08 U1
@@ -1041,6 +1041,39 @@ F 1 "GND" H 6675 5725 50  0000 C CNN
 F 2 "" H 6525 5800 50  0001 C CNN
 F 3 "" H 6525 5800 50  0001 C CNN
 	1    6525 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 641151FB
+P 10000 1000
+F 0 "H?" H 10100 1046 50  0000 L CNN
+F 1 "MountingHole" H 10100 955 50  0000 L CNN
+F 2 "" H 10000 1000 50  0001 C CNN
+F 3 "~" H 10000 1000 50  0001 C CNN
+	1    10000 1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 641158BD
+P 10000 1250
+F 0 "H?" H 10100 1296 50  0000 L CNN
+F 1 "MountingHole" H 10100 1205 50  0000 L CNN
+F 2 "" H 10000 1250 50  0001 C CNN
+F 3 "~" H 10000 1250 50  0001 C CNN
+	1    10000 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H?
+U 1 1 64115BEF
+P 10000 1500
+F 0 "H?" H 10100 1546 50  0000 L CNN
+F 1 "MountingHole" H 10100 1455 50  0000 L CNN
+F 2 "" H 10000 1500 50  0001 C CNN
+F 3 "~" H 10000 1500 50  0001 C CNN
+	1    10000 1500
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
