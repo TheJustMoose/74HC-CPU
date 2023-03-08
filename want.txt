@@ -17,7 +17,7 @@ MUL, ALU - похожи на stripboard
 
 
  0 1 2 3 4 5 6 7 8 9 A B C D E F
-4 + 2 + 2 + 8
+      4 + 2 + 2 + 8
 |  COP  |DST|SRC|  MAYBE CONST  | N
 ---------------------------------
 |  ADD  |DST|SRC|       -       | 0
@@ -26,14 +26,14 @@ MUL, ALU - похожи на stripboard
 |   OR  |DST|SRC|       -       | 3
 |  XOR  |DST|SRC|       -       | 4
 |  MOV  |DST|SRC|       -       | 5
-|  UNO  |DST|TYP|       -       | 6
+|  UNO  |DST|TYP|       -       | 6  // INV SWAP LSR LSRC
 |  MUL  |DST|SRC|       -       | 7
 |  LDI  |DST|SRC|       -       | 8
 |   LD  |DST|SRC|     CONST     | 9
 |   IN  |DST|SRC|       -       | A
 |  OUT  |DST|SRC|       -       | B
 |   ST  |DST|SRC|       -       | C
-| CTRL  | FLAGS |       -       | D
+| CTRL  | FLAGS |       -       | D  // CLRF STOP
 |  CMP  |DST|SRC|       -       | E
 | BRANC |  TYPE |       -       | F
 
@@ -245,3 +245,6 @@ FFF7
 
 делаем отдельную плату, на которой располагаем 16550 и PCF8584 (I2C)
 на этой плате наоборот делаем доступ по последним 16-ти адресам, и не делаем сумматора адресов
+
+если ужаться до 32 команд, то на код операции уйдёт ровно 5 бит, и тогда можно перейти на 8 регистров,
+а вся команда ляжет в 16 бит вместе с 8 бит константой
