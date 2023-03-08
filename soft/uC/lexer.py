@@ -2,6 +2,9 @@ import sys
 from tag import *
 from token import *
 
+class Parser1:
+  test = 2
+
 class Lexer:
   line = 1
   peek = ' '

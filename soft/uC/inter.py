@@ -1,3 +1,5 @@
+from lexer import *
+from token import *
 
 class Node:
   lexline = 0
@@ -14,10 +16,11 @@ class Node:
     return self.labels
 
   def emitlabel(self, i):
-    print("L" + i + ":")
+    print("L" + str(i) + ":")
 
   def emit(s):
     print("\t" + s)
+
 
 class Expr(Node):
   def __init__(self, tok, p):
@@ -47,10 +50,25 @@ class Expr(Node):
   def toString():
     return self.op.toString()
 
+
+class Stmt(Node):
+  @staticmethod
+  def Init():
+    Stmt.Null = Stmt()
+    Stmt.Enclosing = Stmt.Null  # used for break stmts
+
+  def __init__(self):
+    super().__init__()
+
+  def gen(self, b, a):
+    return self
+
+
 class Id(Expr):
   def __init__(self, id, p, b):
     super().__init__(id, p)
     self.offset = b
+
 
 class Op(Expr):
   def __init__(tok, p):
@@ -61,6 +79,7 @@ class Op(Expr):
     t = Temp(self.Type)
     emit(t.toString() + " = " + x.toString())
     return t
+
 
 class Arith(Op):
   def __init__(self, tok, x1, x2):
@@ -77,6 +96,7 @@ class Arith(Op):
   def toString():
     return self.expr1.toString() + " " + self.op.toString() + " " + self.expr2.toString()
 
+
 class Temp(Expr):
   count = 0  # static
   number = 0
@@ -87,6 +107,7 @@ class Temp(Expr):
 
   def toString():
     return "t" + self.number
+
 
 class Unary(Op):
   def __init__(self, tok, x):  # process unari minus
@@ -101,6 +122,7 @@ class Unary(Op):
 
   def toString():
     return self.op.toString() + " " + self.expr.toString()
+
 
 class Constant(Expr):
   def __init__(self, tok, p):
@@ -118,6 +140,7 @@ class Constant(Expr):
     elif self == Constant.FALSE and f != 0:
       emit("goto L" + f)
 
+
 class Logical(Expr):
   def __init__(self, tok, x1, x2):
     super().__init_(tok, None)
@@ -130,7 +153,7 @@ class Logical(Expr):
   def check(p1, p2):
     if p1 == Type.BOOL and p2 == Type.BOOL:
       return Type.BOOL
-    else
+    else:
       return None
 
   def gen():
@@ -148,6 +171,7 @@ class Logical(Expr):
   def toString():
     return expr1.toString() + " " + op.toString() + " " + expr2.toString()
 
+
 class Or(Logical):
   def __init__(self, tok, x1, x2):
     super().__init__(tok, x1, x2)
@@ -158,6 +182,7 @@ class Or(Logical):
     expr2.jumping(t, f)
     if t == 0:
       emitlabel(label)
+
 
 class And(Logical):
   def __init__(self, tok, x1, x2):
@@ -170,6 +195,7 @@ class And(Logical):
     if f == 0:
       emitlabel(label)
 
+
 class Not(Logical):
   def __init__(self, tok, x1, x2):
     super().__init__(tok, x1, x2)
@@ -180,6 +206,7 @@ class Not(Logical):
   def toString(self):
     return op.toString() + " " + expr2.toString()
 
+
 class Rel(Logical):
   def __init__(self, tok, x1, x2):
     super().__init__(tok, x1, x2)
@@ -187,9 +214,9 @@ class Rel(Logical):
   def check(p1, p2):
     if isinstance(p1, Array) or isinstance(p2, Array):
       return None
-    elif if p1 == p2:
+    elif p1 == p2:
       return Type.BOOL
-    else
+    else:
       return None
 
   def jumping(t, f):
@@ -197,6 +224,7 @@ class Rel(Logical):
     b = expr2.reduce()
     test = a.toString() + " " + op.toString() + " " + b.toString()
     emitjumps(test, t, f)
+
 
 class Access(Op):
   def __init__(self, a, i, p):
@@ -213,4 +241,3 @@ class Access(Op):
 
   def toString():
     return array.toString() + " [ " + index.toString() + " ]"
-
