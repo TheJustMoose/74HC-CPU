@@ -34,18 +34,26 @@ class Parser:
     self.decls()
     s = self.stmts()
     self.match('}')
-    top = savedEnv
+    self.top = savedEnv
     return s
 
   def decls(self):
     while self.look.tag == Tag.BASIC:  # D -> type ID ;
-      p = Type()
-      self.tok = look
-      match(Tag.ID)
-      match(';')
+      p = self.type()
+      tok = look
+      self.match(Tag.ID)
+      self.match(';')
       id = Id(Word(tok), p, used)
-      top.put( tok, id )
-      used = used + p.width
+      self.top.put( tok, id )
+      self.used = self.used + p.width
+
+  def type(self):
+    p = Type(self.look)  # expect look.tag == Tag.BASIC 
+    self.match(Tag.BASIC);
+    if self.look.tag != '[':
+      return p  # T -> basic
+    else:
+      return dims(p)  # return array type
 
   def stmts(self):
     if self.look.tag == '}':
