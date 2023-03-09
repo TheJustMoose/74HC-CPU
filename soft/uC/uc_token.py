@@ -1,4 +1,4 @@
-from tag import *
+from uc_tag import *
 
 class Token:
   def __init__(self, t):

@@ -1,5 +1,5 @@
-from lexer import *
-from token import *
+from uc_lexer import *
+from uc_token import *
 
 class Node:
   lexline = 0

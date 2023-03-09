@@ -1,6 +1,8 @@
-from inter import *
-from env import *
-from token import *
+from uc_inter import *
+from uc_env import *
+from uc_token import *
+
+import pdb
 
 class Parser:
   def __init__(self, lexer):
@@ -12,6 +14,9 @@ class Parser:
 
   def move(self):
     self.look = self.lexer.scan()
+
+  def error(self, s):
+    raise Exception("near line " + str(self.lexer.line) + ": " + s)
 
   def match(self, t):
     if self.look.tag == t:
@@ -31,6 +36,7 @@ class Parser:
     self.match('{')
     savedEnv = self.top
     self.top = Env(self.top)
+    pdb.set_trace()
     self.decls()
     s = self.stmts()
     self.match('}')
@@ -40,7 +46,7 @@ class Parser:
   def decls(self):
     while self.look.tag == Tag.BASIC:  # D -> type ID ;
       p = self.type()
-      tok = look
+      tok = self.look
       self.match(Tag.ID)
       self.match(';')
       id = Id(Word(tok), p, used)
@@ -48,12 +54,11 @@ class Parser:
       self.used = self.used + p.width
 
   def type(self):
-    p = Type(self.look)  # expect look.tag == Tag.BASIC 
-    self.match(Tag.BASIC);
+    self.match(Tag.BASIC)  # expect look.tag == Tag.BASIC 
     if self.look.tag != '[':
-      return p  # T -> basic
+      return self.look  # T -> basic
     else:
-      return dims(p)  # return array type
+      return dims(self.look)  # return array type
 
   def stmts(self):
     if self.look.tag == '}':

@@ -1,6 +1,6 @@
 import sys
-from tag import *
-from token import *
+from uc_tag import *
+from uc_token import *
 
 class Parser1:
   test = 2
