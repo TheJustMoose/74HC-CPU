@@ -2,9 +2,6 @@ import sys
 from uc_tag import *
 from uc_token import *
 
-class Parser1:
-  test = 2
-
 class Lexer:
   line = 1
   peek = ' '
@@ -47,11 +44,12 @@ class Lexer:
     return True
 
   def scan(self):
-    while self.readche():
-      if self.peek == ' ' or self.peek == '\t':
-        continue
+    while True:
+      if self.peek == ' ' or self.peek == '\t' or self.peek == '\r':
+        self.readche()
       elif self.peek == '\n':
         self.line += 1
+        self.readche()
       else:
         break
 
@@ -74,7 +72,7 @@ class Lexer:
       return Word.GE if self.readch('=') else Token('>')
 
     if self.peek.isdigit():
-      v = 0;
+      v = 0
       while True:
         v = 10*v + int(self.peek)
         self.readche()
@@ -93,21 +91,22 @@ class Lexer:
       return Real(x)
 
     if self.peek.isalpha():
-      w = ""
+      buf = ""
       while True:
-        w += self.peek
+        buf += self.peek
         self.readche()
         if not self.peek.isalnum():
           break
 
-      exist = self.word_in_words(w)
+      exist = self.word_in_words(buf)
       if exist:
+        print("found: " + type(exist).__name__)
         return exist
 
-      w = Word(w, Tag.ID)
+      w = Word(buf, Tag.ID)
       self.words.append(w)
       return w
 
-    tok = Token(self.peek);
+    tok = Token(self.peek)
     self.peek = ' '
     return tok

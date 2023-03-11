@@ -1,6 +1,6 @@
 import enum
 
-class Tag(enum.Enum):
+class Tag(enum.IntEnum):
   AND = 256
   BASIC = 257
   BREAK = 258

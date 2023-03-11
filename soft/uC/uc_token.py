@@ -48,8 +48,6 @@ class Real(Token):
     return str(self.value) + ' ' + self.tag.name
 
 class Type(Word):
-  width = 0
-
   def __init__(self, s, tag, w):
     super().__init__(s, tag)
     self.width = w
