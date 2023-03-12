@@ -192,7 +192,7 @@ class Parser:
       return x
     elif self.look.tag == Tag.ID:
       s = self.look.toString()
-      idt = top.get(self.look)
+      idt = self.top.get(self.look)
       if idt == None:
         self.error(self.look.toString() + " undeclared")
       self.move()
