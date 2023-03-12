@@ -64,6 +64,42 @@ class Stmt(Node):
     return self
 
 
+class Seq(Stmt):
+  def __init__(self, s1, s2):
+    self.stmt1 = s1
+    self.stmt2 = s2
+
+  def gen(self, b, a):
+    if self.stmt1 == Stmt.Null:
+      stmt2.gen(b, a)
+    elif self.stmt2 == Stmt.Null:
+      stmt1.gen(b, a)
+    else:
+      label = newlabel()
+      stmt1.gen(b, label)
+      emitlabel(label)
+      stmt2.gen(label, a)
+
+
+class Set(Stmt):
+  def __init__(self, i, x):
+    self.idt = i
+    self.expr = x
+    if self.check(self.idt.Type, self.expr.Type) == None:
+      self.error("type error")
+
+  def check(p1, p2):
+    if Type.numeric(p1) and Type.numeric(p2):
+      return p2
+    elif p1 == Type.BOOL and p2 == Type.BOOL:
+      return p2
+    else:
+      return None
+
+  def gen(b, a):
+    self.emit(self.idt.toString() + " = " + self.expr.gen().toString())
+
+
 class Id(Expr):
   def __init__(self, id, p, b):
     super().__init__(id, p)

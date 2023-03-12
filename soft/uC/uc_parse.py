@@ -57,8 +57,8 @@ class Parser:
       tok = self.look
       self.match(Tag.ID)
       self.match(';')
-      id = Id(tok, p, self.used)
-      self.top.put( tok, id )
+      idt = Id(tok, p, self.used)
+      self.top.put(tok, idt)
       self.used = self.used + p.width
 
   def type(self):
@@ -75,5 +75,71 @@ class Parser:
     if self.look.tag == '}':
       return Stmt.Null
     else:
-      return Seq(stmt(), stmts())
+      return Seq(self.stmt(), self.stmts())
 
+  def stmt(self):
+    print("Parser::stmt")
+    if self.look.tag == ';':
+      self.move()
+      return Stmt.Null
+    if self.look.tag == '{':
+      return self.block()
+    else:
+      return self.assign()
+
+  def assign(self):
+    t = self.look
+    self.match(Tag.ID)
+    idt = self.top.get(t)
+    if idt == None:
+      error(t.toString() + " undeclared")
+
+    stmt = None
+    if self.look.tag == '=':  # S -> id = E ;
+      self.move()
+      stmt = Set(idt, self.bool())
+    else:                     # S -> L = E ;
+      x = offset(idt)
+      self.match('=')
+      stmt = SetElem(x, self.bool())
+
+    self.match(';')
+    return stmt
+
+  def bool(self):
+    x = self.join()
+    while self.look.tag == Tag.OR:
+      tok = self.look
+      self.move()
+      x = Or(tok, x, self.join())
+    return x
+
+  def join(self):
+    x = self.equality()
+    while self.look.tag == Tag.AND:
+      tok = self.look
+      self.move()
+      x = And(tok, x, self.equality())
+    return x
+
+  def equality(self):
+    x = self.rel()
+    while self.look.tag == Tag.EQ or self.look.tag == Tag.NE:
+      tok = self.look
+      self.move()
+      x = Rel(tok, x, self.rel())
+    return x
+
+  def rel(self):
+    print("Parser::rel")
+    x = self.expr()
+    relops = ['<', Tag.LE, Tag.GE, '>']
+    if self.look.tag in relops:
+      tok = self.look
+      move()
+      return Rel(tok, x, self.expr())
+    else:
+      return x
+
+  def expr(self):
+    pass
