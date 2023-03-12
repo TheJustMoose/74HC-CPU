@@ -33,7 +33,7 @@ class Expr(Node):
   def reduce(self):
     return self
 
-  def jumping(t, f):
+  def jumping(self, t, f):
     emitjumps(self.toString(), t, f)
 
   def emitjumps(self, test, t, f):
@@ -47,7 +47,7 @@ class Expr(Node):
     #else:
     # nothing since both t and f fall through
 
-  def toString():
+  def toString(self):
     return self.op.toString()
 
 
@@ -88,29 +88,29 @@ class Set(Stmt):
     if self.check(self.idt.Type, self.expr.Type) == None:
       self.error("type error")
 
-  def check(p1, p2):
-    if Type.numeric(p1) and Type.numeric(p2):
+  def check(self, p1, p2):
+    if Type.Numeric(p1) and Type.Numeric(p2):
       return p2
     elif p1 == Type.BOOL and p2 == Type.BOOL:
       return p2
     else:
       return None
 
-  def gen(b, a):
+  def gen(self, b, a):
     self.emit(self.idt.toString() + " = " + self.expr.gen().toString())
 
 
 class Id(Expr):
-  def __init__(self, id, p, b):
-    super().__init__(id, p)
+  def __init__(self, idt, p, b):
+    super().__init__(idt, p)
     self.offset = b
 
 
 class Op(Expr):
-  def __init__(tok, p):
+  def __init__(self, tok, p):
     super().__init__(tok, p)
 
-  def reduce():
+  def reduce(self):
     x = gen()
     t = Temp(self.Type)
     emit(t.toString() + " = " + x.toString())
@@ -126,10 +126,10 @@ class Arith(Op):
     if self.Type == None:
       self.error("type error")
 
-  def gen():
+  def gen(self):
     return Arith(self.op, self.expr1.reduce(), self.expr2.reduce())
 
-  def toString():
+  def toString(self):
     return self.expr1.toString() + " " + self.op.toString() + " " + self.expr2.toString()
 
 
@@ -141,7 +141,7 @@ class Temp(Expr):
     Temp.count += 1  # static
     self.number = Temp.count
 
-  def toString():
+  def toString(self):
     return "t" + self.number
 
 
@@ -153,10 +153,10 @@ class Unary(Op):
     if self.Type == None:
       self.error("Type error")
 
-  def gen():
+  def gen(self):
     return Unary(self.op, self.expr.reduce())
 
-  def toString():
+  def toString(self):
     return self.op.toString() + " " + self.expr.toString()
 
 
@@ -170,7 +170,7 @@ class Constant(Expr):
     Constant.TRUE = Constant(Word.TRUE, Type.BOOL)
     Constant.FALSE = Constant(Word.FALSE, Type.BOOL)
 
-  def jumping(t, f):
+  def jumping(self, t, f):
     if self == Constant.TRUE and t != 0:
       emit("goto L" + t)
     elif self == Constant.FALSE and f != 0:
@@ -186,13 +186,13 @@ class Logical(Expr):
     if self.Type == None:
       error("Type error")
 
-  def check(p1, p2):
+  def check(self, p1, p2):
     if p1 == Type.BOOL and p2 == Type.BOOL:
       return Type.BOOL
     else:
       return None
 
-  def gen():
+  def gen(self):
     f = newlabel()
     a = newlabel()
     temp = Temp(self.Type)
@@ -204,7 +204,7 @@ class Logical(Expr):
     emitlabel(a)
     return temp
 
-  def toString():
+  def toString(self):
     return expr1.toString() + " " + op.toString() + " " + expr2.toString()
 
 
@@ -247,7 +247,7 @@ class Rel(Logical):
   def __init__(self, tok, x1, x2):
     super().__init__(tok, x1, x2)
 
-  def check(p1, p2):
+  def check(self, p1, p2):
     if isinstance(p1, Array) or isinstance(p2, Array):
       return None
     elif p1 == p2:
@@ -255,7 +255,7 @@ class Rel(Logical):
     else:
       return None
 
-  def jumping(t, f):
+  def jumping(self, t, f):
     a = expr1.reduce()
     b = expr2.reduce()
     test = a.toString() + " " + op.toString() + " " + b.toString()
@@ -269,11 +269,11 @@ class Access(Op):
     self.array = a
     self.index = i
 
-  def gen():
+  def gen(self):
     return Access(array, index.reduce(), Type)
 
-  def jumping(t, f):
+  def jumping(self, t, f):
     emitjumps(reduce(), toString(), t, f)
 
-  def toString():
+  def toString(self):
     return array.toString() + " [ " + index.toString() + " ]"

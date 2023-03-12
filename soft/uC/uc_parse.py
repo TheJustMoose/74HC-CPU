@@ -131,7 +131,6 @@ class Parser:
     return x
 
   def rel(self):
-    print("Parser::rel")
     x = self.expr()
     relops = ['<', Tag.LE, Tag.GE, '>']
     if self.look.tag in relops:
@@ -142,4 +141,65 @@ class Parser:
       return x
 
   def expr(self):
-    pass
+    x = self.term()
+    while self.look.tag == '+' or self.look.tag == '-':
+      tok = self.look
+      self.move()
+      x = Arith(tok, x, self.term())
+    return x
+
+  def term(self):
+    x = self.unary()
+    while self.look.tag == '*' or self.look.tag == '/':
+      tok = self.look
+      self.move()
+      x = Arith(tok, x, self.unary())
+    return x
+
+  def unary(self):
+    if self.look.tag == '-':
+      self.move()
+      return Unary(Word.minus, self.unary())
+    elif self.look.tag == '!':
+      tok = self.look
+      self.move()
+      return Not(tok, self.unary())
+    else:
+      return self.factor()
+
+  def factor(self):
+    x = None
+    if self.look.tag == '(':
+      self.move()
+      x = self.bool()
+      self.match(')')
+      return x
+    elif self.look.tag == Tag.NUM:
+      x = Constant(self.look, Type.INT)
+      self.move()
+      return x
+    elif self.look.tag == Tag.REAL:
+      x = Constant(self.look, Type.FLOAT)
+      self.move()
+      return x
+    elif self.look.tag == Tag.TRUE:
+      x = Constant.TRUE
+      self.move()
+      return x
+    elif self.look.tag == Tag.FALSE:
+      x = Constant.FALSE
+      self.move()
+      return x
+    elif self.look.tag == Tag.ID:
+      s = self.look.toString()
+      idt = top.get(self.look)
+      if idt == None:
+        self.error(self.look.toString() + " undeclared")
+      self.move()
+      if self.look.tag != '[':
+        return idt
+      else:
+        return offset(idt)
+    else:
+      self.error("syntax error")
+      return x
