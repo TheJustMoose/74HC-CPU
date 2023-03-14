@@ -28,13 +28,13 @@ MUL, ALU - похожи на stripboard
 |  MOV  |DST|SRC|       -       | 5
 |  UNO  |DST|TYP|       -       | 6  // INV SWAP LSR LSRC
 |  MUL  |DST|SRC|       -       | 7
-|  LDI  |DST|SRC|       -       | 8
-|   LD  |DST|SRC|     CONST     | 9
+|  LDI  |DST| - |     CONST     | 8  // SRC здесь не используются, но можно переключать константу между: 1, 2, CONST, 0xFF
+|   LD  |DST|SRC|     CONST     | 9  // SRC может переключать входы сумматора RAM по принципу: ADDR = R3:R2*SRC[0] + CONST*SRC[1]
 |   IN  |DST|SRC|       -       | A
 |  OUT  |DST|SRC|       -       | B
-|   ST  |DST|SRC|       -       | C
-| CTRL  | FLAGS |       -       | D  // CLRF STOP
-|  CMP  |DST|SRC|       -       | E
+|   ST  |DST|SRC|     CONST     | C
+| CTRL  | FLAGS |       -       | D  // CLRF STOP SWITCH_TO_CONST? - переключить шину SRC на константу на время след команды
+|  CMP  |DST|SRC|       -       | E                                - это позволит сэкономить регистр и операцию пересылки
 | BRANC |  TYPE |       -       | F
 
 можно попробовать сделать так:
@@ -165,7 +165,7 @@ TYPE  REQUIRED - этот же бит входит в состав кода оп
 |01   UNO 0|DST||TYP|     -     | 12  01 001 0
 
 // на данный момент эти константы подключены непосредственно к RAM
-|01    LD 1|DST||     OFFSET    | 13  01 001 1  // LD Rx, [OFFSET] (load by offset) - чтение глобальных переменных
+|01    LD 1|DST||     OFFSET    | 13  01 001 1  // LD Rx, [OFFSET] (load by offset) - чтение глобальных переменных (256 байт)
 |01   LDA 0|DST||         -     | 14  01 010 0  // LD Rx, [R3:R2] (load by ptr) - чтение по указателю, а-ля *ptr
 |01   LDO 1|DST||     OFFSET    | 15  01 010 1  // LD Rx, [R3:R2 + OFFSET] (load by ptr+offset) - чтение со смещением, а-ля *(ptr+1)
 
