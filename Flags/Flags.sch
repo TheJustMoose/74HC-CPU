@@ -572,9 +572,9 @@ Text Label 1200 3400 0    50   ~ 0
 CF_EN
 Text Label 1200 2450 0    50   ~ 0
 ZF_IN
-Text Label 1200 3600 0    50   ~ 0
-ZF_EN
 Text Label 1200 3500 0    50   ~ 0
+ZF_EN
+Text Label 1200 3600 0    50   ~ 0
 CMP_EN
 Text Label 1200 2650 0    50   ~ 0
 LT_IN
@@ -863,6 +863,28 @@ F 1 "MountingHole" H 7600 5705 50  0000 L CNN
 F 2 "MountingHole:MountingHole_3.2mm_M3" H 7500 5750 50  0001 C CNN
 F 3 "~" H 7500 5750 50  0001 C CNN
 	1    7500 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 6469DB14
+P 7500 6000
+F 0 "H3" H 7600 6046 50  0000 L CNN
+F 1 "MountingHole" H 7600 5955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7500 6000 50  0001 C CNN
+F 3 "~" H 7500 6000 50  0001 C CNN
+	1    7500 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 646C277F
+P 7500 6250
+F 0 "H4" H 7600 6296 50  0000 L CNN
+F 1 "MountingHole" H 7600 6205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7500 6250 50  0001 C CNN
+F 3 "~" H 7500 6250 50  0001 C CNN
+	1    7500 6250
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
