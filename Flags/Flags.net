@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\Flags\Flags.sch)
-    (date "26/02/2023 13:06:20")
+    (date "20/05/2023 20:35:20")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -196,7 +196,21 @@
       (datasheet ~)
       (libsource (lib Connector) (part Conn_01x01_Male) (description "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"))
       (sheetpath (names /) (tstamps /))
-      (tstamp 6401693F)))
+      (tstamp 6401693F))
+    (comp (ref H1)
+      (value MountingHole)
+      (footprint MountingHole:MountingHole_3.2mm_M3)
+      (datasheet ~)
+      (libsource (lib Mechanical) (part MountingHole) (description "Mounting Hole without connection"))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 64692F19))
+    (comp (ref H2)
+      (value MountingHole)
+      (footprint MountingHole:MountingHole_3.2mm_M3)
+      (datasheet ~)
+      (libsource (lib Mechanical) (part MountingHole) (description "Mounting Hole without connection"))
+      (sheetpath (names /) (tstamps /))
+      (tstamp 64693311)))
   (libparts
     (libpart (lib 74xx) (part 74LS08)
       (description "Quad And2")
@@ -369,14 +383,24 @@
         (field (name Value) R))
       (pins
         (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive)))))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib Mechanical) (part MountingHole)
+      (description "Mounting Hole without connection")
+      (docs ~)
+      (footprints
+        (fp MountingHole*))
+      (fields
+        (field (name Reference) H)
+        (field (name Value) MountingHole))))
   (libraries
     (library (logical 74xx)
       (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/74xx.lib"))
     (library (logical Connector)
       (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Connector.lib"))
     (library (logical Device)
-      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Device.lib")))
+      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Device.lib"))
+    (library (logical Mechanical)
+      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Mechanical.lib")))
   (nets
     (net (code 1) (name /ZF)
       (node (ref J1) (pin 7))
