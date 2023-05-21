@@ -57,9 +57,9 @@ F 3 "~" H 1750 5150 50  0001 C CNN
 	1    1750 5150
 	1    0    0    1   
 $EndComp
-Text Notes 1400 3150 0    50   ~ 0
+Text Notes 1525 4150 0    50   ~ 0
 A
-Text Notes 1425 4125 0    50   ~ 0
+Text Notes 1525 3150 0    50   ~ 0
 B
 Text Notes 7375 3425 0    50   ~ 0
 Out
@@ -566,13 +566,13 @@ Text Label 2200 5675 0    50   ~ 0
 Text Label 2250 4625 0    50   ~ 0
 Latch
 Text Label 1975 2800 0    50   ~ 0
-A7
-Text Label 1975 3500 0    50   ~ 0
-A0
-Text Label 1975 3800 0    50   ~ 0
 B7
-Text Label 2000 4500 0    50   ~ 0
+Text Label 1975 3500 0    50   ~ 0
 B0
+Text Label 1975 3800 0    50   ~ 0
+A7
+Text Label 2000 4500 0    50   ~ 0
+A0
 Text Label 6875 3050 0    50   ~ 0
 O7
 Text Label 6875 3750 0    50   ~ 0
