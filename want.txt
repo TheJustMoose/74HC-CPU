@@ -30,17 +30,18 @@ MUL, ALU - похожи на stripboard
 |  UNO  |DST|TYP|       -       | 6  // INV SWAP LSR LSRC
 |  MUL  |DST|SRC|       -       | 7
 |  LDI  |DST| - |     CONST     | 8  // SRC здесь не используются, но можно переключать константу между: 1, 2, CONST, 0xFF
-|   LD  |DST|SRC|     CONST     | 9  // SRC может переключать входы сумматора RAM по принципу: ADDR = R3:R2*SRC[0] + CONST*SRC[1]
-|   IN  |DST|SRC|       -       | A
-|  OUT  |DST|SRC|       -       | B
-|   ST  |DST|SRC|     CONST     | C
+|   LD  |DST|EXT|     CONST     | 9  // EXT может переключать входы сумматора RAM по принципу: ADDR = R3:R2*EXT[0] + CONST*EXT[1]
+|   IN  |DST|PRT|       -       | A  // PRT - номер порта, откуда будем вводить данные
+|  OUT  |PRT|SRC|       -       | B  // PRT - номер порта, куда будем выводить данные
+|   ST  |SRC|EXT|     CONST     | C  // SRC стоит на месте DST, т.к. для команды есть отдельный мультиплексор, подключенный к шине OUT
 | CTRL  | FLAGS |       -       | D  // CLRF STOP SWITCH_TO_CONST? - переключить шину SRC на константу на время след команды
 |  CMP  |DST|SRC|       -       | E                                - это позволит сэкономить регистр и операцию пересылки
-| BRANC |  TYPE |       -       | F  // CALL, JMP, RET, JZ, JL, JNE, JG, -, JE, JC, JNZ, JNC
+| BRANC |  TYPE |  8 BIT ADDR   | F  // CALL, JMP, RET, JZ, JL, JNE, JG, -, JE, JC, JNZ, JNC
                                      // переход сейчас только относительный и только в пределах +-127 команд
                                      // но есть несколько свободных команд, можно сделать FARJMP, а лучше JMP по абсолютному адресу
 
-Можно добиться минимальной кровью:
+Можно добиться минимальной кровью
+(так как ADDI, ANDI до сих пор нет, лишние регистры не помешают):
       4 + 3 + 3 + 6 = 16
  0 1 2 3 4 5 6 7 8 9 A B C D E F
 |  COP  | DST | SRC | M.B CONST | N
@@ -51,14 +52,14 @@ MUL, ALU - похожи на stripboard
 |   OR  | DST | SRC |     -     | 3  // гипотетически, это будет работать и с AND/OR/XOR, правда, хз, что из этого сделать полезного ;)
 |  XOR  | DST | SRC |     -     | 4
 |  MOV  | DST | SRC |     -     | 5  // с MOV, кстати, тоже будет работать, поэтому можно сделать R1 := INV(R0), или типа того
-|  UNO  | DST | TYP |     -     | 6  // INV SWAP LSR LSRC
+|  UNO  | DST | TYP |     -     | 6  // INV SWAP LSR LSRC (кстати, теперь здесь есть ещё 4 свободных слота!)
 |  MUL  | DST | SRC |     -     | 7  // а команда MUL в сочетании с ZeroSRC позволит занулить сразу два регистра
-|  LDI  | DST |   8 BIT CONST   | 8  // окей, осталось место только на константу и всё, никакого цирка с 0, 1, FF :(
-|   LD  | DST | SRC |   CONST   | 9  // SRC может переключать входы сумматора RAM по принципу: ADDR = R3:R2*SRC[0] + CONST*SRC[1] (SRC[2] свободен)
-|   IN  | DST | PRT |     -     | A  // но теперь смещение от базы будет только в пределах +-32 байта
-|  OUT  | PRT | SRC |     -     | B  // ура, есть много бит и можно сделать сильно больше, чем 8 портов ввода-вывода
-|   ST  | DST | SRC |   CONST   | C
-| CTRL  | FLAGS |         -     | D  // CLRF STOP DBG
+|  LDI  | DST |E|  8 BIT CONST  | 8  // окей, осталось место только на константу и пустой бит E
+|   LD  | DST |E|  8 BIT CONST  | 9  // E может переключать входы сумматора RAM по принципу: ADDR = R3:R2*E + CONST
+|   IN  | DST |       PRT       | A  // PRT - номер порта, откуда будем вводить данные, 9 бит
+|  OUT  | SRC |       PRT       | B  // придётся использовать тот же мультиплексор, что и для памяти
+|   ST  | SRC |E|  8 BIT CONST  | C  // SRC стоит на месте DST, т.к. для команды есть отдельный мультиплексор, подключенный к шине OUT
+| CTRL  |FLAGS|           -     | D  // CLRF STOP/DBG SETCF
 |  CMP  | DST | SRC |     -     | E  // окей, а здесь есть свободные биты для организации CMPC
 | BRANC |  TYPE |  8 BIT ADDR   | F  // CALL, JMP, RET, JZ, JL, JNE, JG, -, JE, JC, JNZ, JNC [AJMP, FJMP]
  0 1 2 3 4 5 6 7 8 9 A B C D E F     // окей, есть 8 бит.... хорошо, но мало. нужен FARJMP, и опять таки ABSJUMP :((
@@ -70,24 +71,26 @@ MUL, ALU - похожи на stripboard
 можно попробовать сделать так:
  0 1 2 3 4 5 6 7 8 9 A B C D E F
      5    +  3  +  3  = 11
-|   ADD   | DST | SRC |    -    | 0  // всё ещё есть свободное место
-|  ADDC   | DST | SRC |    -    | 1
-|   AND   | DST | SRC |    -    | 2
-|    OR   | DST | SRC |    -    | 3
-|   XOR   | DST | SRC |    -    | 4
-|   MOV   | DST | SRC |    -    | 5
-|   UNO   | DST | TYP |    -    | 6
-|   MUL   | DST | SRC |    -    | 7
-|   LDI   | DST |     CONST     | 8   // 5 + 3 + 8 = 16
-|    LD   | DST | SRC |    -    | 9
-|    IN   | DST | SRC |    -    | A
-|   OUT   | DST | SRC |    -    | B
-|    ST   | DST | SRC |    -    | C
-|  CTRL   |   FLAGS   |    -    | D
-|   CMP   | DST | SRC |    -    | E
-| BRANCH  |    TYPE   |    -    | F  // вообще-то BRANCH имеет с десяток типов, поэтому можно отрезать обратно отхапанные 3(2?) бита
+|   ADD   | DST | SRC |    -    | 00  // всё ещё есть свободное место для INC, INCC, DEC, DECC, SUB, SUBC
+|  ADDI   | DST |     CONST     | 10  // сложение с константой
+|  ADDC   | DST | SRC |    -    | 01
+|   AND   | DST | SRC |    -    | 02
+|    OR   | DST | SRC |    -    | 03
+|   XOR   | DST | SRC |    -    | 04
+|   MOV   | DST | SRC |    -    | 05
+|   UNO   | DST | TYP |    -    | 06
+|   MUL   | DST | SRC |    -    | 07
+|   LDI   | DST |     CONST     | 08   // 5 + 3 + 8 = 16
+|    LD   | DST | SRC |    -    | 09
+|    IN   | DST | SRC |    -    | 0A
+|   OUT   | DST | SRC |    -    | 0B
+|    ST   | DST | SRC |    -    | 0C
+|  CTRL   |   FLAGS   |    -    | 0D
+|   CMP   | DST | SRC |    -    | 0E
+| BRANCH  |    TYPE   |    -    | 0F  // вообще-то BRANCH имеет с десяток типов, поэтому можно отрезать обратно отхапанные 3(2?) бита
 например:
-| BRANCH  |  TYPE |      -      | F  // окей, теперь можно сделать переход в +-64 команды
+| BRANCH  |  TYPE |      -      | 0F  // CALL, JMP, RET, JZ, JL, JNE, JG, -, JE, JC, JNZ, JNC - окей, теперь можно сделать переход в +-64 команды
+| FARJMP  |      11 BIT ADDR    | 1F
  0 1 2 3 4 5 6 7 8 9 A B C D E F
 
 
