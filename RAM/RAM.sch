@@ -276,7 +276,7 @@ U 1 1 63D8CE4B
 P 750 1850
 F 0 "J1" H 800 2225 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 750 1375 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 750 1850 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 1850 50  0001 C CNN
 F 3 "~" H 750 1850 50  0001 C CNN
 	1    750  1850
 	1    0    0    1   
@@ -287,7 +287,7 @@ U 1 1 63D8E866
 P 750 2900
 F 0 "J2" H 800 3275 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 750 2425 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 750 2900 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 2900 50  0001 C CNN
 F 3 "~" H 750 2900 50  0001 C CNN
 	1    750  2900
 	1    0    0    1   
@@ -298,7 +298,7 @@ U 1 1 63D8F7ED
 P 750 4650
 F 0 "J3" H 800 5025 50  0000 C CNN
 F 1 "Conn_01x08_Male" H 750 4175 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal" H 750 4650 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 4650 50  0001 C CNN
 F 3 "~" H 750 4650 50  0001 C CNN
 	1    750  4650
 	1    0    0    1   
@@ -478,7 +478,7 @@ U 1 1 63DBE3C2
 P 750 5700
 F 0 "J4" H 722 5632 50  0000 R CNN
 F 1 "Conn_01x05_Male" H 1075 5975 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal" H 750 5700 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 750 5700 50  0001 C CNN
 F 3 "~" H 750 5700 50  0001 C CNN
 	1    750  5700
 	1    0    0    1   
@@ -727,7 +727,7 @@ U 1 1 63D6EC9D
 P 5000 4100
 F 0 "D1" V 5075 4050 50  0000 R CNN
 F 1 "LED" H 5200 4150 50  0000 R CNN
-F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5000 4100 50  0001 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 5000 4100 50  0001 C CNN
 F 3 "~" H 5000 4100 50  0001 C CNN
 	1    5000 4100
 	0    -1   -1   0   
@@ -738,7 +738,7 @@ U 1 1 63D7DE5B
 P 5750 4100
 F 0 "D2" V 5825 4050 50  0000 R CNN
 F 1 "LED" H 5950 4150 50  0000 R CNN
-F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5750 4100 50  0001 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 5750 4100 50  0001 C CNN
 F 3 "~" H 5750 4100 50  0001 C CNN
 	1    5750 4100
 	0    -1   -1   0   
@@ -749,7 +749,7 @@ U 1 1 63D7E1C1
 P 6500 4100
 F 0 "D3" V 6575 4050 50  0000 R CNN
 F 1 "LED" H 6700 4150 50  0000 R CNN
-F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 6500 4100 50  0001 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 6500 4100 50  0001 C CNN
 F 3 "~" H 6500 4100 50  0001 C CNN
 	1    6500 4100
 	0    -1   -1   0   
@@ -1010,12 +1010,12 @@ Wire Wire Line
 $Comp
 L 74xx:74HC00 U6
 U 1 1 6495168F
-P 3650 9625
-F 0 "U6" H 3650 9950 50  0000 C CNN
-F 1 "74HC00" H 3650 9859 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 3650 9625 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3650 9625 50  0001 C CNN
-	1    3650 9625
+P 5675 9525
+F 0 "U6" H 5675 9850 50  0000 C CNN
+F 1 "74HC00" H 5675 9759 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 5675 9525 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 5675 9525 50  0001 C CNN
+	1    5675 9525
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1043,12 +1043,12 @@ $EndComp
 $Comp
 L 74xx:74HC00 U6
 U 4 1 64956F5A
-P 5675 9525
-F 0 "U6" H 5675 9850 50  0000 C CNN
-F 1 "74HC00" H 5675 9759 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 5675 9525 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 5675 9525 50  0001 C CNN
-	4    5675 9525
+P 3650 9625
+F 0 "U6" H 3650 9950 50  0000 C CNN
+F 1 "74HC00" H 3650 9859 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 3650 9625 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 3650 9625 50  0001 C CNN
+	4    3650 9625
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1104,8 +1104,6 @@ Wire Wire Line
 Wire Wire Line
 	4175 9750 5375 9750
 Wire Wire Line
-	5375 9750 5375 9625
-Wire Wire Line
 	3950 9625 4175 9625
 Connection ~ 4175 9625
 Wire Wire Line
@@ -1126,4 +1124,50 @@ Text Label 4775 9525 0    50   ~ 0
 ~CS2
 Text Notes 4300 8900 0    50   ~ 0
 Address\ndecoder ;)
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 64922E67
+P 7000 7000
+F 0 "H1" H 7100 7046 50  0000 L CNN
+F 1 "MountingHole" H 7100 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7000 7000 50  0001 C CNN
+F 3 "~" H 7000 7000 50  0001 C CNN
+	1    7000 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 64923BB4
+P 7000 7250
+F 0 "H2" H 7100 7296 50  0000 L CNN
+F 1 "MountingHole" H 7100 7205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7000 7250 50  0001 C CNN
+F 3 "~" H 7000 7250 50  0001 C CNN
+	1    7000 7250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 64924557
+P 7000 7500
+F 0 "H3" H 7100 7546 50  0000 L CNN
+F 1 "MountingHole" H 7100 7455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7000 7500 50  0001 C CNN
+F 3 "~" H 7000 7500 50  0001 C CNN
+	1    7000 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 64924E63
+P 7000 7750
+F 0 "H4" H 7100 7796 50  0000 L CNN
+F 1 "MountingHole" H 7100 7705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7000 7750 50  0001 C CNN
+F 3 "~" H 7000 7750 50  0001 C CNN
+	1    7000 7750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5375 9625 5375 9750
 $EndSCHEMATC
