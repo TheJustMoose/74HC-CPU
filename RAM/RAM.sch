@@ -1010,23 +1010,23 @@ Wire Wire Line
 $Comp
 L 74xx:74HC00 U6
 U 1 1 6495168F
-P 5675 9525
-F 0 "U6" H 5675 9850 50  0000 C CNN
-F 1 "74HC00" H 5675 9759 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 5675 9525 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 5675 9525 50  0001 C CNN
-	1    5675 9525
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74HC00 U6
-U 2 1 64953C72
 P 5075 9025
 F 0 "U6" H 5075 9350 50  0000 C CNN
 F 1 "74HC00" H 5075 9259 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 5075 9025 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 5075 9025 50  0001 C CNN
-	2    5075 9025
+	1    5075 9025
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC00 U6
+U 2 1 64953C72
+P 5675 9525
+F 0 "U6" H 5675 9850 50  0000 C CNN
+F 1 "74HC00" H 5675 9759 50  0000 C CNN
+F 2 "Package_DIP:DIP-14_W7.62mm" H 5675 9525 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74hc00" H 5675 9525 50  0001 C CNN
+	2    5675 9525
 	1    0    0    -1  
 $EndComp
 $Comp
