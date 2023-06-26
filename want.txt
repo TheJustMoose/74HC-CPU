@@ -78,7 +78,7 @@ MUL, ALU - похожи на stripboard
 0110dddCvvvvvvvv  |  ADDI | DST |C|  8 BIT CONST  | 6  // чтобы сделать из неё INC, INCC, DEC, DECC, SUB, SUBC
 0111ddd-typ-----  |   UNO | DST |-| TYP |  -      | 7  // INV SWAP LSR LSRC (кстати, теперь здесь есть ещё 4 свободных слота!)
 1000dddZPooooooo  |    LD | DST |Z|P| 7BIT OFFSET | 8  // Z может переключать входы сумматора RAM по принципу: ADDR = R7:R6*E + CONST, P переключает на пару R5:R4
-1001sss-pppppppp  |    IN | DST |-|  8 BIT PORT   | 9  // PORT - номер порта, откуда будем вводить данные
+1001sss-pppppppp  |    IN | DST |-|  7 BIT PORT |I| 9  // PORT - номер порта, откуда будем вводить данные, I - проинвертировать вводимое значение
 1010sss-pppppppp  |   OUT | SRC |-|  8 BIT PORT   | A  // смотри ниже... (придётся использовать тот же мультиплексор, что и для памяти)
 1011sssZPooooooo  |    ST | SRC |Z|P| 7BIT OFFSET | B  // SRC стоит на месте DST, т.к. для команды ST есть отдельный мультиплексор, подключенный к шине OUT
 1100flg---------  |  CTRL |FLAGS|-|          -    | C  // CLRF STOP/DBG SETCF
