@@ -745,7 +745,7 @@ U 1 1 63A9EAB0
 P 8250 3250
 F 0 "C2" H 8365 3296 50  0000 L CNN
 F 1 "0.1uF" H 8365 3205 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D7.5mm_W5.0mm_P10.00mm" H 8288 3100 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 8288 3100 50  0001 C CNN
 F 3 "~" H 8250 3250 50  0001 C CNN
 	1    8250 3250
 	1    0    0    -1  
@@ -756,7 +756,7 @@ U 1 1 63AA00B9
 P 7750 3250
 F 0 "C1" H 7865 3296 50  0000 L CNN
 F 1 "0.1uF" H 7865 3205 50  0000 L CNN
-F 2 "Capacitor_THT:C_Disc_D7.5mm_W5.0mm_P10.00mm" H 7788 3100 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 7788 3100 50  0001 C CNN
 F 3 "~" H 7750 3250 50  0001 C CNN
 	1    7750 3250
 	1    0    0    -1  
@@ -805,4 +805,12 @@ F 3 "" H 8250 3100 50  0001 C CNN
 	1    8250 3100
 	1    0    0    -1  
 $EndComp
+Text Notes 1350 2825 0    50   ~ 0
+DST(A)
+Text Notes 1375 4125 0    50   ~ 0
+SRC(B)
+Text Notes 4875 3200 0    50   ~ 0
+SRC(B) < DST(A)
+Text Notes 4875 3100 0    50   ~ 0
+SRC(B) > DST(A)
 $EndSCHEMATC

@@ -805,4 +805,14 @@ F 3 "" H 8250 3100 50  0001 C CNN
 	1    8250 3100
 	1    0    0    -1  
 $EndComp
+Text Notes 1350 2825 0    50   ~ 0
+DST(A)
+Text Notes 1375 4125 0    50   ~ 0
+SRC(B)
+Text Notes 4875 3200 0    50   ~ 0
+SRC(B) < DST(A)
+Text Notes 4875 3100 0    50   ~ 0
+SRC(B) > DST(A)
+Text Notes 6550 3400 0    50   ~ 0
+~SRC(B) == DST(A)
 $EndSCHEMATC
