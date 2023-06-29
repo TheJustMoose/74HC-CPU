@@ -118,7 +118,7 @@ F 3 "" H 4700 5325 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 2250 2400 0    50   ~ 0
-INV
+INVL
 $Comp
 L Device:C C1
 U 1 1 6387E862
@@ -313,35 +313,35 @@ Wire Wire Line
 Wire Wire Line
 	2825 1850 3000 1850
 Text Label 2825 1850 0    50   ~ 0
-INV
+INVL
 Wire Wire Line
 	3575 2200 3750 2200
 Text Label 3575 2200 0    50   ~ 0
-INV
+INVL
 Wire Wire Line
 	2825 2575 3000 2575
 Text Label 2825 2575 0    50   ~ 0
-INV
+INVL
 Wire Wire Line
 	3575 2950 3750 2950
 Text Label 3575 2950 0    50   ~ 0
-INV
+INVL
 Wire Wire Line
 	2825 3375 3000 3375
 Text Label 2825 3375 0    50   ~ 0
-INV
+INVH
 Wire Wire Line
 	3575 3725 3750 3725
 Text Label 3575 3725 0    50   ~ 0
-INV
+INVH
 Wire Wire Line
 	2825 4100 3000 4100
 Text Label 2825 4100 0    50   ~ 0
-INV
+INVH
 Wire Wire Line
 	3575 4475 3750 4475
 Text Label 3575 4475 0    50   ~ 0
-INV
+INVH
 Wire Wire Line
 	2250 2500 2500 2500
 Wire Wire Line
@@ -430,7 +430,6 @@ F 3 "" H 2250 3300 50  0001 C CNN
 	1    2250 3300
 	1    0    0    -1  
 $EndComp
-NoConn ~ 5000 3350
 Text Label 2300 2500 0    50   ~ 0
 D0
 Text Label 2300 2600 0    50   ~ 0
@@ -447,4 +446,8 @@ Text Label 2300 3100 0    50   ~ 0
 D6
 Text Label 2300 3200 0    50   ~ 0
 D7
+Wire Wire Line
+	4800 3350 5000 3350
+Text Label 4800 3350 0    50   ~ 0
+INVH
 $EndSCHEMATC
