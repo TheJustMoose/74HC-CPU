@@ -1279,4 +1279,19 @@ Wire Wire Line
 	4175 6300 4250 6300
 Text Label 4175 6600 0    50   ~ 0
 ZF_EN
+$Comp
+L Connector:Conn_01x01_Male J19
+U 1 1 64A22DB8
+P 7950 3950
+F 0 "J19" H 7922 3974 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 8275 3850 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 7950 3950 50  0001 C CNN
+F 3 "~" H 7950 3950 50  0001 C CNN
+	1    7950 3950
+	-1   0    0    -1  
+$EndComp
+Text Label 7500 3950 0    50   ~ 0
+~MUL
+Wire Wire Line
+	7500 3950 7750 3950
 $EndSCHEMATC
