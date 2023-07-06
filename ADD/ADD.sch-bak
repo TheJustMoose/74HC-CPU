@@ -154,9 +154,9 @@ F 3 "~" H 1000 5200 50  0001 C CNN
 	1    1000 5200
 	1    0    0    1   
 $EndComp
-Text Label 1200 5400 0    50   ~ 0
-UseCF
 Text Label 1200 5300 0    50   ~ 0
+UseCF
+Text Label 1200 5400 0    50   ~ 0
 ~OE
 $Comp
 L power:GND #PWR0101
@@ -647,4 +647,15 @@ F 3 "" H 4750 6500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4925 4600 5750 4600
+$Comp
+L Connector:Conn_01x01_Male J7
+U 1 1 64A73E8E
+P 3950 3400
+F 0 "J7" H 3922 3424 50  0000 R CNN
+F 1 "Conn_01x01_Male" H 4275 3325 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 3950 3400 50  0001 C CNN
+F 3 "~" H 3950 3400 50  0001 C CNN
+	1    3950 3400
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC
