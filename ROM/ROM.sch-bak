@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L CommonLibrary:AM29F200BB U1
-U 1 1 64960DBD
-P 1850 2600
-F 0 "U1" H 1650 3850 50  0000 C CNN
-F 1 "AM29F200BB" H 2150 3850 50  0000 C CNN
-F 2 "Package_DIP:DIP-48_W15.24mm" H 1850 2600 50  0001 C CNN
-F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
-	1    1850 2600
-	1    0    0    -1  
-$EndComp
-$Comp
 L 74xx:74LS573 U2
 U 1 1 6496325D
 P 3950 1750
@@ -114,7 +103,6 @@ F 3 "" H 1850 4050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1850 4050 1950 4050
-Connection ~ 1850 4050
 Text Label 2250 1500 0    50   ~ 0
 D0
 Text Label 2250 1600 0    50   ~ 0
@@ -230,7 +218,6 @@ Wire Wire Line
 	1200 3400 1450 3400
 Wire Wire Line
 	1450 3500 1450 3400
-Connection ~ 1450 3400
 $Comp
 L Device:R R2
 U 1 1 64973DD7
@@ -1253,47 +1240,60 @@ F 3 "" H 1200 3100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H?
+L Mechanical:MountingHole H1
 U 1 1 649C9A0F
 P 1000 7000
-F 0 "H?" H 1100 7046 50  0000 L CNN
+F 0 "H1" H 1100 7046 50  0000 L CNN
 F 1 "MountingHole" H 1100 6955 50  0000 L CNN
-F 2 "" H 1000 7000 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1000 7000 50  0001 C CNN
 F 3 "~" H 1000 7000 50  0001 C CNN
 	1    1000 7000
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H?
+L Mechanical:MountingHole H3
 U 1 1 649CA99A
 P 1000 7250
-F 0 "H?" H 1100 7296 50  0000 L CNN
+F 0 "H3" H 1100 7296 50  0000 L CNN
 F 1 "MountingHole" H 1100 7205 50  0000 L CNN
-F 2 "" H 1000 7250 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1000 7250 50  0001 C CNN
 F 3 "~" H 1000 7250 50  0001 C CNN
 	1    1000 7250
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H?
+L Mechanical:MountingHole H2
 U 1 1 649CB59E
 P 2000 7000
-F 0 "H?" H 2100 7046 50  0000 L CNN
+F 0 "H2" H 2100 7046 50  0000 L CNN
 F 1 "MountingHole" H 2100 6955 50  0000 L CNN
-F 2 "" H 2000 7000 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2000 7000 50  0001 C CNN
 F 3 "~" H 2000 7000 50  0001 C CNN
 	1    2000 7000
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole H?
+L Mechanical:MountingHole H4
 U 1 1 649CC192
 P 2000 7250
-F 0 "H?" H 2100 7296 50  0000 L CNN
+F 0 "H4" H 2100 7296 50  0000 L CNN
 F 1 "MountingHole" H 2100 7205 50  0000 L CNN
-F 2 "" H 2000 7250 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2000 7250 50  0001 C CNN
 F 3 "~" H 2000 7250 50  0001 C CNN
 	1    2000 7250
 	1    0    0    -1  
 $EndComp
+$Comp
+L CommonLibrary:AM29F200BB-SO44 U1
+U 1 1 64B03999
+P 1850 2600
+F 0 "U1" H 1625 3875 50  0000 C CNN
+F 1 "AM29F200BB-SO44" H 2300 3875 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x22_P2.54mm_Vertical_SMD" H 1850 2600 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
+	1    1850 2600
+	1    0    0    -1  
+$EndComp
+Connection ~ 1850 4050
+Connection ~ 1450 3400
 $EndSCHEMATC

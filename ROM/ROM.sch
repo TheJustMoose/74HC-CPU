@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L CommonLibrary:AM29F200BB U1
-U 1 1 64960DBD
-P 1850 2600
-F 0 "U1" H 1650 3850 50  0000 C CNN
-F 1 "AM29F200BB" H 2150 3850 50  0000 C CNN
-F 2 "Package_DIP:DIP-48_W15.24mm" H 1850 2600 50  0001 C CNN
-F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
-	1    1850 2600
-	1    0    0    -1  
-$EndComp
-$Comp
 L 74xx:74LS573 U2
 U 1 1 6496325D
 P 3950 1750
@@ -114,7 +103,6 @@ F 3 "" H 1850 4050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1850 4050 1950 4050
-Connection ~ 1850 4050
 Text Label 2250 1500 0    50   ~ 0
 D0
 Text Label 2250 1600 0    50   ~ 0
@@ -230,7 +218,6 @@ Wire Wire Line
 	1200 3400 1450 3400
 Wire Wire Line
 	1450 3500 1450 3400
-Connection ~ 1450 3400
 $Comp
 L Device:R R2
 U 1 1 64973DD7
@@ -1296,4 +1283,17 @@ F 3 "~" H 2000 7250 50  0001 C CNN
 	1    2000 7250
 	1    0    0    -1  
 $EndComp
+$Comp
+L CommonLibrary:AM29F200BB-SO44 U1
+U 1 1 64B03999
+P 1850 2600
+F 0 "U1" H 1625 3875 50  0000 C CNN
+F 1 "AM29F200BB-SO44" H 2300 3875 50  0000 C CNN
+F 2 "CommonLibrary:DIP-44_W15.24mm" H 1850 2600 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
+	1    1850 2600
+	1    0    0    -1  
+$EndComp
+Connection ~ 1850 4050
+Connection ~ 1450 3400
 $EndSCHEMATC
