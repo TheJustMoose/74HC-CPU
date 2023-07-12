@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 16)
+    (drawings 17)
     (tracks 147)
     (zones 0)
     (modules 5)
@@ -265,7 +265,7 @@
     (tags "capacitor handsolder")
     (path /6387E862)
     (attr smd)
-    (fp_text reference C1 (at -3.175 0) (layer F.SilkS)
+    (fp_text reference C1 (at 0 -1.905) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value 0.1uF (at 0 1.68) (layer F.Fab)
@@ -421,7 +421,10 @@
     )
   )
 
-  (gr_text INV (at 81.28 40.64) (layer F.SilkS)
+  (gr_text INVH (at 93.345 63.5) (layer F.SilkS) (tstamp 649DF5AA)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (gr_text INVL (at 81.28 40.64) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (gr_text Gnd (at 81.915 64.135) (layer F.Cu) (tstamp 63843D85)

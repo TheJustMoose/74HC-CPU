@@ -4,6 +4,13 @@
 10 RegLED
 10 MUL
 
+заказать платы:
+RegLed3
+CMP
+INV-B
+INV-BB
+RAM?
+
 хочется:
 Flags
 JMPS
