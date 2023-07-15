@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 24)
+    (drawings 25)
     (tracks 202)
     (zones 0)
     (modules 5)
@@ -452,6 +452,9 @@
     )
   )
 
+  (gr_text 74HCPU (at 17.145 33.02) (layer F.SilkS) (tstamp 64B29738)
+    (effects (font (size 2 2) (thickness 0.25)))
+  )
   (gr_text +5V (at 61.087 10.922) (layer B.Cu) (tstamp 64B29657)
     (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
   )
