@@ -116,12 +116,12 @@ $Comp
 L 74xx:74LS86 U2
 U 4 1 64B26B09
 P 4050 2450
-F 0 "U2" H 3900 2650 50  0000 C CNN
-F 1 "74LS86" H 4150 2650 50  0000 C CNN
+F 0 "U2" H 3925 2250 50  0000 C CNN
+F 1 "74LS86" H 4200 2250 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 4050 2450 50  0001 C CNN
 F 3 "74xx/74ls86.pdf" H 4050 2450 50  0001 C CNN
 	4    4050 2450
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L 74xx:74LS86 U2
@@ -307,7 +307,7 @@ Text Label 2700 4650 0    50   ~ 0
 D2
 Text Label 2700 4750 0    50   ~ 0
 D3
-Text Label 3250 4450 0    50   ~ 0
+Text Label 3250 4350 0    50   ~ 0
 Q0
 Wire Wire Line
 	3250 4250 3500 4250
@@ -323,7 +323,7 @@ Wire Wire Line
 	3250 4750 3500 4750
 Wire Wire Line
 	3250 4850 3500 4850
-Text Label 3250 4550 0    50   ~ 0
+Text Label 3250 4450 0    50   ~ 0
 Q1
 Text Label 3250 4650 0    50   ~ 0
 Q2
@@ -355,7 +355,7 @@ Text Label 2700 4250 0    50   ~ 0
 ~MR
 Text Label 3250 4850 0    50   ~ 0
 C
-Text Label 3250 4350 0    50   ~ 0
+Text Label 3250 4550 0    50   ~ 0
 Toggle
 NoConn ~ 2700 4350
 Wire Wire Line

@@ -299,15 +299,15 @@ F 3 "~" H 3700 4550 50  0001 C CNN
 	1    3700 4550
 	-1   0    0    1   
 $EndComp
-Text Label 2700 4450 0    50   ~ 0
+Text Label 2700 4350 0    50   ~ 0
 D0
-Text Label 2700 4550 0    50   ~ 0
+Text Label 2700 4450 0    50   ~ 0
 D1
 Text Label 2700 4650 0    50   ~ 0
 D2
 Text Label 2700 4750 0    50   ~ 0
 D3
-Text Label 3250 4450 0    50   ~ 0
+Text Label 3250 4350 0    50   ~ 0
 Q0
 Wire Wire Line
 	3250 4250 3500 4250
@@ -323,7 +323,7 @@ Wire Wire Line
 	3250 4750 3500 4750
 Wire Wire Line
 	3250 4850 3500 4850
-Text Label 3250 4550 0    50   ~ 0
+Text Label 3250 4450 0    50   ~ 0
 Q1
 Text Label 3250 4650 0    50   ~ 0
 Q2
@@ -355,9 +355,9 @@ Text Label 2700 4250 0    50   ~ 0
 ~MR
 Text Label 3250 4850 0    50   ~ 0
 C
-Text Label 3250 4350 0    50   ~ 0
+Text Label 3250 4550 0    50   ~ 0
 Toggle
-NoConn ~ 2700 4350
+NoConn ~ 2700 4550
 Wire Wire Line
 	5000 2250 5250 2250
 Wire Wire Line
