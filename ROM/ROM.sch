@@ -82,58 +82,58 @@ $EndComp
 $Comp
 L power:VCC #PWR02
 U 1 1 64968CAB
-P 1850 1300
-F 0 "#PWR02" H 1850 1150 50  0001 C CNN
-F 1 "VCC" H 1865 1473 50  0000 C CNN
-F 2 "" H 1850 1300 50  0001 C CNN
-F 3 "" H 1850 1300 50  0001 C CNN
-	1    1850 1300
+P 2250 1050
+F 0 "#PWR02" H 2250 900 50  0001 C CNN
+F 1 "VCC" H 2265 1223 50  0000 C CNN
+F 2 "" H 2250 1050 50  0001 C CNN
+F 3 "" H 2250 1050 50  0001 C CNN
+	1    2250 1050
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR05
 U 1 1 64969298
-P 1850 4050
-F 0 "#PWR05" H 1850 3800 50  0001 C CNN
-F 1 "GND" H 1855 3877 50  0000 C CNN
-F 2 "" H 1850 4050 50  0001 C CNN
-F 3 "" H 1850 4050 50  0001 C CNN
-	1    1850 4050
+P 2250 3800
+F 0 "#PWR05" H 2250 3550 50  0001 C CNN
+F 1 "GND" H 2255 3627 50  0000 C CNN
+F 2 "" H 2250 3800 50  0001 C CNN
+F 3 "" H 2250 3800 50  0001 C CNN
+	1    2250 3800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1850 4050 1950 4050
-Text Label 2250 1500 0    50   ~ 0
+	2250 3800 2350 3800
+Text Label 2650 1250 0    50   ~ 0
 D0
-Text Label 2250 1600 0    50   ~ 0
+Text Label 2650 1350 0    50   ~ 0
 D1
-Text Label 2250 1700 0    50   ~ 0
+Text Label 2650 1450 0    50   ~ 0
 D2
-Text Label 2250 1800 0    50   ~ 0
+Text Label 2650 1550 0    50   ~ 0
 D3
-Text Label 2250 1900 0    50   ~ 0
+Text Label 2650 1650 0    50   ~ 0
 D4
-Text Label 2250 2000 0    50   ~ 0
+Text Label 2650 1750 0    50   ~ 0
 D5
-Text Label 2250 2100 0    50   ~ 0
+Text Label 2650 1850 0    50   ~ 0
 D6
-Text Label 2250 2200 0    50   ~ 0
+Text Label 2650 1950 0    50   ~ 0
 D7
-Text Label 2250 2400 0    50   ~ 0
+Text Label 2650 2150 0    50   ~ 0
 D8
-Text Label 2250 2500 0    50   ~ 0
+Text Label 2650 2250 0    50   ~ 0
 D9
-Text Label 2250 2600 0    50   ~ 0
+Text Label 2650 2350 0    50   ~ 0
 D10
-Text Label 2250 2700 0    50   ~ 0
+Text Label 2650 2450 0    50   ~ 0
 D11
-Text Label 2250 2800 0    50   ~ 0
+Text Label 2650 2550 0    50   ~ 0
 D12
-Text Label 2250 2900 0    50   ~ 0
+Text Label 2650 2650 0    50   ~ 0
 D13
-Text Label 2250 3000 0    50   ~ 0
+Text Label 2650 2750 0    50   ~ 0
 D14
-Text Label 2250 3100 0    50   ~ 0
+Text Label 2650 2850 0    50   ~ 0
 D15
 Wire Wire Line
 	3200 1250 3450 1250
@@ -206,128 +206,128 @@ D7
 $Comp
 L Device:R R1
 U 1 1 649726F6
-P 1050 3400
-F 0 "R1" V 975 3375 50  0000 C CNN
-F 1 "10K" V 1050 3400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 980 3400 50  0001 C CNN
-F 3 "~" H 1050 3400 50  0001 C CNN
-	1    1050 3400
+P 1450 3150
+F 0 "R1" V 1375 3125 50  0000 C CNN
+F 1 "10K" V 1450 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 1380 3150 50  0001 C CNN
+F 3 "~" H 1450 3150 50  0001 C CNN
+	1    1450 3150
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1200 3400 1450 3400
+	1600 3150 1850 3150
 Wire Wire Line
-	1450 3500 1450 3400
+	1850 3250 1850 3150
 $Comp
 L Device:R R2
 U 1 1 64973DD7
-P 1050 3800
-F 0 "R2" V 975 3775 50  0000 C CNN
-F 1 "10K" V 1050 3800 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 980 3800 50  0001 C CNN
-F 3 "~" H 1050 3800 50  0001 C CNN
-	1    1050 3800
+P 1450 3550
+F 0 "R2" V 1375 3525 50  0000 C CNN
+F 1 "10K" V 1450 3550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 1380 3550 50  0001 C CNN
+F 3 "~" H 1450 3550 50  0001 C CNN
+	1    1450 3550
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1200 3800 1450 3800
+	1600 3550 1850 3550
 $Comp
 L power:VCC #PWR0101
 U 1 1 64974863
-P 900 3400
-F 0 "#PWR0101" H 900 3250 50  0001 C CNN
-F 1 "VCC" H 915 3573 50  0000 C CNN
-F 2 "" H 900 3400 50  0001 C CNN
-F 3 "" H 900 3400 50  0001 C CNN
-	1    900  3400
+P 1300 3150
+F 0 "#PWR0101" H 1300 3000 50  0001 C CNN
+F 1 "VCC" H 1315 3323 50  0000 C CNN
+F 2 "" H 1300 3150 50  0001 C CNN
+F 3 "" H 1300 3150 50  0001 C CNN
+	1    1300 3150
 	0    -1   -1   0   
 $EndComp
 $Comp
 L power:VCC #PWR0102
 U 1 1 64975DDC
-P 900 3800
-F 0 "#PWR0102" H 900 3650 50  0001 C CNN
-F 1 "VCC" H 915 3973 50  0000 C CNN
-F 2 "" H 900 3800 50  0001 C CNN
-F 3 "" H 900 3800 50  0001 C CNN
-	1    900  3800
+P 1300 3550
+F 0 "#PWR0102" H 1300 3400 50  0001 C CNN
+F 1 "VCC" H 1315 3723 50  0000 C CNN
+F 2 "" H 1300 3550 50  0001 C CNN
+F 3 "" H 1300 3550 50  0001 C CNN
+	1    1300 3550
 	0    -1   -1   0   
 $EndComp
-NoConn ~ 2250 3250
+NoConn ~ 2650 3000
 $Comp
 L power:GND #PWR0103
 U 1 1 6497697E
-P 1450 3100
-F 0 "#PWR0103" H 1450 2850 50  0001 C CNN
-F 1 "GND" H 1455 2927 50  0000 C CNN
-F 2 "" H 1450 3100 50  0001 C CNN
-F 3 "" H 1450 3100 50  0001 C CNN
-	1    1450 3100
+P 1850 2850
+F 0 "#PWR0103" H 1850 2600 50  0001 C CNN
+F 1 "GND" H 1855 2677 50  0000 C CNN
+F 2 "" H 1850 2850 50  0001 C CNN
+F 3 "" H 1850 2850 50  0001 C CNN
+	1    1850 2850
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1200 1500 1450 1500
+	1600 1250 1850 1250
 Wire Wire Line
-	1200 1600 1450 1600
+	1600 1350 1850 1350
 Wire Wire Line
-	1200 1700 1450 1700
+	1600 1450 1850 1450
 Wire Wire Line
-	1200 1800 1450 1800
+	1600 1550 1850 1550
 Wire Wire Line
-	1200 1900 1450 1900
+	1600 1650 1850 1650
 Wire Wire Line
-	1200 2000 1450 2000
+	1600 1750 1850 1750
 Wire Wire Line
-	1200 2100 1450 2100
+	1600 1850 1850 1850
 Wire Wire Line
-	1200 2200 1450 2200
+	1600 1950 1850 1950
 Wire Wire Line
-	1200 2300 1450 2300
+	1600 2050 1850 2050
 Wire Wire Line
-	1200 2400 1450 2400
+	1600 2150 1850 2150
 Wire Wire Line
-	1200 2500 1450 2500
+	1600 2250 1850 2250
 Wire Wire Line
-	1200 2600 1450 2600
+	1600 2350 1850 2350
 Wire Wire Line
-	1200 2700 1450 2700
+	1600 2450 1850 2450
 Wire Wire Line
-	1200 2800 1450 2800
+	1600 2550 1850 2550
 Wire Wire Line
-	1200 2900 1450 2900
+	1600 2650 1850 2650
 Wire Wire Line
-	1200 3000 1450 3000
-Text Label 1200 1500 0    50   ~ 0
+	1600 2750 1850 2750
+Text Label 1600 1250 0    50   ~ 0
 A0
-Text Label 1200 1600 0    50   ~ 0
+Text Label 1600 1350 0    50   ~ 0
 A1
-Text Label 1200 1700 0    50   ~ 0
+Text Label 1600 1450 0    50   ~ 0
 A2
-Text Label 1200 1800 0    50   ~ 0
+Text Label 1600 1550 0    50   ~ 0
 A3
-Text Label 1200 1900 0    50   ~ 0
+Text Label 1600 1650 0    50   ~ 0
 A4
-Text Label 1200 2000 0    50   ~ 0
+Text Label 1600 1750 0    50   ~ 0
 A5
-Text Label 1200 2100 0    50   ~ 0
+Text Label 1600 1850 0    50   ~ 0
 A6
-Text Label 1200 2200 0    50   ~ 0
+Text Label 1600 1950 0    50   ~ 0
 A7
-Text Label 1200 2300 0    50   ~ 0
+Text Label 1600 2050 0    50   ~ 0
 A8
-Text Label 1200 2400 0    50   ~ 0
+Text Label 1600 2150 0    50   ~ 0
 A9
-Text Label 1200 2500 0    50   ~ 0
+Text Label 1600 2250 0    50   ~ 0
 A10
-Text Label 1200 2600 0    50   ~ 0
+Text Label 1600 2350 0    50   ~ 0
 A11
-Text Label 1200 2700 0    50   ~ 0
+Text Label 1600 2450 0    50   ~ 0
 A12
-Text Label 1200 2800 0    50   ~ 0
+Text Label 1600 2550 0    50   ~ 0
 A13
-Text Label 1200 2900 0    50   ~ 0
+Text Label 1600 2650 0    50   ~ 0
 A14
-Text Label 1200 3000 0    50   ~ 0
+Text Label 1600 2750 0    50   ~ 0
 A15
 $Comp
 L 74xx:74HC00 U6
@@ -407,12 +407,12 @@ F 3 "" H 3950 5300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1200 3600 1450 3600
+	1600 3350 1850 3350
 Wire Wire Line
-	1200 3700 1450 3700
-Text Label 1200 3600 0    50   ~ 0
+	1600 3450 1850 3450
+Text Label 1600 3350 0    50   ~ 0
 ~CS
-Text Label 1200 3700 0    50   ~ 0
+Text Label 1600 3450 0    50   ~ 0
 ~RD
 Text Label 3200 2150 0    50   ~ 0
 LT
@@ -762,12 +762,12 @@ Text Label 6700 4375 0    50   ~ 0
 $Comp
 L power:GND #PWR07
 U 1 1 64A3D6F9
-P 1200 1400
-F 0 "#PWR07" H 1200 1150 50  0001 C CNN
-F 1 "GND" H 1205 1227 50  0000 C CNN
-F 2 "" H 1200 1400 50  0001 C CNN
-F 3 "" H 1200 1400 50  0001 C CNN
-	1    1200 1400
+P 1600 1150
+F 0 "#PWR07" H 1600 900 50  0001 C CNN
+F 1 "GND" H 1605 977 50  0000 C CNN
+F 2 "" H 1600 1150 50  0001 C CNN
+F 3 "" H 1600 1150 50  0001 C CNN
+	1    1600 1150
 	-1   0    0    1   
 $EndComp
 NoConn ~ 2100 6100
@@ -1209,34 +1209,34 @@ ToDo:\nadd LEDs\nadd mounting holes\nfix size fo 100x100 max
 $Comp
 L Connector:Conn_01x09_Male J3
 U 1 1 649678D1
-P 1000 1800
-F 0 "J3" H 975 2225 50  0000 R CNN
-F 1 "Conn_01x09_Male" V 925 2150 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1000 1800 50  0001 C CNN
-F 3 "~" H 1000 1800 50  0001 C CNN
-	1    1000 1800
+P 1400 1550
+F 0 "J3" H 1375 1975 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 1325 1900 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1400 1550 50  0001 C CNN
+F 3 "~" H 1400 1550 50  0001 C CNN
+	1    1400 1550
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J12
 U 1 1 649815E4
-P 1000 2700
-F 0 "J12" H 975 2300 50  0000 R CNN
-F 1 "Conn_01x09_Male" V 925 3050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1000 2700 50  0001 C CNN
-F 3 "~" H 1000 2700 50  0001 C CNN
-	1    1000 2700
+P 1400 2450
+F 0 "J12" H 1375 2050 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 1325 2800 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1400 2450 50  0001 C CNN
+F 3 "~" H 1400 2450 50  0001 C CNN
+	1    1400 2450
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR019
 U 1 1 64983BFF
-P 1200 3100
-F 0 "#PWR019" H 1200 2850 50  0001 C CNN
-F 1 "GND" H 1205 2927 50  0000 C CNN
-F 2 "" H 1200 3100 50  0001 C CNN
-F 3 "" H 1200 3100 50  0001 C CNN
-	1    1200 3100
+P 1600 2850
+F 0 "#PWR019" H 1600 2600 50  0001 C CNN
+F 1 "GND" H 1605 2677 50  0000 C CNN
+F 2 "" H 1600 2850 50  0001 C CNN
+F 3 "" H 1600 2850 50  0001 C CNN
+	1    1600 2850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1286,14 +1286,52 @@ $EndComp
 $Comp
 L CommonLibrary:AM29F200BB-SO44 U1
 U 1 1 64B03999
-P 1850 2600
-F 0 "U1" H 1625 3875 50  0000 C CNN
-F 1 "AM29F200BB-SO44" H 2300 3875 50  0000 C CNN
-F 2 "CommonLibrary:DIP-44_W15.24mm" H 1850 2600 50  0001 C CNN
-F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
-	1    1850 2600
+P 2250 2350
+F 0 "U1" H 2025 3625 50  0000 C CNN
+F 1 "AM29F200BB-SO44" H 2700 3625 50  0000 C CNN
+F 2 "CommonLibrary:DIP-44_W15.24mm" H 2250 2350 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 2250 2350 50  0001 C CNN
+	1    2250 2350
 	1    0    0    -1  
 $EndComp
-Connection ~ 1850 4050
-Connection ~ 1450 3400
+Connection ~ 2250 3800
+Connection ~ 1850 3150
+$Comp
+L Device:R_Network08 RN1
+U 1 1 64B383D6
+P 900 2350
+F 0 "RN1" V 1425 2350 50  0000 C CNN
+F 1 "R_Network08" V 1334 2350 50  0000 C CNN
+F 2 "Resistor_THT:R_Array_SIP9" V 1375 2350 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 900 2350 50  0001 C CNN
+	1    900  2350
+	0    -1   -1   0   
+$EndComp
+Text Label 1100 2050 0    50   ~ 0
+A8
+Text Label 1100 2150 0    50   ~ 0
+A9
+Text Label 1100 2250 0    50   ~ 0
+A10
+Text Label 1100 2350 0    50   ~ 0
+A11
+Text Label 1100 2450 0    50   ~ 0
+A12
+Text Label 1100 2550 0    50   ~ 0
+A13
+Text Label 1100 2650 0    50   ~ 0
+A14
+Text Label 1100 2750 0    50   ~ 0
+A15
+$Comp
+L power:GND #PWR020
+U 1 1 64B3B4C9
+P 700 2750
+F 0 "#PWR020" H 700 2500 50  0001 C CNN
+F 1 "GND" H 705 2577 50  0000 C CNN
+F 2 "" H 700 2750 50  0001 C CNN
+F 3 "" H 700 2750 50  0001 C CNN
+	1    700  2750
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

@@ -1289,11 +1289,49 @@ U 1 1 64B03999
 P 1850 2600
 F 0 "U1" H 1625 3875 50  0000 C CNN
 F 1 "AM29F200BB-SO44" H 2300 3875 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x22_P2.54mm_Vertical_SMD" H 1850 2600 50  0001 C CNN
+F 2 "CommonLibrary:DIP-44_W15.24mm" H 1850 2600 50  0001 C CNN
 F 3 "https://www.mouser.com/datasheet/2/100/spansion%20inc_am29f200b_eol_21526d7-1161251.pdf" H 1850 2600 50  0001 C CNN
 	1    1850 2600
 	1    0    0    -1  
 $EndComp
 Connection ~ 1850 4050
 Connection ~ 1450 3400
+$Comp
+L Device:R_Network08 RN1
+U 1 1 64B383D6
+P 500 2600
+F 0 "RN1" V 1025 2600 50  0000 C CNN
+F 1 "R_Network08" V 934 2600 50  0000 C CNN
+F 2 "Resistor_THT:R_Array_SIP9" V 975 2600 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 500 2600 50  0001 C CNN
+	1    500  2600
+	0    -1   -1   0   
+$EndComp
+Text Label 700  2300 0    50   ~ 0
+A8
+Text Label 700  2400 0    50   ~ 0
+A9
+Text Label 700  2500 0    50   ~ 0
+A10
+Text Label 700  2600 0    50   ~ 0
+A11
+Text Label 700  2700 0    50   ~ 0
+A12
+Text Label 700  2800 0    50   ~ 0
+A13
+Text Label 700  2900 0    50   ~ 0
+A14
+Text Label 700  3000 0    50   ~ 0
+A15
+$Comp
+L power:GND #PWR020
+U 1 1 64B3B4C9
+P 300 3000
+F 0 "#PWR020" H 300 2750 50  0001 C CNN
+F 1 "GND" H 305 2827 50  0000 C CNN
+F 2 "" H 300 3000 50  0001 C CNN
+F 3 "" H 300 3000 50  0001 C CNN
+	1    300  3000
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
