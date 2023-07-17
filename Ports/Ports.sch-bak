@@ -789,13 +789,13 @@ $EndComp
 $Comp
 L power:GND #PWR016
 U 1 1 64B50BB5
-P 3975 4875
-F 0 "#PWR016" H 3975 4625 50  0001 C CNN
-F 1 "GND" H 3980 4702 50  0000 C CNN
-F 2 "" H 3975 4875 50  0001 C CNN
-F 3 "" H 3975 4875 50  0001 C CNN
-	1    3975 4875
-	0    -1   -1   0   
+P 4125 7300
+F 0 "#PWR016" H 4125 7050 50  0001 C CNN
+F 1 "GND" H 4130 7127 50  0000 C CNN
+F 2 "" H 4125 7300 50  0001 C CNN
+F 3 "" H 4125 7300 50  0001 C CNN
+	1    4125 7300
+	1    0    0    -1  
 $EndComp
 Wire Wire Line
 	3200 4875 3375 4875
@@ -821,17 +821,6 @@ F 3 "~" H 3525 5100 50  0001 C CNN
 	1    3525 5100
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR017
-U 1 1 64B5CA3D
-P 3975 5100
-F 0 "#PWR017" H 3975 4850 50  0001 C CNN
-F 1 "GND" H 3980 4927 50  0000 C CNN
-F 2 "" H 3975 5100 50  0001 C CNN
-F 3 "" H 3975 5100 50  0001 C CNN
-	1    3975 5100
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	3200 5100 3375 5100
 $Comp
@@ -855,17 +844,6 @@ F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3455 5325 50  0
 F 3 "~" H 3525 5325 50  0001 C CNN
 	1    3525 5325
 	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR018
-U 1 1 64B5F050
-P 3975 5325
-F 0 "#PWR018" H 3975 5075 50  0001 C CNN
-F 1 "GND" H 3980 5152 50  0000 C CNN
-F 2 "" H 3975 5325 50  0001 C CNN
-F 3 "" H 3975 5325 50  0001 C CNN
-	1    3975 5325
-	0    -1   -1   0   
 $EndComp
 Wire Wire Line
 	3200 5325 3375 5325
@@ -891,17 +869,6 @@ F 3 "~" H 3525 5550 50  0001 C CNN
 	1    3525 5550
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR019
-U 1 1 64B5F063
-P 3975 5550
-F 0 "#PWR019" H 3975 5300 50  0001 C CNN
-F 1 "GND" H 3980 5377 50  0000 C CNN
-F 2 "" H 3975 5550 50  0001 C CNN
-F 3 "" H 3975 5550 50  0001 C CNN
-	1    3975 5550
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	3200 5550 3375 5550
 $Comp
@@ -925,17 +892,6 @@ F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3455 5800 50  0
 F 3 "~" H 3525 5800 50  0001 C CNN
 	1    3525 5800
 	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR020
-U 1 1 64B66EC7
-P 3975 5800
-F 0 "#PWR020" H 3975 5550 50  0001 C CNN
-F 1 "GND" H 3980 5627 50  0000 C CNN
-F 2 "" H 3975 5800 50  0001 C CNN
-F 3 "" H 3975 5800 50  0001 C CNN
-	1    3975 5800
-	0    -1   -1   0   
 $EndComp
 Wire Wire Line
 	3200 5800 3375 5800
@@ -961,17 +917,6 @@ F 3 "~" H 3525 6025 50  0001 C CNN
 	1    3525 6025
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR021
-U 1 1 64B66EDA
-P 3975 6025
-F 0 "#PWR021" H 3975 5775 50  0001 C CNN
-F 1 "GND" H 3980 5852 50  0000 C CNN
-F 2 "" H 3975 6025 50  0001 C CNN
-F 3 "" H 3975 6025 50  0001 C CNN
-	1    3975 6025
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	3200 6025 3375 6025
 $Comp
@@ -995,17 +940,6 @@ F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3455 6250 50  0
 F 3 "~" H 3525 6250 50  0001 C CNN
 	1    3525 6250
 	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR023
-U 1 1 64B66EED
-P 3975 6250
-F 0 "#PWR023" H 3975 6000 50  0001 C CNN
-F 1 "GND" H 3980 6077 50  0000 C CNN
-F 2 "" H 3975 6250 50  0001 C CNN
-F 3 "" H 3975 6250 50  0001 C CNN
-	1    3975 6250
-	0    -1   -1   0   
 $EndComp
 Wire Wire Line
 	3200 6250 3375 6250
@@ -1031,89 +965,56 @@ F 3 "~" H 3525 6475 50  0001 C CNN
 	1    3525 6475
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR025
-U 1 1 64B66F00
-P 3975 6475
-F 0 "#PWR025" H 3975 6225 50  0001 C CNN
-F 1 "GND" H 3980 6302 50  0000 C CNN
-F 2 "" H 3975 6475 50  0001 C CNN
-F 3 "" H 3975 6475 50  0001 C CNN
-	1    3975 6475
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	3200 6475 3375 6475
 $Comp
 L Device:LED D7
 U 1 1 64B69F7E
-P 2575 6250
-F 0 "D7" H 2675 6325 50  0000 C CNN
-F 1 "LED" H 2450 6300 50  0000 C CNN
-F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 2575 6250 50  0001 C CNN
-F 3 "~" H 2575 6250 50  0001 C CNN
-	1    2575 6250
+P 3825 6700
+F 0 "D7" H 3925 6775 50  0000 C CNN
+F 1 "LED" H 3700 6750 50  0000 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 3825 6700 50  0001 C CNN
+F 3 "~" H 3825 6700 50  0001 C CNN
+	1    3825 6700
 	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R R10
 U 1 1 64B69F84
-P 2275 6250
-F 0 "R10" V 2200 6275 50  0000 C CNN
-F 1 "1k" V 2275 6250 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2205 6250 50  0001 C CNN
-F 3 "~" H 2275 6250 50  0001 C CNN
-	1    2275 6250
+P 3525 6700
+F 0 "R10" V 3450 6725 50  0000 C CNN
+F 1 "1k" V 3525 6700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3455 6700 50  0001 C CNN
+F 3 "~" H 3525 6700 50  0001 C CNN
+	1    3525 6700
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR022
-U 1 1 64B69F8A
-P 2725 6250
-F 0 "#PWR022" H 2725 6000 50  0001 C CNN
-F 1 "GND" H 2730 6077 50  0000 C CNN
-F 2 "" H 2725 6250 50  0001 C CNN
-F 3 "" H 2725 6250 50  0001 C CNN
-	1    2725 6250
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
-	1950 6250 2125 6250
+	3200 6700 3375 6700
 $Comp
 L Device:LED D9
 U 1 1 64B69F91
-P 2575 6475
-F 0 "D9" H 2675 6550 50  0000 C CNN
-F 1 "LED" H 2450 6525 50  0000 C CNN
-F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 2575 6475 50  0001 C CNN
-F 3 "~" H 2575 6475 50  0001 C CNN
-	1    2575 6475
+P 2500 6700
+F 0 "D9" H 2600 6775 50  0000 C CNN
+F 1 "LED" H 2375 6750 50  0000 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 2500 6700 50  0001 C CNN
+F 3 "~" H 2500 6700 50  0001 C CNN
+	1    2500 6700
 	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R R12
 U 1 1 64B69F97
-P 2275 6475
-F 0 "R12" V 2200 6500 50  0000 C CNN
-F 1 "1k" V 2275 6475 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2205 6475 50  0001 C CNN
-F 3 "~" H 2275 6475 50  0001 C CNN
-	1    2275 6475
+P 2200 6700
+F 0 "R12" V 2125 6725 50  0000 C CNN
+F 1 "1k" V 2200 6700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2130 6700 50  0001 C CNN
+F 3 "~" H 2200 6700 50  0001 C CNN
+	1    2200 6700
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR024
-U 1 1 64B69F9D
-P 2725 6475
-F 0 "#PWR024" H 2725 6225 50  0001 C CNN
-F 1 "GND" H 2730 6302 50  0000 C CNN
-F 2 "" H 2725 6475 50  0001 C CNN
-F 3 "" H 2725 6475 50  0001 C CNN
-	1    2725 6475
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
-	1950 6475 2125 6475
+	1875 6700 2050 6700
 Text Label 3200 4875 0    50   ~ 0
 P1.0
 Text Label 3200 5100 0    50   ~ 0
@@ -1130,9 +1031,9 @@ Text Label 3200 6250 0    50   ~ 0
 P1.6
 Text Label 3200 6475 0    50   ~ 0
 P1.7
-Text Label 1950 6250 0    50   ~ 0
+Text Label 3200 6700 0    50   ~ 0
 EN
-Text Label 1950 6475 0    50   ~ 0
+Text Label 1875 6700 0    50   ~ 0
 P0.0
 Wire Wire Line
 	5500 2125 5625 2125
@@ -1146,7 +1047,7 @@ U 1 1 64B7BE53
 P 7350 3250
 F 0 "D11" H 7175 3350 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 3350 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 3350 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 3350 50  0001 C CNN
 F 3 "" H 7350 3350 50  0001 C CNN
 	1    7350 3250
 	1    0    0    -1  
@@ -1179,7 +1080,7 @@ U 1 1 64B81817
 P 7350 3500
 F 0 "D13" H 7175 3600 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 3600 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 3600 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 3600 50  0001 C CNN
 F 3 "" H 7350 3600 50  0001 C CNN
 	1    7350 3500
 	1    0    0    -1  
@@ -1201,7 +1102,7 @@ U 1 1 64B835F5
 P 7350 3750
 F 0 "D15" H 7175 3850 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 3850 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 3850 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 3850 50  0001 C CNN
 F 3 "" H 7350 3850 50  0001 C CNN
 	1    7350 3750
 	1    0    0    -1  
@@ -1223,7 +1124,7 @@ U 1 1 64B853BB
 P 7350 4000
 F 0 "D17" H 7175 4100 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 4100 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 4100 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 4100 50  0001 C CNN
 F 3 "" H 7350 4100 50  0001 C CNN
 	1    7350 4000
 	1    0    0    -1  
@@ -1245,7 +1146,7 @@ U 1 1 64B87013
 P 7350 4250
 F 0 "D19" H 7175 4350 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 4350 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 4350 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 4350 50  0001 C CNN
 F 3 "" H 7350 4350 50  0001 C CNN
 	1    7350 4250
 	1    0    0    -1  
@@ -1267,7 +1168,7 @@ U 1 1 64B88DC9
 P 7350 4500
 F 0 "D21" H 7175 4600 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 4600 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 4600 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 4600 50  0001 C CNN
 F 3 "" H 7350 4600 50  0001 C CNN
 	1    7350 4500
 	1    0    0    -1  
@@ -1289,7 +1190,7 @@ U 1 1 64B8AB2F
 P 7350 4750
 F 0 "D23" H 7175 4850 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 4850 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 4850 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 4850 50  0001 C CNN
 F 3 "" H 7350 4850 50  0001 C CNN
 	1    7350 4750
 	1    0    0    -1  
@@ -1311,7 +1212,7 @@ U 1 1 64B8D051
 P 7350 5000
 F 0 "D25" H 7175 5100 50  0000 C CNN
 F 1 "6x6-tact-btn" H 7700 5100 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 7350 5100 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 7350 5100 50  0001 C CNN
 F 3 "" H 7350 5100 50  0001 C CNN
 	1    7350 5000
 	1    0    0    -1  
@@ -1396,7 +1297,7 @@ U 1 1 64BC7773
 P 8200 3325
 F 0 "D12" H 8025 3425 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 3425 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 3425 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 3425 50  0001 C CNN
 F 3 "" H 8200 3425 50  0001 C CNN
 	1    8200 3325
 	1    0    0    -1  
@@ -1407,7 +1308,7 @@ U 1 1 64BC7779
 P 8200 3575
 F 0 "D14" H 8025 3675 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 3675 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 3675 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 3675 50  0001 C CNN
 F 3 "" H 8200 3675 50  0001 C CNN
 	1    8200 3575
 	1    0    0    -1  
@@ -1418,7 +1319,7 @@ U 1 1 64BC777F
 P 8200 3825
 F 0 "D16" H 8025 3925 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 3925 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 3925 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 3925 50  0001 C CNN
 F 3 "" H 8200 3925 50  0001 C CNN
 	1    8200 3825
 	1    0    0    -1  
@@ -1429,7 +1330,7 @@ U 1 1 64BC7785
 P 8200 4075
 F 0 "D18" H 8025 4175 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 4175 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 4175 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 4175 50  0001 C CNN
 F 3 "" H 8200 4175 50  0001 C CNN
 	1    8200 4075
 	1    0    0    -1  
@@ -1440,7 +1341,7 @@ U 1 1 64BC778B
 P 8200 4325
 F 0 "D20" H 8025 4425 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 4425 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 4425 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 4425 50  0001 C CNN
 F 3 "" H 8200 4425 50  0001 C CNN
 	1    8200 4325
 	1    0    0    -1  
@@ -1451,7 +1352,7 @@ U 1 1 64BC7791
 P 8200 4575
 F 0 "D22" H 8025 4675 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 4675 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 4675 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 4675 50  0001 C CNN
 F 3 "" H 8200 4675 50  0001 C CNN
 	1    8200 4575
 	1    0    0    -1  
@@ -1462,7 +1363,7 @@ U 1 1 64BC7797
 P 8200 4825
 F 0 "D24" H 8025 4925 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 4925 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 4925 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 4925 50  0001 C CNN
 F 3 "" H 8200 4925 50  0001 C CNN
 	1    8200 4825
 	1    0    0    -1  
@@ -1473,7 +1374,7 @@ U 1 1 64BC779D
 P 8200 5075
 F 0 "D26" H 8025 5175 50  0000 C CNN
 F 1 "6x6-tact-btn" H 8550 5175 50  0000 C CNN
-F 2 "CommonLibrary:6x6-tact-btn" H 8200 5175 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H4.3mm" H 8200 5175 50  0001 C CNN
 F 3 "" H 8200 5175 50  0001 C CNN
 	1    8200 5075
 	1    0    0    -1  
@@ -1545,24 +1446,24 @@ Wire Wire Line
 	8400 5075 8400 5250
 Connection ~ 8400 5075
 Text Label 7550 5550 0    50   ~ 0
-P0.6
+P0.1
 Text Label 8400 5550 0    50   ~ 0
-P0.7
-Text Label 7700 3325 0    50   ~ 0
+P0.2
+Text Label 7625 5075 0    50   ~ 0
 IN0.0
-Text Label 7700 3575 0    50   ~ 0
+Text Label 7625 4825 0    50   ~ 0
 IN0.1
-Text Label 7700 3825 0    50   ~ 0
+Text Label 7625 4575 0    50   ~ 0
 IN0.2
-Text Label 7700 4075 0    50   ~ 0
+Text Label 7625 4325 0    50   ~ 0
 IN0.3
-Text Label 7700 4325 0    50   ~ 0
+Text Label 7625 4075 0    50   ~ 0
 IN0.4
-Text Label 7700 4575 0    50   ~ 0
+Text Label 7625 3825 0    50   ~ 0
 IN0.5
-Text Label 7700 4825 0    50   ~ 0
+Text Label 7625 3575 0    50   ~ 0
 IN0.6
-Text Label 7700 5075 0    50   ~ 0
+Text Label 7625 3325 0    50   ~ 0
 IN0.7
 Wire Wire Line
 	9500 3250 9750 3250
@@ -1595,41 +1496,41 @@ F 3 "" H 10250 2950 50  0001 C CNN
 	1    10250 2950
 	1    0    0    -1  
 $EndComp
-Text Label 9500 3250 0    50   ~ 0
-IN0.0
-Text Label 9500 3350 0    50   ~ 0
-IN0.1
-Text Label 9500 3450 0    50   ~ 0
-IN0.2
-Text Label 9500 3550 0    50   ~ 0
-IN0.3
-Text Label 9500 3650 0    50   ~ 0
-IN0.4
-Text Label 9500 3750 0    50   ~ 0
-IN0.5
-Text Label 9500 3850 0    50   ~ 0
-IN0.6
 Text Label 9500 3950 0    50   ~ 0
+IN0.0
+Text Label 9500 3850 0    50   ~ 0
+IN0.1
+Text Label 9500 3750 0    50   ~ 0
+IN0.2
+Text Label 9500 3650 0    50   ~ 0
+IN0.3
+Text Label 9500 3550 0    50   ~ 0
+IN0.4
+Text Label 9500 3450 0    50   ~ 0
+IN0.5
+Text Label 9500 3350 0    50   ~ 0
+IN0.6
+Text Label 9500 3250 0    50   ~ 0
 IN0.7
 Text Label 9500 4250 0    50   ~ 0
 IN0.OE
 Text Label 9500 4150 0    50   ~ 0
 IN0.C
-Text Label 10750 3250 0    50   ~ 0
-BUS0
-Text Label 10750 3350 0    50   ~ 0
-BUS1
-Text Label 10750 3450 0    50   ~ 0
-BUS2
-Text Label 10750 3550 0    50   ~ 0
-BUS3
-Text Label 10750 3650 0    50   ~ 0
-BUS4
-Text Label 10750 3750 0    50   ~ 0
-BUS5
-Text Label 10750 3850 0    50   ~ 0
-BUS6
 Text Label 10750 3950 0    50   ~ 0
+BUS0
+Text Label 10750 3850 0    50   ~ 0
+BUS1
+Text Label 10750 3750 0    50   ~ 0
+BUS2
+Text Label 10750 3650 0    50   ~ 0
+BUS3
+Text Label 10750 3550 0    50   ~ 0
+BUS4
+Text Label 10750 3450 0    50   ~ 0
+BUS5
+Text Label 10750 3350 0    50   ~ 0
+BUS6
+Text Label 10750 3250 0    50   ~ 0
 BUS7
 $Comp
 L Connector:Conn_01x09_Male J6
@@ -1675,7 +1576,7 @@ U 1 1 64C174BC
 P 9250 4650
 F 0 "J7" H 9358 4831 50  0000 C CNN
 F 1 "Conn_01x02_Male" V 9175 4625 50  0000 C CNN
-F 2 "" H 9250 4650 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 9250 4650 50  0001 C CNN
 F 3 "~" H 9250 4650 50  0001 C CNN
 	1    9250 4650
 	1    0    0    -1  
@@ -1685,25 +1586,86 @@ IN0.C
 Text Label 9450 4750 0    50   ~ 0
 IN0.OE
 $Comp
-L Diode:LL4148 D?
-U 1 1 64C3BCCE
+L Diode:1N4148 D27
+U 1 1 64C4C1D4
 P 7550 5400
-F 0 "D?" V 7596 5320 50  0000 R CNN
-F 1 "LL4148" V 7505 5320 50  0000 R CNN
-F 2 "Diode_SMD:D_MiniMELF" H 7550 5225 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/85557/ll4148.pdf" H 7550 5400 50  0001 C CNN
+F 0 "D27" V 7596 5320 50  0000 R CNN
+F 1 "1N4148" V 7505 5320 50  0000 R CNN
+F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 7550 5225 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 7550 5400 50  0001 C CNN
 	1    7550 5400
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Diode:LL4148 D?
-U 1 1 64C44E63
+L Diode:1N4148 D28
+U 1 1 64C4DA7D
 P 8400 5400
-F 0 "D?" V 8446 5320 50  0000 R CNN
-F 1 "LL4148" V 8355 5320 50  0000 R CNN
-F 2 "Diode_SMD:D_MiniMELF" H 8400 5225 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/85557/ll4148.pdf" H 8400 5400 50  0001 C CNN
+F 0 "D28" V 8446 5320 50  0000 R CNN
+F 1 "1N4148" V 8355 5320 50  0000 R CNN
+F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 8400 5225 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 8400 5400 50  0001 C CNN
 	1    8400 5400
 	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Jumper JP1
+U 1 1 64D13D47
+P 4125 7000
+F 0 "JP1" H 4125 7264 50  0000 C CNN
+F 1 "Jumper" H 4125 7173 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 4125 7000 50  0001 C CNN
+F 3 "~" H 4125 7000 50  0001 C CNN
+	1    4125 7000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3975 4875 3975 5100
+Wire Wire Line
+	3975 5100 3975 5325
+Connection ~ 3975 5100
+Wire Wire Line
+	3975 5325 3975 5550
+Connection ~ 3975 5325
+Wire Wire Line
+	3975 5550 3975 5800
+Connection ~ 3975 5550
+Wire Wire Line
+	3975 5800 3975 6025
+Connection ~ 3975 5800
+Wire Wire Line
+	3975 6025 3975 6250
+Connection ~ 3975 6025
+Wire Wire Line
+	3975 6250 3975 6475
+Connection ~ 3975 6250
+Wire Wire Line
+	3975 6700 4125 6700
+Wire Wire Line
+	3975 6475 3975 6700
+Connection ~ 3975 6475
+Connection ~ 3975 6700
+Wire Wire Line
+	2650 6700 2750 6700
+$Comp
+L power:GND #PWR?
+U 1 1 64D96433
+P 2750 7300
+F 0 "#PWR?" H 2750 7050 50  0001 C CNN
+F 1 "GND" H 2755 7127 50  0000 C CNN
+F 2 "" H 2750 7300 50  0001 C CNN
+F 3 "" H 2750 7300 50  0001 C CNN
+	1    2750 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Jumper JP?
+U 1 1 64D96439
+P 2750 7000
+F 0 "JP?" H 2750 7264 50  0000 C CNN
+F 1 "Jumper" H 2750 7173 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 2750 7000 50  0001 C CNN
+F 3 "~" H 2750 7000 50  0001 C CNN
+	1    2750 7000
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC
