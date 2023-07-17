@@ -37,6 +37,43 @@ X D7 9 -500 -200 200 R 50 50 1 0 I
 ENDDRAW
 ENDDEF
 #
+# CommonLibrary_6x6-tact-btn
+#
+DEF CommonLibrary_6x6-tact-btn D 0 40 Y Y 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "CommonLibrary_6x6-tact-btn" 0 -150 50 H V C CNN
+F2 "" 0 100 50 H I C CNN
+F3 "" 0 100 50 H I C CNN
+DRAW
+C -80 0 20 0 1 0 N
+C 80 0 20 0 1 0 N
+P 2 0 1 0 0 50 0 120 N
+P 2 0 1 0 100 50 -100 50 N
+X 1 1 -200 0 100 R 50 50 0 1 P
+X 2 2 200 0 100 L 50 50 0 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Conn_01x02_Male
+#
+DEF Connector_Conn_01x02_Male J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Conn_01x02_Male" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+X Pin_1 1 200 0 150 L 50 50 1 1 P
+X Pin_2 2 200 -100 150 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # Connector_Conn_01x04_Male
 #
 DEF Connector_Conn_01x04_Male J 0 40 Y N 1 F N
@@ -202,6 +239,26 @@ P 4 0 1 0 45 0 90 20 90 -20 45 0 F
 X 1 1 0 150 50 D 50 50 1 1 P
 X 2 2 150 0 50 L 50 50 1 1 P
 X 3 3 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Diode_LL4148
+#
+DEF Diode_LL4148 D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Diode_LL4148" 0 -100 50 H V C CNN
+F2 "Diode_SMD:D_MiniMELF" 0 -175 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+ALIAS LL4448
+$FPLIST
+ D*MiniMELF*
+$ENDFPLIST
+DRAW
+P 2 0 1 10 -50 50 -50 -50 N
+P 2 0 1 0 50 0 -50 0 N
+P 4 0 1 10 50 50 50 -50 -50 0 50 50 N
+X K 1 -150 0 100 R 50 50 1 1 P
+X A 2 150 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
