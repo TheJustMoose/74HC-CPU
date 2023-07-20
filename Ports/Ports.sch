@@ -1734,4 +1734,15 @@ F 3 "" H 6500 5400 50  0001 C CNN
 	1    6500 5400
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x08_Male J8
+U 1 1 64B9E326
+P 9300 3550
+F 0 "J8" H 9408 4031 50  0000 C CNN
+F 1 "Conn_01x08_Male" V 9250 3525 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 9300 3550 50  0001 C CNN
+F 3 "~" H 9300 3550 50  0001 C CNN
+	1    9300 3550
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
