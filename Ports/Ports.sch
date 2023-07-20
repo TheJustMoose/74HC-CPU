@@ -211,7 +211,7 @@ D6
 Text Label 1450 4325 0    50   ~ 0
 D7
 Text Label 1450 4525 0    50   ~ 0
-C1
+OUT1
 $Comp
 L power:GND #PWR08
 U 1 1 636457F9
@@ -235,7 +235,7 @@ F 3 "" H 1700 2375 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 1450 2275 0    50   ~ 0
-C0
+OUT0
 $Comp
 L power:GND #PWR02
 U 1 1 63647486
@@ -650,9 +650,9 @@ F 3 "" H 1200 3175 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 1200 2875 0    50   ~ 0
-C0
+OUT0
 Text Label 1200 2975 0    50   ~ 0
-C1
+OUT1
 Wire Wire Line
 	1450 2275 1700 2275
 Wire Wire Line
@@ -746,9 +746,9 @@ F 3 "" H 3950 3175 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 3700 2875 0    50   ~ 0
-C0
+OUT0
 Text Label 3950 2875 0    50   ~ 0
-C1
+OUT1
 $Comp
 L Connector:Conn_01x04_Male J5
 U 1 1 64B46F2F
@@ -761,9 +761,9 @@ F 3 "~" H 1000 3075 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 Text Label 1200 3075 0    50   ~ 0
-EN
+C2
 Text Label 4450 2125 0    50   ~ 0
-EN
+C2
 $Comp
 L Device:LED D1
 U 1 1 64B49AEA
@@ -1032,7 +1032,7 @@ P1.6
 Text Label 3200 6475 0    50   ~ 0
 P1.7
 Text Label 3200 6700 0    50   ~ 0
-EN
+C2
 Text Label 1875 6700 0    50   ~ 0
 P0.0
 Wire Wire Line
