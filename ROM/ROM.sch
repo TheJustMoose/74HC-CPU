@@ -1205,7 +1205,7 @@ F 3 "~" H 750 5000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Notes 7825 6100 0    222  ~ 0
-ToDo:\nadd LEDs\nadd mounting holes\nfix size fo 100x100 max
+ToDo:\nadd LEDs\nfix size fo 100x100 max
 $Comp
 L Connector:Conn_01x09_Male J3
 U 1 1 649678D1
@@ -1334,4 +1334,6 @@ F 3 "" H 700 2750 50  0001 C CNN
 	1    700  2750
 	1    0    0    -1  
 $EndComp
+Text Notes 1475 4950 0    50   ~ 0
+ToDo: Check it! Probably C0 have to be inverted!
 $EndSCHEMATC
