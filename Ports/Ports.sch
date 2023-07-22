@@ -1745,4 +1745,29 @@ F 3 "~" H 9300 3550 50  0001 C CNN
 	1    9300 3550
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x02_Male J9
+U 1 1 64BB2BFF
+P 9275 2675
+F 0 "J9" H 9383 2856 50  0000 C CNN
+F 1 "Conn_01x02_Male" V 9200 2650 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 9275 2675 50  0001 C CNN
+F 3 "~" H 9275 2675 50  0001 C CNN
+	1    9275 2675
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR019
+U 1 1 64BB6028
+P 9475 2775
+F 0 "#PWR019" H 9475 2525 50  0001 C CNN
+F 1 "GND" H 9480 2602 50  0000 C CNN
+F 2 "" H 9475 2775 50  0001 C CNN
+F 3 "" H 9475 2775 50  0001 C CNN
+	1    9475 2775
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9475 2675 9475 2775
+Connection ~ 9475 2775
 $EndSCHEMATC
