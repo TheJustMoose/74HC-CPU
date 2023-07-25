@@ -468,7 +468,7 @@ Text Label 950  5800 0    50   ~ 0
 ~OE
 Text Label 950  5700 0    50   ~ 0
 GND
-Text Label 950  5600 0    50   ~ 0
+Text Label 1575 5600 0    50   ~ 0
 VCC
 Text Label 950  5500 0    50   ~ 0
 ~WR
@@ -1247,4 +1247,30 @@ Text Label 5350 5050 0    50   ~ 0
 AD14
 Text Notes 4575 4250 0    50   ~ 0
 Set both jumpers to top\nif you want to use RAM\ninstead of ROM
+$Comp
+L Transistor_FET:IRLML5203 Q1
+U 1 1 64C0CC9D
+P 1375 5700
+F 0 "Q1" V 1350 5875 50  0000 C CNN
+F 1 "IRLML5203" V 1600 5700 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 1575 5625 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 1375 5700 50  0001 L CNN
+	1    1375 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 64C0F060
+P 1375 5900
+F 0 "#PWR0102" H 1375 5650 50  0001 C CNN
+F 1 "GND" H 1380 5727 50  0000 C CNN
+F 2 "" H 1375 5900 50  0001 C CNN
+F 3 "" H 1375 5900 50  0001 C CNN
+	1    1375 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	950  5600 1175 5600
+Text Notes 1475 5925 0    50   ~ 0
+Reverse\npolarity\nprotection
 $EndSCHEMATC
