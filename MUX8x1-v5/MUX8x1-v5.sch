@@ -1136,35 +1136,35 @@ H6
 Text Label 10200 5125 0    50   ~ 0
 H7
 Text Label 750  2425 0    50   ~ 0
-~E
+~EL
 Wire Wire Line
 	750  2425 875  2425
 Text Label 2500 2425 0    50   ~ 0
-~E
+~EL
 Wire Wire Line
 	2500 2425 2625 2425
 Text Label 4250 2425 0    50   ~ 0
-~E
+~EL
 Wire Wire Line
 	4250 2425 4375 2425
 Text Label 6000 2425 0    50   ~ 0
-~E
+~EL
 Wire Wire Line
 	6000 2425 6125 2425
 Text Label 750  4875 0    50   ~ 0
-~E
+~EH
 Wire Wire Line
 	750  4875 875  4875
 Text Label 2500 4875 0    50   ~ 0
-~E
+~EH
 Wire Wire Line
 	2500 4875 2625 4875
 Text Label 4250 4875 0    50   ~ 0
-~E
+~EH
 Wire Wire Line
 	4250 4875 4375 4875
 Text Label 6000 4875 0    50   ~ 0
-~E
+~EH
 Wire Wire Line
 	6000 4875 6125 4875
 $Comp
@@ -1179,7 +1179,7 @@ F 3 "~" H 6400 5750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 6925 5750 0    50   ~ 0
-~E
+~EH
 Wire Wire Line
 	6925 5750 6800 5750
 $Comp
@@ -1836,4 +1836,44 @@ Text Label 8000 6000 0    50   ~ 0
 S1
 Text Label 8000 6250 0    50   ~ 0
 S2
+$Comp
+L Connector:Conn_01x01_Male J13
+U 1 1 64C4AD0D
+P 5250 5500
+F 0 "J13" H 5358 5681 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 5250 5425 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5250 5500 50  0001 C CNN
+F 3 "~" H 5250 5500 50  0001 C CNN
+	1    5250 5500
+	1    0    0    -1  
+$EndComp
+Text Label 5775 5500 0    50   ~ 0
+~EL
+Wire Wire Line
+	5775 5500 5650 5500
+$Comp
+L Device:R R7
+U 1 1 64C4AD15
+P 5650 5650
+F 0 "R7" H 5700 5700 50  0000 L CNN
+F 1 "10k" V 5650 5575 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 5580 5650 50  0001 C CNN
+F 3 "~" H 5650 5650 50  0001 C CNN
+	1    5650 5650
+	1    0    0    -1  
+$EndComp
+Connection ~ 5650 5500
+Wire Wire Line
+	5650 5500 5450 5500
+$Comp
+L power:GND #PWR0104
+U 1 1 64C4AD1D
+P 5650 5800
+F 0 "#PWR0104" H 5650 5550 50  0001 C CNN
+F 1 "GND" H 5655 5627 50  0000 C CNN
+F 2 "" H 5650 5800 50  0001 C CNN
+F 3 "" H 5650 5800 50  0001 C CNN
+	1    5650 5800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
