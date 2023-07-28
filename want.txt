@@ -126,13 +126,12 @@ MUL, ALU - похожи на stripboard
 |  LPM  | DST |D| EXT |U|OFFSET4| 08  // ROM/RAM ADDR = PTR + OFFSET4;  OFFSET4 - максимальное смещение +-8 байт
 |   LD  | DST |D| EXT |U|OFFSET4| 09  // EXT переключает PTR на пару R1:R0 (0) / R3:R2 (X) / R5:R4 (Y) / R7:R6 (Z) или 0 / SP (8 пар регистров)
 |   IN  | DST | | PORT|  -  |I|i| 0A  // I/i инвертировать ли порт при IN                                // PUSH Rx => ST [SP], Rx   ; DEC SP
-|  OUT  | PORT| | SRC |A|a| - |x| 0B  // XOR-ить ли порт (мл.нибл) при OUT и какой нибл вообще выводить  // POP  Rx => LD Rx, [SP-1] ; INC SP
+|  OUT  | PORT| | SRC |-|A|a|X|x| 0B  // XOR-ить ли порт (мл.нибл) при OUT и какой нибл вообще выводить  // POP  Rx => LD Rx, [SP-1] ; INC SP
 |   ST  | SRC |D| EXT |U|OFFSET4| 0C  // U => UP - автоинкремент регистра после операции, D => DOWN - автодекремент регистра
 | CTRL  |    FLAGS    |    -    | 0D  // CLRF, STOP, [INC SP, DEC SP]
 | BRNCH | TYPE|T|   8 bit ADDR  | 0E  // CALL, JMP, RET, JZ, JL, JNE, JG, NOP - переход в +-127 команды, значение прибавляется к текущему счётчику команд
 |  CMP  | DST |0| SRC |    -    | 0F  //   JE, JC, JNZ, JNC, --, --,  --, AFCALL - Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем
-                                      //   0    1    2    3   4   5    6   7  // вообще здесь надо как-то хитро хранить 8ой бит адреса, или 4ый бит TYPE
-                                                                              // например, брать один бит TYPE из старшего бита команды
+                                      //   0    1    2    3   4   5    6   7
 
 // Бит 7 указывает на то, что нужно переключить шину SRC на константу
 // Его нужно использовать, если команда из первой половины списка, или если код команды 0F
