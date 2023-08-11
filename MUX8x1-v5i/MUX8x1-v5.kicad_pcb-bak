@@ -2819,7 +2819,7 @@
   (gr_text 151 (at 66.3575 100.0125 90) (layer F.SilkS)
     (effects (font (size 2 2) (thickness 0.25)))
   )
-  (gr_text 03.08.2023 (at 63.5 125.095) (layer F.Cu)
+  (gr_text 11.08.2023 (at 63.5 125.095) (layer F.Cu)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (gr_text 74HCPU (at 63.5 121.285) (layer F.Cu)
