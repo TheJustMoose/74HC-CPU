@@ -1,0 +1,38 @@
+3x and
+cmp + mov + and
+inv + swap + lsl + lsr + inv-b
+
+список мелких плат:
+273		20x28	5
+273wLED		26x28
+ALU		99x99
+AND		81x32
+ADD		84x39	5
+AND_SMD		81x28	5
+CMP		81x37
+MOV		81x27
+CMD_DEC		79x51
+INV		61x27
+LSL		61x27
+LSR		61x27
+SWAP		61x27
+Flags		64x42
+JMPS		64x64
+INV-B		23x28	5
+INV-BB		41x28	5
+LED8		17x24	10
+LED8narrow	11x23	10
+MUL1		84x36	8
+MUX1		72x21	8
+MUX16bit	81x94	1
+MUX4x1-v4.2	88x65	3
+MUX4x1-v5	97x57
+MUX8x1-v5	99x99	3
+Ports		95x88
+RAM		84x86
+Reg		72x26	8
+RegLed		72x39	8
+RegLed3		71x43	8
+ROM		119x94
+STACK1		34x25	8
+Toggle		53x24	2
