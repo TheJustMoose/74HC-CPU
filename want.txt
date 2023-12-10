@@ -122,12 +122,12 @@ MUL, ALU - похожи на stripboard
 |  XOR  | DST |0| SRC |-|Z|z|I|-| 04  //          XOR R1, R1 ; z=1 => занулить только старший нибл
 |  MOV  | DST |0| SRC |-|Z|z|I|-| 05  //          AND R1, R2 ; I=1 => проинвертировать R2 и сделать AND с R1
 |  MUL  | DST |0| SRC |-|Z|z|I|-| 06  //          ADD R1, R2 ; I=1 => проинвертировать R2 и сделать ADD с R1 => SUB R1, R2!
-|  UNO  | DST |-| TYP |-|Z|z|I|F| 07  // INV SWAP LSR LSRC ; флаг CF=1 даст для LSR единичку в старшем бите, остальные флаги меняют SRC, который здесь не используется
-|  LPM  | DST |D|EXT|-|U|OFFSET4| 08  // ROM/RAM ADDR = PTR + OFFSET4;  OFFSET4 - максимальное смещение +-8 байт
-|   LD  | DST |D|EXT|-|U|OFFSET4| 09  // EXT переключает PTR на пару R1:R0 (0) / R3:R2 (X) / R5:R4 (Y) / R7:R6 (Z) или 0 / SP (8 пар регистров)
-|   IN  | DST | | PORT|  -  |I| | 0A  // I/i инвертировать ли порт при IN                                // PUSH Rx => ST [SP], Rx   ; DEC SP
-|  OUT  | PORT| | SRC |-|O|o|X|x| 0B  // XOR-ить ли порт (X, x) (мл.нибл) при OUT и какой нибл (O, o) вообще выводить  // POP  Rx => LD Rx, [SP-1] ; INC SP
-|   ST  | SRC |D|EXT|-|U|OFFSET4| 0C  // U => UP - автоинкремент регистра после операции, D => DOWN - автодекремент регистра
+|  UNO  | DST |0| TYP |-|Z|z|I|F| 07  // INV SWAP LSR LSRC ; флаг CF=1 даст для LSR единичку в старшем бите, остальные флаги меняют SRC, который здесь не используется
+|  LPM  | DST |0|EXT|D|U|OFFSET4| 08  // ROM/RAM ADDR = PTR + OFFSET4;  OFFSET4 - максимальное смещение +-8 байт
+|   LD  | DST |0|EXT|D|U|OFFSET4| 09  // EXT переключает PTR на пару R1:R0 (0) / R3:R2 (X) / R5:R4 (Y) / R7:R6 (Z) или 0 / SP (8 пар регистров)
+|   IN  | DST |0| PORT|  -  |I| | 0A  // I/i инвертировать ли порт при IN                                // PUSH Rx => ST [SP], Rx   ; DEC SP
+|  OUT  | PORT|0| SRC |-|O|o|X|x| 0B  // XOR-ить ли порт (X, x) (мл.нибл) при OUT и какой нибл (O, o) вообще выводить  // POP  Rx => LD Rx, [SP-1] ; INC SP
+|   ST  | SRC |0|EXT|D|U|OFFSET4| 0C  // U => UP - автоинкремент регистра после операции, D => DOWN - автодекремент регистра
 | CTRL  |    FLAGS    |    -    | 0D  // CLRF, STOP, [INC SP, DEC SP]
 | BRNCH | TYPE|T|   8 bit ADDR  | 0E  // CALL, JMP, RET, JZ, JL, JNE, JG, NOP - переход в +-127 команды, значение прибавляется к текущему счётчику команд
 |  CMP  | DST |0| SRC |    -    | 0F  //   JE, JC, JNZ, JNC, --, --,  --, AFCALL - Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем
