@@ -8,4 +8,4 @@ This is a very simple discrete logic processor.
 *4 data registers
 *1 flag register
 
-!(CPU.png)
+![CPU structure](./CPU.png)
