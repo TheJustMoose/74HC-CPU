@@ -679,21 +679,21 @@ Text Label 6000 4575 0    50   ~ 0
 S1
 Text Label 6000 4675 0    50   ~ 0
 S2
-Text Label 1075 6475 0    50   ~ 0
-O1
-Text Label 1075 6575 0    50   ~ 0
-O0
-Text Label 1075 6375 0    50   ~ 0
-O2
-Text Label 1075 6275 0    50   ~ 0
-O3
-Text Label 1075 6175 0    50   ~ 0
-O4
-Text Label 1075 6075 0    50   ~ 0
-O5
 Text Label 1075 5975 0    50   ~ 0
-O6
+O1
 Text Label 1075 5875 0    50   ~ 0
+O0
+Text Label 1075 6075 0    50   ~ 0
+O2
+Text Label 1075 6175 0    50   ~ 0
+O3
+Text Label 1075 6275 0    50   ~ 0
+O4
+Text Label 1075 6375 0    50   ~ 0
+O5
+Text Label 1075 6475 0    50   ~ 0
+O6
+Text Label 1075 6575 0    50   ~ 0
 O7
 Text Label 1875 1125 0    50   ~ 0
 O0
@@ -1071,70 +1071,6 @@ F 3 "" H 6025 7200 50  0001 C CNN
 	1    6025 7200
 	1    0    0    -1  
 $EndComp
-Text Label 10200 850  0    50   ~ 0
-E0
-Text Label 10200 950  0    50   ~ 0
-E1
-Text Label 10200 1050 0    50   ~ 0
-E2
-Text Label 10200 1150 0    50   ~ 0
-E3
-Text Label 10200 1250 0    50   ~ 0
-E4
-Text Label 10200 1350 0    50   ~ 0
-E5
-Text Label 10200 1450 0    50   ~ 0
-E6
-Text Label 10200 1550 0    50   ~ 0
-E7
-Text Label 10200 2025 0    50   ~ 0
-F0
-Text Label 10200 2125 0    50   ~ 0
-F1
-Text Label 10200 2225 0    50   ~ 0
-F2
-Text Label 10200 2325 0    50   ~ 0
-F3
-Text Label 10200 2425 0    50   ~ 0
-F4
-Text Label 10200 2525 0    50   ~ 0
-F5
-Text Label 10200 2625 0    50   ~ 0
-F6
-Text Label 10200 2725 0    50   ~ 0
-F7
-Text Label 10200 3275 0    50   ~ 0
-G0
-Text Label 10200 3375 0    50   ~ 0
-G1
-Text Label 10200 3475 0    50   ~ 0
-G2
-Text Label 10200 3575 0    50   ~ 0
-G3
-Text Label 10200 3675 0    50   ~ 0
-G4
-Text Label 10200 3775 0    50   ~ 0
-G5
-Text Label 10200 3875 0    50   ~ 0
-G6
-Text Label 10200 3975 0    50   ~ 0
-G7
-Text Label 10200 4425 0    50   ~ 0
-H0
-Text Label 10200 4525 0    50   ~ 0
-H1
-Text Label 10200 4625 0    50   ~ 0
-H2
-Text Label 10200 4725 0    50   ~ 0
-H3
-Text Label 10200 4825 0    50   ~ 0
-H4
-Text Label 10200 4925 0    50   ~ 0
-H5
-Text Label 10200 5025 0    50   ~ 0
-H6
-Text Label 10200 5125 0    50   ~ 0
-H7
 Text Label 750  2425 0    50   ~ 0
 ~EL
 Wire Wire Line
@@ -1210,13 +1146,13 @@ $EndComp
 $Comp
 L Connector:Conn_01x09_Male J21
 U 1 1 637AC408
-P 3125 6275
-F 0 "J21" H 3233 6856 50  0000 C CNN
-F 1 "Conn_01x09_Male" V 3050 6275 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3125 6275 50  0001 C CNN
-F 3 "~" H 3125 6275 50  0001 C CNN
-	1    3125 6275
-	-1   0    0    1   
+P 3125 6175
+F 0 "J21" H 3175 6650 50  0000 C CNN
+F 1 "Conn_01x09_Male" V 3050 6175 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3125 6175 50  0001 C CNN
+F 3 "~" H 3125 6175 50  0001 C CNN
+	1    3125 6175
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J15
@@ -1238,17 +1174,6 @@ F 1 "Conn_01x09_Male" H 9108 5215 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 9000 4725 50  0001 C CNN
 F 3 "~" H 9000 4725 50  0001 C CNN
 	1    9000 4725
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x09_Male J18
-U 1 1 637AFFC9
-P 10000 4725
-F 0 "J18" H 10108 5306 50  0000 C CNN
-F 1 "Conn_01x09_Male" H 10108 5215 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 10000 4725 50  0001 C CNN
-F 3 "~" H 10000 4725 50  0001 C CNN
-	1    10000 4725
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1274,17 +1199,6 @@ F 3 "~" H 9000 3575 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x09_Male J14
-U 1 1 637BC51A
-P 10000 3575
-F 0 "J14" H 10108 4156 50  0000 C CNN
-F 1 "Conn_01x09_Male" H 10108 4065 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 10000 3575 50  0001 C CNN
-F 3 "~" H 10000 3575 50  0001 C CNN
-	1    10000 3575
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:Conn_01x09_Male J5
 U 1 1 637C47F5
 P 8000 2325
@@ -1304,17 +1218,6 @@ F 1 "Conn_01x09_Male" H 9108 2815 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 9000 2325 50  0001 C CNN
 F 3 "~" H 9000 2325 50  0001 C CNN
 	1    9000 2325
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x09_Male J8
-U 1 1 637C6B07
-P 10000 2325
-F 0 "J8" H 10108 2906 50  0000 C CNN
-F 1 "Conn_01x09_Male" H 10108 2815 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 10000 2325 50  0001 C CNN
-F 3 "~" H 10000 2325 50  0001 C CNN
-	1    10000 2325
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1340,26 +1243,15 @@ F 3 "~" H 9000 1150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x09_Male J4
-U 1 1 637CA193
-P 10000 1150
-F 0 "J4" H 10108 1731 50  0000 C CNN
-F 1 "Conn_01x09_Male" H 10108 1640 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 10000 1150 50  0001 C CNN
-F 3 "~" H 10000 1150 50  0001 C CNN
-	1    10000 1150
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0105
 U 1 1 637CC421
-P 2925 6675
-F 0 "#PWR0105" H 2925 6425 50  0001 C CNN
-F 1 "GND" V 2930 6547 50  0000 R CNN
-F 2 "" H 2925 6675 50  0001 C CNN
-F 3 "" H 2925 6675 50  0001 C CNN
-	1    2925 6675
-	1    0    0    -1  
+P 2925 5775
+F 0 "#PWR0105" H 2925 5525 50  0001 C CNN
+F 1 "GND" V 2930 5647 50  0000 R CNN
+F 2 "" H 2925 5775 50  0001 C CNN
+F 3 "" H 2925 5775 50  0001 C CNN
+	1    2925 5775
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0106
@@ -1381,28 +1273,6 @@ F 1 "GND" V 9205 4197 50  0000 R CNN
 F 2 "" H 9200 4325 50  0001 C CNN
 F 3 "" H 9200 4325 50  0001 C CNN
 	1    9200 4325
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR0109
-U 1 1 637CD523
-P 10200 4325
-F 0 "#PWR0109" H 10200 4075 50  0001 C CNN
-F 1 "GND" V 10205 4197 50  0000 R CNN
-F 2 "" H 10200 4325 50  0001 C CNN
-F 3 "" H 10200 4325 50  0001 C CNN
-	1    10200 4325
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR0110
-U 1 1 637CD95D
-P 10200 3175
-F 0 "#PWR0110" H 10200 2925 50  0001 C CNN
-F 1 "GND" V 10205 3047 50  0000 R CNN
-F 2 "" H 10200 3175 50  0001 C CNN
-F 3 "" H 10200 3175 50  0001 C CNN
-	1    10200 3175
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -1447,28 +1317,6 @@ F 1 "GND" V 9205 1797 50  0000 R CNN
 F 2 "" H 9200 1925 50  0001 C CNN
 F 3 "" H 9200 1925 50  0001 C CNN
 	1    9200 1925
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR0117
-U 1 1 637CEF9C
-P 10200 1925
-F 0 "#PWR0117" H 10200 1675 50  0001 C CNN
-F 1 "GND" V 10205 1797 50  0000 R CNN
-F 2 "" H 10200 1925 50  0001 C CNN
-F 3 "" H 10200 1925 50  0001 C CNN
-	1    10200 1925
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR0118
-U 1 1 637CF285
-P 10200 750
-F 0 "#PWR0118" H 10200 500 50  0001 C CNN
-F 1 "GND" V 10205 622 50  0000 R CNN
-F 2 "" H 10200 750 50  0001 C CNN
-F 3 "" H 10200 750 50  0001 C CNN
-	1    10200 750 
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -1536,60 +1384,6 @@ Wire Wire Line
 	1075 6475 1650 6475
 Wire Wire Line
 	1075 6575 1650 6575
-$Comp
-L Connector:Conn_01x09_Male J3
-U 1 1 63EF4F8E
-P 3925 6275
-F 0 "J3" H 4033 6856 50  0000 C CNN
-F 1 "Conn_01x09_Male" V 3850 6275 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3925 6275 50  0001 C CNN
-F 3 "~" H 3925 6275 50  0001 C CNN
-	1    3925 6275
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR06
-U 1 1 63EF4F94
-P 3725 6675
-F 0 "#PWR06" H 3725 6425 50  0001 C CNN
-F 1 "GND" V 3730 6547 50  0000 R CNN
-F 2 "" H 3725 6675 50  0001 C CNN
-F 3 "" H 3725 6675 50  0001 C CNN
-	1    3725 6675
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3450 5875 3725 5875
-Wire Wire Line
-	3450 5975 3725 5975
-Wire Wire Line
-	3450 6075 3725 6075
-Wire Wire Line
-	3450 6175 3725 6175
-Wire Wire Line
-	3450 6275 3725 6275
-Wire Wire Line
-	3450 6375 3725 6375
-Wire Wire Line
-	3450 6475 3725 6475
-Wire Wire Line
-	3450 6575 3725 6575
-Text Label 3450 6475 0    50   ~ 0
-BUS1
-Text Label 3450 6575 0    50   ~ 0
-BUS0
-Text Label 3450 6375 0    50   ~ 0
-BUS2
-Text Label 3450 6275 0    50   ~ 0
-BUS3
-Text Label 3450 6175 0    50   ~ 0
-BUS4
-Text Label 3450 6075 0    50   ~ 0
-BUS5
-Text Label 3450 5975 0    50   ~ 0
-BUS6
-Text Label 3450 5875 0    50   ~ 0
-BUS7
 $Comp
 L power:GND #PWR017
 U 1 1 63EC3EAD
@@ -1860,20 +1654,96 @@ F 3 "" H 5650 5800 50  0001 C CNN
 	1    5650 5800
 	1    0    0    -1  
 $EndComp
-Text Label 2725 6475 0    50   ~ 0
-BUS1
-Text Label 2725 6575 0    50   ~ 0
-BUS0
-Text Label 2725 6375 0    50   ~ 0
-BUS2
-Text Label 2725 6275 0    50   ~ 0
-BUS3
-Text Label 2725 6175 0    50   ~ 0
-BUS4
-Text Label 2725 6075 0    50   ~ 0
-BUS5
 Text Label 2725 5975 0    50   ~ 0
-BUS6
+BUS1
 Text Label 2725 5875 0    50   ~ 0
+BUS0
+Text Label 2725 6075 0    50   ~ 0
+BUS2
+Text Label 2725 6175 0    50   ~ 0
+BUS3
+Text Label 2725 6275 0    50   ~ 0
+BUS4
+Text Label 2725 6375 0    50   ~ 0
+BUS5
+Text Label 2725 6475 0    50   ~ 0
+BUS6
+Text Label 2725 6575 0    50   ~ 0
 BUS7
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 658CCBF3
+P 1500 7700
+F 0 "H5" H 1600 7746 50  0000 L CNN
+F 1 "MountingHole" H 1600 7655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 7700 50  0001 C CNN
+F 3 "~" H 1500 7700 50  0001 C CNN
+	1    1500 7700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 658CCFDB
+P 2250 7700
+F 0 "H6" H 2350 7746 50  0000 L CNN
+F 1 "MountingHole" H 2350 7655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7700 50  0001 C CNN
+F 3 "~" H 2250 7700 50  0001 C CNN
+	1    2250 7700
+	1    0    0    -1  
+$EndComp
+Text Label 3775 5875 0    50   ~ 0
+BUS7
+Text Label 3775 5975 0    50   ~ 0
+BUS6
+Text Label 3775 6075 0    50   ~ 0
+BUS5
+Text Label 3775 6175 0    50   ~ 0
+BUS4
+Text Label 3775 6275 0    50   ~ 0
+BUS3
+Text Label 3775 6375 0    50   ~ 0
+BUS2
+Text Label 3775 6575 0    50   ~ 0
+BUS0
+Text Label 3775 6475 0    50   ~ 0
+BUS1
+Wire Wire Line
+	3775 6575 4050 6575
+Wire Wire Line
+	3775 6475 4050 6475
+Wire Wire Line
+	3775 6375 4050 6375
+Wire Wire Line
+	3775 6275 4050 6275
+Wire Wire Line
+	3775 6175 4050 6175
+Wire Wire Line
+	3775 6075 4050 6075
+Wire Wire Line
+	3775 5975 4050 5975
+Wire Wire Line
+	3775 5875 4050 5875
+$Comp
+L power:GND #PWR06
+U 1 1 63EF4F94
+P 4050 6675
+F 0 "#PWR06" H 4050 6425 50  0001 C CNN
+F 1 "GND" V 4055 6547 50  0000 R CNN
+F 2 "" H 4050 6675 50  0001 C CNN
+F 3 "" H 4050 6675 50  0001 C CNN
+	1    4050 6675
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x09_Male J3
+U 1 1 63EF4F8E
+P 4250 6275
+F 0 "J3" H 4358 6856 50  0000 C CNN
+F 1 "Conn_01x09_Male" V 4175 6275 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 4250 6275 50  0001 C CNN
+F 3 "~" H 4250 6275 50  0001 C CNN
+	1    4250 6275
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

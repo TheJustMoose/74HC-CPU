@@ -679,21 +679,21 @@ Text Label 6000 4575 0    50   ~ 0
 S1
 Text Label 6000 4675 0    50   ~ 0
 S2
-Text Label 1075 6475 0    50   ~ 0
-O1
-Text Label 1075 6575 0    50   ~ 0
-O0
-Text Label 1075 6375 0    50   ~ 0
-O2
-Text Label 1075 6275 0    50   ~ 0
-O3
-Text Label 1075 6175 0    50   ~ 0
-O4
-Text Label 1075 6075 0    50   ~ 0
-O5
 Text Label 1075 5975 0    50   ~ 0
-O6
+O1
 Text Label 1075 5875 0    50   ~ 0
+O0
+Text Label 1075 6075 0    50   ~ 0
+O2
+Text Label 1075 6175 0    50   ~ 0
+O3
+Text Label 1075 6275 0    50   ~ 0
+O4
+Text Label 1075 6375 0    50   ~ 0
+O5
+Text Label 1075 6475 0    50   ~ 0
+O6
+Text Label 1075 6575 0    50   ~ 0
 O7
 Text Label 1875 1125 0    50   ~ 0
 O0
@@ -1210,13 +1210,13 @@ $EndComp
 $Comp
 L Connector:Conn_01x09_Male J21
 U 1 1 637AC408
-P 3125 6275
-F 0 "J21" H 3233 6856 50  0000 C CNN
-F 1 "Conn_01x09_Male" V 3050 6275 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3125 6275 50  0001 C CNN
-F 3 "~" H 3125 6275 50  0001 C CNN
-	1    3125 6275
-	-1   0    0    1   
+P 3125 6175
+F 0 "J21" H 3175 6650 50  0000 C CNN
+F 1 "Conn_01x09_Male" V 3050 6175 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3125 6175 50  0001 C CNN
+F 3 "~" H 3125 6175 50  0001 C CNN
+	1    3125 6175
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J15
@@ -1353,13 +1353,13 @@ $EndComp
 $Comp
 L power:GND #PWR0105
 U 1 1 637CC421
-P 2925 6675
-F 0 "#PWR0105" H 2925 6425 50  0001 C CNN
-F 1 "GND" V 2930 6547 50  0000 R CNN
-F 2 "" H 2925 6675 50  0001 C CNN
-F 3 "" H 2925 6675 50  0001 C CNN
-	1    2925 6675
-	1    0    0    -1  
+P 2925 5775
+F 0 "#PWR0105" H 2925 5525 50  0001 C CNN
+F 1 "GND" V 2930 5647 50  0000 R CNN
+F 2 "" H 2925 5775 50  0001 C CNN
+F 3 "" H 2925 5775 50  0001 C CNN
+	1    2925 5775
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0106
@@ -1536,60 +1536,6 @@ Wire Wire Line
 	1075 6475 1650 6475
 Wire Wire Line
 	1075 6575 1650 6575
-$Comp
-L Connector:Conn_01x09_Male J3
-U 1 1 63EF4F8E
-P 3925 6275
-F 0 "J3" H 4033 6856 50  0000 C CNN
-F 1 "Conn_01x09_Male" V 3850 6275 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3925 6275 50  0001 C CNN
-F 3 "~" H 3925 6275 50  0001 C CNN
-	1    3925 6275
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR06
-U 1 1 63EF4F94
-P 3725 6675
-F 0 "#PWR06" H 3725 6425 50  0001 C CNN
-F 1 "GND" V 3730 6547 50  0000 R CNN
-F 2 "" H 3725 6675 50  0001 C CNN
-F 3 "" H 3725 6675 50  0001 C CNN
-	1    3725 6675
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3450 5875 3725 5875
-Wire Wire Line
-	3450 5975 3725 5975
-Wire Wire Line
-	3450 6075 3725 6075
-Wire Wire Line
-	3450 6175 3725 6175
-Wire Wire Line
-	3450 6275 3725 6275
-Wire Wire Line
-	3450 6375 3725 6375
-Wire Wire Line
-	3450 6475 3725 6475
-Wire Wire Line
-	3450 6575 3725 6575
-Text Label 3450 6475 0    50   ~ 0
-BUS1
-Text Label 3450 6575 0    50   ~ 0
-BUS0
-Text Label 3450 6375 0    50   ~ 0
-BUS2
-Text Label 3450 6275 0    50   ~ 0
-BUS3
-Text Label 3450 6175 0    50   ~ 0
-BUS4
-Text Label 3450 6075 0    50   ~ 0
-BUS5
-Text Label 3450 5975 0    50   ~ 0
-BUS6
-Text Label 3450 5875 0    50   ~ 0
-BUS7
 $Comp
 L power:GND #PWR017
 U 1 1 63EC3EAD
@@ -1860,20 +1806,96 @@ F 3 "" H 5650 5800 50  0001 C CNN
 	1    5650 5800
 	1    0    0    -1  
 $EndComp
-Text Label 2725 6475 0    50   ~ 0
-BUS1
-Text Label 2725 6575 0    50   ~ 0
-BUS0
-Text Label 2725 6375 0    50   ~ 0
-BUS2
-Text Label 2725 6275 0    50   ~ 0
-BUS3
-Text Label 2725 6175 0    50   ~ 0
-BUS4
-Text Label 2725 6075 0    50   ~ 0
-BUS5
 Text Label 2725 5975 0    50   ~ 0
-BUS6
+BUS1
 Text Label 2725 5875 0    50   ~ 0
+BUS0
+Text Label 2725 6075 0    50   ~ 0
+BUS2
+Text Label 2725 6175 0    50   ~ 0
+BUS3
+Text Label 2725 6275 0    50   ~ 0
+BUS4
+Text Label 2725 6375 0    50   ~ 0
+BUS5
+Text Label 2725 6475 0    50   ~ 0
+BUS6
+Text Label 2725 6575 0    50   ~ 0
 BUS7
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 658CCBF3
+P 1500 7700
+F 0 "H5" H 1600 7746 50  0000 L CNN
+F 1 "MountingHole" H 1600 7655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 7700 50  0001 C CNN
+F 3 "~" H 1500 7700 50  0001 C CNN
+	1    1500 7700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 658CCFDB
+P 2250 7700
+F 0 "H6" H 2350 7746 50  0000 L CNN
+F 1 "MountingHole" H 2350 7655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7700 50  0001 C CNN
+F 3 "~" H 2250 7700 50  0001 C CNN
+	1    2250 7700
+	1    0    0    -1  
+$EndComp
+Text Label 3775 5875 0    50   ~ 0
+BUS7
+Text Label 3775 5975 0    50   ~ 0
+BUS6
+Text Label 3775 6075 0    50   ~ 0
+BUS5
+Text Label 3775 6175 0    50   ~ 0
+BUS4
+Text Label 3775 6275 0    50   ~ 0
+BUS3
+Text Label 3775 6375 0    50   ~ 0
+BUS2
+Text Label 3775 6575 0    50   ~ 0
+BUS0
+Text Label 3775 6475 0    50   ~ 0
+BUS1
+Wire Wire Line
+	3775 6575 4050 6575
+Wire Wire Line
+	3775 6475 4050 6475
+Wire Wire Line
+	3775 6375 4050 6375
+Wire Wire Line
+	3775 6275 4050 6275
+Wire Wire Line
+	3775 6175 4050 6175
+Wire Wire Line
+	3775 6075 4050 6075
+Wire Wire Line
+	3775 5975 4050 5975
+Wire Wire Line
+	3775 5875 4050 5875
+$Comp
+L power:GND #PWR06
+U 1 1 63EF4F94
+P 4050 6675
+F 0 "#PWR06" H 4050 6425 50  0001 C CNN
+F 1 "GND" V 4055 6547 50  0000 R CNN
+F 2 "" H 4050 6675 50  0001 C CNN
+F 3 "" H 4050 6675 50  0001 C CNN
+	1    4050 6675
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x09_Male J3
+U 1 1 63EF4F8E
+P 4250 6275
+F 0 "J3" H 4358 6856 50  0000 C CNN
+F 1 "Conn_01x09_Male" V 4175 6275 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 4250 6275 50  0001 C CNN
+F 3 "~" H 4250 6275 50  0001 C CNN
+	1    4250 6275
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

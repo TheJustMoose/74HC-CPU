@@ -1,4 +1,4 @@
-update=23/11/2022 20:05:02
+update=27/12/2023 22:49:06
 version=1
 last_client=kicad
 [general]
@@ -26,7 +26,7 @@ ERC_TestSimilarLabels=1
 version=1
 PageLayoutDescrFile=
 LastNetListRead=MUX8x1-v5.net
-CopperLayerCount=4
+CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
 AllowBlindVias=0
@@ -82,12 +82,12 @@ Type=0
 Enabled=1
 [pcbnew/Layer.In1.Cu]
 Name=In1.Cu
-Type=1
-Enabled=1
+Type=0
+Enabled=0
 [pcbnew/Layer.In2.Cu]
 Name=In2.Cu
-Type=1
-Enabled=1
+Type=0
+Enabled=0
 [pcbnew/Layer.In3.Cu]
 Name=In3.Cu
 Type=0
