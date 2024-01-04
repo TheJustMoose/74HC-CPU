@@ -465,182 +465,182 @@ Text Label 6875 5000 0    50   ~ 0
 H6
 Text Label 6875 5125 0    50   ~ 0
 H7
-Text Label 1950 1500 0    50   ~ 0
+Text Label 1950 1475 0    50   ~ 0
 R0.0
-Text Label 1950 1625 0    50   ~ 0
+Text Label 1950 1575 0    50   ~ 0
 R0.1
-Text Label 1950 1750 0    50   ~ 0
+Text Label 1950 1675 0    50   ~ 0
 R0.2
-Text Label 1950 1875 0    50   ~ 0
+Text Label 1950 1775 0    50   ~ 0
 R0.3
-Text Label 1950 2000 0    50   ~ 0
+Text Label 1950 1875 0    50   ~ 0
 R0.4
-Text Label 1950 2125 0    50   ~ 0
+Text Label 1950 1975 0    50   ~ 0
 R0.5
-Text Label 1950 2250 0    50   ~ 0
+Text Label 1950 2075 0    50   ~ 0
 R0.6
-Text Label 1950 2375 0    50   ~ 0
+Text Label 1950 2175 0    50   ~ 0
 R0.7
-Text Label 1950 4250 0    50   ~ 0
+Text Label 1950 4225 0    50   ~ 0
 R1.0
-Text Label 1950 4375 0    50   ~ 0
+Text Label 1950 4325 0    50   ~ 0
 R1.1
-Text Label 1950 4500 0    50   ~ 0
+Text Label 1950 4425 0    50   ~ 0
 R1.2
-Text Label 1950 4625 0    50   ~ 0
+Text Label 1950 4525 0    50   ~ 0
 R1.3
-Text Label 1950 4750 0    50   ~ 0
+Text Label 1950 4625 0    50   ~ 0
 R1.4
-Text Label 1950 4875 0    50   ~ 0
+Text Label 1950 4725 0    50   ~ 0
 R1.5
-Text Label 1950 5000 0    50   ~ 0
+Text Label 1950 4825 0    50   ~ 0
 R1.6
-Text Label 1950 5125 0    50   ~ 0
+Text Label 1950 4925 0    50   ~ 0
 R1.7
-Text Label 3950 1500 0    50   ~ 0
+Text Label 3950 1475 0    50   ~ 0
 R2.0
-Text Label 3950 1625 0    50   ~ 0
+Text Label 3950 1575 0    50   ~ 0
 R2.1
-Text Label 3950 1750 0    50   ~ 0
+Text Label 3950 1675 0    50   ~ 0
 R2.2
-Text Label 3950 1875 0    50   ~ 0
+Text Label 3950 1775 0    50   ~ 0
 R2.3
-Text Label 3950 2000 0    50   ~ 0
+Text Label 3950 1875 0    50   ~ 0
 R2.4
-Text Label 3950 2125 0    50   ~ 0
+Text Label 3950 1975 0    50   ~ 0
 R2.5
-Text Label 3950 2250 0    50   ~ 0
+Text Label 3950 2075 0    50   ~ 0
 R2.6
-Text Label 3950 2375 0    50   ~ 0
+Text Label 3950 2175 0    50   ~ 0
 R2.7
-Text Label 3950 4250 0    50   ~ 0
+Text Label 3950 4225 0    50   ~ 0
 R3.0
-Text Label 3950 4375 0    50   ~ 0
+Text Label 3950 4325 0    50   ~ 0
 R3.1
-Text Label 3950 4500 0    50   ~ 0
+Text Label 3950 4425 0    50   ~ 0
 R3.2
-Text Label 3950 4625 0    50   ~ 0
+Text Label 3950 4525 0    50   ~ 0
 R3.3
-Text Label 3950 4750 0    50   ~ 0
+Text Label 3950 4625 0    50   ~ 0
 R3.4
-Text Label 3950 4875 0    50   ~ 0
+Text Label 3950 4725 0    50   ~ 0
 R3.5
-Text Label 3950 5000 0    50   ~ 0
+Text Label 3950 4825 0    50   ~ 0
 R3.6
-Text Label 3950 5125 0    50   ~ 0
+Text Label 3950 4925 0    50   ~ 0
 R3.7
-Text Label 5950 1500 0    50   ~ 0
+Text Label 5950 1475 0    50   ~ 0
 R4.0
-Text Label 5950 1625 0    50   ~ 0
+Text Label 5950 1575 0    50   ~ 0
 R4.1
-Text Label 5950 1750 0    50   ~ 0
+Text Label 5950 1675 0    50   ~ 0
 R4.2
-Text Label 5950 1875 0    50   ~ 0
+Text Label 5950 1775 0    50   ~ 0
 R4.3
-Text Label 5950 2000 0    50   ~ 0
+Text Label 5950 1875 0    50   ~ 0
 R4.4
-Text Label 5950 2125 0    50   ~ 0
+Text Label 5950 1975 0    50   ~ 0
 R4.5
-Text Label 5950 2250 0    50   ~ 0
+Text Label 5950 2075 0    50   ~ 0
 R4.6
-Text Label 5950 2375 0    50   ~ 0
+Text Label 5950 2175 0    50   ~ 0
 R4.7
-Text Label 5950 4250 0    50   ~ 0
+Text Label 5950 4225 0    50   ~ 0
 R5.0
-Text Label 5950 4375 0    50   ~ 0
+Text Label 5950 4325 0    50   ~ 0
 R5.1
-Text Label 5950 4500 0    50   ~ 0
+Text Label 5950 4425 0    50   ~ 0
 R5.2
-Text Label 5950 4625 0    50   ~ 0
+Text Label 5950 4525 0    50   ~ 0
 R5.3
-Text Label 5950 4750 0    50   ~ 0
+Text Label 5950 4625 0    50   ~ 0
 R5.4
-Text Label 5950 4875 0    50   ~ 0
+Text Label 5950 4725 0    50   ~ 0
 R5.5
-Text Label 5950 5000 0    50   ~ 0
+Text Label 5950 4825 0    50   ~ 0
 R5.6
-Text Label 5950 5125 0    50   ~ 0
+Text Label 5950 4925 0    50   ~ 0
 R5.7
-Text Label 7950 1500 0    50   ~ 0
+Text Label 7950 1475 0    50   ~ 0
 R6.0
-Text Label 7950 1625 0    50   ~ 0
+Text Label 7950 1575 0    50   ~ 0
 R6.1
-Text Label 7950 1750 0    50   ~ 0
+Text Label 7950 1675 0    50   ~ 0
 R6.2
-Text Label 7950 1875 0    50   ~ 0
+Text Label 7950 1775 0    50   ~ 0
 R6.3
-Text Label 7950 2000 0    50   ~ 0
+Text Label 7950 1875 0    50   ~ 0
 R6.4
-Text Label 7950 2125 0    50   ~ 0
+Text Label 7950 1975 0    50   ~ 0
 R6.5
-Text Label 7950 2250 0    50   ~ 0
+Text Label 7950 2075 0    50   ~ 0
 R6.6
-Text Label 7950 2375 0    50   ~ 0
+Text Label 7950 2175 0    50   ~ 0
 R6.7
-Text Label 7950 4250 0    50   ~ 0
+Text Label 7950 4225 0    50   ~ 0
 R7.0
-Text Label 7950 4375 0    50   ~ 0
+Text Label 7950 4325 0    50   ~ 0
 R7.1
-Text Label 7950 4500 0    50   ~ 0
+Text Label 7950 4425 0    50   ~ 0
 R7.2
-Text Label 7950 4625 0    50   ~ 0
+Text Label 7950 4525 0    50   ~ 0
 R7.3
-Text Label 7950 4750 0    50   ~ 0
+Text Label 7950 4625 0    50   ~ 0
 R7.4
-Text Label 7950 4875 0    50   ~ 0
+Text Label 7950 4725 0    50   ~ 0
 R7.5
-Text Label 7950 5000 0    50   ~ 0
+Text Label 7950 4825 0    50   ~ 0
 R7.6
-Text Label 7950 5125 0    50   ~ 0
+Text Label 7950 4925 0    50   ~ 0
 R7.7
-Text Label 9950 1500 0    50   ~ 0
+Text Label 9950 1475 0    50   ~ 0
 SPL.0
-Text Label 9950 1625 0    50   ~ 0
+Text Label 9950 1575 0    50   ~ 0
 SPL.1
-Text Label 9950 1750 0    50   ~ 0
+Text Label 9950 1675 0    50   ~ 0
 SPL.2
-Text Label 9950 1875 0    50   ~ 0
+Text Label 9950 1775 0    50   ~ 0
 SPL.3
-Text Label 9950 2000 0    50   ~ 0
+Text Label 9950 1875 0    50   ~ 0
 SPL.4
-Text Label 9950 2125 0    50   ~ 0
+Text Label 9950 1975 0    50   ~ 0
 SPL.5
-Text Label 9950 2250 0    50   ~ 0
+Text Label 9950 2075 0    50   ~ 0
 SPL.6
-Text Label 9950 2375 0    50   ~ 0
+Text Label 9950 2175 0    50   ~ 0
 SPL.7
-Text Label 9950 4250 0    50   ~ 0
+Text Label 9950 4225 0    50   ~ 0
 SPH.0
-Text Label 9950 4375 0    50   ~ 0
+Text Label 9950 4325 0    50   ~ 0
 SPH.1
-Text Label 9950 4500 0    50   ~ 0
+Text Label 9950 4425 0    50   ~ 0
 SPH.2
-Text Label 9950 4625 0    50   ~ 0
+Text Label 9950 4525 0    50   ~ 0
 SPH.3
-Text Label 9950 4750 0    50   ~ 0
+Text Label 9950 4625 0    50   ~ 0
 SPH.4
-Text Label 9950 4875 0    50   ~ 0
+Text Label 9950 4725 0    50   ~ 0
 SPH.5
-Text Label 9950 5000 0    50   ~ 0
+Text Label 9950 4825 0    50   ~ 0
 SPH.6
-Text Label 9950 5125 0    50   ~ 0
+Text Label 9950 4925 0    50   ~ 0
 SPH.7
 $Comp
 L Connector:Conn_01x09_Male J?
 U 1 1 65A514BB
-P -275 1625
-F 0 "J?" H -200 2100 50  0000 R CNN
-F 1 "Conn_01x09_Male" H -75 1175 50  0000 R CNN
-F 2 "" H -275 1625 50  0001 C CNN
-F 3 "~" H -275 1625 50  0001 C CNN
-	1    -275 1625
+P 12475 4600
+F 0 "J?" H 12550 5075 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 12875 4125 50  0000 R CNN
+F 2 "" H 12475 4600 50  0001 C CNN
+F 3 "~" H 12475 4600 50  0001 C CNN
+	1    12475 4600
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR02
 U 1 1 65A58027
 P 1475 3250
-F 0 "#PWR?" H 1475 3000 50  0001 C CNN
+F 0 "#PWR02" H 1475 3000 50  0001 C CNN
 F 1 "GND" H 1480 3077 50  0000 C CNN
 F 2 "" H 1475 3250 50  0001 C CNN
 F 3 "" H 1475 3250 50  0001 C CNN
@@ -648,20 +648,68 @@ F 3 "" H 1475 3250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR01
 U 1 1 65A58C7A
-P -475 1225
-F 0 "#PWR?" H -475 975 50  0001 C CNN
-F 1 "GND" H -500 1100 50  0000 C CNN
-F 2 "" H -475 1225 50  0001 C CNN
-F 3 "" H -475 1225 50  0001 C CNN
-	1    -475 1225
+P 12275 4200
+F 0 "#PWR01" H 12275 3950 50  0001 C CNN
+F 1 "GND" H 12250 4075 50  0000 C CNN
+F 2 "" H 12275 4200 50  0001 C CNN
+F 3 "" H 12275 4200 50  0001 C CNN
+	1    12275 4200
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	-700 1325 -475 1325
+	12050 4300 12275 4300
 Wire Wire Line
-	-700 1425 -475 1425
+	12050 4400 12275 4400
 Wire Wire Line
-	-700 1525 -475 1525
+	12050 4500 12275 4500
+Wire Wire Line
+	12050 4600 12275 4600
+Wire Wire Line
+	12050 4700 12275 4700
+Wire Wire Line
+	12050 4800 12275 4800
+Wire Wire Line
+	12050 4900 12275 4900
+Wire Wire Line
+	12050 5000 12275 5000
+$Comp
+L Connector:Conn_01x09_Male J1
+U 1 1 65A7E99E
+P 2375 1775
+F 0 "J1" H 2450 2250 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 2775 1300 50  0000 R CNN
+F 2 "" H 2375 1775 50  0001 C CNN
+F 3 "~" H 2375 1775 50  0001 C CNN
+	1    2375 1775
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR03
+U 1 1 65A7E9A4
+P 2175 1375
+F 0 "#PWR03" H 2175 1125 50  0001 C CNN
+F 1 "GND" H 2150 1250 50  0000 C CNN
+F 2 "" H 2175 1375 50  0001 C CNN
+F 3 "" H 2175 1375 50  0001 C CNN
+	1    2175 1375
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1950 1475 2175 1475
+Wire Wire Line
+	1950 1575 2175 1575
+Wire Wire Line
+	1950 1675 2175 1675
+Wire Wire Line
+	1950 1775 2175 1775
+Wire Wire Line
+	1950 1875 2175 1875
+Wire Wire Line
+	1950 1975 2175 1975
+Wire Wire Line
+	1950 2075 2175 2075
+Wire Wire Line
+	1950 2175 2175 2175
 $EndSCHEMATC
