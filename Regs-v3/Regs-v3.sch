@@ -210,260 +210,258 @@ R3
 Text Notes 1825 4025 0    100  ~ 0
 R1
 Wire Wire Line
-	875  1500 1000 1500
+	875  1475 1000 1475
 Wire Wire Line
-	875  1625 1000 1625
+	875  1575 1000 1575
 Wire Wire Line
-	875  1750 1000 1750
+	875  1675 1000 1675
+Wire Wire Line
+	875  1775 1000 1775
 Wire Wire Line
 	875  1875 1000 1875
 Wire Wire Line
-	875  2000 1000 2000
+	875  1975 1000 1975
 Wire Wire Line
-	875  2125 1000 2125
+	875  2075 1000 2075
 Wire Wire Line
-	875  2250 1000 2250
-Wire Wire Line
-	875  2375 1000 2375
-Text Label 875  1500 0    50   ~ 0
+	875  2175 1000 2175
+Text Label 875  1475 0    50   ~ 0
 L0
-Text Label 875  1625 0    50   ~ 0
+Text Label 875  1575 0    50   ~ 0
 L1
-Text Label 875  1750 0    50   ~ 0
+Text Label 875  1675 0    50   ~ 0
 L2
-Text Label 875  1875 0    50   ~ 0
+Text Label 875  1775 0    50   ~ 0
 L3
-Text Label 875  2000 0    50   ~ 0
+Text Label 875  1875 0    50   ~ 0
 L4
-Text Label 875  2125 0    50   ~ 0
+Text Label 875  1975 0    50   ~ 0
 L5
-Text Label 875  2250 0    50   ~ 0
+Text Label 875  2075 0    50   ~ 0
 L6
-Text Label 875  2375 0    50   ~ 0
+Text Label 875  2175 0    50   ~ 0
 L7
 Wire Wire Line
-	875  4250 1000 4250
+	875  4225 1000 4225
 Wire Wire Line
-	875  4375 1000 4375
+	875  4325 1000 4325
 Wire Wire Line
-	875  4500 1000 4500
+	875  4425 1000 4425
+Wire Wire Line
+	875  4525 1000 4525
 Wire Wire Line
 	875  4625 1000 4625
 Wire Wire Line
-	875  4750 1000 4750
+	875  4725 1000 4725
 Wire Wire Line
-	875  4875 1000 4875
+	875  4825 1000 4825
 Wire Wire Line
-	875  5000 1000 5000
-Wire Wire Line
-	875  5125 1000 5125
-Text Label 875  4250 0    50   ~ 0
+	875  4925 1000 4925
+Text Label 875  4225 0    50   ~ 0
 H0
-Text Label 875  4375 0    50   ~ 0
+Text Label 875  4325 0    50   ~ 0
 H1
-Text Label 875  4500 0    50   ~ 0
+Text Label 875  4425 0    50   ~ 0
 H2
-Text Label 875  4625 0    50   ~ 0
+Text Label 875  4525 0    50   ~ 0
 H3
-Text Label 875  4750 0    50   ~ 0
+Text Label 875  4625 0    50   ~ 0
 H4
-Text Label 875  4875 0    50   ~ 0
+Text Label 875  4725 0    50   ~ 0
 H5
-Text Label 875  5000 0    50   ~ 0
+Text Label 875  4825 0    50   ~ 0
 H6
-Text Label 875  5125 0    50   ~ 0
+Text Label 875  4925 0    50   ~ 0
 H7
 Wire Wire Line
-	2875 1500 3000 1500
+	2875 1475 3000 1475
 Wire Wire Line
-	2875 1625 3000 1625
+	2875 1575 3000 1575
 Wire Wire Line
-	2875 1750 3000 1750
+	2875 1675 3000 1675
+Wire Wire Line
+	2875 1775 3000 1775
 Wire Wire Line
 	2875 1875 3000 1875
 Wire Wire Line
-	2875 2000 3000 2000
+	2875 1975 3000 1975
 Wire Wire Line
-	2875 2125 3000 2125
+	2875 2075 3000 2075
 Wire Wire Line
-	2875 2250 3000 2250
-Wire Wire Line
-	2875 2375 3000 2375
-Text Label 2875 1500 0    50   ~ 0
+	2875 2175 3000 2175
+Text Label 2875 1475 0    50   ~ 0
 L0
-Text Label 2875 1625 0    50   ~ 0
+Text Label 2875 1575 0    50   ~ 0
 L1
-Text Label 2875 1750 0    50   ~ 0
+Text Label 2875 1675 0    50   ~ 0
 L2
-Text Label 2875 1875 0    50   ~ 0
+Text Label 2875 1775 0    50   ~ 0
 L3
-Text Label 2875 2000 0    50   ~ 0
+Text Label 2875 1875 0    50   ~ 0
 L4
-Text Label 2875 2125 0    50   ~ 0
+Text Label 2875 1975 0    50   ~ 0
 L5
-Text Label 2875 2250 0    50   ~ 0
+Text Label 2875 2075 0    50   ~ 0
 L6
-Text Label 2875 2375 0    50   ~ 0
+Text Label 2875 2175 0    50   ~ 0
 L7
 Wire Wire Line
-	4875 1500 5000 1500
+	4875 1475 5000 1475
 Wire Wire Line
-	4875 1625 5000 1625
+	4875 1575 5000 1575
 Wire Wire Line
-	4875 1750 5000 1750
+	4875 1675 5000 1675
+Wire Wire Line
+	4875 1775 5000 1775
 Wire Wire Line
 	4875 1875 5000 1875
 Wire Wire Line
-	4875 2000 5000 2000
+	4875 1975 5000 1975
 Wire Wire Line
-	4875 2125 5000 2125
+	4875 2075 5000 2075
 Wire Wire Line
-	4875 2250 5000 2250
-Wire Wire Line
-	4875 2375 5000 2375
-Text Label 4875 1500 0    50   ~ 0
+	4875 2175 5000 2175
+Text Label 4875 1475 0    50   ~ 0
 L0
-Text Label 4875 1625 0    50   ~ 0
+Text Label 4875 1575 0    50   ~ 0
 L1
-Text Label 4875 1750 0    50   ~ 0
+Text Label 4875 1675 0    50   ~ 0
 L2
-Text Label 4875 1875 0    50   ~ 0
+Text Label 4875 1775 0    50   ~ 0
 L3
-Text Label 4875 2000 0    50   ~ 0
+Text Label 4875 1875 0    50   ~ 0
 L4
-Text Label 4875 2125 0    50   ~ 0
+Text Label 4875 1975 0    50   ~ 0
 L5
-Text Label 4875 2250 0    50   ~ 0
+Text Label 4875 2075 0    50   ~ 0
 L6
-Text Label 4875 2375 0    50   ~ 0
+Text Label 4875 2175 0    50   ~ 0
 L7
 Wire Wire Line
-	6875 1500 7000 1500
+	6875 1475 7000 1475
 Wire Wire Line
-	6875 1625 7000 1625
+	6875 1575 7000 1575
 Wire Wire Line
-	6875 1750 7000 1750
+	6875 1675 7000 1675
+Wire Wire Line
+	6875 1775 7000 1775
 Wire Wire Line
 	6875 1875 7000 1875
 Wire Wire Line
-	6875 2000 7000 2000
+	6875 1975 7000 1975
 Wire Wire Line
-	6875 2125 7000 2125
+	6875 2075 7000 2075
 Wire Wire Line
-	6875 2250 7000 2250
-Wire Wire Line
-	6875 2375 7000 2375
-Text Label 6875 1500 0    50   ~ 0
+	6875 2175 7000 2175
+Text Label 6875 1475 0    50   ~ 0
 L0
-Text Label 6875 1625 0    50   ~ 0
+Text Label 6875 1575 0    50   ~ 0
 L1
-Text Label 6875 1750 0    50   ~ 0
+Text Label 6875 1675 0    50   ~ 0
 L2
-Text Label 6875 1875 0    50   ~ 0
+Text Label 6875 1775 0    50   ~ 0
 L3
-Text Label 6875 2000 0    50   ~ 0
+Text Label 6875 1875 0    50   ~ 0
 L4
-Text Label 6875 2125 0    50   ~ 0
+Text Label 6875 1975 0    50   ~ 0
 L5
-Text Label 6875 2250 0    50   ~ 0
+Text Label 6875 2075 0    50   ~ 0
 L6
-Text Label 6875 2375 0    50   ~ 0
+Text Label 6875 2175 0    50   ~ 0
 L7
 Wire Wire Line
-	2875 4250 3000 4250
+	2875 4225 3000 4225
 Wire Wire Line
-	2875 4375 3000 4375
+	2875 4425 3000 4425
 Wire Wire Line
-	2875 4500 3000 4500
+	2875 4525 3000 4525
 Wire Wire Line
 	2875 4625 3000 4625
 Wire Wire Line
-	2875 4750 3000 4750
+	2875 4725 3000 4725
 Wire Wire Line
-	2875 4875 3000 4875
+	2875 4825 3000 4825
 Wire Wire Line
-	2875 5000 3000 5000
-Wire Wire Line
-	2875 5125 3000 5125
-Text Label 2875 4250 0    50   ~ 0
+	2875 4925 3000 4925
+Text Label 2875 4225 0    50   ~ 0
 H0
-Text Label 2875 4375 0    50   ~ 0
+Text Label 2875 4325 0    50   ~ 0
 H1
-Text Label 2875 4500 0    50   ~ 0
+Text Label 2875 4425 0    50   ~ 0
 H2
-Text Label 2875 4625 0    50   ~ 0
+Text Label 2875 4525 0    50   ~ 0
 H3
-Text Label 2875 4750 0    50   ~ 0
+Text Label 2875 4625 0    50   ~ 0
 H4
-Text Label 2875 4875 0    50   ~ 0
+Text Label 2875 4725 0    50   ~ 0
 H5
-Text Label 2875 5000 0    50   ~ 0
+Text Label 2875 4825 0    50   ~ 0
 H6
-Text Label 2875 5125 0    50   ~ 0
+Text Label 2875 4925 0    50   ~ 0
 H7
 Wire Wire Line
-	4875 4250 5000 4250
+	4875 4225 5000 4225
 Wire Wire Line
-	4875 4375 5000 4375
+	4875 4325 5000 4325
 Wire Wire Line
-	4875 4500 5000 4500
+	4875 4425 5000 4425
+Wire Wire Line
+	4875 4525 5000 4525
 Wire Wire Line
 	4875 4625 5000 4625
 Wire Wire Line
-	4875 4750 5000 4750
+	4875 4725 5000 4725
 Wire Wire Line
-	4875 4875 5000 4875
+	4875 4825 5000 4825
 Wire Wire Line
-	4875 5000 5000 5000
-Wire Wire Line
-	4875 5125 5000 5125
-Text Label 4875 4250 0    50   ~ 0
+	4875 4925 5000 4925
+Text Label 4875 4225 0    50   ~ 0
 H0
-Text Label 4875 4375 0    50   ~ 0
+Text Label 4875 4325 0    50   ~ 0
 H1
-Text Label 4875 4500 0    50   ~ 0
+Text Label 4875 4425 0    50   ~ 0
 H2
-Text Label 4875 4625 0    50   ~ 0
+Text Label 4875 4525 0    50   ~ 0
 H3
-Text Label 4875 4750 0    50   ~ 0
+Text Label 4875 4625 0    50   ~ 0
 H4
-Text Label 4875 4875 0    50   ~ 0
+Text Label 4875 4725 0    50   ~ 0
 H5
-Text Label 4875 5000 0    50   ~ 0
+Text Label 4875 4825 0    50   ~ 0
 H6
-Text Label 4875 5125 0    50   ~ 0
+Text Label 4875 4925 0    50   ~ 0
 H7
 Wire Wire Line
-	6875 4250 7000 4250
+	6875 4225 7000 4225
 Wire Wire Line
-	6875 4375 7000 4375
+	6875 4325 7000 4325
 Wire Wire Line
-	6875 4500 7000 4500
+	6875 4425 7000 4425
+Wire Wire Line
+	6875 4525 7000 4525
 Wire Wire Line
 	6875 4625 7000 4625
 Wire Wire Line
-	6875 4750 7000 4750
+	6875 4725 7000 4725
 Wire Wire Line
-	6875 4875 7000 4875
+	6875 4825 7000 4825
 Wire Wire Line
-	6875 5000 7000 5000
-Wire Wire Line
-	6875 5125 7000 5125
-Text Label 6875 4250 0    50   ~ 0
+	6875 4925 7000 4925
+Text Label 6875 4225 0    50   ~ 0
 H0
-Text Label 6875 4375 0    50   ~ 0
+Text Label 6875 4325 0    50   ~ 0
 H1
-Text Label 6875 4500 0    50   ~ 0
+Text Label 6875 4425 0    50   ~ 0
 H2
-Text Label 6875 4625 0    50   ~ 0
+Text Label 6875 4525 0    50   ~ 0
 H3
-Text Label 6875 4750 0    50   ~ 0
+Text Label 6875 4625 0    50   ~ 0
 H4
-Text Label 6875 4875 0    50   ~ 0
+Text Label 6875 4725 0    50   ~ 0
 H5
-Text Label 6875 5000 0    50   ~ 0
+Text Label 6875 4825 0    50   ~ 0
 H6
-Text Label 6875 5125 0    50   ~ 0
+Text Label 6875 4925 0    50   ~ 0
 H7
 Text Label 1950 1475 0    50   ~ 0
 R0.0
@@ -639,12 +637,12 @@ $EndComp
 $Comp
 L power:GND #PWR02
 U 1 1 65A58027
-P 1475 3250
-F 0 "#PWR02" H 1475 3000 50  0001 C CNN
-F 1 "GND" H 1480 3077 50  0000 C CNN
-F 2 "" H 1475 3250 50  0001 C CNN
-F 3 "" H 1475 3250 50  0001 C CNN
-	1    1475 3250
+P 1500 3250
+F 0 "#PWR02" H 1500 3000 50  0001 C CNN
+F 1 "GND" H 1505 3077 50  0000 C CNN
+F 2 "" H 1500 3250 50  0001 C CNN
+F 3 "" H 1500 3250 50  0001 C CNN
+	1    1500 3250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -712,4 +710,272 @@ Wire Wire Line
 	1950 2075 2175 2075
 Wire Wire Line
 	1950 2175 2175 2175
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 6598F316
+P 4375 1775
+F 0 "J?" H 4450 2250 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 4775 1300 50  0000 R CNN
+F 2 "" H 4375 1775 50  0001 C CNN
+F 3 "~" H 4375 1775 50  0001 C CNN
+	1    4375 1775
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6598F31C
+P 4175 1375
+F 0 "#PWR?" H 4175 1125 50  0001 C CNN
+F 1 "GND" H 4150 1250 50  0000 C CNN
+F 2 "" H 4175 1375 50  0001 C CNN
+F 3 "" H 4175 1375 50  0001 C CNN
+	1    4175 1375
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3950 1475 4175 1475
+Wire Wire Line
+	3950 1575 4175 1575
+Wire Wire Line
+	3950 1675 4175 1675
+Wire Wire Line
+	3950 1775 4175 1775
+Wire Wire Line
+	3950 1875 4175 1875
+Wire Wire Line
+	3950 1975 4175 1975
+Wire Wire Line
+	3950 2075 4175 2075
+Wire Wire Line
+	3950 2175 4175 2175
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 6599B348
+P 6375 1775
+F 0 "J?" H 6450 2250 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 6775 1300 50  0000 R CNN
+F 2 "" H 6375 1775 50  0001 C CNN
+F 3 "~" H 6375 1775 50  0001 C CNN
+	1    6375 1775
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6599B34E
+P 6175 1375
+F 0 "#PWR?" H 6175 1125 50  0001 C CNN
+F 1 "GND" H 6150 1250 50  0000 C CNN
+F 2 "" H 6175 1375 50  0001 C CNN
+F 3 "" H 6175 1375 50  0001 C CNN
+	1    6175 1375
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5950 1475 6175 1475
+Wire Wire Line
+	5950 1575 6175 1575
+Wire Wire Line
+	5950 1675 6175 1675
+Wire Wire Line
+	5950 1775 6175 1775
+Wire Wire Line
+	5950 1875 6175 1875
+Wire Wire Line
+	5950 1975 6175 1975
+Wire Wire Line
+	5950 2075 6175 2075
+Wire Wire Line
+	5950 2175 6175 2175
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 659A04A8
+P 8375 1775
+F 0 "J?" H 8450 2250 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 8775 1300 50  0000 R CNN
+F 2 "" H 8375 1775 50  0001 C CNN
+F 3 "~" H 8375 1775 50  0001 C CNN
+	1    8375 1775
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 659A04AE
+P 8175 1375
+F 0 "#PWR?" H 8175 1125 50  0001 C CNN
+F 1 "GND" H 8150 1250 50  0000 C CNN
+F 2 "" H 8175 1375 50  0001 C CNN
+F 3 "" H 8175 1375 50  0001 C CNN
+	1    8175 1375
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7950 1475 8175 1475
+Wire Wire Line
+	7950 1575 8175 1575
+Wire Wire Line
+	7950 1675 8175 1675
+Wire Wire Line
+	7950 1775 8175 1775
+Wire Wire Line
+	7950 1875 8175 1875
+Wire Wire Line
+	7950 1975 8175 1975
+Wire Wire Line
+	7950 2075 8175 2075
+Wire Wire Line
+	7950 2175 8175 2175
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 659A5FEC
+P 2375 4525
+F 0 "J?" H 2450 5000 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 2775 4050 50  0000 R CNN
+F 2 "" H 2375 4525 50  0001 C CNN
+F 3 "~" H 2375 4525 50  0001 C CNN
+	1    2375 4525
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 659A5FF2
+P 2175 4125
+F 0 "#PWR?" H 2175 3875 50  0001 C CNN
+F 1 "GND" H 2150 4000 50  0000 C CNN
+F 2 "" H 2175 4125 50  0001 C CNN
+F 3 "" H 2175 4125 50  0001 C CNN
+	1    2175 4125
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1950 4225 2175 4225
+Wire Wire Line
+	1950 4325 2175 4325
+Wire Wire Line
+	1950 4425 2175 4425
+Wire Wire Line
+	1950 4525 2175 4525
+Wire Wire Line
+	1950 4625 2175 4625
+Wire Wire Line
+	1950 4725 2175 4725
+Wire Wire Line
+	1950 4825 2175 4825
+Wire Wire Line
+	1950 4925 2175 4925
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 659AD25C
+P 4375 4525
+F 0 "J?" H 4450 5000 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 4775 4050 50  0000 R CNN
+F 2 "" H 4375 4525 50  0001 C CNN
+F 3 "~" H 4375 4525 50  0001 C CNN
+	1    4375 4525
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 659AD262
+P 4175 4125
+F 0 "#PWR?" H 4175 3875 50  0001 C CNN
+F 1 "GND" H 4150 4000 50  0000 C CNN
+F 2 "" H 4175 4125 50  0001 C CNN
+F 3 "" H 4175 4125 50  0001 C CNN
+	1    4175 4125
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3950 4225 4175 4225
+Wire Wire Line
+	3950 4325 4175 4325
+Wire Wire Line
+	3950 4425 4175 4425
+Wire Wire Line
+	3950 4525 4175 4525
+Wire Wire Line
+	3950 4625 4175 4625
+Wire Wire Line
+	3950 4725 4175 4725
+Wire Wire Line
+	3950 4825 4175 4825
+Wire Wire Line
+	3950 4925 4175 4925
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 659B5004
+P 6375 4525
+F 0 "J?" H 6450 5000 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 6775 4050 50  0000 R CNN
+F 2 "" H 6375 4525 50  0001 C CNN
+F 3 "~" H 6375 4525 50  0001 C CNN
+	1    6375 4525
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 659B500A
+P 6175 4125
+F 0 "#PWR?" H 6175 3875 50  0001 C CNN
+F 1 "GND" H 6150 4000 50  0000 C CNN
+F 2 "" H 6175 4125 50  0001 C CNN
+F 3 "" H 6175 4125 50  0001 C CNN
+	1    6175 4125
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5950 4225 6175 4225
+Wire Wire Line
+	5950 4325 6175 4325
+Wire Wire Line
+	5950 4425 6175 4425
+Wire Wire Line
+	5950 4525 6175 4525
+Wire Wire Line
+	5950 4625 6175 4625
+Wire Wire Line
+	5950 4725 6175 4725
+Wire Wire Line
+	5950 4825 6175 4825
+Wire Wire Line
+	5950 4925 6175 4925
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 659BD6E4
+P 8375 4525
+F 0 "J?" H 8450 5000 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 8775 4050 50  0000 R CNN
+F 2 "" H 8375 4525 50  0001 C CNN
+F 3 "~" H 8375 4525 50  0001 C CNN
+	1    8375 4525
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 659BD6EA
+P 8175 4125
+F 0 "#PWR?" H 8175 3875 50  0001 C CNN
+F 1 "GND" H 8150 4000 50  0000 C CNN
+F 2 "" H 8175 4125 50  0001 C CNN
+F 3 "" H 8175 4125 50  0001 C CNN
+	1    8175 4125
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7950 4225 8175 4225
+Wire Wire Line
+	7950 4325 8175 4325
+Wire Wire Line
+	7950 4425 8175 4425
+Wire Wire Line
+	7950 4525 8175 4525
+Wire Wire Line
+	7950 4625 8175 4625
+Wire Wire Line
+	7950 4725 8175 4725
+Wire Wire Line
+	7950 4825 8175 4825
+Wire Wire Line
+	7950 4925 8175 4925
+Wire Wire Line
+	2875 4325 3000 4325
 $EndSCHEMATC
