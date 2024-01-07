@@ -2044,10 +2044,10 @@ F 3 "" H 11000 3400 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0126
 U 1 1 65A9C543
 P 9000 4825
-F 0 "#PWR?" H 9000 4575 50  0001 C CNN
+F 0 "#PWR0126" H 9000 4575 50  0001 C CNN
 F 1 "GND" V 8925 4675 50  0000 C CNN
 F 2 "" H 9000 4825 50  0001 C CNN
 F 3 "" H 9000 4825 50  0001 C CNN
@@ -2055,21 +2055,21 @@ F 3 "" H 9000 4825 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J16
 U 1 1 65B8A75F
 P 1450 8250
-F 0 "J?" H 1530 8242 50  0000 L CNN
+F 0 "J16" H 1530 8242 50  0000 L CNN
 F 1 "Screw_Terminal_01x02" H 1530 8151 50  0000 L CNN
-F 2 "" H 1450 8250 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1450 8250 50  0001 C CNN
 F 3 "~" H 1450 8250 50  0001 C CNN
 	1    1450 8250
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0127
 U 1 1 65B8C30B
 P 1250 8350
-F 0 "#PWR?" H 1250 8100 50  0001 C CNN
+F 0 "#PWR0127" H 1250 8100 50  0001 C CNN
 F 1 "GND" H 1255 8177 50  0000 C CNN
 F 2 "" H 1250 8350 50  0001 C CNN
 F 3 "" H 1250 8350 50  0001 C CNN
@@ -2077,14 +2077,16 @@ F 3 "" H 1250 8350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:VCC #PWR?
+L power:VCC #PWR0128
 U 1 1 65B8CABD
 P 1250 8250
-F 0 "#PWR?" H 1250 8100 50  0001 C CNN
+F 0 "#PWR0128" H 1250 8100 50  0001 C CNN
 F 1 "VCC" H 1265 8423 50  0000 C CNN
 F 2 "" H 1250 8250 50  0001 C CNN
 F 3 "" H 1250 8250 50  0001 C CNN
 	1    1250 8250
 	1    0    0    -1  
 $EndComp
+Text Notes 6550 7725 0    100  ~ 0
+1. Потерял входной мультиплексор\n2. Потерял пулапы (Res)\n3. Поправить диаметры отверстий и контактных пятачков\n4. Попробовать переупорядочить логические элементы
 $EndSCHEMATC
