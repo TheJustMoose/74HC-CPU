@@ -2100,4 +2100,217 @@ F 3 "" H 4100 7650 50  0001 C CNN
 	1    4100 7650
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x09_Male J17
+U 1 1 65A046FB
+P 3550 8050
+F 0 "J17" H 3625 8525 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 3475 8350 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 8050 50  0001 C CNN
+F 3 "~" H 3550 8050 50  0001 C CNN
+	1    3550 8050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3875 9550 4000 9550
+Wire Wire Line
+	3875 9650 4000 9650
+Wire Wire Line
+	3875 9750 4000 9750
+Wire Wire Line
+	3875 9850 4000 9850
+Wire Wire Line
+	3875 9950 4000 9950
+Wire Wire Line
+	3875 10050 4000 10050
+Wire Wire Line
+	3875 10150 4000 10150
+Wire Wire Line
+	3875 10250 4000 10250
+Text Label 3875 9550 0    50   ~ 0
+H0
+Text Label 3875 9650 0    50   ~ 0
+H1
+Text Label 3875 9750 0    50   ~ 0
+H2
+Text Label 3875 9850 0    50   ~ 0
+H3
+Text Label 3875 9950 0    50   ~ 0
+H4
+Text Label 3875 10050 0    50   ~ 0
+H5
+Text Label 3875 10150 0    50   ~ 0
+H6
+Text Label 3875 10250 0    50   ~ 0
+H7
+Wire Wire Line
+	3750 8450 4000 8450
+Wire Wire Line
+	3750 8350 4000 8350
+Wire Wire Line
+	3750 8250 4000 8250
+Wire Wire Line
+	3750 8150 4000 8150
+Wire Wire Line
+	3750 8050 4000 8050
+Wire Wire Line
+	3750 7950 4000 7950
+Wire Wire Line
+	3750 7850 4000 7850
+Wire Wire Line
+	3750 7750 4000 7750
+$Comp
+L power:GND #PWR030
+U 1 1 65B84CC6
+P 3750 7650
+F 0 "#PWR030" H 3750 7400 50  0001 C CNN
+F 1 "GND" H 3725 7525 50  0000 C CNN
+F 2 "" H 3750 7650 50  0001 C CNN
+F 3 "" H 3750 7650 50  0001 C CNN
+	1    3750 7650
+	-1   0    0    1   
+$EndComp
+Text Label 3825 7750 0    50   ~ 0
+L0
+Text Label 3825 7850 0    50   ~ 0
+L1
+Text Label 3825 7950 0    50   ~ 0
+L2
+Text Label 3825 8050 0    50   ~ 0
+L3
+Text Label 3825 8150 0    50   ~ 0
+L4
+Text Label 3825 8250 0    50   ~ 0
+L5
+Text Label 3825 8350 0    50   ~ 0
+L6
+Text Label 3825 8450 0    50   ~ 0
+L7
+Wire Wire Line
+	3750 10450 4000 10450
+Text Label 3750 10450 0    50   ~ 0
+~MUL
+$Comp
+L power:GND #PWR033
+U 1 1 65C064B0
+P 4000 10750
+F 0 "#PWR033" H 4000 10500 50  0001 C CNN
+F 1 "GND" H 4005 10577 50  0000 C CNN
+F 2 "" H 4000 10750 50  0001 C CNN
+F 3 "" H 4000 10750 50  0001 C CNN
+	1    4000 10750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 10650 4000 10750
+Connection ~ 4000 10750
+$Comp
+L power:VCC #PWR032
+U 1 1 65C20568
+P 3875 10550
+F 0 "#PWR032" H 3875 10400 50  0001 C CNN
+F 1 "VCC" H 3890 10723 50  0000 C CNN
+F 2 "" H 3875 10550 50  0001 C CNN
+F 3 "" H 3875 10550 50  0001 C CNN
+	1    3875 10550
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3875 10550 4000 10550
+$Comp
+L Connector:Conn_01x09_Male J18
+U 1 1 65C3B36A
+P 3550 8950
+F 0 "J18" H 3525 9350 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 3500 9275 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 8950 50  0001 C CNN
+F 3 "~" H 3550 8950 50  0001 C CNN
+	1    3550 8950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR031
+U 1 1 65C40119
+P 3750 8550
+F 0 "#PWR031" H 3750 8300 50  0001 C CNN
+F 1 "GND" V 3750 8350 50  0000 C CNN
+F 2 "" H 3750 8550 50  0001 C CNN
+F 3 "" H 3750 8550 50  0001 C CNN
+	1    3750 8550
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3750 8650 4000 8650
+Wire Wire Line
+	3750 8750 4000 8750
+Wire Wire Line
+	3750 8850 4000 8850
+Wire Wire Line
+	3750 8950 4000 8950
+Wire Wire Line
+	3750 9050 4000 9050
+Wire Wire Line
+	3750 9150 4000 9150
+Wire Wire Line
+	3750 9250 4000 9250
+Wire Wire Line
+	3750 9350 4000 9350
+Text Notes 2400 8125 0    50   ~ 0
+To ALU low byte output
+Text Notes 2400 8925 0    50   ~ 0
+To ALU high byte output
+Text Label 3750 9350 0    50   ~ 0
+ALU_H7
+Text Label 3750 8650 0    50   ~ 0
+ALU_H0
+$Comp
+L Device:R R6
+U 1 1 65D1BAB2
+P 7300 8250
+F 0 "R6" V 7225 8250 50  0000 C CNN
+F 1 "10k" V 7300 8250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7230 8250 50  0001 C CNN
+F 3 "~" H 7300 8250 50  0001 C CNN
+	1    7300 8250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:VCC #PWR035
+U 1 1 65D1BAB8
+P 7450 8250
+F 0 "#PWR035" H 7450 8100 50  0001 C CNN
+F 1 "VCC" H 7465 8423 50  0000 C CNN
+F 2 "" H 7450 8250 50  0001 C CNN
+F 3 "" H 7450 8250 50  0001 C CNN
+	1    7450 8250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 65D373EF
+P 7300 8000
+F 0 "R5" V 7225 8000 50  0000 C CNN
+F 1 "10k" V 7300 8000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7230 8000 50  0001 C CNN
+F 3 "~" H 7300 8000 50  0001 C CNN
+	1    7300 8000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:VCC #PWR034
+U 1 1 65D373F5
+P 7450 8000
+F 0 "#PWR034" H 7450 7850 50  0001 C CNN
+F 1 "VCC" H 7465 8173 50  0000 C CNN
+F 2 "" H 7450 8000 50  0001 C CNN
+F 3 "" H 7450 8000 50  0001 C CNN
+	1    7450 8000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6950 8000 7150 8000
+Wire Wire Line
+	6950 8250 7150 8250
+Text Notes 7225 8550 0    50   ~ 0
+EXT[1] allow to get SP\ninstead of Y reg
 $EndSCHEMATC
