@@ -146,6 +146,7 @@ MUL, ALU - похожи на stripboard
 Вариант от 11.12.2023:
 Убрал LDI и CTRL. CLRF(CTRL) теперь реализован в виде порта ввода-вывода.
 Добавил LPM и CMPC.
+Сделал адреса порта пяти битным.
 
 Легенда (действия с SRC перед подачей в АЛУ):
 Z - занулить старший ниббл
@@ -183,9 +184,9 @@ BTYPE - тип команды перехода (или команды управ
 |   UNO | DST |0|TYP|-|F|Z|z|I|i| 07  // теперь, когда инвертор есть на шине SRC можно выкинуть команду INV и заменить её... на SHUFFLE? MIRROR?
 |   LPM | DST |0|EXT|D|U|OFFSET4| 08  // LPM R0, [+X]   // LPM R1, [X+1]   // LPM R1, [-X-1]
 |    LD | DST |0|EXT|D|U|OFFSET4| 09  // LD R1, [-Y]    // LD R3, [+SP-1] ; POP R3
-|    IN | DST |0|PORT |P|-|-|I|i| 0A  // IN R2, PIN1    // IN R2, ~PIN1 ; инвертировать порт перед чтением
+|    IN | DST |  PORT   |-|-|I|i| 0A  // IN R2, PIN1    // IN R2, ~PIN1 ; инвертировать порт перед чтением
 ------------------------------------  всё что ниже - не модифицирует регистры
-|   OUT |PORT |0| SRC |P|O|o|X|x| 0B  // OUT PORT0, R2  // XOUT PORT0, R2
+|   OUT | SRC |  PORT   |O|o|X|x| 0B  // OUT PORT0, R2  // XOUT PORT0, R2
 |    ST | SRC |0|EXT|D|U|OFFSET4| 0C  // ST [Y], R2     // ST [+X], R2     // ST [Y+2], R2   // ST [-SP], R2 ; PUSH R2
 |   CMP | DST |C| SRC |-|   -   | 0D  // CMPI R3, 10    // CMP  R0, R2
 |  CMPC | DST |C| SRC |-|   -   | 0E  // CMPCI R4, 10   // CMPC R1, R3
