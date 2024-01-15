@@ -175,29 +175,30 @@ BTYPE - тип команды перехода (или команды управ
     4   +  3  +1+  3  +   5   = 16
  0 1 2 3 4 5 6 7 8 9 A B C D E F
 ------------------------------------
-|   ADD | DST |C| SRC |-|Z|z|I|i| 00  // ADDI R0, 1         // INC R0;
-|  ADDC | DST |C| SRC |F|Z|z|I|i| 01  // ADDC R1, 1 (+F=1)  // INCC R1;    // кажется, бит F теперь не нужен, потому что можно использовать константу
-|   AND | DST |C| SRC |-|Z|z|I|i| 02  // ANDI R2, 0x0F
-|    OR | DST |C| SRC |-|Z|z|I|i| 03  // ORI R3, 2
-|   XOR | DST |C| SRC |-|Z|z|I|i| 04  // XORI R4, 4
-|   MOV | DST |C| SRC |*|Z|z|I|i| 05  // MOVI R5, 5     // LDI R5, 5       // * - можно использовать, чтобы пихать адрес в SPL/SPH
-|   MUL | DST |C| SRC |-|Z|z|I|i| 06  // MULI R6, 10    // R7:R6 := R6*10
-|   UNO | DST |0|TYP|-|F|Z|z|I|i| 07  // теперь, когда инвертор есть на шине SRC можно выкинуть команду INV и заменить её... на SHUFFLE? MIRROR?
-|   LPM | DST |0|EXT|D|U|OFFSET4| 08  // LPM R0, [+X]   // LPM R1, [X+1]   // LPM R1, [-X-1]
-|    LD | DST |0|EXT|D|U|OFFSET4| 09  // LD R1, [-Y]    // LD R3, [+SP-1] ; POP R3
-|    IN | DST |  PORT   |-|-|I|i| 0A  // IN R2, PIN1    // IN R2, ~PIN1 ; инвертировать порт перед чтением
-------------------------------------  всё что ниже - не модифицирует регистры
-|   OUT | SRC |  PORT   |O|o|X|x| 0B  // OUT PORT0, R2  // XOUT PORT0, R2
-|    ST | SRC |0|EXT|D|U|OFFSET4| 0C  // ST [Y], R2     // ST [+X], R2     // ST [Y+2], R2   // ST [-SP], R2 ; PUSH R2
-|   CMP | DST |C| SRC |-|   -   | 0D  // CMPI R3, 10    // CMP  R0, R2
-|  CMPC | DST |C| SRC |-|   -   | 0E  // CMPCI R4, 10   // CMPC R1, R3
-| BRNCH | BTYPE |   8 bit ADDR  | 0F  // CALL, JMP, RET,  JZ,   JL,  JNE,  JE,    JG - переход в +-127 команды, значение прибавляется к текущему счётчику команд
-                                      //   JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP  // AFCALL - Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем
-                                      //    0    1    2    3     4     5    6     7    // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
+|   ADD | DST |C| SRC |-|Z|z|I|i| 00 0000 // ADDI R0, 1         // INC R0;
+|  ADDC | DST |C| SRC |F|Z|z|I|i| 01 0001 // ADDC R1, 1 (+F=1)  // INCC R1;    // кажется, бит F теперь не нужен, потому что можно использовать константу
+|   AND | DST |C| SRC |-|Z|z|I|i| 02 0010 // ANDI R2, 0x0F
+|    OR | DST |C| SRC |-|Z|z|I|i| 03 0011 // ORI R3, 2
+|   XOR | DST |C| SRC |-|Z|z|I|i| 04 0100 // XORI R4, 4
+|   MOV | DST |C| SRC |*|Z|z|I|i| 05 0101 // MOVI R5, 5     // LDI R5, 5       // * - можно использовать, чтобы пихать адрес в SPL/SPH
+|   MUL | DST |C| SRC |-|Z|z|I|i| 06 0110 // MULI R6, 10    // R7:R6 := R6*10
+|   UNO | DST |0|TYP|-|F|Z|z|I|i| 07 0111 // теперь, когда инвертор есть на шине SRC можно выкинуть команду INV и заменить её... на SHUFFLE? MIRROR?
+|   LPM | DST |0|EXT|D|U|OFFSET4| 08 1000 // LPM R0, [+X]   // LPM R1, [X+1]   // LPM R1, [-X-1]
+|    LD | DST |0|EXT|D|U|OFFSET4| 09 1001 // LD R1, [-Y]    // LD R3, [+SP-1] ; POP R3
+|    IN | DST |  PORT   |-|-|I|i| 0A 1010 // IN R2, PIN1    // IN R2, ~PIN1 ; инвертировать порт перед чтением
+---------------7-8-9-A-B------------      всё что ниже - не модифицирует регистры
+|   OUT | SRC |  PORT   |O|o|X|x| 0B 1011 // OUT PORT0, R2  // XOUT PORT0, R2
+|    ST | SRC |0|EXT|D|U|OFFSET4| 0C 1100 // ST [Y], R2     // ST [+X], R2     // ST [Y+2], R2   // ST [-SP], R2 ; PUSH R2
+|   CMP | DST |C| SRC |-|   -   | 0D 1101 // CMPI R3, 10    // CMP  R0, R2
+|  CMPC | DST |C| SRC |-|   -   | 0E 1110 // CMPCI R4, 10   // CMPC R1, R3
+| BRNCH | BTYPE |   8 bit ADDR  | 0F 1111 // CALL, JMP, RET,  JZ,   JL,  JNE,  JE,    JG - переход в +-127 команды, значение прибавляется к текущему счётчику команд
+                                          //   JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP  // AFCALL - Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем
+                                          //    0    1    2    3     4     5    6     7    // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
 
-Oops! Что будет читать LPM, если ROM у меня 16 битный???
+Oops! Что будет читать LPM, если ROM у меня 16 битный??? Хотя, это похоже на команду MUL
 И не вкрутить ли сюда тупо Unicode? Всё равно старший байт пропадает.
-Oops! Придумать что-то с pushf
+Нужнен ли бит D в команде LPM? Это ж не RAM, зачем её читать в обратном порядке?
+Oops! Придумать что-то с pushf/popf
 
 // Бит 7 кода операции (C) указывает на то, что нужно переключить шину SRC на константу (CONST)
 // Его нужно использовать, если команда из первой половины списка, или если код команды 0D|0E
