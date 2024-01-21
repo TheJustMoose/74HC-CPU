@@ -718,12 +718,12 @@ $EndComp
 $Comp
 L 74xx:74LS27 U3
 U 1 1 636F573A
-P 2050 4850
-F 0 "U3" H 2050 5175 50  0000 C CNN
-F 1 "74LS27" H 2050 5084 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 4850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 4850 50  0001 C CNN
-	1    2050 4850
+P 1650 4150
+F 0 "U3" H 1650 4475 50  0000 C CNN
+F 1 "74LS27" H 1650 4384 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 1650 4150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 1650 4150 50  0001 C CNN
+	1    1650 4150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -738,15 +738,10 @@ F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2700 2625 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1750 4750 1750 4850
-Connection ~ 1750 4850
-Wire Wire Line
-	1750 4850 1750 4950
+	1350 4050 1350 4150
 Wire Wire Line
 	2400 2525 2400 2625
 Connection ~ 2400 2625
-Wire Wire Line
-	2400 2625 2400 2725
 Wire Wire Line
 	2275 2625 2400 2625
 $Comp
@@ -899,16 +894,15 @@ Text Label 8275 5650 0    50   ~ 0
 UpOut
 Text Label 8275 5750 0    50   ~ 0
 DownOut
-NoConn ~ 2350 4850
 $Comp
 L power:GND #PWR024
 U 1 1 64AF5786
-P 1750 4850
-F 0 "#PWR024" H 1750 4600 50  0001 C CNN
-F 1 "GND" V 1755 4722 50  0000 R CNN
-F 2 "" H 1750 4850 50  0001 C CNN
-F 3 "" H 1750 4850 50  0001 C CNN
-	1    1750 4850
+P 1350 4050
+F 0 "#PWR024" H 1350 3800 50  0001 C CNN
+F 1 "GND" V 1355 3922 50  0000 R CNN
+F 2 "" H 1350 4050 50  0001 C CNN
+F 3 "" H 1350 4050 50  0001 C CNN
+	1    1350 4050
 	0    1    1    0   
 $EndComp
 $Comp
@@ -1016,4 +1010,94 @@ Wire Wire Line
 Wire Wire Line
 	10300 5600 10300 5800
 Connection ~ 10300 5600
+$Comp
+L Connector:Conn_01x01_Male J8
+U 1 1 65AD21B9
+P 2200 3175
+F 0 "J8" H 2200 3100 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 1800 3175 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 2200 3175 50  0001 C CNN
+F 3 "~" H 2200 3175 50  0001 C CNN
+	1    2200 3175
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 2725 2400 3175
+$Comp
+L Device:R R12
+U 1 1 65AD4FBF
+P 2400 3325
+F 0 "R12" V 2300 3250 50  0000 C CNN
+F 1 "10k" V 2400 3325 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2330 3325 50  0001 C CNN
+F 3 "~" H 2400 3325 50  0001 C CNN
+	1    2400 3325
+	-1   0    0    1   
+$EndComp
+Connection ~ 2400 3175
+$Comp
+L power:GND #PWR028
+U 1 1 65AD5DA6
+P 2400 3475
+F 0 "#PWR028" H 2400 3225 50  0001 C CNN
+F 1 "GND" H 2550 3400 50  0000 C CNN
+F 2 "" H 2400 3475 50  0001 C CNN
+F 3 "" H 2400 3475 50  0001 C CNN
+	1    2400 3475
+	1    0    0    -1  
+$EndComp
+Text Label 2400 2925 0    50   ~ 0
+MLOAD
+Text Notes 2425 3100 0    50   ~ 0
+Unconditional\nload
+Connection ~ 1350 4050
+$Comp
+L Connector:Conn_01x01_Male J9
+U 1 1 65AF4013
+P 1150 4550
+F 0 "J9" H 1125 4500 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 1575 4500 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 1150 4550 50  0001 C CNN
+F 3 "~" H 1150 4550 50  0001 C CNN
+	1    1150 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R13
+U 1 1 65AF401A
+P 1200 4250
+F 0 "R13" V 1100 4175 50  0000 C CNN
+F 1 "10k" V 1200 4250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 1130 4250 50  0001 C CNN
+F 3 "~" H 1200 4250 50  0001 C CNN
+	1    1200 4250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J10
+U 1 1 65AF9C4B
+P 2150 4150
+F 0 "J10" H 2200 4225 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 2100 4100 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 2150 4150 50  0001 C CNN
+F 3 "~" H 2150 4150 50  0001 C CNN
+	1    2150 4150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR029
+U 1 1 65B09055
+P 1050 4250
+F 0 "#PWR029" H 1050 4100 50  0001 C CNN
+F 1 "VCC" V 1065 4377 50  0000 L CNN
+F 2 "" H 1050 4250 50  0001 C CNN
+F 3 "" H 1050 4250 50  0001 C CNN
+	1    1050 4250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1350 4250 1350 4550
+Connection ~ 1350 4250
+Text Label 1350 4550 0    50   ~ 0
+~MLOAD
 $EndSCHEMATC
