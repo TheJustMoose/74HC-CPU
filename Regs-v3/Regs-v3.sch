@@ -1898,31 +1898,31 @@ F 3 "~" H 6750 8250 50  0001 C CNN
 $EndComp
 Text Label 6950 8250 0    50   ~ 0
 ~Res
-Text Label 6950 8750 0    50   ~ 0
+Text Label 6950 9250 0    50   ~ 0
 EXT[1]
 $Comp
 L Connector:Conn_01x01_Male J14
 U 1 1 659CA35B
-P 6750 8750
-F 0 "J14" H 6775 8825 50  0000 C CNN
-F 1 "Conn_01x01_Male" H 6750 8675 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 6750 8750 50  0001 C CNN
-F 3 "~" H 6750 8750 50  0001 C CNN
-	1    6750 8750
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x01_Male J15
-U 1 1 659CD5FE
 P 6750 9250
-F 0 "J15" H 6775 9325 50  0000 C CNN
+F 0 "J14" H 6775 9325 50  0000 C CNN
 F 1 "Conn_01x01_Male" H 6750 9175 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 6750 9250 50  0001 C CNN
 F 3 "~" H 6750 9250 50  0001 C CNN
 	1    6750 9250
 	1    0    0    -1  
 $EndComp
-Text Label 6950 9250 0    50   ~ 0
+$Comp
+L Connector:Conn_01x01_Male J15
+U 1 1 659CD5FE
+P 6750 9750
+F 0 "J15" H 6775 9825 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 6750 9675 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 6750 9750 50  0001 C CNN
+F 3 "~" H 6750 9750 50  0001 C CNN
+	1    6750 9750
+	1    0    0    -1  
+$EndComp
+Text Label 6950 9750 0    50   ~ 0
 Latch
 $Comp
 L power:GND #PWR027
@@ -2278,7 +2278,7 @@ Wire Wire Line
 	6950 8000 7150 8000
 Wire Wire Line
 	6950 8250 7150 8250
-Text Notes 7225 8700 0    50   ~ 0
+Text Notes 7225 9200 0    50   ~ 0
 EXT[1] allow to get SP\ninstead of Y reg
 $Comp
 L Device:C C1
@@ -2448,27 +2448,27 @@ $EndComp
 $Comp
 L power:GND #PWR0130
 U 1 1 65EC024E
-P 7500 8750
-F 0 "#PWR0130" H 7500 8500 50  0001 C CNN
-F 1 "GND" H 7505 8577 50  0000 C CNN
-F 2 "" H 7500 8750 50  0001 C CNN
-F 3 "" H 7500 8750 50  0001 C CNN
-	1    7500 8750
+P 7500 9250
+F 0 "#PWR0130" H 7500 9000 50  0001 C CNN
+F 1 "GND" H 7505 9077 50  0000 C CNN
+F 2 "" H 7500 9250 50  0001 C CNN
+F 3 "" H 7500 9250 50  0001 C CNN
+	1    7500 9250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R7
 U 1 1 65EC05BB
-P 7350 8750
-F 0 "R7" V 7275 8750 50  0000 C CNN
-F 1 "10k" V 7350 8750 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7280 8750 50  0001 C CNN
-F 3 "~" H 7350 8750 50  0001 C CNN
-	1    7350 8750
+P 7350 9250
+F 0 "R7" V 7275 9250 50  0000 C CNN
+F 1 "10k" V 7350 9250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7280 9250 50  0001 C CNN
+F 3 "~" H 7350 9250 50  0001 C CNN
+	1    7350 9250
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	6950 8750 7200 8750
+	6950 9250 7200 9250
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 65EE18DB
@@ -2550,4 +2550,32 @@ Wire Wire Line
 	8975 3600 10475 3600
 Wire Wire Line
 	8975 5325 9625 5325
+$Comp
+L Connector:Conn_01x01_Male J19
+U 1 1 65B1020A
+P 6750 8500
+F 0 "J19" H 6775 8575 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 6750 8450 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 6750 8500 50  0001 C CNN
+F 3 "~" H 6750 8500 50  0001 C CNN
+	1    6750 8500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J20
+U 1 1 65B104F0
+P 6750 8750
+F 0 "J20" H 6775 8825 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 6750 8700 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 6750 8750 50  0001 C CNN
+F 3 "~" H 6750 8750 50  0001 C CNN
+	1    6750 8750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6950 8250 6950 8500
+Connection ~ 6950 8250
+Wire Wire Line
+	6950 8750 6950 8500
+Connection ~ 6950 8500
 $EndSCHEMATC
