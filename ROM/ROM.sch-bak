@@ -809,7 +809,7 @@ L Connector:Screw_Terminal_01x02 J4
 U 1 1 64A547C9
 P 4200 7075
 F 0 "J4" H 4150 7175 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" V 4300 6625 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 3725 6700 50  0000 L CNN
 F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 4200 7075 50  0001 C CNN
 F 3 "~" H 4200 7075 50  0001 C CNN
 	1    4200 7075
@@ -829,12 +829,12 @@ $EndComp
 $Comp
 L power:VCC #PWR09
 U 1 1 64A55D50
-P 4000 7075
-F 0 "#PWR09" H 4000 6925 50  0001 C CNN
-F 1 "VCC" H 4015 7248 50  0000 C CNN
-F 2 "" H 4000 7075 50  0001 C CNN
-F 3 "" H 4000 7075 50  0001 C CNN
-	1    4000 7075
+P 4000 6550
+F 0 "#PWR09" H 4000 6400 50  0001 C CNN
+F 1 "VCC" H 4015 6723 50  0000 C CNN
+F 2 "" H 4000 6550 50  0001 C CNN
+F 3 "" H 4000 6550 50  0001 C CNN
+	1    4000 6550
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1238,45 +1238,45 @@ $EndComp
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 649C9A0F
-P 1000 7000
-F 0 "H1" H 1100 7046 50  0000 L CNN
-F 1 "MountingHole" H 1100 6955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1000 7000 50  0001 C CNN
-F 3 "~" H 1000 7000 50  0001 C CNN
-	1    1000 7000
+P 750 7000
+F 0 "H1" H 850 7046 50  0000 L CNN
+F 1 "MountingHole" H 850 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 7000 50  0001 C CNN
+F 3 "~" H 750 7000 50  0001 C CNN
+	1    750  7000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 649CA99A
-P 1000 7250
-F 0 "H3" H 1100 7296 50  0000 L CNN
-F 1 "MountingHole" H 1100 7205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1000 7250 50  0001 C CNN
-F 3 "~" H 1000 7250 50  0001 C CNN
-	1    1000 7250
+P 750 7250
+F 0 "H3" H 850 7296 50  0000 L CNN
+F 1 "MountingHole" H 850 7205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 7250 50  0001 C CNN
+F 3 "~" H 750 7250 50  0001 C CNN
+	1    750  7250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 649CB59E
-P 2000 7000
-F 0 "H2" H 2100 7046 50  0000 L CNN
-F 1 "MountingHole" H 2100 6955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2000 7000 50  0001 C CNN
-F 3 "~" H 2000 7000 50  0001 C CNN
-	1    2000 7000
+P 1500 7000
+F 0 "H2" H 1600 7046 50  0000 L CNN
+F 1 "MountingHole" H 1600 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 7000 50  0001 C CNN
+F 3 "~" H 1500 7000 50  0001 C CNN
+	1    1500 7000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 649CC192
-P 2000 7250
-F 0 "H4" H 2100 7296 50  0000 L CNN
-F 1 "MountingHole" H 2100 7205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2000 7250 50  0001 C CNN
-F 3 "~" H 2000 7250 50  0001 C CNN
-	1    2000 7250
+P 1500 7250
+F 0 "H4" H 1600 7296 50  0000 L CNN
+F 1 "MountingHole" H 1600 7205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 7250 50  0001 C CNN
+F 3 "~" H 1500 7250 50  0001 C CNN
+	1    1500 7250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -2039,5 +2039,51 @@ F 2 "" H 950 5250 50  0001 C CNN
 F 3 "" H 950 5250 50  0001 C CNN
 	1    950  5250
 	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 65BCC566
+P 2250 7000
+F 0 "H5" H 2350 7046 50  0000 L CNN
+F 1 "MountingHole" H 2350 6955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7000 50  0001 C CNN
+F 3 "~" H 2250 7000 50  0001 C CNN
+	1    2250 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 65BCC56C
+P 2250 7250
+F 0 "H6" H 2350 7296 50  0000 L CNN
+F 1 "MountingHole" H 2350 7205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7250 50  0001 C CNN
+F 3 "~" H 2250 7250 50  0001 C CNN
+	1    2250 7250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:IRLML5203 Q?
+U 1 1 65C3B56B
+P 4100 6750
+F 0 "Q?" H 4305 6704 50  0000 L CNN
+F 1 "IRLML5203" H 3775 6875 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4300 6675 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 4100 6750 50  0001 L CNN
+	1    4100 6750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4000 6950 4000 7075
+$Comp
+L power:GND #PWR?
+U 1 1 65C6B11B
+P 4300 6750
+F 0 "#PWR?" H 4300 6500 50  0001 C CNN
+F 1 "GND" H 4300 6600 50  0000 C CNN
+F 2 "" H 4300 6750 50  0001 C CNN
+F 3 "" H 4300 6750 50  0001 C CNN
+	1    4300 6750
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
