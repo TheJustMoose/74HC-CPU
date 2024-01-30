@@ -139,22 +139,22 @@ BTYPE - тип команды перехода (или команды управ
 |    ST | SRC |0|EXT|D|U|OFFSET4| 0C 1100  -  // ST [Y], R2     // ST [IX], R2     // ST [Y+2], R2   // ST [-SP], R2 ; PUSH R2
 |   CMP | DST |C| SRC |-|   -   | 0D 1101  +  // CMPI R3, 10    // CMP  R0, R2
 |  CMPC | DST |C| SRC |-|   -   | 0E 1110  +  // CMPCI R4, 10   // CMPC R1, R3
-| BRNCH |  CALL |   8 bit ADDR  | 0F 1111 0000 // переход в +-127 команды, значение прибавляется к текущему счётчику команд
-| BRNCH |   JMP |   8 bit ADDR  | 0F 1111 0001
+| BRNCH |  CALL | 8 bit OFFSET  | 0F 1111 0000 // переход в +-127 команды, значение прибавляется к текущему счётчику команд
+| BRNCH |   JMP | 8 bit OFFSET  | 0F 1111 0001 <- COP low byte
 | BRNCH |   RET | 8 bit +STACK  | 0F 1111 0010 // на сколько байт переместить указатель стека, дабы пропустить запушенные параметры
-| BRNCH |    JZ |   8 bit ADDR  | 0F 1111 0011 // условные переходы
-| BRNCH |    JL |   8 bit ADDR  | 0F 1111 0100
-| BRNCH |   JNE |   8 bit ADDR  | 0F 1111 0101
-| BRNCH |    JE |   8 bit ADDR  | 0F 1111 0110
-| BRNCH |    JG |   8 bit ADDR  | 0F 1111 0111
-| BRNCH |    JC |   8 bit ADDR  | 0F 1111 1000
-| BRNCH |   JNZ |   8 bit ADDR  | 0F 1111 1001
-| BRNCH |   JNC |   8 bit ADDR  | 0F 1111 1010
-| BRNCH |   JHC |   8 bit ADDR  | 0F 1111 1011
-| BRNCH |  JNHC |   8 bit ADDR  | 0F 1111 1100
-| BRNCH |  STOP |   8 bit ADDR  | 0F 1111 1101 // отладочный стоп, чтобы можно было смотреть глазами регистры
-| BRNCH |AFCALL |   8 bit ADDR  | 0F 1111 1110 // Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем к младшим
-| BRNCH |   NOP |   8 bit ADDR  | 0F 1111 1111 // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
+| BRNCH |    JZ | 8 bit OFFSET  | 0F 1111 0011 // условные переходы
+| BRNCH |    JL | 8 bit OFFSET  | 0F 1111 0100
+| BRNCH |   JNE | 8 bit OFFSET  | 0F 1111 0101
+| BRNCH |    JE | 8 bit OFFSET  | 0F 1111 0110
+| BRNCH |    JG | 8 bit OFFSET  | 0F 1111 0111
+| BRNCH |    JC | 8 bit OFFSET  | 0F 1111 1000
+| BRNCH |   JNZ | 8 bit OFFSET  | 0F 1111 1001
+| BRNCH |   JNC | 8 bit OFFSET  | 0F 1111 1010
+| BRNCH |   JHC | 8 bit OFFSET  | 0F 1111 1011
+| BRNCH |  JNHC | 8 bit OFFSET  | 0F 1111 1100
+| BRNCH |  STOP |   0000 0000   | 0F 1111 1101 // отладочный стоп, чтобы можно было смотреть глазами регистры
+| BRNCH |AFCALL | Hi 8 bit ADDR | 0F 1111 1110 // Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем к младшим
+| BRNCH |   NOP |   1111 1111   | 0F 1111 1111 // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
 
 * - меняем CF, HCF, ZF (результат сложения)
 + - меняем LF, EQ, GF (результат сравнения)
