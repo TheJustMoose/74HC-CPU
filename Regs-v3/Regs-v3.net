@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\Regs-v3\Regs-v3.sch)
-    (date "21/01/2024 20:40:28")
+    (date "03/02/2024 21:24:49")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
