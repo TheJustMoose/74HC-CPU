@@ -1,11 +1,11 @@
-# 74HC-CPU
+# 74HCPU
 
 This is a simple discrete logic processor.
 
 * 8 bit data
-* 16 bit address
+* 16 bit address / 64KB RAM
 * 16 instructions
-* 8 data registers and 4 pointer registers
-* 1 flag register
+* 8 data registers and 4 pointer registers in 2 banks
+* 1 flag register in IO port
 
 ![CPU structure](./CPU2.png)
