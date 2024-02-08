@@ -41,7 +41,6 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <conio.h>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -51,15 +50,25 @@ using namespace std;
 int process(string fname);
 
 void help() {
-  printf("74HCPU assembler v 0.2\n");
-  printf("Support next instructions:\n");
-  printf("arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n");
-  printf("memory: LPM, LD, ST\n");
-  printf("port: IN, OUT\n");
-  printf("compare: CMP, CMPC\n");
-  printf("jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n");
-  printf("Registers: R0, R1, R2, R3, R4, R5, R6, R7\n");
-  printf("Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+ZPH)\n");
+  char* help_lines[] = {
+      "74HCPU assembler v 0.2\n",
+      "Support next instructions:\n",
+      "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
+      "memory: LPM, LD, ST\n",
+      "port: IN, OUT\n",
+      "compare: CMP, CMPC\n",
+      "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
+      "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
+      "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+ZPH)\n",
+      "PORTS: PORT0-31, PIN0-31",
+      nullptr
+  };
+
+  i = 0;
+  while (help_lines[i]) {
+    cout << help_lines[i];
+    i++;
+  }
 }
 
 int main(int argc, char* argv[]) {
