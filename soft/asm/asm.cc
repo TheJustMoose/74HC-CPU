@@ -39,39 +39,22 @@
 | BRNCH |   NOP |   1111 1111   | 0F 1111 1111 // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
 */
 
-#define _CRT_SECURE_NO_WARNINGS
-
-#include <stdio.h>
+#include <iostream>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
 int process(string fname);
-
-void help() {
-  char* help_lines[] = {
-      "74HCPU assembler v 0.2\n",
-      "Support next instructions:\n",
-      "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
-      "memory: LPM, LD, ST\n",
-      "port: IN, OUT\n",
-      "compare: CMP, CMPC\n",
-      "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
-      "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
-      "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+ZPH)\n",
-      "PORTS: PORT0-31, PIN0-31",
-      nullptr
-  };
-
-  i = 0;
-  while (help_lines[i]) {
-    cout << help_lines[i];
-    i++;
-  }
-}
+void help();
 
 int main(int argc, char* argv[]) {
+  //locale::global(locale(""));
+  SetConsoleOutputCP(CP_UTF8);
+
+  cout << "Превед!" << endl;
+
   if (argc < 2) {
     help();
     return 0;
@@ -94,13 +77,36 @@ int main(int argc, char* argv[]) {
 
 vector<string> lines;
 
+void help() {
+  const char* help_lines[] = {
+      "74HCPU assembler v 0.2\n",
+      "Support next instructions:\n",
+      "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
+      "memory: LPM, LD, ST\n",
+      "port: IN, OUT\n",
+      "compare: CMP, CMPC\n",
+      "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
+      "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
+      "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+ZPH)\n",
+      "PORTS: PORT0-31, PIN0-31",
+      nullptr
+  };
+
+  int i = 0;
+  while (help_lines[i]) {
+    cout << help_lines[i];
+    i++;
+  }
+}
+
 int process(string fname) {
+/*
   FILE* f = fopen(fname.c_str(), "r");
   if (!f) {
     printf("Error. Can't open file %s\n", fname.c_str());
     return 1;
   }
   fclose(f);
-
+*/
   return 0;
 }
