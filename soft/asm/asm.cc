@@ -58,6 +58,7 @@ class FileReader {
  protected:
   void handle_char(const char& c);
   string trim_right(string);
+  void merge_code_with_labels();
 
  private:
   map<int, string> lines_ {};
@@ -120,6 +121,8 @@ int FileReader::process(string fname) {
   int res = read_file(fname);
   if (res != 0)
     return res;
+
+  merge_code_with_labels();
   out_src();
 
   return 0;
@@ -166,6 +169,19 @@ string FileReader::trim_right(string s) {
   return s;
 }
 
+void FileReader::merge_code_with_labels() {
+  map<int, string>::iterator it, prev;
+  for (it = lines_.begin(); it != lines_.end();) {
+    prev = it;
+    it++;
+    if (*prev->second.rbegin() == ':' &&       // ok, comment was found
+        it != lines_.end()) {                  // and we have some code on the next line
+      it->second = prev->second + it->second;  // move comment to the next line
+      lines_.erase(prev);                      // remove comment from curent line
+    }
+  }
+}
+
 int FileReader::read_file(string fname) {
   ifstream f;
   f.open(fname, ios::binary);
@@ -179,11 +195,14 @@ int FileReader::read_file(string fname) {
            istreambuf_iterator<char>(),
            [this](const char& c) { handle_char(c); });
 
+  handle_char('\n');  // probably there is no EOL on the last line of code
+
   f.close();
   return 0;
 }
 
 void FileReader::out_src() {
   for (auto v : lines_)
+    //cout << v.second << endl;
     cout << v.first << " " << v.second << endl;
 }
