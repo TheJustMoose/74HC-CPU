@@ -57,6 +57,7 @@ class FileReader {
 
  protected:
   void handle_char(const char& c);
+  string trim_right(string);
 
  private:
   map<int, string> lines_ {};
@@ -134,7 +135,7 @@ void FileReader::handle_char(const char& c) {
   skip_space_ = false;
 
   if (c == '\n') {
-    lines_[line_num_] = std::move(line_);
+    lines_[line_num_] = trim_right(line_);
     line_ = "";  // not sure about line state after move
     skip_space_ = true;
     skip_comment_ = false;
@@ -147,6 +148,20 @@ void FileReader::handle_char(const char& c) {
 
   if (!skip_comment_)
     line_ += c;
+}
+
+string FileReader::trim_right(string s) {
+  if (s.empty())
+    return {};
+
+  // index of first right non empty char:
+  size_t i = s.size() - 1;
+  while (s[i] == ' ' && i > 0)
+     i--;
+
+  if (i >= 0 && i < s.size())
+    s.resize(i + 1);  // +1 will convert index to size
+  return s;
 }
 
 int FileReader::read_file(string fname) {
