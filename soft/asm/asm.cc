@@ -39,6 +39,7 @@
 | BRNCH |   NOP |   1111 1111   | 0F 1111 1111 // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
 */
 
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <fstream>
@@ -48,15 +49,28 @@
 
 using namespace std;
 
+class FileReader {
+ public:
+  int process(string fname);
+  int read_file(string fname);
+  void out_src();
+
+ protected:
+  void handle_char(const char& c);
+
+ private:
+  map<int, string> lines_ {};
+  string line_ {};
+  bool skip_space_ {true};
+  bool skip_comment_ {false};
+  int line_num_ {1};
+};
+
 void help();
-int process(string fname);
-void out_src();
 
 int main(int argc, char* argv[]) {
   //locale::global(locale(""));
   SetConsoleOutputCP(CP_UTF8);
-
-  cout << "Превед!" << endl;
 
   if (argc < 2) {
     help();
@@ -71,14 +85,13 @@ int main(int argc, char* argv[]) {
     }
 
     // okay, probably cmd is file name ;)
-    return process(cmd);
+    FileReader fr;
+    return fr.process(cmd);
   }
 
   printf("argc: %d\n", argc);
   return 0;
 }
-
-map<int, string> lines;
 
 void help() {
   const char* help_lines[] = {
@@ -102,31 +115,58 @@ void help() {
   }
 }
 
-int process(string fname) {
-  ifstream f;
-  f.open(fname);
-  if (!f.is_open()) {
-    cout << "Error. Can't open file " << fname << endl;
-    return 1;
-  }
-
-  string line;
-  int cnt = 1;
-  while (getline(f, line)) {
-    if (!line.empty())
-      lines[cnt] = line;
-    cnt++;
-  }
-
-  f.close();
-
+int FileReader::process(string fname) {
+  int res = read_file(fname);
+  if (res != 0)
+    return res;
   out_src();
 
   return 0;
 }
 
-void out_src() {
-  for (auto v : lines)
-    cout << v.first << " " << v.second << endl;
+void FileReader::handle_char(const char& c) {
+  if (c == '\r')
+    return;
+
+  if (c == ' ' && skip_space_)
+    return;
+
+  skip_space_ = false;
+
+  if (c == '\n') {
+    lines_[line_num_] = std::move(line_);
+    line_ = "";  // not sure about line state after move
+    skip_space_ = true;
+    skip_comment_ = false;
+    line_num_++;
+    return;
+  }
+
+  if (c == ';')
+    skip_comment_ = true;
+
+  if (!skip_comment_)
+    line_ += c;
 }
 
+int FileReader::read_file(string fname) {
+  ifstream f;
+  f.open(fname, ios::binary);
+  if (!f) {
+    cout << "Error. Can't open file " << fname << endl;
+    return 1;
+  }
+
+  cout << "Processing " << fname << "..." << endl;
+  for_each(istreambuf_iterator<char>(f),
+           istreambuf_iterator<char>(),
+           [this](const char& c) { handle_char(c); });
+
+  f.close();
+  return 0;
+}
+
+void FileReader::out_src() {
+  for (auto v : lines_)
+    cout << v.first << " " << v.second << endl;
+}
