@@ -40,6 +40,7 @@
 */
 
 #include <iostream>
+#include <map>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -47,8 +48,9 @@
 
 using namespace std;
 
-int process(string fname);
 void help();
+int process(string fname);
+void out_src();
 
 int main(int argc, char* argv[]) {
   //locale::global(locale(""));
@@ -76,7 +78,7 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 
-vector<string> lines;
+map<int, string> lines;
 
 void help() {
   const char* help_lines[] = {
@@ -111,12 +113,20 @@ int process(string fname) {
   string line;
   int cnt = 1;
   while (getline(f, line)) {
-    cout << cnt << " " << line << endl;
-    lines.push_back(line);
+    if (!line.empty())
+      lines[cnt] = line;
     cnt++;
   }
 
   f.close();
 
+  out_src();
+
   return 0;
 }
+
+void out_src() {
+  for (auto v : lines)
+    cout << v.first << " " << v.second << endl;
+}
+
