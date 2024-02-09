@@ -40,6 +40,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <windows.h>
@@ -100,13 +101,22 @@ void help() {
 }
 
 int process(string fname) {
-/*
-  FILE* f = fopen(fname.c_str(), "r");
-  if (!f) {
-    printf("Error. Can't open file %s\n", fname.c_str());
+  ifstream f;
+  f.open(fname);
+  if (!f.is_open()) {
+    cout << "Error. Can't open file " << fname << endl;
     return 1;
   }
-  fclose(f);
-*/
+
+  string line;
+  int cnt = 1;
+  while (getline(f, line)) {
+    cout << cnt << " " << line << endl;
+    lines.push_back(line);
+    cnt++;
+  }
+
+  f.close();
+
   return 0;
 }
