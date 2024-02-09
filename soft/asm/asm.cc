@@ -135,7 +135,9 @@ void FileReader::handle_char(const char& c) {
   skip_space_ = false;
 
   if (c == '\n') {
-    lines_[line_num_] = trim_right(line_);
+    string t = trim_right(line_);
+    if (!t.empty())
+      lines_[line_num_] = t;
     line_ = "";  // not sure about line state after move
     skip_space_ = true;
     skip_comment_ = false;
@@ -155,7 +157,7 @@ string FileReader::trim_right(string s) {
     return {};
 
   // index of first right non empty char:
-  size_t i = s.size() - 1;
+  size_t i = s.size() - 1;  // TODO: try rbegin() here
   while (s[i] == ' ' && i > 0)
      i--;
 
