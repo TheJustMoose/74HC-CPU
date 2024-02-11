@@ -120,6 +120,25 @@ map<string, BRANCH> branch_names {
   { "NOP", bNOP },
 };
 
+enum REG {
+  // Arithmetic registers
+  rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7,
+  // Pointer register pairs
+  rX = 8, rY = 9, rZ = 10, rSP = 11,
+  // Same pointers but with post increment
+  rXI = 8, rYI = 9, rZI = 10, rSPI = 11,
+  // Same pointers but with post decrement
+  rXD = 8, rYD = 9, rZD = 10, rSPD = 11,
+  rUnk = 100
+};
+
+map<string, REG> reg_names {
+  { "R0", rR0 }, { "R1", rR1 }, { "R2", rR2 }, { "R3", rR3 }, { "R4", rR4 }, { "R5", rR5 }, { "R6", rR6 }, { "R7", rR7 },
+  { "X", rX }, { "Y", rY }, { "Z", rZ }, { "SP", rSP },
+  { "XI", rXI }, { "YI", rYI }, { "ZI", rZI }, { "SPI", rSPI },
+  { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
+};
+
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
@@ -130,8 +149,8 @@ class CodeLine {
   int line_number_ {0};
   int address_ {0};
   COP instruction_ {cNO_OP};
-  int left_op_ {0};
-  int right_op_ {0};
+  REG left_op_ {rUnk};
+  REG right_op_ {rUnk};
 
   vector<string> labels_ {};
   string line_text_ {};
@@ -144,8 +163,6 @@ string to_upper(string s) {
 
 CodeLine::CodeLine(int line_number, string line_text)
   : line_number_(line_number), line_text_(line_text) {
-
-  //cout << "CodeLine ctor for: " << line_text_ << endl;
 
   size_t pos = line_text_.find(":");
   while (pos != string::npos) {
@@ -160,7 +177,16 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
   cout << "line tail: " << line_text_ << endl;
 
-  stringstream ss(to_upper(line_text_));
+  string t = to_upper(line_text_);
+  pos = t.find(',');
+  if (pos != string::npos)
+    t[pos] = ' ';  // try to convert 'mov r0, r1' to 'mov r0  r1'
+  //cout << "after replace: " << t << endl;
+
+  stringstream ss(t);
+  // examples:
+  // MOV R0, R1
+  // JMP label
   string cop, left, right;
   ss >> cop;
   ss >> left;
@@ -168,6 +194,20 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   if (cop_names.find(cop) != cop_names.end()) {
     instruction_ = cop_names[cop];
+
+    if (!left.empty()) {
+      if (reg_names.find(left) != reg_names.end())
+        left_op_ = reg_names[left];
+      else
+        cout << "Unknown register: " << left << endl;
+    }
+
+    if (!right.empty()) {
+      if (reg_names.find(right) != reg_names.end())
+        right_op_ = reg_names[right];
+      else
+        cout << "Unknown register: " << right << endl;
+    }
   } else if (branch_names.find(cop) != branch_names.end()) {
     instruction_ = cBRANCH;
   } else {
@@ -176,6 +216,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
 
   cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
+  cout << "CODE: " << instruction_ << " " << left_op_ << " " << right_op_ << endl;
 }
 
 void CodeLine::generate_machine_code() {
