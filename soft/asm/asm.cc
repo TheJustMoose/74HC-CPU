@@ -53,6 +53,71 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// Code Of Operation
+enum COP {
+  cADD = 0x00, cADDC = 0x01,
+  cAND = 0x02, cOR = 0x03, cXOR = 0x04,
+  cMUL = 0x05, cUNO = 0x06, cMOV = 0x07,
+  cLPM = 0x08, cLD = 0x09,
+  cIN = 0x0A, cOUT = 0x0B,
+  cST = 0x0C,
+  cCMP = 0x0D, cCMPC = 0x0E,
+  cBRANCH = 0x0F,
+  cNO_OP = 0x100
+};
+
+map<string, COP> cop_names {
+  { "ADD", cADD}, { "ADDC", cADDC},
+  { "AND", cAND}, { "OR", cOR}, { "XOR", cXOR},
+  { "MUL", cMUL},
+  { "INV", cUNO}, { "SWAP", cUNO}, { "LSR", cUNO}, { "LSRC", cUNO},
+  { "MOV", cMOV},
+  { "LPM", cLPM}, { "LD", cLD},
+  { "IN", cIN}, { "OUT", cOUT},
+  { "ST", cST},
+  { "CMP", cCMP}, { "CMPC", cCMPC},
+  { "BRANCH", cBRANCH},
+};
+
+// Code of branch
+enum BRANCH {
+  bCALL = 0x00,
+  bJMP = 0x01,
+  bRET = 0x02,
+  bJZ = 0x03,
+  bJL = 0x04,
+  bJNE = 0x05,
+  bJE = 0x06,
+  bJG = 0x07,
+  bJC = 0x08,
+  bJNZ = 0x09,
+  bJNC = 0x0A,
+  bJHC = 0x0B,
+  bJNHC = 0x0C,
+  bSTOP = 0x0D,
+  bAFCALL = 0x0E,
+  bNOP = 0x0F
+};
+
+map<string, BRANCH> branch_names {
+  { "CALL", bCALL},
+  { "JMP", bJMP },
+  { "RET", bRET },
+  { "JZ", bJZ },
+  { "JL", bJL },
+  { "JNE", bJNE },
+  { "JE", bJE },
+  { "JG", bJG },
+  { "JC", bJC },
+  { "JNZ", bJNZ },
+  { "JNC", bJNC },
+  { "JHC", bJHC },
+  { "JNHC", bJNHC },
+  { "STOP", bSTOP },
+  { "AFCALL", bAFCALL },
+  { "NOP", bNOP },
+};
+
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
@@ -62,7 +127,7 @@ class CodeLine {
  private:
   int line_number_ {0};
   int address_ {0};
-  int instruction_ {0};
+  COP instruction_ {cNO_OP};
   int left_op_ {0};
   int right_op_ {0};
 
