@@ -1,3 +1,4 @@
+///////////////////////////////////////////////////////////////////////////////
 /*
 
 Ассемблер для моего 74HCPU под новую систему команд:
@@ -38,6 +39,7 @@
 | BRNCH |AFCALL | Hi 8 bit ADDR | 0F 1111 1110 // Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем к младшим
 | BRNCH |   NOP |   1111 1111   | 0F 1111 1111 // NOP - хорошо бы чтоб имел код 0xFF, это позволит думать, что не прошитая память заполнена NOP-ами
 */
+///////////////////////////////////////////////////////////////////////////////
 
 #include <algorithm>
 #include <iostream>
@@ -49,6 +51,50 @@
 
 using namespace std;
 
+///////////////////////////////////////////////////////////////////////////////
+
+class CodeLine {
+ public:
+  CodeLine(int line_number, string line_text);
+
+  void generate_machine_code();
+
+ private:
+  int line_number_ {0};
+  int address_ {0};
+  int instruction_ {0};
+  int left_op_ {0};
+  int right_op_ {0};
+
+  vector<string> labels_ {};
+  string line_text_ {};
+};
+
+CodeLine::CodeLine(int line_number, string line_text)
+  : line_number_(line_number), line_text_(line_text) {
+
+  //cout << "CodeLine ctor for: " << line_text_ << endl;
+
+  size_t pos = line_text_.find(":");
+  while (pos != string::npos) {
+    string label = line_text_.substr(0, pos);
+    if (!label.empty()) {
+      labels_.push_back(label);
+      cout << "label: " << label << endl;
+    }
+    line_text_.erase(0, pos + 1);
+    //cout << "line_text_ after label remove: " << line_text_ << endl;
+    pos = line_text_.find(":");
+  }
+  cout << "line tail: " << line_text_ << endl;
+}
+
+void CodeLine::generate_machine_code() {
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+// TODO: extract some methods into Assembler class
 class FileReader {
  public:
   int process(string fname);
@@ -59,6 +105,7 @@ class FileReader {
   void handle_char(const char& c);
   string trim_right(string);
   void merge_code_with_labels();
+  void pass1();
 
  private:
   map<int, string> lines_ {};
@@ -123,6 +170,7 @@ int FileReader::process(string fname) {
     return res;
 
   merge_code_with_labels();
+  pass1();
   out_src();
 
   return 0;
@@ -182,6 +230,14 @@ void FileReader::merge_code_with_labels() {
   }
 }
 
+void FileReader::pass1() {
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end(); it++) {
+    CodeLine cl(it->first, it->second);
+    cl.generate_machine_code();
+  }
+}
+
 int FileReader::read_file(string fname) {
   ifstream f;
   f.open(fname, ios::binary);
@@ -206,3 +262,5 @@ void FileReader::out_src() {
     //cout << v.second << endl;
     cout << v.first << " " << v.second << endl;
 }
+
+///////////////////////////////////////////////////////////////////////////////
