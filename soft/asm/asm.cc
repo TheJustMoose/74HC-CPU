@@ -42,9 +42,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <algorithm>
+#include <cctype>
+#include <fstream>
 #include <iostream>
 #include <map>
-#include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <windows.h>
@@ -72,9 +74,9 @@ map<string, COP> cop_names {
   { "MUL", cMUL},
   { "INV", cUNO}, { "SWAP", cUNO}, { "LSR", cUNO}, { "LSRC", cUNO},
   { "MOV", cMOV},
-  { "LPM", cLPM}, { "LD", cLD},
+  { "LPM", cLPM}, { "LD", cLD}, { "LOAD", cLD},
   { "IN", cIN}, { "OUT", cOUT},
-  { "ST", cST},
+  { "ST", cST}, { "STORE", cST},
   { "CMP", cCMP}, { "CMPC", cCMPC},
   { "BRANCH", cBRANCH},
 };
@@ -135,6 +137,11 @@ class CodeLine {
   string line_text_ {};
 };
 
+string to_upper(string s) {
+  std::transform(s.begin(), s.end(), s.begin(), ::toupper);
+  return s;
+}
+
 CodeLine::CodeLine(int line_number, string line_text)
   : line_number_(line_number), line_text_(line_text) {
 
@@ -152,6 +159,23 @@ CodeLine::CodeLine(int line_number, string line_text)
     pos = line_text_.find(":");
   }
   cout << "line tail: " << line_text_ << endl;
+
+  stringstream ss(to_upper(line_text_));
+  string cop, left, right;
+  ss >> cop;
+  ss >> left;
+  ss >> right;
+
+  if (cop_names.find(cop) != cop_names.end()) {
+    instruction_ = cop_names[cop];
+  } else if (branch_names.find(cop) != branch_names.end()) {
+    instruction_ = cBRANCH;
+  } else {
+    cout << "Error. Unknown instruction: |" << cop << "|" << endl;
+    return;
+  }
+
+  cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
 }
 
 void CodeLine::generate_machine_code() {
