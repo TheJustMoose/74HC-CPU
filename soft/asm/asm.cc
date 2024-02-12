@@ -79,8 +79,35 @@ enum COP {
   bJNHC = 0xFC,
   bSTOP = 0xFD,
   bAFCALL = 0xFE,
-  bNOP = 0xFF,
-  cNO_OP = 0x100
+  bNOP = 0xFF,    // processor operation
+  cNO_OP = 0x100  // just constant for "there is no operation here", for example for labels
+};
+
+enum OP_TYPE {
+  tBINARY, tUNARY, tMEMORY, tIO, tBRANCH, tNO_OP
+};
+
+OP_TYPE CopToType(COP cop) {
+  if (cop == cNO_OP)
+    return tNO_OP;
+  else if (cop >= cADD && cop <= cMUL)
+    return tBINARY;
+  else if (cop == cMOV || cop == cCMP || cop == cCMPC)
+    return tBINARY;
+  else if (cop == cUNO)
+    return tUNARY;
+  else if (cop == cLPM || cop == cLD || cop == cST)
+    return tMEMORY;
+  else if (cop == cIN || cop == cOUT)
+    return tIO;
+  else if (cop >= bCALL && cop <= bNOP)
+    return tBRANCH;
+  else  // I don't know then this should work
+    return tNO_OP;
+}
+
+enum UNARY_TYPE {
+  unINV, unSWAP, unLSR, unLSRC
 };
 
 map<string, COP> cop_names {
@@ -130,6 +157,48 @@ map<string, REG> reg_names {
   { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
 };
 
+//  tBINARY, tUNARY, tMEMORY, tIO, tBRANCH, tNO_OP
+class CodeGen {
+ public:
+  CodeGen();
+  virtual void Emit() = 0;
+};
+
+class BinaryCodeGen: public CodeGen {
+ public:
+  BinaryCodeGen() = default;
+  void Init(COP cop, string left, string right);
+  void Emit() {}
+};
+
+class UnaryCodeGen: public CodeGen {
+ public:
+  UnaryCodeGen() = default;
+  void Init(COP cop, string op);
+  void Emit() {}
+};
+
+class MemoryCodeGen: public CodeGen {
+ public:
+  MemoryCodeGen() = default;
+  void Init(COP cop, string left, string right);
+  void Emit() {}
+};
+
+class IOCodeGen: public CodeGen {
+ public:
+  IOCodeGen() = default;
+  void Init(COP cop, string left, string right);
+  void Emit() {}
+};
+
+class BranchCodeGen: public CodeGen {
+ public:
+  BranchCodeGen() = default;
+  void Init(COP cop, string label);
+  void Emit() {}
+};
+
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
@@ -139,9 +208,9 @@ class CodeLine {
  private:
   int line_number_ {0};
   int address_ {0};
-  COP instruction_ {cNO_OP};
-  REG left_op_ {rUnk};
-  REG right_op_ {rUnk};
+  COP operation_ {cNO_OP};
+  //REG left_op_ {rUnk};
+  //REG right_op_ {rUnk};
 
   vector<string> labels_ {};
   string line_text_ {};
@@ -184,28 +253,44 @@ CodeLine::CodeLine(int line_number, string line_text)
   ss >> right;
 
   if (cop_names.find(cop) != cop_names.end()) {
-    instruction_ = cop_names[cop];
-
-    if (!left.empty()) {
-      if (reg_names.find(left) != reg_names.end())
-        left_op_ = reg_names[left];
-      else
-        cout << "Unknown register: " << left << endl;
-    }
-
-    if (!right.empty()) {
-      if (reg_names.find(right) != reg_names.end())
-        right_op_ = reg_names[right];
-      else
-        cout << "Unknown register: " << right << endl;
-    }
+    operation_ = cop_names[cop];
   } else {
-    cout << "Error. Unknown instruction: |" << cop << "|" << endl;
+    cout << "Error. Unknown operation: |" << cop << "|" << endl;
     return;
   }
 
+  OP_TYPE opt = CopToType(operation_);
+  cout << "Operation type: " << opt << endl;
+
+  CodeGen* cg {nullptr};
+  switch (opt) {
+    // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
+    case tBINARY: cg = new BinaryCodeGen(opt, left, right);
+    case tUNARY: cg = new UnaryCodeGen(opt, left);
+    case tMEMORY: cg = new MemoryCodeGen(opt, left, right);
+    case tIO: cg = new IOCodeGen(opt, left, right);
+    case tBRANCH: cg = new BranchCodeGen(opt, left);
+    case tNO_OP:
+    default:
+      cout << "No operation is required" << endl;
+  }
+/*
+  if (!left.empty()) {
+    if (reg_names.find(left) != reg_names.end())
+      left_op_ = reg_names[left];
+    else
+      cout << "Unknown register: " << left << endl;
+  }
+
+  if (!right.empty()) {
+    if (reg_names.find(right) != reg_names.end())
+      right_op_ = reg_names[right];
+    else
+      cout << "Unknown register: " << right << endl;
+  }
+*/
   cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
-  cout << "CODE: " << hex << instruction_ << " " << left_op_ << " " << right_op_ << endl;
+  cout << "CODE: " << hex << operation_ << endl;
 }
 
 void CodeLine::generate_machine_code() {
@@ -264,7 +349,7 @@ int main(int argc, char* argv[]) {
 void help() {
   const char* help_lines[] = {
       "74HCPU assembler v 0.2\n",
-      "Support next instructions:\n",
+      "Support next operations:\n",
       "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
       "memory: LPM, LD, ST\n",
       "port: IN, OUT\n",
