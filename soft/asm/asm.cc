@@ -57,14 +57,29 @@ using namespace std;
 
 // Code Of Operation
 enum COP {
-  cADD = 0x00, cADDC = 0x01,
-  cAND = 0x02, cOR = 0x03, cXOR = 0x04,
-  cMUL = 0x05, cUNO = 0x06, cMOV = 0x07,
-  cLPM = 0x08, cLD = 0x09,
-  cIN = 0x0A, cOUT = 0x0B,
-  cST = 0x0C,
-  cCMP = 0x0D, cCMPC = 0x0E,
-  cBRANCH = 0x0F,
+  cADD = 0x00, cADDC = 0x10,
+  cAND = 0x20, cOR = 0x30, cXOR = 0x40,
+  cMUL = 0x50, cUNO = 0x60, cMOV = 0x70,
+  cLPM = 0x80, cLD = 0x90,
+  cIN = 0xA0, cOUT = 0xB0,
+  cST = 0xC0,
+  cCMP = 0xD0, cCMPC = 0xE0,
+  bCALL = 0xF0,
+  bJMP = 0xF1,
+  bRET = 0xF2,
+  bJZ = 0xF3,
+  bJL = 0xF4,
+  bJNE = 0xF5,
+  bJE = 0xF6,
+  bJG = 0xF7,
+  bJC = 0xF8,
+  bJNZ = 0xF9,
+  bJNC = 0xFA,
+  bJHC = 0xFB,
+  bJNHC = 0xFC,
+  bSTOP = 0xFD,
+  bAFCALL = 0xFE,
+  bNOP = 0xFF,
   cNO_OP = 0x100
 };
 
@@ -78,30 +93,6 @@ map<string, COP> cop_names {
   { "IN", cIN}, { "OUT", cOUT},
   { "ST", cST}, { "STORE", cST},
   { "CMP", cCMP}, { "CMPC", cCMPC},
-  { "BRANCH", cBRANCH},
-};
-
-// Code of branch
-enum BRANCH {
-  bCALL = 0x00,
-  bJMP = 0x01,
-  bRET = 0x02,
-  bJZ = 0x03,
-  bJL = 0x04,
-  bJNE = 0x05,
-  bJE = 0x06,
-  bJG = 0x07,
-  bJC = 0x08,
-  bJNZ = 0x09,
-  bJNC = 0x0A,
-  bJHC = 0x0B,
-  bJNHC = 0x0C,
-  bSTOP = 0x0D,
-  bAFCALL = 0x0E,
-  bNOP = 0x0F
-};
-
-map<string, BRANCH> branch_names {
   { "CALL", bCALL},
   { "JMP", bJMP },
   { "RET", bRET },
@@ -208,15 +199,13 @@ CodeLine::CodeLine(int line_number, string line_text)
       else
         cout << "Unknown register: " << right << endl;
     }
-  } else if (branch_names.find(cop) != branch_names.end()) {
-    instruction_ = cBRANCH;
   } else {
     cout << "Error. Unknown instruction: |" << cop << "|" << endl;
     return;
   }
 
   cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
-  cout << "CODE: " << instruction_ << " " << left_op_ << " " << right_op_ << endl;
+  cout << "CODE: " << hex << instruction_ << " " << left_op_ << " " << right_op_ << endl;
 }
 
 void CodeLine::generate_machine_code() {
