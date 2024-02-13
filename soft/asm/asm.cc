@@ -157,7 +157,17 @@ map<string, REG> reg_names {
   { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
 };
 
-//  tBINARY, tUNARY, tMEMORY, tIO, tBRANCH, tNO_OP
+REG RegFromName(string name) {
+  if (name.empty())
+    return rUnk;
+  if (reg_names.find(name) != reg_names.end())
+    return reg_names[name];
+  else {
+    cout << "Unknown register: " << name << endl;
+    return rUnk;
+  }
+}
+
 class CodeGen {
  public:
   CodeGen();
@@ -166,36 +176,45 @@ class CodeGen {
 
 class BinaryCodeGen: public CodeGen {
  public:
-  BinaryCodeGen() = default;
-  void Init(COP cop, string left, string right);
+  BinaryCodeGen(COP cop, string left, string right)
+    : operation_(cop) {
+    left_op_ = RegFromName(left);
+    right_op_ = RegFromName(right);
+  }
+
   void Emit() {}
+
+ private:
+  COP operation_ {cNO_OP};
+  REG left_op_ {rUnk};
+  REG right_op_ {rUnk};
 };
 
 class UnaryCodeGen: public CodeGen {
  public:
-  UnaryCodeGen() = default;
-  void Init(COP cop, string op);
+  UnaryCodeGen(COP cop, string op);
+
   void Emit() {}
 };
 
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen() = default;
-  void Init(COP cop, string left, string right);
+  MemoryCodeGen(COP cop, string left, string right);
+
   void Emit() {}
 };
 
 class IOCodeGen: public CodeGen {
  public:
-  IOCodeGen() = default;
-  void Init(COP cop, string left, string right);
+  IOCodeGen(COP cop, string left, string right);
+
   void Emit() {}
 };
 
 class BranchCodeGen: public CodeGen {
  public:
-  BranchCodeGen() = default;
-  void Init(COP cop, string label);
+  BranchCodeGen(COP cop, string label);
+
   void Emit() {}
 };
 
@@ -209,8 +228,8 @@ class CodeLine {
   int line_number_ {0};
   int address_ {0};
   COP operation_ {cNO_OP};
-  //REG left_op_ {rUnk};
-  //REG right_op_ {rUnk};
+
+  unique_ptr<CodeGen> code_gen_ {nullptr};
 
   vector<string> labels_ {};
   string line_text_ {};
@@ -265,30 +284,18 @@ CodeLine::CodeLine(int line_number, string line_text)
   CodeGen* cg {nullptr};
   switch (opt) {
     // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
-    case tBINARY: cg = new BinaryCodeGen(opt, left, right);
-    case tUNARY: cg = new UnaryCodeGen(opt, left);
-    case tMEMORY: cg = new MemoryCodeGen(opt, left, right);
-    case tIO: cg = new IOCodeGen(opt, left, right);
-    case tBRANCH: cg = new BranchCodeGen(opt, left);
+    case tBINARY: cg = new BinaryCodeGen(operation_, left, right);
+    case tUNARY: cg = new UnaryCodeGen(operation_, left);
+    case tMEMORY: cg = new MemoryCodeGen(operation_, left, right);
+    case tIO: cg = new IOCodeGen(operation_, left, right);
+    case tBRANCH: cg = new BranchCodeGen(operation_, left);
     case tNO_OP:
     default:
       cout << "No operation is required" << endl;
   }
-/*
-  if (!left.empty()) {
-    if (reg_names.find(left) != reg_names.end())
-      left_op_ = reg_names[left];
-    else
-      cout << "Unknown register: " << left << endl;
-  }
 
-  if (!right.empty()) {
-    if (reg_names.find(right) != reg_names.end())
-      right_op_ = reg_names[right];
-    else
-      cout << "Unknown register: " << right << endl;
-  }
-*/
+  code_gen_.reset(cg);
+
   cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
   cout << "CODE: " << hex << operation_ << endl;
 }
