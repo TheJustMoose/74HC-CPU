@@ -44,6 +44,7 @@
 #include <algorithm>
 #include <cctype>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <map>
 #include <sstream>
@@ -54,6 +55,8 @@
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
+typedef unsigned int UINT;
+
 
 // Code Of Operation
 enum COP {
@@ -171,7 +174,7 @@ REG RegFromName(string name) {
 class CodeGen {
  public:
   CodeGen() {}
-  virtual void Emit() = 0;
+  virtual UINT Emit() = 0;
   virtual ~CodeGen() {}
 };
 
@@ -183,7 +186,12 @@ class BinaryCodeGen: public CodeGen {
     right_op_ = RegFromName(right);
   }
 
-  void Emit() {}
+  UINT Emit() {
+    unsigned int cop = operation_ << 8;
+    cop |= left_op_ << 8;
+    cop |= right_op_ << 4;
+    return cop;
+  }
 
  private:
   COP operation_ {cNO_OP};
@@ -195,28 +203,36 @@ class UnaryCodeGen: public CodeGen {
  public:
   UnaryCodeGen(COP cop, string op) {}
 
-  void Emit() {}
+  UINT Emit() {
+    return 0;
+  }
 };
 
 class MemoryCodeGen: public CodeGen {
  public:
   MemoryCodeGen(COP cop, string left, string right) {}
 
-  void Emit() {}
+  UINT Emit() {
+    return 0;
+  }
 };
 
 class IOCodeGen: public CodeGen {
  public:
   IOCodeGen(COP cop, string left, string right) {}
 
-  void Emit() {}
+  UINT Emit() {
+    return 0;
+  }
 };
 
 class BranchCodeGen: public CodeGen {
  public:
   BranchCodeGen(COP cop, string label) {}
 
-  void Emit() {}
+  UINT Emit() {
+    return 0;
+  }
 };
 
 class CodeLine {
@@ -228,7 +244,6 @@ class CodeLine {
  private:
   int line_number_ {0};
   int address_ {0};
-  COP operation_ {cNO_OP};
 
   unique_ptr<CodeGen> code_gen_ {nullptr};
 
@@ -267,29 +282,30 @@ CodeLine::CodeLine(int line_number, string line_text)
   // examples:
   // MOV R0, R1
   // JMP label
-  string cop, left, right;
-  ss >> cop;
+  string op_name, left, right;
+  ss >> op_name;
   ss >> left;
   ss >> right;
 
-  if (cop_names.find(cop) != cop_names.end()) {
-    operation_ = cop_names[cop];
+  COP op {cNO_OP};
+  if (cop_names.find(op_name) != cop_names.end()) {
+    op = cop_names[op_name];
   } else {
-    cout << "Error. Unknown operation: |" << cop << "|" << endl;
+    cout << "Error. Unknown operation: |" << op_name << "|" << endl;
     return;
   }
 
-  OP_TYPE opt = CopToType(operation_);
+  OP_TYPE opt = CopToType(op);
   cout << "Operation type: " << opt << endl;
 
   CodeGen* cg {nullptr};
   switch (opt) {
     // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
-    case tBINARY: cg = new BinaryCodeGen(operation_, left, right); break;
-    case tUNARY: cg = new UnaryCodeGen(operation_, left); break;
-    case tMEMORY: cg = new MemoryCodeGen(operation_, left, right); break;
-    case tIO: cg = new IOCodeGen(operation_, left, right); break;
-    case tBRANCH: cg = new BranchCodeGen(operation_, left); break;
+    case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
+    case tUNARY: cg = new UnaryCodeGen(op, left); break;
+    case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
+    case tIO: cg = new IOCodeGen(op, left, right); break;
+    case tBRANCH: cg = new BranchCodeGen(op, left); break;
     case tNO_OP:
     default:
       cout << "No operation is required" << endl;
@@ -297,11 +313,13 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   code_gen_.reset(cg);
 
-  cout << "GOT: |" << cop << "|" << left << "|" << right << "|" << endl;
-  cout << "CODE: " << hex << operation_ << endl;
+  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
+  //cout << "CODE: " << hex << op << endl;
 }
 
 void CodeLine::generate_machine_code() {
+  UINT cop = code_gen_->Emit();
+  cout << hex << setw(4) << setfill('0') << cop << endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
