@@ -149,8 +149,8 @@ BTYPE - тип команды перехода (или команды управ
 | BRNCH |    JG | 8 bit OFFSET  | 0F 1111 0111
 | BRNCH |    JC | 8 bit OFFSET  | 0F 1111 1000
 | BRNCH |   JNZ | 8 bit OFFSET  | 0F 1111 1001
-| BRNCH |   JNC | 8 bit OFFSET  | 0F 1111 1010
-| BRNCH |   JHC | 8 bit OFFSET  | 0F 1111 1011
+| BRNCH |   JNC | 8 bit OFFSET  | 0F 1111 1010 // выкинуть инструкции, что реально не будут использоваться
+| BRNCH |   JHC | 8 bit OFFSET  | 0F 1111 1011 // вкрутить что-то вроде NJMP offset (и делать реальный переход на offset*16, к примеру)
 | BRNCH |  JNHC | 8 bit OFFSET  | 0F 1111 1100
 | BRNCH |  STOP |   0000 0000   | 0F 1111 1101 // отладочный стоп, чтобы можно было смотреть глазами регистры (и есть 8 бит на фантазию, например останавливаться только при записи в порт)
 | BRNCH |AFCALL | Hi 8 bit ADDR | 0F 1111 1110 // Absolute Far Call - 8 bit ADDR кладём в старшие биты и ничего не добавляем к младшим
