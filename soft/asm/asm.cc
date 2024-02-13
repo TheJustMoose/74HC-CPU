@@ -170,8 +170,9 @@ REG RegFromName(string name) {
 
 class CodeGen {
  public:
-  CodeGen();
+  CodeGen() {}
   virtual void Emit() = 0;
+  virtual ~CodeGen() {}
 };
 
 class BinaryCodeGen: public CodeGen {
@@ -192,28 +193,28 @@ class BinaryCodeGen: public CodeGen {
 
 class UnaryCodeGen: public CodeGen {
  public:
-  UnaryCodeGen(COP cop, string op);
+  UnaryCodeGen(COP cop, string op) {}
 
   void Emit() {}
 };
 
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen(COP cop, string left, string right);
+  MemoryCodeGen(COP cop, string left, string right) {}
 
   void Emit() {}
 };
 
 class IOCodeGen: public CodeGen {
  public:
-  IOCodeGen(COP cop, string left, string right);
+  IOCodeGen(COP cop, string left, string right) {}
 
   void Emit() {}
 };
 
 class BranchCodeGen: public CodeGen {
  public:
-  BranchCodeGen(COP cop, string label);
+  BranchCodeGen(COP cop, string label) {}
 
   void Emit() {}
 };
@@ -284,11 +285,11 @@ CodeLine::CodeLine(int line_number, string line_text)
   CodeGen* cg {nullptr};
   switch (opt) {
     // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
-    case tBINARY: cg = new BinaryCodeGen(operation_, left, right);
-    case tUNARY: cg = new UnaryCodeGen(operation_, left);
-    case tMEMORY: cg = new MemoryCodeGen(operation_, left, right);
-    case tIO: cg = new IOCodeGen(operation_, left, right);
-    case tBRANCH: cg = new BranchCodeGen(operation_, left);
+    case tBINARY: cg = new BinaryCodeGen(operation_, left, right); break;
+    case tUNARY: cg = new UnaryCodeGen(operation_, left); break;
+    case tMEMORY: cg = new MemoryCodeGen(operation_, left, right); break;
+    case tIO: cg = new IOCodeGen(operation_, left, right); break;
+    case tBRANCH: cg = new BranchCodeGen(operation_, left); break;
     case tNO_OP:
     default:
       cout << "No operation is required" << endl;
