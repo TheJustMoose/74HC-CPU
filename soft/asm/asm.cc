@@ -43,6 +43,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -141,7 +142,7 @@ map<string, COP> cop_names {
   { "NOP", bNOP },
 };
 
-enum REG {
+enum REG : UINT {
   // Arithmetic registers
   rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7,
   // Pointer register pairs
@@ -173,65 +174,113 @@ REG RegFromName(string name) {
 
 class CodeGen {
  public:
-  CodeGen() {}
+  CodeGen(COP cop)
+   : operation_(cop) {}
   virtual UINT Emit() = 0;
   virtual ~CodeGen() {}
+
+  static bool StrToInt(string val, UINT* pout) {
+    UINT res = 0;
+    try {
+      if (val.find("0X") == 0)
+        res = stoi(&val[2], nullptr, 16);
+      else if (val.find("0O") == 0)
+        res = stoi(&val[2], nullptr, 8);
+      else if (val.find("0B") == 0)
+        res = stoi(&val[2], nullptr, 2);
+      else {
+        int ival = stoi(val, nullptr, 10);
+        if (ival < 0)
+          res = ival & 0x00FF;
+        else
+          res = ival;
+      }
+    } catch(std::invalid_argument& e) {
+      return false;
+    }
+
+    if (res > 0xFF)
+      cout << "Error. Immediate value should have 8 bit only (0 - 255)." << endl;
+    if (pout)
+      *pout = res;
+    return true;
+  }
+
+ protected:
+  COP operation_ {cNO_OP};
 };
 
 class BinaryCodeGen: public CodeGen {
  public:
   BinaryCodeGen(COP cop, string left, string right)
-    : operation_(cop) {
+    : CodeGen(cop) {
     left_op_ = RegFromName(left);
-    right_op_ = RegFromName(right);
+    immediate_ = CodeGen::StrToInt(right, &right_val_);  // MOV R1, 10
+    if (!immediate_)  // not val, try to check register name
+      right_op_ = RegFromName(right);  // MOV R0, 10
+
+    if (!immediate_ && right_op_ == rUnk)
+      cout << "You have to use Register name or immediate value as rval" << endl;
   }
 
   UINT Emit() {
     unsigned int cop = operation_ << 8;
     cop |= left_op_ << 8;
-    cop |= right_op_ << 4;
+    if (immediate_)
+      cop |= right_val_;
+    else
+      cop |= right_op_ << 4;
     return cop;
   }
 
  private:
-  COP operation_ {cNO_OP};
   REG left_op_ {rUnk};
   REG right_op_ {rUnk};
+  UINT right_val_ {0};
+  bool immediate_ {false};
 };
 
 class UnaryCodeGen: public CodeGen {
  public:
-  UnaryCodeGen(COP cop, string op) {}
+  UnaryCodeGen(COP cop, string op)
+    : CodeGen(cop) {}
 
   UINT Emit() {
-    return 0;
+    unsigned int cop = operation_ << 8;
+    return cop;
   }
 };
 
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen(COP cop, string left, string right) {}
+  MemoryCodeGen(COP cop, string left, string right)
+    : CodeGen(cop) {}
 
   UINT Emit() {
-    return 0;
+    unsigned int cop = operation_ << 8;
+    return cop;
   }
 };
 
 class IOCodeGen: public CodeGen {
  public:
-  IOCodeGen(COP cop, string left, string right) {}
+  IOCodeGen(COP cop, string left, string right)
+    : CodeGen(cop) {}
 
   UINT Emit() {
-    return 0;
+    unsigned int cop = operation_ << 8;
+    return cop;
   }
 };
 
 class BranchCodeGen: public CodeGen {
  public:
-  BranchCodeGen(COP cop, string label) {}
+  BranchCodeGen(COP cop, string label)
+    : CodeGen(cop) {}
 
   UINT Emit() {
-    return 0;
+    unsigned int cop = operation_ << 8;
+    return cop;
   }
 };
 
@@ -318,6 +367,9 @@ CodeLine::CodeLine(int line_number, string line_text)
 }
 
 void CodeLine::generate_machine_code() {
+  if (!code_gen_)
+    return;
+
   UINT cop = code_gen_->Emit();
   cout << hex << setw(4) << setfill('0') << cop << endl;
 }
