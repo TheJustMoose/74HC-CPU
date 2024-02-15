@@ -36,3 +36,9 @@ RegLed3		71x43	8
 ROM		119x94
 STACK1		34x25	8
 Toggle		53x24	2
+
+
+платы:
+MUX+REG   ALU+MUL+INV   RAM+Ports+Toggle
+  Jmps       Flags      CMD_DEC
+OSC  ADDR_CNT+STACK  MUX  ROM
