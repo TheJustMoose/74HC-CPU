@@ -12,7 +12,7 @@
 |    OR | DST |C| SRC |-|Z|z|I|i| 03 0011  *  // ORI R3, 2      // в любом случае, сдвиг старшего нибла на место младшего кажется полезным
 |   XOR | DST |C| SRC |-|Z|z|I|i| 04 0100  *  // XORI R4, 4     // кстати, в этом случае можно ещё и от команды SWAP избавиться
 |   MUL | DST |C| SRC |-|Z|z|I|i| 05 0101  *  // MULI R6, 10    // R7:R6 := R6*10
-|   UNO | DST |0|TYP|-|F|-|-|-|-| 06 0110  *  // унарные команды не используют операнд SRC, поэтому нельзя использовать инверторы и отдельные нибблы
+|   UNO | DST |0|-|TYP|F|-|-|-|-| 06 0110  *  // унарные команды не используют операнд SRC, поэтому нельзя использовать инверторы и отдельные нибблы
 |   MOV | DST |C| SRC |*|Z|z|I|i| 07 0111  -  // MOVI R5, 5     // LDI R5, 5       // * - можно использовать, чтобы пихать адрес в SPL/SPH (правда, только из других регистров)
 |   LPM | DST |W|EXT|?|U|OFFSET4| 08 1000  -  // LPM R0, [IX]   // LPM R1, [X+1]   // LPM R1, [DX-1]  // W - читать слово (1) или байт (0)
 |    LD | DST |0|EXT|D|U|OFFSET4| 09 1001  -  // LD R1, [-Y]    // LD R3, [+SP-1] ; POP R3
@@ -106,12 +106,15 @@ OP_TYPE CopToType(COP cop) {
     return tIO;
   else if (cop >= bCALL && cop <= bNOP)
     return tBRANCH;
-  else  // I don't know then this should work
+  else  // I don't know when this should work
     return tNO_OP;
 }
 
-enum UNARY_TYPE {
-  unINV, unSWAP, unLSR, unLSRC
+map<string, UINT> unary_codes {
+  { "INV", 0x00 },
+  { "SWAP", 0x20 },
+  { "LSR", 0x40 },
+  { "LSRC", 0x60 },
 };
 
 map<string, COP> cop_names {
@@ -224,12 +227,14 @@ class BinaryCodeGen: public CodeGen {
   }
 
   UINT Emit() {
-    unsigned int cop = operation_ << 8;
-    cop |= left_op_ << 8;
-    if (immediate_)
+    UINT cop = operation_ << 8;
+    cop |= left_op_ << 9;  // don't forget about C bit
+    if (immediate_) {
       cop |= right_val_;
+      cop |= 0x0100;  // set C bit to 1
+    }
     else
-      cop |= right_op_ << 4;
+      cop |= right_op_ << 5;
     return cop;
   }
 
@@ -242,13 +247,28 @@ class BinaryCodeGen: public CodeGen {
 
 class UnaryCodeGen: public CodeGen {
  public:
-  UnaryCodeGen(COP cop, string op)
-    : CodeGen(cop) {}
+  UnaryCodeGen(string op_name, string reg)
+    : CodeGen(cUNO), op_name_(op_name) {
+    reg_ = RegFromName(reg);
+    if (unary_codes.find(op_name) != unary_codes.end())
+      ucode_ = unary_codes[op_name];
+    else {
+      ucode_ = 0;
+      cout << "Unknown unary operation " << op_name;
+    }
+  }
 
   UINT Emit() {
-    unsigned int cop = operation_ << 8;
+    UINT cop = operation_ << 8;
+    cop |= ucode_;
+    cop |= reg_ << 9;  // don't forget about C bit
     return cop;
   }
+
+ private:
+  string op_name_;
+  UINT ucode_ {0};
+  REG reg_ {rUnk};
 };
 
 class MemoryCodeGen: public CodeGen {
@@ -351,7 +371,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   switch (opt) {
     // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
     case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
-    case tUNARY: cg = new UnaryCodeGen(op, left); break;
+    case tUNARY: cg = new UnaryCodeGen(op_name, left); break;
     case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
     case tIO: cg = new IOCodeGen(op, left, right); break;
     case tBRANCH: cg = new BranchCodeGen(op, left); break;
