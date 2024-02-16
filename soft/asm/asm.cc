@@ -53,6 +53,8 @@
 #include <vector>
 #include <windows.h>
 
+#include "asm.h"
+
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -316,6 +318,7 @@ class MemoryCodeGen: public CodeGen {
   REG ptr_ {rUnk};
 };
 
+// IN R0, PORT1
 class IOCodeGen: public CodeGen {
  public:
   IOCodeGen(COP cop, string left, string right)
@@ -422,7 +425,6 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   CodeGen* cg {nullptr};
   switch (opt) {
-    // а здесь надо как-то пропихнуть внутрь регистры, возможно даже лишние :(
     case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
     case tUNARY: cg = new UnaryCodeGen(op_name, left); break;
     case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
@@ -448,27 +450,6 @@ void CodeLine::generate_machine_code() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-// TODO: extract some methods into Assembler class
-class FileReader {
- public:
-  int process(string fname);
-  int read_file(string fname);
-  void out_src();
-
- protected:
-  void handle_char(const char& c);
-  string trim_right(string);
-  void merge_code_with_labels();
-  void pass1();
-
- private:
-  map<int, string> lines_ {};
-  string line_ {};
-  bool skip_space_ {true};
-  bool skip_comment_ {false};
-  int line_num_ {1};
-};
 
 void help();
 
@@ -507,7 +488,7 @@ void help() {
       "compare: CMP, CMPC\n",
       "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
       "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
-      "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+ZPH)\n",
+      "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+SPH)\n",
       "PORTS: PORT0-31, PIN0-31",
       nullptr
   };
