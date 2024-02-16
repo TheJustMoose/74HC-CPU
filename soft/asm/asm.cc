@@ -213,6 +213,8 @@ class CodeGen {
   COP operation_ {cNO_OP};
 };
 
+// ADD R0, R1
+// ADD R2, 10
 class BinaryCodeGen: public CodeGen {
  public:
   BinaryCodeGen(COP cop, string left, string right)
@@ -245,6 +247,7 @@ class BinaryCodeGen: public CodeGen {
   bool immediate_ {false};
 };
 
+// LSR R7
 class UnaryCodeGen: public CodeGen {
  public:
   UnaryCodeGen(string op_name, string reg)
@@ -271,15 +274,34 @@ class UnaryCodeGen: public CodeGen {
   REG reg_ {rUnk};
 };
 
+// LD R0, X
+// LD R1, XI + 10
 class MemoryCodeGen: public CodeGen {
  public:
   MemoryCodeGen(COP cop, string left, string right)
-    : CodeGen(cop) {}
+    : CodeGen(cop) {
+    if (cop == cLD) {
+      reg_ = RegFromName(left);
+      ptr_ = RegFromName(right);
+    } else if (cop == cST) {
+      ptr_ = RegFromName(left);
+      reg_ = RegFromName(right);
+    } else {
+      cout << "Unknown operation. Should be LD or ST" << endl;
+    }
+  }
 
   UINT Emit() {
     unsigned int cop = operation_ << 8;
+    cop |= reg_ << 9;  // don't forget about C bit
+    cop |= ptr_ << ?;
+    // а если ST, то слева должен быть ptr_, а справа reg_
     return cop;
   }
+
+ private:
+  REG reg_ {rUnk};
+  REG ptr_ {rUnk};
 };
 
 class IOCodeGen: public CodeGen {
