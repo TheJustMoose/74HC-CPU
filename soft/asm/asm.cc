@@ -58,40 +58,6 @@
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
-typedef unsigned int UINT;
-
-
-// Code Of Operation
-enum COP {
-  cADD = 0x00, cADDC = 0x10,
-  cAND = 0x20, cOR = 0x30, cXOR = 0x40,
-  cMUL = 0x50, cUNO = 0x60, cMOV = 0x70,
-  cLPM = 0x80, cLD = 0x90,
-  cIN = 0xA0, cOUT = 0xB0,
-  cST = 0xC0,
-  cCMP = 0xD0, cCMPC = 0xE0,
-  bCALL = 0xF0,
-  bJMP = 0xF1,
-  bRET = 0xF2,
-  bJZ = 0xF3,
-  bJL = 0xF4,
-  bJNE = 0xF5,
-  bJE = 0xF6,
-  bJG = 0xF7,
-  bJC = 0xF8,
-  bJNZ = 0xF9,
-  bJNC = 0xFA,
-  bJHC = 0xFB,
-  bJNHC = 0xFC,
-  bSTOP = 0xFD,
-  bAFCALL = 0xFE,
-  bNOP = 0xFF,    // processor operation
-  cNO_OP = 0x100  // just constant for "there is no operation here", for example for labels
-};
-
-enum OP_TYPE {
-  tBINARY, tUNARY, tMEMORY, tIO, tBRANCH, tNO_OP
-};
 
 OP_TYPE CopToType(COP cop) {
   if (cop == cNO_OP)
@@ -147,18 +113,6 @@ map<string, COP> cop_names {
   { "NOP", bNOP },
 };
 
-enum REG : UINT {
-  // Arithmetic registers
-  rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7,
-  // Pointer register pairs
-  rX = 8, rY = 9, rZ = 10, rSP = 11,
-  // Same pointers but with post increment
-  rXI = 8, rYI = 9, rZI = 10, rSPI = 11,
-  // Same pointers but with post decrement
-  rXD = 8, rYD = 9, rZD = 10, rSPD = 11,
-  rUnk = 100
-};
-
 map<string, REG> reg_names {
   { "R0", rR0 }, { "R1", rR1 }, { "R2", rR2 }, { "R3", rR3 }, { "R4", rR4 }, { "R5", rR5 }, { "R6", rR6 }, { "R7", rR7 },
   { "X", rX }, { "Y", rY }, { "Z", rZ }, { "SP", rSP },
@@ -190,39 +144,40 @@ UINT PortFromName(string name, string prefix) {
   return res;
 }
 
+static bool StrToInt(string val, UINT* pout) {
+  UINT res = 0;
+  try {
+    if (val.find("0X") == 0)
+      res = stoi(&val[2], nullptr, 16);
+    else if (val.find("0O") == 0)
+      res = stoi(&val[2], nullptr, 8);
+    else if (val.find("0B") == 0)
+      res = stoi(&val[2], nullptr, 2);
+    else {
+      int ival = stoi(val, nullptr, 10);
+      if (ival < 0)
+        res = ival & 0x00FF;
+      else
+        res = ival;
+    }
+  } catch(std::invalid_argument& e) {
+    return false;
+  }
+
+  if (res > 0xFF)
+    cout << "Error. Immediate value should have 8 bit only (0 - 255)." << endl;
+  if (pout)
+    *pout = res;
+  return true;
+}
+
+
 class CodeGen {
  public:
   CodeGen(COP cop)
    : operation_(cop) {}
   virtual UINT Emit() = 0;
   virtual ~CodeGen() {}
-
-  static bool StrToInt(string val, UINT* pout) {
-    UINT res = 0;
-    try {
-      if (val.find("0X") == 0)
-        res = stoi(&val[2], nullptr, 16);
-      else if (val.find("0O") == 0)
-        res = stoi(&val[2], nullptr, 8);
-      else if (val.find("0B") == 0)
-        res = stoi(&val[2], nullptr, 2);
-      else {
-        int ival = stoi(val, nullptr, 10);
-        if (ival < 0)
-          res = ival & 0x00FF;
-        else
-          res = ival;
-      }
-    } catch(std::invalid_argument& e) {
-      return false;
-    }
-
-    if (res > 0xFF)
-      cout << "Error. Immediate value should have 8 bit only (0 - 255)." << endl;
-    if (pout)
-      *pout = res;
-    return true;
-  }
 
  protected:
   COP operation_ {cNO_OP};
@@ -235,7 +190,7 @@ class BinaryCodeGen: public CodeGen {
   BinaryCodeGen(COP cop, string left, string right)
     : CodeGen(cop) {
     left_op_ = RegFromName(left);
-    immediate_ = CodeGen::StrToInt(right, &right_val_);  // MOV R1, 10
+    immediate_ = StrToInt(right, &right_val_);  // MOV R1, 10
     if (!immediate_)  // not val, try to check register name
       right_op_ = RegFromName(right);  // MOV R0, 10
 
@@ -358,22 +313,6 @@ class BranchCodeGen: public CodeGen {
 
  private:
   string label_;
-};
-
-class CodeLine {
- public:
-  CodeLine(int line_number, string line_text);
-
-  void generate_machine_code();
-
- private:
-  int line_number_ {0};
-  int address_ {0};
-
-  unique_ptr<CodeGen> code_gen_ {nullptr};
-
-  vector<string> labels_ {};
-  string line_text_ {};
 };
 
 string to_upper(string s) {
