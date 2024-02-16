@@ -88,3 +88,11 @@ class FileReader {
   bool skip_comment_ {false};
   int line_num_ {1};
 };
+
+class Asm {
+ public:
+  Asm() = default;
+
+ private:
+  vector<UINT> code_;
+};
