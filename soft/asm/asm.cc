@@ -175,6 +175,19 @@ REG RegFromName(string name) {
   }
 }
 
+UINT PortFromName(string name, string prefix) {
+  if (name.empty())
+    return 0;
+  if (name.find(prefix) != 0) {
+    cout << "Unknown port name: " << name << endl;
+    return 0;
+  }
+  UINT res = stoi(&name[prefix.size()], nullptr, 10);
+  if (res > 63)
+    cout << "Port number should be in range 0-63" << endl;
+  return res;
+}
+
 class CodeGen {
  public:
   CodeGen(COP cop)
@@ -280,22 +293,21 @@ class MemoryCodeGen: public CodeGen {
  public:
   MemoryCodeGen(COP cop, string left, string right)
     : CodeGen(cop) {
-    if (cop == cLD) {
+    if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
       ptr_ = RegFromName(right);
     } else if (cop == cST) {
       ptr_ = RegFromName(left);
       reg_ = RegFromName(right);
     } else {
-      cout << "Unknown operation. Should be LD or ST" << endl;
+      cout << "Unknown operation. Should be LD or ST or LPM" << endl;
     }
   }
 
   UINT Emit() {
     unsigned int cop = operation_ << 8;
     cop |= reg_ << 9;  // don't forget about C bit
-    cop |= ptr_ << ?;
-    // а если ST, то слева должен быть ptr_, а справа reg_
+    cop |= ptr_ << 6;
     return cop;
   }
 
@@ -307,23 +319,42 @@ class MemoryCodeGen: public CodeGen {
 class IOCodeGen: public CodeGen {
  public:
   IOCodeGen(COP cop, string left, string right)
-    : CodeGen(cop) {}
+    : CodeGen(cop) {
+    if (cop == cIN) {
+      reg_ = RegFromName(left);
+      port_ = PortFromName(right, "PIN");
+    } else if (cop == cOUT) {
+      port_ = PortFromName(left, "PORT");
+      reg_ = RegFromName(right);
+    } else {
+      cout << "Unknown operation. Should be IN or OUT" << endl;
+    }
+  }
 
   UINT Emit() {
     unsigned int cop = operation_ << 8;
+    cop |= reg_ << 9;
+    cop |= port_ << 4;
     return cop;
   }
+
+ private:
+  REG reg_ {rUnk};
+  UINT port_ {0};
 };
 
 class BranchCodeGen: public CodeGen {
  public:
   BranchCodeGen(COP cop, string label)
-    : CodeGen(cop) {}
+    : CodeGen(cop), label_(label) {}
 
   UINT Emit() {
     unsigned int cop = operation_ << 8;
     return cop;
   }
+
+ private:
+  string label_;
 };
 
 class CodeLine {
