@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -56,7 +57,7 @@ class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
 
-  void generate_machine_code();
+  UINT generate_machine_code();
 
  private:
   int line_number_ {0};
@@ -87,6 +88,7 @@ class FileReader {
   bool skip_space_ {true};
   bool skip_comment_ {false};
   int line_num_ {1};
+  vector<CodeLine> code_;
 };
 
 class Asm {

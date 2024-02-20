@@ -174,6 +174,7 @@ static bool StrToInt(string val, UINT* pout) {
   return true;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 
 class CodeGen {
  public:
@@ -317,11 +318,14 @@ class BranchCodeGen: public CodeGen {
  private:
   string label_;
 };
+///////////////////////////////////////////////////////////////////////////////
 
 string to_upper(string s) {
   std::transform(s.begin(), s.end(), s.begin(), ::toupper);
   return s;
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 CodeLine::CodeLine(int line_number, string line_text)
   : line_number_(line_number), line_text_(line_text) {
@@ -383,12 +387,13 @@ CodeLine::CodeLine(int line_number, string line_text)
   //cout << "CODE: " << hex << op << endl;
 }
 
-void CodeLine::generate_machine_code() {
+UINT CodeLine::generate_machine_code() {
   if (!code_gen_)
-    return;
+    return (bNOP << 8) | 0xFF;
 
   UINT cop = code_gen_->Emit();
-  cout << hex << setw(4) << setfill('0') << cop << endl;
+  cout << "cop:" << hex << setw(4) << setfill('0') << cop << endl;
+  return cop;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -510,10 +515,8 @@ void FileReader::merge_code_with_labels() {
 
 void FileReader::pass1() {
   map<int, string>::iterator it;
-  for (it = lines_.begin(); it != lines_.end(); it++) {
-    CodeLine cl(it->first, it->second);
-    cl.generate_machine_code();
-  }
+  for (it = lines_.begin(); it != lines_.end(); it++)
+    code_.push_back(CodeLine(it->first, it->second));
 }
 
 int FileReader::read_file(string fname) {
@@ -537,7 +540,7 @@ int FileReader::read_file(string fname) {
 
 void FileReader::out_src() {
   for (auto v : lines_)
-    //cout << v.second << endl;
+    //    line number        line code
     cout << v.first << " " << v.second << endl;
 }
 
