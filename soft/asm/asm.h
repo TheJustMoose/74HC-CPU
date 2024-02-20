@@ -58,6 +58,11 @@ class CodeLine {
   CodeLine(int line_number, string line_text);
 
   UINT generate_machine_code();
+  void update_machine_code(const map<string, UINT>& label_to_address);
+
+  vector<string> get_labels() {
+    return labels_;
+  }
 
  private:
   int line_number_ {0};
@@ -81,6 +86,8 @@ class FileReader {
   string trim_right(string);
   void merge_code_with_labels();
   void pass1();
+  void pass2();
+  void pass3();
 
  private:
   map<int, string> lines_ {};
@@ -89,6 +96,7 @@ class FileReader {
   bool skip_comment_ {false};
   int line_num_ {1};
   vector<CodeLine> code_;
+  map<string, UINT> label_to_address_;
 };
 
 class Asm {
