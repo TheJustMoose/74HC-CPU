@@ -41,7 +41,7 @@ enum OP_TYPE {
   tBINARY, tUNARY, tMEMORY, tIO, tBRANCH, tNO_OP
 };
 
-enum REG : UINT {
+enum REG : uint16_t {
   // Arithmetic registers
   rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7,
   // Pointer register pairs
@@ -57,7 +57,7 @@ class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
 
-  UINT generate_machine_code();
+  uint16_t generate_machine_code();
   void update_machine_code(const map<string, UINT>& label_to_address);
 
   vector<string> get_labels() {
@@ -104,5 +104,5 @@ class Asm {
   Asm() = default;
 
  private:
-  vector<UINT> code_;
+  vector<uint16_t> code_;
 };

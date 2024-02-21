@@ -62,6 +62,20 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 
+struct ARITHM {
+ public:
+  uint16_t cop : 4;
+  uint16_t dst : 3;
+  uint16_t C : 1;
+  uint16_t src : 3;
+  uint16_t F : 1;
+  uint16_t Z : 1;
+  uint16_t z : 1;
+  uint16_t I : 1;
+  uint16_t i : 1;
+};
+
+
 OP_TYPE CopToType(COP cop) {
   if (cop == cNO_OP)
     return tNO_OP;
@@ -81,7 +95,7 @@ OP_TYPE CopToType(COP cop) {
     return tNO_OP;
 }
 
-map<string, UINT> unary_codes {
+map<string, uint16_t> unary_codes {
   { "INV", 0x00 },
   { "SWAP", 0x20 },
   { "LSR", 0x40 },
@@ -134,14 +148,14 @@ REG RegFromName(string name) {
   }
 }
 
-UINT PortFromName(string name, string prefix) {
+uint16_t PortFromName(string name, string prefix) {
   if (name.empty())
     return 0;
   if (name.find(prefix) != 0) {
     cout << "Unknown port name: " << name << endl;
     return 0;
   }
-  UINT res = stoi(&name[prefix.size()], nullptr, 10);
+  uint16_t res = stoi(&name[prefix.size()], nullptr, 10);
   if (res > 63)
     cout << "Port number should be in range 0-63" << endl;
   return res;
@@ -180,7 +194,7 @@ class CodeGen {
  public:
   CodeGen(COP cop)
    : operation_(cop) {}
-  virtual UINT Emit() = 0;
+  virtual uint16_t Emit() = 0;
   virtual void update_machine_code(const map<string, UINT>& label_to_address) {}
   virtual ~CodeGen() {}
 
@@ -195,7 +209,9 @@ class BinaryCodeGen: public CodeGen {
   BinaryCodeGen(COP cop, string left, string right)
     : CodeGen(cop) {
     left_op_ = RegFromName(left);
-    immediate_ = StrToInt(right, &right_val_);  // MOV R1, 10
+    UINT t = 0;
+    immediate_ = StrToInt(right, &t);  // MOV R1, 10
+    right_val_ = (uint16_t)t;
     if (!immediate_)  // not val, try to check register name
       right_op_ = RegFromName(right);  // MOV R0, 10
 
@@ -203,8 +219,11 @@ class BinaryCodeGen: public CodeGen {
       cout << "You have to use Register name or immediate value as rval" << endl;
   }
 
-  UINT Emit() {
-    UINT cop = operation_ << 8;
+  uint16_t Emit() {
+    //ARITHM res;
+    //res.cop = operation_;
+    //return res;
+    uint16_t cop = operation_ << 8;
     cop |= left_op_ << 9;  // don't forget about C bit
     if (immediate_) {
       cop |= right_val_;
@@ -218,7 +237,7 @@ class BinaryCodeGen: public CodeGen {
  private:
   REG left_op_ {rUnk};
   REG right_op_ {rUnk};
-  UINT right_val_ {0};
+  uint16_t right_val_ {0};
   bool immediate_ {false};
 };
 
@@ -236,8 +255,8 @@ class UnaryCodeGen: public CodeGen {
     }
   }
 
-  UINT Emit() {
-    UINT cop = operation_ << 8;
+  uint16_t Emit() {
+    uint16_t cop = operation_ << 8;
     cop |= ucode_;
     cop |= reg_ << 9;  // don't forget about C bit
     return cop;
@@ -245,7 +264,7 @@ class UnaryCodeGen: public CodeGen {
 
  private:
   string op_name_;
-  UINT ucode_ {0};
+  uint16_t ucode_ {0};
   REG reg_ {rUnk};
 };
 
@@ -266,8 +285,8 @@ class MemoryCodeGen: public CodeGen {
     }
   }
 
-  UINT Emit() {
-    unsigned int cop = operation_ << 8;
+  uint16_t Emit() {
+    uint16_t cop = operation_ << 8;
     cop |= reg_ << 9;  // don't forget about C bit
     cop |= ptr_ << 6;
     return cop;
@@ -294,8 +313,8 @@ class IOCodeGen: public CodeGen {
     }
   }
 
-  UINT Emit() {
-    unsigned int cop = operation_ << 8;
+  uint16_t Emit() {
+    uint16_t cop = operation_ << 8;
     cop |= reg_ << 9;
     cop |= port_ << 4;
     return cop;
@@ -303,7 +322,7 @@ class IOCodeGen: public CodeGen {
 
  private:
   REG reg_ {rUnk};
-  UINT port_ {0};
+  uint16_t port_ {0};
 };
 
 class BranchCodeGen: public CodeGen {
@@ -311,9 +330,9 @@ class BranchCodeGen: public CodeGen {
   BranchCodeGen(COP cop, string label)
     : CodeGen(cop), label_(label) {}
 
-  UINT Emit() {
-    unsigned int cop = operation_ << 8;
-    cop |= target_addr_;
+  uint16_t Emit() {
+    uint16_t cop = operation_ << 8;
+    cop |= (uint16_t)target_addr_;
     return cop;
   }
 
@@ -399,11 +418,11 @@ CodeLine::CodeLine(int line_number, string line_text)
   //cout << "CODE: " << hex << op << endl;
 }
 
-UINT CodeLine::generate_machine_code() {
+uint16_t CodeLine::generate_machine_code() {
   if (!code_gen_)
     return (bNOP << 8) | 0xFF;
 
-  UINT cop = code_gen_->Emit();
+  uint16_t cop = code_gen_->Emit();
   //cout << "cop:" << hex << setw(4) << setfill('0') << cop << endl;
   return cop;
 }
@@ -430,6 +449,9 @@ int main(int argc, char* argv[]) {
     string cmd(argv[1]);
     if (cmd == "help") {
       help();
+      cout << "uint16_t: " << sizeof(uint16_t) << endl;
+      cout << "ARITHM: " << sizeof(ARITHM) << endl;
+      cout << "UINT: " << sizeof(UINT) << endl;
       return 0;
     }
 
