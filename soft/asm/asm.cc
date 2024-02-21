@@ -346,6 +346,8 @@ class BranchCodeGen: public CodeGen {
     map<string, UINT>::const_iterator it;
     for (it = label_to_address.begin(); it != label_to_address.end(); it++) {
       if (to_upper(it->first) == label_) {
+        // TODO: this will work for AFCALL only
+        // jump, jc, jnz, ... require relative addresses
         target_addr_ = it->second;
         cout << "new target address: " << hex << target_addr_ << endl;
       }
