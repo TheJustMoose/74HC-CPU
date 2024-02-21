@@ -75,7 +75,6 @@ struct ARITHM {
   uint16_t i : 1;
 };
 
-
 OP_TYPE CopToType(COP cop) {
   if (cop == cNO_OP)
     return tNO_OP;
@@ -136,6 +135,13 @@ map<string, REG> reg_names {
   { "XI", rXI }, { "YI", rYI }, { "ZI", rZI }, { "SPI", rSPI },
   { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+string to_upper(string s) {
+  std::transform(s.begin(), s.end(), s.begin(), ::toupper);
+  return s;
+}
 
 REG RegFromName(string name) {
   if (name.empty())
@@ -338,24 +344,18 @@ class BranchCodeGen: public CodeGen {
 
   void update_machine_code(const map<string, UINT>& label_to_address) {
     map<string, UINT>::const_iterator it;
-    for (it = label_to_address.begin(); it != label_to_address.end(); it++)
-      if (it->first == label_) {
+    for (it = label_to_address.begin(); it != label_to_address.end(); it++) {
+      if (to_upper(it->first) == label_) {
         target_addr_ = it->second;
         cout << "new target address: " << hex << target_addr_ << endl;
       }
+    }
   }
 
  private:
   string label_;
   UINT target_addr_ {0};
 };
-///////////////////////////////////////////////////////////////////////////////
-
-string to_upper(string s) {
-  std::transform(s.begin(), s.end(), s.begin(), ::toupper);
-  return s;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 
 CodeLine::CodeLine(int line_number, string line_text)
@@ -430,6 +430,7 @@ uint16_t CodeLine::generate_machine_code() {
 void CodeLine::update_machine_code(const map<string, UINT>& label_to_address) {
   if (!code_gen_)
     return;
+  code_gen_->update_machine_code(label_to_address);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -496,6 +497,7 @@ int FileReader::process(string fname) {
   pass2();
   pass3();
   out_src();
+  out_code();
 
   return 0;
 }
@@ -565,14 +567,8 @@ void FileReader::pass1() {
 // get real address of labels
 void FileReader::pass2() {
   UINT addr = 0;
-  cout << "ADDR: COP" << endl;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
-    cout << hex
-         << setw(4) << setfill('0') << addr << ": "
-         << setw(4) << setfill('0') << it->generate_machine_code()
-         << endl;
-
     vector<string> labels = it->get_labels();
     vector<string>::iterator lit;
     for (lit = labels.begin(); lit != labels.end(); lit++)
@@ -585,6 +581,19 @@ void FileReader::pass3() {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
     it->update_machine_code(label_to_address_);
+}
+
+void FileReader::out_code() {
+  cout << "ADDR: COP" << endl;
+  UINT addr = 0;
+  vector<CodeLine>::iterator it;
+  for (it = code_.begin(); it != code_.end(); it++, addr++) {
+    cout << hex
+         << setw(4) << setfill('0') << addr << ": "
+         << setw(4) << setfill('0') << it->generate_machine_code()
+         << "  " << it->get_line_text()
+         << endl;
+  }
 }
 
 int FileReader::read_file(string fname) {

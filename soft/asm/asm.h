@@ -64,6 +64,14 @@ class CodeLine {
     return labels_;
   }
 
+  bool has_labels() {
+    return labels_.size() > 0;
+  }
+
+  string get_line_text() {
+    return line_text_;
+  }
+
  private:
   int line_number_ {0};
   int address_ {0};
@@ -88,6 +96,7 @@ class FileReader {
   void pass1();
   void pass2();
   void pass3();
+  void out_code();
 
  private:
   map<int, string> lines_ {};
