@@ -586,14 +586,15 @@ void FileReader::pass3() {
 }
 
 void FileReader::out_code() {
-  cout << "ADDR: COP" << endl;
+  cout << "ADDR: COP   ASM               LABELS" << endl;
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
     cout << hex
          << setw(4) << setfill('0') << addr << ": "
-         << setw(4) << setfill('0') << it->generate_machine_code()
-         << "  " << it->get_line_text()
+         << setw(4) << setfill('0') << it->generate_machine_code() << "  "
+         << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
+         << setw(16) << setfill(' ') << left << it->get_labels_as_string()
          << endl;
   }
 }

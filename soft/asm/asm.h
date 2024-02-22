@@ -64,6 +64,18 @@ class CodeLine {
     return labels_;
   }
 
+  string get_labels_as_string() {
+    if (!has_labels())
+      return {};
+
+    string res;
+    for (auto& l : labels_) {
+      res += l;
+      res += "/";
+    }
+    return res;
+  }
+
   bool has_labels() {
     return labels_.size() > 0;
   }
