@@ -265,7 +265,10 @@ class BinaryCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
-    return {4, 3, 3};
+    if (immediate_)
+      return {4, 3, 1, 8};
+    else
+      return {4, 3, 1, 3, 1};
   }
 
  private:
@@ -294,6 +297,10 @@ class UnaryCodeGen: public CodeGen {
     cop |= ucode_;
     cop |= reg_ << 9;  // don't forget about C bit
     return cop;
+  }
+
+  vector<int> get_blocks() {
+    return {4, 3, 1, 1, 2, 1};
   }
 
  private:
@@ -327,7 +334,7 @@ class MemoryCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
-    return {};
+    return {4, 3, 1, 2, 1, 1};
   }
 
  private:
@@ -359,7 +366,7 @@ class IOCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
-    return {};
+    return {4, 3, 5, 2, 2};
   }
 
  private:
@@ -391,7 +398,7 @@ class BranchCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
-    return {};
+    return {4, 4, 8};
   }
 
  private:
