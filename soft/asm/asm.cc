@@ -505,9 +505,6 @@ int main(int argc, char* argv[]) {
     string cmd(argv[1]);
     if (cmd == "help") {
       help();
-      cout << "uint16_t: " << sizeof(uint16_t) << endl;
-      cout << "ARITHM: " << sizeof(ARITHM) << endl;
-      cout << "UINT: " << sizeof(UINT) << endl;
       return 0;
     }
 

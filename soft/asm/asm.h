@@ -72,7 +72,7 @@ class CodeLine {
     string res;
     for (auto& l : labels_) {
       res += l;
-      res += "/";
+      res += " ";
     }
     return res;
   }
