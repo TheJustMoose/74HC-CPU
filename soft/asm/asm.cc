@@ -280,8 +280,10 @@ class BinaryCodeGen: public CodeGen {
 
   vector<int> get_blocks() {
     if (immediate_)
+      //    COP dst C value
       return {4, 3, 1, 8};
     else
+      //    COP dst C src F
       return {4, 3, 1, 3, 1};
   }
 
@@ -314,6 +316,7 @@ class UnaryCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
+    //    COP reg 0  - TYP F
     return {4, 3, 1, 1, 2, 1};
   }
 
@@ -348,7 +351,8 @@ class MemoryCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
-    return {4, 3, 1, 2, 1, 1};
+    //    COP dst 0 EXT D  U  OFFSET
+    return {4, 3, 1, 2, 1, 1, 4};
   }
 
  private:
@@ -380,6 +384,8 @@ class IOCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
+    //   COP dst port -- Ii
+    //   COP src port Oo Xx
     return {4, 3, 5, 2, 2};
   }
 
@@ -412,6 +418,7 @@ class BranchCodeGen: public CodeGen {
   }
 
   vector<int> get_blocks() {
+    //    COP TYP offset/addr
     return {4, 4, 8};
   }
 
