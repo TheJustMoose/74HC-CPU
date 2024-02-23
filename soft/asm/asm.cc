@@ -132,6 +132,9 @@ map<string, COP> cop_names {
 
 map<string, REG> reg_names {
   { "R0", rR0 }, { "R1", rR1 }, { "R2", rR2 }, { "R3", rR3 }, { "R4", rR4 }, { "R5", rR5 }, { "R6", rR6 }, { "R7", rR7 },
+};
+
+map<string, PTR> ptr_names {
   { "X", rX }, { "Y", rY }, { "Z", rZ }, { "SP", rSP },
   { "XI", rXI }, { "YI", rYI }, { "ZI", rZI }, { "SPI", rSPI },
   { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
@@ -146,12 +149,23 @@ string to_upper(string s) {
 
 REG RegFromName(string name) {
   if (name.empty())
-    return rUnk;
+    return rUnkReg;
   if (reg_names.find(name) != reg_names.end())
     return reg_names[name];
   else {
     cout << "Unknown register: " << name << endl;
-    return rUnk;
+    return rUnkReg;
+  }
+}
+
+PTR PtrFromName(string name) {
+  if (name.empty())
+    return rUnkPtr;
+  if (ptr_names.find(name) != ptr_names.end())
+    return ptr_names[name];
+  else {
+    cout << "Unknown register: " << name << endl;
+    return rUnkPtr;
   }
 }
 
@@ -245,7 +259,7 @@ class BinaryCodeGen: public CodeGen {
     if (!immediate_)  // not val, try to check register name
       right_op_ = RegFromName(right);  // MOV R0, 10
 
-    if (!immediate_ && right_op_ == rUnk)
+    if (!immediate_ && right_op_ == rUnkReg)
       cout << "You have to use Register name or immediate value as rval" << endl;
   }
 
@@ -272,8 +286,8 @@ class BinaryCodeGen: public CodeGen {
   }
 
  private:
-  REG left_op_ {rUnk};
-  REG right_op_ {rUnk};
+  REG left_op_ {rUnkReg};
+  REG right_op_ {rUnkReg};
   uint16_t right_val_ {0};
   bool immediate_ {false};
 };
@@ -306,7 +320,7 @@ class UnaryCodeGen: public CodeGen {
  private:
   string op_name_;
   uint16_t ucode_ {0};
-  REG reg_ {rUnk};
+  REG reg_ {rUnkReg};
 };
 
 // LD R0, X
@@ -317,9 +331,9 @@ class MemoryCodeGen: public CodeGen {
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
-      ptr_ = RegFromName(right);
+      ptr_ = PtrFromName(right);
     } else if (cop == cST) {
-      ptr_ = RegFromName(left);
+      ptr_ = PtrFromName(left);
       reg_ = RegFromName(right);
     } else {
       cout << "Unknown operation. Should be LD or ST or LPM" << endl;
@@ -338,8 +352,8 @@ class MemoryCodeGen: public CodeGen {
   }
 
  private:
-  REG reg_ {rUnk};
-  REG ptr_ {rUnk};
+  REG reg_ {rUnkReg};
+  PTR ptr_ {rUnkPtr};
 };
 
 // IN R0, PORT1
@@ -370,7 +384,7 @@ class IOCodeGen: public CodeGen {
   }
 
  private:
-  REG reg_ {rUnk};
+  REG reg_ {rUnkReg};
   uint16_t port_ {0};
 };
 

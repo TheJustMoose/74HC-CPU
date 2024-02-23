@@ -43,14 +43,17 @@ enum OP_TYPE {
 
 enum REG : uint16_t {
   // Arithmetic registers
-  rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7,
+  rR0 = 0, rR1 = 1, rR2 = 2, rR3 = 3, rR4 = 4, rR5 = 5, rR6 = 6, rR7 = 7, rUnkReg = 0x100
+};
+
+enum PTR : uint16_t {
   // Pointer register pairs
-  rX = 8, rY = 9, rZ = 10, rSP = 11,
+  rX = 0, rY = 1, rZ = 2, rSP = 3,
   // Same pointers but with post increment
-  rXI = 8, rYI = 9, rZI = 10, rSPI = 11,
+  rXI = 0x10, rYI = 0x11, rZI = 0x12, rSPI = 0x13,
   // Same pointers but with post decrement
-  rXD = 8, rYD = 9, rZD = 10, rSPD = 11,
-  rUnk = 100
+  rXD = 0x20, rYD = 0x21, rZD = 0x22, rSPD = 0x23,
+  rUnkPtr = 0x100
 };
 
 class CodeLine {
