@@ -45,6 +45,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <algorithm>
+#include <bitset>
 #include <cctype>
 #include <cstdlib>
 #include <fstream>
@@ -200,9 +201,32 @@ class CodeGen {
  public:
   CodeGen(COP cop)
    : operation_(cop) {}
+  virtual ~CodeGen() {}
   virtual uint16_t Emit() = 0;
   virtual void update_machine_code(const map<string, UINT>& label_to_address) {}
-  virtual ~CodeGen() {}
+
+  virtual vector<int> get_blocks() { return {}; }
+  virtual string cop() {
+    stringstream s;
+    s << bitset<16>(Emit());
+    return s.str();
+  }
+  string FormattedCOP() {
+    string res = cop();
+    vector<int> blocks = get_blocks();
+    if (blocks.empty())
+      return res;
+
+    size_t pos {0};
+    for (auto b : blocks) {
+      pos += b;
+      if (pos >= res.size())
+        break;
+      res.insert(pos, " ");
+      pos++;
+    }
+    return res;
+  }
 
  protected:
   COP operation_ {cNO_OP};
@@ -238,6 +262,10 @@ class BinaryCodeGen: public CodeGen {
     else
       cop |= right_op_ << 5;
     return cop;
+  }
+
+  vector<int> get_blocks() {
+    return {4, 3, 3};
   }
 
  private:
@@ -298,6 +326,10 @@ class MemoryCodeGen: public CodeGen {
     return cop;
   }
 
+  vector<int> get_blocks() {
+    return {};
+  }
+
  private:
   REG reg_ {rUnk};
   REG ptr_ {rUnk};
@@ -326,6 +358,10 @@ class IOCodeGen: public CodeGen {
     return cop;
   }
 
+  vector<int> get_blocks() {
+    return {};
+  }
+
  private:
   REG reg_ {rUnk};
   uint16_t port_ {0};
@@ -352,6 +388,10 @@ class BranchCodeGen: public CodeGen {
         cout << "new target address: " << hex << target_addr_ << endl;
       }
     }
+  }
+
+  vector<int> get_blocks() {
+    return {};
   }
 
  private:
@@ -433,6 +473,12 @@ void CodeLine::update_machine_code(const map<string, UINT>& label_to_address) {
   if (!code_gen_)
     return;
   code_gen_->update_machine_code(label_to_address);
+}
+
+string CodeLine::FormattedCOP() {
+  if (!code_gen_)
+    return {};
+  return code_gen_->FormattedCOP();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -586,7 +632,7 @@ void FileReader::pass3() {
 }
 
 void FileReader::out_code() {
-  cout << "ADDR: COP   ASM               LABELS" << endl;
+  cout << "ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
@@ -595,6 +641,7 @@ void FileReader::out_code() {
          << setw(4) << setfill('0') << right << it->generate_machine_code() << "  "
          << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
          << setw(16) << setfill(' ') << left << it->get_labels_as_string()
+         << setw(16) << setfill(' ') << left << it->FormattedCOP()
          << endl;
   }
 }

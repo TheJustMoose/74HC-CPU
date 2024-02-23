@@ -59,6 +59,7 @@ class CodeLine {
 
   uint16_t generate_machine_code();
   void update_machine_code(const map<string, UINT>& label_to_address);
+  string FormattedCOP();
 
   vector<string> get_labels() {
     return labels_;
