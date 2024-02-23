@@ -402,6 +402,8 @@ class BranchCodeGen: public CodeGen {
   uint16_t Emit() {
     uint16_t cop = operation_ << 8;
     cop |= (uint16_t)target_addr_;
+    if (operation_ == bNOP)
+      cop |= 0xFF;
     return cop;
   }
 
