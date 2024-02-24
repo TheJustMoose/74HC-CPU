@@ -56,6 +56,46 @@ enum PTR : uint16_t {
   rUnkPtr = 0x100
 };
 
+class CodeGen {
+ public:
+  CodeGen(COP cop)
+   : operation_(cop) {}
+  virtual ~CodeGen() {}
+
+  virtual uint16_t Emit() = 0;
+  virtual void update_machine_code(const map<string, UINT>& label_to_address) {}
+
+  virtual vector<int> get_blocks() { return {}; }
+  virtual string cop() {
+    stringstream s;
+    s << bitset<16>(Emit());
+    return s.str();
+  }
+  string FormattedCOP() {
+    string res = cop();
+    vector<int> blocks = get_blocks();
+    if (blocks.empty())
+      return res;
+
+    size_t pos {0};
+    for (auto b : blocks) {
+      pos += b;
+      if (pos >= res.size())
+        break;
+      res.insert(pos, " ");
+      pos++;
+    }
+    return res;
+  }
+  void set_address(UINT addr) {
+    address_ = addr;
+  }
+
+ protected:
+  UINT address_ {0};
+  COP operation_ {cNO_OP};
+};
+
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
@@ -88,9 +128,13 @@ class CodeLine {
     return line_text_;
   }
 
+  void set_address(UINT addr) {
+    if (code_gen_)
+      code_gen_->set_address(addr);
+  }
+
  private:
   int line_number_ {0};
-  int address_ {0};
 
   unique_ptr<CodeGen> code_gen_ {nullptr};
 
@@ -122,12 +166,4 @@ class FileReader {
   int line_num_ {1};
   vector<CodeLine> code_;
   map<string, UINT> label_to_address_;
-};
-
-class Asm {
- public:
-  Asm() = default;
-
- private:
-  vector<uint16_t> code_;
 };

@@ -211,41 +211,6 @@ static bool StrToInt(string val, UINT* pout) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-class CodeGen {
- public:
-  CodeGen(COP cop)
-   : operation_(cop) {}
-  virtual ~CodeGen() {}
-  virtual uint16_t Emit() = 0;
-  virtual void update_machine_code(const map<string, UINT>& label_to_address) {}
-
-  virtual vector<int> get_blocks() { return {}; }
-  virtual string cop() {
-    stringstream s;
-    s << bitset<16>(Emit());
-    return s.str();
-  }
-  string FormattedCOP() {
-    string res = cop();
-    vector<int> blocks = get_blocks();
-    if (blocks.empty())
-      return res;
-
-    size_t pos {0};
-    for (auto b : blocks) {
-      pos += b;
-      if (pos >= res.size())
-        break;
-      res.insert(pos, " ");
-      pos++;
-    }
-    return res;
-  }
-
- protected:
-  COP operation_ {cNO_OP};
-};
-
 // ADD R0, R1
 // ADD R2, 10
 class BinaryCodeGen: public CodeGen {
@@ -411,9 +376,17 @@ class BranchCodeGen: public CodeGen {
     map<string, UINT>::const_iterator it;
     for (it = label_to_address.begin(); it != label_to_address.end(); it++) {
       if (to_upper(it->first) == label_) {
-        // TODO: this will work for AFCALL only
-        // jump, jc, jnz, ... require relative addresses
-        target_addr_ = it->second;
+        UINT label_addr = it->second;
+        if (operation_ == bAFCALL) {
+          target_addr_ = label_addr;
+        } else {
+          int offset = label_addr;
+          offset -= address_;
+          if (offset > 127 || offset < -128)
+            cout << "Error: Label " << label_ << " is too far from this instruction" << endl;
+          else
+            target_addr_ = offset & 0xFF;
+        }
         cout << "new target address: " << hex << target_addr_ << endl;
       }
     }
@@ -644,6 +617,8 @@ void FileReader::pass2() {
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
+    it->set_address(addr);
+
     vector<string> labels = it->get_labels();
     vector<string>::iterator lit;
     for (lit = labels.begin(); lit != labels.end(); lit++)
