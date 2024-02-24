@@ -147,42 +147,7 @@ string to_upper(string s) {
   return s;
 }
 
-REG RegFromName(string name) {
-  if (name.empty())
-    return rUnkReg;
-  if (reg_names.find(name) != reg_names.end())
-    return reg_names[name];
-  else {
-    cout << "Unknown register: " << name << endl;
-    return rUnkReg;
-  }
-}
-
-PTR PtrFromName(string name) {
-  if (name.empty())
-    return rUnkPtr;
-  if (ptr_names.find(name) != ptr_names.end())
-    return ptr_names[name];
-  else {
-    cout << "Unknown register: " << name << endl;
-    return rUnkPtr;
-  }
-}
-
-uint16_t PortFromName(string name, string prefix) {
-  if (name.empty())
-    return 0;
-  if (name.find(prefix) != 0) {
-    cout << "Unknown port name: " << name << endl;
-    return 0;
-  }
-  uint16_t res = stoi(&name[prefix.size()], nullptr, 10);
-  if (res > 63)
-    cout << "Port number should be in range 0-63" << endl;
-  return res;
-}
-
-static bool StrToInt(string val, UINT* pout) {
+bool StrToInt(string val, UINT* pout) {
   UINT res = 0;
   try {
     if (val.find("0X") == 0)
@@ -203,10 +168,52 @@ static bool StrToInt(string val, UINT* pout) {
   }
 
   if (res > 0xFF)
-    cout << "Error. Immediate value should have 8 bit only (0 - 255)." << endl;
+    cout << "Error. Immediate value should have 8 bit only (0 - 255): " << val << endl;
   if (pout)
     *pout = res;
   return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+REG CodeGen::RegFromName(string name) {
+  if (name.empty())
+    return rUnkReg;
+  if (reg_names.find(name) != reg_names.end())
+    return reg_names[name];
+  else {
+    err("Unknown register: " + name);
+    return rUnkReg;
+  }
+}
+
+PTR CodeGen::PtrFromName(string name) {
+  if (name.empty())
+    return rUnkPtr;
+  if (ptr_names.find(name) != ptr_names.end())
+    return ptr_names[name];
+  else {
+    err("Unknown pointer register: " + name);
+    return rUnkPtr;
+  }
+}
+
+uint16_t CodeGen::PortFromName(string name, string prefix) {
+  if (name.empty())
+    return 0;
+  if (name.find(prefix) != 0) {
+    err("Unknown port name: " + name);
+    return 0;
+  }
+  uint16_t res = stoi(&name[prefix.size()], nullptr, 10);
+  if (res > 63)
+    err("Port number should be in range 0-63");
+  return res;
+}
+
+void CodeGen::err(string msg) {
+  cout << msg << endl;
+  errors_.push_back(msg);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -225,7 +232,7 @@ class BinaryCodeGen: public CodeGen {
       right_op_ = RegFromName(right);  // MOV R0, 10
 
     if (!immediate_ && right_op_ == rUnkReg)
-      cout << "You have to use Register name or immediate value as rval" << endl;
+      err("You have to use Register name or immediate value as rval.");
   }
 
   uint16_t Emit() {
@@ -269,7 +276,7 @@ class UnaryCodeGen: public CodeGen {
       ucode_ = unary_codes[op_name];
     else {
       ucode_ = 0;
-      cout << "Unknown unary operation " << op_name;
+      err("Unknown unary operation ");
     }
   }
 
@@ -304,7 +311,7 @@ class MemoryCodeGen: public CodeGen {
       ptr_ = PtrFromName(left);
       reg_ = RegFromName(right);
     } else {
-      cout << "Unknown operation. Should be LD or ST or LPM" << endl;
+      err("Unknown memory operation. Should be LD or ST or LPM.");
     }
   }
 
@@ -337,7 +344,7 @@ class IOCodeGen: public CodeGen {
       port_ = PortFromName(left, "PORT");
       reg_ = RegFromName(right);
     } else {
-      cout << "Unknown operation. Should be IN or OUT" << endl;
+      err("Unknown IO operation. Should be IN or OUT.");
     }
   }
 
@@ -378,12 +385,14 @@ class BranchCodeGen: public CodeGen {
       if (to_upper(it->first) == label_) {
         UINT label_addr = it->second;
         if (operation_ == bAFCALL) {
-          target_addr_ = label_addr;
+          if (label_addr % 256)
+            err("Label address in far call must be a multiple of 256.");
+          target_addr_ = label_addr;  // absolute address
         } else {
           int offset = label_addr;
-          offset -= address_;
+          offset -= address_;         // offset from current address
           if (offset > 127 || offset < -128)
-            cout << "Error: Label " << label_ << " is too far from this instruction" << endl;
+            err("Error: Label " + label_ + " is too far from this instruction");
           else
             target_addr_ = offset & 0xFF;
         }
@@ -645,6 +654,10 @@ void FileReader::out_code() {
          << setw(16) << setfill(' ') << left << it->get_labels_as_string()
          << setw(16) << setfill(' ') << left << it->FormattedCOP()
          << endl;
+
+    vector<string> el = it->get_err();
+    for (auto& e : el)
+      cout << " > " << e << endl;
   }
 }
 

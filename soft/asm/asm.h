@@ -91,9 +91,19 @@ class CodeGen {
     address_ = addr;
   }
 
+  REG RegFromName(string name);
+  PTR PtrFromName(string name);
+  uint16_t PortFromName(string name, string prefix);
+
+  void err(string msg);
+  vector<string> get_err() {
+    return errors_;
+  }
+
  protected:
   UINT address_ {0};
   COP operation_ {cNO_OP};
+  vector<string> errors_ {};
 };
 
 class CodeLine {
@@ -131,6 +141,13 @@ class CodeLine {
   void set_address(UINT addr) {
     if (code_gen_)
       code_gen_->set_address(addr);
+  }
+
+  vector<string> get_err() {
+    if (code_gen_)
+      return code_gen_->get_err();
+    else
+      return {};
   }
 
  private:
