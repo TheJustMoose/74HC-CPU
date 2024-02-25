@@ -147,7 +147,9 @@ string to_upper(string s) {
   return s;
 }
 
-bool StrToInt(string val, UINT* pout) {
+///////////////////////////////////////////////////////////////////////////////
+
+bool CodeGen::StrToInt(string val, UINT* pout) {
   UINT res = 0;
   try {
     if (val.find("0X") == 0)
@@ -168,13 +170,11 @@ bool StrToInt(string val, UINT* pout) {
   }
 
   if (res > 0xFF)
-    cout << "Error. Immediate value should have 8 bit only (0 - 255): " << val << endl;
+    err("Error. Immediate value should have 8 bit only (0 - 255). Got: " + val);
   if (pout)
     *pout = res;
   return true;
 }
-
-///////////////////////////////////////////////////////////////////////////////
 
 REG CodeGen::RegFromName(string name) {
   if (name.empty())

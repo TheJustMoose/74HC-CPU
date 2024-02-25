@@ -7,8 +7,6 @@ using namespace std;
 
 typedef unsigned int UINT;
 
-class CodeGen;
-
 // Code Of Operation
 enum COP {
   cADD = 0x00, cADDC = 0x10,
@@ -91,14 +89,15 @@ class CodeGen {
     address_ = addr;
   }
 
-  REG RegFromName(string name);
-  PTR PtrFromName(string name);
-  uint16_t PortFromName(string name, string prefix);
-
   void err(string msg);
   vector<string> get_err() {
     return errors_;
   }
+
+  bool StrToInt(string val, UINT* pout);
+  REG RegFromName(string name);
+  PTR PtrFromName(string name);
+  uint16_t PortFromName(string name, string prefix);
 
  protected:
   UINT address_ {0};
