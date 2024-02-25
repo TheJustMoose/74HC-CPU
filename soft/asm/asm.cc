@@ -306,7 +306,7 @@ class MemoryCodeGen: public CodeGen {
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
-      ptr_ = PtrFromName(right);
+      ptr_ = PtrFromName(right);  // TODO: have to read offset here
     } else if (cop == cST) {
       ptr_ = PtrFromName(left);
       reg_ = RegFromName(right);
@@ -441,7 +441,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   string op_name, left, right;
   ss >> op_name;
   ss >> left;
-  ss >> right;
+  ss >> right;  // TODO: right value may have offset. For example: XI + 10
 
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
@@ -626,7 +626,7 @@ void FileReader::pass2() {
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
-    it->set_address(addr);
+    it->set_address(addr);  // TODO: have to process .org instruction
 
     vector<string> labels = it->get_labels();
     vector<string>::iterator lit;
@@ -648,7 +648,7 @@ void FileReader::out_code() {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
     cout << hex
-         << setw(4) << setfill('0') << right << addr << ": "
+         << setw(4) << setfill('0') << right << addr << ": "  // TODO: now address is stored in CodeLine
          << setw(4) << setfill('0') << right << it->generate_machine_code() << "  "
          << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
          << setw(16) << setfill(' ') << left << it->get_labels_as_string()
