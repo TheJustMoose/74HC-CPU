@@ -302,7 +302,7 @@ class UnaryCodeGen: public CodeGen {
 // LD R1, XI + 10
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen(COP cop, string left, string right)
+  MemoryCodeGen(COP cop, string left, string right, string tail)
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
@@ -313,12 +313,42 @@ class MemoryCodeGen: public CodeGen {
     } else {
       err("Unknown memory operation. Should be LD or ST or LPM.");
     }
+
+    offset_ = parse_offset(tail);
+  }
+
+  UINT parse_offset(string tail) {
+    if (tail.empty())
+      return 0;
+
+    if (tail[0] != '+' && tail[0] != '-') {
+      err("You can add or substract offset from pointer register. No other operations.");
+      return 0;
+    }
+
+    if (tail.size() < 2) {
+      err("You lost offset value.");
+      return 0;
+    }
+
+    UINT res {0};
+    int off = stoi(&tail[1], nullptr, 10);
+    if (tail[0] == '-')
+      off = -off;
+    if (off > 7)
+      err("Offset has to be <= 7.");
+    else if (off < -8)
+      err("Offset has to be >= -8.");
+    else
+      res = off & 0x0F;  // we need only 4 bits
+    return res;
   }
 
   uint16_t Emit() {
     uint16_t cop = operation_ << 8;
     cop |= reg_ << 9;  // don't forget about C bit
     cop |= ptr_ << 6;
+    cop |= offset_;
     return cop;
   }
 
@@ -330,6 +360,7 @@ class MemoryCodeGen: public CodeGen {
  private:
   REG reg_ {rUnkReg};
   PTR ptr_ {rUnkPtr};
+  UINT offset_ {0};
 };
 
 // IN R0, PORT1
@@ -438,10 +469,13 @@ CodeLine::CodeLine(int line_number, string line_text)
   // examples:
   // MOV R0, R1
   // JMP label
-  string op_name, left, right;
+  string op_name, left, right, tail;
   ss >> op_name;
   ss >> left;
-  ss >> right;  // TODO: right value may have offset. For example: XI + 10
+  ss >> right;
+  getline(ss, tail);  // TODO: right value may have offset. For example: XI + 10
+  // try to remove all spaces
+  tail.erase(remove_if(tail.begin(), tail.end(), isspace), tail.end());
 
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
@@ -458,7 +492,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   switch (opt) {
     case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
     case tUNARY: cg = new UnaryCodeGen(op_name, left); break;
-    case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
+    case tMEMORY: cg = new MemoryCodeGen(op, left, right, tail); break;
     case tIO: cg = new IOCodeGen(op, left, right); break;
     case tBRANCH: cg = new BranchCodeGen(op, left); break;
     case tNO_OP:
@@ -468,7 +502,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   code_gen_.reset(cg);
 
-  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
+  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
   //cout << "CODE: " << hex << op << endl;
 }
 
