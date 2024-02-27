@@ -306,7 +306,7 @@ class MemoryCodeGen: public CodeGen {
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
-      ptr_ = PtrFromName(right);  // TODO: have to read offset here
+      ptr_ = PtrFromName(right);
     } else if (cop == cST) {
       ptr_ = PtrFromName(left);
       reg_ = RegFromName(right);
@@ -548,7 +548,7 @@ int main(int argc, char* argv[]) {
     }
 
     // okay, probably cmd is file name ;)
-    FileReader fr;
+    Assembler fr;
     return fr.process(cmd);
   }
 
@@ -578,7 +578,7 @@ void help() {
   }
 }
 
-int FileReader::process(string fname) {
+int Assembler::process(string fname) {
   int res = read_file(fname);
   if (res != 0)
     return res;
@@ -593,7 +593,7 @@ int FileReader::process(string fname) {
   return 0;
 }
 
-void FileReader::handle_char(const char& c) {
+void Assembler::handle_char(const char& c) {
   if (c == '\r')
     return;
 
@@ -620,7 +620,7 @@ void FileReader::handle_char(const char& c) {
     line_ += c;
 }
 
-string FileReader::trim_right(string s) {
+string Assembler::trim_right(string s) {
   if (s.empty())
     return {};
 
@@ -634,7 +634,7 @@ string FileReader::trim_right(string s) {
   return s;
 }
 
-void FileReader::merge_code_with_labels() {
+void Assembler::merge_code_with_labels() {
   map<int, string>::iterator it, prev;
   for (it = lines_.begin(); it != lines_.end();) {
     prev = it;
@@ -648,7 +648,7 @@ void FileReader::merge_code_with_labels() {
 }
 
 // generate machine code
-void FileReader::pass1() {
+void Assembler::pass1() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end(); it++) {
     code_.push_back(CodeLine(it->first, it->second));
@@ -656,7 +656,7 @@ void FileReader::pass1() {
 }
 
 // get real address of labels
-void FileReader::pass2() {
+void Assembler::pass2() {
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
@@ -670,13 +670,13 @@ void FileReader::pass2() {
 }
 
 // set real jump addresses
-void FileReader::pass3() {
+void Assembler::pass3() {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
     it->update_machine_code(label_to_address_);
 }
 
-void FileReader::out_code() {
+void Assembler::out_code() {
   cout << "ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
   UINT addr = 0;
   vector<CodeLine>::iterator it;
@@ -695,7 +695,7 @@ void FileReader::out_code() {
   }
 }
 
-int FileReader::read_file(string fname) {
+int Assembler::read_file(string fname) {
   ifstream f;
   f.open(fname, ios::binary);
   if (!f) {
@@ -714,7 +714,7 @@ int FileReader::read_file(string fname) {
   return 0;
 }
 
-void FileReader::out_src() {
+void Assembler::out_src() {
   for (auto v : label_to_address_)
     //    line number        line code
     cout << v.first << " " << v.second << endl;

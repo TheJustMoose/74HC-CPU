@@ -159,7 +159,7 @@ class CodeLine {
 };
 
 // TODO: extract some methods into Assembler class
-class FileReader {
+class Assembler {
  public:
   int process(string fname);
   int read_file(string fname);
