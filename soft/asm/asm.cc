@@ -578,6 +578,8 @@ void help() {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
 int Assembler::process(string fname) {
   FileReader fr;
   int res = fr.read_file(fname, &lines_);
@@ -585,6 +587,7 @@ int Assembler::process(string fname) {
     return res;
 
   merge_code_with_labels();
+  extract_orgs();
   pass1();
   pass2();
   pass3();
@@ -604,6 +607,19 @@ void Assembler::merge_code_with_labels() {
       it->second = prev->second + it->second;  // move comment to the next line
       lines_.erase(prev);                      // remove comment from curent line
     }
+  }
+}
+
+void Assembler::extract_orgs() {
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end();) {
+    string line = it->second;
+    if (line.find(".org") == 0) {
+      cout << line << endl;
+      it = lines_.erase(it);
+    }
+    else
+      it++;
   }
 }
 
@@ -701,7 +717,7 @@ void FileReader::handle_char(const char& c) {
   if (c == '\n') {
     string t = trim_right(line_);
     if (!t.empty())
-      lines_[line_num_] = t;
+      lines_[line_num_] = std::move(t);
     line_ = "";  // not sure about line state after move
     skip_space_ = true;
     skip_comment_ = false;

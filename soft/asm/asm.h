@@ -166,6 +166,7 @@ class Assembler {
 
  protected:
   void merge_code_with_labels();
+  void extract_orgs();
   void pass1();
   void pass2();
   void pass3();
