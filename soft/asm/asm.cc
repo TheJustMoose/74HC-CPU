@@ -579,7 +579,8 @@ void help() {
 }
 
 int Assembler::process(string fname) {
-  int res = read_file(fname);
+  FileReader fr;
+  int res = fr.read_file(fname, &lines_);
   if (res != 0)
     return res;
 
@@ -591,47 +592,6 @@ int Assembler::process(string fname) {
   out_code();
 
   return 0;
-}
-
-void Assembler::handle_char(const char& c) {
-  if (c == '\r')
-    return;
-
-  if (c == ' ' && skip_space_)
-    return;
-
-  skip_space_ = false;
-
-  if (c == '\n') {
-    string t = trim_right(line_);
-    if (!t.empty())
-      lines_[line_num_] = t;
-    line_ = "";  // not sure about line state after move
-    skip_space_ = true;
-    skip_comment_ = false;
-    line_num_++;
-    return;
-  }
-
-  if (c == ';')
-    skip_comment_ = true;
-
-  if (!skip_comment_)
-    line_ += c;
-}
-
-string Assembler::trim_right(string s) {
-  if (s.empty())
-    return {};
-
-  // index of first right non empty char:
-  size_t i = s.size() - 1;  // TODO: try rbegin() here
-  while (s[i] == ' ' && i > 0)
-     i--;
-
-  if (i >= 0 && i < s.size())
-    s.resize(i + 1);  // +1 will convert index to size
-  return s;
 }
 
 void Assembler::merge_code_with_labels() {
@@ -695,7 +655,20 @@ void Assembler::out_code() {
   }
 }
 
-int Assembler::read_file(string fname) {
+void Assembler::out_src() {
+  for (auto v : label_to_address_)
+    //    line number        line code
+    cout << v.first << " " << v.second << endl;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+int FileReader::read_file(string fname, map<int, string> *result) {
+  if (!result) {
+    cout << "Error: no output array";
+    return 1;
+  }
+
   ifstream f;
   f.open(fname, ios::binary);
   if (!f) {
@@ -709,15 +682,52 @@ int Assembler::read_file(string fname) {
            [this](const char& c) { handle_char(c); });
 
   handle_char('\n');  // probably there is no EOL on the last line of code
-
   f.close();
+
+  *result = std::move(lines_);
+
   return 0;
 }
 
-void Assembler::out_src() {
-  for (auto v : label_to_address_)
-    //    line number        line code
-    cout << v.first << " " << v.second << endl;
+void FileReader::handle_char(const char& c) {
+  if (c == '\r')
+    return;
+
+  if (c == ' ' && skip_space_)
+    return;
+
+  skip_space_ = false;
+
+  if (c == '\n') {
+    string t = trim_right(line_);
+    if (!t.empty())
+      lines_[line_num_] = t;
+    line_ = "";  // not sure about line state after move
+    skip_space_ = true;
+    skip_comment_ = false;
+    line_num_++;
+    return;
+  }
+
+  if (c == ';')
+    skip_comment_ = true;
+
+  if (!skip_comment_)
+    line_ += c;
+}
+
+string FileReader::trim_right(string s) {
+  if (s.empty())
+    return {};
+
+  // index of first right non empty char:
+  size_t i = s.size() - 1;  // TODO: try rbegin() here
+  while (s[i] == ' ' && i > 0)
+     i--;
+
+  if (i >= 0 && i < s.size())
+    s.resize(i + 1);  // +1 will convert index to size
+  return s;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

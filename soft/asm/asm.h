@@ -162,12 +162,9 @@ class CodeLine {
 class Assembler {
  public:
   int process(string fname);
-  int read_file(string fname);
   void out_src();
 
  protected:
-  void handle_char(const char& c);
-  string trim_right(string);
   void merge_code_with_labels();
   void pass1();
   void pass2();
@@ -176,10 +173,23 @@ class Assembler {
 
  private:
   map<int, string> lines_ {};
+  vector<CodeLine> code_;
+  map<string, UINT> label_to_address_;
+};
+
+class FileReader {
+ public:
+  FileReader() = default;
+
+  int read_file(string fname, map<int, string> *result);
+
+  void handle_char(const char& c);
+  string trim_right(string);
+
+ private:
   string line_ {};
   bool skip_space_ {true};
   bool skip_comment_ {false};
   int line_num_ {1};
-  vector<CodeLine> code_;
-  map<string, UINT> label_to_address_;
+  map<int, string> lines_ {};
 };
