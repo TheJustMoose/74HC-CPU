@@ -686,11 +686,13 @@ void Assembler::pass3() {
 }
 
 void Assembler::out_code() {
-  cout << "ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
+  cout << "LINE ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
   UINT addr = 0;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
-    cout << hex
+    cout << dec
+         << setw(4) << setfill(' ') << right << it->line_number() << " "
+         << hex
          << setw(4) << setfill('0') << right << it->address() << ": "
          << setw(4) << setfill('0') << right << it->generate_machine_code() << "  "
          << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
