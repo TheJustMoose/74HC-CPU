@@ -484,7 +484,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   ss >> op_name;
   ss >> left;
   ss >> right;
-  getline(ss, tail);  // TODO: right value may have offset. For example: XI + 10
+  getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line
   // try to remove all spaces
   tail.erase(remove_if(tail.begin(), tail.end(), isspace), tail.end());
 
@@ -599,6 +599,7 @@ int Assembler::process(string fname) {
 
   merge_code_with_labels();
   extract_orgs();
+  extract_string();
   pass1();
   pass2();
   pass3();
@@ -630,14 +631,41 @@ void Assembler::extract_orgs() {
     if (org.find(".org") == 0) {
       cout << line << ":" << org << endl;
       org.erase(0, sizeof(".org"));
-      int val;
+
+      int val {0};
       string msg_err;
       if (StrToInt(org, &val, &msg_err)) {
         line_to_org_[line] = val;
         cout << "now line " << line << " has address " << val << endl;
       } else
         cout << "Can't convert org value to int" << endl << msg_err << endl;
-      it = lines_.erase(it);
+      it = lines_.erase(it);  // now remove this directive from asm
+    }
+    else
+      it++;
+  }
+}
+
+void Assembler::extract_string() {
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end();) {
+    string str = it->second;
+    if (str.find(".str") == 0) {
+      str.erase(0, sizeof(".str"));
+      cout << "str: " << str << endl;
+
+      size_t pos = str.find(" ");
+      if (pos == string::npos) {
+        cout << "Error in string const: '" << it->second << "'" << endl;
+        cout << "Line: " << it->first << ". String value not found" << endl;
+      } else if (pos < str.size()) {
+        string str_name = str.substr(0, pos);
+        string str_val = str.substr(pos + 1);
+        string_consts_[str_name] = str_val;
+        cout << "str_name: " << str_name << endl;
+        cout << "str_val: " << str_val << endl;
+      }
+      it = lines_.erase(it);  // now remove this directive from asm
     }
     else
       it++;
@@ -687,9 +715,9 @@ void Assembler::pass3() {
 
 void Assembler::out_code() {
   cout << "LINE ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
-  UINT addr = 0;
+  UINT max_addr {0};
   vector<CodeLine>::iterator it;
-  for (it = code_.begin(); it != code_.end(); it++, addr++) {
+  for (it = code_.begin(); it != code_.end(); it++) {
     cout << dec
          << setw(4) << setfill(' ') << right << it->line_number() << " "
          << hex
@@ -703,6 +731,22 @@ void Assembler::out_code() {
     vector<string> el = it->get_err();
     for (auto& e : el)
       cout << " > " << e << endl;
+
+    if (max_addr < it->address())
+      max_addr = it->address();
+  }
+
+  cout << "max_addr: " << max_addr << endl;
+
+  cout << "STRINGS:" << endl;
+  UINT addr {max_addr + 1};
+  for (const auto& s : string_consts_) {
+    string str = s.second;
+    cout << str << endl;
+    for (size_t i = 0; i < str.size(); i++)
+      cout
+         << setw(4) << setfill('0') << right << addr++ << ": "
+         << UINT(str[i]) << " " << str[i] << endl;
   }
 }
 

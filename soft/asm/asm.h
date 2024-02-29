@@ -168,7 +168,6 @@ class CodeLine {
   string line_text_ {};
 };
 
-// TODO: extract some methods into Assembler class
 class Assembler {
  public:
   int process(string fname);
@@ -176,6 +175,7 @@ class Assembler {
  protected:
   void merge_code_with_labels();
   void extract_orgs();
+  void extract_string();
   void pass1();
   void pass2();
   void pass3();
@@ -186,8 +186,9 @@ class Assembler {
  private:
   map<int, string> lines_ {};
   map<int, UINT> line_to_org_ {};
-  vector<CodeLine> code_;
-  map<string, UINT> label_to_address_;
+  vector<CodeLine> code_ {};
+  map<string, UINT> label_to_address_ {};
+  map<string, string> string_consts_ {};
 };
 
 class FileReader {
