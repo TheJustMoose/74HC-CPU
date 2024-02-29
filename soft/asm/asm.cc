@@ -429,7 +429,7 @@ class BranchCodeGen: public CodeGen {
         if (operation_ == bAFCALL) {
           if (label_addr % 256)
             err("Label address in far call must be a multiple of 256.");
-          target_addr_ = label_addr;  // absolute address
+          target_addr_ = label_addr >> 8;  // absolute address divided by 256
         } else {
           int offset = label_addr;
           offset -= address_;         // offset from current address
