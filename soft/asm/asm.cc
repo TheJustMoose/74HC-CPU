@@ -591,7 +591,8 @@ int Assembler::process(string fname) {
   pass1();
   pass2();
   pass3();
-  out_src();
+  out_labels();
+  out_orgs();
   out_code();
 
   return 0;
@@ -613,9 +614,11 @@ void Assembler::merge_code_with_labels() {
 void Assembler::extract_orgs() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
-    string line = it->second;
-    if (line.find(".org") == 0) {
-      cout << line << endl;
+    int line = it->first;
+    string org = it->second;
+    if (org.find(".org") == 0) {
+      cout << line << ":" << org << endl;
+      line_to_org_[line] = org;
       it = lines_.erase(it);
     }
     else
@@ -658,7 +661,7 @@ void Assembler::out_code() {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
     cout << hex
-         << setw(4) << setfill('0') << right << addr << ": "  // TODO: now address is stored in CodeLine
+         << setw(4) << setfill('0') << right << it->address() << ": "
          << setw(4) << setfill('0') << right << it->generate_machine_code() << "  "
          << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
          << setw(16) << setfill(' ') << left << it->get_labels_as_string()
@@ -671,9 +674,16 @@ void Assembler::out_code() {
   }
 }
 
-void Assembler::out_src() {
+void Assembler::out_labels() {
+  cout << "LABELS:" << endl;
   for (auto v : label_to_address_)
     //    line number        line code
+    cout << v.first << " " << v.second << endl;
+}
+
+void Assembler::out_orgs() {
+  cout << "ORGS:" << endl;
+  for (auto v : line_to_org_)
     cout << v.first << " " << v.second << endl;
 }
 

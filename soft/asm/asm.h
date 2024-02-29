@@ -85,6 +85,9 @@ class CodeGen {
     }
     return res;
   }
+  UINT address() {
+    return address_;
+  }
   void set_address(UINT addr) {
     address_ = addr;
   }
@@ -137,6 +140,10 @@ class CodeLine {
     return line_text_;
   }
 
+  UINT address() {
+    return code_gen_ ? code_gen_->address() : 0;
+  }
+
   void set_address(UINT addr) {
     if (code_gen_)
       code_gen_->set_address(addr);
@@ -162,7 +169,6 @@ class CodeLine {
 class Assembler {
  public:
   int process(string fname);
-  void out_src();
 
  protected:
   void merge_code_with_labels();
@@ -171,9 +177,12 @@ class Assembler {
   void pass2();
   void pass3();
   void out_code();
+  void out_labels();
+  void out_orgs();
 
  private:
   map<int, string> lines_ {};
+  map<int, string> line_to_org_ {};
   vector<CodeLine> code_;
   map<string, UINT> label_to_address_;
 };
