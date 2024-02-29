@@ -97,7 +97,6 @@ class CodeGen {
     return errors_;
   }
 
-  bool StrToInt(string val, UINT* pout);
   REG RegFromName(string name);
   PTR PtrFromName(string name);
   uint16_t PortFromName(string name, string prefix);
@@ -156,6 +155,10 @@ class CodeLine {
       return {};
   }
 
+  int line_number() {
+    return line_number_;
+  }
+
  private:
   int line_number_ {0};
 
@@ -182,7 +185,7 @@ class Assembler {
 
  private:
   map<int, string> lines_ {};
-  map<int, string> line_to_org_ {};
+  map<int, UINT> line_to_org_ {};
   vector<CodeLine> code_;
   map<string, UINT> label_to_address_;
 };

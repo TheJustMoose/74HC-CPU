@@ -147,34 +147,36 @@ string to_upper(string s) {
   return s;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-bool CodeGen::StrToInt(string val, UINT* pout) {
-  UINT res = 0;
+bool StrToInt(string val, int* pout, string* err = nullptr) {
+  int res = 0;
   try {
     if (val.find("0X") == 0)
       res = stoi(&val[2], nullptr, 16);
+    else if (*val.rbegin() == 'h')
+      res = stoi(&val[0], nullptr, 16);
     else if (val.find("0O") == 0)
       res = stoi(&val[2], nullptr, 8);
     else if (val.find("0B") == 0)
       res = stoi(&val[2], nullptr, 2);
     else {
-      int ival = stoi(val, nullptr, 10);
-      if (ival < 0)
-        res = ival & 0x00FF;
-      else
-        res = ival;
+      res = stoi(val, nullptr, 10);
     }
   } catch(std::invalid_argument& e) {
+    if (err) {
+      *err += e.what();
+      *err += "\n";
+      *err += "arg: ";
+      *err += val;
+    }
     return false;
   }
 
-  if (res > 0xFF)
-    err("Error. Immediate value should have 8 bit only (0 - 255). Got: " + val);
   if (pout)
     *pout = res;
   return true;
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 REG CodeGen::RegFromName(string name) {
   if (name.empty())
@@ -225,9 +227,18 @@ class BinaryCodeGen: public CodeGen {
   BinaryCodeGen(COP cop, string left, string right)
     : CodeGen(cop) {
     left_op_ = RegFromName(left);
-    UINT t = 0;
+    int t = 0;
     immediate_ = StrToInt(right, &t);  // MOV R1, 10
-    right_val_ = (uint16_t)t;
+    if (immediate_) {
+      if (t < 0)
+        right_val_ = t & 0x00FF;
+      else
+        right_val_ = t;
+
+      if (right_val_> 0xFF)
+        err("Error. Immediate value should have 8 bit only (0 - 255). Got: " + right);
+    }
+
     if (!immediate_)  // not val, try to check register name
       right_op_ = RegFromName(right);  // MOV R0, 10
 
@@ -618,7 +629,14 @@ void Assembler::extract_orgs() {
     string org = it->second;
     if (org.find(".org") == 0) {
       cout << line << ":" << org << endl;
-      line_to_org_[line] = org;
+      org.erase(0, sizeof(".org"));
+      int val;
+      string msg_err;
+      if (StrToInt(org, &val, &msg_err)) {
+        line_to_org_[line] = val;
+        cout << "now line " << line << " has address " << val << endl;
+      } else
+        cout << "Can't convert org value to int" << endl << msg_err << endl;
       it = lines_.erase(it);
     }
     else
@@ -638,8 +656,20 @@ void Assembler::pass1() {
 void Assembler::pass2() {
   UINT addr = 0;
   vector<CodeLine>::iterator it;
+  map<int, UINT>::iterator oit = line_to_org_.begin();
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
-    it->set_address(addr);  // TODO: have to process .org instruction
+    if (oit != line_to_org_.end() &&
+        it->line_number() > oit->first) {
+      cout << "***** org placed here *****" << endl;
+      if (oit->second > addr) {
+        addr = oit->second;
+        cout << "move address to: " << addr << endl;
+      }
+      oit++;
+    }
+    cout << addr << endl;
+
+    it->set_address(addr);
 
     vector<string> labels = it->get_labels();
     vector<string>::iterator lit;
