@@ -147,6 +147,8 @@ string to_upper(string s) {
   return s;
 }
 
+// will remove leading spaces
+// also remove more than one space in a row
 string normalize_line(string s) {
   string res;
   bool skip_space {true};
@@ -725,7 +727,7 @@ void Assembler::extract_string() {
     string str = normalize_line(it->second);
     if (str.find(".str") == 0) {
       str.erase(0, sizeof(".str"));
-      cout << "str: " << str << endl;
+      //cout << "str: " << str << endl;
 
       size_t pos = str.find(" ");
       if (pos == string::npos) {
@@ -735,8 +737,7 @@ void Assembler::extract_string() {
         string str_name = trim(str.substr(0, pos));
         string str_val = remove_quotes(trim(str.substr(pos + 1)));
         string_consts_[str_name] = str_val;
-        cout << "str_name: '" << str_name << "'" << endl;
-        cout << "str_val: '" << str_val << "'" << endl;
+        cout << "STR '" << str_name << "' = '" << str_val << "'" << endl;
       }
       it = lines_.erase(it);  // now remove this directive from asm
     }
@@ -745,20 +746,38 @@ void Assembler::extract_string() {
   }
 }
 
+string extract_arg(string& name_w_arg) {
+  size_t left = name_w_arg.find('(');
+  size_t right = name_w_arg.find(')');
+
+  if (left == string::npos || right == string::npos)
+    return {};
+  if (right < left)
+    return {};
+
+  string arg = name_w_arg.substr(left + 1, right - left - 1);
+  name_w_arg.resize(left);
+  return arg;
+}
+
 void Assembler::extract_defs() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
     string str = normalize_line(it->second);
     if (str.find(".def") == 0) {
       str.erase(0, sizeof(".def"));
-      str = trim(str);
+      //str = trim(str);
 
       size_t pos = str.find(" ");
       if (pos != string::npos) {
         string def_name = trim(str.substr(0, pos));
         string def_val = trim(str.substr(pos + 1));
+        string def_arg = extract_arg(def_name);
         def_values_[def_name] = def_val;
-        cout << "def: " << def_name << "=" << def_val << endl;
+        if (def_arg.size())
+          cout << "DEF " << def_name << "(" << def_arg << ") = " << def_val << endl;
+        else
+          cout << "DEF " << def_name << " = " << def_val << endl;
       } else
         cout << "error in .def directive: " << it->second << endl;
 
