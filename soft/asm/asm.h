@@ -107,9 +107,23 @@ class CodeGen {
   vector<string> errors_ {};
 };
 
+class MACRO {
+  public:
+    MACRO() = default;
+    MACRO(string val): val_(val) {}
+    MACRO(string val, string arg): val_(val), arg_(arg) {}
+
+    string val_ {};
+    string arg_ {};
+};
+
+map<string, MACRO> g_def_values {};
+
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
+
+  string prepare_line(string line);
 
   uint16_t generate_machine_code();
   void update_machine_code(const map<string, UINT>& label_to_address);
@@ -172,16 +186,6 @@ class Assembler {
  public:
   int process(string fname);
 
-  class MACRO {
-    public:
-      MACRO() = default;
-      MACRO(string val): val_(val) {}
-      MACRO(string val, string arg): val_(val), arg_(arg) {}
-
-      string val_ {};
-      string arg_ {};
-  };
-
  protected:
   void merge_code_with_labels();
   void extract_orgs();
@@ -200,7 +204,6 @@ class Assembler {
   vector<CodeLine> code_ {};
   map<string, UINT> label_to_address_ {};
   map<string, string> string_consts_ {};
-  map<string, MACRO> def_values_ {};
   map<string, UINT> string_name_to_address_ {};
 };
 

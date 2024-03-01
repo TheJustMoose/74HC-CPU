@@ -213,10 +213,30 @@ string trim(string s) {
   return trim_left(trim_right(s));
 }
 
+void remove_all_spaces(string& s) {
+  // try to remove all spaces
+  s.erase(remove_if(s.begin(), s.end(), isspace), s.end());
+}
+
 string remove_quotes(string s) {
   if (s.size() <= 2)
     return s;
   return s.substr(1, s.size() - 2);
+}
+
+string sreplace(string where, string from, string to) {
+  size_t lpos = where.find(from);
+  if (lpos == string::npos)
+    return where;
+
+  string left = where.substr(0, lpos);
+
+  string right {};
+  size_t rpos = lpos + from.size();
+  if (rpos < where.size())
+    right = where.substr(rpos);
+
+  return left + to + right;
 }
 
 bool StrToInt(string val, int* pout, string* err = nullptr) {
@@ -543,24 +563,36 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
   cout << "line tail: " << line_text_ << endl;
 
-  string t = to_upper(line_text_);
-  pos = t.find(',');
-  if (pos != string::npos)
-    t[pos] = ' ';  // try to convert 'mov r0, r1' to 'mov r0  r1'
-  //cout << "after replace: " << t << endl;
-
-  stringstream ss(t);
+  stringstream ss(prepare_line(line_text_));
   // examples:
   // MOV R0, R1
   // JMP label
   string op_name, left, right, tail;
-  ss >> op_name;
-  ss >> left;
-  ss >> right;
-  getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line
+  ss >> op_name;      // LD
+  ss >> left;         // R0
+  ss >> right;        // XI
+  getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
+  remove_all_spaces(tail);
 
-  // try to remove all spaces
-  tail.erase(remove_if(tail.begin(), tail.end(), isspace), tail.end());
+  if (g_def_values.find(op_name) != g_def_values.end()) {
+    const MACRO &m = g_def_values[op_name];
+    cout << "have to replace " << op_name << " to " << m.val_ << endl;
+    string new_op {m.val_};
+    if (m.arg_.size())
+      new_op = sreplace(new_op, m.arg_, left);
+    cout << "***** " << new_op << endl;
+
+    stringstream ss(prepare_line(new_op));
+    ss >> op_name;      // LD
+    ss >> left;         // R0
+    ss >> right;        // XI
+    getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
+    remove_all_spaces(tail);
+
+    /*if (m.arg_.size()) {
+      string arg = left;
+    }*/
+  }
 
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
@@ -589,6 +621,14 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
   //cout << "CODE: " << hex << op << endl;
+}
+
+string CodeLine::prepare_line(string line) {
+  string res = to_upper(line);
+  size_t pos = res.find(',');
+  if (pos != string::npos)
+    res[pos] = ' ';  // try to convert 'mov r0, r1' to 'mov r0  r1'
+  return res;
 }
 
 uint16_t CodeLine::generate_machine_code() {
@@ -773,7 +813,7 @@ void Assembler::extract_defs() {
         string def_name = trim(str.substr(0, pos));
         string def_val = trim(str.substr(pos + 1));
         string def_arg = extract_arg(def_name);
-        def_values_[def_name] = MACRO(def_val, def_arg);
+        g_def_values[def_name] = MACRO(def_val, def_arg);
         if (def_arg.size())
           cout << "DEF " << def_name << "(" << def_arg << ") = " << def_val << endl;
         else
