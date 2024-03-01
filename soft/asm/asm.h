@@ -198,7 +198,6 @@ class FileReader {
   int read_file(string fname, map<int, string> *result);
 
   void handle_char(const char& c);
-  string trim_right(string);
 
  private:
   string line_ {};

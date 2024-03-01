@@ -147,6 +147,52 @@ string to_upper(string s) {
   return s;
 }
 
+string trim_right(string s) {
+  if (s.empty())
+    return {};
+
+  int cnt {0};
+  string::reverse_iterator it;
+  for (it = s.rbegin(); it != s.rend(); it++)
+    if (*it == ' ')
+      cnt++;
+    else
+      break;
+
+  if (cnt > 0)
+    s.resize(s.size() - cnt);
+
+  return s;
+}
+
+string trim_left(string s) {
+  if (s.empty())
+    return {};
+
+  int cnt {0};
+  string::iterator it;
+  for (it = s.begin(); it != s.end(); it++)
+    if (*it == ' ')
+      cnt++;
+    else
+      break;
+
+  if (cnt > 0)
+    s = s.erase(0, cnt);
+
+  return s;
+}
+
+string trim(string s) {
+  return trim_left(trim_right(s));
+}
+
+string remove_quotes(string s) {
+  if (s.size() <= 2)
+    return s;
+  return s.substr(1, s.size() - 2);
+}
+
 bool StrToInt(string val, int* pout, string* err = nullptr) {
   int res = 0;
   try {
@@ -452,6 +498,7 @@ class BranchCodeGen: public CodeGen {
   string label_;
   UINT target_addr_ {0};
 };
+
 ///////////////////////////////////////////////////////////////////////////////
 
 CodeLine::CodeLine(int line_number, string line_text)
@@ -485,6 +532,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   ss >> left;
   ss >> right;
   getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line
+
   // try to remove all spaces
   tail.erase(remove_if(tail.begin(), tail.end(), isspace), tail.end());
 
@@ -659,11 +707,11 @@ void Assembler::extract_string() {
         cout << "Error in string const: '" << it->second << "'" << endl;
         cout << "Line: " << it->first << ". String value not found" << endl;
       } else if (pos < str.size()) {
-        string str_name = str.substr(0, pos);
-        string str_val = str.substr(pos + 1);
+        string str_name = trim(str.substr(0, pos));
+        string str_val = remove_quotes(trim(str.substr(pos + 1)));
         string_consts_[str_name] = str_val;
-        cout << "str_name: " << str_name << endl;
-        cout << "str_val: " << str_val << endl;
+        cout << "str_name: '" << str_name << "'" << endl;
+        cout << "str_val: '" << str_val << "'" << endl;
       }
       it = lines_.erase(it);  // now remove this directive from asm
     }
@@ -742,11 +790,17 @@ void Assembler::out_code() {
   UINT addr {max_addr + 1};
   for (const auto& s : string_consts_) {
     string str = s.second;
-    cout << str << endl;
+    cout << s.first << ":" << endl;
     for (size_t i = 0; i < str.size(); i++)
-      cout
+      cout << "     "
          << setw(4) << setfill('0') << right << addr++ << ": "
-         << UINT(str[i]) << " " << str[i] << endl;
+         << setw(4) << setfill('0') << right << UINT(str[i]) << " "
+         << str[i] << endl;
+
+    cout << "     "
+         << setw(4) << setfill('0') << right << addr++ << ": "
+         << setw(4) << setfill('0') << right << UINT(0) << " "
+         << "Zero" << endl;
   }
 }
 
@@ -816,20 +870,6 @@ void FileReader::handle_char(const char& c) {
 
   if (!skip_comment_)
     line_ += c;
-}
-
-string FileReader::trim_right(string s) {
-  if (s.empty())
-    return {};
-
-  // index of first right non empty char:
-  size_t i = s.size() - 1;  // TODO: try rbegin() here
-  while (s[i] == ' ' && i > 0)
-     i--;
-
-  if (i >= 0 && i < s.size())
-    s.resize(i + 1);  // +1 will convert index to size
-  return s;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
