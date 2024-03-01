@@ -147,6 +147,30 @@ string to_upper(string s) {
   return s;
 }
 
+string normalize_line(string s) {
+  string res;
+  bool skip_space {true};
+  bool in_string {false};
+  for (size_t i = 0; i < s.size(); i++) {
+    if (s[i] == '"')
+      in_string = !in_string;
+
+    if (!in_string) {
+      if (s[i] == ' ') {
+        if (skip_space)
+          continue;
+        else
+          skip_space = true;
+      } else {
+        skip_space = false;
+      }
+    }
+    res += s[i];
+  }
+
+  return res;
+}
+
 string trim_right(string s) {
   if (s.empty())
     return {};
@@ -607,8 +631,8 @@ int main(int argc, char* argv[]) {
     }
 
     // okay, probably cmd is file name ;)
-    Assembler fr;
-    return fr.process(cmd);
+    Assembler assm;
+    return assm.process(cmd);
   }
 
   cout << "argc: " << argc << endl;
@@ -617,7 +641,7 @@ int main(int argc, char* argv[]) {
 
 void help() {
   const char* help_lines[] = {
-      "74HCPU assembler v 0.2\n",
+      "74HCPU assembler v 0.3\n",
       "Support next operations:\n",
       "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
       "memory: LPM, LD, ST\n",
@@ -648,6 +672,7 @@ int Assembler::process(string fname) {
   merge_code_with_labels();
   extract_orgs();
   extract_string();
+  extract_defs();
   pass1();
   pass2();
   pass3();
@@ -675,7 +700,7 @@ void Assembler::extract_orgs() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
     int line = it->first;
-    string org = it->second;
+    string org = normalize_line(it->second);
     if (org.find(".org") == 0) {
       cout << line << ":" << org << endl;
       org.erase(0, sizeof(".org"));
@@ -697,7 +722,7 @@ void Assembler::extract_orgs() {
 void Assembler::extract_string() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
-    string str = it->second;
+    string str = normalize_line(it->second);
     if (str.find(".str") == 0) {
       str.erase(0, sizeof(".str"));
       cout << "str: " << str << endl;
@@ -713,6 +738,30 @@ void Assembler::extract_string() {
         cout << "str_name: '" << str_name << "'" << endl;
         cout << "str_val: '" << str_val << "'" << endl;
       }
+      it = lines_.erase(it);  // now remove this directive from asm
+    }
+    else
+      it++;
+  }
+}
+
+void Assembler::extract_defs() {
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end();) {
+    string str = normalize_line(it->second);
+    if (str.find(".def") == 0) {
+      str.erase(0, sizeof(".def"));
+      str = trim(str);
+
+      size_t pos = str.find(" ");
+      if (pos != string::npos) {
+        string def_name = trim(str.substr(0, pos));
+        string def_val = trim(str.substr(pos + 1));
+        def_values_[def_name] = def_val;
+        cout << "def: " << def_name << "=" << def_val << endl;
+      } else
+        cout << "error in .def directive: " << it->second << endl;
+
       it = lines_.erase(it);  // now remove this directive from asm
     }
     else

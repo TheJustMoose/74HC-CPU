@@ -176,6 +176,7 @@ class Assembler {
   void merge_code_with_labels();
   void extract_orgs();
   void extract_string();
+  void extract_defs();
   void pass1();
   void pass2();
   void pass3();
@@ -189,6 +190,7 @@ class Assembler {
   vector<CodeLine> code_ {};
   map<string, UINT> label_to_address_ {};
   map<string, string> string_consts_ {};
+  map<string, string> def_values_ {};
   map<string, UINT> string_name_to_address_ {};
 };
 
