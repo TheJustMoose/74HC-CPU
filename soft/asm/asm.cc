@@ -791,6 +791,7 @@ void Assembler::out_code() {
   for (const auto& s : string_consts_) {
     string str = s.second;
     cout << s.first << ":" << endl;
+    string_name_to_address_[s.first] = addr;
     for (size_t i = 0; i < str.size(); i++)
       cout << "     " << hex
          << setw(4) << setfill('0') << right << addr++ << ": "
@@ -802,6 +803,10 @@ void Assembler::out_code() {
          << setw(4) << setfill('0') << right << UINT(0) << " "
          << "Zero" << endl;
   }
+
+  cout << "STRINGS ADDR:" << endl;
+  for (const auto& s : string_name_to_address_)
+    cout << s.first << ": " << s.second << endl;
 }
 
 void Assembler::out_labels() {

@@ -189,6 +189,7 @@ class Assembler {
   vector<CodeLine> code_ {};
   map<string, UINT> label_to_address_ {};
   map<string, string> string_consts_ {};
+  map<string, UINT> string_name_to_address_ {};
 };
 
 class FileReader {
