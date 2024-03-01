@@ -172,6 +172,16 @@ class Assembler {
  public:
   int process(string fname);
 
+  class MACRO {
+    public:
+      MACRO() = default;
+      MACRO(string val): val_(val) {}
+      MACRO(string val, string arg): val_(val), arg_(arg) {}
+
+      string val_ {};
+      string arg_ {};
+  };
+
  protected:
   void merge_code_with_labels();
   void extract_orgs();
@@ -190,7 +200,7 @@ class Assembler {
   vector<CodeLine> code_ {};
   map<string, UINT> label_to_address_ {};
   map<string, string> string_consts_ {};
-  map<string, string> def_values_ {};
+  map<string, MACRO> def_values_ {};
   map<string, UINT> string_name_to_address_ {};
 };
 

@@ -773,7 +773,7 @@ void Assembler::extract_defs() {
         string def_name = trim(str.substr(0, pos));
         string def_val = trim(str.substr(pos + 1));
         string def_arg = extract_arg(def_name);
-        def_values_[def_name] = def_val;
+        def_values_[def_name] = MACRO(def_val, def_arg);
         if (def_arg.size())
           cout << "DEF " << def_name << "(" << def_arg << ") = " << def_val << endl;
         else
@@ -792,7 +792,7 @@ void Assembler::extract_defs() {
 void Assembler::pass1() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end(); it++) {
-    code_.push_back(CodeLine(it->first, it->second));
+    code_.push_back(CodeLine(it->first, normalize_line(it->second)));
   }
 }
 
