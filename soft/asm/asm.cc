@@ -574,13 +574,17 @@ CodeLine::CodeLine(int line_number, string line_text)
   getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
   remove_all_spaces(tail);
 
+  string msg;
   if (g_def_values.find(op_name) != g_def_values.end()) {
     const MACRO &m = g_def_values[op_name];
     cout << "have to replace " << op_name << " to " << m.val_ << endl;
     string new_op {m.val_};
-    if (m.arg_.size())
-      new_op = sreplace(new_op, m.arg_, left);
+    if (m.arg_.size()) {
+      new_op = sreplace(new_op, m.arg_, left);  // macro has one arg
+      new_op = sreplace(new_op, m.arg_, left);  // but instructions may have two regs
+    }
     cout << "***** " << new_op << endl;
+    msg = ".def was applied: " + new_op;
 
     stringstream ss(prepare_line(new_op));
     ss >> op_name;      // LD
@@ -588,10 +592,18 @@ CodeLine::CodeLine(int line_number, string line_text)
     ss >> right;        // XI
     getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
     remove_all_spaces(tail);
+  }
 
-    /*if (m.arg_.size()) {
-      string arg = left;
-    }*/
+  if (g_def_values.find(left) != g_def_values.end()) {
+    const MACRO &m = g_def_values[left];
+    cout << "have to replace " << left << " to " << m.val_ << endl;
+    left = m.val_;
+  }
+
+  if (g_def_values.find(right) != g_def_values.end()) {
+    const MACRO &m = g_def_values[right];
+    cout << "have to replace " << right << " to " << m.val_ << endl;
+    right = m.val_;
   }
 
   COP op {cNO_OP};
@@ -618,6 +630,8 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
 
   code_gen_.reset(cg);
+  if (code_gen_ && msg.size())
+    code_gen_->err(msg);
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
   //cout << "CODE: " << hex << op << endl;
