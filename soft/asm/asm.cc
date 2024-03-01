@@ -792,12 +792,12 @@ void Assembler::out_code() {
     string str = s.second;
     cout << s.first << ":" << endl;
     for (size_t i = 0; i < str.size(); i++)
-      cout << "     "
+      cout << "     " << hex
          << setw(4) << setfill('0') << right << addr++ << ": "
          << setw(4) << setfill('0') << right << UINT(str[i]) << " "
          << str[i] << endl;
 
-    cout << "     "
+    cout << "     " << hex
          << setw(4) << setfill('0') << right << addr++ << ": "
          << setw(4) << setfill('0') << right << UINT(0) << " "
          << "Zero" << endl;
