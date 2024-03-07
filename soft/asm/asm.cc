@@ -584,7 +584,7 @@ CodeLine::CodeLine(int line_number, string line_text)
       new_op = sreplace(new_op, m.arg_, left);  // but instructions may have two regs
     }
     cout << "***** " << new_op << endl;
-    msg = ".def was applied: " + new_op;
+    msg = ".def was applied, got: " + new_op;
 
     stringstream ss(prepare_line(new_op));
     ss >> op_name;      // LD

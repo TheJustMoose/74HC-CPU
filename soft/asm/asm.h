@@ -32,7 +32,7 @@ enum COP {
   bSTOP = 0xFD,
   bAFCALL = 0xFE,
   bNOP = 0xFF,    // processor operation
-  cNO_OP = 0x100  // just constant for "there is no operation here", for example for labels
+  cNO_OP = 0x100  // just constant for "there is no operation here", for example for labels or error op names
 };
 
 enum OP_TYPE {
@@ -47,10 +47,12 @@ enum REG : uint16_t {
 enum PTR : uint16_t {
   // Pointer register pairs
   rX = 0, rY = 1, rZ = 2, rSP = 3,
+  // Flags
+  rInc = 0x10, rDec = 0x20,
   // Same pointers but with post increment
-  rXI = 0x10, rYI = 0x11, rZI = 0x12, rSPI = 0x13,
+  rXI = rX | rInc, rYI = rY | rInc, rZI = rZ | rInc, rSPI = rSP | rInc,
   // Same pointers but with post decrement
-  rXD = 0x20, rYD = 0x21, rZD = 0x22, rSPD = 0x23,
+  rXD = rX | rDec, rYD = rY | rDec, rZD = rZ | rDec, rSPD = rSP | rDec,
   rUnkPtr = 0x100
 };
 
