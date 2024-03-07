@@ -184,6 +184,25 @@ class CodeLine {
   string line_text_ {};
 };
 
+class StringConst {
+ public:
+  StringConst() = default;
+  StringConst(const string& str): str_(str) {}
+  StringConst& operator=(const StringConst& rval);
+
+  UINT get_size() const;
+  UINT addr() const { return addr_; }
+  void set_addr(UINT);
+  void out_code() const;
+  string str() const {
+    return str_;
+  }
+
+ private:
+  string str_ {};
+  UINT addr_ {0};
+};
+
 class Assembler {
  public:
   int process(string fname);
@@ -196,6 +215,7 @@ class Assembler {
   void pass1();
   void pass2();
   void pass3();
+  UINT get_max_address();
   void out_code();
   void out_labels();
   void out_orgs();
@@ -205,8 +225,7 @@ class Assembler {
   map<int, UINT> line_to_org_ {};
   vector<CodeLine> code_ {};
   map<string, UINT> label_to_address_ {};
-  map<string, string> string_consts_ {};
-  map<string, UINT> string_name_to_address_ {};
+  map<string, StringConst> string_consts_ {};
 };
 
 class FileReader {

@@ -718,7 +718,7 @@ void help() {
       "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
       "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
       "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+SPH)\n",
-      "PORTS: PORT0-31, PIN0-31",
+      "PORTS: PORT0-31, PIN0-31\n",
       nullptr
   };
 
@@ -727,6 +727,41 @@ void help() {
     cout << help_lines[i];
     i++;
   }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+StringConst& StringConst::operator=(const StringConst& rval) {
+  this->str_ = rval.str_;
+  this->addr_ = rval.addr_;
+  return *this;
+}
+
+UINT StringConst::get_size() const {
+  return str_.size() + 1;
+}
+
+void StringConst::set_addr(UINT addr) {
+  if (addr > 0xFFFF) {
+    cout << "Address is too much: " << addr;
+    return;
+  }
+
+  addr_ = addr;
+}
+
+void StringConst::out_code() const {
+  UINT addr = addr_;
+  for (size_t i = 0; i < str_.size(); i++)
+    cout << "     " << hex
+       << setw(4) << setfill('0') << right << addr++ << ": "
+       << setw(4) << setfill('0') << right << UINT(str_[i]) << " "
+       << str_[i] << endl;
+
+  cout << "     " << hex
+       << setw(4) << setfill('0') << right << addr++ << ": "
+       << setw(4) << setfill('0') << right << UINT(0) << " "
+       << "Zero" << endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -802,7 +837,7 @@ void Assembler::extract_string() {
       } else if (pos < str.size()) {
         string str_name = trim(str.substr(0, pos));
         string str_val = remove_quotes(trim(str.substr(pos + 1)));
-        string_consts_[str_name] = str_val;
+        string_consts_[str_name] = StringConst(str_val);
         cout << "STR '" << str_name << "' = '" << str_val << "'" << endl;
       }
       it = lines_.erase(it);  // now remove this directive from asm
@@ -895,9 +930,33 @@ void Assembler::pass3() {
     it->update_machine_code(label_to_address_);
 }
 
-void Assembler::out_code() {
-  cout << "LINE ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
+UINT Assembler::get_max_address() {
   UINT max_addr {0};
+  vector<CodeLine>::iterator it;
+  for (it = code_.begin(); it != code_.end(); it++)
+    if (max_addr < it->address())
+      max_addr = it->address();
+  return max_addr;
+}
+
+void Assembler::out_code() {
+  UINT max_addr = get_max_address();
+  cout << "max_addr: " << max_addr << endl;
+
+  cout << "STRINGS:" << endl;
+  UINT addr {max_addr + 1};
+  for (auto& s : string_consts_) {
+    cout << s.first << ":" << endl;
+    s.second.set_addr(addr);
+    s.second.out_code();
+    addr += s.second.get_size();
+  }
+
+  cout << "STRINGS ADDR:" << endl;
+  for (const auto& s : string_consts_)
+    cout << s.first << ": " << s.second.addr() << endl;
+
+  cout << "LINE ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++) {
     cout << dec
@@ -913,34 +972,7 @@ void Assembler::out_code() {
     vector<string> el = it->get_err();
     for (auto& e : el)
       cout << " > " << e << endl;
-
-    if (max_addr < it->address())
-      max_addr = it->address();
   }
-
-  cout << "max_addr: " << max_addr << endl;
-
-  cout << "STRINGS:" << endl;
-  UINT addr {max_addr + 1};
-  for (const auto& s : string_consts_) {
-    string str = s.second;
-    cout << s.first << ":" << endl;
-    string_name_to_address_[s.first] = addr;
-    for (size_t i = 0; i < str.size(); i++)
-      cout << "     " << hex
-         << setw(4) << setfill('0') << right << addr++ << ": "
-         << setw(4) << setfill('0') << right << UINT(str[i]) << " "
-         << str[i] << endl;
-
-    cout << "     " << hex
-         << setw(4) << setfill('0') << right << addr++ << ": "
-         << setw(4) << setfill('0') << right << UINT(0) << " "
-         << "Zero" << endl;
-  }
-
-  cout << "STRINGS ADDR:" << endl;
-  for (const auto& s : string_name_to_address_)
-    cout << s.first << ": " << s.second << endl;
 }
 
 void Assembler::out_labels() {
