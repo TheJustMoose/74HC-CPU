@@ -100,7 +100,7 @@ class CodeGen {
   }
 
   REG RegFromName(string name);
-  PTR PtrFromName(string name);
+  PTR PtrFromName(string name, bool* inc, bool* dec);
   uint16_t PortFromName(string name, string prefix);
 
  protected:

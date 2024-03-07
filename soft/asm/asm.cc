@@ -281,12 +281,19 @@ REG CodeGen::RegFromName(string name) {
   }
 }
 
-PTR CodeGen::PtrFromName(string name) {
+PTR CodeGen::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) {
   if (name.empty())
     return rUnkPtr;
-  if (ptr_names.find(name) != ptr_names.end())
-    return ptr_names[name];
-  else {
+
+  PTR ptr {rUnkPtr};
+  if (ptr_names.find(name) != ptr_names.end()) {
+    ptr = ptr_names[name];
+    if (inc)
+      *inc = ptr & rInc;
+    if (dec)
+      *dec = ptr & rDec;
+    return (PTR)(ptr & 0x0F);
+  } else {
     err("Unknown pointer register: " + name);
     return rUnkPtr;
   }
@@ -409,9 +416,9 @@ class MemoryCodeGen: public CodeGen {
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM) {
       reg_ = RegFromName(left);
-      ptr_ = PtrFromName(right);
+      ptr_ = PtrFromName(right, &inc_, &dec_);
     } else if (cop == cST) {
-      ptr_ = PtrFromName(left);
+      ptr_ = PtrFromName(left, &inc_, &dec_);
       reg_ = RegFromName(right);
     } else {
       err("Unknown memory operation. Should be LD or ST or LPM.");
@@ -451,6 +458,8 @@ class MemoryCodeGen: public CodeGen {
     uint16_t cop = operation_ << 8;
     cop |= reg_ << 9;  // don't forget about C bit
     cop |= ptr_ << 6;
+    cop |= dec_ << 5;
+    cop |= inc_ << 4;
     cop |= offset_;
     return cop;
   }
@@ -463,6 +472,8 @@ class MemoryCodeGen: public CodeGen {
  private:
   REG reg_ {rUnkReg};
   PTR ptr_ {rUnkPtr};
+  bool inc_ {false};  // post increment ptr_
+  bool dec_ {false};  // post decrement ptr_
   UINT offset_ {0};
 };
 
@@ -586,6 +597,7 @@ CodeLine::CodeLine(int line_number, string line_text)
     cout << "***** " << new_op << endl;
     msg = ".def was applied, got: " + new_op;
 
+    // Try 2:
     stringstream ss(prepare_line(new_op));
     ss >> op_name;      // LD
     ss >> left;         // R0
