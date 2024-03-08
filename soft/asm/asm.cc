@@ -132,6 +132,7 @@ map<string, COP> cop_names {
 
 map<string, REG> reg_names {
   { "R0", rR0 }, { "R1", rR1 }, { "R2", rR2 }, { "R3", rR3 }, { "R4", rR4 }, { "R5", rR5 }, { "R6", rR6 }, { "R7", rR7 },
+  { "XL", rXL}, { "XH", rXH}, { "YL", rYL}, { "YH", rYH}, { "ZL", rZL}, { "ZH", rZH}, { "SPL", rSPL}, { "SPH", rSPH},
 };
 
 map<string, PTR> ptr_names {
@@ -928,6 +929,8 @@ void Assembler::pass2() {
   addr = max_addr + 1;
   for (auto& s : string_consts_) {
     s.second.set_addr(addr);
+    g_def_values[s.first] = MACRO(to_string(addr));
+    cout << "add def: " << s.first << " = " << to_string(addr) << endl;
     addr += s.second.get_size();
   }
 }
