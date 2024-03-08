@@ -391,7 +391,7 @@ class BinaryCodeGen: public CodeGen {
       return;
     }
 
-    err("replace " + it->first + " to " + to_string(it->second));
+    err("Replace " + it->first + " to " + to_string(it->second));
 
     right_val_ = it->second;
     if (hi)
@@ -610,7 +610,6 @@ CodeLine::CodeLine(int line_number, string line_text)
       cout << "label: " << label << endl;
     }
     line_text_.erase(0, pos + 1);
-    //cout << "line_text_ after label remove: " << line_text_ << endl;
     pos = line_text_.find(":");
   }
   cout << "line tail: " << line_text_ << endl;
@@ -687,7 +686,6 @@ CodeLine::CodeLine(int line_number, string line_text)
     code_gen_->err(msg);
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
-  //cout << "CODE: " << hex << op << endl;
 }
 
 string CodeLine::prepare_line(string line) {
@@ -703,7 +701,6 @@ uint16_t CodeLine::generate_machine_code() {
     return (bNOP << 8) | 0xFF;
 
   uint16_t cop = code_gen_->Emit();
-  //cout << "cop:" << hex << setw(4) << setfill('0') << cop << endl;
   return cop;
 }
 
@@ -869,7 +866,6 @@ void Assembler::extract_string() {
     string str = normalize_line(it->second);
     if (str.find(".str") == 0) {
       str.erase(0, sizeof(".str"));
-      //cout << "str: " << str << endl;
 
       size_t pos = str.find(" ");
       if (pos == string::npos) {
@@ -953,7 +949,6 @@ void Assembler::pass2() {
       }
       oit++;
     }
-    cout << addr << endl;
 
     it->set_address(addr);
 
