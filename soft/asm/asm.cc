@@ -85,7 +85,7 @@ OP_TYPE CopToType(COP cop) {
     return tBINARY;
   else if (cop == cUNO)
     return tUNARY;
-  else if (cop == cLPM || cop == cLD || cop == cST)
+  else if (cop == cLPM || cop == cLPMW || cop == cLD || cop == cST)
     return tMEMORY;
   else if (cop == cIN || cop == cOUT)
     return tIO;
@@ -108,7 +108,7 @@ map<string, COP> cop_names {
   { "MUL", cMUL},
   { "INV", cUNO}, { "SWAP", cUNO}, { "LSR", cUNO}, { "LSRC", cUNO},
   { "MOV", cMOV},
-  { "LPM", cLPM}, { "LD", cLD}, { "LOAD", cLD},
+  { "LPM", cLPM}, { "LPMW", cLPMW}, { "LD", cLD}, { "LOAD", cLD},
   { "IN", cIN}, { "OUT", cOUT},
   { "ST", cST}, { "STORE", cST},
   { "CMP", cCMP}, { "CMPC", cCMPC},
@@ -455,7 +455,7 @@ class MemoryCodeGen: public CodeGen {
  public:
   MemoryCodeGen(COP cop, string left, string right, string tail)
     : CodeGen(cop) {
-    if (cop == cLD || cop == cLPM) {
+    if (cop == cLD || cop == cLPM || cop == cLPMW) {
       reg_ = RegFromName(left);
       ptr_ = PtrFromName(right, &inc_, &dec_);
     } else if (cop == cST) {
