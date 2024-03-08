@@ -897,7 +897,7 @@ void Assembler::pass1() {
   }
 }
 
-// get real address of labels
+// get real address of labels & string
 void Assembler::pass2() {
   UINT addr = 0;
   vector<CodeLine>::iterator it;
@@ -921,6 +921,15 @@ void Assembler::pass2() {
     for (lit = labels.begin(); lit != labels.end(); lit++)
       label_to_address_[*lit] = addr;
   }
+
+  UINT max_addr = get_max_address();
+  cout << "max_addr: " << max_addr << " (" << hex << max_addr << "h)" << endl;
+
+  addr = max_addr + 1;
+  for (auto& s : string_consts_) {
+    s.second.set_addr(addr);
+    addr += s.second.get_size();
+  }
 }
 
 // set real jump addresses
@@ -940,18 +949,6 @@ UINT Assembler::get_max_address() {
 }
 
 void Assembler::out_code() {
-  UINT max_addr = get_max_address();
-  cout << "max_addr: " << max_addr << endl;
-
-  cout << "STRINGS:" << endl;
-  UINT addr {max_addr + 1};
-  for (auto& s : string_consts_) {
-    cout << s.first << ":" << endl;
-    s.second.set_addr(addr);
-    s.second.out_code();
-    addr += s.second.get_size();
-  }
-
   cout << "STRINGS ADDR:" << endl;
   for (const auto& s : string_consts_)
     cout << s.first << ": " << s.second.addr() << endl;
@@ -971,7 +968,14 @@ void Assembler::out_code() {
 
     vector<string> el = it->get_err();
     for (auto& e : el)
-      cout << " > " << e << endl;
+      cout << "         > " << e << endl;
+  }
+
+  cout << "STRINGS:" << endl;
+  for (auto& s : string_consts_) {
+    cout << s.first << ":" << endl;
+    s.second.addr();
+    s.second.out_code();
   }
 }
 
