@@ -66,7 +66,7 @@ class CodeGen {
   virtual ~CodeGen() {}
 
   virtual uint16_t Emit() = 0;
-  virtual void update_machine_code(const map<string, UINT>& label_to_address) {}
+  virtual void update_machine_code(const map<string, UINT>& name_to_address) {}
 
   virtual vector<int> get_blocks() { return {}; }
   virtual string cop() {
@@ -131,7 +131,7 @@ class CodeLine {
   string prepare_line(string line);
 
   uint16_t generate_machine_code();
-  void update_machine_code(const map<string, UINT>& label_to_address);
+  void update_machine_code(const map<string, UINT>& name_to_address);
   string FormattedCOP();
 
   vector<string> get_labels() {
@@ -227,7 +227,7 @@ class Assembler {
   map<int, string> lines_ {};
   map<int, UINT> line_to_org_ {};
   vector<CodeLine> code_ {};
-  map<string, UINT> label_to_address_ {};
+  map<string, UINT> name_to_address_ {};
   map<string, StringConst> string_consts_ {};
 };
 

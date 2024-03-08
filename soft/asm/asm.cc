@@ -325,8 +325,12 @@ void CodeGen::err(string msg) {
 class BinaryCodeGen: public CodeGen {
  public:
   BinaryCodeGen(COP cop, string left, string right)
-    : CodeGen(cop) {
+    : CodeGen(cop), right_str_(right) {
     left_op_ = RegFromName(left);
+    SetImmediate(right);
+  }
+
+  void SetImmediate(string right) {
     int t = 0;
     immediate_ = StrToInt(right, &t);  // MOV R1, 10
     if (immediate_) {
@@ -344,6 +348,8 @@ class BinaryCodeGen: public CodeGen {
 
     if (!immediate_ && right_op_ == rUnkReg)
       err("You have to use Register name or immediate value as rval.");
+    else
+      right_str_ = "";
   }
 
   uint16_t Emit() {
@@ -361,6 +367,39 @@ class BinaryCodeGen: public CodeGen {
     return cop;
   }
 
+  void update_machine_code(const map<string, UINT>& name_to_address) {
+    if (right_str_.empty())
+      return;
+
+    bool hi {false};
+    if (right_str_.find("LO(") == 0)
+      right_str_ = right_str_.substr(3, right_str_.size() - 4);
+    else if (right_str_.find("HI(") == 0) {
+      right_str_ = right_str_.substr(3, right_str_.size() - 4);
+      hi = true;
+    }
+
+    map<string, UINT>::const_iterator it;
+    for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
+      string t = to_upper(it->first);
+      if (t == right_str_)
+        break;
+    }
+
+    if (it == name_to_address.end()) {
+      err("Name " + right_str_ + " not found in symbol list");
+      return;
+    }
+
+    err("replace " + it->first + " to " + to_string(it->second));
+
+    right_val_ = it->second;
+    if (hi)
+      right_val_ >>= 8;
+    right_val_ &= 0x00FF;
+    immediate_ = true;
+  }
+
   vector<int> get_blocks() {
     if (immediate_)
       //    COP dst C value
@@ -375,6 +414,7 @@ class BinaryCodeGen: public CodeGen {
   REG right_op_ {rUnkReg};
   uint16_t right_val_ {0};
   bool immediate_ {false};
+  string right_str_ {};
 };
 
 // LSR R7
@@ -525,9 +565,9 @@ class BranchCodeGen: public CodeGen {
     return cop;
   }
 
-  void update_machine_code(const map<string, UINT>& label_to_address) {
+  void update_machine_code(const map<string, UINT>& name_to_address) {
     map<string, UINT>::const_iterator it;
-    for (it = label_to_address.begin(); it != label_to_address.end(); it++) {
+    for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
       if (to_upper(it->first) == label_) {
         UINT label_addr = it->second;
         if (operation_ == bAFCALL) {
@@ -667,10 +707,10 @@ uint16_t CodeLine::generate_machine_code() {
   return cop;
 }
 
-void CodeLine::update_machine_code(const map<string, UINT>& label_to_address) {
+void CodeLine::update_machine_code(const map<string, UINT>& name_to_address) {
   if (!code_gen_)
     return;
-  code_gen_->update_machine_code(label_to_address);
+  code_gen_->update_machine_code(name_to_address);
 }
 
 string CodeLine::FormattedCOP() {
@@ -920,7 +960,7 @@ void Assembler::pass2() {
     vector<string> labels = it->get_labels();
     vector<string>::iterator lit;
     for (lit = labels.begin(); lit != labels.end(); lit++)
-      label_to_address_[*lit] = addr;
+      name_to_address_[*lit] = addr;
   }
 
   UINT max_addr = get_max_address();
@@ -929,8 +969,8 @@ void Assembler::pass2() {
   addr = max_addr + 1;
   for (auto& s : string_consts_) {
     s.second.set_addr(addr);
-    g_def_values[s.first] = MACRO(to_string(addr));
-    cout << "add def: " << s.first << " = " << to_string(addr) << endl;
+    name_to_address_[s.first] = addr;
+    cout << "add to name_to_address_: " << s.first << " = " << to_string(addr) << endl;
     addr += s.second.get_size();
   }
 }
@@ -939,7 +979,7 @@ void Assembler::pass2() {
 void Assembler::pass3() {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
-    it->update_machine_code(label_to_address_);
+    it->update_machine_code(name_to_address_);
 }
 
 UINT Assembler::get_max_address() {
@@ -984,7 +1024,7 @@ void Assembler::out_code() {
 
 void Assembler::out_labels() {
   cout << "LABELS:" << endl;
-  for (auto v : label_to_address_)
+  for (auto v : name_to_address_)
     //    line number        line code
     cout << v.first << " " << v.second << endl;
 }
