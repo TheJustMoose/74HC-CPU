@@ -87,7 +87,7 @@ OP_TYPE CopToType(COP cop) {
     return tUNARY;
   else if (cop == cLPM || cop == cLPMW || cop == cLD || cop == cST)
     return tMEMORY;
-  else if (cop == cIN || cop == cOUT)
+  else if (cop == cIN || cop == cOUT || cop == cTOGL)
     return tIO;
   else if (cop >= bCALL && cop <= bNOP)
     return tBRANCH;
@@ -109,7 +109,7 @@ map<string, COP> cop_names {
   { "INV", cUNO}, { "SWAP", cUNO}, { "LSR", cUNO}, { "LSRC", cUNO},
   { "MOV", cMOV},
   { "LPM", cLPM}, { "LPMW", cLPMW}, { "LD", cLD}, { "LOAD", cLD},
-  { "IN", cIN}, { "OUT", cOUT},
+  { "IN", cIN}, { "OUT", cOUT}, { "TOGL", cTOGL},
   { "ST", cST}, { "STORE", cST},
   { "CMP", cCMP}, { "CMPC", cCMPC},
   { "CALL", bCALL},
@@ -356,7 +356,7 @@ class BinaryCodeGen: public CodeGen {
     //ARITHM res;
     //res.cop = operation_;
     //return res;
-    uint16_t cop = operation_ << 8;
+    uint16_t cop = operation_;
     cop |= left_op_ << 9;  // don't forget about C bit
     if (immediate_) {
       cop |= right_val_;
@@ -432,7 +432,7 @@ class UnaryCodeGen: public CodeGen {
   }
 
   uint16_t Emit() {
-    uint16_t cop = operation_ << 8;
+    uint16_t cop = operation_;
     cop |= ucode_;
     cop |= reg_ << 9;  // don't forget about C bit
     return cop;
@@ -496,7 +496,7 @@ class MemoryCodeGen: public CodeGen {
   }
 
   uint16_t Emit() {
-    uint16_t cop = operation_ << 8;
+    uint16_t cop = operation_;
     cop |= reg_ << 9;  // don't forget about C bit
     cop |= ptr_ << 6;
     cop |= dec_ << 5;
@@ -526,7 +526,7 @@ class IOCodeGen: public CodeGen {
     if (cop == cIN) {
       reg_ = RegFromName(left);
       port_ = PortFromName(right, "PIN");
-    } else if (cop == cOUT) {
+    } else if (cop == cOUT || cop == cTOGL) {
       port_ = PortFromName(left, "PORT");
       reg_ = RegFromName(right);
     } else {
@@ -535,7 +535,7 @@ class IOCodeGen: public CodeGen {
   }
 
   uint16_t Emit() {
-    uint16_t cop = operation_ << 8;
+    uint16_t cop = operation_;
     cop |= reg_ << 9;
     cop |= port_ << 4;
     return cop;
@@ -558,7 +558,7 @@ class BranchCodeGen: public CodeGen {
     : CodeGen(cop), label_(label) {}
 
   uint16_t Emit() {
-    uint16_t cop = operation_ << 8;
+    uint16_t cop = operation_;
     cop |= (uint16_t)target_addr_;
     if (operation_ == bNOP)
       cop |= 0xFF;

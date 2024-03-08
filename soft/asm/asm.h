@@ -9,30 +9,30 @@ typedef unsigned int UINT;
 
 // Code Of Operation
 enum COP {
-  cADD = 0x00, cADDC = 0x10,
-  cAND = 0x20, cOR = 0x30, cXOR = 0x40,
-  cMUL = 0x50, cUNO = 0x60, cMOV = 0x70,
-  cLPM = 0x80, cLPMW = 0x81, cLD = 0x90,
-  cIN = 0xA0, cOUT = 0xB0,
-  cST = 0xC0,
-  cCMP = 0xD0, cCMPC = 0xE0,
-  bCALL = 0xF0,
-  bJMP = 0xF1,
-  bRET = 0xF2,
-  bJZ = 0xF3,
-  bJL = 0xF4,
-  bJNE = 0xF5,
-  bJE = 0xF6,
-  bJG = 0xF7,
-  bJC = 0xF8,
-  bJNZ = 0xF9,
-  bJNC = 0xFA,
-  bJHC = 0xFB,
-  bJNHC = 0xFC,
-  bSTOP = 0xFD,
-  bAFCALL = 0xFE,
-  bNOP = 0xFF,    // processor operation
-  cNO_OP = 0x100  // just constant for "there is no operation here", for example for labels or error op names
+  cADD = 0x0000, cADDC = 0x1000,
+  cAND = 0x2000, cOR = 0x3000, cXOR = 0x4000,
+  cMUL = 0x5000, cUNO = 0x6000, cMOV = 0x7000,
+  cLPM = 0x8000, cLPMW = 0x8100, cLD = 0x9000,
+  cIN = 0xA000, cOUT = 0xB000, cTOGL = 0xB003,
+  cST = 0xC000,
+  cCMP = 0xD000, cCMPC = 0xE000,
+  bCALL = 0xF000,
+  bJMP = 0xF100,
+  bRET = 0xF200,
+  bJZ = 0xF300,
+  bJL = 0xF400,
+  bJNE = 0xF500,
+  bJE = 0xF600,
+  bJG = 0xF700,
+  bJC = 0xF800,
+  bJNZ = 0xF900,
+  bJNC = 0xFA00,
+  bJHC = 0xFB00,
+  bJNHC = 0xFC00,
+  bSTOP = 0xFD00,
+  bAFCALL = 0xFE00,
+  bNOP = 0xFF00,    // processor operation
+  cNO_OP = 0x10000  // just constant for "there is no operation here", for example for labels or error op names
 };
 
 enum OP_TYPE {
