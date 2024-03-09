@@ -48,7 +48,6 @@
 #include <bitset>
 #include <cctype>
 #include <cstdlib>
-#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <map>
@@ -58,6 +57,8 @@
 #include <windows.h>
 
 #include "asm.h"
+#include "file_reader.h"
+#include "trim.h"
 
 using namespace std;
 
@@ -173,46 +174,6 @@ string normalize_line(string s) {
   }
 
   return res;
-}
-
-string trim_right(string s) {
-  if (s.empty())
-    return {};
-
-  int cnt {0};
-  string::reverse_iterator it;
-  for (it = s.rbegin(); it != s.rend(); it++)
-    if (*it == ' ')
-      cnt++;
-    else
-      break;
-
-  if (cnt > 0)
-    s.resize(s.size() - cnt);
-
-  return s;
-}
-
-string trim_left(string s) {
-  if (s.empty())
-    return {};
-
-  int cnt {0};
-  string::iterator it;
-  for (it = s.begin(); it != s.end(); it++)
-    if (*it == ' ')
-      cnt++;
-    else
-      break;
-
-  if (cnt > 0)
-    s = s.erase(0, cnt);
-
-  return s;
-}
-
-string trim(string s) {
-  return trim_left(trim_right(s));
 }
 
 void remove_all_spaces(string& s) {
@@ -1029,61 +990,6 @@ void Assembler::out_orgs() {
   cout << "ORGS:" << endl;
   for (auto v : line_to_org_)
     cout << v.first << " " << v.second << endl;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int FileReader::read_file(string fname, map<int, string> *result) {
-  if (!result) {
-    cout << "Error: no output array";
-    return 1;
-  }
-
-  ifstream f;
-  f.open(fname, ios::binary);
-  if (!f) {
-    cout << "Error. Can't open file " << fname << endl;
-    return 1;
-  }
-
-  cout << "Processing " << fname << "..." << endl;
-  for_each(istreambuf_iterator<char>(f),
-           istreambuf_iterator<char>(),
-           [this](const char& c) { handle_char(c); });
-
-  handle_char('\n');  // probably there is no EOL on the last line of code
-  f.close();
-
-  *result = std::move(lines_);
-
-  return 0;
-}
-
-void FileReader::handle_char(const char& c) {
-  if (c == '\r')
-    return;
-
-  if (c == ' ' && skip_space_)
-    return;
-
-  skip_space_ = false;
-
-  if (c == '\n') {
-    string t = trim_right(line_);
-    if (!t.empty())
-      lines_[line_num_] = std::move(t);
-    line_ = "";  // not sure about line state after move
-    skip_space_ = true;
-    skip_comment_ = false;
-    line_num_++;
-    return;
-  }
-
-  if (c == ';')
-    skip_comment_ = true;
-
-  if (!skip_comment_)
-    line_ += c;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

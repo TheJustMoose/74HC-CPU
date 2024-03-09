@@ -230,19 +230,3 @@ class Assembler {
   map<string, UINT> name_to_address_ {};
   map<string, StringConst> string_consts_ {};
 };
-
-class FileReader {
- public:
-  FileReader() = default;
-
-  int read_file(string fname, map<int, string> *result);
-
-  void handle_char(const char& c);
-
- private:
-  string line_ {};
-  bool skip_space_ {true};
-  bool skip_comment_ {false};
-  int line_num_ {1};
-  map<int, string> lines_ {};
-};
