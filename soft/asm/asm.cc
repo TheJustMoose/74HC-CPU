@@ -132,6 +132,7 @@ map<string, COP> cop_names {
 
 map<string, REG> reg_names {
   { "R0", rR0 }, { "R1", rR1 }, { "R2", rR2 }, { "R3", rR3 }, { "R4", rR4 }, { "R5", rR5 }, { "R6", rR6 }, { "R7", rR7 },
+// R0.L R0.H R1.L R1.H....
   { "XL", rXL}, { "XH", rXH}, { "YL", rYL}, { "YH", rYH}, { "ZL", rZL}, { "ZH", rZH}, { "SPL", rSPL}, { "SPH", rSPH},
 };
 
@@ -698,7 +699,7 @@ string CodeLine::prepare_line(string line) {
 
 uint16_t CodeLine::generate_machine_code() {
   if (!code_gen_)
-    return (bNOP << 8) | 0xFF;
+    return bNOP | 0xFF;
 
   uint16_t cop = code_gen_->Emit();
   return cop;
