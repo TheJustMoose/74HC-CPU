@@ -26,7 +26,7 @@ string Preprocessor::StripLine(string line) {
     if (line[i] == ';')
       break;
 
-    if (line[i] == ' ') {
+    if (IsSpace(line[i])) {
       if (skip_space)
         continue;
       else
@@ -38,10 +38,14 @@ string Preprocessor::StripLine(string line) {
     res += line[i];
   }
 
-  if (res.size() && *res.rbegin() == ' ')
+  if (res.size() && IsSpace(*res.rbegin()))
     res.resize(res.size() - 1);
 
   return res;
+}
+
+bool Preprocessor::IsSpace(char ch) {
+  return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r';
 }
 
 
