@@ -3,6 +3,8 @@
 
 #include "preprocessor.h"
 
+using namespace std;
+
 TEST_CASE("check preprocessor cleaner") {
   Preprocessor pre;
 
@@ -31,6 +33,10 @@ TEST_CASE("check preprocessor cleaner") {
   CHECK(pre.StripLine("a b ") == "a b");
   CHECK(pre.StripLine("  a b  ") == "a b");
 
+  // check comment removing
+  CHECK(pre.StripLine("LSR R0 ; comment ") == "LSR R0");
+  CHECK(pre.StripLine("LSR R0;comment ") == "LSR R0");
+
   // check labels
   CHECK(pre.StripLine("label: mov  ax, bx  ; test cmd") == "label: mov ax, bx");
   CHECK(pre.StripLine("  LSR   R0  ") == "LSR R0");
@@ -41,4 +47,16 @@ TEST_CASE("check preprocessor cleaner") {
 
   // check different spaces
   CHECK(pre.StripLine("\t\tLSR R0  \n") == "LSR R0");
+}
+
+TEST_CASE("check .def detection") {
+  map<int, string> lines {
+    {1, "mov r0, r1"},
+    {2, ".def ACC R0"}
+  };
+
+  Preprocessor pre;
+  CHECK(!pre.Preprocess(nullptr));
+  CHECK(pre.Preprocess(&lines));
+  CHECK(lines.size() == 1);
 }

@@ -11,4 +11,7 @@ class Preprocessor {
   std::string StripLine(std::string);
 
   bool IsSpace(char);
+
+ private:
+  std::map<int, std::string> defines_ {};
 };

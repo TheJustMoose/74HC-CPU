@@ -15,7 +15,15 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
   for (it = lines->begin(); it != lines->end(); it++)
     it->second = StripLine(it->second);
 
-  return false;
+  for (it = lines->begin(); it != lines->end();) {
+    if (it->second.find(".def") == 0) {
+      defines_[it->first] = it->second;
+      it = lines->erase(it);
+    } else
+      it++;
+  }
+
+  return true;
 }
 
 string Preprocessor::StripLine(string line) {
