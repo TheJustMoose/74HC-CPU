@@ -1,0 +1,3 @@
+[submodule "soft/asm/doctest"]
+	path = soft/asm/doctest
+	url = https://github.com/doctest/doctest.git
