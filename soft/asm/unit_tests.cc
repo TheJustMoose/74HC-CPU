@@ -57,6 +57,37 @@ TEST_CASE("check .def detection") {
 
   Preprocessor pre;
   CHECK(!pre.Preprocess(nullptr));
+
   CHECK(pre.Preprocess(&lines));
   CHECK(lines.size() == 1);
+}
+
+TEST_CASE("check split") {
+  Preprocessor pre;
+
+  CHECK(pre.Split("test").size() == 1);
+
+  vector<string> v = pre.Split("test test");
+  REQUIRE(v.size() == 2);
+  CHECK(v[0] == "test");
+  CHECK(v[1] == "test");
+
+  vector<string> c = pre.Split("add r0, 10");
+  REQUIRE(c.size() == 3);
+  CHECK(c[0] == "add");
+  CHECK(c[1] == "r0");
+  CHECK(c[1] == "10");
+}
+
+TEST_CASE("check simple defines") {
+  map<int, string> lines {
+    {1, "add ACC, r1"},
+    {2, ".def ACC R0"}
+  };
+
+  Preprocessor pre;
+  CHECK(pre.Preprocess(&lines));
+
+  CHECK(lines.size() == 1);
+  CHECK(lines[1] == "add R0, r1");
 }

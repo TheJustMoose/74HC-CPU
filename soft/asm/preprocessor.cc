@@ -11,10 +11,12 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
     return false;
   }
 
+  // remove spaces
   map<int, string>::iterator it;
   for (it = lines->begin(); it != lines->end(); it++)
     it->second = StripLine(it->second);
 
+  // extract defines to another map
   for (it = lines->begin(); it != lines->end();) {
     if (it->second.find(".def") == 0) {
       defines_[it->first] = it->second;
@@ -54,6 +56,24 @@ string Preprocessor::StripLine(string line) {
 
 bool Preprocessor::IsSpace(char ch) {
   return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r';
+}
+
+vector<string> Preprocessor::Split(string line) {
+  vector<string> res;
+
+  string str;
+  for (size_t i = 0; i < line.size(); i++)
+    if (IsSpace(line[i])) {
+      if (str.size())
+        res.push_back(str);
+      str = "";
+    } else
+      str += line[i];
+
+  if (str.size())
+    res.push_back(str);
+
+  return res;
 }
 
 

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 class Preprocessor {
  public:
@@ -11,6 +12,8 @@ class Preprocessor {
   std::string StripLine(std::string);
 
   bool IsSpace(char);
+
+  std::vector<std::string> Split(std::string);
 
  private:
   std::map<int, std::string> defines_ {};
