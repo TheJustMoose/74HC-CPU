@@ -13,8 +13,6 @@ class FileReader {
 
  private:
   std::string line_ {};
-  bool skip_space_ {true};
-  bool skip_comment_ {false};
   int line_num_ {1};
   std::map<int, std::string> lines_ {};
 };

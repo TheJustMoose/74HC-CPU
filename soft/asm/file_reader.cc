@@ -37,25 +37,13 @@ void FileReader::handle_char(const char& c) {
   if (c == '\r')
     return;
 
-  if (c == ' ' && skip_space_)
-    return;
-
-  skip_space_ = false;
-
   if (c == '\n') {
-    string t = trim_right(line_);
-    if (!t.empty())
-      lines_[line_num_] = std::move(t);
+    if (!line_.empty())
+      lines_[line_num_] = std::move(line_);
     line_ = "";  // not sure about line state after move
-    skip_space_ = true;
-    skip_comment_ = false;
     line_num_++;
     return;
   }
 
-  if (c == ';')
-    skip_comment_ = true;
-
-  if (!skip_comment_)
-    line_ += c;
+  line_ += c;
 }

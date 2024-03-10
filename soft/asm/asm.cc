@@ -58,6 +58,7 @@
 
 #include "asm.h"
 #include "file_reader.h"
+#include "preprocessor.h"
 #include "trim.h"
 
 using namespace std;
@@ -771,6 +772,15 @@ int Assembler::process(string fname) {
   int res = fr.read_file(fname, &lines_);
   if (res != 0)
     return res;
+
+  Preprocessor pre;
+  pre.Preprocess(&lines_);
+
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end(); it++)
+    cout << it->second << endl;
+
+  return 1;
 
   merge_code_with_labels();
   extract_orgs();
