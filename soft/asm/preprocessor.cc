@@ -34,14 +34,14 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
   // extract defines to another map
   for (it = lines->begin(); it != lines->end();) {
     vector<string> parts = Split(it->second);
-    if (parts[0] != ".def") {  // TODO: change ne to eq
-      it++;
-      continue;
+    if (parts[0] == ".def") {
+      // remove define from source code
+      it = lines->erase(it);
+      AddDefineIntoMap(std::move(parts));
     }
+    else
+      it++;
 
-    // remove define from source code
-    it = lines->erase(it);
-    AddDefineIntoMap(std::move(parts));
   }
 
   cout << "DEFINE LIST:" << endl;
