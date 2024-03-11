@@ -16,7 +16,7 @@ string join(vector<string> v, char del = '|') {
   return res;
 }
 
-string Define::body() {
+string Define::Body() {
   return join(body_, ' ');
 }
 
@@ -47,7 +47,7 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
   cout << "DEFINE LIST:" << endl;
   map<string, Define>::iterator it2;
   for (it2 = defines_.begin(); it2 != defines_.end(); it2++)
-    cout << it2->first << " == " << it2->second.body() << endl;
+    cout << it2->first << " == " << it2->second.Body() << endl;
 
   ApplyDefines(lines);
 
@@ -76,10 +76,8 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     cout << "process: " << join(parts) << endl;
 
     for (string &p : parts)
-      if (defines_.find(p) != defines_.end()) {
-        vector<string>& body = defines_[p].body_;
-        p = body.size() ? body[0] : string{};
-      }
+      if (defines_.find(p) != defines_.end())
+        p = defines_[p].Body();
 
     it->second = join(parts, ' ');
   }

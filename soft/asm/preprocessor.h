@@ -10,9 +10,9 @@ class Define {
   Define(std::string name, std::vector<std::string> body)
     : name_(name), body_(body) {}
 
-  std::string body();
+  std::string Body();
 
- //private:
+ private:
   std::string name_ {};
   std::vector<std::string> body_ {};
 };
