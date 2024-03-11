@@ -49,19 +49,6 @@ TEST_CASE("check preprocessor cleaner") {
   CHECK(pre.StripLine("\t\tLSR R0  \n") == "LSR R0");
 }
 
-TEST_CASE("check .def detection") {
-  map<int, string> lines {
-    {1, "mov r0, r1"},
-    {2, ".def ACC R0"}
-  };
-
-  Preprocessor pre;
-  CHECK(!pre.Preprocess(nullptr));
-
-  CHECK(pre.Preprocess(&lines));
-  CHECK(lines.size() == 1);
-}
-
 TEST_CASE("check split") {
   Preprocessor pre;
 
@@ -73,16 +60,18 @@ TEST_CASE("check split") {
   CHECK(v[1] == "test");
 
   vector<string> c1 = pre.Split("add r0, 10");
-  REQUIRE(c1.size() == 3);
+  REQUIRE(c1.size() == 4);
   CHECK(c1[0] == "add");
   CHECK(c1[1] == "r0");
-  CHECK(c1[2] == "10");
+  CHECK(c1[2] == ",");
+  CHECK(c1[3] == "10");
 
   vector<string> c2 = pre.Split(" add  r0 , 10 ");
-  REQUIRE(c2.size() == 3);
+  REQUIRE(c2.size() == 4);
   CHECK(c2[0] == "add");
   CHECK(c2[1] == "r0");
-  CHECK(c2[2] == "10");
+  CHECK(c2[2] == ",");
+  CHECK(c2[3] == "10");
 
   vector<string> c3 = pre.Split(".org 100h");
   REQUIRE(c3.size() == 2);
@@ -95,17 +84,18 @@ TEST_CASE("check split") {
   CHECK(c4[1] == "ACC");
   CHECK(c4[2] == "R0");
 }
-/*
-TEST_CASE("check simple defines") {
+
+TEST_CASE("check .def detection & simple defines") {
   map<int, string> lines {
     {1, "add ACC, r1"},
     {2, ".def ACC R0"}
   };
 
   Preprocessor pre;
-  CHECK(pre.Preprocess(&lines));
+  CHECK(!pre.Preprocess(nullptr));
 
+  CHECK(pre.Preprocess(&lines));
   CHECK(lines.size() == 1);
-  CHECK(lines[1] == "add R0, r1");
+  // now all string items separated by space
+  CHECK(lines[1] == "add R0 , r1");
 }
-*/

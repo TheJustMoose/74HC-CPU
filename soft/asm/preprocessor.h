@@ -12,9 +12,11 @@ class Preprocessor {
   std::string StripLine(std::string);
 
   bool IsSpace(char);
+  bool IsDelimeter(char);
 
   std::vector<std::string> Split(std::string);
+  void AddDefineIntoMap(std::vector<std::string> parts);
 
  private:
-  std::map<int, std::string> defines_ {};
+  std::map<std::string, std::vector<std::string>> defines_ {};
 };
