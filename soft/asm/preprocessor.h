@@ -11,6 +11,9 @@ class Define {
     : name_(name), body_(body) {}
 
   std::string Body();
+  std::string BodyWoParams();
+
+  bool HasParams();
 
  private:
   std::string name_ {};

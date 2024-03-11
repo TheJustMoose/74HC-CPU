@@ -20,6 +20,18 @@ string Define::Body() {
   return join(body_, ' ');
 }
 
+string Define::BodyWoParams() {
+  if (!HasParams())
+    return Body();
+
+  vector<string> b;
+  copy_if ? (body_, b);
+}
+
+bool Define::HasParams() {
+  return (body_.size() > 0) && (body_[0] == "(");
+}
+
 bool Preprocessor::Preprocess(map<int, string> *lines) {
   if (!lines) {
     cout << "lines is NULL" << endl;
@@ -77,7 +89,15 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
 
     for (string &p : parts)
       if (defines_.find(p) != defines_.end())
-        p = defines_[p].Body();
+        if (!defines_[p].HasParams()) {
+          string np = defines_[p].Body();
+          cout << "replace: " << p << " <-- " << np << endl;
+          p = np;
+        } else {
+          string np = defines_[p].Body();
+          cout << "replace: " << p << " <-- " << np << endl;
+          p = np;
+        }
 
     it->second = join(parts, ' ');
   }

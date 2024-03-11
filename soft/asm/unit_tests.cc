@@ -100,4 +100,5 @@ TEST_CASE("check .def detection & simple defines") {
   CHECK(lines.size() == 2);
   // now all string items separated by space
   CHECK(lines[1] == "add R0 , r1");
+  CHECK(lines[2] == "ST SPD , r0");
 }
