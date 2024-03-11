@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 
 #include "preprocessor.h"
@@ -62,41 +63,17 @@ vector<string> Preprocessor::Split(string line) {
   vector<string> res;
 
   string str;
-  for (size_t i = 0; i < line.size(); i++)
-    if (IsSpace(line[i])) {
+  for (char ch : line)
+    if (IsSpace(ch) || ch == ',') {
       if (str.size())
         res.push_back(str);
       str = "";
-    } else
-      str += line[i];
+    } else {
+      str += ch;
+    }
 
   if (str.size())
     res.push_back(str);
 
   return res;
 }
-
-
-/*
-  if (c == ' ' && skip_space_)
-    return;
-
-  skip_space_ = false;
-
-  if (c == '\n') {
-    string t = trim_right(line_);
-    if (!t.empty())
-      lines_[line_num_] = std::move(t);
-    line_ = "";  // not sure about line state after move
-    skip_space_ = true;
-    skip_comment_ = false;
-    line_num_++;
-    return;
-  }
-
-  if (c == ';')
-    skip_comment_ = true;
-
-  if (!skip_comment_)
-    line_ += c;
-*/

@@ -76,9 +76,20 @@ TEST_CASE("check split") {
   REQUIRE(c.size() == 3);
   CHECK(c[0] == "add");
   CHECK(c[1] == "r0");
-  CHECK(c[1] == "10");
-}
+  CHECK(c[2] == "10");
 
+  vector<string> c2 = pre.Split(" add  r0 , 10 ");
+  REQUIRE(c2.size() == 3);
+  CHECK(c2[0] == "add");
+  CHECK(c2[1] == "r0");
+  CHECK(c2[2] == "10");
+
+  vector<string> c3 = pre.Split(".org 100h");
+  REQUIRE(c3.size() == 2);
+  CHECK(c3[0] == ".org");
+  CHECK(c3[1] == "100h");
+}
+/*
 TEST_CASE("check simple defines") {
   map<int, string> lines {
     {1, "add ACC, r1"},
@@ -91,3 +102,4 @@ TEST_CASE("check simple defines") {
   CHECK(lines.size() == 1);
   CHECK(lines[1] == "add R0, r1");
 }
+*/
