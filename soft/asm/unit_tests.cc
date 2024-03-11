@@ -88,14 +88,16 @@ TEST_CASE("check split") {
 TEST_CASE("check .def detection & simple defines") {
   map<int, string> lines {
     {1, "add ACC, r1"},
-    {2, ".def ACC R0"}
+    {2, "PUSH r0"},
+    {10, ".def ACC R0"},
+    {11, ".def PUSH(r) ST SPD, r"}
   };
 
   Preprocessor pre;
   CHECK(!pre.Preprocess(nullptr));
 
   CHECK(pre.Preprocess(&lines));
-  CHECK(lines.size() == 1);
+  CHECK(lines.size() == 2);
   // now all string items separated by space
   CHECK(lines[1] == "add R0 , r1");
 }

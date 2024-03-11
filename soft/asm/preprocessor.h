@@ -4,6 +4,19 @@
 #include <string>
 #include <vector>
 
+class Define {
+ public:
+  Define() = default;
+  Define(std::string name, std::vector<std::string> body)
+    : name_(name), body_(body) {}
+
+  std::string body();
+
+ //private:
+  std::string name_ {};
+  std::vector<std::string> body_ {};
+};
+
 class Preprocessor {
  public:
   Preprocessor() = default;
@@ -19,5 +32,5 @@ class Preprocessor {
   void ApplyDefines(std::map<int, std::string> *lines);
 
  private:
-  std::map<std::string, std::vector<std::string>> defines_ {};
+  std::map<std::string, Define> defines_ {};
 };

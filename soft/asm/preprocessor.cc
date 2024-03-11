@@ -16,6 +16,10 @@ string join(vector<string> v, char del = '|') {
   return res;
 }
 
+string Define::body() {
+  return join(body_, ' ');
+}
+
 bool Preprocessor::Preprocess(map<int, string> *lines) {
   if (!lines) {
     cout << "lines is NULL" << endl;
@@ -38,13 +42,12 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
     // remove define from source code
     it = lines->erase(it);
     AddDefineIntoMap(std::move(parts));
-    cout << "should be zero: " << parts.size() << endl;  // TODO: remove it later
   }
 
   cout << "DEFINE LIST:" << endl;
-  map<string, vector<string>>::iterator it2;
+  map<string, Define>::iterator it2;
   for (it2 = defines_.begin(); it2 != defines_.end(); it2++)
-    cout << it2->first << " == " << join(it2->second) << endl;
+    cout << it2->first << " == " << it2->second.body() << endl;
 
   ApplyDefines(lines);
 
@@ -63,7 +66,7 @@ void Preprocessor::AddDefineIntoMap(std::vector<std::string> parts) {
   // move define to map
   string def_name = parts[0];
   parts.erase(parts.begin());
-  defines_[def_name] = parts;
+  defines_[def_name] = Define(def_name, parts);
 }
 
 void Preprocessor::ApplyDefines(map<int, string> *lines) {
@@ -74,8 +77,8 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
 
     for (string &p : parts)
       if (defines_.find(p) != defines_.end()) {
-        vector<string>& strlist = defines_[p];
-        p = strlist.size() ? strlist[0] : string{};
+        vector<string>& body = defines_[p].body_;
+        p = body.size() ? body[0] : string{};
       }
 
     it->second = join(parts, ' ');
