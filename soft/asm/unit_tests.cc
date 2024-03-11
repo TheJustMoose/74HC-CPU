@@ -72,11 +72,11 @@ TEST_CASE("check split") {
   CHECK(v[0] == "test");
   CHECK(v[1] == "test");
 
-  vector<string> c = pre.Split("add r0, 10");
-  REQUIRE(c.size() == 3);
-  CHECK(c[0] == "add");
-  CHECK(c[1] == "r0");
-  CHECK(c[2] == "10");
+  vector<string> c1 = pre.Split("add r0, 10");
+  REQUIRE(c1.size() == 3);
+  CHECK(c1[0] == "add");
+  CHECK(c1[1] == "r0");
+  CHECK(c1[2] == "10");
 
   vector<string> c2 = pre.Split(" add  r0 , 10 ");
   REQUIRE(c2.size() == 3);
@@ -88,6 +88,12 @@ TEST_CASE("check split") {
   REQUIRE(c3.size() == 2);
   CHECK(c3[0] == ".org");
   CHECK(c3[1] == "100h");
+
+  vector<string> c4 = pre.Split(".def\tACC\tR0\n");
+  REQUIRE(c4.size() == 3);
+  CHECK(c4[0] == ".def");
+  CHECK(c4[1] == "ACC");
+  CHECK(c4[2] == "R0");
 }
 /*
 TEST_CASE("check simple defines") {
