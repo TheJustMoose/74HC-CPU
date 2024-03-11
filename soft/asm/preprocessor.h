@@ -16,6 +16,7 @@ class Preprocessor {
 
   std::vector<std::string> Split(std::string);
   void AddDefineIntoMap(std::vector<std::string> parts);
+  void ApplyDefines(std::map<int, std::string> *lines);
 
  private:
   std::map<std::string, std::vector<std::string>> defines_ {};

@@ -46,19 +46,7 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
   for (it2 = defines_.begin(); it2 != defines_.end(); it2++)
     cout << it2->first << " == " << join(it2->second) << endl;
 
-  for (it = lines->begin(); it != lines->end(); it++) {
-    vector<string> parts = Split(it->second);
-    cout << "process: " << join(parts) << endl;
-
-    for (string &p : parts)
-      if (defines_.find(p) != defines_.end()) {
-        vector<string>& strlist = defines_[p];
-        p = strlist.size() ? strlist[0] : string{};
-      }
-
-    it->second = join(parts, ' ');
-  }
-  //ApplyDefine();
+  ApplyDefines(lines);
 
   return true;
 }
@@ -76,6 +64,22 @@ void Preprocessor::AddDefineIntoMap(std::vector<std::string> parts) {
   string def_name = parts[0];
   parts.erase(parts.begin());
   defines_[def_name] = parts;
+}
+
+void Preprocessor::ApplyDefines(map<int, string> *lines) {
+  map<int, string>::iterator it;
+  for (it = lines->begin(); it != lines->end(); it++) {
+    vector<string> parts = Split(it->second);
+    cout << "process: " << join(parts) << endl;
+
+    for (string &p : parts)
+      if (defines_.find(p) != defines_.end()) {
+        vector<string>& strlist = defines_[p];
+        p = strlist.size() ? strlist[0] : string{};
+      }
+
+    it->second = join(parts, ' ');
+  }
 }
 
 string Preprocessor::StripLine(string line) {
