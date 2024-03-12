@@ -89,6 +89,7 @@ TEST_CASE("check .def detection & simple defines") {
   map<int, string> lines {
     {1, "add ACC, r1"},
     {2, "PUSH r0"},
+    {3, "PUSH r7"},
     {10, ".def ACC R0"},
     {11, ".def PUSH(r) ST SPD, r"}
   };
@@ -97,8 +98,9 @@ TEST_CASE("check .def detection & simple defines") {
   CHECK(!pre.Preprocess(nullptr));
 
   CHECK(pre.Preprocess(&lines));
-  CHECK(lines.size() == 2);
+  CHECK(lines.size() == 3);
   // now all string items separated by space
-  CHECK(lines[1] == "add R0 , r1");
+  REQUIRE(lines[1] == "add R0 , r1");
   CHECK(lines[2] == "ST SPD , r0");
+  CHECK(lines[3] == "ST SPD , r7");
 }

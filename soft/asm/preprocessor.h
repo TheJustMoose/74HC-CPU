@@ -11,9 +11,15 @@ class Define {
     : name_(name), body_(body) {}
 
   std::string Body();
+  std::vector<std::string> BodyParts();
+
   std::string BodyWoParams();
+  std::vector<std::string> BodyWoParamsParts();
 
   bool HasParams();
+  bool IsValid();
+
+  std::string ParamName();
 
  private:
   std::string name_ {};

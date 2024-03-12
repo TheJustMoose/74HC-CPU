@@ -20,16 +20,58 @@ string Define::Body() {
   return join(body_, ' ');
 }
 
-string Define::BodyWoParams() {
-  if (!HasParams())
-    return Body();
+vector<string> Define::BodyParts() {
+  return body_;
+}
 
-  vector<string> b;
-  copy_if ? (body_, b);
+string Define::BodyWoParams() {
+  return join(BodyWoParamsParts(), ' ');
+}
+
+vector<string> Define::BodyWoParamsParts() {
+  if (!HasParams() || !IsValid())
+    return BodyParts();
+
+  vector<string>::iterator it = find(body_.begin(), body_.end(), ")");
+  it++;  // the next word after ")"
+  if (it == body_.end())
+    return {};
+
+  vector<string> res;
+  copy(it, body_.end(), back_inserter(res));
+  return res;
 }
 
 bool Define::HasParams() {
   return (body_.size() > 0) && (body_[0] == "(");
+}
+
+bool Define::IsValid() {
+  if (!HasParams())
+    return true;
+
+  // Define with param should have next parts:
+  // name ( param ) body parts
+  // So minimum size is 3: ( param )
+  // Name is stored in name_
+  if (body_.size() < 3) {
+    cout << "Define is too small. It should contain at least: name ( param )" << endl;
+    return false;
+  }
+
+  if (body_[2] != ")") {  // no define name in body_
+    cout << "Can't find closing parenthesis in: " << Body();
+    return false;
+  }
+
+  return true;
+}
+
+string Define::ParamName() {
+  if (!HasParams() || !IsValid())
+    return {};
+
+  return body_[1];
 }
 
 bool Preprocessor::Preprocess(map<int, string> *lines) {
@@ -85,19 +127,41 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
   map<int, string>::iterator it;
   for (it = lines->begin(); it != lines->end(); it++) {
     vector<string> parts = Split(it->second);
+    if (parts.empty())
+      continue;
+
     cout << "process: " << join(parts) << endl;
 
-    for (string &p : parts)
-      if (defines_.find(p) != defines_.end())
-        if (!defines_[p].HasParams()) {
-          string np = defines_[p].Body();
-          cout << "replace: " << p << " <-- " << np << endl;
-          p = np;
-        } else {
-          string np = defines_[p].Body();
-          cout << "replace: " << p << " <-- " << np << endl;
-          p = np;
-        }
+    // process all parts of cmd for simple define
+    for (string &p : parts) {
+      cout << "check part: " << p << endl;
+      map<string, Define>::iterator pit = defines_.find(p);
+      if (pit == defines_.end()) {
+        cout << "part " << p << " is not found" << endl;
+        continue;
+      }
+      if (pit->second.HasParams()) {
+        cout << "this define have param" << endl;
+        continue;
+      }
+
+      string np = pit->second.Body();
+      cout << "replace: " << p << " <-- " << np << endl;
+      p = np;
+    }
+
+    // process only first parts of cmd for define with param
+    map<string, Define>::iterator pit = defines_.find(parts[0]);
+    if (pit != defines_.end())
+      if (pit->second.HasParams() && pit->second.IsValid() && parts.size() > 1) {
+        vector<string> np = pit->second.BodyWoParamsParts();
+        cout << "replace: " << join(parts) << " <-- " << join(np) << endl;
+        string param = parts[1];
+        parts = np;
+        for (size_t i = 0; i < parts.size(); i++)
+          if (parts[i] == pit->second.ParamName())
+            parts[i] = param;
+      }
 
     it->second = join(parts, ' ');
   }
