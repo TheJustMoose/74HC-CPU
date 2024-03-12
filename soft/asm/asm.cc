@@ -899,7 +899,7 @@ void Assembler::out_code() {
   for (const auto& s : string_consts_)
     cout << s.first << ": " << s.second.addr() << endl;
 
-  cout << "LINE ADDR: COP   ASM               LABELS          FORMATTED_COP" << endl;
+  cout << "LINE ADDR: COP   ASM                       LABELS          FORMATTED_COP" << endl;
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++) {
     cout << dec
@@ -907,7 +907,7 @@ void Assembler::out_code() {
          << hex
          << setw(4) << setfill('0') << right << it->address() << ": "
          << setw(4) << setfill('0') << right << it->generate_machine_code() << "  "
-         << setw(16) << setfill(' ') << left << it->get_line_text() << "  "
+         << setw(24) << setfill(' ') << left << it->get_line_text() << "  "
          << setw(16) << setfill(' ') << left << it->get_labels_as_string()
          << setw(16) << setfill(' ') << left << it->FormattedCOP()
          << endl;

@@ -18,6 +18,7 @@ TEST_CASE("check preprocessor cleaner") {
   CHECK(pre.StripLine("") == "");
   CHECK(pre.StripLine(" ") == "");
   CHECK(pre.StripLine("  ") == "");
+  CHECK(pre.StripLine("\n") == "");
 
   // check many spaces in many places
   CHECK(pre.StripLine("a") == "a");
@@ -47,6 +48,8 @@ TEST_CASE("check preprocessor cleaner") {
 
   // check different spaces
   CHECK(pre.StripLine("\t\tLSR R0  \n") == "LSR R0");
+
+  CHECK(pre.StripLine(";.org 1000h") == "");
 }
 
 TEST_CASE("check split") {
@@ -91,6 +94,26 @@ TEST_CASE("check .def detection & simple defines") {
     {2, "PUSH r0"},
     {3, "PUSH r7"},
     {10, ".def ACC R0"},
+    {11, ".def PUSH(r) ST SPD, r"},
+    {13, ";.org 1000h"}
+  };
+
+  Preprocessor pre;
+  CHECK(!pre.Preprocess(nullptr));
+
+  CHECK(pre.Preprocess(&lines));
+  REQUIRE(lines.size() == 4);
+  // now all string items separated by space
+  CHECK(lines[1] == "add R0 , r1");
+  CHECK(lines[2] == "ST SPD , r0");
+  CHECK(lines[3] == "ST SPD , r7");
+  CHECK(lines[4] == "");
+}
+
+TEST_CASE("check labels") {
+  map<int, string> lines {
+    {1, "label:PUSH r0"},
+    {2, "lsr r0"},
     {11, ".def PUSH(r) ST SPD, r"}
   };
 
@@ -98,9 +121,8 @@ TEST_CASE("check .def detection & simple defines") {
   CHECK(!pre.Preprocess(nullptr));
 
   CHECK(pre.Preprocess(&lines));
-  CHECK(lines.size() == 3);
+  REQUIRE(lines.size() == 2);
   // now all string items separated by space
-  REQUIRE(lines[1] == "add R0 , r1");
-  CHECK(lines[2] == "ST SPD , r0");
-  CHECK(lines[3] == "ST SPD , r7");
+  CHECK(lines[1] == "ST SPD , r0");
+  CHECK(lines[2] == "lsr r0");
 }

@@ -132,7 +132,7 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     if (parts[0] == ".str")
       continue;
 
-    cout << "process: " << join(parts) << endl;
+    //cout << "process: " << join(parts) << endl;
 
     // process all parts of cmd for simple define
     for (string &p : parts) {
