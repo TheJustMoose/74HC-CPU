@@ -588,39 +588,6 @@ CodeLine::CodeLine(int line_number, string line_text)
   getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
   remove_all_spaces(tail);
 
-  string msg;
-  if (g_def_values.find(op_name) != g_def_values.end()) {
-    const MACRO &m = g_def_values[op_name];
-    cout << "have to replace " << op_name << " to " << m.val_ << endl;
-    string new_op {m.val_};
-    if (m.arg_.size()) {
-      new_op = sreplace(new_op, m.arg_, left);  // macro has one arg
-      new_op = sreplace(new_op, m.arg_, left);  // but instructions may have two regs
-    }
-    cout << "***** " << new_op << endl;
-    msg = ".def was applied, got: " + new_op;
-
-    // Try 2:
-    stringstream ss(prepare_line(new_op));
-    ss >> op_name;      // LD
-    ss >> left;         // R0
-    ss >> right;        // XI
-    getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
-    remove_all_spaces(tail);
-  }
-
-  if (g_def_values.find(left) != g_def_values.end()) {
-    const MACRO &m = g_def_values[left];
-    cout << "have to replace " << left << " to " << m.val_ << endl;
-    left = m.val_;
-  }
-
-  if (g_def_values.find(right) != g_def_values.end()) {
-    const MACRO &m = g_def_values[right];
-    cout << "have to replace " << right << " to " << m.val_ << endl;
-    right = m.val_;
-  }
-
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
     op = cop_names[op_name];
@@ -645,8 +612,6 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
 
   code_gen_.reset(cg);
-  if (code_gen_ && msg.size())
-    code_gen_->err(msg);
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
 }
@@ -776,16 +741,15 @@ int Assembler::process(string fname) {
   Preprocessor pre;
   pre.Preprocess(&lines_);
 
-  map<int, string>::iterator it;
+  /*map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end(); it++)
     cout << it->second << endl;
 
-  return 1;
+  return 1;*/
 
   merge_code_with_labels();
   extract_orgs();
   extract_string();
-  extract_defs();
   pass1();
   pass2();
   pass3();
@@ -868,34 +832,6 @@ string extract_arg(string& name_w_arg) {
   string arg = name_w_arg.substr(left + 1, right - left - 1);
   name_w_arg.resize(left);
   return arg;
-}
-
-void Assembler::extract_defs() {
-  map<int, string>::iterator it;
-  for (it = lines_.begin(); it != lines_.end();) {
-    string str = normalize_line(it->second);
-    if (str.find(".def") == 0) {
-      str.erase(0, sizeof(".def"));
-      //str = trim(str);
-
-      size_t pos = str.find(" ");
-      if (pos != string::npos) {
-        string def_name = trim(str.substr(0, pos));
-        string def_val = trim(str.substr(pos + 1));
-        string def_arg = extract_arg(def_name);
-        g_def_values[def_name] = MACRO(def_val, def_arg);
-        if (def_arg.size())
-          cout << "DEF " << def_name << "(" << def_arg << ") = " << def_val << endl;
-        else
-          cout << "DEF " << def_name << " = " << def_val << endl;
-      } else
-        cout << "error in .def directive: " << it->second << endl;
-
-      it = lines_.erase(it);  // now remove this directive from asm
-    }
-    else
-      it++;
-  }
 }
 
 // generate machine code

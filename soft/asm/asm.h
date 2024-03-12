@@ -112,18 +112,6 @@ class CodeGen {
   vector<string> errors_ {};
 };
 
-class MACRO {
-  public:
-    MACRO() = default;
-    MACRO(string val): val_(val) {}
-    MACRO(string val, string arg): val_(val), arg_(arg) {}
-
-    string val_ {};
-    string arg_ {};
-};
-
-map<string, MACRO> g_def_values {};
-
 class CodeLine {
  public:
   CodeLine(int line_number, string line_text);

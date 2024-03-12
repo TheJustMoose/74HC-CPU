@@ -82,11 +82,8 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
 
   // remove spaces & comments
   map<int, string>::iterator it;
-  for (it = lines->begin(); it != lines->end(); it++) {
-    cout << "was: " << it->second << "(" << it->second.size() << ")" << endl;
+  for (it = lines->begin(); it != lines->end(); it++)
     it->second = StripLine(it->second);
-    cout << "now: " << it->second << "(" << it->second.size() << ")" << endl;
-  }
 
   // extract defines to another map
   for (it = lines->begin(); it != lines->end();) {
@@ -131,6 +128,8 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
   for (it = lines->begin(); it != lines->end(); it++) {
     vector<string> parts = Split(it->second);
     if (parts.empty())
+      continue;
+    if (parts[0] == ".str")
       continue;
 
     cout << "process: " << join(parts) << endl;
