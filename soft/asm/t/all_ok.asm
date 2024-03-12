@@ -73,9 +73,9 @@ jmp end
 .str Hello "Test string!"
 .str Menu  "Menu"
 
-.def CLR(reg) XOR reg, reg
-.def INC(reg) ADD reg, 1
-.def INCC(reg) ADDC reg, 0
-.def TEST()  STOP
-.def PUSH(r) ST SPD, r
-.def POP(r)  LD r, SPI - 1
+.def clr(reg) XOR reg, reg
+.def inc(reg) ADD reg, 1
+.def incc(reg) ADDC reg, 0
+.def test()  STOP
+.def push(r) ST SPD, r
+.def pop(r)  LD r, SPI - 1
