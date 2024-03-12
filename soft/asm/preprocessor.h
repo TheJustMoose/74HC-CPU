@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+std::string join(std::vector<std::string> v, char del = '|');
+
 class Define {
  public:
   Define() = default;
@@ -14,7 +16,7 @@ class Define {
   std::vector<std::string> BodyParts();
 
   std::string BodyWoParams();
-  std::vector<std::string> BodyWoParamsParts();
+  std::vector<std::string> BodyPartsWoParam();
 
   bool HasParams();
   bool IsValid();

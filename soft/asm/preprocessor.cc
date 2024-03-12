@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string join(vector<string> v, char del = '|') {
+string join(vector<string> v, char del) {
   string res {};
   for (size_t i = 0; i < v.size(); i++) {
     res += v[i];
@@ -25,10 +25,10 @@ vector<string> Define::BodyParts() {
 }
 
 string Define::BodyWoParams() {
-  return join(BodyWoParamsParts(), ' ');
+  return join(BodyPartsWoParam(), ' ');
 }
 
-vector<string> Define::BodyWoParamsParts() {
+vector<string> Define::BodyPartsWoParam() {
   if (!HasParams() || !IsValid())
     return BodyParts();
 
@@ -82,13 +82,16 @@ bool Preprocessor::Preprocess(map<int, string> *lines) {
 
   // remove spaces & comments
   map<int, string>::iterator it;
-  for (it = lines->begin(); it != lines->end(); it++)
+  for (it = lines->begin(); it != lines->end(); it++) {
+    cout << "was: " << it->second << "(" << it->second.size() << ")" << endl;
     it->second = StripLine(it->second);
+    cout << "now: " << it->second << "(" << it->second.size() << ")" << endl;
+  }
 
   // extract defines to another map
   for (it = lines->begin(); it != lines->end();) {
     vector<string> parts = Split(it->second);
-    if (parts[0] == ".def") {
+    if (parts.size() && parts[0] == ".def") {
       // remove define from source code
       it = lines->erase(it);
       AddDefineIntoMap(std::move(parts));
@@ -151,7 +154,7 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     map<string, Define>::iterator pit = defines_.find(parts[0]);
     if (pit != defines_.end())
       if (pit->second.HasParams() && pit->second.IsValid() && parts.size() > 1) {
-        vector<string> np = pit->second.BodyWoParamsParts();
+        vector<string> np = pit->second.BodyPartsWoParam();
         cout << "replace: " << join(parts) << " <-- " << join(np) << endl;
         string param = parts[1];
         parts = np;
