@@ -134,14 +134,11 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
 
     // process all parts of cmd for simple define
     for (string &p : parts) {
-      cout << "check part: " << p << endl;
       map<string, Define>::iterator pit = defines_.find(p);
       if (pit == defines_.end()) {
-        cout << "part " << p << " is not found" << endl;
         continue;
       }
       if (pit->second.HasParams()) {
-        cout << "this define have param" << endl;
         continue;
       }
 
