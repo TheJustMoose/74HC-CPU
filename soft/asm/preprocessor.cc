@@ -132,7 +132,13 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     if (parts[0] == ".str")
       continue;
 
-    //cout << "process: " << join(parts) << endl;
+    size_t colon_pos = parts[0].rfind(':');
+    string labels {};
+    if (colon_pos != string::npos) {
+      labels = parts[0].substr(0, colon_pos + 1);  // +1 will convert pos to prefix length
+      parts[0].erase(0, colon_pos + 1);
+      cout << "labels: " << labels << endl;
+    }
 
     // process all parts of cmd for simple define
     for (string &p : parts) {
@@ -161,6 +167,9 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
           if (parts[i] == pit->second.ParamName())
             parts[i] = param;
       }
+
+    if (labels.size())  // return label back to string
+      parts[0] = labels + parts[0];
 
     it->second = join(parts, ' ');
   }

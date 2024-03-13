@@ -123,6 +123,6 @@ TEST_CASE("check labels") {
   CHECK(pre.Preprocess(&lines));
   REQUIRE(lines.size() == 2);
   // now all string items separated by space
-  CHECK(lines[1] == "ST SPD , r0");
+  CHECK(lines[1] == "label:ST SPD , r0");
   CHECK(lines[2] == "lsr r0");
 }
