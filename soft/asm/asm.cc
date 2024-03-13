@@ -416,7 +416,7 @@ class UnaryCodeGen: public CodeGen {
 // LD R1, XI + 10
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen(COP cop, string left, string right, string tail)
+  MemoryCodeGen(COP cop, string left, string right)
     : CodeGen(cop) {
     if (cop == cLD || cop == cLPM || cop == cLPMW) {
       reg_ = RegFromName(left);
@@ -428,7 +428,7 @@ class MemoryCodeGen: public CodeGen {
       err("Unknown memory operation. Should be LD or ST or LPM.");
     }
 
-    offset_ = parse_offset(tail);
+    //offset_ = parse_offset(tail);
   }
 
   UINT parse_offset(string tail) {
@@ -575,36 +575,29 @@ CodeLine::CodeLine(int line_number, string line_text)
     line_text_.erase(0, pos + 1);
     pos = line_text_.find(":");
   }
-  cout << "line tail: " << line_text_ << endl;
+  cout << "code line w/o label: " << line_text_ << endl;
 
   stringstream ss(to_upper(line_text_));
   // examples:
   // MOV R0, R1
   // JMP label
-  string op_name, left, right, tail;
+  string op_name, left, right;
   ss >> op_name;      // LD
-  cout << "op_name: " << op_name << ", eof: " << ss.eof() << endl;
-  ss >> left;
-  cout << "t0: " << left << ", eof: " << ss.eof() << endl;
 
+  ss >> left;
   while (!ss.eof()) {
     string t;
     ss >> t;
-    if (t == ",") {
-      cout << "skip ," << endl;
+    if (t == ",")
       break;
-    }
     left += t;        // R0 or XI or XI+5
-    cout << "t1: " << t << ", eof: " << ss.eof() << endl;
   }
 
   ss >> right;
-  cout << "t2: " << right << endl;
   while (!ss.eof()) { // && t.size()
     string t;
     ss >> t;
     right += t;       // XI or XI+10 or R0
-    cout << "t3: " << t << endl;
   }
 
   //getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
@@ -625,7 +618,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   switch (opt) {
     case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
     case tUNARY: cg = new UnaryCodeGen(op_name, left); break;
-    case tMEMORY: cg = new MemoryCodeGen(op, left, right, tail); break;
+    case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
     case tIO: cg = new IOCodeGen(op, left, right); break;
     case tBRANCH: cg = new BranchCodeGen(op, left); break;
     case tNO_OP:
@@ -635,7 +628,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   code_gen_.reset(cg);
 
-  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
+  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
 }
 /*
 string CodeLine::prepare_line(string line) {

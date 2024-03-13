@@ -27,6 +27,7 @@ in   r4, pin0
 out  port0, r5
 togl port1, r7
 st   ZI, r6
+st   ZI+3, r7
 cmp  r7, -5
 cmpc r7, 0
 call proc
