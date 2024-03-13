@@ -657,16 +657,20 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  if (argc == 2 && argv[1]) {
+  if (argc >= 2 && argv[1]) {
     string cmd(argv[1]);
     if (cmd == "help") {
       help();
       return 0;
     }
 
+    bool show_pre {false};
+    if (argc > 2 && string(argv[2]) == "-pre")
+      show_pre = true;
+
     // okay, probably cmd is file name ;)
     Assembler assm;
-    return assm.process(cmd);
+    return assm.process(cmd, show_pre);
   }
 
   cout << "argc: " << argc << endl;
@@ -685,6 +689,9 @@ void help() {
       "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
       "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+SPH)\n",
       "PORTS: PORT0-31, PIN0-31\n",
+      "\nRun:\n",
+      "74hc-asm.exe src.asm [-pre]\n",
+      "-pre will print preprocessed src.asm\n",
       nullptr
   };
 
@@ -732,7 +739,7 @@ void StringConst::out_code() const {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int Assembler::process(string fname) {
+int Assembler::process(string fname, bool show_preprocess_out) {
   FileReader fr;
   int res = fr.read_file(fname, &lines_);
   if (res != 0)
@@ -741,11 +748,13 @@ int Assembler::process(string fname) {
   Preprocessor pre;
   pre.Preprocess(&lines_);
 
-  /*map<int, string>::iterator it;
-  for (it = lines_.begin(); it != lines_.end(); it++)
-    cout << it->second << endl;
-
-  return 1;*/
+  if (show_preprocess_out) {
+    cout << "-------- preprocessed source: --------" << endl;
+    map<int, string>::iterator it;
+    for (it = lines_.begin(); it != lines_.end(); it++)
+      cout << it->second << endl;
+    cout << "-------- end of preprocessed source --------" << endl;
+  }
 
   merge_code_with_labels();
   extract_orgs();

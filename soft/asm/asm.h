@@ -196,7 +196,7 @@ class StringConst {
 
 class Assembler {
  public:
-  int process(string fname);
+  int process(string fname, bool show_preprocess_out = false);
 
  protected:
   void merge_code_with_labels();

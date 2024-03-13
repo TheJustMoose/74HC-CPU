@@ -137,7 +137,6 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     if (colon_pos != string::npos) {
       labels = parts[0].substr(0, colon_pos + 1);  // +1 will convert pos to prefix length
       parts[0].erase(0, colon_pos + 1);
-      cout << "labels: " << labels << endl;
     }
 
     // process all parts of cmd for simple define
