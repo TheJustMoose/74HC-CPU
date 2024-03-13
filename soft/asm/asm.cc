@@ -630,15 +630,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
 }
-/*
-string CodeLine::prepare_line(string line) {
-  string res = to_upper(line);
-  size_t pos = res.find(',');
-  if (pos != string::npos)
-    res[pos] = ' ';  // try to convert 'mov r0, r1' to 'mov r0  r1'
-  return res;
-}
-*/
+
 uint16_t CodeLine::generate_machine_code() {
   if (!code_gen_)
     return bNOP | 0xFF;

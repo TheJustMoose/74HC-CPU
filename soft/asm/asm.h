@@ -116,8 +116,6 @@ class CodeLine {
  public:
   CodeLine(int line_number, string line_text);
 
-  //string prepare_line(string line);
-
   uint16_t generate_machine_code();
   void update_machine_code(const map<string, UINT>& name_to_address);
   string FormattedCOP();
