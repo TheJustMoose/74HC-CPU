@@ -290,10 +290,10 @@ class BinaryCodeGen: public CodeGen {
   BinaryCodeGen(COP cop, string left, string right)
     : CodeGen(cop), right_str_(right) {
     left_op_ = RegFromName(left);
-    SetImmediate(right);
+    TryImmediate(right);
   }
 
-  void SetImmediate(string right) {
+  void TryImmediate(string right) {
     int t = 0;
     immediate_ = StrToInt(right, &t);  // MOV R1, 10
     if (immediate_) {
@@ -577,16 +577,38 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
   cout << "line tail: " << line_text_ << endl;
 
-  stringstream ss(prepare_line(line_text_));
+  stringstream ss(to_upper(line_text_));
   // examples:
   // MOV R0, R1
   // JMP label
   string op_name, left, right, tail;
   ss >> op_name;      // LD
-  ss >> left;         // R0
-  ss >> right;        // XI
-  getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
-  remove_all_spaces(tail);
+  cout << "op_name: " << op_name << ", eof: " << ss.eof() << endl;
+  ss >> left;
+  cout << "t0: " << left << ", eof: " << ss.eof() << endl;
+
+  while (!ss.eof()) {
+    string t;
+    ss >> t;
+    if (t == ",") {
+      cout << "skip ," << endl;
+      break;
+    }
+    left += t;        // R0 or XI or XI+5
+    cout << "t1: " << t << ", eof: " << ss.eof() << endl;
+  }
+
+  ss >> right;
+  cout << "t2: " << right << endl;
+  while (!ss.eof()) { // && t.size()
+    string t;
+    ss >> t;
+    right += t;       // XI or XI+10 or R0
+    cout << "t3: " << t << endl;
+  }
+
+  //getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
+  //remove_all_spaces(tail);
 
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
@@ -615,7 +637,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << tail << "|" << endl;
 }
-
+/*
 string CodeLine::prepare_line(string line) {
   string res = to_upper(line);
   size_t pos = res.find(',');
@@ -623,7 +645,7 @@ string CodeLine::prepare_line(string line) {
     res[pos] = ' ';  // try to convert 'mov r0, r1' to 'mov r0  r1'
   return res;
 }
-
+*/
 uint16_t CodeLine::generate_machine_code() {
   if (!code_gen_)
     return bNOP | 0xFF;

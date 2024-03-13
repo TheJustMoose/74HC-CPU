@@ -56,7 +56,7 @@ add r0, r0
 add r0, 10
 ret
 
-mov r1 r2
+mov r1, r2
 nop
 
 push r0
