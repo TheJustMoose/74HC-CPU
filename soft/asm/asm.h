@@ -98,6 +98,7 @@ class CodeGen {
   }
 
   void err(string msg);
+  void clr_err();
   vector<string> get_err() {
     return errors_;
   }

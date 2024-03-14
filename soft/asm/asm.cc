@@ -289,6 +289,10 @@ void CodeGen::err(string msg) {
   errors_.push_back(msg);
 }
 
+void CodeGen::clr_err() {
+  errors_.clear();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 // ADD R0, R1
@@ -362,6 +366,7 @@ class BinaryCodeGen: public CodeGen {
       return;
     }
 
+    clr_err();
     err("Replace " + it->first + " to " + to_string(it->second));
 
     right_val_ = it->second;
