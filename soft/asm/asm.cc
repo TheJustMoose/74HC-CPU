@@ -705,7 +705,7 @@ int main(int argc, char* argv[]) {
 
 void help() {
   const char* help_lines[] = {
-      "74HCPU assembler v 0.3\n",
+      "74HCPU assembler v 0.4\n",
       "Support next operations:\n",
       "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
       "memory: LPM, LD, ST\n",
@@ -715,6 +715,9 @@ void help() {
       "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
       "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+SPH)\n",
       "PORTS: PORT0-31, PIN0-31\n",
+      "Macro: LO()/HI() for pointers, for example:\nmov YL, LO(StringName)\n",
+      "Directives:\n.org 1000h\n.str S \"Some str\"\n.def FROM TO\n.def FROM(param) TO param, bla-bla\n",
+      ".def push(r) ST SPD, r ; example for .def with param\n",
       "\nRun:\n",
       "74hc-asm.exe src.asm [-pre]\n",
       "-pre will print preprocessed src.asm\n",

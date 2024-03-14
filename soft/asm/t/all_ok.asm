@@ -79,4 +79,4 @@ jmp end
 .def incc(reg) ADDC reg, 0
 .def test()  STOP
 .def push(r) ST SPD, r
-.def pop(r)  LD r, SPI - 1
+.def pop(r)  LD r, SPI-1
