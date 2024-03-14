@@ -47,6 +47,7 @@
 #include <algorithm>
 #include <bitset>
 #include <cctype>
+#include <clocale>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -237,6 +238,7 @@ bool StrToInt(string val, int* pout, string* err = nullptr) {
 REG CodeGen::RegFromName(string name) {
   if (name.empty())
     return rUnkReg;
+
   if (reg_names.find(name) != reg_names.end())
     return reg_names[name];
   else {
@@ -248,6 +250,12 @@ REG CodeGen::RegFromName(string name) {
 PTR CodeGen::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) {
   if (name.empty())
     return rUnkPtr;
+
+  size_t len = 0;
+  while (len < name.size() && isalpha(name[len]))
+    len++;
+  if (len != name.size())
+    name.resize(len);
 
   PTR ptr {rUnkPtr};
   if (ptr_names.find(name) != ptr_names.end()) {
@@ -421,17 +429,23 @@ class MemoryCodeGen: public CodeGen {
     if (cop == cLD || cop == cLPM || cop == cLPMW) {
       reg_ = RegFromName(left);
       ptr_ = PtrFromName(right, &inc_, &dec_);
+      offset_ = parse_offset(right);
     } else if (cop == cST) {
       ptr_ = PtrFromName(left, &inc_, &dec_);
       reg_ = RegFromName(right);
+      offset_ = parse_offset(left);
     } else {
       err("Unknown memory operation. Should be LD or ST or LPM.");
     }
-
-    //offset_ = parse_offset(tail);
   }
 
   UINT parse_offset(string tail) {
+    if (tail.empty())
+      return 0;
+
+    while (tail.size() && isalpha(*tail.begin()))
+      tail = tail.erase(0, 1);
+
     if (tail.empty())
       return 0;
 
