@@ -57,19 +57,19 @@ Wire Wire Line
 	6750 3100 6500 3100
 Wire Wire Line
 	6750 3200 6500 3200
-Text Label 3250 2500 0    50   ~ 0
+Text Label 3250 2900 0    50   ~ 0
 D0
-Text Label 3250 2600 0    50   ~ 0
+Text Label 3250 2800 0    50   ~ 0
 D1
 Text Label 3250 2700 0    50   ~ 0
 D2
-Text Label 3250 2800 0    50   ~ 0
-D3
-Text Label 3250 2900 0    50   ~ 0
-D4
 Text Label 3250 3000 0    50   ~ 0
-D5
+D3
 Text Label 3250 3100 0    50   ~ 0
+D4
+Text Label 3250 2600 0    50   ~ 0
+D5
+Text Label 3250 2500 0    50   ~ 0
 D6
 Text Label 3250 3200 0    50   ~ 0
 D7
@@ -116,7 +116,7 @@ L power:VCC #PWR01
 U 1 1 628ED33A
 P 4000 2200
 F 0 "#PWR01" H 4000 2050 50  0001 C CNN
-F 1 "VCC" H 4000 2375 50  0000 C CNN
+F 1 "VCC" H 4000 2350 50  0000 C CNN
 F 2 "" H 4000 2200 50  0001 C CNN
 F 3 "" H 4000 2200 50  0001 C CNN
 	1    4000 2200
@@ -317,12 +317,12 @@ Text Label 9700 5825 0    50   ~ 0
 $Comp
 L 74xx:74LS27 U3
 U 2 1 6296B95D
-P 2950 3400
-F 0 "U3" H 2950 3725 50  0000 C CNN
-F 1 "74LS27" H 2950 3634 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2950 3400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2950 3400 50  0001 C CNN
-	2    2950 3400
+P 2050 4850
+F 0 "U3" H 2050 5175 50  0000 C CNN
+F 1 "74LS27" H 2050 5084 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 4850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 4850 50  0001 C CNN
+	2    2050 4850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -371,32 +371,21 @@ F 3 "" H 6000 1900 50  0001 C CNN
 	1    6000 1900
 	-1   0    0    1   
 $EndComp
-$Comp
-L power:GND #PWR0101
-U 1 1 63557573
-P 3500 3500
-F 0 "#PWR0101" H 3500 3250 50  0001 C CNN
-F 1 "GND" H 3505 3327 50  0000 C CNN
-F 2 "" H 3500 3500 50  0001 C CNN
-F 3 "" H 3500 3500 50  0001 C CNN
-	1    3500 3500
-	1    0    0    -1  
-$EndComp
 Text Label 6500 2200 0    50   ~ 0
 ~CS
-Text Label 4500 2500 0    50   ~ 0
+Text Label 4500 2900 0    50   ~ 0
 L0
-Text Label 4500 2600 0    50   ~ 0
+Text Label 4500 2800 0    50   ~ 0
 L1
 Text Label 4500 2700 0    50   ~ 0
 L2
-Text Label 4500 2800 0    50   ~ 0
-L3
-Text Label 4500 2900 0    50   ~ 0
-L4
 Text Label 4500 3000 0    50   ~ 0
-L5
+L3
 Text Label 4500 3100 0    50   ~ 0
+L4
+Text Label 4500 2600 0    50   ~ 0
+L5
+Text Label 4500 2500 0    50   ~ 0
 L6
 Text Label 4500 3200 0    50   ~ 0
 L7
@@ -716,24 +705,24 @@ $EndComp
 $Comp
 L 74xx:74LS27 U3
 U 1 1 636F573A
-P 2050 4850
-F 0 "U3" H 2050 5175 50  0000 C CNN
-F 1 "74LS27" H 2050 5084 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 4850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 4850 50  0001 C CNN
-	1    2050 4850
-	1    0    0    -1  
-$EndComp
-$Comp
-L 74xx:74LS27 U3
-U 3 1 636F7276
 P 2050 5600
 F 0 "U3" H 2050 5925 50  0000 C CNN
 F 1 "74LS27" H 2050 5834 50  0000 C CNN
 F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 5600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 5600 50  0001 C CNN
-	3    2050 5600
+	1    2050 5600
 	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS27 U3
+U 3 1 636F7276
+P 2950 3400
+F 0 "U3" H 2950 3725 50  0000 C CNN
+F 1 "74LS27" H 2950 3634 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2950 3400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2950 3400 50  0001 C CNN
+	3    2950 3400
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR024
@@ -773,17 +762,6 @@ Wire Wire Line
 	1625 5600 1750 5600
 NoConn ~ 2350 4850
 NoConn ~ 2350 5600
-$Comp
-L 74xx:74HC374 U1
-U 1 1 65F8AF74
-P 4000 3000
-F 0 "U1" H 3775 3675 50  0000 C CNN
-F 1 "74HC374" H 4200 3675 50  0000 C CNN
-F 2 "Package_DIP:DIP-20_W7.62mm" H 4000 3000 50  0001 C CNN
-F 3 "https://www.ti.com/lit/ds/symlink/cd74hct374.pdf" H 4000 3000 50  0001 C CNN
-	1    4000 3000
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:GND #PWR0102
 U 1 1 65FD5B26
@@ -827,4 +805,32 @@ Text Label 5250 2600 0    50   ~ 0
 L6
 Text Label 5250 2500 0    50   ~ 0
 L7
+$Comp
+L 74xx:74HC273 U1
+U 1 1 65FBFB4A
+P 4000 3000
+F 0 "U1" H 3750 3650 50  0000 C CNN
+F 1 "74HC273" H 4200 3650 50  0000 C CNN
+F 2 "Package_DIP:DIP-20_W7.62mm" H 4000 3000 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT273.pdf" H 4000 3000 50  0001 C CNN
+	1    4000 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J5
+U 1 1 65FCB403
+P 9500 2000
+F 0 "J5" H 9608 2181 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 9125 2025 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 9500 2000 50  0001 C CNN
+F 3 "~" H 9500 2000 50  0001 C CNN
+	1    9500 2000
+	1    0    0    -1  
+$EndComp
+Text Label 9700 2000 0    50   ~ 0
+Res
+Wire Wire Line
+	3250 3500 3500 3500
+Text Label 3250 3500 0    50   ~ 0
+Res
 $EndSCHEMATC
