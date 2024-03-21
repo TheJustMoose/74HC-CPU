@@ -317,12 +317,12 @@ Text Label 9700 5825 0    50   ~ 0
 $Comp
 L 74xx:74LS27 U3
 U 2 1 6296B95D
-P 2050 4850
-F 0 "U3" H 2050 5175 50  0000 C CNN
-F 1 "74LS27" H 2050 5084 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 4850 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 4850 50  0001 C CNN
-	2    2050 4850
+P 2050 5600
+F 0 "U3" H 2050 5925 50  0000 C CNN
+F 1 "74LS27" H 2050 5834 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 5600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 5600 50  0001 C CNN
+	2    2050 5600
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -705,12 +705,12 @@ $EndComp
 $Comp
 L 74xx:74LS27 U3
 U 1 1 636F573A
-P 2050 5600
-F 0 "U3" H 2050 5925 50  0000 C CNN
-F 1 "74LS27" H 2050 5834 50  0000 C CNN
-F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2050 5600 50  0001 C CNN
-F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2050 5600 50  0001 C CNN
-	1    2050 5600
+P 2950 4275
+F 0 "U3" H 2950 4600 50  0000 C CNN
+F 1 "74LS27" H 2950 4509 50  0000 C CNN
+F 2 "Package_SO:SO-14_3.9x8.65mm_P1.27mm" H 2950 4275 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2950 4275 50  0001 C CNN
+	1    2950 4275
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -724,24 +724,11 @@ F 3 "http://www.ti.com/lit/gpn/sn74LS27" H 2950 3400 50  0001 C CNN
 	3    2950 3400
 	1    0    0    1   
 $EndComp
-$Comp
-L power:GND #PWR024
-U 1 1 636FBAA1
-P 1625 4850
-F 0 "#PWR024" H 1625 4600 50  0001 C CNN
-F 1 "GND" H 1630 4677 50  0000 C CNN
-F 2 "" H 1625 4850 50  0001 C CNN
-F 3 "" H 1625 4850 50  0001 C CNN
-	1    1625 4850
-	0    1    1    0   
-$EndComp
 Wire Wire Line
-	1750 4750 1750 4850
-Connection ~ 1750 4850
+	2650 4175 2650 4275
+Connection ~ 2650 4275
 Wire Wire Line
-	1750 4850 1750 4950
-Wire Wire Line
-	1625 4850 1750 4850
+	2650 4275 2650 4375
 $Comp
 L power:GND #PWR025
 U 1 1 636FE071
@@ -760,7 +747,6 @@ Wire Wire Line
 	1750 5600 1750 5700
 Wire Wire Line
 	1625 5600 1750 5600
-NoConn ~ 2350 4850
 NoConn ~ 2350 5600
 $Comp
 L power:GND #PWR0102
@@ -830,7 +816,13 @@ $EndComp
 Text Label 9700 2000 0    50   ~ 0
 Res
 Wire Wire Line
-	3250 3500 3500 3500
-Text Label 3250 3500 0    50   ~ 0
+	2400 4275 2650 4275
+Text Label 2400 4275 0    50   ~ 0
 Res
+Wire Wire Line
+	3500 3500 3375 3500
+Wire Wire Line
+	3375 3500 3375 4275
+Wire Wire Line
+	3375 4275 3250 4275
 $EndSCHEMATC
