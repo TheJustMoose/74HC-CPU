@@ -3,6 +3,7 @@ from uc_lexer import *
 from uc_token import *
 #from uc_tag import *
 from uc_parse import *
+import traceback
 
 Word.Init()
 Type.Init()
@@ -15,4 +16,5 @@ try:
   parse.program();
   print("used: %d" % parse.used)
 except Exception as e:
+  traceback.print_exc()
   print(e)

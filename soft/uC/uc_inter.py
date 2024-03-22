@@ -18,7 +18,7 @@ class Node:
   def emitlabel(self, i):
     print("L" + str(i) + ":")
 
-  def emit(s):
+  def emit(self, s):
     print("\t" + s)
 
 
@@ -71,14 +71,14 @@ class Seq(Stmt):
 
   def gen(self, b, a):
     if self.stmt1 == Stmt.Null:
-      stmt2.gen(b, a)
+      self.stmt2.gen(b, a)
     elif self.stmt2 == Stmt.Null:
-      stmt1.gen(b, a)
+      self.stmt1.gen(b, a)
     else:
-      label = newlabel()
-      stmt1.gen(b, label)
-      emitlabel(label)
-      stmt2.gen(label, a)
+      label = self.newlabel()
+      self.stmt1.gen(b, label)
+      self.emitlabel(label)
+      self.stmt2.gen(label, a)
 
 
 class Set(Stmt):
