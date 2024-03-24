@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <string>
 #include "token.h"
 
@@ -12,7 +13,7 @@ class Lexer {
   void reserve(Word* w);
   void readch();
   bool readch(char c);
-  Token scan();
+  std::shared_ptr<Token> scan();
 
   static Word* If();
   static Word* Else();
@@ -22,5 +23,6 @@ class Lexer {
 
  private:
   char peek_ {' '};
-  std::map<std::string, Word*> words_ {};
+  int line_ {1};
+  static std::map<std::string, std::shared_ptr<Token>> words_;
 };

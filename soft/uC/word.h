@@ -13,16 +13,16 @@ class Word: public Token {
     return lexeme_;
   }
 
-  static Word* And();
-  static Word* Or();
-  static Word* Eq();
-  static Word* Ne();
-  static Word* Le();
-  static Word* Ge();
-  static Word* Minus();
-  static Word* True();
-  static Word* False();
-  static Word* Temp();
+  static std::shared_ptr<Token> And();
+  static std::shared_ptr<Token> Or();
+  static std::shared_ptr<Token> Eq();
+  static std::shared_ptr<Token> Ne();
+  static std::shared_ptr<Token> Le();
+  static std::shared_ptr<Token> Ge();
+  static std::shared_ptr<Token> Minus();
+  static std::shared_ptr<Token> True();
+  static std::shared_ptr<Token> False();
+  static std::shared_ptr<Token> Temp();
 
  private:
   void Init();

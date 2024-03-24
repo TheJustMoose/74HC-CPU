@@ -37,5 +37,5 @@ class Parser {
 
  private:
   Lexer* lex_;               // lexical analyzer for this parser
-  Token look_ {Tag::EMPTY};  // lookahead tagen
+  Token look_ {Tag::EMPTY};  // lookahead token
 };
