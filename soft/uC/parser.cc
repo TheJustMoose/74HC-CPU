@@ -3,6 +3,8 @@
 #include "lexer.h"
 #include "tag.h"
 
+using namespace std;
+
 Parser::Parser(Lexer* l)
   : lex_(l) {
   move();

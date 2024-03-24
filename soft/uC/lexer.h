@@ -1,10 +1,10 @@
 #pragma once
 
 #include <map>
-#include <memory>
 #include <string>
 #include "token.h"
-#include "word.h"
+
+class Word;
 
 class Lexer {
  public:
@@ -13,6 +13,12 @@ class Lexer {
   void readch();
   bool readch(char c);
   Token scan();
+
+  static Word* If();
+  static Word* Else();
+  static Word* While();
+  static Word* Do();
+  static Word* Break();
 
  private:
   char peek_ {' '};

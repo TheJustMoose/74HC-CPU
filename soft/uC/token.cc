@@ -2,9 +2,11 @@
 
 #include <string>
 
-Token::Token(int t)
+using namespace std;
+
+Token::Token(Tag t)
   : tag_(t) {}
 
 string Token::toString() {
-  return to_string(tag_);
+  return to_string((int)tag_);
 }

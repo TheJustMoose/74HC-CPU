@@ -1,0 +1,4 @@
+lexer.cc:49:1: warning: non-void function does not return a value [-Wreturn-type]
+}
+^
+1 warning generated.
