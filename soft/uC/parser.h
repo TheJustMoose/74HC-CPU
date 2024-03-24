@@ -8,6 +8,8 @@
 #include "stmt.h"
 #include "type.h"
 
+class Lexer;
+
 class Parser {
  public:
   Parser(Lexer* l);
