@@ -1,12 +1,13 @@
 #pragma once
 
 #include <string>
+#include "tag.h"
 
 class Token {
  public:
-  Token(int t);
+  Token(Tag t);
   std::string toString();
 
  private:
-  int tag_ {};
+  Tag tag_ {};
 };
