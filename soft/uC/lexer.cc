@@ -9,7 +9,8 @@
 using namespace std;
 
 // static
-std::map<std::string, Word*> Lexer::words_ {};
+map<string, Word*> Lexer::words_ {};
+vector<unique_ptr<Word>> words_holder_ {};
 
 Lexer::Lexer() {
   reserve( Lexer::If() );
@@ -49,7 +50,7 @@ bool Lexer::readch(char c) {
   return true;
 }
 
-Token Lexer::scan() {
+Token* Lexer::scan() {
   for( ; ; readch() ) {
     if (peek_ == ' ' || peek_ == '\t' || peek_ == '\r')
       continue;
@@ -104,10 +105,11 @@ Token Lexer::scan() {
     } while (isalpha(peek_));
 
     if (words_.find(b) != words_.end())
-      return words_[w];
+      return words_[b];
 
-    w = new Word(s, Tag.ID);
-    words.put(s, w);
+    Word* w = new Word(s, Tag.ID);
+    words_[s] = w;
+    words_holder_.emplace_back(make_unique<Word>(w));
     return w;
   } 
 

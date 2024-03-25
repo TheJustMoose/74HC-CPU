@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 #include "token.h"
 
 class Word;
@@ -13,7 +14,7 @@ class Lexer {
   void reserve(Word* w);
   void readch();
   bool readch(char c);
-  std::shared_ptr<Token> scan();
+  Token* scan();
 
   static Word* If();
   static Word* Else();
@@ -24,5 +25,7 @@ class Lexer {
  private:
   char peek_ {' '};
   int line_ {1};
-  static std::map<std::string, std::shared_ptr<Token>> words_;
+
+  static std::map<std::string, Word*> words_;
+  static std::vector<std::unique_ptr<Word>> words_holder_;
 };

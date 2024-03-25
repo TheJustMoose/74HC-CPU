@@ -36,6 +36,6 @@ class Parser {
   Access offset(Id a);
 
  private:
-  Lexer* lex_;               // lexical analyzer for this parser
-  Token look_ {Tag::EMPTY};  // lookahead token
+  Lexer* lex_ {nullptr};   // lexical analyzer for this parser
+  Token* look_ {nullptr};  // lookahead token
 };
