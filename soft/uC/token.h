@@ -11,6 +11,8 @@ class Token {
 
   std::string toString();
 
+  Tag tag() { return tag_; }
+
  private:
   Tag tag_ {};
 };

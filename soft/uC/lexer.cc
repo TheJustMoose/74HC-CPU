@@ -14,7 +14,8 @@ using namespace std;
 map<string, Word*> Lexer::words_ {};
 vector<unique_ptr<Word>> Lexer::words_holder_ {};
 
-Lexer::Lexer() {
+Lexer::Lexer(istream& is)
+  : is_(is) {
   reserve( Lexer::If() );
   reserve( Lexer::Else() );
   reserve( Lexer::While() );
@@ -40,7 +41,7 @@ void Lexer::reserve(Word* w) {
 }
 
 void Lexer::readch() {
-  cin >> peek_;
+  is_ >> peek_;
 }
 
 bool Lexer::readch(char c) {

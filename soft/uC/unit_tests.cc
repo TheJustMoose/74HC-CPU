@@ -9,5 +9,9 @@ using namespace std;
 TEST_CASE("check Lexer") {
   CHECK(Lexer::If()->toString() == "if");
 
-  //CHECK(pre.IsSpace(' '));
+  stringstream ss("1 + 2");
+  Lexer lex(ss);
+  Token* t = lex.scan();
+  CHECK( t );
+  CHECK( t->tag() == Tag::tNUM );
 }

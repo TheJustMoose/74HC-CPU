@@ -8,9 +8,13 @@
 
 class Word;
 
+namespace str {
+class istream;
+}
+
 class Lexer {
  public:
-  Lexer();
+  Lexer(std::istream& is);
   void reserve(Word* w);
   void readch();
   bool readch(char c);
@@ -25,6 +29,8 @@ class Lexer {
  private:
   char peek_ {' '};
   int line_ {1};
+
+  std::istream& is_;
 
   static std::map<std::string, Word*> words_;
   static std::vector<std::unique_ptr<Word>> words_holder_;
