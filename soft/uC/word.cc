@@ -13,51 +13,51 @@ string Word::toString() {
 }
 
 Word* Word::And() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "&&", Tag::AND );
+  static unique_ptr<Word> ptr = make_unique<Word>( "&&", Tag::tAND );
   return ptr.get();
 }
 
 Word* Word::Or() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "||", Tag::OR );
+  static unique_ptr<Word> ptr = make_unique<Word>( "||", Tag::tOR );
   return ptr.get();
 }
 
 Word* Word::Eq() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "==", Tag::EQ );
+  static unique_ptr<Word> ptr = make_unique<Word>( "==", Tag::tEQ );
   return ptr.get();
 }
 
 Word* Word::Ne() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "!=", Tag::NE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "!=", Tag::tNE );
   return ptr.get();
 }
 
 Word* Word::Le() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "<=", Tag::LE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "<=", Tag::tLE );
   return ptr.get();
 }
 
 Word* Word::Ge() {
-  static unique_ptr<Word> ptr = make_unique<Word>( ">=", Tag::GE );
+  static unique_ptr<Word> ptr = make_unique<Word>( ">=", Tag::tGE );
   return ptr.get();
 }
 
 Word* Word::Minus() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "minus", Tag::MINUS );
+  static unique_ptr<Word> ptr = make_unique<Word>( "minus", Tag::tMINUS );
   return ptr.get();
 }
 
 Word* Word::True() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "true", Tag::TRUE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "true", Tag::tTRUE );
   return ptr.get();
 }
 
 Word* Word::False() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "false", Tag::FALSE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "false", Tag::tFALSE );
   return ptr.get();
 }
 
 Word* Word::Temp() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "t", Tag::TEMP );
+  static unique_ptr<Word> ptr = make_unique<Word>( "t", Tag::tTEMP );
   return ptr.get();
 }

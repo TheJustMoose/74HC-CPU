@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <cctype>
+#include "num.h"
+#include "real.h"
 #include "tag.h"
 #include "type.h"
 #include "word.h"
@@ -10,7 +12,7 @@ using namespace std;
 
 // static
 map<string, Word*> Lexer::words_ {};
-vector<unique_ptr<Word>> words_holder_ {};
+vector<unique_ptr<Word>> Lexer::words_holder_ {};
 
 Lexer::Lexer() {
   reserve( Lexer::If() );
@@ -75,12 +77,12 @@ Token* Lexer::scan() {
       if( readch('=') ) return Word::Ge();   else return new Token('>');
   }
 
-  if (is_digit(peek_)) {
+  if (isdigit(peek_)) {
     int v = 0;
     do {
       v = 10*v + int(peek_ - '0');
       readch();
-    } while( is_digit(peek_) );
+    } while( isdigit(peek_) );
 
     if( peek_ != '.' )
       return new Num(v);
@@ -89,7 +91,7 @@ Token* Lexer::scan() {
     float d = 10;
     for (;;) {
       readch();
-      if (! is_digit(peek_))
+      if (! isdigit(peek_))
         break;
       x = x + int(peek_ - '0') / d;
       d *= 10;
@@ -107,38 +109,38 @@ Token* Lexer::scan() {
     if (words_.find(b) != words_.end())
       return words_[b];
 
-    Word* w = new Word(s, Tag.ID);
-    words_[s] = w;
-    words_holder_.emplace_back(make_unique<Word>(w));
+    Word* w = new Word(b, Tag::tID);
+    words_[b] = w;
+    words_holder_.emplace_back(unique_ptr<Word>(w));
     return w;
   } 
 
-  Token tok = new Token(peek_);
+  Token* tok = new Token(peek_);
   peek_ = ' ';
   return tok;
 }
 
 Word* Lexer::If() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "if", Tag::IF );
+  static unique_ptr<Word> ptr = make_unique<Word>( "if", Tag::tIF );
   return ptr.get();
 }
 
 Word* Lexer::Else() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "else", Tag::ELSE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "else", Tag::tELSE );
   return ptr.get();
 }
 
 Word* Lexer::While() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "while", Tag::WHILE );
+  static unique_ptr<Word> ptr = make_unique<Word>( "while", Tag::tWHILE );
   return ptr.get();
 }
 
 Word* Lexer::Do() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "do", Tag::DO );
+  static unique_ptr<Word> ptr = make_unique<Word>( "do", Tag::tDO );
   return ptr.get();
 }
 
 Word* Lexer::Break() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "break", Tag::BREAK );
+  static unique_ptr<Word> ptr = make_unique<Word>( "break", Tag::tBREAK );
   return ptr.get();
 }

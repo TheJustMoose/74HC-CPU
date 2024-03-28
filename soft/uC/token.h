@@ -6,6 +6,7 @@
 class Token {
  public:
   Token(Tag t);
+  Token(char c);
   virtual ~Token() {}
 
   std::string toString();

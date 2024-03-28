@@ -1,3 +1,6 @@
 [submodule "soft/asm/doctest"]
 	path = soft/asm/doctest
 	url = https://github.com/doctest/doctest.git
+[submodule "soft/uC/doctest"]
+	path = soft/uC/doctest
+	url = https://github.com/doctest/doctest.git

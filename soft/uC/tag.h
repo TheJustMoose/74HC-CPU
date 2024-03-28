@@ -1,9 +1,9 @@
 #pragma once
 
 enum class Tag {
-  EMPTY = 0,
-  AND   = 256,  BASIC = 257,  BREAK = 258,  DO   = 259, ELSE  = 260,
-  EQ    = 261,  FALSE = 262,  GE    = 263,  ID   = 264, IF    = 265,
-  INDEX = 266,  LE    = 267,  MINUS = 268,  NE   = 269, NUM   = 270,
-  OR    = 271,  REAL  = 272,  TEMP  = 273,  TRUE = 274, WHILE = 275
+  tEMPTY = 0,
+  tAND   = 256,  tBASIC = 257,  tBREAK = 258,  tDO   = 259, tELSE  = 260,
+  tEQ    = 261,  tFALSE = 262,  tGE    = 263,  tID   = 264, tIF    = 265,
+  tINDEX = 266,  tLE    = 267,  tMINUS = 268,  tNE   = 269, tNUM   = 270,
+  tOR    = 271,  tREAL  = 272,  tTEMP  = 273,  tTRUE = 274, tWHILE = 275
 };
