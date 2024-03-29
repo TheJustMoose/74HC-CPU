@@ -4,7 +4,6 @@
 #include <cctype>
 
 #include "lexer.h"
-#include "num.h"
 #include "word.h"
 
 using namespace std;

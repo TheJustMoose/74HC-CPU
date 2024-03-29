@@ -2,8 +2,6 @@
 
 #include <iostream>
 #include <cctype>
-#include "num.h"
-#include "real.h"
 #include "tag.h"
 #include "type.h"
 #include "word.h"
