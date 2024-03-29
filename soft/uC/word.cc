@@ -47,16 +47,6 @@ Word* Word::Minus() {
   return ptr.get();
 }
 
-Word* Word::True() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "true", Tag::tTRUE );
-  return ptr.get();
-}
-
-Word* Word::False() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "false", Tag::tFALSE );
-  return ptr.get();
-}
-
 Word* Word::Temp() {
   static unique_ptr<Word> ptr = make_unique<Word>( "t", Tag::tTEMP );
   return ptr.get();

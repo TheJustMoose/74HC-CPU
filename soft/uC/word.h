@@ -21,8 +21,8 @@ class Word: public Token {
   static Word* Le();
   static Word* Ge();
   static Word* Minus();
-  static Word* True();
-  static Word* False();
+  //static Word* True();
+  //static Word* False();
   static Word* Temp();
 
  private:

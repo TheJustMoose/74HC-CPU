@@ -16,14 +16,14 @@ vector<unique_ptr<Word>> Lexer::words_holder_ {};
 
 Lexer::Lexer(istream& is)
   : is_(is) {
-  reserve( Lexer::If() );
-  reserve( Lexer::Else() );
-  reserve( Lexer::While() );
-  reserve( Lexer::Do() );
-  reserve( Lexer::Break() );
+  reserve( new Word( "if", Tag::tIF ) );
+  reserve( new Word( "else", Tag::tELSE ) );
+  reserve( new Word( "while", Tag::tWHILE ) );
+  reserve( new Word( "do", Tag::tDO ) );
+  reserve( new Word( "break", Tag::tBREAK ) );
 
-  reserve( Word::True() );
-  reserve( Word::False() );
+  reserve( new Word( "true", Tag::tTRUE ) );
+  reserve( new Word( "false", Tag::tFALSE ) );
 
   reserve( Type::Int()  );
   reserve( Type::Char()  );
@@ -37,7 +37,13 @@ void Lexer::reserve(Word* w) {
     return;
   }
 
+  if (words_.find(w->lexeme()) != words_.end()) {
+    delete w;  // no good, but work
+    return;
+  }
+
   words_[w->lexeme()] = w;
+  words_holder_.emplace_back(unique_ptr<Word>(w));  // Okay, we will own this object
 }
 
 void Lexer::readch() {
@@ -125,29 +131,4 @@ Token* Lexer::scan() {
   Token* tok = new Token(peek_);
   peek_ = ' ';
   return tok;
-}
-
-Word* Lexer::If() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "if", Tag::tIF );
-  return ptr.get();
-}
-
-Word* Lexer::Else() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "else", Tag::tELSE );
-  return ptr.get();
-}
-
-Word* Lexer::While() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "while", Tag::tWHILE );
-  return ptr.get();
-}
-
-Word* Lexer::Do() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "do", Tag::tDO );
-  return ptr.get();
-}
-
-Word* Lexer::Break() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "break", Tag::tBREAK );
-  return ptr.get();
 }

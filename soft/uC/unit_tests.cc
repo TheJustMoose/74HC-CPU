@@ -36,8 +36,6 @@ TEST_CASE("check Num") {
 }
 
 TEST_CASE("check Lexer") {
-  CHECK(Lexer::If()->toString() == "if");
-
   stringstream ss("1 + 234");
   Lexer lex(ss);
 
@@ -54,7 +52,23 @@ TEST_CASE("check Lexer") {
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "234" );
-
+  // end of file / stream /etc
   t = lex.scan();
   CHECK( t == nullptr );
+}
+
+TEST_CASE("check dictionary") {
+  stringstream ss("word word word");
+  Lexer lex(ss);
+
+  Token* t1 = lex.scan();
+  REQUIRE( t1 );
+  Token* t2 = lex.scan();
+  REQUIRE( t2 );
+  Token* t3 = lex.scan();
+  REQUIRE( t3 );
+
+  // we should have only one copy of word
+  CHECK( t1 == t2 );
+  CHECK( t2 == t3 );
 }
