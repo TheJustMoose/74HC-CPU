@@ -7,7 +7,7 @@ class Word: public Token {
  public:
   Word(std::string s, Tag tag);
 
-  std::string toString();
+  std::string toString() override;
 
   std::string lexeme() {
     return lexeme_;

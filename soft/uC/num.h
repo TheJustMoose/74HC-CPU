@@ -8,7 +8,7 @@ class Num : public Token {
   Num(int v);
   virtual ~Num() {}
 
-  std::string toString();
+  std::string toString() override;
 
  private:
   int value_ {0};

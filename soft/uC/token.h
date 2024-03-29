@@ -9,7 +9,7 @@ class Token {
   Token(char c);
   virtual ~Token() {}
 
-  std::string toString();
+  virtual std::string toString();
 
   Tag tag() { return tag_; }
 

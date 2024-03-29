@@ -41,7 +41,8 @@ void Lexer::reserve(Word* w) {
 }
 
 void Lexer::readch() {
-  is_ >> peek_;
+  if (!is_.get(peek_))
+    peek_ = 0;
 }
 
 bool Lexer::readch(char c) {
@@ -59,6 +60,8 @@ Token* Lexer::scan() {
       continue;
     else if (peek_ == '\n')
       line_++;
+    else if (peek_ == 0)
+      return nullptr;
     else
       break;
   }
@@ -83,7 +86,7 @@ Token* Lexer::scan() {
     do {
       v = 10*v + int(peek_ - '0');
       readch();
-    } while( isdigit(peek_) );
+    } while(peek_ && isdigit(peek_) );
 
     if( peek_ != '.' )
       return new Num(v);
@@ -115,6 +118,9 @@ Token* Lexer::scan() {
     words_holder_.emplace_back(unique_ptr<Word>(w));
     return w;
   } 
+
+  if (peek_ == 0)
+    return nullptr;
 
   Token* tok = new Token(peek_);
   peek_ = ' ';

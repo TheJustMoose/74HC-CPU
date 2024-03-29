@@ -8,7 +8,7 @@ class Real : public Token {
   Real(float v);
   virtual ~Real() {}
 
-  std::string toString();
+  std::string toString() override;
 
  private:
   float value_ {0};
