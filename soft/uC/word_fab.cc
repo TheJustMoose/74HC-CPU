@@ -1,7 +1,7 @@
 #include "word_fab.h"
 
 #include "tag.h"
-#include "word.h"
+#include "token.h"
 
 using namespace std;
 

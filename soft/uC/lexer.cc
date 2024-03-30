@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cctype>
 #include "tag.h"
-#include "word.h"
+#include "token.h"
 #include "word_fab.h"
 
 using namespace std;

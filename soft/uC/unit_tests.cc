@@ -4,7 +4,7 @@
 #include <cctype>
 
 #include "lexer.h"
-#include "word.h"
+#include "token.h"
 
 using namespace std;
 

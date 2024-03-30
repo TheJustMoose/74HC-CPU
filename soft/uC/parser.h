@@ -7,7 +7,7 @@
 #include "expr.h"
 #include "id.h"
 #include "stmt.h"
-#include "word.h"
+#include "token.h"
 
 class Lexer;
 
