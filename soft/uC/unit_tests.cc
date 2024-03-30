@@ -85,4 +85,23 @@ TEST_CASE("check dictionary") {
   // we should have only one copy of word
   CHECK( t1 == t2 );
   CHECK( t2 == t3 );
+
+  CHECK( t1->tag() == Tag::tID );
+}
+
+TEST_CASE("check key words") {
+  stringstream ss("if do else");
+  Lexer lex(ss);
+
+  shared_ptr<Token> t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tIF );
+
+  t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tDO );
+
+  t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tELSE );
 }
