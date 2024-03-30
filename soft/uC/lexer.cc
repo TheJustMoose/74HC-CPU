@@ -9,39 +9,36 @@
 using namespace std;
 
 // static
-map<string, Word*> Lexer::words_ {};
-vector<unique_ptr<Word>> Lexer::words_holder_ {};
+map<string, shared_ptr<Token>> Lexer::words_ {};
 
 Lexer::Lexer(istream& is)
   : is_(is) {
-  reserve( new Word( "if", Tag::tIF ) );
-  reserve( new Word( "else", Tag::tELSE ) );
-  reserve( new Word( "while", Tag::tWHILE ) );
-  reserve( new Word( "do", Tag::tDO ) );
-  reserve( new Word( "break", Tag::tBREAK ) );
+  reserve( shared_ptr<Word>(new Word( "if", Tag::tIF )) );
+  reserve( shared_ptr<Word>(new Word( "else", Tag::tELSE )) );
+  reserve( shared_ptr<Word>(new Word( "while", Tag::tWHILE )) );
+  reserve( shared_ptr<Word>(new Word( "do", Tag::tDO )) );
+  reserve( shared_ptr<Word>(new Word( "break", Tag::tBREAK )) );
 
-  reserve( new Word( "true", Tag::tTRUE ) );
-  reserve( new Word( "false", Tag::tFALSE ) );
+  reserve( shared_ptr<Word>(new Word( "true", Tag::tTRUE )) );
+  reserve( shared_ptr<Word>(new Word( "false", Tag::tFALSE )) );
 
-  reserve( Type::Int()  );
-  reserve( Type::Char()  );
-  reserve( Type::Bool() );
-  reserve( Type::Float() );
+  reserve( shared_ptr<Word>(Type::Int()) );
+  reserve( shared_ptr<Word>(Type::Char()) );
+  reserve( shared_ptr<Word>(Type::Bool()) );
+  reserve( shared_ptr<Word>(Type::Float()) );
 }
 
-void Lexer::reserve(Word* w) {
+void Lexer::reserve(shared_ptr<Word> w) {
   if (!w) {
     cerr << "Word is NULL" << endl;
     return;
   }
 
-  if (words_.find(w->lexeme()) != words_.end()) {
-    delete w;  // no good, but work
+  // w will be removed during return cause ref count will become zero
+  if (words_.find(w->lexeme()) != words_.end())
     return;
-  }
 
   words_[w->lexeme()] = w;
-  words_holder_.emplace_back(unique_ptr<Word>(w));  // Okay, we will own this object
 }
 
 void Lexer::readch() {
@@ -58,7 +55,7 @@ bool Lexer::readch(char c) {
   return true;
 }
 
-Token* Lexer::scan() {
+shared_ptr<Token> Lexer::scan() {
   for( ; ; readch() ) {
     if (peek_ == ' ' || peek_ == '\t' || peek_ == '\r')
       continue;
@@ -72,17 +69,17 @@ Token* Lexer::scan() {
 
   switch( peek_ ) {
     case '&':
-      if( readch('&') ) return Word::And();  else return new Token('&');
+      if( readch('&') ) return Word::And();  else return shared_ptr<Token>(new Token('&'));
     case '|':
-      if( readch('|') ) return Word::Or();   else return new Token('|');
+      if( readch('|') ) return Word::Or();   else return shared_ptr<Token>(new Token('|'));
     case '=':
-      if( readch('=') ) return Word::Eq();   else return new Token('=');
+      if( readch('=') ) return Word::Eq();   else return shared_ptr<Token>(new Token('='));
     case '!':
-      if( readch('=') ) return Word::Ne();   else return new Token('!');
+      if( readch('=') ) return Word::Ne();   else return shared_ptr<Token>(new Token('!'));
     case '<':
-      if( readch('=') ) return Word::Le();   else return new Token('<');
+      if( readch('=') ) return Word::Le();   else return shared_ptr<Token>(new Token('<'));
     case '>':
-      if( readch('=') ) return Word::Ge();   else return new Token('>');
+      if( readch('=') ) return Word::Ge();   else return shared_ptr<Token>(new Token('>'));
   }
 
   if (isdigit(peek_)) {
@@ -93,7 +90,7 @@ Token* Lexer::scan() {
     } while(peek_ && isdigit(peek_) );
 
     if( peek_ != '.' )
-      return new Num(v);
+      return shared_ptr<Token>(new Num(v));
 
     float x = v;
     float d = 10;
@@ -104,7 +101,7 @@ Token* Lexer::scan() {
       x = x + int(peek_ - '0') / d;
       d *= 10;
     }
-    return new Real(x);
+    return shared_ptr<Token>(new Real(x));
   }
 
   if (isalpha(peek_)) {
@@ -117,16 +114,15 @@ Token* Lexer::scan() {
     if (words_.find(b) != words_.end())
       return words_[b];
 
-    Word* w = new Word(b, Tag::tID);
+    shared_ptr<Word> w(new Word(b, Tag::tID));
     words_[b] = w;
-    words_holder_.emplace_back(unique_ptr<Word>(w));
     return w;
   } 
 
   if (peek_ == 0)
-    return nullptr;
+    return shared_ptr<Token>();
 
-  Token* tok = new Token(peek_);
+  shared_ptr<Token> tok(new Token(peek_));
   peek_ = ' ';
   return tok;
 }

@@ -1,7 +1,5 @@
 #include "word.h"
 
-#include <memory>
-
 using namespace std;
 
 Word::Word(std::string s, Tag tag)
@@ -12,42 +10,35 @@ string Word::toString() {
   return lexeme_;
 }
 
-Word* Word::And() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "&&", Tag::tAND );
-  return ptr.get();
+// static
+shared_ptr<Word> Word::And() {
+  return shared_ptr<Word>( new Word( "&&", Tag::tAND ) );
 }
 
-Word* Word::Or() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "||", Tag::tOR );
-  return ptr.get();
+shared_ptr<Word> Word::Or() {
+  return shared_ptr<Word>( new Word( "||", Tag::tOR ) );
 }
 
-Word* Word::Eq() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "==", Tag::tEQ );
-  return ptr.get();
+shared_ptr<Word> Word::Eq() {
+  return shared_ptr<Word>( new Word( "==", Tag::tEQ ) );
 }
 
-Word* Word::Ne() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "!=", Tag::tNE );
-  return ptr.get();
+shared_ptr<Word> Word::Ne() {
+  return shared_ptr<Word>( new Word( "!=", Tag::tNE ) );
 }
 
-Word* Word::Le() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "<=", Tag::tLE );
-  return ptr.get();
+shared_ptr<Word> Word::Le() {
+  return shared_ptr<Word>( new Word( "<=", Tag::tLE ) );
 }
 
-Word* Word::Ge() {
-  static unique_ptr<Word> ptr = make_unique<Word>( ">=", Tag::tGE );
-  return ptr.get();
+shared_ptr<Word> Word::Ge() {
+  return shared_ptr<Word>( new Word( ">=", Tag::tGE ) );
 }
 
-Word* Word::Minus() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "minus", Tag::tMINUS );
-  return ptr.get();
+shared_ptr<Word> Word::Minus() {
+  return shared_ptr<Word>( new Word( "minus", Tag::tMINUS ) );
 }
 
-Word* Word::Temp() {
-  static unique_ptr<Word> ptr = make_unique<Word>( "t", Tag::tTEMP );
-  return ptr.get();
+shared_ptr<Word> Word::Temp() {
+  return shared_ptr<Word>( new Word( "t", Tag::tTEMP ) );
 }

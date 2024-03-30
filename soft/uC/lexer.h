@@ -15,10 +15,10 @@ class istream;
 class Lexer {
  public:
   Lexer(std::istream& is);
-  Token* scan();
+  std::shared_ptr<Token> scan();
 
  protected:
-  void reserve(Word* w);
+  void reserve(std::shared_ptr<Word> w);
   void readch();
   bool readch(char c);
 
@@ -28,7 +28,6 @@ class Lexer {
 
   std::istream& is_;
 
-  // only one Lexer can work
-  static std::map<std::string, Word*> words_;
-  static std::vector<std::unique_ptr<Word>> words_holder_;
+  // only one Lexer can work now
+  static std::map<std::string, std::shared_ptr<Token>> words_;
 };

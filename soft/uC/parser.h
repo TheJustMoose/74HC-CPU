@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include "access.h"
@@ -37,5 +38,5 @@ class Parser {
 
  private:
   Lexer* lex_ {nullptr};   // lexical analyzer for this parser
-  Token* look_ {nullptr};  // lookahead token
+  std::shared_ptr<Token> look_;  // lookahead token
 };

@@ -28,7 +28,7 @@ TEST_CASE("check Num") {
   stringstream ss("1");
   Lexer lex(ss);
 
-  Token* t = lex.scan();
+  shared_ptr<Token> t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "1" );
@@ -38,7 +38,7 @@ TEST_CASE("check Lexer") {
   stringstream ss("1 + 234");
   Lexer lex(ss);
 
-  Token* t = lex.scan();
+  shared_ptr<Token> t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "1" );
@@ -60,11 +60,11 @@ TEST_CASE("check dictionary") {
   stringstream ss("word word word");
   Lexer lex(ss);
 
-  Token* t1 = lex.scan();
+  shared_ptr<Token> t1 = lex.scan();
   REQUIRE( t1 );
-  Token* t2 = lex.scan();
+  shared_ptr<Token> t2 = lex.scan();
   REQUIRE( t2 );
-  Token* t3 = lex.scan();
+  shared_ptr<Token> t3 = lex.scan();
   REQUIRE( t3 );
 
   // we should have only one copy of word
