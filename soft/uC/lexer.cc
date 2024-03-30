@@ -4,6 +4,7 @@
 #include <cctype>
 #include "tag.h"
 #include "word.h"
+#include "word_fab.h"
 
 using namespace std;
 
@@ -68,17 +69,17 @@ shared_ptr<Token> Lexer::scan() {
 
   switch( peek_ ) {
     case '&':
-      if( readch('&') ) return Word::And();  else return shared_ptr<Token>(new Token('&'));
+      if( readch('&') ) return And();  else return shared_ptr<Token>(new Token('&'));
     case '|':
-      if( readch('|') ) return Word::Or();   else return shared_ptr<Token>(new Token('|'));
+      if( readch('|') ) return Or();   else return shared_ptr<Token>(new Token('|'));
     case '=':
-      if( readch('=') ) return Word::Eq();   else return shared_ptr<Token>(new Token('='));
+      if( readch('=') ) return Eq();   else return shared_ptr<Token>(new Token('='));
     case '!':
-      if( readch('=') ) return Word::Ne();   else return shared_ptr<Token>(new Token('!'));
+      if( readch('=') ) return Ne();   else return shared_ptr<Token>(new Token('!'));
     case '<':
-      if( readch('=') ) return Word::Le();   else return shared_ptr<Token>(new Token('<'));
+      if( readch('=') ) return Le();   else return shared_ptr<Token>(new Token('<'));
     case '>':
-      if( readch('=') ) return Word::Ge();   else return shared_ptr<Token>(new Token('>'));
+      if( readch('=') ) return Ge();   else return shared_ptr<Token>(new Token('>'));
   }
 
   if (isdigit(peek_)) {
