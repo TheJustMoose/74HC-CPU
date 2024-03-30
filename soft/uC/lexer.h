@@ -29,5 +29,5 @@ class Lexer {
   std::istream& is_;
 
   // only one Lexer can work now
-  static std::map<std::string, std::shared_ptr<Token>> words_;
+  static std::map<std::string, std::shared_ptr<Word>> words_;
 };

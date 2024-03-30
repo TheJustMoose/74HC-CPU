@@ -8,7 +8,7 @@
 using namespace std;
 
 // static
-map<string, shared_ptr<Token>> Lexer::words_ {};
+map<string, shared_ptr<Word>> Lexer::words_ {};
 
 Lexer::Lexer(istream& is)
   : is_(is) {
