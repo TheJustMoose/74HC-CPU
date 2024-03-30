@@ -104,12 +104,14 @@ shared_ptr<Token> Lexer::scan() {
     return shared_ptr<Token>(new Real(x));
   }
 
-  if (isalpha(peek_)) {
+  // IDs should start from letter or underscore
+  if (isalpha(peek_) || (peek_ == '_')) {
     string b;
     do {
       b += peek_;
       readch();
-    } while (isalpha(peek_));
+    } while (isalpha(peek_) || isdigit(peek_) || (peek_ == '_'));
+    // and may contain digit
 
     if (words_.find(b) != words_.end())
       return words_[b];

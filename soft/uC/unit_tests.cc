@@ -105,3 +105,28 @@ TEST_CASE("check key words") {
   REQUIRE( t );
   CHECK( t->tag() == Tag::tELSE );
 }
+
+TEST_CASE("check id chars") {
+  stringstream ss("test  t0  t_0st  __und__");
+  Lexer lex(ss);
+
+  shared_ptr<Token> t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tID );
+  CHECK( t->toString() == "test" );
+
+  t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tID );
+  CHECK( t->toString() == "t0" );
+
+  t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tID );
+  CHECK( t->toString() == "t_0st" );
+
+  t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tID );
+  CHECK( t->toString() == "__und__" );
+}
