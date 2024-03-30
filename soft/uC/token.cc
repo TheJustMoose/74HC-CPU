@@ -18,8 +18,7 @@ Num::Num(int v)
   : Token(Tag::tNUM), value_(v) {}
 
 string Num::toString() {
-  string res = to_string(value_);
-  return res;
+  return to_string(value_);
 }
 
 Real::Real(float v)
