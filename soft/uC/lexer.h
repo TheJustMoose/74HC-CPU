@@ -17,6 +17,10 @@ class Lexer {
   Lexer(std::istream& is);
   std::shared_ptr<Token> scan();
 
+  int line() {
+    return line_;
+  }
+
  protected:
   void reserve(std::shared_ptr<Word> w);
   void readch();

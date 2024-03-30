@@ -7,6 +7,7 @@
 #include "expr.h"
 #include "id.h"
 #include "stmt.h"
+#include "tag.h"
 #include "token.h"
 
 class Lexer;
@@ -17,7 +18,7 @@ class Parser {
 
   void move();
   void error(std::string s);
-  void match(int t);
+  void match(Tag t);
   void program();
   Stmt block();
   void decls();
