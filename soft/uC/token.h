@@ -26,8 +26,6 @@ class Num : public Token {
   Num(int v)
     : Token(Tag::tNUM), value_(v) {}
 
-  virtual ~Num() {}
-
   std::string toString() override;
 
  private:
@@ -38,8 +36,6 @@ class Real : public Token {
  public:
   Real(float v)
     : Token(Tag::tREAL), value_(v) {}
-
-  virtual ~Real() {}
 
   std::string toString() override;
 
