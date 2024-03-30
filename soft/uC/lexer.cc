@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cctype>
 #include "tag.h"
-#include "type.h"
 #include "word.h"
 
 using namespace std;
@@ -22,10 +21,10 @@ Lexer::Lexer(istream& is)
   reserve( shared_ptr<Word>(new Word( "true", Tag::tTRUE )) );
   reserve( shared_ptr<Word>(new Word( "false", Tag::tFALSE )) );
 
-  reserve( shared_ptr<Word>(Type::Int()) );
-  reserve( shared_ptr<Word>(Type::Char()) );
-  reserve( shared_ptr<Word>(Type::Bool()) );
-  reserve( shared_ptr<Word>(Type::Float()) );
+  reserve( shared_ptr<Word>(new Type( "int", Tag::tBASIC, 4 )) );
+  reserve( shared_ptr<Word>(new Type( "float", Tag::tBASIC, 8 )) );
+  reserve( shared_ptr<Word>(new Type( "char", Tag::tBASIC, 1 )) );
+  reserve( shared_ptr<Word>(new Type( "bool", Tag::tBASIC, 1 )) );
 }
 
 void Lexer::reserve(shared_ptr<Word> w) {

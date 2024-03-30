@@ -29,3 +29,12 @@ class Word: public Token {
 
   std::string lexeme_ {};
 };
+
+class Type: public Word {
+ public:
+  Type(std::string s, Tag tag, int w)
+    : Word(s, tag), width_(w) {}
+
+ private:
+  int width_ {0};
+};
