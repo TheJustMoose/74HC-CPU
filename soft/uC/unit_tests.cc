@@ -65,6 +65,7 @@ TEST_CASE("check Lexer") {
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "234" );
+
   // end of file / stream /etc
   t = lex.scan();
   CHECK( t == nullptr );
