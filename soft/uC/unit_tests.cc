@@ -16,6 +16,7 @@ TEST_CASE("check cpp lib") {
   CHECK( isdigit(0) == 0 );
 
   CHECK( to_string(1) == "1");
+  CHECK( to_string(1.0) == "1.000000");
   CHECK( to_string(321) == "321");
 }
 
@@ -32,6 +33,19 @@ TEST_CASE("check Num") {
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "1" );
+}
+
+TEST_CASE("check Real") {
+  Real r(1.5);
+  CHECK( r.toString() == "1.500000" );  // no good, no good ;)
+
+  stringstream ss("1.5");
+  Lexer lex(ss);
+
+  shared_ptr<Token> t = lex.scan();
+  REQUIRE( t );
+  CHECK( t->tag() == Tag::tREAL );
+  CHECK( t->toString() == "1.500000" );
 }
 
 TEST_CASE("check Lexer") {
