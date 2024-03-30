@@ -5,8 +5,12 @@
 
 class Token {
  public:
-  Token(Tag t);
-  Token(char c);
+  Token(Tag t)
+    : tag_(t) {}
+
+  Token(char c)
+    : tag_((Tag)c) {}
+
   virtual ~Token() {}
 
   virtual std::string toString();
@@ -19,7 +23,9 @@ class Token {
 
 class Num : public Token {
  public:
-  Num(int v);
+  Num(int v)
+    : Token(Tag::tNUM), value_(v) {}
+
   virtual ~Num() {}
 
   std::string toString() override;
@@ -30,7 +36,9 @@ class Num : public Token {
 
 class Real : public Token {
  public:
-  Real(float v);
+  Real(float v)
+    : Token(Tag::tREAL), value_(v) {}
+
   virtual ~Real() {}
 
   std::string toString() override;
