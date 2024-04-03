@@ -9,6 +9,7 @@
 using namespace std;
 
 // static
+int Lexer::line_ {1};
 map<string, shared_ptr<Word>> Lexer::words_ {};
 
 Lexer::Lexer(istream& is)
@@ -127,4 +128,12 @@ shared_ptr<Token> Lexer::scan() {
   shared_ptr<Token> tok(new Token(peek_));
   peek_ = ' ';
   return tok;
+}
+
+// static
+shared_ptr<Word> Lexer::GetWord(std::string word) {
+  if (words_.find(word) != words_.end())
+    return {};
+
+  return words_[word];
 }

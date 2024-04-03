@@ -3,6 +3,7 @@
 
 #include <cctype>
 
+#include "id.h"
 #include "env.h"
 #include "lexer.h"
 #include "token.h"
@@ -135,7 +136,8 @@ TEST_CASE("check id chars") {
 TEST_CASE("check Env class") {
   Env e;
   Token* t = (Token*)(1L);  // we need just fake address to identify value
-  shared_ptr<Id> id = make_shared<Id>();
+  Word w("tmp", Tag::tID);
+  shared_ptr<Id> id = make_shared<Id>(w, Lexer::GetWord("int"), 10);
   /*e.put(t, id);
   CHECK( e.get(t) );*/
   CHECK( true );

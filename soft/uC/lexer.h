@@ -17,9 +17,11 @@ class Lexer {
   Lexer(std::istream& is);
   std::shared_ptr<Token> scan();
 
-  int line() {
+  static int line() {
     return line_;
   }
+
+  static std::shared_ptr<Word> GetWord(std::string word);
 
  protected:
   void reserve(std::shared_ptr<Word> w);
@@ -28,7 +30,7 @@ class Lexer {
 
  private:
   char peek_ {' '};
-  int line_ {1};
+  static int line_;
 
   std::istream& is_;
 
