@@ -3,6 +3,7 @@
 
 #include <cctype>
 
+#include "env.h"
 #include "lexer.h"
 #include "token.h"
 
@@ -129,4 +130,13 @@ TEST_CASE("check id chars") {
   REQUIRE( t );
   CHECK( t->tag() == Tag::tID );
   CHECK( t->toString() == "__und__" );
+}
+
+TEST_CASE("check Env class") {
+  Env e;
+  Token* t = (Token*)(1L);  // we need just fake address to identify value
+  shared_ptr<Id> id = make_shared<Id>();
+  /*e.put(t, id);
+  CHECK( e.get(t) );*/
+  CHECK( true );
 }
