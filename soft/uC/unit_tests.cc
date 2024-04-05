@@ -137,8 +137,9 @@ TEST_CASE("check Env class") {
   Env e;
   Token* t = (Token*)(1L);  // we need just fake address to identify value
   Word w("tmp", Tag::tID);
-  shared_ptr<Id> id = make_shared<Id>(w, Lexer::GetWord("int"), 10);
-  /*e.put(t, id);
-  CHECK( e.get(t) );*/
-  CHECK( true );
+  shared_ptr<Word> int_w = Lexer::GetWord("int");
+  shared_ptr<Id> id(new Id(&w, static_cast<Type*>(int_w.get()), 10));
+  e.put(t, id);
+  CHECK( e.get(t) );
+  CHECK( e.get(t).get() == id.get() );
 }

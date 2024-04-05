@@ -38,12 +38,14 @@ void Parser::program() {
 
 Stmt Parser::block() {  // block -> { decls stmts }
   match('{');
-  Env savedEnv = top;
-  top = new Env(top);
+  Env* savedEnv = top_;
+  top_ = new Env(top);
   decls();
   Stmt s = stmts();
   match('}');
-  top = savedEnv;
+  if (top_)
+    delete top_;
+  top_ = savedEnv;
   return s;
 }
 

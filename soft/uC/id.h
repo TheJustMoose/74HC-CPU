@@ -4,8 +4,8 @@
 
 class Id: public Expr {
  public:
-  Id(Word id, Type p, int off)
-    : Expr(id, p), offset_(off) {}
+  Id(Word* id, Type* t, int off)
+    : Expr(id, t), offset_(off) {}
 
  private:
   int offset_ {0};     // relative address

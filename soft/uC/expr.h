@@ -7,11 +7,11 @@
 
 class Expr: public Node {
  public:
-  Token op;
-  Type type;
+  Token* op_ {nullptr};
+  Type* type_ {nullptr};
 
-  Expr(Token tok, Type p)
-    : op(tok), type(p) {}
+  Expr(Token* tok, Type* t)
+    : op_(tok), type_(t) {}
 
   Expr* gen() { return this; }
   Expr* reduce() { return this; }
@@ -33,5 +33,5 @@ class Expr: public Node {
       ; // nothing since both t and f fall through
    }
 
-  std::string toString() { return op.toString(); }
+  std::string toString() { return op_->toString(); }
 };

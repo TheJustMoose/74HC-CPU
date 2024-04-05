@@ -40,5 +40,5 @@ class Parser {
  private:
   Lexer* lex_ {nullptr};   // lexical analyzer for this parser
   std::shared_ptr<Token> look_;  // lookahead token
-  Env top = null;       // current or top symbol table
+  Env* top_ {nullptr};       // current or top symbol table
 };
