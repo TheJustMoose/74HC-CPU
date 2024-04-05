@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 
+#include "env.h"
 #include "lexer.h"
 #include "tag.h"
 
@@ -27,68 +28,73 @@ void Parser::match(Tag t)  {
     error("syntax error");
 }
 
-void Parser::program() {
-  Stmt s = block();
-  int begin = s.newlabel();
-  int after = s.newlabel();
-  s.emitlabel(begin);
-  s.gen(begin, after);
-  s.emitlabel(after);
+void Parser::match(char c) {
+  match(static_cast<Tag>(c));
 }
 
-Stmt Parser::block() {  // block -> { decls stmts }
+void Parser::program() {
+  Stmt* s = block();
+  int begin = s->newlabel();
+  int after = s->newlabel();
+  s->emitlabel(begin);
+  s->gen(begin, after);
+  s->emitlabel(after);
+}
+
+Stmt* Parser::block() {  // block -> { decls stmts }
   match('{');
   Env* savedEnv = top_;
-  top_ = new Env(top);
+  top_ = new Env(top_);
   decls();
-  Stmt s = stmts();
+  //Stmt s = stmts();
   match('}');
   if (top_)
     delete top_;
   top_ = savedEnv;
-  return s;
+  return 0; //s;
 }
 
 void Parser::decls() {
-  while (look_->tag == Tag.BASIC) {   // D -> type ID ;
-    Type p = type();
-    Token tok = look_;
-    match(Tag.ID);
+  while (look_->tag() == Tag::tBASIC) {   // D -> type ID ;
+    Type* p = type();
+    Token* tok = look_.get();
+    match(Tag::tID);
     match(';');
 
-    Id id = new Id((Word)tok, p, used);
-    top.put( tok, id);
-    used = used + p.width;
+    Id* id = new Id(static_cast<Word*>(tok), p, used_);  // check it: who own this var?
+    top_->put(tok, shared_ptr<Id>(id));  // check it: who own this var?
+    used_ += p->width();
   }
 }
 
-Type Parser::type() {
-  Type p = (Type)look_;   // expect look_->tag == Tag.BASIC 
-  match(Tag.BASIC);
-  if (look_->tag != '[')
-    return p;            // T -> basic
-  else
-    return dims(p);   // return array type
+Type* Parser::type() {
+  //Type p = (Type)look_;   // expect look_->tag == Tag::tBASIC 
+  match(Tag::tBASIC);
+  //if (look_->tag != '[')
+    return IsType(look_.get()) ? static_cast<Type*>(look_.get()) : nullptr;            // T -> basic
+  //else
+  //  return dims(p);   // return array type
 }
 
+/*
 Type Parser::dims(Type p) {
   match('[');
   Token tok = look_;
-  match(Tag.NUM);
+  match(Tag::tNUM);
   match(']');
   if (look_->tag == '[')
     p = dims(p);
   return new Array(((Num)tok).value, p);
 }
 
-Stmt stmts() {
+Stmt Parser::stmts() {
   if (look_->tag == '}')
     return Stmt.Null;
   else
     return new Seq(stmt(), stmts());
 }
 
-Stmt stmt() {
+Stmt Parser::stmt() {
   Expr x;
   Stmt s, s1, s2;
   Stmt savedStmt;         // save enclosing loop for breaks
@@ -98,35 +104,35 @@ Stmt stmt() {
       move();
       return Stmt.Null;
 
-    case Tag.IF:
-      match(Tag.IF); match('('); x = boolean(); match(')');
+    case Tag::tIF:
+      match(Tag::tIF); match('('); x = boolean(); match(')');
       s1 = stmt();
-      if (look_->tag != Tag.ELSE) return new If(x, s1);
-      match(Tag.ELSE);
+      if (look_->tag != Tag::tELSE) return new If(x, s1);
+      match(Tag::tELSE);
       s2 = stmt();
       return new Else(x, s1, s2);
 
-    case Tag.WHILE:
+    case Tag::tWHILE:
       While whilenode = new While();
       savedStmt = Stmt.Enclosing; Stmt.Enclosing = whilenode;
-      match(Tag.WHILE); match('('); x = boolean(); match(')');
+      match(Tag::tWHILE); match('('); x = boolean(); match(')');
       s1 = stmt();
       whilenode.init(x, s1);
       Stmt.Enclosing = savedStmt;  // reset Stmt.Enclosing
       return whilenode;
 
-    case Tag.DO:
+    case Tag::tDO:
       Do donode = new Do();
       savedStmt = Stmt.Enclosing; Stmt.Enclosing = donode;
-      match(Tag.DO);
+      match(Tag::tDO);
       s1 = stmt();
-      match(Tag.WHILE); match('('); x = boolean(); match(')'); match(';');
+      match(Tag::tWHILE); match('('); x = boolean(); match(')'); match(';');
       donode.init(s1, x);
       Stmt.Enclosing = savedStmt;  // reset Stmt.Enclosing
       return donode;
 
-    case Tag.BREAK:
-      match(Tag.BREAK); match(';');
+    case Tag::tBREAK:
+      match(Tag::tBREAK); match(';');
       return new Break();
 
     case '{':
@@ -137,9 +143,9 @@ Stmt stmt() {
     }
 }
 
-Stmt assign() {
+Stmt Parser::assign() {
   Stmt stmt;  Token t = look_;
-  match(Tag.ID);
+  match(Tag::tID);
   Id id = top.get(t);
   if (id == null) error(t.toString() + " undeclared");
 
@@ -154,44 +160,44 @@ Stmt assign() {
   return stmt;
 }
 
-Expr boolean() {
+Expr Parser::boolean() {
   Expr x = join();
-  while (look_->tag == Tag.OR) {
+  while (look_->tag == Tag::tOR) {
     Token tok = look_;  move();  x = new Or(tok, x, join());
   }
 
   return x;
 }
 
-Expr join() {
+Expr Parser::join() {
   Expr x = equality();
-  while (look_->tag == Tag.AND) {
+  while (look_->tag == Tag::tAND) {
     Token tok = look_;  move();  x = new And(tok, x, equality());
   }
 
   return x;
 }
 
-Expr equality() {
+Expr Parser::equality() {
   Expr x = rel();
-  while (look_->tag == Tag.EQ || look_->tag == Tag.NE) {
+  while (look_->tag == Tag::tEQ || look_->tag == Tag::tNE) {
     Token tok = look_;  move();  x = new Rel(tok, x, rel());
   }
 
   return x;
 }
 
-Expr rel() {
+Expr Parser::rel() {
   Expr x = expr();
   switch (look_->tag) {
-  case '<': case Tag.LE: case Tag.GE: case '>':
+  case '<': case Tag::tLE: case Tag::tGE: case '>':
     Token tok = look_;  move();  return new Rel(tok, x, expr());
   default:
     return x;
   }
 }
 
-Expr expr() {
+Expr Parser::expr() {
   Expr x = term();
   while (look_->tag == '+' || look_->tag == '-') {
     Token tok = look_;  move();  x = new Arith(tok, x, term());
@@ -200,7 +206,7 @@ Expr expr() {
   return x;
 }
 
-Expr term() {
+Expr Parser::term() {
   Expr x = unary();
   while (look_->tag == '*' || look_->tag == '/') {
     Token tok = look_;  move();   x = new Arith(tok, x, unary());
@@ -209,7 +215,7 @@ Expr term() {
   return x;
 }
 
-Expr unary() {
+Expr Parser::unary() {
   if (look_->tag == '-') {
     move();  return new Unary(Word.minus, unary());
   }
@@ -220,7 +226,7 @@ Expr unary() {
     return factor();
 }
 
-Expr factor() {
+Expr Parser::factor() {
   Expr x = null;
   switch (look_->tag) {
   case '(':
@@ -228,18 +234,18 @@ Expr factor() {
     x = boolean();
     match(')');
     return x;
-  case Tag.NUM:
+  case Tag::tNUM:
     x = new Constant(look_, Type.Int);    move(); return x;
-  case Tag.REAL:
+  case Tag::tREAL:
     x = new Constant(look_, Type.Float);  move(); return x;
-  case Tag.TRUE:
+  case Tag::tTRUE:
     x = Constant.True;                   move(); return x;
-  case Tag.FALSE:
+  case Tag::tFALSE:
     x = Constant.False;                  move(); return x;
   default:
     error("syntax error");
   return x;
-    case Tag.ID:
+    case Tag::tID:
   String s = look_->toString();
     Id id = top.get(look_);
     if (id == null)
@@ -252,7 +258,7 @@ Expr factor() {
   }
 }
 
-Access offset(Id a) {   // I -> [E] | [E] I
+Access Parser::offset(Id a) {   // I -> [E] | [E] I
   Expr i; Expr w; Expr t1, t2; Expr loc;  // inherit id
 
   Type type = a.type;
@@ -272,3 +278,4 @@ Access offset(Id a) {   // I -> [E] | [E] I
 
   return new Access(a, loc, type);
 }
+*/

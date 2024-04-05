@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "tag.h"
+
 using namespace std;
 
 string Token::toString() {
@@ -14,4 +16,8 @@ string Num::toString() {
 
 string Real::toString() {
   return to_string(value_);
+}
+
+bool IsType(Token* t) {
+  return t->tag() == Tag::tBASIC;
 }

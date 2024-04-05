@@ -6,6 +6,7 @@
 #include "id.h"
 #include "env.h"
 #include "lexer.h"
+#include "parser.h"
 #include "token.h"
 
 using namespace std;
@@ -142,4 +143,11 @@ TEST_CASE("check Env class") {
   e.put(t, id);
   CHECK( e.get(t) );
   CHECK( e.get(t).get() == id.get() );
+}
+
+TEST_CASE("check Parser") {
+  stringstream ss("{ int a; }");
+  Lexer lex(ss);
+  Parser p(&lex);
+  p.program();
 }

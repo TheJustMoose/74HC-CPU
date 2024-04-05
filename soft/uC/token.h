@@ -67,6 +67,10 @@ class Type: public Word {
   Type(std::string s, Tag tag, int w)
     : Word(s, tag), width_(w) {}
 
+  int width() { return width_; }
+
  private:
   int width_ {0};
 };
+
+bool IsType(Token* t);

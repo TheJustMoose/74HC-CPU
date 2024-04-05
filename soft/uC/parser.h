@@ -10,6 +10,7 @@
 #include "tag.h"
 #include "token.h"
 
+class Env;
 class Lexer;
 
 class Parser {
@@ -19,11 +20,12 @@ class Parser {
   void move();
   void error(std::string s);
   void match(Tag t);
+  void match(char c);
   void program();
-  Stmt block();
+  Stmt* block();
   void decls();
-  Type type();
-  Type dims(Type p);
+  Type* type();
+  /*Type dims(Type p);
   Stmt stmts();
   Stmt stmt();
   Stmt assign();
@@ -35,10 +37,11 @@ class Parser {
   Expr term();
   Expr unary();
   Expr factor();
-  Access offset(Id a);
+  Access offset(Id a);*/
 
  private:
-  Lexer* lex_ {nullptr};   // lexical analyzer for this parser
+  Lexer* lex_ {nullptr};         // lexical analyzer for this parser
   std::shared_ptr<Token> look_;  // lookahead token
-  Env* top_ {nullptr};       // current or top symbol table
+  Env* top_ {nullptr};           // current or top symbol table
+  int used_ {0};                 // storage used for declarations
 };
