@@ -7,8 +7,7 @@ class Stmt: public Node {
   Stmt() {}
 
   static Stmt* Null() {
-    static Stmt* inst = new Stmt();
-    return inst;
+    return new Stmt();
   }
 
   static Stmt* Enclosing() {

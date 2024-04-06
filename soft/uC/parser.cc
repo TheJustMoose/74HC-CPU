@@ -93,7 +93,7 @@ Type Parser::dims(Type p) {
   Token tok = look_;
   match(Tag::tNUM);
   match(']');
-  if (look_->tag == '[')
+  if (look_->ctag() == '[')
     p = dims(p);
   return new Array(((Num)tok).value, p);
 }
@@ -104,21 +104,24 @@ Stmt* Parser::stmts() {
   else
     return nullptr;//new Seq(stmt(), stmts());
 }
-/*
+
 Stmt* Parser::stmt() {
-  Expr x;
-  Stmt s, s1, s2;
-  Stmt savedStmt;         // save enclosing loop for breaks
+  Expr* x {nullptr};
+  Stmt* s {nullptr};
+  Stmt* s1 {nullptr};
+  Stmt* s2 {nullptr};
+  Stmt* savedStmt {nullptr};  // save enclosing loop for breaks
 
   switch (look_->tag()) {
-    case ';':
+    case Tag::tSEMI:
       move();
-      return Stmt.Null;
+      return Stmt::Null();
 
     case Tag::tIF:
       match(Tag::tIF); match('('); x = boolean(); match(')');
       s1 = stmt();
-      if (look_->tag != Tag::tELSE) return new If(x, s1);
+      if (look_->tag() != Tag::tELSE)
+        return new If(x, s1);
       match(Tag::tELSE);
       s2 = stmt();
       return new Else(x, s1, s2);
@@ -146,7 +149,7 @@ Stmt* Parser::stmt() {
       match(Tag::tBREAK); match(';');
       return new Break();
 
-    case '{':
+    case Tag::tLBRACE:
       return block();
 
     default:
@@ -160,7 +163,7 @@ Stmt Parser::assign() {
   Id id = top.get(t);
   if (id == null) error(t.toString() + " undeclared");
 
-  if (look_->tag == '=') {       // S -> id = E ;
+  if (look_->ctag() == '=') {       // S -> id = E ;
     move();  stmt = new Set(id, boolean());
   }
   else {                        // S -> L = E ;
@@ -171,36 +174,36 @@ Stmt Parser::assign() {
   return stmt;
 }
 
-Expr Parser::boolean() {
-  Expr x = join();
-  while (look_->tag == Tag::tOR) {
+Expr* Parser::boolean() {
+  Expr* x = join();
+  while (look_->tag() == Tag::tOR) {
     Token tok = look_;  move();  x = new Or(tok, x, join());
   }
 
   return x;
 }
 
-Expr Parser::join() {
-  Expr x = equality();
-  while (look_->tag == Tag::tAND) {
+Expr* Parser::join() {
+  Expr* x = equality();
+  while (look_->tag() == Tag::tAND) {
     Token tok = look_;  move();  x = new And(tok, x, equality());
   }
 
   return x;
 }
 
-Expr Parser::equality() {
-  Expr x = rel();
-  while (look_->tag == Tag::tEQ || look_->tag == Tag::tNE) {
+Expr* Parser::equality() {
+  Expr* x = rel();
+  while (look_->tag() == Tag::tEQ || look_->tag() == Tag::tNE) {
     Token tok = look_;  move();  x = new Rel(tok, x, rel());
   }
 
   return x;
 }
 
-Expr Parser::rel() {
-  Expr x = expr();
-  switch (look_->tag) {
+Expr* Parser::rel() {
+  Expr* x = expr();
+  switch (look_->tag()) {
   case '<': case Tag::tLE: case Tag::tGE: case '>':
     Token tok = look_;  move();  return new Rel(tok, x, expr());
   default:
@@ -208,67 +211,78 @@ Expr Parser::rel() {
   }
 }
 
-Expr Parser::expr() {
-  Expr x = term();
-  while (look_->tag == '+' || look_->tag == '-') {
+Expr* Parser::expr() {
+  Expr* x = term();
+  while (look_->ctag() == '+' || look_->ctag() == '-') {
     Token tok = look_;  move();  x = new Arith(tok, x, term());
   }
 
   return x;
 }
 
-Expr Parser::term() {
-  Expr x = unary();
-  while (look_->tag == '*' || look_->tag == '/') {
+Expr* Parser::term() {
+  Expr* x = unary();
+  while (look_->ctag() == '*' || look_->ctag() == '/') {
     Token tok = look_;  move();   x = new Arith(tok, x, unary());
   }
 
   return x;
 }
 
-Expr Parser::unary() {
-  if (look_->tag == '-') {
-    move();  return new Unary(Word.minus, unary());
+Expr* Parser::unary() {
+  if (look_->ctag() == '-') {
+    move();
+    return new Unary(Word.minus, unary());
   }
-  else if (look_->tag == '!') {
-    Token tok = look_;  move();  return new Not(tok, unary());
+  else if (look_->ctag() == '!') {
+    Token tok = look_;
+    move();
+    return new Not(tok, unary());
   }
   else
     return factor();
 }
 
-Expr Parser::factor() {
-  Expr x = null;
-  switch (look_->tag) {
-  case '(':
-    move();
-    x = boolean();
-    match(')');
-    return x;
-  case Tag::tNUM:
-    x = new Constant(look_, Type.Int);    move(); return x;
-  case Tag::tREAL:
-    x = new Constant(look_, Type.Float);  move(); return x;
-  case Tag::tTRUE:
-    x = Constant.True;                   move(); return x;
-  case Tag::tFALSE:
-    x = Constant.False;                  move(); return x;
-  default:
-    error("syntax error");
-  return x;
+Expr* Parser::factor() {
+  Expr* x = nullptr;
+  switch (look_->tag()) {
+    case '(':
+      move();
+      x = boolean();
+      match(')');
+      return x;
+    case Tag::tNUM:
+      x = new Constant(look_, Type.Int);
+      move();
+      return x;
+    case Tag::tREAL:
+      x = new Constant(look_, Type.Float);
+      move();
+      return x;
+    case Tag::tTRUE:
+      x = Constant.True;
+      move();
+      return x;
+    case Tag::tFALSE:
+      x = Constant.False;
+      move();
+      return x;
     case Tag::tID:
-  String s = look_->toString();
-    Id id = top.get(look_);
-    if (id == null)
-      error(look_->toString() + " undeclared");
-    move();
-    if (look_->tag != '[')
-      return id;
-    else
-      return offset(id);
+      String s = look_->toString();
+      Id* id = top.get(look_);
+      if (id == nullptr)
+        error(look_->toString() + " undeclared");
+      move();
+      if (look_->ctag() != '[')
+        return id;
+      else
+        return nullptr; //offset(id);
+    default:
+      error("syntax error");
+      return x;
   }
 }
-
+/*
 Access Parser::offset(Id a) {   // I -> [E] | [E] I
   Expr i; Expr w; Expr t1, t2; Expr loc;  // inherit id
 
@@ -278,7 +292,7 @@ Access Parser::offset(Id a) {   // I -> [E] | [E] I
   w = new Constant(type.width);
   t1 = new Arith(new Token('*'), i, w);
   loc = t1;
-  while (look_->tag == '[') {      // multi-dimensional I -> [ E ] I
+  while (look_->ctag() == '[') {      // multi-dimensional I -> [ E ] I
     match('['); i = boolean(); match(']');
     type = ((Array)type).of;
     w = new Constant(type.width);
