@@ -4,13 +4,13 @@
 #include <cctype>
 #include "tag.h"
 #include "token.h"
-#include "word_fab.h"
 
 using namespace std;
 
 // static
 int Lexer::line_ {1};
 map<string, shared_ptr<Word>> Lexer::words_ {};
+map<string, shared_ptr<Token>> Lexer::tokens_ {};
 
 Lexer::Lexer(istream& is)
   : is_(is) {
@@ -27,6 +27,23 @@ Lexer::Lexer(istream& is)
   reserve( shared_ptr<Word>(new Type( "float", Tag::tBASIC, 8 )) );
   reserve( shared_ptr<Word>(new Type( "char", Tag::tBASIC, 1 )) );
   reserve( shared_ptr<Word>(new Type( "bool", Tag::tBASIC, 1 )) );
+
+  reserve( shared_ptr<Word>(new Word( "&&", Tag::tAND )) );
+  reserve( shared_ptr<Word>(new Word( "||", Tag::tOR )) );
+  reserve( shared_ptr<Word>(new Word( "==", Tag::tEQ )) );
+  reserve( shared_ptr<Word>(new Word( "!=", Tag::tNE )) );
+  reserve( shared_ptr<Word>(new Word( "<=", Tag::tLE )) );
+  reserve( shared_ptr<Word>(new Word( ">=", Tag::tGE )) );
+  reserve( shared_ptr<Word>(new Word( "minus", Tag::tMINUS )) );
+  reserve( shared_ptr<Word>(new Word( "t", Tag::tTEMP )) );
+}
+
+// static
+Word* Lexer::get_word(std::string word) {
+  if (words_.find(word) == words_.end())
+    return nullptr;
+
+  return words_[word].get();
 }
 
 void Lexer::reserve(shared_ptr<Word> w) {
@@ -56,7 +73,7 @@ bool Lexer::readch(char c) {
   return true;
 }
 
-shared_ptr<Token> Lexer::scan() {
+Token* Lexer::scan() {
   for( ; ; readch() ) {
     if (peek_ == ' ' || peek_ == '\t' || peek_ == '\r')
       continue;
@@ -70,17 +87,17 @@ shared_ptr<Token> Lexer::scan() {
 
   switch( peek_ ) {
     case '&':
-      if( readch('&') ) return And();  else return shared_ptr<Token>(new Token('&'));
+      if( readch('&') ) return get_word("&&");  else return new Token('&');  // TODO: fix this leak
     case '|':
-      if( readch('|') ) return Or();   else return shared_ptr<Token>(new Token('|'));
+      if( readch('|') ) return get_word("||");  else return new Token('|');
     case '=':
-      if( readch('=') ) return Eq();   else return shared_ptr<Token>(new Token('='));
+      if( readch('=') ) return get_word("==");  else return new Token('=');
     case '!':
-      if( readch('=') ) return Ne();   else return shared_ptr<Token>(new Token('!'));
+      if( readch('=') ) return get_word("!=");  else return new Token('!');
     case '<':
-      if( readch('=') ) return Le();   else return shared_ptr<Token>(new Token('<'));
+      if( readch('=') ) return get_word("<=");  else return new Token('<');
     case '>':
-      if( readch('=') ) return Ge();   else return shared_ptr<Token>(new Token('>'));
+      if( readch('=') ) return get_word(">=");  else return new Token('>');
   }
 
   if (isdigit(peek_)) {
@@ -91,7 +108,7 @@ shared_ptr<Token> Lexer::scan() {
     } while(peek_ && isdigit(peek_) );
 
     if( peek_ != '.' )
-      return shared_ptr<Token>(new Num(v));
+      return new Num(v);
 
     float x = v;
     float d = 10;
@@ -102,7 +119,7 @@ shared_ptr<Token> Lexer::scan() {
       x = x + int(peek_ - '0') / d;
       d *= 10;
     }
-    return shared_ptr<Token>(new Real(x));
+    return new Real(x);
   }
 
   // IDs should start from letter or underscore
@@ -115,25 +132,17 @@ shared_ptr<Token> Lexer::scan() {
     // and may contain digit
 
     if (words_.find(b) != words_.end())
-      return words_[b];
+      return words_[b].get();
 
     shared_ptr<Word> w(new Word(b, Tag::tID));
     words_[b] = w;
-    return w;
+    return get_word(b);
   } 
 
   if (peek_ == 0)
-    return shared_ptr<Token>();
+    return nullptr;
 
-  shared_ptr<Token> tok(new Token(peek_));
+  Token* tok = new Token(peek_);
   peek_ = ' ';
   return tok;
-}
-
-// static
-shared_ptr<Word> Lexer::GetWord(std::string word) {
-  if (words_.find(word) != words_.end())
-    return {};
-
-  return words_[word];
 }

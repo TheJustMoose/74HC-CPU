@@ -57,12 +57,12 @@ Stmt* Parser::block() {  // block -> { decls stmts }
 void Parser::decls() {
   while (look_->tag() == Tag::tBASIC) {   // D -> type ID ;
     Type* p = type();
-    Token* tok = look_.get();
+    Token* tok = look_;
     match(Tag::tID);
     match(';');
 
     Id* id = new Id(static_cast<Word*>(tok), p, used_);  // check it: who own this var?
-    top_->put(tok, shared_ptr<Id>(id));  // check it: who own this var?
+    top_->put(tok, id);  // check it: who own this var?
     used_ += p->width();
   }
 }
@@ -71,7 +71,7 @@ Type* Parser::type() {
   //Type p = (Type)look_;   // expect look_->tag == Tag::tBASIC 
   match(Tag::tBASIC);
   //if (look_->tag != '[')
-    return IsType(look_.get()) ? static_cast<Type*>(look_.get()) : nullptr;            // T -> basic
+    return IsType(look_) ? static_cast<Type*>(look_) : nullptr;            // T -> basic
   //else
   //  return dims(p);   // return array type
 }

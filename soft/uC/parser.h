@@ -40,8 +40,8 @@ class Parser {
   Access offset(Id a);*/
 
  private:
-  Lexer* lex_ {nullptr};         // lexical analyzer for this parser
-  std::shared_ptr<Token> look_;  // lookahead token
-  Env* top_ {nullptr};           // current or top symbol table
-  int used_ {0};                 // storage used for declarations
+  Lexer* lex_ {nullptr};   // lexical analyzer for this parser
+  Token* look_ {nullptr};  // lookahead token
+  Env* top_ {nullptr};     // current or top symbol table
+  int used_ {0};           // storage used for declarations
 };

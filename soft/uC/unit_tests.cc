@@ -32,7 +32,7 @@ TEST_CASE("check Num") {
   stringstream ss("1");
   Lexer lex(ss);
 
-  shared_ptr<Token> t = lex.scan();
+  Token* t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "1" );
@@ -45,7 +45,7 @@ TEST_CASE("check Real") {
   stringstream ss("1.5");
   Lexer lex(ss);
 
-  shared_ptr<Token> t = lex.scan();
+  Token* t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tREAL );
   CHECK( t->toString() == "1.500000" );
@@ -55,7 +55,7 @@ TEST_CASE("check Lexer") {
   stringstream ss("1 + 234");
   Lexer lex(ss);
 
-  shared_ptr<Token> t = lex.scan();
+  Token* t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tNUM );
   CHECK( t->toString() == "1" );
@@ -78,11 +78,11 @@ TEST_CASE("check dictionary") {
   stringstream ss("word word word");
   Lexer lex(ss);
 
-  shared_ptr<Token> t1 = lex.scan();
+  Token* t1 = lex.scan();
   REQUIRE( t1 );
-  shared_ptr<Token> t2 = lex.scan();
+  Token* t2 = lex.scan();
   REQUIRE( t2 );
-  shared_ptr<Token> t3 = lex.scan();
+  Token* t3 = lex.scan();
   REQUIRE( t3 );
 
   // we should have only one copy of word
@@ -96,7 +96,7 @@ TEST_CASE("check key words") {
   stringstream ss("if do else");
   Lexer lex(ss);
 
-  shared_ptr<Token> t = lex.scan();
+  Token* t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tIF );
 
@@ -113,7 +113,7 @@ TEST_CASE("check id chars") {
   stringstream ss("test  t0  t_0st  __und__");
   Lexer lex(ss);
 
-  shared_ptr<Token> t = lex.scan();
+  Token* t = lex.scan();
   REQUIRE( t );
   CHECK( t->tag() == Tag::tID );
   CHECK( t->toString() == "test" );
@@ -138,11 +138,14 @@ TEST_CASE("check Env class") {
   Env e;
   Token* t = (Token*)(1L);  // we need just fake address to identify value
   Word w("tmp", Tag::tID);
-  shared_ptr<Word> int_w = Lexer::GetWord("int");
-  shared_ptr<Id> id(new Id(&w, static_cast<Type*>(int_w.get()), 10));
+  Word* int_w = Lexer::get_word("int");
+
+  Id* id = new Id(&w, static_cast<Type*>(int_w), 10);
   e.put(t, id);
+
   CHECK( e.get(t) );
-  CHECK( e.get(t).get() == id.get() );
+  CHECK( e.get(t) == id );
+  delete id;
 }
 
 TEST_CASE("check Parser") {

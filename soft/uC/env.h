@@ -8,17 +8,17 @@ class Token;
 
 class Env {
  public:
-  typedef std::map<Token*, std::shared_ptr<Id>> SymTable;
+  typedef std::map<Token*, Id*> SymTable;
 
   Env(Env* n = nullptr) {
     prev_ = n;
   }
 
-  void put(Token* w, std::shared_ptr<Id> i) {
-    table_[w] = i;
+  void put(Token* w, Id* id) {
+    table_[w] = id;
   }
 
-  std::shared_ptr<Id> get(Token* w) {
+  Id* get(Token* w) {
     for (Env* e = this; e != nullptr; e = e->prev_) {
       SymTable::iterator it = e->table_.find(w);
       if (it != e->table_.end())
