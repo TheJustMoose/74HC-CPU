@@ -16,6 +16,7 @@ class Token {
   virtual std::string toString();
 
   Tag tag() { return tag_; }
+  char ctag() { return (static_cast<int>(tag_) < 256) ? static_cast<char>(tag_) : 0; }
 
  private:
   Tag tag_ {};

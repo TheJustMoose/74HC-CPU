@@ -25,9 +25,9 @@ class Parser {
   Stmt* block();
   void decls();
   Type* type();
-  /*Type dims(Type p);
-  Stmt stmts();
-  Stmt stmt();
+  //Type dims(Type p);
+  Stmt* stmts();
+  /*Stmt stmt();
   Stmt assign();
   Expr boolean();
   Expr join();

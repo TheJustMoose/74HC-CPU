@@ -33,7 +33,10 @@ void Parser::match(Tag t)  {
 }
 
 void Parser::match(char c) {
-  match(static_cast<Tag>(c));
+  if (look_->ctag() == c)
+    move();
+  else
+    error("syntax error");
 }
 
 void Parser::program() {
@@ -53,11 +56,11 @@ Stmt* Parser::block() {  // block -> { decls stmts }
   Env* savedEnv = top_;
   top_ = new Env(top_);
   decls();
-  //Stmt s = stmts();
+  Stmt* s = stmts();
   match('}');
   delete top_;
   top_ = savedEnv;
-  return 0; //s;
+  return s;
 }
 
 void Parser::decls() {
@@ -78,7 +81,7 @@ void Parser::decls() {
 Type* Parser::type() {
   Type* p = IsType(look_) ? static_cast<Type*>(look_) : nullptr;  // expect look_->tag == Tag::tBASIC
   match(Tag::tBASIC);
-  if (look_->tag() != static_cast<Tag>('['))
+  if (look_->ctag() != '[')
     return p;            // T -> basic
   else
     return nullptr; //dims(p);   // return array type
@@ -94,15 +97,15 @@ Type Parser::dims(Type p) {
     p = dims(p);
   return new Array(((Num)tok).value, p);
 }
-
-Stmt Parser::stmts() {
-  if (look_->tag == '}')
-    return Stmt.Null;
+*/
+Stmt* Parser::stmts() {
+  if (look_->ctag() == '}')
+    return Stmt::Null();
   else
-    return new Seq(stmt(), stmts());
+    return nullptr;//new Seq(stmt(), stmts());
 }
-
-Stmt Parser::stmt() {
+/*
+Stmt* Parser::stmt() {
   Expr x;
   Stmt s, s1, s2;
   Stmt savedStmt;         // save enclosing loop for breaks
