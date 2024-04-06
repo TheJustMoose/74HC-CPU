@@ -15,6 +15,10 @@ Parser::Parser(Lexer* l)
 
 void Parser::move() {
   look_ = lex_->scan();
+  if (look_)
+    cout << "look_: " << look_->toString() << endl;
+  else
+    cout << "look_: nullptr" << endl;
 }
 
 void Parser::error(string s) {
@@ -34,6 +38,9 @@ void Parser::match(char c) {
 
 void Parser::program() {
   Stmt* s = block();
+  if (!s)
+    return;
+
   int begin = s->newlabel();
   int after = s->newlabel();
   s->emitlabel(begin);
@@ -48,15 +55,16 @@ Stmt* Parser::block() {  // block -> { decls stmts }
   decls();
   //Stmt s = stmts();
   match('}');
-  if (top_)
-    delete top_;
+  delete top_;
   top_ = savedEnv;
   return 0; //s;
 }
 
 void Parser::decls() {
-  while (look_->tag() == Tag::tBASIC) {   // D -> type ID ;
+  while (look_ && (look_->tag() == Tag::tBASIC)) {   // D -> type ID ;
     Type* p = type();
+    if (!p)
+      cout << "p is null" << endl;
     Token* tok = look_;
     match(Tag::tID);
     match(';');
@@ -68,12 +76,12 @@ void Parser::decls() {
 }
 
 Type* Parser::type() {
-  //Type p = (Type)look_;   // expect look_->tag == Tag::tBASIC 
+  Type* p = IsType(look_) ? static_cast<Type*>(look_) : nullptr;  // expect look_->tag == Tag::tBASIC
   match(Tag::tBASIC);
-  //if (look_->tag != '[')
-    return IsType(look_) ? static_cast<Type*>(look_) : nullptr;            // T -> basic
-  //else
-  //  return dims(p);   // return array type
+  if (look_->tag() != static_cast<Tag>('['))
+    return p;            // T -> basic
+  else
+    return nullptr; //dims(p);   // return array type
 }
 
 /*

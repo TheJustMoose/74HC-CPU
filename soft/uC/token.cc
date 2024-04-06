@@ -1,6 +1,7 @@
 #include "token.h"
 
 #include <string>
+#include <iostream>
 
 #include "tag.h"
 

@@ -15,6 +15,8 @@ class istream;
 class Lexer {
  public:
   Lexer(std::istream& is);
+  ~Lexer();
+
   Token* scan();
 
   // Lexer will own all words and will remove it in dtor
@@ -27,6 +29,7 @@ class Lexer {
 
  protected:
   void reserve(std::shared_ptr<Word> w);
+  Token* reserve(Token* t);
   void readch();
   bool readch(char c);
 
@@ -38,5 +41,5 @@ class Lexer {
 
   // only one Lexer can work now
   static std::map<std::string, std::shared_ptr<Word>> words_;
-  static std::map<std::string, std::shared_ptr<Token>> tokens_;
+  static std::vector<std::shared_ptr<Token>> tokens_;
 };

@@ -10,7 +10,7 @@ using namespace std;
 // static
 int Lexer::line_ {1};
 map<string, shared_ptr<Word>> Lexer::words_ {};
-map<string, shared_ptr<Token>> Lexer::tokens_ {};
+vector<shared_ptr<Token>> Lexer::tokens_ {};
 
 Lexer::Lexer(istream& is)
   : is_(is) {
@@ -38,6 +38,9 @@ Lexer::Lexer(istream& is)
   reserve( shared_ptr<Word>(new Word( "t", Tag::tTEMP )) );
 }
 
+Lexer::~Lexer() {
+}
+
 // static
 Word* Lexer::get_word(std::string word) {
   if (words_.find(word) == words_.end())
@@ -57,6 +60,12 @@ void Lexer::reserve(shared_ptr<Word> w) {
     return;
 
   words_[w->lexeme()] = w;
+}
+
+Token* Lexer::reserve(Token* t) {
+  shared_ptr<Token> tmp(t);
+  tokens_.push_back(tmp);
+  return tokens_.rbegin()->get();
 }
 
 void Lexer::readch() {
@@ -85,19 +94,19 @@ Token* Lexer::scan() {
       break;
   }
 
-  switch( peek_ ) {
+  switch (peek_) {
     case '&':
-      if( readch('&') ) return get_word("&&");  else return new Token('&');  // TODO: fix this leak
+      if( readch('&') ) return get_word("&&");  else return reserve(new Token('&'));
     case '|':
-      if( readch('|') ) return get_word("||");  else return new Token('|');
+      if( readch('|') ) return get_word("||");  else return reserve(new Token('|'));
     case '=':
-      if( readch('=') ) return get_word("==");  else return new Token('=');
+      if( readch('=') ) return get_word("==");  else return reserve(new Token('='));
     case '!':
-      if( readch('=') ) return get_word("!=");  else return new Token('!');
+      if( readch('=') ) return get_word("!=");  else return reserve(new Token('!'));
     case '<':
-      if( readch('=') ) return get_word("<=");  else return new Token('<');
+      if( readch('=') ) return get_word("<=");  else return reserve(new Token('<'));
     case '>':
-      if( readch('=') ) return get_word(">=");  else return new Token('>');
+      if( readch('=') ) return get_word(">=");  else return reserve(new Token('>'));
   }
 
   if (isdigit(peek_)) {
@@ -108,7 +117,7 @@ Token* Lexer::scan() {
     } while(peek_ && isdigit(peek_) );
 
     if( peek_ != '.' )
-      return new Num(v);
+      return reserve(new Num(v));
 
     float x = v;
     float d = 10;
@@ -119,7 +128,7 @@ Token* Lexer::scan() {
       x = x + int(peek_ - '0') / d;
       d *= 10;
     }
-    return new Real(x);
+    return reserve(new Real(x));
   }
 
   // IDs should start from letter or underscore
@@ -142,7 +151,7 @@ Token* Lexer::scan() {
   if (peek_ == 0)
     return nullptr;
 
-  Token* tok = new Token(peek_);
+  Token* tok = reserve(new Token(peek_));
   peek_ = ' ';
   return tok;
 }

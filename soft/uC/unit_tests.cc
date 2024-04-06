@@ -136,7 +136,7 @@ TEST_CASE("check id chars") {
 
 TEST_CASE("check Env class") {
   Env e;
-  Token* t = (Token*)(1L);  // we need just fake address to identify value
+  Token* t = new Token('a');
   Word w("tmp", Tag::tID);
   Word* int_w = Lexer::get_word("int");
 
