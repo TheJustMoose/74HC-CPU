@@ -14,12 +14,12 @@ class Node {
   void emitlabel(int i) { std::cout << "L" << i << ":"; }
   void emit(std::string s) { std::cout << "\t" << s << std::endl; }
 
- private:
-  int lexline = 0;
-
+ protected:
   void error(std::string s) {
     throw new std::runtime_error("near line " + std::to_string(lexline) + ": " + s);
   }
 
+ private:
+  int lexline = 0;
   static int labels;
 };

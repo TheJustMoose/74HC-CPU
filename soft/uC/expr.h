@@ -7,9 +7,6 @@
 
 class Expr: public Node {
  public:
-  Token* op_ {nullptr};
-  Type* type_ {nullptr};
-
   Expr(Token* tok, Type* t)
     : op_(tok), type_(t) {}
 
@@ -34,4 +31,10 @@ class Expr: public Node {
    }
 
   std::string toString() { return op_->toString(); }
+
+  Type* type() { return type_; }
+
+ private:
+  Token* op_ {nullptr};
+  Type* type_ {nullptr};
 };
