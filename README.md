@@ -8,4 +8,4 @@ This is a simple discrete logic processor.
 * 8 data registers and 4 pointer registers in 2 banks
 * 1 flag register in IO port
 
-![CPU structure](./CPU2.png)
+![CPU structure](./cpu2.1.png)
