@@ -70,6 +70,9 @@ class Type: public Word {
 
   int width() { return width_; }
 
+  static bool numeric(Type* p);
+  static Type* max(Type* p1, Type* p2);
+
  private:
   int width_ {0};
 };
