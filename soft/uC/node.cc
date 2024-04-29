@@ -1,4 +1,4 @@
 #include "node.h"
 
 //static
-int Node::labels {0};
+int Node::labels_ {0};

@@ -6,6 +6,7 @@
 #include "id.h"
 #include "env.h"
 #include "lexer.h"
+#include "op.h"
 #include "parser.h"
 #include "token.h"
 
@@ -153,4 +154,8 @@ TEST_CASE("check Parser") {
   Lexer lex(ss);
   Parser p(&lex);
   p.program();
+}
+
+TEST_CASE("check Op") {
+  Op op(nullptr, nullptr);
 }

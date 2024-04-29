@@ -35,7 +35,7 @@ Lexer::Lexer(istream& is)
   reserve( shared_ptr<Word>(new Word( "<=", Tag::tLE )) );
   reserve( shared_ptr<Word>(new Word( ">=", Tag::tGE )) );
   reserve( shared_ptr<Word>(new Word( "minus", Tag::tMINUS )) );
-  reserve( shared_ptr<Word>(new Word( "t", Tag::tTEMP )) );
+  reserve( shared_ptr<Word>(new Word( "#t", Tag::tTEMP )) );
 }
 
 Lexer::~Lexer() {

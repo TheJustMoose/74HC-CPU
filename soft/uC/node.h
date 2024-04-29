@@ -8,18 +8,17 @@
 
 class Node {
  public:
-  Node() { lexline = Lexer::line(); }
+  Node() { lexline_ = Lexer::line(); }
 
-  int newlabel() { return ++labels; }
+  int newlabel() { return ++labels_; }
   void emitlabel(int i) { std::cout << "L" << i << ":"; }
   void emit(std::string s) { std::cout << "\t" << s << std::endl; }
 
- protected:
   void error(std::string s) {
-    throw new std::runtime_error("near line " + std::to_string(lexline) + ": " + s);
+    throw new std::runtime_error("near line " + std::to_string(lexline_) + ": " + s);
   }
 
  private:
-  int lexline = 0;
-  static int labels;
+  int lexline_ = 0;
+  static int labels_;
 };

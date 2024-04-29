@@ -113,11 +113,12 @@ Stmt* Parser::stmt() {
   Stmt* savedStmt {nullptr};  // save enclosing loop for breaks
 
   switch (look_->tag()) {
-    case Tag::tSEMI:
+    case Tag::tSEMI: {
       move();
       return Stmt::Null();
+    }
 
-    case Tag::tIF:
+    case Tag::tIF: {
       match(Tag::tIF); match('('); x = boolean(); match(')');
       s1 = stmt();
       if (look_->tag() != Tag::tELSE)
@@ -125,50 +126,61 @@ Stmt* Parser::stmt() {
       match(Tag::tELSE);
       s2 = stmt();
       return new Else(x, s1, s2);
+    }
 
-    case Tag::tWHILE:
-      While whilenode = new While();
-      savedStmt = Stmt.Enclosing; Stmt.Enclosing = whilenode;
+    case Tag::tWHILE: {
+      While* whilenode = new While();
+      savedStmt = Stmt::Enclosing;
+      Stmt::Enclosing = whilenode;
       match(Tag::tWHILE); match('('); x = boolean(); match(')');
       s1 = stmt();
-      whilenode.init(x, s1);
-      Stmt.Enclosing = savedStmt;  // reset Stmt.Enclosing
+      whilenode->init(x, s1);
+      Stmt::Enclosing = savedStmt;  // reset Stmt.Enclosing
       return whilenode;
+    }
 
-    case Tag::tDO:
-      Do donode = new Do();
-      savedStmt = Stmt.Enclosing; Stmt.Enclosing = donode;
+    case Tag::tDO: {
+      Do* donode = new Do();
+      savedStmt = Stmt::Enclosing;
+      Stmt::Enclosing = donode;
       match(Tag::tDO);
       s1 = stmt();
       match(Tag::tWHILE); match('('); x = boolean(); match(')'); match(';');
-      donode.init(s1, x);
-      Stmt.Enclosing = savedStmt;  // reset Stmt.Enclosing
+      donode->init(s1, x);
+      Stmt::Enclosing = savedStmt;  // reset Stmt.Enclosing
       return donode;
+    }
 
-    case Tag::tBREAK:
+    case Tag::tBREAK: {
       match(Tag::tBREAK); match(';');
       return new Break();
+    }
 
-    case Tag::tLBRACE:
+    case Tag::tLBRACE: {
       return block();
+    }
 
-    default:
+    default: {
       return assign();
     }
+  }
 }
 
-Stmt Parser::assign() {
-  Stmt stmt;  Token t = look_;
+Stmt* Parser::assign() {
+  Stmt* stmt;
+  Token* t {look_};
   match(Tag::tID);
-  Id id = top.get(t);
-  if (id == null) error(t.toString() + " undeclared");
+  Id* id = top_->get(t);
+  if (id == nullptr)
+    error(t->toString() + " undeclared");
 
   if (look_->ctag() == '=') {       // S -> id = E ;
-    move();  stmt = new Set(id, boolean());
-  }
-  else {                        // S -> L = E ;
-    Access x = offset(id);
-    match('=');  stmt = new SetElem(x, boolean());
+    move();
+    stmt = new Set(id, boolean());
+  } else {                        // S -> L = E ;
+    Access* x = nullptr; // offset(id);
+    match('=');
+    stmt = new SetElem(x, boolean());
   }
   match(';');
   return stmt;
@@ -177,7 +189,9 @@ Stmt Parser::assign() {
 Expr* Parser::boolean() {
   Expr* x = join();
   while (look_->tag() == Tag::tOR) {
-    Token tok = look_;  move();  x = new Or(tok, x, join());
+    Token* tok {look_};
+    move();
+    x = new Or(tok, x, join());
   }
 
   return x;
@@ -186,7 +200,9 @@ Expr* Parser::boolean() {
 Expr* Parser::join() {
   Expr* x = equality();
   while (look_->tag() == Tag::tAND) {
-    Token tok = look_;  move();  x = new And(tok, x, equality());
+    Token* tok {look_};
+    move();
+    x = new And(tok, x, equality());
   }
 
   return x;
@@ -195,7 +211,9 @@ Expr* Parser::join() {
 Expr* Parser::equality() {
   Expr* x = rel();
   while (look_->tag() == Tag::tEQ || look_->tag() == Tag::tNE) {
-    Token tok = look_;  move();  x = new Rel(tok, x, rel());
+    Token* tok {look_};
+    move();
+    x = new Rel(tok, x, rel());
   }
 
   return x;
@@ -204,17 +222,24 @@ Expr* Parser::equality() {
 Expr* Parser::rel() {
   Expr* x = expr();
   switch (look_->tag()) {
-  case '<': case Tag::tLE: case Tag::tGE: case '>':
-    Token tok = look_;  move();  return new Rel(tok, x, expr());
-  default:
-    return x;
+    case '<':
+    case Tag::tLE:
+    case Tag::tGE:
+    case '>':
+      Token* tok {look_};
+      move();
+      return new Rel(tok, x, expr());
+    default:
+      return x;
   }
 }
 
 Expr* Parser::expr() {
   Expr* x = term();
   while (look_->ctag() == '+' || look_->ctag() == '-') {
-    Token tok = look_;  move();  x = new Arith(tok, x, term());
+    Token* tok {look_};
+    move();
+    x = new Arith(tok, x, term());
   }
 
   return x;
@@ -223,7 +248,9 @@ Expr* Parser::expr() {
 Expr* Parser::term() {
   Expr* x = unary();
   while (look_->ctag() == '*' || look_->ctag() == '/') {
-    Token tok = look_;  move();   x = new Arith(tok, x, unary());
+    Token* tok {look_};
+    move();
+    x = new Arith(tok, x, unary());
   }
 
   return x;
@@ -233,9 +260,8 @@ Expr* Parser::unary() {
   if (look_->ctag() == '-') {
     move();
     return new Unary(Word.minus, unary());
-  }
-  else if (look_->ctag() == '!') {
-    Token tok = look_;
+  } else if (look_->ctag() == '!') {
+    Token* tok {look_};
     move();
     return new Not(tok, unary());
   }
@@ -244,7 +270,7 @@ Expr* Parser::unary() {
 }
 
 Expr* Parser::factor() {
-  Expr* x = nullptr;
+  Expr* x {nullptr};
   switch (look_->tag()) {
     case '(':
       move();

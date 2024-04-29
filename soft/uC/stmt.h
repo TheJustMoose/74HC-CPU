@@ -1,8 +1,12 @@
 #pragma once
 
-#include "node.h"
+#include <string>
 
 #include "lexer.h"
+#include "node.h"
+
+// TODO: try to implement it:
+// std::string operator+(const char*, int);
 
 class Stmt: public Node {
  public:
@@ -12,11 +16,9 @@ class Stmt: public Node {
     return new Stmt();
   }
 
-  static Stmt* Enclosing() {
-    return Stmt::Null();    // used for break stmts
-  }
-
   void gen(int b, int a) {} // called with labels begin and after
+
+  static Stmt* Enclosing;    // used for break stmts
 
  private:
   int after_ {0};           // saves label after
@@ -31,8 +33,8 @@ class If: public Stmt {
   }
 
   void gen(int b, int a) {
-    int label = newlabel(); // label for the code for stmt
-    expr_->jumping(0, a);     // fall through on true, goto a on false
+    int label = newlabel();  // label for the code for stmt
+    expr_->jumping(0, a);    // fall through on true, goto a on false
     emitlabel(label);
     stmt_->gen(label, a);
   }
@@ -40,4 +42,38 @@ class If: public Stmt {
  private:
   Expr* expr_ {nullptr};
   Stmt* stmt_ {nullptr};
+};
+
+class Else: public Stmt {
+ public:
+  Else(Expr* x, Stmt* s1, Stmt* s2)
+    : expr_(x), stmt1_(s1), stmt2_(s2) {
+    if (expr_->type() != Type::Bool())
+      expr_->error("boolean required in if");
+  }
+
+  void gen(int b, int a) {
+    int label1 = newlabel();    // label1 for stmt1
+    int label2 = newlabel();    // label2 for stmt2
+    expr_->jumping(0,label2);   // fall through to stmt1 on true
+    emitlabel(label1);
+    stmt1_->gen(label1, a);
+    emit("goto L" + std::to_string(a));
+    emitlabel(label2);
+    stmt2_->gen(label2, a);
+  }
+
+ private:
+  Expr* expr_ {nullptr};
+  Stmt* stmt1_ {nullptr};
+  Stmt* stmt2_ {nullptr};
+};
+
+class Do: public Stmt {
+};
+
+class While: public Stmt {
+};
+
+class Break: public Stmt {
 };

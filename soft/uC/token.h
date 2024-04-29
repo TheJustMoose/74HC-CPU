@@ -3,6 +3,8 @@
 #include <string>
 #include "tag.h"
 
+class Temp;
+
 class Token {
  public:
   Token(Tag t)
@@ -22,7 +24,7 @@ class Token {
   Tag tag_ {};
 };
 
-class Num : public Token {
+class Num: public Token {
  public:
   Num(int v)
     : Token(Tag::tNUM), value_(v) {}
@@ -33,7 +35,7 @@ class Num : public Token {
   int value_ {0};
 };
 
-class Real : public Token {
+class Real: public Token {
  public:
   Real(float v)
     : Token(Tag::tREAL), value_(v) {}
@@ -57,6 +59,8 @@ class Word: public Token {
     return lexeme_;
   }
 
+  static Word* temp();
+
  private:
   void Init();
 
@@ -72,6 +76,11 @@ class Type: public Word {
 
   static bool numeric(Type* p);
   static Type* max(Type* p1, Type* p2);
+
+  static Type* Bool();
+  static Type* Char();
+  static Type* Int();
+  static Type* Float();
 
  private:
   int width_ {0};
