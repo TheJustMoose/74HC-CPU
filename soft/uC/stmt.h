@@ -13,10 +13,11 @@ class Stmt: public Node {
   Stmt() {}
 
   static Stmt* Null() {
-    return new Stmt();
+    return new Stmt();  // TODO: should it be singleton?
   }
 
   void gen(int b, int a) {} // called with labels begin and after
+  int after() { return after_; }
 
   static Stmt* Enclosing;    // used for break stmts
 
@@ -76,4 +77,17 @@ class While: public Stmt {
 };
 
 class Break: public Stmt {
+ public:
+  Break() {
+    if (Stmt::Enclosing == Stmt::Null())
+      error("unenclosed break");
+    stmt_ = Stmt::Enclosing;
+  }
+
+  void gen(int b, int a) {
+    emit("goto L" + std::to_string(stmt_->after()));
+  }
+
+ private:
+  Stmt* stmt_ {nullptr};
 };
