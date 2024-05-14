@@ -9,3 +9,6 @@ Not a very scary instruction set discrete logic processor.
 * 1 flag register in IO port
 
 ![CPU structure](./CPU2.1.png)
+
+How CPU works?
+![CPU tacts](./tacts.png)
