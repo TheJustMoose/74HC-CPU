@@ -10,6 +10,6 @@ Not a very scary instruction set discrete logic processor.
 
 ![CPU structure](./CPU2.1.png)
 
-##How CPU works?
+## How CPU works?
 
 ![CPU tacts](./tacts.png)
