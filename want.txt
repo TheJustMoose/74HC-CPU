@@ -3,6 +3,7 @@
 MUL, ALU, ADDR_CNT, OSC
 шины питания?
  + 2032 power supply
+HardDuino SmdKbd
 
 Переделать платы:
 CMD_DEC, Flags, Jumps, Stack
