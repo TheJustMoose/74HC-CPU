@@ -855,7 +855,7 @@ U 1 1 64857268
 P 7750 5000
 F 0 "U9" H 7550 5675 50  0000 C CNN
 F 1 "74HC245" H 7950 5675 50  0000 C CNN
-F 2 "Package_DIP:DIP-20_W7.62mm_Socket" H 7750 5000 50  0001 C CNN
+F 2 "Package_SO:SOIC-20W_7.5x12.8mm_P1.27mm" H 7750 5000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74HC245" H 7750 5000 50  0001 C CNN
 	1    7750 5000
 	1    0    0    -1  
@@ -866,7 +866,7 @@ U 1 1 64858454
 P 10000 5000
 F 0 "U10" H 9800 5675 50  0000 C CNN
 F 1 "74HC245" H 10200 5675 50  0000 C CNN
-F 2 "Package_DIP:DIP-20_W7.62mm_Socket" H 10000 5000 50  0001 C CNN
+F 2 "Package_SO:SOIC-20W_7.5x12.8mm_P1.27mm" H 10000 5000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/gpn/sn74HC245" H 10000 5000 50  0001 C CNN
 	1    10000 5000
 	1    0    0    -1  
@@ -903,37 +903,37 @@ Text Label 5750 7550 0    50   ~ 0
 BUS14
 Text Label 5750 7650 0    50   ~ 0
 BUS15
-Text Label 8250 4500 0    50   ~ 0
-BUS0
-Text Label 8250 4600 0    50   ~ 0
-BUS1
-Text Label 8250 4700 0    50   ~ 0
-BUS2
-Text Label 8250 4800 0    50   ~ 0
-BUS3
-Text Label 8250 4900 0    50   ~ 0
-BUS4
-Text Label 8250 5000 0    50   ~ 0
-BUS5
-Text Label 8250 5100 0    50   ~ 0
-BUS6
 Text Label 8250 5200 0    50   ~ 0
+BUS0
+Text Label 8250 5100 0    50   ~ 0
+BUS1
+Text Label 8250 5000 0    50   ~ 0
+BUS2
+Text Label 8250 4900 0    50   ~ 0
+BUS3
+Text Label 8250 4800 0    50   ~ 0
+BUS4
+Text Label 8250 4700 0    50   ~ 0
+BUS5
+Text Label 8250 4600 0    50   ~ 0
+BUS6
+Text Label 8250 4500 0    50   ~ 0
 BUS7
-Text Label 10500 4500 0    50   ~ 0
-BUS8
-Text Label 10500 4600 0    50   ~ 0
-BUS9
-Text Label 10500 4700 0    50   ~ 0
-BUS10
-Text Label 10500 4800 0    50   ~ 0
-BUS11
-Text Label 10500 4900 0    50   ~ 0
-BUS12
-Text Label 10500 5000 0    50   ~ 0
-BUS13
-Text Label 10500 5100 0    50   ~ 0
-BUS14
 Text Label 10500 5200 0    50   ~ 0
+BUS8
+Text Label 10500 5100 0    50   ~ 0
+BUS9
+Text Label 10500 5000 0    50   ~ 0
+BUS10
+Text Label 10500 4900 0    50   ~ 0
+BUS11
+Text Label 10500 4800 0    50   ~ 0
+BUS12
+Text Label 10500 4700 0    50   ~ 0
+BUS13
+Text Label 10500 4600 0    50   ~ 0
+BUS14
+Text Label 10500 4500 0    50   ~ 0
 BUS15
 Wire Wire Line
 	7000 4500 7250 4500
@@ -967,37 +967,37 @@ Wire Wire Line
 	9250 5100 9500 5100
 Wire Wire Line
 	9250 5200 9500 5200
-Text Label 7000 4500 0    50   ~ 0
-O0
-Text Label 7000 4600 0    50   ~ 0
-O1
-Text Label 7000 4700 0    50   ~ 0
-O2
-Text Label 7000 4800 0    50   ~ 0
-O3
-Text Label 7000 4900 0    50   ~ 0
-O4
-Text Label 7000 5000 0    50   ~ 0
-O5
-Text Label 7000 5100 0    50   ~ 0
-O6
 Text Label 7000 5200 0    50   ~ 0
+O0
+Text Label 7000 5100 0    50   ~ 0
+O1
+Text Label 7000 5000 0    50   ~ 0
+O2
+Text Label 7000 4900 0    50   ~ 0
+O3
+Text Label 7000 4800 0    50   ~ 0
+O4
+Text Label 7000 4700 0    50   ~ 0
+O5
+Text Label 7000 4600 0    50   ~ 0
+O6
+Text Label 7000 4500 0    50   ~ 0
 O7
-Text Label 9250 4500 0    50   ~ 0
-O8
-Text Label 9250 4600 0    50   ~ 0
-O9
-Text Label 9250 4700 0    50   ~ 0
-O10
-Text Label 9250 4800 0    50   ~ 0
-O11
-Text Label 9250 4900 0    50   ~ 0
-O12
-Text Label 9250 5000 0    50   ~ 0
-O13
-Text Label 9250 5100 0    50   ~ 0
-O14
 Text Label 9250 5200 0    50   ~ 0
+O8
+Text Label 9250 5100 0    50   ~ 0
+O9
+Text Label 9250 5000 0    50   ~ 0
+O10
+Text Label 9250 4900 0    50   ~ 0
+O11
+Text Label 9250 4800 0    50   ~ 0
+O12
+Text Label 9250 4700 0    50   ~ 0
+O13
+Text Label 9250 4600 0    50   ~ 0
+O14
+Text Label 9250 4500 0    50   ~ 0
 O15
 $Comp
 L power:GND #PWR021
@@ -1121,7 +1121,7 @@ L Connector:Conn_01x03_Male J7
 U 1 1 648B4729
 P 2550 6350
 F 0 "J7" H 2658 6631 50  0000 C CNN
-F 1 "Conn_01x03_Male" H 2500 6075 50  0000 C CNN
+F 1 "Conn_01x03_Male" H 2550 6175 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 2550 6350 50  0001 C CNN
 F 3 "~" H 2550 6350 50  0001 C CNN
 	1    2550 6350
@@ -1162,34 +1162,34 @@ Wire Wire Line
 $Comp
 L Connector:Screw_Terminal_01x02 J8
 U 1 1 648DFC45
-P 4200 6350
-F 0 "J8" H 4280 6342 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 4280 6251 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 4200 6350 50  0001 C CNN
-F 3 "~" H 4200 6350 50  0001 C CNN
-	1    4200 6350
+P 4450 7425
+F 0 "J8" H 4530 7417 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 4350 7225 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 4450 7425 50  0001 C CNN
+F 3 "~" H 4450 7425 50  0001 C CNN
+	1    4450 7425
 	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0101
 U 1 1 648ED9C1
-P 4000 6350
-F 0 "#PWR0101" H 4000 6100 50  0001 C CNN
-F 1 "GND" V 4005 6222 50  0000 R CNN
-F 2 "" H 4000 6350 50  0001 C CNN
-F 3 "" H 4000 6350 50  0001 C CNN
-	1    4000 6350
+P 4250 7425
+F 0 "#PWR0101" H 4250 7175 50  0001 C CNN
+F 1 "GND" V 4255 7297 50  0000 R CNN
+F 2 "" H 4250 7425 50  0001 C CNN
+F 3 "" H 4250 7425 50  0001 C CNN
+	1    4250 7425
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:VCC #PWR0102
 U 1 1 648EE35D
-P 4000 6250
-F 0 "#PWR0102" H 4000 6100 50  0001 C CNN
-F 1 "VCC" H 4015 6423 50  0000 C CNN
-F 2 "" H 4000 6250 50  0001 C CNN
-F 3 "" H 4000 6250 50  0001 C CNN
-	1    4000 6250
+P 4250 6800
+F 0 "#PWR0102" H 4250 6650 50  0001 C CNN
+F 1 "VCC" H 4265 6973 50  0000 C CNN
+F 2 "" H 4250 6800 50  0001 C CNN
+F 3 "" H 4250 6800 50  0001 C CNN
+	1    4250 6800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1197,45 +1197,45 @@ Wire Wire Line
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 649016DC
-P 4000 6900
-F 0 "#FLG0101" H 4000 6975 50  0001 C CNN
-F 1 "PWR_FLAG" H 4000 7073 50  0000 C CNN
-F 2 "" H 4000 6900 50  0001 C CNN
-F 3 "~" H 4000 6900 50  0001 C CNN
-	1    4000 6900
+P 3375 7350
+F 0 "#FLG0101" H 3375 7425 50  0001 C CNN
+F 1 "PWR_FLAG" H 3375 7523 50  0000 C CNN
+F 2 "" H 3375 7350 50  0001 C CNN
+F 3 "~" H 3375 7350 50  0001 C CNN
+	1    3375 7350
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0103
 U 1 1 64902232
-P 4000 6900
-F 0 "#PWR0103" H 4000 6650 50  0001 C CNN
-F 1 "GND" V 4005 6772 50  0000 R CNN
-F 2 "" H 4000 6900 50  0001 C CNN
-F 3 "" H 4000 6900 50  0001 C CNN
-	1    4000 6900
+P 3375 7350
+F 0 "#PWR0103" H 3375 7100 50  0001 C CNN
+F 1 "GND" V 3380 7222 50  0000 R CNN
+F 2 "" H 3375 7350 50  0001 C CNN
+F 3 "" H 3375 7350 50  0001 C CNN
+	1    3375 7350
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:PWR_FLAG #FLG0102
 U 1 1 64902A74
-P 4500 6900
-F 0 "#FLG0102" H 4500 6975 50  0001 C CNN
-F 1 "PWR_FLAG" H 4500 7073 50  0000 C CNN
-F 2 "" H 4500 6900 50  0001 C CNN
-F 3 "~" H 4500 6900 50  0001 C CNN
-	1    4500 6900
+P 3375 6900
+F 0 "#FLG0102" H 3375 6975 50  0001 C CNN
+F 1 "PWR_FLAG" H 3375 7073 50  0000 C CNN
+F 2 "" H 3375 6900 50  0001 C CNN
+F 3 "~" H 3375 6900 50  0001 C CNN
+	1    3375 6900
 	-1   0    0    1   
 $EndComp
 $Comp
 L power:VCC #PWR0104
 U 1 1 649037AF
-P 4500 6900
-F 0 "#PWR0104" H 4500 6750 50  0001 C CNN
-F 1 "VCC" H 4515 7073 50  0000 C CNN
-F 2 "" H 4500 6900 50  0001 C CNN
-F 3 "" H 4500 6900 50  0001 C CNN
-	1    4500 6900
+P 3375 6900
+F 0 "#PWR0104" H 3375 6750 50  0001 C CNN
+F 1 "VCC" H 3390 7073 50  0000 C CNN
+F 2 "" H 3375 6900 50  0001 C CNN
+F 3 "" H 3375 6900 50  0001 C CNN
+	1    3375 6900
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1457,5 +1457,51 @@ F 2 "" H 8950 5850 50  0001 C CNN
 F 3 "" H 8950 5850 50  0001 C CNN
 	1    8950 5850
 	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 66563728
+P 1250 7500
+F 0 "H5" H 1350 7546 50  0000 L CNN
+F 1 "MountingHole" H 1350 7455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1250 7500 50  0001 C CNN
+F 3 "~" H 1250 7500 50  0001 C CNN
+	1    1250 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 6656372E
+P 2000 7500
+F 0 "H6" H 2100 7546 50  0000 L CNN
+F 1 "MountingHole" H 2100 7455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2000 7500 50  0001 C CNN
+F 3 "~" H 2000 7500 50  0001 C CNN
+	1    2000 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:IRLML5203 Q1
+U 1 1 6656E483
+P 4350 7000
+F 0 "Q1" H 4555 6954 50  0000 L CNN
+F 1 "IRLML5203" H 4555 7045 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4550 6925 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 4350 7000 50  0001 L CNN
+	1    4350 7000
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4250 7200 4250 7325
+$Comp
+L power:GND #PWR033
+U 1 1 665B0C3C
+P 4550 7000
+F 0 "#PWR033" H 4550 6750 50  0001 C CNN
+F 1 "GND" V 4555 6872 50  0000 R CNN
+F 2 "" H 4550 7000 50  0001 C CNN
+F 3 "" H 4550 7000 50  0001 C CNN
+	1    4550 7000
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
