@@ -1008,4 +1008,17 @@ Text Label 2000 5100 0    50   ~ 0
 D15
 Wire Wire Line
 	1500 5400 2000 5400
+$Comp
+L Connector:Conn_01x01_Male J7
+U 1 1 6653500A
+P 1300 3500
+F 0 "J7" H 1200 3525 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 1375 3600 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Horizontal" H 1300 3500 50  0001 C CNN
+F 3 "~" H 1300 3500 50  0001 C CNN
+	1    1300 3500
+	1    0    0    -1  
+$EndComp
+Text Label 1500 3500 0    50   ~ 0
+CP
 $EndSCHEMATC
