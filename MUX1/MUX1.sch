@@ -60,13 +60,13 @@ $EndComp
 $Comp
 L Connector:Conn_01x02_Male J4
 U 1 1 64822EFE
-P 3050 4400
-F 0 "J4" H 3158 4581 50  0000 C CNN
-F 1 "Conn_01x02_Male" H 2925 4250 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 3050 4400 50  0001 C CNN
-F 3 "~" H 3050 4400 50  0001 C CNN
-	1    3050 4400
-	1    0    0    -1  
+P 3050 4500
+F 0 "J4" H 3050 4600 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 2775 4325 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 3050 4500 50  0001 C CNN
+F 3 "~" H 3050 4500 50  0001 C CNN
+	1    3050 4500
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR02
@@ -223,7 +223,7 @@ L Device:C C1
 U 1 1 64829BAA
 P 4500 4900
 F 0 "C1" H 4615 4946 50  0000 L CNN
-F 1 "C" H 4615 4855 50  0000 L CNN
+F 1 "0.1uF" H 4615 4855 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4538 4750 50  0001 C CNN
 F 3 "~" H 4500 4900 50  0001 C CNN
 	1    4500 4900

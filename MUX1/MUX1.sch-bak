@@ -262,8 +262,8 @@ F 3 "~" H 3050 5150 50  0001 C CNN
 	1    3050 5150
 	1    0    0    -1  
 $EndComp
-Text Label 3250 5150 0    50   ~ 0
-O0
 Text Label 3250 5250 0    50   ~ 0
+O0
+Text Label 3250 5150 0    50   ~ 0
 O1
 $EndSCHEMATC
