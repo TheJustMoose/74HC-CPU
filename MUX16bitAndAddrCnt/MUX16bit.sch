@@ -1563,42 +1563,42 @@ D15
 $Comp
 L Connector:Conn_01x09_Male J9
 U 1 1 667594D7
-P 5500 6500
-F 0 "J9" H 5550 6025 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 5950 6975 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 5500 6500 50  0001 C CNN
-F 3 "~" H 5500 6500 50  0001 C CNN
-	1    5500 6500
+P 8750 5400
+F 0 "J9" H 8800 4925 50  0000 R CNN
+F 1 "Conn_01x09_Male" H 9200 5875 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 8750 5400 50  0001 C CNN
+F 3 "~" H 8750 5400 50  0001 C CNN
+	1    8750 5400
 	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0105
 U 1 1 667642DF
-P 5700 6025
-F 0 "#PWR0105" H 5700 5775 50  0001 C CNN
-F 1 "GND" V 5705 5897 50  0000 R CNN
-F 2 "" H 5700 6025 50  0001 C CNN
-F 3 "" H 5700 6025 50  0001 C CNN
-	1    5700 6025
+P 8950 4925
+F 0 "#PWR0105" H 8950 4675 50  0001 C CNN
+F 1 "GND" V 8955 4797 50  0000 R CNN
+F 2 "" H 8950 4925 50  0001 C CNN
+F 3 "" H 8950 4925 50  0001 C CNN
+	1    8950 4925
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5700 6025 5700 6100
-Text Label 5700 6200 0    50   ~ 0
+	8950 4925 8950 5000
+Text Label 8950 5100 0    50   ~ 0
 CNST0
-Text Label 5700 6300 0    50   ~ 0
+Text Label 8950 5200 0    50   ~ 0
 CNST1
-Text Label 5700 6400 0    50   ~ 0
+Text Label 8950 5300 0    50   ~ 0
 CNST2
-Text Label 5700 6500 0    50   ~ 0
+Text Label 8950 5400 0    50   ~ 0
 CNST3
-Text Label 5700 6600 0    50   ~ 0
+Text Label 8950 5500 0    50   ~ 0
 CNST4
-Text Label 5700 6700 0    50   ~ 0
+Text Label 8950 5600 0    50   ~ 0
 CNST5
-Text Label 5700 6800 0    50   ~ 0
+Text Label 8950 5700 0    50   ~ 0
 CNST6
-Text Label 5700 6900 0    50   ~ 0
+Text Label 8950 5800 0    50   ~ 0
 CNST7
 Wire Wire Line
 	5500 4350 5750 4350
@@ -1763,4 +1763,111 @@ Text Label 9250 3750 0    50   ~ 0
 N13
 Text Label 9250 3850 0    50   ~ 0
 N14
+$Comp
+L CommonLibrary:STACK16 U9
+U 1 1 66718735
+P 4600 5400
+F 0 "U9" H 4950 5681 50  0000 C CNN
+F 1 "STACK16" H 4950 5590 50  0000 C CNN
+F 2 "CommonLibrary:STACK16" H 4600 5400 50  0001 C CNN
+F 3 "" H 4600 5400 50  0001 C CNN
+	1    4600 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4250 5500 4500 5500
+Wire Wire Line
+	4250 5600 4500 5600
+Wire Wire Line
+	4250 5700 4500 5700
+Wire Wire Line
+	4250 5800 4500 5800
+Wire Wire Line
+	4250 5900 4500 5900
+Wire Wire Line
+	4250 6000 4500 6000
+Wire Wire Line
+	4250 6100 4500 6100
+Wire Wire Line
+	4250 6200 4500 6200
+Text Label 4250 5500 0    50   ~ 0
+N0
+Text Label 4250 5600 0    50   ~ 0
+N1
+Text Label 4250 5700 0    50   ~ 0
+N2
+Text Label 4250 5800 0    50   ~ 0
+N3
+Text Label 4250 5900 0    50   ~ 0
+N4
+Text Label 4250 6000 0    50   ~ 0
+N5
+Text Label 4250 6100 0    50   ~ 0
+N6
+Text Label 4250 6200 0    50   ~ 0
+N7
+Wire Wire Line
+	4250 6400 4500 6400
+Wire Wire Line
+	4250 6500 4500 6500
+Wire Wire Line
+	4250 6600 4500 6600
+Wire Wire Line
+	4250 6700 4500 6700
+Wire Wire Line
+	4250 6800 4500 6800
+Wire Wire Line
+	4250 6900 4500 6900
+Wire Wire Line
+	4250 7000 4500 7000
+Wire Wire Line
+	4250 7100 4500 7100
+Text Label 4250 7100 0    50   ~ 0
+N15
+Text Label 4250 6800 0    50   ~ 0
+N12
+Text Label 4250 6700 0    50   ~ 0
+N11
+Text Label 4250 6400 0    50   ~ 0
+N8
+Text Label 4250 6500 0    50   ~ 0
+N9
+Text Label 4250 6600 0    50   ~ 0
+N10
+Text Label 4250 6900 0    50   ~ 0
+N13
+Text Label 4250 7000 0    50   ~ 0
+N14
+Text Label 5400 5500 0    50   ~ 0
+C0
+Text Label 5400 5600 0    50   ~ 0
+C1
+Text Label 5400 5700 0    50   ~ 0
+C2
+Text Label 5400 5800 0    50   ~ 0
+C3
+Text Label 5400 5900 0    50   ~ 0
+C4
+Text Label 5400 6000 0    50   ~ 0
+C5
+Text Label 5400 6100 0    50   ~ 0
+C6
+Text Label 5400 6200 0    50   ~ 0
+C7
+Text Label 5400 6400 0    50   ~ 0
+C8
+Text Label 5400 6500 0    50   ~ 0
+C9
+Text Label 5400 6600 0    50   ~ 0
+C10
+Text Label 5400 6700 0    50   ~ 0
+C11
+Text Label 5400 6800 0    50   ~ 0
+C12
+Text Label 5400 6900 0    50   ~ 0
+C13
+Text Label 5400 7000 0    50   ~ 0
+C14
+Text Label 5400 7100 0    50   ~ 0
+C15
 $EndSCHEMATC
