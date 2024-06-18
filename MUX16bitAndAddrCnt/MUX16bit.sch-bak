@@ -1838,4 +1838,36 @@ Text Label 4250 6900 0    50   ~ 0
 N13
 Text Label 4250 7000 0    50   ~ 0
 N14
+Text Label 5400 5500 0    50   ~ 0
+C0
+Text Label 5400 5600 0    50   ~ 0
+C1
+Text Label 5400 5700 0    50   ~ 0
+C2
+Text Label 5400 5800 0    50   ~ 0
+C3
+Text Label 5400 5900 0    50   ~ 0
+C4
+Text Label 5400 6000 0    50   ~ 0
+C5
+Text Label 5400 6100 0    50   ~ 0
+C6
+Text Label 5400 6200 0    50   ~ 0
+C7
+Text Label 5400 6400 0    50   ~ 0
+C8
+Text Label 5400 6500 0    50   ~ 0
+C9
+Text Label 5400 6600 0    50   ~ 0
+C10
+Text Label 5400 6700 0    50   ~ 0
+C11
+Text Label 5400 6800 0    50   ~ 0
+C12
+Text Label 5400 6900 0    50   ~ 0
+C13
+Text Label 5400 7000 0    50   ~ 0
+C14
+Text Label 5400 7100 0    50   ~ 0
+C15
 $EndSCHEMATC
