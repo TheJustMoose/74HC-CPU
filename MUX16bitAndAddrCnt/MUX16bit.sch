@@ -960,7 +960,7 @@ $Comp
 L Device:R R1
 U 1 1 6486449B
 P 9350 2000
-F 0 "R1" V 9275 1950 50  0000 C CNN
+F 0 "R1" V 9425 1975 50  0000 C CNN
 F 1 "10k" V 9350 2000 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9280 2000 50  0001 C CNN
 F 3 "~" H 9350 2000 50  0001 C CNN
@@ -982,7 +982,7 @@ $Comp
 L Device:R R2
 U 1 1 648927C5
 P 9350 4150
-F 0 "R2" V 9275 4100 50  0000 C CNN
+F 0 "R2" V 9425 4125 50  0000 C CNN
 F 1 "10k" V 9350 4150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9280 4150 50  0001 C CNN
 F 3 "~" H 9350 4150 50  0001 C CNN
@@ -1871,31 +1871,66 @@ C14
 Text Label 5400 7100 0    50   ~ 0
 C15
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0106
 U 1 1 6689E4FA
 P 5000 7600
-F 0 "#PWR?" H 5000 7350 50  0001 C CNN
+F 0 "#PWR0106" H 5000 7350 50  0001 C CNN
 F 1 "GND" H 5005 7427 50  0000 C CNN
 F 2 "" H 5000 7600 50  0001 C CNN
 F 3 "" H 5000 7600 50  0001 C CNN
 	1    5000 7600
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4900 7600 5000 7600
-Connection ~ 5000 7600
 $Comp
-L power:VCC #PWR?
+L power:VCC #PWR0107
 U 1 1 668AED81
 P 4900 5300
-F 0 "#PWR?" H 4900 5150 50  0001 C CNN
+F 0 "#PWR0107" H 4900 5150 50  0001 C CNN
 F 1 "VCC" H 4915 5473 50  0000 C CNN
 F 2 "" H 4900 5300 50  0001 C CNN
 F 3 "" H 4900 5300 50  0001 C CNN
 	1    4900 5300
 	1    0    0    -1  
 $EndComp
+NoConn ~ 5000 5300
+NoConn ~ 4900 7600
+NoConn ~ 8350 4250
+$Comp
+L Connector:Conn_01x01_Male J10
+U 1 1 66794AD6
+P 7250 5750
+F 0 "J10" H 7275 5800 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 7275 5675 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 7250 5750 50  0001 C CNN
+F 3 "~" H 7250 5750 50  0001 C CNN
+	1    7250 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J11
+U 1 1 66795F85
+P 7250 6000
+F 0 "J11" H 7275 6050 50  0000 C CNN
+F 1 "Conn_01x01_Male" H 7275 5925 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 7250 6000 50  0001 C CNN
+F 3 "~" H 7250 6000 50  0001 C CNN
+	1    7250 6000
+	1    0    0    -1  
+$EndComp
+Text Label 7450 5750 0    50   ~ 0
++1\CNST
 Wire Wire Line
-	4900 5300 5000 5300
-Connection ~ 4900 5300
+	9250 1900 9500 1900
+Text Label 9250 1900 0    50   ~ 0
+STEP
+Text Label 9250 4050 0    50   ~ 0
+STEP
+Wire Wire Line
+	9250 4050 9500 4050
+Text Label 7450 6000 0    50   ~ 0
+STEP
+NoConn ~ 4500 7300
+NoConn ~ 4500 7400
+Text Notes 2525 7375 0    50   ~ 0
+These pins have to be connected to "stack logic"
 $EndSCHEMATC
