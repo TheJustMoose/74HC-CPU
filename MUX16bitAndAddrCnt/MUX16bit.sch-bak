@@ -1933,4 +1933,37 @@ NoConn ~ 4500 7300
 NoConn ~ 4500 7400
 Text Notes 2525 7375 0    50   ~ 0
 These pins have to be connected to "stack logic"
+$Comp
+L 74xx:74LS161 U10
+U 1 1 66742071
+P 3100 9475
+F 0 "U10" H 3100 10456 50  0000 C CNN
+F 1 "74LS161" H 3100 10365 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm" H 3100 9475 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS161" H 3100 9475 50  0001 C CNN
+	1    3100 9475
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS138 U?
+U 1 1 6674F1BD
+P 4700 9250
+F 0 "U?" H 4700 10031 50  0000 C CNN
+F 1 "74LS138" H 4700 9940 50  0000 C CNN
+F 2 "" H 4700 9250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS138" H 4700 9250 50  0001 C CNN
+	1    4700 9250
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx_IEEE:74HC238 U?
+U 1 1 6674FF62
+P 6175 9200
+F 0 "U?" H 6175 9716 50  0000 C CNN
+F 1 "74HC238" H 6175 9625 50  0000 C CNN
+F 2 "" H 6175 9200 50  0001 C CNN
+F 3 "" H 6175 9200 50  0001 C CNN
+	1    6175 9200
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

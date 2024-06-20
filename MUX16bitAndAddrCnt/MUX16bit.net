@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\PROJECT\github\74HC-CPU\MUX16bitAndAddrCnt\MUX16bit.sch)
-    (date "18/06/2024 23:23:52")
+    (date "20/06/2024 22:42:22")
     (tool "Eeschema (5.1.8)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
