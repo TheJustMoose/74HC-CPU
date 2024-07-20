@@ -110,7 +110,7 @@ Wire Wire Line
 	4500 2700 4500 2500
 Connection ~ 2750 2700
 Wire Wire Line
-	2750 2800 4500 2800
+	2750 2800 4000 2800
 Wire Wire Line
 	4500 2800 4500 3000
 Connection ~ 2750 2800
@@ -121,7 +121,7 @@ Wire Wire Line
 	4500 3100 4500 3000
 Connection ~ 4500 3000
 Wire Wire Line
-	4500 2700 6250 2700
+	4500 2700 5750 2700
 Wire Wire Line
 	6250 2700 6250 2500
 Connection ~ 4500 2700
@@ -300,4 +300,40 @@ Text Notes 1475 2500 0    100  ~ 0
 IN
 Text Notes 9325 2500 0    100  ~ 0
 OUT
+$Comp
+L Device:LED D1
+U 1 1 669C336A
+P 4350 1875
+F 0 "D1" H 4343 2092 50  0000 C CNN
+F 1 "LED" H 4343 2001 50  0000 C CNN
+F 2 "LED_THT:LED_D5.0mm" H 4350 1875 50  0001 C CNN
+F 3 "~" H 4350 1875 50  0001 C CNN
+	1    4350 1875
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 669C3987
+P 4650 1875
+F 0 "R1" V 4443 1875 50  0000 C CNN
+F 1 "1k" V 4534 1875 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 4580 1875 50  0001 C CNN
+F 3 "~" H 4650 1875 50  0001 C CNN
+	1    4650 1875
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4800 1875 5750 1875
+Wire Wire Line
+	5750 1875 5750 2700
+Connection ~ 5750 2700
+Wire Wire Line
+	5750 2700 6250 2700
+Wire Wire Line
+	4200 1875 4000 1875
+Wire Wire Line
+	4000 1875 4000 2800
+Connection ~ 4000 2800
+Wire Wire Line
+	4000 2800 4500 2800
 $EndSCHEMATC
