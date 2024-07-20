@@ -16,174 +16,288 @@ $EndDescr
 $Comp
 L Connector:Screw_Terminal_01x02 J1
 U 1 1 6679E2FC
-P 3050 2550
-F 0 "J1" H 3130 2542 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 3130 2451 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 3050 2550 50  0001 C CNN
-F 3 "~" H 3050 2550 50  0001 C CNN
-	1    3050 2550
+P 1550 2800
+F 0 "J1" H 1630 2792 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 1630 2701 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1550 2800 50  0001 C CNN
+F 3 "~" H 1550 2800 50  0001 C CNN
+	1    1550 2800
 	-1   0    0    1   
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J2
 U 1 1 6679EB70
-P 4450 2150
-F 0 "J2" H 4530 2142 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 4530 2051 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 4450 2150 50  0001 C CNN
-F 3 "~" H 4450 2150 50  0001 C CNN
-	1    4450 2150
+P 2950 2400
+F 0 "J2" H 3030 2392 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 3030 2301 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 2950 2400 50  0001 C CNN
+F 3 "~" H 2950 2400 50  0001 C CNN
+	1    2950 2400
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J3
 U 1 1 6679F51B
-P 4450 2750
-F 0 "J3" H 4530 2742 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 4530 2651 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 4450 2750 50  0001 C CNN
-F 3 "~" H 4450 2750 50  0001 C CNN
-	1    4450 2750
+P 2950 3000
+F 0 "J3" H 3030 2992 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 3030 2901 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 2950 3000 50  0001 C CNN
+F 3 "~" H 2950 3000 50  0001 C CNN
+	1    2950 3000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J4
 U 1 1 667A0AEF
-P 6200 2150
-F 0 "J4" H 6280 2142 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 6280 2051 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 6200 2150 50  0001 C CNN
-F 3 "~" H 6200 2150 50  0001 C CNN
-	1    6200 2150
+P 4700 2400
+F 0 "J4" H 4780 2392 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 4780 2301 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 4700 2400 50  0001 C CNN
+F 3 "~" H 4700 2400 50  0001 C CNN
+	1    4700 2400
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J5
 U 1 1 667A0AF5
-P 6200 2750
-F 0 "J5" H 6280 2742 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 6280 2651 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 6200 2750 50  0001 C CNN
-F 3 "~" H 6200 2750 50  0001 C CNN
-	1    6200 2750
+P 4700 3000
+F 0 "J5" H 4780 2992 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 4780 2901 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 4700 3000 50  0001 C CNN
+F 3 "~" H 4700 3000 50  0001 C CNN
+	1    4700 3000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J6
 U 1 1 667A19D5
-P 7950 2150
-F 0 "J6" H 8030 2142 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 8030 2051 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 7950 2150 50  0001 C CNN
-F 3 "~" H 7950 2150 50  0001 C CNN
-	1    7950 2150
+P 6450 2400
+F 0 "J6" H 6530 2392 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 6530 2301 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 6450 2400 50  0001 C CNN
+F 3 "~" H 6450 2400 50  0001 C CNN
+	1    6450 2400
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J7
 U 1 1 667A19DB
-P 7950 2750
-F 0 "J7" H 8030 2742 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 8030 2651 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 7950 2750 50  0001 C CNN
-F 3 "~" H 7950 2750 50  0001 C CNN
-	1    7950 2750
+P 6450 3000
+F 0 "J7" H 6530 2992 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 6530 2901 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 6450 3000 50  0001 C CNN
+F 3 "~" H 6450 3000 50  0001 C CNN
+	1    6450 3000
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3750 2450 4000 2450
+	2250 2700 2500 2700
 Wire Wire Line
-	4250 2450 4250 2250
+	2750 2700 2750 2500
 Wire Wire Line
-	3750 2550 4000 2550
+	2250 2800 2500 2800
 Wire Wire Line
-	4250 2550 4250 2750
+	2750 2800 2750 3000
 Wire Wire Line
-	4250 2150 4250 2250
-Connection ~ 4250 2250
+	2750 2400 2750 2500
+Connection ~ 2750 2500
 Wire Wire Line
-	4250 2850 4250 2750
-Connection ~ 4250 2750
+	2750 3100 2750 3000
+Connection ~ 2750 3000
 Wire Wire Line
-	4250 2450 6000 2450
+	2750 2700 4500 2700
 Wire Wire Line
-	6000 2450 6000 2250
-Connection ~ 4250 2450
+	4500 2700 4500 2500
+Connection ~ 2750 2700
 Wire Wire Line
-	4250 2550 6000 2550
+	2750 2800 4500 2800
 Wire Wire Line
-	6000 2550 6000 2750
-Connection ~ 4250 2550
+	4500 2800 4500 3000
+Connection ~ 2750 2800
 Wire Wire Line
-	6000 2150 6000 2250
-Connection ~ 6000 2250
+	4500 2400 4500 2500
+Connection ~ 4500 2500
 Wire Wire Line
-	6000 2850 6000 2750
-Connection ~ 6000 2750
+	4500 3100 4500 3000
+Connection ~ 4500 3000
 Wire Wire Line
-	6000 2450 7750 2450
+	4500 2700 6250 2700
 Wire Wire Line
-	7750 2450 7750 2250
-Connection ~ 6000 2450
+	6250 2700 6250 2500
+Connection ~ 4500 2700
 Wire Wire Line
-	6000 2550 7750 2550
+	4500 2800 6250 2800
 Wire Wire Line
-	7750 2550 7750 2750
-Connection ~ 6000 2550
+	6250 2800 6250 3000
+Connection ~ 4500 2800
 Wire Wire Line
-	7750 2150 7750 2250
-Connection ~ 7750 2250
+	6250 2400 6250 2500
+Connection ~ 6250 2500
 Wire Wire Line
-	7750 2850 7750 2750
-Connection ~ 7750 2750
+	6250 3100 6250 3000
+Connection ~ 6250 3000
 $Comp
 L power:GND #PWR02
 U 1 1 667A30C6
-P 4000 2550
-F 0 "#PWR02" H 4000 2300 50  0001 C CNN
-F 1 "GND" H 4005 2377 50  0000 C CNN
-F 2 "" H 4000 2550 50  0001 C CNN
-F 3 "" H 4000 2550 50  0001 C CNN
-	1    4000 2550
+P 2500 2800
+F 0 "#PWR02" H 2500 2550 50  0001 C CNN
+F 1 "GND" H 2505 2627 50  0000 C CNN
+F 2 "" H 2500 2800 50  0001 C CNN
+F 3 "" H 2500 2800 50  0001 C CNN
+	1    2500 2800
 	1    0    0    -1  
 $EndComp
-Connection ~ 4000 2550
+Connection ~ 2500 2800
 Wire Wire Line
-	4000 2550 4250 2550
+	2500 2800 2750 2800
 $Comp
 L power:VCC #PWR01
 U 1 1 667A3959
-P 4000 2450
-F 0 "#PWR01" H 4000 2300 50  0001 C CNN
-F 1 "VCC" H 4015 2623 50  0000 C CNN
-F 2 "" H 4000 2450 50  0001 C CNN
-F 3 "" H 4000 2450 50  0001 C CNN
-	1    4000 2450
+P 2500 2700
+F 0 "#PWR01" H 2500 2550 50  0001 C CNN
+F 1 "VCC" H 2515 2873 50  0000 C CNN
+F 2 "" H 2500 2700 50  0001 C CNN
+F 3 "" H 2500 2700 50  0001 C CNN
+	1    2500 2700
 	1    0    0    -1  
 $EndComp
-Connection ~ 4000 2450
+Connection ~ 2500 2700
 Wire Wire Line
-	4000 2450 4250 2450
+	2500 2700 2750 2700
 $Comp
-L Transistor_FET:IRLML5203 Q?
+L Transistor_FET:IRLML5203 Q1
 U 1 1 667A66C2
-P 3550 2550
-F 0 "Q?" V 3892 2550 50  0000 C CNN
-F 1 "IRLML5203" V 3801 2550 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 3750 2475 50  0001 L CIN
-F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 3550 2550 50  0001 L CNN
-	1    3550 2550
+P 2050 2800
+F 0 "Q1" V 2392 2800 50  0000 C CNN
+F 1 "IRLML5203" V 2301 2800 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2250 2725 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 2050 2800 50  0001 L CNN
+	1    2050 2800
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	3250 2450 3350 2450
+	1750 2700 1850 2700
 Wire Wire Line
-	3250 2550 3250 2750
+	1750 2800 1750 3000
 Wire Wire Line
-	3250 2750 3550 2750
+	1750 3000 2050 3000
 Wire Wire Line
-	3750 2550 3750 2750
+	2250 2800 2250 3000
 Wire Wire Line
-	3750 2750 3550 2750
-Connection ~ 3550 2750
+	2250 3000 2050 3000
+Connection ~ 2050 3000
+$Comp
+L Connector:Screw_Terminal_01x02 J8
+U 1 1 667F499C
+P 8200 2400
+F 0 "J8" H 8280 2392 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 8280 2301 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 8200 2400 50  0001 C CNN
+F 3 "~" H 8200 2400 50  0001 C CNN
+	1    8200 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J9
+U 1 1 667F49A2
+P 8200 3000
+F 0 "J9" H 8280 2992 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 8280 2901 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 8200 3000 50  0001 C CNN
+F 3 "~" H 8200 3000 50  0001 C CNN
+	1    8200 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6250 2700 8000 2700
+Wire Wire Line
+	8000 2700 8000 2500
+Wire Wire Line
+	6250 2800 8000 2800
+Wire Wire Line
+	8000 2800 8000 3000
+Wire Wire Line
+	8000 2400 8000 2500
+Connection ~ 8000 2500
+Wire Wire Line
+	8000 3100 8000 3000
+Connection ~ 8000 3000
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 667F5E7A
+P 2500 3750
+F 0 "H1" H 2600 3796 50  0000 L CNN
+F 1 "MountingHole" H 2600 3705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 2500 3750 50  0001 C CNN
+F 3 "~" H 2500 3750 50  0001 C CNN
+	1    2500 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 667F7FFA
+P 3750 3750
+F 0 "H2" H 3850 3796 50  0000 L CNN
+F 1 "MountingHole" H 3850 3705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 3750 3750 50  0001 C CNN
+F 3 "~" H 3750 3750 50  0001 C CNN
+	1    3750 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 667F82DA
+P 5250 3750
+F 0 "H3" H 5350 3796 50  0000 L CNN
+F 1 "MountingHole" H 5350 3705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 5250 3750 50  0001 C CNN
+F 3 "~" H 5250 3750 50  0001 C CNN
+	1    5250 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 667F8712
+P 7000 3750
+F 0 "H4" H 7100 3796 50  0000 L CNN
+F 1 "MountingHole" H 7100 3705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 7000 3750 50  0001 C CNN
+F 3 "~" H 7000 3750 50  0001 C CNN
+	1    7000 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 667F8DA7
+P 8750 3750
+F 0 "H5" H 8850 3796 50  0000 L CNN
+F 1 "MountingHole" H 8850 3705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 8750 3750 50  0001 C CNN
+F 3 "~" H 8750 3750 50  0001 C CNN
+	1    8750 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 66800363
+P 9450 2700
+F 0 "J?" H 9530 2692 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 9530 2601 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 9450 2700 50  0001 C CNN
+F 3 "~" H 9450 2700 50  0001 C CNN
+	1    9450 2700
+	1    0    0    -1  
+$EndComp
+Connection ~ 6250 2700
+Connection ~ 6250 2800
+Wire Wire Line
+	8000 2700 9250 2700
+Connection ~ 8000 2700
+Wire Wire Line
+	8000 2800 9250 2800
+Connection ~ 8000 2800
+Text Notes 1475 2500 0    100  ~ 0
+IN
+Text Notes 9325 2500 0    100  ~ 0
+OUT
 $EndSCHEMATC
