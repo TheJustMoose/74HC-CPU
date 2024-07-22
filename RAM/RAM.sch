@@ -464,26 +464,13 @@ Wire Wire Line
 Wire Wire Line
 	4200 2650 5000 2650
 NoConn ~ 3250 8500
-Text Label 950  5800 0    50   ~ 0
+Text Label 950  9300 0    50   ~ 0
 ~OE
-Text Label 950  5700 0    50   ~ 0
-GND
-Text Label 1575 5600 0    50   ~ 0
+Text Label 2125 10175 0    50   ~ 0
 VCC
-Text Label 950  5500 0    50   ~ 0
+Text Label 950  9200 0    50   ~ 0
 ~WR
-$Comp
-L Connector:Conn_01x05_Male J4
-U 1 1 63DBE3C2
-P 750 5700
-F 0 "J4" H 722 5632 50  0000 R CNN
-F 1 "Conn_01x05_Male" H 1075 5975 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 750 5700 50  0001 C CNN
-F 3 "~" H 750 5700 50  0001 C CNN
-	1    750  5700
-	1    0    0    1   
-$EndComp
-Text Label 950  5900 0    50   ~ 0
+Text Label 950  9400 0    50   ~ 0
 ~CS
 Text Label 6000 2450 0    50   ~ 0
 ~WR
@@ -1123,45 +1110,45 @@ Address\ndecoder ;)
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 64922E67
-P 750 9250
-F 0 "H1" H 850 9296 50  0000 L CNN
-F 1 "MountingHole" H 850 9205 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 9250 50  0001 C CNN
-F 3 "~" H 750 9250 50  0001 C CNN
-	1    750  9250
+P 750 8000
+F 0 "H1" H 850 8046 50  0000 L CNN
+F 1 "MountingHole" H 850 7955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 8000 50  0001 C CNN
+F 3 "~" H 750 8000 50  0001 C CNN
+	1    750  8000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 64923BB4
-P 750 9500
-F 0 "H2" H 850 9546 50  0000 L CNN
-F 1 "MountingHole" H 850 9455 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 9500 50  0001 C CNN
-F 3 "~" H 750 9500 50  0001 C CNN
-	1    750  9500
+P 750 8250
+F 0 "H2" H 850 8296 50  0000 L CNN
+F 1 "MountingHole" H 850 8205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 8250 50  0001 C CNN
+F 3 "~" H 750 8250 50  0001 C CNN
+	1    750  8250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 64924557
-P 750 9750
-F 0 "H3" H 850 9796 50  0000 L CNN
-F 1 "MountingHole" H 850 9705 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 9750 50  0001 C CNN
-F 3 "~" H 750 9750 50  0001 C CNN
-	1    750  9750
+P 750 8500
+F 0 "H3" H 850 8546 50  0000 L CNN
+F 1 "MountingHole" H 850 8455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 8500 50  0001 C CNN
+F 3 "~" H 750 8500 50  0001 C CNN
+	1    750  8500
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 64924E63
-P 750 10000
-F 0 "H4" H 850 10046 50  0000 L CNN
-F 1 "MountingHole" H 850 9955 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 10000 50  0001 C CNN
-F 3 "~" H 750 10000 50  0001 C CNN
-	1    750  10000
+P 750 8750
+F 0 "H4" H 850 8796 50  0000 L CNN
+F 1 "MountingHole" H 850 8705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 8750 50  0001 C CNN
+F 3 "~" H 750 8750 50  0001 C CNN
+	1    750  8750
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1250,27 +1237,108 @@ Set both jumpers to top\nif you want to use RAM\ninstead of ROM
 $Comp
 L Transistor_FET:IRLML5203 Q1
 U 1 1 64C0CC9D
-P 1375 5700
-F 0 "Q1" V 1350 5875 50  0000 C CNN
-F 1 "IRLML5203" V 1600 5700 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 1575 5625 50  0001 L CIN
-F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 1375 5700 50  0001 L CNN
-	1    1375 5700
+P 1925 10275
+F 0 "Q1" V 1900 10450 50  0000 C CNN
+F 1 "IRLML5203" V 2150 10275 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2125 10200 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 1925 10275 50  0001 L CNN
+	1    1925 10275
 	0    -1   -1   0   
 $EndComp
 $Comp
 L power:GND #PWR0102
 U 1 1 64C0F060
-P 1375 5900
-F 0 "#PWR0102" H 1375 5650 50  0001 C CNN
-F 1 "GND" H 1380 5727 50  0000 C CNN
-F 2 "" H 1375 5900 50  0001 C CNN
-F 3 "" H 1375 5900 50  0001 C CNN
-	1    1375 5900
+P 1925 10475
+F 0 "#PWR0102" H 1925 10225 50  0001 C CNN
+F 1 "GND" H 1930 10302 50  0000 C CNN
+F 2 "" H 1925 10475 50  0001 C CNN
+F 3 "" H 1925 10475 50  0001 C CNN
+	1    1925 10475
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	950  5600 1175 5600
-Text Notes 1475 5925 0    50   ~ 0
+	1500 10175 1725 10175
+Text Notes 2025 10500 0    50   ~ 0
 Reverse\npolarity\nprotection
+$Comp
+L Connector:Screw_Terminal_01x02 J6
+U 1 1 669F52FC
+P 1300 10175
+F 0 "J6" H 1218 9850 50  0000 C CNN
+F 1 "Screw_Terminal_01x02" H 1500 10300 50  0000 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1300 10175 50  0001 C CNN
+F 3 "~" H 1300 10175 50  0001 C CNN
+	1    1300 10175
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR027
+U 1 1 66A2007B
+P 1625 10400
+F 0 "#PWR027" H 1625 10150 50  0001 C CNN
+F 1 "GND" H 1630 10227 50  0000 C CNN
+F 2 "" H 1625 10400 50  0001 C CNN
+F 3 "" H 1625 10400 50  0001 C CNN
+	1    1625 10400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1500 10275 1625 10275
+Wire Wire Line
+	1625 10275 1625 10400
+$Comp
+L power:PWR_FLAG #FLG03
+U 1 1 66A26073
+P 2750 10075
+F 0 "#FLG03" H 2750 10150 50  0001 C CNN
+F 1 "PWR_FLAG" H 2750 10248 50  0000 C CNN
+F 2 "" H 2750 10075 50  0001 C CNN
+F 3 "~" H 2750 10075 50  0001 C CNN
+	1    2750 10075
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG04
+U 1 1 66A26A72
+P 2750 10500
+F 0 "#FLG04" H 2750 10575 50  0001 C CNN
+F 1 "PWR_FLAG" H 2750 10673 50  0000 C CNN
+F 2 "" H 2750 10500 50  0001 C CNN
+F 3 "~" H 2750 10500 50  0001 C CNN
+	1    2750 10500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR029
+U 1 1 66A36050
+P 2750 10500
+F 0 "#PWR029" H 2750 10250 50  0001 C CNN
+F 1 "GND" H 2755 10327 50  0000 C CNN
+F 2 "" H 2750 10500 50  0001 C CNN
+F 3 "" H 2750 10500 50  0001 C CNN
+	1    2750 10500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR028
+U 1 1 66A37595
+P 2750 10075
+F 0 "#PWR028" H 2750 9925 50  0001 C CNN
+F 1 "VCC" H 2765 10248 50  0000 C CNN
+F 2 "" H 2750 10075 50  0001 C CNN
+F 3 "" H 2750 10075 50  0001 C CNN
+	1    2750 10075
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x03_Male J4
+U 1 1 66A40C29
+P 750 9300
+F 0 "J4" H 750 9500 50  0000 C CNN
+F 1 "Conn_01x03_Male" H 900 9125 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 750 9300 50  0001 C CNN
+F 3 "~" H 750 9300 50  0001 C CNN
+	1    750  9300
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
