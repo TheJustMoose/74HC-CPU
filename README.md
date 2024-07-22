@@ -13,3 +13,5 @@ Not a very scary instruction set discrete logic processor.
 ## How CPU works?
 
 ![CPU tacts](./tacts.png)
+
+[Layers of PCBs](layers/README.md)
