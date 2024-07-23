@@ -39,6 +39,6 @@ Toggle		53x24	2
 
 
 платы:
-MUX+REG   ALU+MUL+INV   RAM+Ports+Toggle
-  Jmps       Flags      CMD_DEC
-OSC  ADDR_CNT+STACK  MUX  ROM
+MUX+REG  ALU(1)+MUL(2)+INV   RAM+Ports+Toggle
+ Jmps(4)      Flags(3)      CMD_DEC(5)
+OSC(6)  ADDR_CNT+STACK+MUX   ROM
