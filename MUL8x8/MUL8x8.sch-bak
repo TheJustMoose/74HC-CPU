@@ -1,0 +1,148 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CommonLibrary:MUL1 U1
+U 1 1 669D7ECF
+P 1350 1400
+F 0 "U1" H 1550 1681 50  0000 C CNN
+F 1 "MUL1" H 1550 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 1350 1400 50  0001 C CNN
+F 3 "" H 1350 1400 50  0001 C CNN
+	1    1350 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U2
+U 1 1 669D8CD8
+P 3100 1400
+F 0 "U2" H 3300 1681 50  0000 C CNN
+F 1 "MUL1" H 3300 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 3100 1400 50  0001 C CNN
+F 3 "" H 3100 1400 50  0001 C CNN
+	1    3100 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U3
+U 1 1 669D9C88
+P 4850 1400
+F 0 "U3" H 5050 1681 50  0000 C CNN
+F 1 "MUL1" H 5050 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 4850 1400 50  0001 C CNN
+F 3 "" H 4850 1400 50  0001 C CNN
+	1    4850 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U4
+U 1 1 669DAF70
+P 6600 1400
+F 0 "U4" H 6800 1681 50  0000 C CNN
+F 1 "MUL1" H 6800 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 6600 1400 50  0001 C CNN
+F 3 "" H 6600 1400 50  0001 C CNN
+	1    6600 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U5
+U 1 1 669E1B8E
+P 8350 1400
+F 0 "U5" H 8550 1681 50  0000 C CNN
+F 1 "MUL1" H 8550 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 8350 1400 50  0001 C CNN
+F 3 "" H 8350 1400 50  0001 C CNN
+	1    8350 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U6
+U 1 1 669E2BFB
+P 10100 1400
+F 0 "U6" H 10300 1681 50  0000 C CNN
+F 1 "MUL1" H 10300 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 10100 1400 50  0001 C CNN
+F 3 "" H 10100 1400 50  0001 C CNN
+	1    10100 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:MUL1 U7
+U 1 1 669E3CC7
+P 11850 1400
+F 0 "U7" H 12050 1681 50  0000 C CNN
+F 1 "MUL1" H 12050 1590 50  0000 C CNN
+F 2 "CommonLibrary:MUL1" H 11850 1400 50  0001 C CNN
+F 3 "" H 11850 1400 50  0001 C CNN
+	1    11850 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CommonLibrary:CMD U8
+U 1 1 669E50F8
+P 13600 2250
+F 0 "U8" H 14000 3225 50  0000 C CNN
+F 1 "CMD" H 14000 3134 50  0000 C CNN
+F 2 "CommonLibrary:CMD" H 13600 2600 50  0001 C CNN
+F 3 "" H 13600 2600 50  0001 C CNN
+	1    13600 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 669FF9F8
+P 1500 5000
+F 0 "H1" H 1600 5046 50  0000 L CNN
+F 1 "MountingHole" H 1600 4955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 5000 50  0001 C CNN
+F 3 "~" H 1500 5000 50  0001 C CNN
+	1    1500 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 66A0010C
+P 1500 5250
+F 0 "H2" H 1600 5296 50  0000 L CNN
+F 1 "MountingHole" H 1600 5205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 5250 50  0001 C CNN
+F 3 "~" H 1500 5250 50  0001 C CNN
+	1    1500 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 66A00385
+P 1500 5500
+F 0 "H3" H 1600 5546 50  0000 L CNN
+F 1 "MountingHole" H 1600 5455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 5500 50  0001 C CNN
+F 3 "~" H 1500 5500 50  0001 C CNN
+	1    1500 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 66A0082B
+P 1500 5750
+F 0 "H4" H 1600 5796 50  0000 L CNN
+F 1 "MountingHole" H 1600 5705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 5750 50  0001 C CNN
+F 3 "~" H 1500 5750 50  0001 C CNN
+	1    1500 5750
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
