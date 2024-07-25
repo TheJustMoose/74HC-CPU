@@ -2,7 +2,9 @@
 
 ## Layer 1 (top)
 
-| <img src="regs.png" width="450"/> | <img src="ports.png" width="300"/> |
+<table>
+<tr><td><img src="regs.png" width="450"/></td><td><img src="ports.png" width="300"/></td></tr>
+</table>
 
 ## Layer 2
 
