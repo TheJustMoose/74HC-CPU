@@ -8,16 +8,22 @@
 
 ## Layer 2
 
-| <img src="mux8x1.png" width="450"/> | <img src="sram.png" width="300"/> |
+<table>
+<tr><td><img src="mux8x1.png" width="450"/></td><td><img src="sram.png" width="300"/></td></tr>
+</table>
 
 ## Layer 3
 
-| <img src="mux8x1.png" width="450"/> | <img src="alu.png" width="300"/> |
-| <img src="pwrbus.png" width="450"/> | <img src="pwrbus-short.png" width="300"/> |
-| <img src="" width="300"/> | <img src="rom.png" width="450"/> |
+<table>
+<tr><td><img src="mux8x1.png" width="450"/></td><td><img src="alu.png" width="300"/></td></tr>
+<tr><td><img src="pwrbus.png" width="450"/></td><td><img src="pwrbus-short.png" width="300"/></td></tr>
+<tr><td><img src="" width="300"/></td><td><img src="rom.png" width="450"/></td></tr>
+</table>
 
 ## Layer 4 (bottom)
 
-| <img src="mux8x1.png" width="450"/> | <img src="mul.png" width="300"/> |
-| <img src="pwrbus.png" width="450"/> | <img src="pwrbus-short.png" width="300"/> |
-| <img src="" width="300"/> | <img src="addr_counter.png" width="450"/> |
+<table>
+<tr><td><img src="mux8x1.png" width="450"/></td><td><img src="mul.png" width="300"/></td></tr>
+<tr><td><img src="pwrbus.png" width="450"/></td><td><img src="pwrbus-short.png" width="300"/></td></tr>
+<tr><td><img src="" width="300"/></td><td><img src="addr_counter.png" width="450"/></td></tr>
+</table>
