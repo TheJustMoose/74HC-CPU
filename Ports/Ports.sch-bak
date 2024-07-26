@@ -85,10 +85,10 @@ U 1 1 6362E5F3
 P 1000 1675
 F 0 "J1" H 1050 2175 50  0000 R CNN
 F 1 "Conn_01x09_Male" H 1325 1150 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Horizontal" H 1000 1675 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1000 1675 50  0001 C CNN
 F 3 "~" H 1000 1675 50  0001 C CNN
 	1    1000 1675
-	1    0    0    1   
+	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J2
@@ -723,7 +723,7 @@ U 1 1 64B46F2F
 P 1000 3075
 F 0 "J5" H 1108 3356 50  0000 C CNN
 F 1 "Conn_01x04_Male" V 900 3025 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 3075 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 1000 3075 50  0001 C CNN
 F 3 "~" H 1000 3075 50  0001 C CNN
 	1    1000 3075
 	1    0    0    1   
@@ -755,12 +755,12 @@ $EndComp
 $Comp
 L power:GND #PWR016
 U 1 1 64B50BB5
-P 4125 7300
-F 0 "#PWR016" H 4125 7050 50  0001 C CNN
-F 1 "GND" H 4130 7127 50  0000 C CNN
-F 2 "" H 4125 7300 50  0001 C CNN
-F 3 "" H 4125 7300 50  0001 C CNN
-	1    4125 7300
+P 4350 7300
+F 0 "#PWR016" H 4350 7050 50  0001 C CNN
+F 1 "GND" H 4355 7127 50  0000 C CNN
+F 2 "" H 4350 7300 50  0001 C CNN
+F 3 "" H 4350 7300 50  0001 C CNN
+	1    4350 7300
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -960,28 +960,28 @@ Wire Wire Line
 $Comp
 L Device:LED D9
 U 1 1 64B69F91
-P 2500 6700
-F 0 "D9" H 2600 6775 50  0000 C CNN
-F 1 "LED" H 2375 6750 50  0000 C CNN
-F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 2500 6700 50  0001 C CNN
-F 3 "~" H 2500 6700 50  0001 C CNN
-	1    2500 6700
+P 3825 7050
+F 0 "D9" H 3925 7125 50  0000 C CNN
+F 1 "LED" H 3700 7100 50  0000 C CNN
+F 2 "LED_THT:LED_Rectangular_W5.0mm_H2.0mm" H 3825 7050 50  0001 C CNN
+F 3 "~" H 3825 7050 50  0001 C CNN
+	1    3825 7050
 	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:R R12
 U 1 1 64B69F97
-P 2200 6700
-F 0 "R12" V 2125 6725 50  0000 C CNN
-F 1 "1k" V 2200 6700 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2130 6700 50  0001 C CNN
-F 3 "~" H 2200 6700 50  0001 C CNN
-	1    2200 6700
+P 3525 7050
+F 0 "R12" V 3450 7075 50  0000 C CNN
+F 1 "1k" V 3525 7050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3455 7050 50  0001 C CNN
+F 3 "~" H 3525 7050 50  0001 C CNN
+	1    3525 7050
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1875 6700 2050 6700
-Text Label 1875 6700 0    50   ~ 0
+	3200 7050 3375 7050
+Text Label 3200 7050 0    50   ~ 0
 P0.0
 Wire Wire Line
 	5500 2125 5625 2125
@@ -1394,9 +1394,9 @@ Wire Wire Line
 	8400 5075 8400 5250
 Connection ~ 8400 5075
 Text Label 7550 5550 0    50   ~ 0
-P0.1
+P0.5
 Text Label 8400 5550 0    50   ~ 0
-P0.2
+P0.6
 Text Label 7625 5075 0    50   ~ 0
 IN0.0
 Text Label 7625 4825 0    50   ~ 0
@@ -1486,10 +1486,10 @@ U 1 1 64C0EF66
 P 9750 5400
 F 0 "J6" H 9800 5900 50  0000 R CNN
 F 1 "Conn_01x09_Male" V 9675 5750 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Horizontal" H 9750 5400 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 9750 5400 50  0001 C CNN
 F 3 "~" H 9750 5400 50  0001 C CNN
 	1    9750 5400
-	1    0    0    1   
+	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0116
@@ -1524,7 +1524,7 @@ U 1 1 64C174BC
 P 9250 4650
 F 0 "J7" H 9358 4831 50  0000 C CNN
 F 1 "Conn_01x02_Male" V 9175 4625 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 9250 4650 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 9250 4650 50  0001 C CNN
 F 3 "~" H 9250 4650 50  0001 C CNN
 	1    9250 4650
 	1    0    0    -1  
@@ -1539,7 +1539,7 @@ U 1 1 64C4C1D4
 P 7550 5400
 F 0 "D27" V 7596 5320 50  0000 R CNN
 F 1 "1N4148" V 7505 5320 50  0000 R CNN
-F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 7550 5225 50  0001 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal" H 7550 5225 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 7550 5400 50  0001 C CNN
 	1    7550 5400
 	0    -1   -1   0   
@@ -1550,7 +1550,7 @@ U 1 1 64C4DA7D
 P 8400 5400
 F 0 "D28" V 8446 5320 50  0000 R CNN
 F 1 "1N4148" V 8355 5320 50  0000 R CNN
-F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 8400 5225 50  0001 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal" H 8400 5225 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 8400 5400 50  0001 C CNN
 	1    8400 5400
 	0    -1   -1   0   
@@ -1558,12 +1558,12 @@ $EndComp
 $Comp
 L Device:Jumper JP1
 U 1 1 64D13D47
-P 4125 7000
-F 0 "JP1" H 4125 7264 50  0000 C CNN
-F 1 "Jumper" H 4125 7173 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 4125 7000 50  0001 C CNN
-F 3 "~" H 4125 7000 50  0001 C CNN
-	1    4125 7000
+P 4350 7000
+F 0 "JP1" H 4350 7264 50  0000 C CNN
+F 1 "Jumper" H 4350 7173 50  0000 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 4350 7000 50  0001 C CNN
+F 3 "~" H 4350 7000 50  0001 C CNN
+	1    4350 7000
 	0    1    1    0   
 $EndComp
 Wire Wire Line
@@ -1587,35 +1587,9 @@ Wire Wire Line
 	3975 6250 3975 6475
 Connection ~ 3975 6250
 Wire Wire Line
-	3975 6700 4125 6700
-Wire Wire Line
 	3975 6475 3975 6700
 Connection ~ 3975 6475
 Connection ~ 3975 6700
-Wire Wire Line
-	2650 6700 2750 6700
-$Comp
-L power:GND #PWR0117
-U 1 1 64D96433
-P 2750 7300
-F 0 "#PWR0117" H 2750 7050 50  0001 C CNN
-F 1 "GND" H 2755 7127 50  0000 C CNN
-F 2 "" H 2750 7300 50  0001 C CNN
-F 3 "" H 2750 7300 50  0001 C CNN
-	1    2750 7300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Jumper JP2
-U 1 1 64D96439
-P 2750 7000
-F 0 "JP2" H 2750 7264 50  0000 C CNN
-F 1 "Jumper" H 2750 7173 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 2750 7000 50  0001 C CNN
-F 3 "~" H 2750 7000 50  0001 C CNN
-	1    2750 7000
-	0    1    1    0   
-$EndComp
 $Comp
 L Device:C C3
 U 1 1 64B8A916
@@ -1836,4 +1810,8 @@ F 3 "" H 6150 6825 50  0001 C CNN
 	1    6150 6825
 	0    -1   -1   0   
 $EndComp
+Wire Wire Line
+	3975 6700 4350 6700
+Wire Wire Line
+	3975 6700 3975 7050
 $EndSCHEMATC

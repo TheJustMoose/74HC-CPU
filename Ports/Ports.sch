@@ -85,10 +85,10 @@ U 1 1 6362E5F3
 P 1000 1675
 F 0 "J1" H 1050 2175 50  0000 R CNN
 F 1 "Conn_01x09_Male" H 1325 1150 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Horizontal" H 1000 1675 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 1000 1675 50  0001 C CNN
 F 3 "~" H 1000 1675 50  0001 C CNN
 	1    1000 1675
-	1    0    0    1   
+	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Male J2
@@ -409,13 +409,13 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J4
 U 1 1 6365C12F
-P 6050 7025
-F 0 "J4" H 6130 7017 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 5975 6825 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 6050 7025 50  0001 C CNN
-F 3 "~" H 6050 7025 50  0001 C CNN
-	1    6050 7025
-	1    0    0    -1  
+P 6050 7125
+F 0 "J4" H 6130 7117 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 5975 7225 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 6050 7125 50  0001 C CNN
+F 3 "~" H 6050 7125 50  0001 C CNN
+	1    6050 7125
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0103
@@ -723,7 +723,7 @@ U 1 1 64B46F2F
 P 1000 3075
 F 0 "J5" H 1108 3356 50  0000 C CNN
 F 1 "Conn_01x04_Male" V 900 3025 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 3075 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 1000 3075 50  0001 C CNN
 F 3 "~" H 1000 3075 50  0001 C CNN
 	1    1000 3075
 	1    0    0    1   
@@ -1394,9 +1394,9 @@ Wire Wire Line
 	8400 5075 8400 5250
 Connection ~ 8400 5075
 Text Label 7550 5550 0    50   ~ 0
-P0.1
+P0.5
 Text Label 8400 5550 0    50   ~ 0
-P0.2
+P0.6
 Text Label 7625 5075 0    50   ~ 0
 IN0.0
 Text Label 7625 4825 0    50   ~ 0
@@ -1486,10 +1486,10 @@ U 1 1 64C0EF66
 P 9750 5400
 F 0 "J6" H 9800 5900 50  0000 R CNN
 F 1 "Conn_01x09_Male" V 9675 5750 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Horizontal" H 9750 5400 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 9750 5400 50  0001 C CNN
 F 3 "~" H 9750 5400 50  0001 C CNN
 	1    9750 5400
-	1    0    0    1   
+	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0116
@@ -1524,7 +1524,7 @@ U 1 1 64C174BC
 P 9250 4650
 F 0 "J7" H 9358 4831 50  0000 C CNN
 F 1 "Conn_01x02_Male" V 9175 4625 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Horizontal" H 9250 4650 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 9250 4650 50  0001 C CNN
 F 3 "~" H 9250 4650 50  0001 C CNN
 	1    9250 4650
 	1    0    0    -1  
@@ -1539,7 +1539,7 @@ U 1 1 64C4C1D4
 P 7550 5400
 F 0 "D27" V 7596 5320 50  0000 R CNN
 F 1 "1N4148" V 7505 5320 50  0000 R CNN
-F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 7550 5225 50  0001 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal" H 7550 5225 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 7550 5400 50  0001 C CNN
 	1    7550 5400
 	0    -1   -1   0   
@@ -1550,7 +1550,7 @@ U 1 1 64C4DA7D
 P 8400 5400
 F 0 "D28" V 8446 5320 50  0000 R CNN
 F 1 "1N4148" V 8355 5320 50  0000 R CNN
-F 2 "Diode_THT:D_DO-15_P12.70mm_Horizontal" H 8400 5225 50  0001 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P10.16mm_Horizontal" H 8400 5225 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 8400 5400 50  0001 C CNN
 	1    8400 5400
 	0    -1   -1   0   
