@@ -270,39 +270,6 @@ Text Label 2000 8400 0    50   ~ 0
 A14
 Text Label 2000 8500 0    50   ~ 0
 A15
-$Comp
-L Connector:Conn_01x08_Male J1
-U 1 1 63D8CE4B
-P 750 1850
-F 0 "J1" H 800 2225 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 750 1375 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 1850 50  0001 C CNN
-F 3 "~" H 750 1850 50  0001 C CNN
-	1    750  1850
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_01x08_Male J2
-U 1 1 63D8E866
-P 750 2900
-F 0 "J2" H 800 3275 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 750 2425 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 2900 50  0001 C CNN
-F 3 "~" H 750 2900 50  0001 C CNN
-	1    750  2900
-	1    0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_01x08_Male J3
-U 1 1 63D8F7ED
-P 750 4650
-F 0 "J3" H 800 5025 50  0000 C CNN
-F 1 "Conn_01x08_Male" H 750 4175 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 750 4650 50  0001 C CNN
-F 3 "~" H 750 4650 50  0001 C CNN
-	1    750  4650
-	1    0    0    1   
-$EndComp
 Text Label 950  1450 0    50   ~ 0
 A0
 Text Label 950  1550 0    50   ~ 0
@@ -1263,13 +1230,13 @@ Reverse\npolarity\nprotection
 $Comp
 L Connector:Screw_Terminal_01x02 J6
 U 1 1 669F52FC
-P 1300 10275
-F 0 "J6" H 1218 9950 50  0000 C CNN
-F 1 "Screw_Terminal_01x02" H 1500 10400 50  0000 C CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1300 10275 50  0001 C CNN
-F 3 "~" H 1300 10275 50  0001 C CNN
-	1    1300 10275
-	-1   0    0    1   
+P 1300 10175
+F 0 "J6" H 1218 9850 50  0000 C CNN
+F 1 "Screw_Terminal_01x02" H 1500 10300 50  0000 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1300 10175 50  0001 C CNN
+F 3 "~" H 1300 10175 50  0001 C CNN
+	1    1300 10175
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR027
@@ -1340,5 +1307,71 @@ F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 750 9300 50  
 F 3 "~" H 750 9300 50  0001 C CNN
 	1    750  9300
 	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x09_Male J1
+U 1 1 66A51CBB
+P 750 1750
+F 0 "J1" H 775 2250 50  0000 C CNN
+F 1 "Conn_01x09_Male" H 750 1300 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 750 1750 50  0001 C CNN
+F 3 "~" H 750 1750 50  0001 C CNN
+	1    750  1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 66A55262
+P 950 1350
+F 0 "#PWR0103" H 950 1100 50  0001 C CNN
+F 1 "GND" H 825 1275 50  0000 C CNN
+F 2 "" H 950 1350 50  0001 C CNN
+F 3 "" H 950 1350 50  0001 C CNN
+	1    950  1350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 66A5DBC4
+P 750 2800
+F 0 "J?" H 775 3300 50  0000 C CNN
+F 1 "Conn_01x09_Male" H 750 2350 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 750 2800 50  0001 C CNN
+F 3 "~" H 750 2800 50  0001 C CNN
+	1    750  2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 66A5F42A
+P 950 2400
+F 0 "#PWR?" H 950 2150 50  0001 C CNN
+F 1 "GND" H 825 2325 50  0000 C CNN
+F 2 "" H 950 2400 50  0001 C CNN
+F 3 "" H 950 2400 50  0001 C CNN
+	1    950  2400
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x09_Male J?
+U 1 1 66A61404
+P 750 4550
+F 0 "J?" H 775 5050 50  0000 C CNN
+F 1 "Conn_01x09_Male" H 750 4100 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 750 4550 50  0001 C CNN
+F 3 "~" H 750 4550 50  0001 C CNN
+	1    750  4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 66A62ADA
+P 950 4150
+F 0 "#PWR?" H 950 3900 50  0001 C CNN
+F 1 "GND" H 825 4075 50  0000 C CNN
+F 2 "" H 950 4150 50  0001 C CNN
+F 3 "" H 950 4150 50  0001 C CNN
+	1    950  4150
+	-1   0    0    1   
 $EndComp
 $EndSCHEMATC
