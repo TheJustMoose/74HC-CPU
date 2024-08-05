@@ -988,21 +988,21 @@ Text Label 10125 6175 0    50   ~ 0
 M6
 Text Label 10125 6275 0    50   ~ 0
 M7
-Text Label 10125 7575 0    50   ~ 0
+Text Label 11250 7575 0    50   ~ 0
 M8
-Text Label 10125 7675 0    50   ~ 0
+Text Label 11250 7675 0    50   ~ 0
 M9
-Text Label 10125 7775 0    50   ~ 0
+Text Label 11250 7775 0    50   ~ 0
 M10
-Text Label 10125 7875 0    50   ~ 0
+Text Label 11250 7875 0    50   ~ 0
 M11
-Text Label 10125 7975 0    50   ~ 0
+Text Label 11250 7975 0    50   ~ 0
 M12
-Text Label 10125 8075 0    50   ~ 0
+Text Label 11250 8075 0    50   ~ 0
 M13
-Text Label 10125 8175 0    50   ~ 0
+Text Label 11250 8175 0    50   ~ 0
 M14
-Text Label 10125 8275 0    50   ~ 0
+Text Label 11250 8275 0    50   ~ 0
 M15
 Text Label 11250 5575 0    50   ~ 0
 P0
@@ -1038,7 +1038,7 @@ Text Label 11250 6275 0    50   ~ 0
 P7
 Wire Wire Line
 	10125 7575 10250 7575
-Text Label 11250 7575 0    50   ~ 0
+Text Label 10125 7575 0    50   ~ 0
 P8
 Wire Wire Line
 	10125 7675 10250 7675
@@ -1054,19 +1054,19 @@ Wire Wire Line
 	10125 8175 10250 8175
 Wire Wire Line
 	10125 8275 10250 8275
-Text Label 11250 7675 0    50   ~ 0
+Text Label 10125 7675 0    50   ~ 0
 P9
-Text Label 11250 7775 0    50   ~ 0
+Text Label 10125 7775 0    50   ~ 0
 P10
-Text Label 11250 7875 0    50   ~ 0
+Text Label 10125 7875 0    50   ~ 0
 P11
-Text Label 11250 7975 0    50   ~ 0
+Text Label 10125 7975 0    50   ~ 0
 P12
-Text Label 11250 8075 0    50   ~ 0
+Text Label 10125 8075 0    50   ~ 0
 P13
-Text Label 11250 8175 0    50   ~ 0
+Text Label 10125 8175 0    50   ~ 0
 P14
-Text Label 11250 8275 0    50   ~ 0
+Text Label 10125 8275 0    50   ~ 0
 P15
 Text Label 11025 1575 0    50   ~ 0
 P8
@@ -1271,25 +1271,36 @@ Wire Wire Line
 Connection ~ 1225 8175
 Connection ~ 1225 8275
 $Comp
-L power:GND #PWR0101
-U 1 1 67045374
-P 9875 8475
-F 0 "#PWR0101" H 9875 8225 50  0001 C CNN
-F 1 "GND" H 10025 8400 50  0000 C CNN
-F 2 "" H 9875 8475 50  0001 C CNN
-F 3 "" H 9875 8475 50  0001 C CNN
-	1    9875 8475
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR?
+L power:GND #PWR033
 U 1 1 670A35B1
 P 9850 6475
-F 0 "#PWR?" H 9850 6225 50  0001 C CNN
+F 0 "#PWR033" H 9850 6225 50  0001 C CNN
 F 1 "GND" H 9725 6375 50  0000 C CNN
 F 2 "" H 9850 6475 50  0001 C CNN
 F 3 "" H 9850 6475 50  0001 C CNN
 	1    9850 6475
 	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 66B0C887
+P 9725 8475
+F 0 "R3" V 9625 8450 50  0000 C CNN
+F 1 "10k" V 9725 8475 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9655 8475 50  0001 C CNN
+F 3 "~" H 9725 8475 50  0001 C CNN
+	1    9725 8475
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR032
+U 1 1 66B40468
+P 9575 8475
+F 0 "#PWR032" H 9575 8325 50  0001 C CNN
+F 1 "VCC" H 9700 8550 50  0000 C CNN
+F 2 "" H 9575 8475 50  0001 C CNN
+F 3 "" H 9575 8475 50  0001 C CNN
+	1    9575 8475
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
