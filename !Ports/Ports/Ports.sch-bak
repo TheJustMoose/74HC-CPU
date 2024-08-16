@@ -409,13 +409,13 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J4
 U 1 1 6365C12F
-P 6050 7025
-F 0 "J4" H 6130 7017 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 5975 6825 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 6050 7025 50  0001 C CNN
-F 3 "~" H 6050 7025 50  0001 C CNN
-	1    6050 7025
-	1    0    0    -1  
+P 6050 7125
+F 0 "J4" H 6130 7117 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 5975 7225 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 6050 7125 50  0001 C CNN
+F 3 "~" H 6050 7125 50  0001 C CNN
+	1    6050 7125
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0103
@@ -1629,7 +1629,7 @@ U 1 1 64BCC7FB
 P 6500 5250
 F 0 "C4" H 6615 5296 50  0000 L CNN
 F 1 "0.1uF" H 6615 5205 50  0000 L CNN
-F 2 "Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm" H 6538 5100 50  0001 C CNN
+F 2 "Capacitor_THT:C_Disc_D7.0mm_W2.5mm_P5.00mm" H 6538 5100 50  0001 C CNN
 F 3 "~" H 6500 5250 50  0001 C CNN
 	1    6500 5250
 	1    0    0    -1  
