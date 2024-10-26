@@ -1,0 +1,412 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Switch:SW_Push SW1
+U 1 1 671D69C2
+P 2700 2250
+F 0 "SW1" H 2700 2535 50  0000 C CNN
+F 1 "SW_Push" H 2700 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 2700 2450 50  0001 C CNN
+F 3 "~" H 2700 2450 50  0001 C CNN
+	1    2700 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 671D76AF
+P 750 2000
+F 0 "H1" H 850 2046 50  0000 L CNN
+F 1 "MountingHole" H 850 1955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 2000 50  0001 C CNN
+F 3 "~" H 750 2000 50  0001 C CNN
+	1    750  2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 671D7D7A
+P 750 2250
+F 0 "H2" H 850 2296 50  0000 L CNN
+F 1 "MountingHole" H 850 2205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 2250 50  0001 C CNN
+F 3 "~" H 750 2250 50  0001 C CNN
+	1    750  2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 671D8C8E
+P 750 2500
+F 0 "H3" H 850 2546 50  0000 L CNN
+F 1 "MountingHole" H 850 2455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 2500 50  0001 C CNN
+F 3 "~" H 750 2500 50  0001 C CNN
+	1    750  2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 671D8C94
+P 750 2750
+F 0 "H4" H 850 2796 50  0000 L CNN
+F 1 "MountingHole" H 850 2705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 2750 50  0001 C CNN
+F 3 "~" H 750 2750 50  0001 C CNN
+	1    750  2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 671D907C
+P 750 3000
+F 0 "H5" H 850 3046 50  0000 L CNN
+F 1 "MountingHole" H 850 2955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 3000 50  0001 C CNN
+F 3 "~" H 750 3000 50  0001 C CNN
+	1    750  3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 671D9082
+P 750 3250
+F 0 "H6" H 850 3296 50  0000 L CNN
+F 1 "MountingHole" H 850 3205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 750 3250 50  0001 C CNN
+F 3 "~" H 750 3250 50  0001 C CNN
+	1    750  3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW2
+U 1 1 671DF6B9
+P 2700 2750
+F 0 "SW2" H 2700 3035 50  0000 C CNN
+F 1 "SW_Push" H 2700 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 2700 2950 50  0001 C CNN
+F 3 "~" H 2700 2950 50  0001 C CNN
+	1    2700 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW3
+U 1 1 671DFA7A
+P 2700 3250
+F 0 "SW3" H 2700 3535 50  0000 C CNN
+F 1 "SW_Push" H 2700 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 2700 3450 50  0001 C CNN
+F 3 "~" H 2700 3450 50  0001 C CNN
+	1    2700 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW4
+U 1 1 671E1022
+P 3450 2250
+F 0 "SW4" H 3450 2535 50  0000 C CNN
+F 1 "SW_Push" H 3450 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 3450 2450 50  0001 C CNN
+F 3 "~" H 3450 2450 50  0001 C CNN
+	1    3450 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW5
+U 1 1 671E1028
+P 3450 2750
+F 0 "SW5" H 3450 3035 50  0000 C CNN
+F 1 "SW_Push" H 3450 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 3450 2950 50  0001 C CNN
+F 3 "~" H 3450 2950 50  0001 C CNN
+	1    3450 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW6
+U 1 1 671E102E
+P 3450 3250
+F 0 "SW6" H 3450 3535 50  0000 C CNN
+F 1 "SW_Push" H 3450 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 3450 3450 50  0001 C CNN
+F 3 "~" H 3450 3450 50  0001 C CNN
+	1    3450 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW7
+U 1 1 671E1A01
+P 4200 2250
+F 0 "SW7" H 4200 2535 50  0000 C CNN
+F 1 "SW_Push" H 4200 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4200 2450 50  0001 C CNN
+F 3 "~" H 4200 2450 50  0001 C CNN
+	1    4200 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW8
+U 1 1 671E1A07
+P 4200 2750
+F 0 "SW8" H 4200 3035 50  0000 C CNN
+F 1 "SW_Push" H 4200 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4200 2950 50  0001 C CNN
+F 3 "~" H 4200 2950 50  0001 C CNN
+	1    4200 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW9
+U 1 1 671E1A0D
+P 4200 3250
+F 0 "SW9" H 4200 3535 50  0000 C CNN
+F 1 "SW_Push" H 4200 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4200 3450 50  0001 C CNN
+F 3 "~" H 4200 3450 50  0001 C CNN
+	1    4200 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW10
+U 1 1 671E27B1
+P 4950 2250
+F 0 "SW10" H 4950 2535 50  0000 C CNN
+F 1 "SW_Push" H 4950 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4950 2450 50  0001 C CNN
+F 3 "~" H 4950 2450 50  0001 C CNN
+	1    4950 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW11
+U 1 1 671E27B7
+P 4950 2750
+F 0 "SW11" H 4950 3035 50  0000 C CNN
+F 1 "SW_Push" H 4950 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4950 2950 50  0001 C CNN
+F 3 "~" H 4950 2950 50  0001 C CNN
+	1    4950 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW12
+U 1 1 671E27BD
+P 4950 3250
+F 0 "SW12" H 4950 3535 50  0000 C CNN
+F 1 "SW_Push" H 4950 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 4950 3450 50  0001 C CNN
+F 3 "~" H 4950 3450 50  0001 C CNN
+	1    4950 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW13
+U 1 1 671E3439
+P 5700 2250
+F 0 "SW13" H 5700 2535 50  0000 C CNN
+F 1 "SW_Push" H 5700 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 5700 2450 50  0001 C CNN
+F 3 "~" H 5700 2450 50  0001 C CNN
+	1    5700 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW14
+U 1 1 671E343F
+P 5700 2750
+F 0 "SW14" H 5700 3035 50  0000 C CNN
+F 1 "SW_Push" H 5700 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 5700 2950 50  0001 C CNN
+F 3 "~" H 5700 2950 50  0001 C CNN
+	1    5700 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW15
+U 1 1 671E3445
+P 5700 3250
+F 0 "SW15" H 5700 3535 50  0000 C CNN
+F 1 "SW_Push" H 5700 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 5700 3450 50  0001 C CNN
+F 3 "~" H 5700 3450 50  0001 C CNN
+	1    5700 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW16
+U 1 1 671E8240
+P 6450 2250
+F 0 "SW16" H 6450 2535 50  0000 C CNN
+F 1 "SW_Push" H 6450 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 6450 2450 50  0001 C CNN
+F 3 "~" H 6450 2450 50  0001 C CNN
+	1    6450 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW17
+U 1 1 671E8246
+P 6450 2750
+F 0 "SW17" H 6450 3035 50  0000 C CNN
+F 1 "SW_Push" H 6450 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 6450 2950 50  0001 C CNN
+F 3 "~" H 6450 2950 50  0001 C CNN
+	1    6450 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW18
+U 1 1 671E824C
+P 6450 3250
+F 0 "SW18" H 6450 3535 50  0000 C CNN
+F 1 "SW_Push" H 6450 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 6450 3450 50  0001 C CNN
+F 3 "~" H 6450 3450 50  0001 C CNN
+	1    6450 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW19
+U 1 1 671E8252
+P 7200 2250
+F 0 "SW19" H 7200 2535 50  0000 C CNN
+F 1 "SW_Push" H 7200 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7200 2450 50  0001 C CNN
+F 3 "~" H 7200 2450 50  0001 C CNN
+	1    7200 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW20
+U 1 1 671E8258
+P 7200 2750
+F 0 "SW20" H 7200 3035 50  0000 C CNN
+F 1 "SW_Push" H 7200 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7200 2950 50  0001 C CNN
+F 3 "~" H 7200 2950 50  0001 C CNN
+	1    7200 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW21
+U 1 1 671E825E
+P 7200 3250
+F 0 "SW21" H 7200 3535 50  0000 C CNN
+F 1 "SW_Push" H 7200 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7200 3450 50  0001 C CNN
+F 3 "~" H 7200 3450 50  0001 C CNN
+	1    7200 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW22
+U 1 1 671E8264
+P 7950 2250
+F 0 "SW22" H 7950 2535 50  0000 C CNN
+F 1 "SW_Push" H 7950 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7950 2450 50  0001 C CNN
+F 3 "~" H 7950 2450 50  0001 C CNN
+	1    7950 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW23
+U 1 1 671E826A
+P 7950 2750
+F 0 "SW23" H 7950 3035 50  0000 C CNN
+F 1 "SW_Push" H 7950 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7950 2950 50  0001 C CNN
+F 3 "~" H 7950 2950 50  0001 C CNN
+	1    7950 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW24
+U 1 1 671E8270
+P 7950 3250
+F 0 "SW24" H 7950 3535 50  0000 C CNN
+F 1 "SW_Push" H 7950 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 7950 3450 50  0001 C CNN
+F 3 "~" H 7950 3450 50  0001 C CNN
+	1    7950 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW25
+U 1 1 671E8276
+P 8700 2250
+F 0 "SW25" H 8700 2535 50  0000 C CNN
+F 1 "SW_Push" H 8700 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 8700 2450 50  0001 C CNN
+F 3 "~" H 8700 2450 50  0001 C CNN
+	1    8700 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW26
+U 1 1 671E827C
+P 8700 2750
+F 0 "SW26" H 8700 3035 50  0000 C CNN
+F 1 "SW_Push" H 8700 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 8700 2950 50  0001 C CNN
+F 3 "~" H 8700 2950 50  0001 C CNN
+	1    8700 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW27
+U 1 1 671E8282
+P 8700 3250
+F 0 "SW27" H 8700 3535 50  0000 C CNN
+F 1 "SW_Push" H 8700 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 8700 3450 50  0001 C CNN
+F 3 "~" H 8700 3450 50  0001 C CNN
+	1    8700 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW28
+U 1 1 671E8288
+P 9450 2250
+F 0 "SW28" H 9450 2535 50  0000 C CNN
+F 1 "SW_Push" H 9450 2444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 9450 2450 50  0001 C CNN
+F 3 "~" H 9450 2450 50  0001 C CNN
+	1    9450 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW29
+U 1 1 671E828E
+P 9450 2750
+F 0 "SW29" H 9450 3035 50  0000 C CNN
+F 1 "SW_Push" H 9450 2944 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 9450 2950 50  0001 C CNN
+F 3 "~" H 9450 2950 50  0001 C CNN
+	1    9450 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW30
+U 1 1 671E8294
+P 9450 3250
+F 0 "SW30" H 9450 3535 50  0000 C CNN
+F 1 "SW_Push" H 9450 3444 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_PUSH-12mm" H 9450 3450 50  0001 C CNN
+F 3 "~" H 9450 3450 50  0001 C CNN
+	1    9450 3250
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
