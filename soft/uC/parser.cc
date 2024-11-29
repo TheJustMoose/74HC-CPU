@@ -2,8 +2,11 @@
 
 #include <stdexcept>
 
+#include "arith.h"
+#include "const.h"
 #include "env.h"
 #include "lexer.h"
+#include "logical.h"
 #include "tag.h"
 
 using namespace std;
@@ -222,13 +225,14 @@ Expr* Parser::equality() {
 Expr* Parser::rel() {
   Expr* x = expr();
   switch (look_->tag()) {
-    case '<':
+    case Tag::tLess:
     case Tag::tLE:
     case Tag::tGE:
-    case '>':
+    case Tag::tMore: {
       Token* tok {look_};
       move();
       return new Rel(tok, x, expr());
+    }
     default:
       return x;
   }
@@ -259,7 +263,7 @@ Expr* Parser::term() {
 Expr* Parser::unary() {
   if (look_->ctag() == '-') {
     move();
-    return new Unary(Word.minus, unary());
+    return new Unary(Tag::tMINUS, unary());
   } else if (look_->ctag() == '!') {
     Token* tok {look_};
     move();
@@ -278,11 +282,11 @@ Expr* Parser::factor() {
       match(')');
       return x;
     case Tag::tNUM:
-      x = new Constant(look_, Type.Int);
+      x = new Constant(look_, Type::Int());
       move();
       return x;
     case Tag::tREAL:
-      x = new Constant(look_, Type.Float);
+      x = new Constant(look_, Type::Float());
       move();
       return x;
     case Tag::tTRUE:
@@ -294,7 +298,7 @@ Expr* Parser::factor() {
       move();
       return x;
     case Tag::tID:
-      String s = look_->toString();
+      //string s = look_->toString();
       Id* id = top.get(look_);
       if (id == nullptr)
         error(look_->toString() + " undeclared");

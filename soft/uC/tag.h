@@ -2,6 +2,7 @@
 
 enum class Tag {
   tEMPTY = 0,
+  tLess  = '<',  tMore   = '>',
   tSEMI  = ';',  tLBRACE = '{',
   tAND   = 256,  tBASIC = 257,  tBREAK = 258,  tDO   = 259, tELSE  = 260,
   tEQ    = 261,  tFALSE = 262,  tGE    = 263,  tID   = 264, tIF    = 265,

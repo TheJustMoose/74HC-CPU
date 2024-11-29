@@ -15,3 +15,6 @@ class Op: public Expr {
     return t;
   }
 };
+
+class Unary: public Op {
+};

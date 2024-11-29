@@ -71,9 +71,13 @@ class Else: public Stmt {
 };
 
 class Do: public Stmt {
+ public:
+  void init(Stmt* s, Expr* x);
 };
 
 class While: public Stmt {
+ public:
+  void init(Expr* x, Stmt* s);
 };
 
 class Break: public Stmt {
@@ -90,4 +94,14 @@ class Break: public Stmt {
 
  private:
   Stmt* stmt_ {nullptr};
+};
+
+class Set: public Stmt {
+ public:
+  Set(Id* id, Expr* x);
+};
+
+class SetElem: public Stmt {
+ public:
+  SetElem(Access* x, Expr* y);
 };
