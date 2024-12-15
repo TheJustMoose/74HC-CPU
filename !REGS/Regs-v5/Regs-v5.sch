@@ -1466,13 +1466,13 @@ $EndComp
 $Comp
 L Connector:Conn_01x09_Male J17
 U 1 1 65A046FB
-P 3550 8050
-F 0 "J17" H 3625 8525 50  0000 R CNN
-F 1 "Conn_01x09_Male" V 3475 8350 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 8050 50  0001 C CNN
-F 3 "~" H 3550 8050 50  0001 C CNN
-	1    3550 8050
-	1    0    0    -1  
+P 3550 8150
+F 0 "J17" H 3625 8625 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 3475 8450 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 8150 50  0001 C CNN
+F 3 "~" H 3550 8150 50  0001 C CNN
+	1    3550 8150
+	1    0    0    1   
 $EndComp
 Wire Wire Line
 	3875 9550 4000 9550
@@ -1490,21 +1490,21 @@ Wire Wire Line
 	3875 10150 4000 10150
 Wire Wire Line
 	3875 10250 4000 10250
-Text Label 3875 9550 0    50   ~ 0
-H0
-Text Label 3875 9650 0    50   ~ 0
-H1
-Text Label 3875 9750 0    50   ~ 0
-H2
-Text Label 3875 9850 0    50   ~ 0
-H3
-Text Label 3875 9950 0    50   ~ 0
-H4
-Text Label 3875 10050 0    50   ~ 0
-H5
-Text Label 3875 10150 0    50   ~ 0
-H6
 Text Label 3875 10250 0    50   ~ 0
+H0
+Text Label 3875 10150 0    50   ~ 0
+H1
+Text Label 3875 10050 0    50   ~ 0
+H2
+Text Label 3875 9950 0    50   ~ 0
+H3
+Text Label 3875 9850 0    50   ~ 0
+H4
+Text Label 3875 9750 0    50   ~ 0
+H5
+Text Label 3875 9650 0    50   ~ 0
+H6
+Text Label 3875 9550 0    50   ~ 0
 H7
 Wire Wire Line
 	3750 8450 4000 8450
@@ -1525,29 +1525,29 @@ Wire Wire Line
 $Comp
 L power:GND #PWR030
 U 1 1 65B84CC6
-P 3750 7650
-F 0 "#PWR030" H 3750 7400 50  0001 C CNN
-F 1 "GND" H 3725 7525 50  0000 C CNN
-F 2 "" H 3750 7650 50  0001 C CNN
-F 3 "" H 3750 7650 50  0001 C CNN
-	1    3750 7650
-	-1   0    0    1   
+P 3750 8550
+F 0 "#PWR030" H 3750 8300 50  0001 C CNN
+F 1 "GND" V 3775 8375 50  0000 C CNN
+F 2 "" H 3750 8550 50  0001 C CNN
+F 3 "" H 3750 8550 50  0001 C CNN
+	1    3750 8550
+	0    -1   -1   0   
 $EndComp
-Text Label 3825 7750 0    50   ~ 0
+Text Label 3800 8450 0    50   ~ 0
 L0
-Text Label 3825 7850 0    50   ~ 0
+Text Label 3800 8350 0    50   ~ 0
 L1
-Text Label 3825 7950 0    50   ~ 0
+Text Label 3800 8250 0    50   ~ 0
 L2
-Text Label 3825 8050 0    50   ~ 0
+Text Label 3800 8150 0    50   ~ 0
 L3
-Text Label 3825 8150 0    50   ~ 0
+Text Label 3800 8050 0    50   ~ 0
 L4
-Text Label 3825 8250 0    50   ~ 0
+Text Label 3800 7950 0    50   ~ 0
 L5
-Text Label 3825 8350 0    50   ~ 0
+Text Label 3800 7850 0    50   ~ 0
 L6
-Text Label 3825 8450 0    50   ~ 0
+Text Label 3800 7750 0    50   ~ 0
 L7
 Text Label 2650 10450 0    50   ~ 0
 ~MUL
@@ -1581,24 +1581,24 @@ Wire Wire Line
 $Comp
 L Connector:Conn_01x09_Male J18
 U 1 1 65C3B36A
-P 3550 8950
-F 0 "J18" H 3525 9350 50  0000 R CNN
-F 1 "Conn_01x09_Male" V 3500 9275 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 8950 50  0001 C CNN
-F 3 "~" H 3550 8950 50  0001 C CNN
-	1    3550 8950
-	1    0    0    -1  
+P 3550 9050
+F 0 "J18" H 3525 9450 50  0000 R CNN
+F 1 "Conn_01x09_Male" V 3500 9375 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3550 9050 50  0001 C CNN
+F 3 "~" H 3550 9050 50  0001 C CNN
+	1    3550 9050
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR031
 U 1 1 65C40119
-P 3750 8550
-F 0 "#PWR031" H 3750 8300 50  0001 C CNN
-F 1 "GND" V 3750 8350 50  0000 C CNN
-F 2 "" H 3750 8550 50  0001 C CNN
-F 3 "" H 3750 8550 50  0001 C CNN
-	1    3750 8550
-	0    -1   -1   0   
+P 3750 9450
+F 0 "#PWR031" H 3750 9200 50  0001 C CNN
+F 1 "GND" V 3750 9250 50  0000 C CNN
+F 2 "" H 3750 9450 50  0001 C CNN
+F 3 "" H 3750 9450 50  0001 C CNN
+	1    3750 9450
+	1    0    0    -1  
 $EndComp
 Wire Wire Line
 	3750 8650 4000 8650
@@ -1616,13 +1616,13 @@ Wire Wire Line
 	3750 9250 4000 9250
 Wire Wire Line
 	3750 9350 4000 9350
-Text Notes 2400 8125 0    50   ~ 0
+Text Notes 2400 8175 0    50   ~ 0
 To ALU low byte output
-Text Notes 2400 8925 0    50   ~ 0
+Text Notes 2375 9075 0    50   ~ 0
 To ALU high byte output
-Text Label 3750 9350 0    50   ~ 0
-ALU_H7
 Text Label 3750 8650 0    50   ~ 0
+ALU_H7
+Text Label 3750 9350 0    50   ~ 0
 ALU_H0
 $Comp
 L Device:R R6
