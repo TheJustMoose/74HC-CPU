@@ -6,14 +6,16 @@
 
 #include <cstdint>
 
-typedef RAM_ADDR uint16_t;
-typedef RAM_DATA uint8_t;
+#include "lcd.h"
+
+typedef uint16_t RAM_ADDR;
+typedef uint8_t RAM_DATA;
 constexpr RAM_ADDR LAST_RAM_ADDR {0xFFFF};
 
-typedef ROM_ADDR uint16_t;
-typedef ROM_DATA uint16_t;
+typedef uint16_t ROM_ADDR;
+typedef uint16_t ROM_DATA;
 
-typedef PORT_DATA uint8_t;
+typedef uint8_t PORT_DATA;
 
 class Reg {
 public:
@@ -73,7 +75,24 @@ public:
   OutPort port2;
   OutPort port3;
 
+  void Step();
+
+  void ActivateBank(int BankId);  // 0 - Bank0, 1 - Bank1
+
+protected:
+  Bank& ActiveBank();
+
 private:
   ROM_ADDR IP{0};  // Instruction Pointer
   RAM_ADDR SP{LAST_RAM_ADDR};  // Stack Pointer
+
+  int active_bank_num_ {0};
+};
+
+class System {
+public:
+  CPU cpu;
+  LCD lcd;
+
+  void Step();
 };
