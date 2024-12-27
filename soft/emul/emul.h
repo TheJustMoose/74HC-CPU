@@ -7,6 +7,7 @@
 #include <cstdint>
 
 #include "lcd.h"
+#include "observer.h"
 
 typedef uint16_t RAM_ADDR;
 typedef uint8_t RAM_DATA;
@@ -17,9 +18,27 @@ typedef uint16_t ROM_DATA;
 
 typedef uint8_t PORT_DATA;
 
-class Reg {
+class Reg : public Subject {
 public:
- uint8_t value {0};
+  Reg() = default;
+  Reg(int v): value_(v) {}
+
+  operator uint8_t() const {
+    return value_;
+  }
+
+  operator int() const {
+    return value_;
+  }
+
+  Reg& operator=(uint8_t v) {
+    value_ = v;
+    Notify();
+    return *this;
+  }
+
+private:
+  uint8_t value_ {0};
 };
 
 class Bank {
