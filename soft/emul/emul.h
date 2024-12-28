@@ -168,8 +168,7 @@ public:
 class Instruction {
 public:
   // 74hcpu has 16 bit instructions
-  Instruction(uint16_t code)
-    : code_(code) {}
+  Instruction(uint16_t code) : code_(code) {}
   virtual void Execute(CPU*) = 0;
 
 private:
@@ -178,90 +177,90 @@ private:
 
 class Add : public Instruction {
 public:
-  Add(uint16_t code): Instruction(code) {}
+  Add(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class AddC : public Instruction {
 public:
-  AddC(uint16_t);
+  AddC(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class And : public Instruction {
 public:
-  And(uint16_t);
+  And(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Or : public Instruction {
 public:
-  Or(uint16_t);
+  Or(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Xor : public Instruction {
 public:
-  Xor(uint16_t);
+  Xor(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Mul : public Instruction {
 public:
-  Mul(uint16_t);
+  Mul(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Uno : public Instruction {
 public:
-  Uno(uint16_t);
+  Uno(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Mov : public Instruction {
 public:
-  Mov(uint16_t);
+  Mov(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Lpm : public Instruction {
 public:
-  Lpm(uint16_t);
+  Lpm(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Ld : public Instruction {
 public:
-  Ld(uint16_t);
+  Ld(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class In : public Instruction {
 public:
-  In(uint16_t);
+  In(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Out : public Instruction {
 public:
-  Out(uint16_t);
+  Out(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class St : public Instruction {
 public:
-  St(uint16_t);
+  St(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Cmp : public Instruction {
 public:
-  Cmp(uint16_t);
+  Cmp(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class CmpC : public Instruction {
 public:
-  CmpC(uint16_t);
+  CmpC(uint16_t code) : Instruction(code) {}
   void Execute(CPU*) override;
 };

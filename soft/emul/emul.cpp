@@ -56,9 +56,65 @@ unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
 
   switch (static_cast<Cops>(cop)) {
     case Cops::ADD: return make_unique<Add>(machine_code);
+    case Cops::ADDC: return make_unique<AddC>(machine_code);
+    case Cops::AND: return make_unique<And>(machine_code);
+    case Cops::OR: return make_unique<Or>(machine_code);
+    case Cops::XOR: return make_unique<Xor>(machine_code);
+    case Cops::MUL: return make_unique<Mul>(machine_code);
+    case Cops::UNO: return make_unique<Uno>(machine_code);
+    case Cops::MOV: return make_unique<Mov>(machine_code);
+    case Cops::LPM: return make_unique<Lpm>(machine_code);
+    case Cops::LD: return make_unique<Ld>(machine_code);
+    case Cops::IN: return make_unique<In>(machine_code);
+    case Cops::OUT: return make_unique<Out>(machine_code);
+    case Cops::ST: return make_unique<St>(machine_code);
+    case Cops::CMP: return make_unique<Cmp>(machine_code);
+    case Cops::CMPC: return make_unique<CmpC>(machine_code);
     default: throw exception("Unknown COP");
   }
 }
 
 void Add::Execute(CPU*) {
+}
+
+void AddC::Execute(CPU*) {
+}
+
+void And::Execute(CPU*) {
+}
+
+void Or::Execute(CPU*) {
+}
+
+void Xor::Execute(CPU*) {
+}
+
+void Mul::Execute(CPU*) {
+}
+
+void Uno::Execute(CPU*) {
+}
+
+void Mov::Execute(CPU*) {
+}
+
+void Lpm::Execute(CPU*) {
+}
+
+void Ld::Execute(CPU*) {
+}
+
+void In::Execute(CPU*) {
+}
+
+void Out::Execute(CPU*) {
+}
+
+void St::Execute(CPU*) {
+}
+
+void Cmp::Execute(CPU*) {
+}
+
+void CmpC::Execute(CPU*) {
 }
