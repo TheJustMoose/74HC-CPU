@@ -43,3 +43,22 @@
 */
 
 #include "emul.h"
+
+#include <exception>
+
+using namespace std;
+
+unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
+  uint8_t cop = machine_code >> 8;  // HI byte
+  // we need LO nibble of code for branches only
+  if (static_cast<Cops>(cop & 0xF0) != Cops::BRANCH)
+    cop &= 0xF0;  // another operations have zero low nibble
+
+  switch (static_cast<Cops>(cop)) {
+    case Cops::ADD: return make_unique<Add>(machine_code);
+    default: throw exception("Unknown COP");
+  }
+}
+
+void Add::Execute(CPU*) {
+}

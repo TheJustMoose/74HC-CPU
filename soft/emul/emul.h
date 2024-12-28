@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cstdint>
+#include <memory>
 
 #include "lcd.h"
 #include "observer.h"
@@ -30,7 +31,7 @@ enum class Flags : uint8_t {
   IF = 0x80
 };
 
-enum class Ops : uint8_t {
+enum class Cops : uint8_t {
   ADD  = 0x00,
   ADDC = 0x10,
   AND  = 0x20,
@@ -46,11 +47,8 @@ enum class Ops : uint8_t {
   ST   = 0xC0,
   CMP  = 0xD0,
   CMPC = 0xE0,
-  BRANCH = 0xF0
-};
-
-enum class BranchOps : uint8_t {
   CALL = 0xF0,
+  BRANCH = CALL,
   JMP  = 0xF1,
   RET  = 0xF2,
   JZ   = 0xF3,
@@ -68,7 +66,7 @@ enum class BranchOps : uint8_t {
   NOP  = 0xFF,
 };
 
-Instruction* CreateFromCOP(uint16_t COP);
+std::unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code);
 
 class Reg : public Subject {
 public:
@@ -174,17 +172,13 @@ public:
     : code_(code) {}
   virtual void Execute(CPU*) = 0;
 
-  uint8_t COP() {
-    return static_cast<uint8_t>(code_ >> 12);
-  }
-
 private:
   uint16_t code_ {0};
 };
 
 class Add : public Instruction {
 public:
-  Add(uint16_t);
+  Add(uint16_t code): Instruction(code) {}
   void Execute(CPU*) override;
 };
 
@@ -271,4 +265,3 @@ public:
   CmpC(uint16_t);
   void Execute(CPU*) override;
 };
-
