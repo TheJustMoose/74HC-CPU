@@ -109,8 +109,7 @@ public:
 
 class ROM {
 public:
-  ROM(ROM_ADDR max_addr)
-    : max_addr_(max_addr) {}
+  ROM() = default;
 
   ROM_ADDR GetMaxAddress() {
     return max_addr_;
@@ -118,13 +117,22 @@ public:
 
   ROM_DATA Read(ROM_ADDR addr) {
     // вообще, ROM_ADDR 16 битный, поэтому проверка не имеет смысла (кажется)
-    if (addr >= max_addr_)
+    if (addr >= max_addr_)  // хотя если размер меньше 2^16, то лучше проверить :)
       throw std::exception("ROM address out of bounds");
-    return {};
+    return rom_[addr];
+  }
+
+  void Flash(std::vector<ROM_DATA>&& rom) {
+    if (rom.size() >= 0x10000)
+      throw std::exception("Firmware is too large");
+
+    rom_ = rom;
+    max_addr_ = static_cast<ROM_ADDR>(rom_.size());
   }
 
 private:
-  ROM_ADDR max_addr_;
+  ROM_ADDR max_addr_ {0};
+  std::vector<ROM_DATA> rom_;
 };
 
 class OutPort {
