@@ -45,6 +45,7 @@
 #include "emul.h"
 
 #include <exception>
+#include <iostream>
 
 using namespace std;
 
@@ -75,46 +76,61 @@ unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
 }
 
 void Add::Execute(CPU*) {
+  cout << "Add" << endl;
 }
 
 void AddC::Execute(CPU*) {
+  cout << "AddC" << endl;
 }
 
 void And::Execute(CPU*) {
+  cout << "And" << endl;
 }
 
 void Or::Execute(CPU*) {
+  cout << "Or" << endl;
 }
 
 void Xor::Execute(CPU*) {
+  cout << "Xor" << endl;
 }
 
 void Mul::Execute(CPU*) {
+  cout << "Mul" << endl;
 }
 
 void Uno::Execute(CPU*) {
+  cout << "Uno" << endl;
 }
 
 void Mov::Execute(CPU*) {
+  cout << "Mov" << endl;
 }
 
 void Lpm::Execute(CPU*) {
+  cout << "Lmp" << endl;
 }
 
 void Ld::Execute(CPU*) {
+  cout << "Ld" << endl;
 }
 
 void In::Execute(CPU*) {
+  cout << "In" << endl;
 }
 
 void Out::Execute(CPU*) {
+  cout << "Out" << endl;
 }
 
 void St::Execute(CPU*) {
+  cout << "St" << endl;
 }
 
 void Cmp::Execute(CPU*) {
+  cout << "Cmp" << endl;
 }
 
 void CmpC::Execute(CPU*) {
+  cout << "CmpC" << endl;
 }

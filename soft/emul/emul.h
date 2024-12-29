@@ -66,7 +66,7 @@ enum class Cops : uint8_t {
   NOP  = 0xFF,
 };
 
-std::unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code);
+std::unique_ptr<Instruction> CreateFromMachineCode(ROM_DATA machine_code);
 
 class Reg : public Subject {
 public:
@@ -176,99 +176,99 @@ public:
 class Instruction {
 public:
   // 74hcpu has 16 bit instructions
-  Instruction(uint16_t code) : code_(code) {}
+  Instruction(ROM_DATA code) : code_(code) {}
   virtual void Execute(CPU*) = 0;
 
 private:
-  uint16_t code_ {0};
+  ROM_DATA code_ {0};
 };
 
 class Add : public Instruction {
 public:
-  Add(uint16_t code) : Instruction(code) {}
+  Add(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class AddC : public Instruction {
 public:
-  AddC(uint16_t code) : Instruction(code) {}
+  AddC(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class And : public Instruction {
 public:
-  And(uint16_t code) : Instruction(code) {}
+  And(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Or : public Instruction {
 public:
-  Or(uint16_t code) : Instruction(code) {}
+  Or(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Xor : public Instruction {
 public:
-  Xor(uint16_t code) : Instruction(code) {}
+  Xor(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Mul : public Instruction {
 public:
-  Mul(uint16_t code) : Instruction(code) {}
+  Mul(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Uno : public Instruction {
 public:
-  Uno(uint16_t code) : Instruction(code) {}
+  Uno(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Mov : public Instruction {
 public:
-  Mov(uint16_t code) : Instruction(code) {}
+  Mov(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Lpm : public Instruction {
 public:
-  Lpm(uint16_t code) : Instruction(code) {}
+  Lpm(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Ld : public Instruction {
 public:
-  Ld(uint16_t code) : Instruction(code) {}
+  Ld(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class In : public Instruction {
 public:
-  In(uint16_t code) : Instruction(code) {}
+  In(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Out : public Instruction {
 public:
-  Out(uint16_t code) : Instruction(code) {}
+  Out(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class St : public Instruction {
 public:
-  St(uint16_t code) : Instruction(code) {}
+  St(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class Cmp : public Instruction {
 public:
-  Cmp(uint16_t code) : Instruction(code) {}
+  Cmp(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };
 
 class CmpC : public Instruction {
 public:
-  CmpC(uint16_t code) : Instruction(code) {}
+  CmpC(ROM_DATA code) : Instruction(code) {}
   void Execute(CPU*) override;
 };

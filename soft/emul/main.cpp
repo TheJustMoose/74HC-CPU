@@ -15,6 +15,9 @@ ostream& operator<< (ostream& ostr, const LCD& lcd) {
 }
 
 int main(int argc, char* argv[]) {
+  uint16_t x = 0x0001;
+  printf("%s-endian\n", *((uint8_t *) &x) ? "little" : "big");
+
   if (argc == 1) {
     cout << "74hcpu emulator" << endl;
     cout << "using: emul <firmware.hex>" << endl;
@@ -38,11 +41,25 @@ int main(int argc, char* argv[]) {
   }
 
   // TODO: will it work on big-endian?
-  vector<ROM_DATA> buf(flen / 2, 0);
-  cout << "flen: " << flen << ", v.size: " << buf.size() << endl;
+  //vector<ROM_DATA> buf(flen / 2, 0);
+  //cout << "flen: " << flen << ", v.size: " << buf.size() << endl;
 
-  f.read(reinterpret_cast<char*>(&buf[0]), buf.size()*sizeof(ROM_DATA));
+  //f.read(reinterpret_cast<char*>(&buf[0]), buf.size()*sizeof(ROM_DATA));
   f.close();
+
+//  TEST DATA:
+// |   MOV | DST |C| SRC |*|Z|z|I|i| 70 0111 0000| |
+//     MOV   R0,     0x0F
+//    0111   000  1  0000 1111 == 0x710F
+//     MOV   R1,     0x01
+//    0111   001  1  0000 0001 == 0x7301
+// |   ADD | DST |C| SRC |-|Z|z|I|i| 00 0000 0000|*|
+//     ADD   R1,     R0
+//    0000   001  0  000 00000 == 0x0200
+  vector<ROM_DATA> buf(3, 0);
+  buf[0] = 0x710F;
+  buf[1] = 0x7301;
+  buf[2] = 0x0200;
 
   ROM rom;
   rom.Flash(std::move(buf));
@@ -50,6 +67,12 @@ int main(int argc, char* argv[]) {
   cout << "max ROM addr: " << rom.GetMaxAddress() << endl;
   ROM_DATA d = rom.Read(0);
   cout << "First word: " << hex << d << endl;
+
+  for (ROM_ADDR addr = 0; addr < rom.GetMaxAddress(); addr++) {
+    ROM_DATA machine_code = rom.Read(addr);
+    std::unique_ptr<Instruction> ins = CreateFromMachineCode(machine_code);
+    ins->Execute(nullptr);
+  }
 
   return 0;
 }
