@@ -75,8 +75,43 @@ unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
   }
 }
 
-void Add::Execute(CPU*) {
-  cout << "Add" << endl;
+struct BIN_INS {
+  uint16_t cop : 4;  // code of operation
+  uint16_t dst : 3;  // destination register
+  uint16_t cnst : 1; // const or register
+  uint16_t src : 3;  // source register
+  uint16_t frc : 1;  // force to set CF flag
+  uint16_t Z : 1;    // zero hi nibble
+  uint16_t z : 1;    // zero lo nibble
+  uint16_t I : 1;    // invert hi nibble
+  uint16_t i : 1;    // invert lo nibble
+};
+
+union INSTRUCTION {
+  uint16_t machine_code;
+  BIN_INS bin_ins;
+};
+
+uint8_t BinaryInstruction::LeftOp(CPU* cpu) {
+  if (!cpu)
+    throw exception("Pointer to CPU is nullptr");
+
+  INSTRUCTION ins;
+  ins.machine_code = code();
+  return ins.bin_ins.dst;
+}
+
+uint8_t BinaryInstruction::RightOp(CPU* cpu) {
+  if (!cpu)
+    throw exception("Pointer to CPU is nullptr");
+
+  INSTRUCTION ins;
+  ins.machine_code = code();
+  return ins.bin_ins.src;
+}
+
+void Add::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
 void AddC::Execute(CPU*) {

@@ -68,10 +68,11 @@ int main(int argc, char* argv[]) {
   ROM_DATA d = rom.Read(0);
   cout << "First word: " << hex << d << endl;
 
+  CPU cpu;
   for (ROM_ADDR addr = 0; addr < rom.GetMaxAddress(); addr++) {
     ROM_DATA machine_code = rom.Read(addr);
     std::unique_ptr<Instruction> ins = CreateFromMachineCode(machine_code);
-    ins->Execute(nullptr);
+    ins->Execute(&cpu);
   }
 
   return 0;

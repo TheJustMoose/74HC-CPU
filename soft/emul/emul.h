@@ -104,7 +104,7 @@ class Bank {
 
 class RAM {
 public:
-  RAM(uint8_t BitWidth);
+  RAM(uint8_t BitWidth = 8) {}
 };
 
 class ROM {
@@ -141,7 +141,6 @@ public:
 };
 
 class CPU {
-private:
 public:
   ROM rom;
   RAM ram;
@@ -152,6 +151,8 @@ public:
   OutPort port2;
   OutPort port3;
   Flags flags;
+
+  CPU() {}
 
   void Step();
 
@@ -179,14 +180,35 @@ public:
   Instruction(ROM_DATA code) : code_(code) {}
   virtual void Execute(CPU*) = 0;
 
+protected:
+  ROM_DATA code() {
+    return code_;
+  }
+
 private:
   ROM_DATA code_ {0};
 };
 
-class Add : public Instruction {
+class BinaryInstruction : public Instruction {
 public:
-  Add(ROM_DATA code) : Instruction(code) {}
+  BinaryInstruction(ROM_DATA code) : Instruction(code) {}
+
+  virtual std::string Name() {
+    return {};
+  }
+
+  uint8_t LeftOp(CPU*);
+  uint8_t RightOp(CPU*);
+};
+
+class Add : public BinaryInstruction {
+public:
+  Add(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override {
+    return "ADD";
+  }
 };
 
 class AddC : public Instruction {
