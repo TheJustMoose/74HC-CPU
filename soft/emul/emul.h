@@ -9,6 +9,7 @@
 
 #include "lcd.h"
 #include "observer.h"
+#include "consts.h"
 
 typedef uint16_t RAM_ADDR;
 typedef uint8_t RAM_DATA;
@@ -20,52 +21,9 @@ typedef uint16_t ROM_DATA;
 typedef uint8_t PORT_DATA;
 
 class Instruction;
+class CPU;
 
-enum class Flags : uint8_t {
-  CF = 0x01,
-  ZF = 0x02,
-  LF = 0x04,
-  EF = 0x08,
-  GF = 0x10,
-  BF = 0x20,
-  IF = 0x80
-};
-
-enum class Cops : uint8_t {
-  ADD  = 0x00,
-  ADDC = 0x10,
-  AND  = 0x20,
-  OR   = 0x30,
-  XOR  = 0x40,
-  MUL  = 0x50,
-  UNO  = 0x60,
-  MOV  = 0x70,
-  LPM  = 0x80,
-  LD   = 0x90,
-  IN   = 0xA0,
-  OUT  = 0xB0,
-  ST   = 0xC0,
-  CMP  = 0xD0,
-  CMPC = 0xE0,
-  CALL = 0xF0,
-  BRANCH = CALL,
-  JMP  = 0xF1,
-  RET  = 0xF2,
-  JZ   = 0xF3,
-  JL   = 0xF4,
-  JNE  = 0xF5,
-  JE   = 0xF6,
-  JG   = 0xF7,
-  JC   = 0xF8,
-  JNZ  = 0xF9,
-  JNC  = 0xFA,
-  JHC  = 0xFB,
-  JNHC = 0xFC,
-  STOP = 0xFD,
-  AFCALL = 0xFE,
-  NOP  = 0xFF,
-};
-
+Cops GetCopFromMachineCode(uint16_t machine_code);
 std::unique_ptr<Instruction> CreateFromMachineCode(ROM_DATA machine_code);
 
 class Reg : public Subject {
@@ -92,6 +50,7 @@ private:
 };
 
 class Bank {
+public:
   Reg R0;
   Reg R1;
   Reg R2;
@@ -140,6 +99,18 @@ public:
   void Write(PORT_DATA);
 };
 
+class RegByNum {
+public:
+  RegByNum(CPU* cpu) : cpu_(cpu) {}
+
+  Reg& operator[](uint8_t RegNum);
+
+  static Reg& GetRegByNum(Bank& bank, uint8_t RegNum);  // RegNum: 0 - 7
+
+private:
+  CPU* cpu_ {nullptr};
+};
+
 class CPU {
 public:
   ROM rom;
@@ -158,6 +129,8 @@ public:
 
   void ActivateBank(int BankNum);  // 0 - Bank0, 1 - Bank1
   Bank& ActiveBank();
+
+  RegByNum R {this};
 
 private:
   ROM_ADDR IP{0};  // Instruction Pointer

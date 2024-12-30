@@ -1,44 +1,44 @@
 /*
   Cmd system of 74hcpu:
 
-|---------------------------------------------|f|
-|   4   +  3 + 1 + 3  +    5    = 16          |l|
-|   HIGH BYTE   |    LOW BYTE   |  HIGH BYTE  |a|
-|0 1 2 3 4 5 6 7 8 9 A B C D E F|   (again)   |g|
-|---------------------------------------------|s|
-|   ADD | DST |C| SRC |-|Z|z|I|i| 00 0000 0000|*|
-|  ADDC | DST |C| SRC |F|Z|z|I|i| 10 0001 0000|*|
-|   AND | DST |C| SRC |-|Z|z|I|i| 20 0010 0000|*|
-|    OR | DST |C| SRC |-|Z|z|I|i| 30 0011 0000|*|
-|   XOR | DST |C| SRC |-|Z|z|I|i| 40 0100 0000|*|
-|   MUL | DST |C| SRC |-|Z|z|I|i| 50 0101 0000|*|
-|   UNO | DST |0|-|TYP|F|-|-|-|-| 60 0110 0000|*|
-|   MOV | DST |C| SRC |*|Z|z|I|i| 70 0111 0000| |
-|   LPM | DST |W|EXT|D|U|OFFSET4| 80 1000 0000| |
-|    LD | DST |0|EXT|D|U|OFFSET4| 90 1001 0000| |
-|    IN | DST |  PORT   |-|-|I|i| A0 1010 0000| |
-|-------------|7-8-9-A-B|-------|-------------|-|
-|   OUT | SRC |  PORT   |O|o|X|x| B0 1011 0000| |
-|    ST | SRC |0|EXT|D|U|OFFSET4| C0 1100 0000| |
-|   CMP | DST |C| SRC |-|   -   | D0 1101 0000|+|
-|  CMPC | DST |C| SRC |-|   -   | E0 1110 0000|+|
-| BRNCH |  CALL | 8 bit OFFSET  | F0 1111 0000| |
-| BRNCH |   JMP | 8 bit OFFSET  | F1 1111 0001| |
-| BRNCH |   RET | 8 bit +STACK  | F2 1111 0010| |
-| BRNCH |    JZ | 8 bit OFFSET  | F3 1111 0011| |
-| BRNCH |    JL | 8 bit OFFSET  | F4 1111 0100| |
-| BRNCH |   JNE | 8 bit OFFSET  | F5 1111 0101| |
-| BRNCH |    JE | 8 bit OFFSET  | F6 1111 0110| |
-| BRNCH |    JG | 8 bit OFFSET  | F7 1111 0111| |
-| BRNCH |    JC | 8 bit OFFSET  | F8 1111 1000| |
-| BRNCH |   JNZ | 8 bit OFFSET  | F9 1111 1001| |
-| BRNCH |   JNC | 8 bit OFFSET  | FA 1111 1010| |
-| BRNCH |   JHC | 8 bit OFFSET  | FB 1111 1011| |
-| BRNCH |  JNHC | 8 bit OFFSET  | FC 1111 1100| |
-| BRNCH |  STOP |   0000 0000   | FD 1111 1101| |
-| BRNCH |AFCALL | Hi 8 bit ADDR | FE 1111 1110| |
-| BRNCH |   NOP |   1111 1111   | FF 1111 1111| |
-|---------------------------------------------|-|
+|-----------------------------------------------|f|
+|   4   +  3 + 1 + 3  +    5    = 16            |l|
+|   HIGH BYTE   |    LOW BYTE   |   HIGH BYTE   |a|
+|0 1 2 3 4 5 6 7 8 9 A B C D E F|    (again)    |g|
+|-----------------------------------------------|s|
+|   ADD | DST |C| SRC |-|Z|z|I|i| 00 = 0000 0000|*|
+|  ADDC | DST |C| SRC |F|Z|z|I|i| 10 = 0001 0000|*|
+|   AND | DST |C| SRC |-|Z|z|I|i| 20 = 0010 0000|*|
+|    OR | DST |C| SRC |-|Z|z|I|i| 30 = 0011 0000|*|
+|   XOR | DST |C| SRC |-|Z|z|I|i| 40 = 0100 0000|*|
+|   MUL | DST |C| SRC |-|Z|z|I|i| 50 = 0101 0000|*|
+|   UNO | DST |0|-|TYP|F|-|-|-|-| 60 = 0110 0000|*|
+|   MOV | DST |C| SRC |*|Z|z|I|i| 70 = 0111 0000| |
+|   LPM | DST |W|EXT|D|U|OFFSET4| 80 = 1000 0000| |
+|    LD | DST |0|EXT|D|U|OFFSET4| 90 = 1001 0000| |
+|    IN | DST |  PORT   |-|-|I|i| A0 = 1010 0000| |
+|-------------|7-8-9-A-B|-------|---------------|-|
+|   OUT | SRC |  PORT   |O|o|X|x| B0 = 1011 0000| |
+|    ST | SRC |0|EXT|D|U|OFFSET4| C0 = 1100 0000| |
+|   CMP | DST |C| SRC |-|   -   | D0 = 1101 0000|+|
+|  CMPC | DST |C| SRC |-|   -   | E0 = 1110 0000|+|
+| BRNCH |  CALL | 8 bit OFFSET  | F0 = 1111 0000| |
+| BRNCH |   JMP | 8 bit OFFSET  | F1 = 1111 0001| |
+| BRNCH |   RET | 8 bit +STACK  | F2 = 1111 0010| |
+| BRNCH |    JZ | 8 bit OFFSET  | F3 = 1111 0011| |
+| BRNCH |    JL | 8 bit OFFSET  | F4 = 1111 0100| |
+| BRNCH |   JNE | 8 bit OFFSET  | F5 = 1111 0101| |
+| BRNCH |    JE | 8 bit OFFSET  | F6 = 1111 0110| |
+| BRNCH |    JG | 8 bit OFFSET  | F7 = 1111 0111| |
+| BRNCH |    JC | 8 bit OFFSET  | F8 = 1111 1000| |
+| BRNCH |   JNZ | 8 bit OFFSET  | F9 = 1111 1001| |
+| BRNCH |   JNC | 8 bit OFFSET  | FA = 1111 1010| |
+| BRNCH |   JHC | 8 bit OFFSET  | FB = 1111 1011| |
+| BRNCH |  JNHC | 8 bit OFFSET  | FC = 1111 1100| |
+| BRNCH |  STOP |   0000 0000   | FD = 1111 1101| |
+| BRNCH |AFCALL | Hi 8 bit ADDR | FE = 1111 1110| |
+| BRNCH |   NOP |   1111 1111   | FF = 1111 1111| |
+|-----------------------------------------------|-|
 
 */
 
@@ -49,58 +49,61 @@
 
 using namespace std;
 
-unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
+Cops GetCopFromMachineCode(uint16_t machine_code) {
   uint8_t cop = machine_code >> 8;  // HI byte
+
   // we need LO nibble of code for branches only
-  if (static_cast<Cops>(cop & 0xF0) != Cops::BRANCH)
+  if (static_cast<Cops>(cop & 0xF0) != Cops::cBRANCH)
     cop &= 0xF0;  // another operations have zero low nibble
 
-  switch (static_cast<Cops>(cop)) {
-    case Cops::ADD: return make_unique<Add>(machine_code);
-    case Cops::ADDC: return make_unique<AddC>(machine_code);
-    case Cops::AND: return make_unique<And>(machine_code);
-    case Cops::OR: return make_unique<Or>(machine_code);
-    case Cops::XOR: return make_unique<Xor>(machine_code);
-    case Cops::MUL: return make_unique<Mul>(machine_code);
-    case Cops::UNO: return make_unique<Uno>(machine_code);
-    case Cops::MOV: return make_unique<Mov>(machine_code);
-    case Cops::LPM: return make_unique<Lpm>(machine_code);
-    case Cops::LD: return make_unique<Ld>(machine_code);
-    case Cops::IN: return make_unique<In>(machine_code);
-    case Cops::OUT: return make_unique<Out>(machine_code);
-    case Cops::ST: return make_unique<St>(machine_code);
-    case Cops::CMP: return make_unique<Cmp>(machine_code);
-    case Cops::CMPC: return make_unique<CmpC>(machine_code);
+  return static_cast<Cops>(cop);
+}
+
+unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
+  switch (GetCopFromMachineCode(machine_code)) {
+    case Cops::cADD: return make_unique<Add>(machine_code);
+    case Cops::cADDC: return make_unique<AddC>(machine_code);
+    case Cops::cAND: return make_unique<And>(machine_code);
+    case Cops::cOR: return make_unique<Or>(machine_code);
+    case Cops::cXOR: return make_unique<Xor>(machine_code);
+    case Cops::cMUL: return make_unique<Mul>(machine_code);
+    case Cops::cUNO: return make_unique<Uno>(machine_code);
+    case Cops::cMOV: return make_unique<Mov>(machine_code);
+    case Cops::cLPM: return make_unique<Lpm>(machine_code);
+    case Cops::cLD: return make_unique<Ld>(machine_code);
+    case Cops::cIN: return make_unique<In>(machine_code);
+    case Cops::cOUT: return make_unique<Out>(machine_code);
+    case Cops::cST: return make_unique<St>(machine_code);
+    case Cops::cCMP: return make_unique<Cmp>(machine_code);
+    case Cops::cCMPC: return make_unique<CmpC>(machine_code);
     default: throw exception("Unknown COP");
   }
 }
 
-struct BIN_INS_FLAGS {
-  uint8_t src : 3;  // source register
-  uint8_t frc : 1;  // force to set CF flag
-  uint8_t Z : 1;    // zero hi nibble
-  uint8_t z : 1;    // zero lo nibble
-  uint8_t I : 1;    // invert hi nibble
-  uint8_t i : 1;    // invert lo nibble
-};
+Reg& RegByNum::operator[](uint8_t RegNum) {
+  return GetRegByNum(cpu_->ActiveBank(), RegNum);
+}
 
-union BIN_INS_LOW_BYTE {
-  BIN_INS_FLAGS Flags;
-  uint8_t Const;
-};
+Reg& RegByNum::GetRegByNum(Bank& bank, uint8_t RegNum) {
+  switch (RegNum) {
+    case 0: return bank.R0;
+    case 1: return bank.R1;
+    case 2: return bank.R2;
+    case 3: return bank.R3;
+    case 4: return bank.R4;
+    case 5: return bank.R5;
+    case 6: return bank.R6;
+    case 7: return bank.R7;
+    default: throw exception("Unknown RegNum");
+  }
+}
 
-
-struct BIN_INS {         // high byte:
-  uint8_t cop : 4;       // code of operation
-  uint8_t dst : 3;       // destination register
-  uint8_t cnst : 1;      // const or register
-  BIN_INS_LOW_BYTE low;  // low byte: can contain flags or const
-};
-
-union INSTRUCTION {
-  uint16_t machine_code;
-  BIN_INS bin_ins;
-};
+Bank& CPU::ActiveBank() {
+  if (active_bank_num_ == 0)
+    return bank0;
+  else
+    return bank1;
+}
 
 uint8_t BinaryInstruction::LeftOp(CPU* cpu) {
   if (!cpu)
