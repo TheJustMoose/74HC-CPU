@@ -91,9 +91,9 @@ union BIN_INS_LOW_BYTE {
 
 
 struct BIN_INS {         // high byte:
-  uint8_t cop : 4;      // code of operation
-  uint8_t dst : 3;      // destination register
-  uint8_t cnst : 1;     // const or register
+  uint8_t cop : 4;       // code of operation
+  uint8_t dst : 3;       // destination register
+  uint8_t cnst : 1;      // const or register
   BIN_INS_LOW_BYTE low;  // low byte: can contain flags or const
 };
 
@@ -124,36 +124,36 @@ void Add::Execute(CPU* cpu) {
   cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void AddC::Execute(CPU*) {
-  cout << "AddC" << endl;
+void AddC::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void And::Execute(CPU*) {
-  cout << "And" << endl;
+void And::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void Or::Execute(CPU*) {
-  cout << "Or" << endl;
+void Or::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void Xor::Execute(CPU*) {
-  cout << "Xor" << endl;
+void Xor::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void Mul::Execute(CPU*) {
-  cout << "Mul" << endl;
+void Mul::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Uno::Execute(CPU*) {
   cout << "Uno" << endl;
 }
 
-void Mov::Execute(CPU*) {
-  cout << "Mov" << endl;
+void Mov::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Lpm::Execute(CPU*) {
-  cout << "Lmp" << endl;
+  cout << "Lpm" << endl;
 }
 
 void Ld::Execute(CPU*) {
@@ -172,10 +172,10 @@ void St::Execute(CPU*) {
   cout << "St" << endl;
 }
 
-void Cmp::Execute(CPU*) {
-  cout << "Cmp" << endl;
+void Cmp::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }
 
-void CmpC::Execute(CPU*) {
-  cout << "CmpC" << endl;
+void CmpC::Execute(CPU* cpu) {
+  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
 }

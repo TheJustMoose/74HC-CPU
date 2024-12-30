@@ -178,7 +178,7 @@ class Instruction {
 public:
   // 74hcpu has 16 bit instructions
   Instruction(ROM_DATA code) : code_(code) {}
-  virtual void Execute(CPU*) = 0;
+  virtual void Execute(CPU* cpu) = 0;
 
 protected:
   ROM_DATA code() {
@@ -206,39 +206,47 @@ public:
   Add(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
 
-  std::string Name() override {
-    return "ADD";
-  }
+  std::string Name() override { return "ADD"; }
 };
 
-class AddC : public Instruction {
+class AddC : public BinaryInstruction {
 public:
-  AddC(ROM_DATA code) : Instruction(code) {}
+  AddC(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "ADDC"; }
 };
 
-class And : public Instruction {
+class And : public BinaryInstruction {
 public:
-  And(ROM_DATA code) : Instruction(code) {}
+  And(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "AND"; }
 };
 
-class Or : public Instruction {
+class Or : public BinaryInstruction {
 public:
-  Or(ROM_DATA code) : Instruction(code) {}
+  Or(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "OR"; }
 };
 
-class Xor : public Instruction {
+class Xor : public BinaryInstruction {
 public:
-  Xor(ROM_DATA code) : Instruction(code) {}
+  Xor(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "XOR"; }
 };
 
-class Mul : public Instruction {
+class Mul : public BinaryInstruction {
 public:
-  Mul(ROM_DATA code) : Instruction(code) {}
+  Mul(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "MUL"; }
 };
 
 class Uno : public Instruction {
@@ -247,10 +255,12 @@ public:
   void Execute(CPU*) override;
 };
 
-class Mov : public Instruction {
+class Mov : public BinaryInstruction {
 public:
-  Mov(ROM_DATA code) : Instruction(code) {}
+  Mov(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "MOV"; }
 };
 
 class Lpm : public Instruction {
@@ -283,14 +293,18 @@ public:
   void Execute(CPU*) override;
 };
 
-class Cmp : public Instruction {
+class Cmp : public BinaryInstruction {
 public:
-  Cmp(ROM_DATA code) : Instruction(code) {}
+  Cmp(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "CMP"; }
 };
 
-class CmpC : public Instruction {
+class CmpC : public BinaryInstruction {
 public:
-  CmpC(ROM_DATA code) : Instruction(code) {}
+  CmpC(ROM_DATA code) : BinaryInstruction(code) {}
   void Execute(CPU*) override;
+
+  std::string Name() override { return "CMPC"; }
 };
