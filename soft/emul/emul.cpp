@@ -80,22 +80,22 @@ unique_ptr<Instruction> CreateFromMachineCode(uint16_t machine_code) {
   }
 }
 
-Reg& RegByNum::operator[](uint8_t RegNum) {
-  return GetRegByNum(cpu_->ActiveBank(), RegNum);
-}
-
-Reg& RegByNum::GetRegByNum(Bank& bank, uint8_t RegNum) {
+Reg& Bank::GetRegByNum(uint8_t RegNum) {
   switch (RegNum) {
-    case 0: return bank.R0;
-    case 1: return bank.R1;
-    case 2: return bank.R2;
-    case 3: return bank.R3;
-    case 4: return bank.R4;
-    case 5: return bank.R5;
-    case 6: return bank.R6;
-    case 7: return bank.R7;
+    case 0: return R0;
+    case 1: return R1;
+    case 2: return R2;
+    case 3: return R3;
+    case 4: return R4;
+    case 5: return R5;
+    case 6: return R6;
+    case 7: return R7;
     default: throw exception("Unknown RegNum");
   }
+}
+
+Reg& RegByNum::operator[](uint8_t RegNum) {
+  return cpu_->ActiveBank().GetRegByNum(RegNum);
 }
 
 Bank& CPU::ActiveBank() {

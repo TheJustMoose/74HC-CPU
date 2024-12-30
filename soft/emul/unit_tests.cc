@@ -33,8 +33,11 @@ TEST_CASE("check RegByNum") {
   Bank b;
   CHECK_EQ(&b.R0, &b.R0);
 
-  Reg& r0 = RegByNum::GetRegByNum(b, 0);
+  Reg& r0 = b.GetRegByNum(0);
   CHECK_EQ(&r0, &b.R0);
 
-  CHECK_THROWS(RegByNum::GetRegByNum(b, 10));
+  Reg& r7 = b.GetRegByNum(7);
+  CHECK_EQ(&r7, &b.R7);
+
+  CHECK_THROWS(b.GetRegByNum(10));
 }

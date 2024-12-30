@@ -59,6 +59,8 @@ public:
   Reg R5;
   Reg R6;
   Reg R7;
+
+  Reg& GetRegByNum(uint8_t RegNum);  // RegNum: 0 - 7
 };
 
 class RAM {
@@ -104,8 +106,6 @@ public:
   RegByNum(CPU* cpu) : cpu_(cpu) {}
 
   Reg& operator[](uint8_t RegNum);
-
-  static Reg& GetRegByNum(Bank& bank, uint8_t RegNum);  // RegNum: 0 - 7
 
 private:
   CPU* cpu_ {nullptr};
