@@ -111,7 +111,6 @@ Reg& BinaryInstruction::LeftOp(CPU* cpu) {
 
   INSTRUCTION ins {};
   ins.machine_code = code();
-  cout << "BinaryInstruction code: " << code() << endl;
   return cpu->R[ins.bin_ins.high.dst];
 }
 

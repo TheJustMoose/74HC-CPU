@@ -38,8 +38,8 @@ TEST_CASE("check binary instruction bit fields") {
   INSTRUCTION ins {};
   ins.machine_code = 0x710F;
 
-  //CHECK_EQ(ins.bin_ins.cop, 7);
-  //CHECK_EQ(ins.bin_ins.dst, 0);
+  CHECK_EQ(ins.bin_ins.high.cop, 7);
+  CHECK_EQ(ins.bin_ins.high.dst, 0);
   CHECK_EQ(ins.bin_ins.high.cnst, 1);
 }
 

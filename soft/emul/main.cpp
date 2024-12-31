@@ -15,9 +15,8 @@ ostream& operator<< (ostream& ostr, const LCD& lcd) {
   return ostr << lcd.Content();
 }
 
-// Intel -> Little endian -> low byte is stored in low address
-
 void test_emul() {
+// Intel -> Little endian -> low byte is stored in low address
 //  TEST DATA:
 // |   MOV | DST |C| SRC |*|Z|z|I|i| 70 0111 0000| |
 //     MOV   R0,     0x0F
@@ -47,47 +46,7 @@ void test_emul() {
   }
 }
 
-struct TEST {
-  uint8_t first;  // low byte
-  uint8_t second; // high byte
-};
-
-TEST test;
-
-struct BTEST {
-  uint8_t low : 4;  // low nibble
-  uint8_t high : 4; // high nibble
-};
-
-union UN {
-  uint8_t byte;
-  BTEST btest;
-} un;
-
 int main(int argc, char* argv[]) {
-  uint16_t x = 0x0001;
-  printf("%s-endian\n", *((uint8_t *) &x) ? "little" : "big");
-
-  cout << "first addr:  " << hex << (void*)&(test.first) << endl;
-  cout << "second addr: " << hex << (void*)&(test.second) << endl;
-
-  un.byte = 0xF1;
-  cout << "low: " << hex << (int)un.btest.low << endl;
-  cout << "high: " << hex << (int)un.btest.high << endl;
-
-  INSTRUCTION ins {};
-  ins.machine_code = 0x710F;
-
-  cout << "uint16_t: " << hex << (int)(ins.machine_code) << endl;
-  cout << "bytes[0]: " << hex << (int)(ins.bytes[0]) << endl;
-  cout << "bytes[1]: " << hex << (int)(ins.bytes[1]) << endl;
-
-  cout << "cop: " << hex << (int)(ins.bin_ins.high.cop) << endl;
-  cout << "dst: " << hex << (int)(ins.bin_ins.high.dst) << endl;
-  cout << "cnst: " << hex << (int)(ins.bin_ins.high.cnst) << endl;
-
-  cout << "low byte: " << hex << setw(2) << setfill('0') << (int)(ins.bin_ins.low.Const) << endl;
-
   if (argc == 1) {
     cout << "74hcpu emulator" << endl;
     cout << "using: emul <firmware.hex>" << endl;
@@ -111,10 +70,10 @@ int main(int argc, char* argv[]) {
   }
 
   // TODO: will it work on big-endian?
-  //vector<ROM_DATA> buf(flen / 2, 0);
-  //cout << "flen: " << flen << ", v.size: " << buf.size() << endl;
+  vector<ROM_DATA> buf(flen / 2, 0);
+  cout << "flen: " << flen << ", v.size: " << buf.size() << endl;
 
-  //f.read(reinterpret_cast<char*>(&buf[0]), buf.size()*sizeof(ROM_DATA));
+  f.read(reinterpret_cast<char*>(&buf[0]), buf.size()*sizeof(ROM_DATA));
   f.close();
 
   try {
@@ -126,23 +85,3 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
-
-/*
-  Reg r0;
-  r0 = 10;
-  cout << "r0: " << r0 << endl;
-
-  Reg r1;
-  r1 = 0;
-  cout << "r1: " << r1 << endl;
-
-  LCD lcd;
-  lcd.Connect(&r0, &r1);
-  cout << "LCD: " << lcd << endl;
-
-  const char* buf = "74hcpu";
-  for (int i = 0; buf[i] != 0; i++) {
-    r0 = buf[i];
-    cout << "LCD: " << lcd << endl;
-  }
-*/
