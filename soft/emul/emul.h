@@ -28,8 +28,7 @@ std::unique_ptr<Instruction> CreateFromMachineCode(ROM_DATA machine_code);
 
 class Reg : public Subject {
 public:
-  Reg() = default;
-  Reg(int v): value_(v) {}
+  Reg(std::string name) : name_(name) {}
 
   operator uint8_t() const {
     return value_;
@@ -45,20 +44,23 @@ public:
     return *this;
   }
 
+  std::string name() { return name_; }
+
 private:
   uint8_t value_ {0};
+  std::string name_ {};
 };
 
 class Bank {
 public:
-  Reg R0;
-  Reg R1;
-  Reg R2;
-  Reg R3;
-  Reg R4;
-  Reg R5;
-  Reg R6;
-  Reg R7;
+  Reg R0 {"R0"};
+  Reg R1 {"R1"};
+  Reg R2 {"R2"};
+  Reg R3 {"R3"};
+  Reg R4 {"R4"};
+  Reg R5 {"R5"};
+  Reg R6 {"R6"};
+  Reg R7 {"R7"};
 
   Reg& GetRegByNum(uint8_t RegNum);  // RegNum: 0 - 7
 };
@@ -115,8 +117,6 @@ class CPU {
 public:
   ROM rom;
   RAM ram;
-  Bank bank0;
-  Bank bank1;
   OutPort LCD_data;
   OutPort LCD_ctrl;
   OutPort port2;
@@ -133,6 +133,9 @@ public:
   RegByNum R {this};
 
 private:
+  Bank bank0;
+  Bank bank1;
+
   ROM_ADDR IP{0};  // Instruction Pointer
   RAM_ADDR SP{LAST_RAM_ADDR};  // Stack Pointer
 
@@ -153,7 +156,7 @@ public:
   Instruction(ROM_DATA code) : code_(code) {}
   virtual void Execute(CPU* cpu) = 0;
 
-protected:
+//protected:
   ROM_DATA code() {
     return code_;
   }
@@ -170,7 +173,7 @@ public:
     return {};
   }
 
-  uint8_t LeftOp(CPU*);
+  Reg& LeftOp(CPU*);
   uint8_t RightOp(CPU*);
 };
 

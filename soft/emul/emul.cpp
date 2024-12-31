@@ -105,13 +105,14 @@ Bank& CPU::ActiveBank() {
     return bank1;
 }
 
-uint8_t BinaryInstruction::LeftOp(CPU* cpu) {
+Reg& BinaryInstruction::LeftOp(CPU* cpu) {
   if (!cpu)
     throw exception("Pointer to CPU is nullptr");
 
   INSTRUCTION ins {};
   ins.machine_code = code();
-  return ins.bin_ins.dst;
+  cout << "BinaryInstruction code: " << code() << endl;
+  return cpu->R[ins.bin_ins.high.dst];
 }
 
 uint8_t BinaryInstruction::RightOp(CPU* cpu) {
@@ -120,31 +121,34 @@ uint8_t BinaryInstruction::RightOp(CPU* cpu) {
 
   INSTRUCTION ins {};
   ins.machine_code = code();
-  return ins.bin_ins.low.Flags.src;
+  if (ins.bin_ins.high.cnst)
+    return ins.bin_ins.low.Const;
+  else
+    return cpu->R[ins.bin_ins.low.Flags.src];
 }
 
 void Add::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void AddC::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void And::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Or::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Xor::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Mul::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Uno::Execute(CPU*) {
@@ -152,7 +156,7 @@ void Uno::Execute(CPU*) {
 }
 
 void Mov::Execute(CPU* cpu) {
-  cout << Name() << " " << (int)LeftOp(cpu) << ", " << (int)RightOp(cpu) << endl;
+  cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Lpm::Execute(CPU*) {

@@ -48,12 +48,14 @@ enum class Cops : uint8_t {
 };
 
 struct BIN_INS_FLAGS {
-  uint8_t src : 3;  // source register
-  uint8_t frc : 1;  // force to set CF flag
-  uint8_t Z : 1;    // zero hi nibble
-  uint8_t z : 1;    // zero lo nibble
-  uint8_t I : 1;    // invert hi nibble
+  // LSB
   uint8_t i : 1;    // invert lo nibble
+  uint8_t I : 1;    // invert hi nibble
+  uint8_t z : 1;    // zero lo nibble
+  uint8_t Z : 1;    // zero hi nibble
+  uint8_t frc : 1;  // force to set CF flag
+  uint8_t src : 3;  // source register
+  // MSB
 };
 
 union BIN_INS_LOW_BYTE {
@@ -61,14 +63,23 @@ union BIN_INS_LOW_BYTE {
   uint8_t Const;
 };
 
-struct BIN_INS {         // high byte:
-  uint8_t cop : 4;       // code of operation
-  uint8_t dst : 3;       // destination register
+struct BIN_INS_HIGH_BYTE {
+  // LSB
   uint8_t cnst : 1;      // const or register
-  BIN_INS_LOW_BYTE low;  // low byte: can contain flags or const
+  uint8_t dst : 3;       // destination register
+  uint8_t cop : 4;       // code of operation
+  // MSB
+};
+
+struct BIN_INS {
+  // low byte:
+  BIN_INS_LOW_BYTE low;  // can contain flags or const
+  // high byte:
+  BIN_INS_HIGH_BYTE high;  // COP, etc
 };
 
 union INSTRUCTION {
   uint16_t machine_code;
+  uint8_t bytes[2];
   BIN_INS bin_ins;
 };
