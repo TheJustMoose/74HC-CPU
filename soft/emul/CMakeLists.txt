@@ -15,5 +15,6 @@ include_directories("doctest\\doctest")
 project(unit_tests CXX)
 add_executable(unit_tests
 	emul.cpp
+	observer.cpp
 	unit_tests.cc
 )

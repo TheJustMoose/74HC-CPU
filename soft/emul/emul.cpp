@@ -127,26 +127,51 @@ uint8_t BinaryInstruction::RightOp(CPU* cpu) {
 }
 
 void Add::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs += RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void AddC::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs += RightOp(cpu);
+  r = lhs;
+  // add CF
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void And::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs &= RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Or::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs |= RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Xor::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs ^= RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
 void Mul::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs *= RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
@@ -155,6 +180,10 @@ void Uno::Execute(CPU*) {
 }
 
 void Mov::Execute(CPU* cpu) {
+  Reg& r = LeftOp(cpu);
+  uint8_t lhs = r;
+  lhs = RightOp(cpu);
+  r = lhs;
   cout << Name() << " " << LeftOp(cpu).name() << ", " << (int)RightOp(cpu) << endl;
 }
 
