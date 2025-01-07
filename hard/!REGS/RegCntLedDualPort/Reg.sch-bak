@@ -368,7 +368,7 @@ U 1 1 635595B9
 P 5200 2250
 F 0 "R1" V 5100 2175 50  0000 C CNN
 F 1 "10k" V 5200 2250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P15.24mm_Horizontal" V 5130 2250 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 5130 2250 50  0001 C CNN
 F 3 "~" H 5200 2250 50  0001 C CNN
 	1    5200 2250
 	0    1    1    0   
@@ -1116,21 +1116,21 @@ Wire Wire Line
 	7550 3700 7300 3700
 Wire Wire Line
 	7550 3800 7300 3800
-Text Label 7550 3800 0    50   ~ 0
+Text Label 6125 3100 0    50   ~ 0
 AQ0
-Text Label 7550 3700 0    50   ~ 0
+Text Label 6125 3200 0    50   ~ 0
 AQ1
-Text Label 7550 3600 0    50   ~ 0
+Text Label 6125 3300 0    50   ~ 0
 AQ2
-Text Label 7550 3500 0    50   ~ 0
+Text Label 6125 3400 0    50   ~ 0
 AQ3
-Text Label 7550 3400 0    50   ~ 0
+Text Label 6125 3500 0    50   ~ 0
 AQ4
-Text Label 7550 3300 0    50   ~ 0
+Text Label 6125 3600 0    50   ~ 0
 AQ5
-Text Label 7550 3200 0    50   ~ 0
+Text Label 6125 3700 0    50   ~ 0
 AQ6
-Text Label 7550 3100 0    50   ~ 0
+Text Label 6125 3800 0    50   ~ 0
 AQ7
 $Comp
 L 74xx:74HC245 U5
@@ -1165,45 +1165,21 @@ F 3 "" H 6800 4400 50  0001 C CNN
 	1    6800 4400
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R14
-U 1 1 65BD1D55
-P 5950 4000
-F 0 "R14" V 5850 3925 50  0000 C CNN
-F 1 "10k" V 5950 4000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 5880 4000 50  0001 C CNN
-F 3 "~" H 5950 4000 50  0001 C CNN
-	1    5950 4000
-	0    1    1    0   
-$EndComp
-$Comp
-L power:VCC #PWR030
-U 1 1 65BD1D5B
-P 5800 4000
-F 0 "#PWR030" H 5800 3850 50  0001 C CNN
-F 1 "VCC" V 5815 4127 50  0000 L CNN
-F 2 "" H 5800 4000 50  0001 C CNN
-F 3 "" H 5800 4000 50  0001 C CNN
-	1    5800 4000
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6100 4000 6300 4000
-Text Label 6125 3800 0    50   ~ 0
+Text Label 7550 3100 0    50   ~ 0
 L0
-Text Label 6125 3700 0    50   ~ 0
+Text Label 7550 3200 0    50   ~ 0
 L1
-Text Label 6125 3600 0    50   ~ 0
+Text Label 7550 3300 0    50   ~ 0
 L2
-Text Label 6125 3500 0    50   ~ 0
+Text Label 7550 3400 0    50   ~ 0
 L3
-Text Label 6125 3400 0    50   ~ 0
+Text Label 7550 3500 0    50   ~ 0
 L4
-Text Label 6125 3300 0    50   ~ 0
+Text Label 7550 3600 0    50   ~ 0
 L5
-Text Label 6125 3200 0    50   ~ 0
+Text Label 7550 3700 0    50   ~ 0
 L6
-Text Label 6125 3100 0    50   ~ 0
+Text Label 7550 3800 0    50   ~ 0
 L7
 Wire Wire Line
 	6125 3100 6300 3100
@@ -1223,7 +1199,7 @@ Wire Wire Line
 	6125 3800 6300 3800
 Text Notes 7200 1700 0    50   ~ 0
 To Register\nMultiplexer
-Text Notes 7800 3500 0    50   ~ 0
+Text Notes 5250 3450 0    50   ~ 0
 To Address\nMultiplexer
 $Comp
 L power:GND #PWR031
@@ -1298,4 +1274,7 @@ F 3 "" H 4500 6025 50  0001 C CNN
 	1    4500 6025
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6300 4000 6300 4100
+Connection ~ 6300 4100
 $EndSCHEMATC
