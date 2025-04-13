@@ -377,34 +377,34 @@ S2
 $Comp
 L Connector:Screw_Terminal_01x02 J9
 U 1 1 62880E7E
-P 10275 5875
-F 0 "J9" H 10355 5867 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 10355 5776 50  0000 L CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 10275 5875 50  0001 C CNN
-F 3 "~" H 10275 5875 50  0001 C CNN
-	1    10275 5875
-	1    0    0    -1  
+P 10250 5200
+F 0 "J9" H 10330 5192 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 10330 5101 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 10250 5200 50  0001 C CNN
+F 3 "~" H 10250 5200 50  0001 C CNN
+	1    10250 5200
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR022
 U 1 1 62881857
-P 10075 5975
-F 0 "#PWR022" H 10075 5725 50  0001 C CNN
-F 1 "GND" H 10080 5802 50  0000 C CNN
-F 2 "" H 10075 5975 50  0001 C CNN
-F 3 "" H 10075 5975 50  0001 C CNN
-	1    10075 5975
+P 10050 5200
+F 0 "#PWR022" H 10050 4950 50  0001 C CNN
+F 1 "GND" H 10055 5027 50  0000 C CNN
+F 2 "" H 10050 5200 50  0001 C CNN
+F 3 "" H 10050 5200 50  0001 C CNN
+	1    10050 5200
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:VCC #PWR021
 U 1 1 6288228A
-P 10075 5875
-F 0 "#PWR021" H 10075 5725 50  0001 C CNN
-F 1 "VCC" H 10090 6048 50  0000 C CNN
-F 2 "" H 10075 5875 50  0001 C CNN
-F 3 "" H 10075 5875 50  0001 C CNN
-	1    10075 5875
+P 10050 4700
+F 0 "#PWR021" H 10050 4550 50  0001 C CNN
+F 1 "VCC" H 10065 4873 50  0000 C CNN
+F 2 "" H 10050 4700 50  0001 C CNN
+F 3 "" H 10050 4700 50  0001 C CNN
+	1    10050 4700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -766,45 +766,45 @@ $EndComp
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 628D9A25
-P 600 6925
-F 0 "H1" H 700 6971 50  0000 L CNN
-F 1 "MountingHole" H 700 6880 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 600 6925 50  0001 C CNN
-F 3 "~" H 600 6925 50  0001 C CNN
-	1    600  6925
+P 10250 1000
+F 0 "H1" H 10350 1046 50  0000 L CNN
+F 1 "MountingHole" H 10350 955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 1000 50  0001 C CNN
+F 3 "~" H 10250 1000 50  0001 C CNN
+	1    10250 1000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H3
 U 1 1 628DA0C7
-P 600 7175
-F 0 "H3" H 700 7221 50  0000 L CNN
-F 1 "MountingHole" H 700 7130 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 600 7175 50  0001 C CNN
-F 3 "~" H 600 7175 50  0001 C CNN
-	1    600  7175
+P 10250 1250
+F 0 "H3" H 10350 1296 50  0000 L CNN
+F 1 "MountingHole" H 10350 1205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 1250 50  0001 C CNN
+F 3 "~" H 10250 1250 50  0001 C CNN
+	1    10250 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H2
 U 1 1 628DA5B9
-P 600 7450
-F 0 "H2" H 700 7496 50  0000 L CNN
-F 1 "MountingHole" H 700 7405 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 600 7450 50  0001 C CNN
-F 3 "~" H 600 7450 50  0001 C CNN
-	1    600  7450
+P 10250 1500
+F 0 "H2" H 10350 1546 50  0000 L CNN
+F 1 "MountingHole" H 10350 1455 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 1500 50  0001 C CNN
+F 3 "~" H 10250 1500 50  0001 C CNN
+	1    10250 1500
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H4
 U 1 1 628DA819
-P 600 7700
-F 0 "H4" H 700 7746 50  0000 L CNN
-F 1 "MountingHole" H 700 7655 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 600 7700 50  0001 C CNN
-F 3 "~" H 600 7700 50  0001 C CNN
-	1    600  7700
+P 10250 1750
+F 0 "H4" H 10350 1796 50  0000 L CNN
+F 1 "MountingHole" H 10350 1705 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 1750 50  0001 C CNN
+F 3 "~" H 10250 1750 50  0001 C CNN
+	1    10250 1750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -813,7 +813,7 @@ U 1 1 628DDE66
 P 4900 6500
 F 0 "C1" H 4925 6600 50  0000 L CNN
 F 1 "0.1uF" H 4925 6400 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4938 6350 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 4938 6350 50  0001 C CNN
 F 3 "~" H 4900 6500 50  0001 C CNN
 	1    4900 6500
 	1    0    0    -1  
@@ -846,7 +846,7 @@ U 1 1 628E1678
 P 5275 6500
 F 0 "C2" H 5300 6600 50  0000 L CNN
 F 1 "0.1uF" H 5300 6400 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5313 6350 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 5313 6350 50  0001 C CNN
 F 3 "~" H 5275 6500 50  0001 C CNN
 	1    5275 6500
 	1    0    0    -1  
@@ -879,7 +879,7 @@ U 1 1 628E2564
 P 5650 6500
 F 0 "C3" H 5675 6600 50  0000 L CNN
 F 1 "0.1uF" H 5675 6400 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5688 6350 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 5688 6350 50  0001 C CNN
 F 3 "~" H 5650 6500 50  0001 C CNN
 	1    5650 6500
 	1    0    0    -1  
@@ -912,7 +912,7 @@ U 1 1 628E3393
 P 6025 6500
 F 0 "C4" H 6050 6600 50  0000 L CNN
 F 1 "0.1uF" H 6050 6400 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6063 6350 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 6063 6350 50  0001 C CNN
 F 3 "~" H 6025 6500 50  0001 C CNN
 	1    6025 6500
 	1    0    0    -1  
@@ -945,7 +945,7 @@ U 1 1 628EB41A
 P 4900 7350
 F 0 "C5" H 4925 7450 50  0000 L CNN
 F 1 "0.1uF" H 4925 7250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4938 7200 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 4938 7200 50  0001 C CNN
 F 3 "~" H 4900 7350 50  0001 C CNN
 	1    4900 7350
 	1    0    0    -1  
@@ -978,7 +978,7 @@ U 1 1 628EB42C
 P 5275 7350
 F 0 "C6" H 5300 7450 50  0000 L CNN
 F 1 "0.1uF" H 5300 7250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5313 7200 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 5313 7200 50  0001 C CNN
 F 3 "~" H 5275 7350 50  0001 C CNN
 	1    5275 7350
 	1    0    0    -1  
@@ -1011,7 +1011,7 @@ U 1 1 628EB43E
 P 5650 7350
 F 0 "C7" H 5675 7450 50  0000 L CNN
 F 1 "0.1uF" H 5675 7250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 5688 7200 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 5688 7200 50  0001 C CNN
 F 3 "~" H 5650 7350 50  0001 C CNN
 	1    5650 7350
 	1    0    0    -1  
@@ -1044,7 +1044,7 @@ U 1 1 628EB450
 P 6025 7350
 F 0 "C8" H 6050 7450 50  0000 L CNN
 F 1 "0.1uF" H 6050 7250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6063 7200 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 6063 7200 50  0001 C CNN
 F 3 "~" H 6025 7350 50  0001 C CNN
 	1    6025 7350
 	1    0    0    -1  
@@ -1476,7 +1476,7 @@ U 1 1 63FF5B82
 P 6400 7350
 F 0 "C9" H 6425 7450 50  0000 L CNN
 F 1 "0.1uF" H 6425 7250 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6438 7200 50  0001 C CNN
+F 2 "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P12.50mm_Horizontal" H 6438 7200 50  0001 C CNN
 F 3 "~" H 6400 7350 50  0001 C CNN
 	1    6400 7350
 	1    0    0    -1  
@@ -1673,23 +1673,23 @@ BUS7
 $Comp
 L Mechanical:MountingHole H5
 U 1 1 658CCBF3
-P 1500 7700
-F 0 "H5" H 1600 7746 50  0000 L CNN
-F 1 "MountingHole" H 1600 7655 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 1500 7700 50  0001 C CNN
-F 3 "~" H 1500 7700 50  0001 C CNN
-	1    1500 7700
+P 10250 2000
+F 0 "H5" H 10350 2046 50  0000 L CNN
+F 1 "MountingHole" H 10350 1955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 2000 50  0001 C CNN
+F 3 "~" H 10250 2000 50  0001 C CNN
+	1    10250 2000
 	1    0    0    -1  
 $EndComp
 $Comp
 L Mechanical:MountingHole H6
 U 1 1 658CCFDB
-P 2250 7700
-F 0 "H6" H 2350 7746 50  0000 L CNN
-F 1 "MountingHole" H 2350 7655 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.2mm_M3" H 2250 7700 50  0001 C CNN
-F 3 "~" H 2250 7700 50  0001 C CNN
-	1    2250 7700
+P 10250 2250
+F 0 "H6" H 10350 2296 50  0000 L CNN
+F 1 "MountingHole" H 10350 2205 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10250 2250 50  0001 C CNN
+F 3 "~" H 10250 2250 50  0001 C CNN
+	1    10250 2250
 	1    0    0    -1  
 $EndComp
 Text Label 3775 5875 0    50   ~ 0
@@ -1746,4 +1746,30 @@ F 3 "~" H 4250 6275 50  0001 C CNN
 	1    4250 6275
 	-1   0    0    1   
 $EndComp
+$Comp
+L power:GND #PWR045
+U 1 1 67FDE119
+P 9750 4900
+F 0 "#PWR045" H 9750 4650 50  0001 C CNN
+F 1 "GND" H 9755 4727 50  0000 C CNN
+F 2 "" H 9750 4900 50  0001 C CNN
+F 3 "" H 9750 4900 50  0001 C CNN
+	1    9750 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:IRLML5203 Q1
+U 1 1 67FD1FEE
+P 9950 4900
+F 0 "Q1" H 9850 5050 50  0000 L CNN
+F 1 "IRLML5203" H 10150 5000 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10150 4825 50  0001 L CIN
+F 3 "https://www.infineon.com/dgdl/irlml5203pbf.pdf?fileId=5546d462533600a40153566868da261d" H 9950 4900 50  0001 L CNN
+	1    9950 4900
+	1    0    0    1   
+$EndComp
+Text Notes 10250 5375 0    50   ~ 0
+Power In
+Text Notes 10150 4875 0    50   ~ 0
+Reverse\npolarity\nprotection
 $EndSCHEMATC
