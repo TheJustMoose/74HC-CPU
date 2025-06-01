@@ -580,272 +580,6 @@ F 3 "" H 1500 3175 50  0001 C CNN
 	1    1500 3175
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:Conn_01x09_Male J3
-U 1 1 6598F316
-P 4375 1775
-F 0 "J3" H 4450 2250 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 4775 1300 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 4375 1775 50  0001 C CNN
-F 3 "~" H 4375 1775 50  0001 C CNN
-	1    4375 1775
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR08
-U 1 1 6598F31C
-P 4175 1375
-F 0 "#PWR08" H 4175 1125 50  0001 C CNN
-F 1 "GND" H 4150 1250 50  0000 C CNN
-F 2 "" H 4175 1375 50  0001 C CNN
-F 3 "" H 4175 1375 50  0001 C CNN
-	1    4175 1375
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3950 1475 4175 1475
-Wire Wire Line
-	3950 1575 4175 1575
-Wire Wire Line
-	3950 1675 4175 1675
-Wire Wire Line
-	3950 1775 4175 1775
-Wire Wire Line
-	3950 1875 4175 1875
-Wire Wire Line
-	3950 1975 4175 1975
-Wire Wire Line
-	3950 2075 4175 2075
-Wire Wire Line
-	3950 2175 4175 2175
-$Comp
-L Connector:Conn_01x09_Male J5
-U 1 1 6599B348
-P 6375 1775
-F 0 "J5" H 6450 2250 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 6775 1300 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 6375 1775 50  0001 C CNN
-F 3 "~" H 6375 1775 50  0001 C CNN
-	1    6375 1775
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR012
-U 1 1 6599B34E
-P 6175 1375
-F 0 "#PWR012" H 6175 1125 50  0001 C CNN
-F 1 "GND" H 6150 1250 50  0000 C CNN
-F 2 "" H 6175 1375 50  0001 C CNN
-F 3 "" H 6175 1375 50  0001 C CNN
-	1    6175 1375
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	5950 1475 6175 1475
-Wire Wire Line
-	5950 1575 6175 1575
-Wire Wire Line
-	5950 1675 6175 1675
-Wire Wire Line
-	5950 1775 6175 1775
-Wire Wire Line
-	5950 1875 6175 1875
-Wire Wire Line
-	5950 1975 6175 1975
-Wire Wire Line
-	5950 2075 6175 2075
-Wire Wire Line
-	5950 2175 6175 2175
-$Comp
-L Connector:Conn_01x09_Male J7
-U 1 1 659A04A8
-P 8375 1775
-F 0 "J7" H 8450 2250 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 8775 1300 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 8375 1775 50  0001 C CNN
-F 3 "~" H 8375 1775 50  0001 C CNN
-	1    8375 1775
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR016
-U 1 1 659A04AE
-P 8175 1375
-F 0 "#PWR016" H 8175 1125 50  0001 C CNN
-F 1 "GND" H 8150 1250 50  0000 C CNN
-F 2 "" H 8175 1375 50  0001 C CNN
-F 3 "" H 8175 1375 50  0001 C CNN
-	1    8175 1375
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	7950 1475 8175 1475
-Wire Wire Line
-	7950 1575 8175 1575
-Wire Wire Line
-	7950 1675 8175 1675
-Wire Wire Line
-	7950 1775 8175 1775
-Wire Wire Line
-	7950 1875 8175 1875
-Wire Wire Line
-	7950 1975 8175 1975
-Wire Wire Line
-	7950 2075 8175 2075
-Wire Wire Line
-	7950 2175 8175 2175
-$Comp
-L Connector:Conn_01x09_Male J2
-U 1 1 659A5FEC
-P 2375 4525
-F 0 "J2" H 2450 5000 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 2775 4050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 2375 4525 50  0001 C CNN
-F 3 "~" H 2375 4525 50  0001 C CNN
-	1    2375 4525
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR05
-U 1 1 659A5FF2
-P 2175 4125
-F 0 "#PWR05" H 2175 3875 50  0001 C CNN
-F 1 "GND" H 2150 4000 50  0000 C CNN
-F 2 "" H 2175 4125 50  0001 C CNN
-F 3 "" H 2175 4125 50  0001 C CNN
-	1    2175 4125
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	1950 4225 2175 4225
-Wire Wire Line
-	1950 4325 2175 4325
-Wire Wire Line
-	1950 4425 2175 4425
-Wire Wire Line
-	1950 4525 2175 4525
-Wire Wire Line
-	1950 4625 2175 4625
-Wire Wire Line
-	1950 4725 2175 4725
-Wire Wire Line
-	1950 4825 2175 4825
-Wire Wire Line
-	1950 4925 2175 4925
-$Comp
-L Connector:Conn_01x09_Male J4
-U 1 1 659AD25C
-P 4375 4525
-F 0 "J4" H 4450 5000 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 4775 4050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 4375 4525 50  0001 C CNN
-F 3 "~" H 4375 4525 50  0001 C CNN
-	1    4375 4525
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR09
-U 1 1 659AD262
-P 4175 4125
-F 0 "#PWR09" H 4175 3875 50  0001 C CNN
-F 1 "GND" H 4150 4000 50  0000 C CNN
-F 2 "" H 4175 4125 50  0001 C CNN
-F 3 "" H 4175 4125 50  0001 C CNN
-	1    4175 4125
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3950 4225 4175 4225
-Wire Wire Line
-	3950 4325 4175 4325
-Wire Wire Line
-	3950 4425 4175 4425
-Wire Wire Line
-	3950 4525 4175 4525
-Wire Wire Line
-	3950 4625 4175 4625
-Wire Wire Line
-	3950 4725 4175 4725
-Wire Wire Line
-	3950 4825 4175 4825
-Wire Wire Line
-	3950 4925 4175 4925
-$Comp
-L Connector:Conn_01x09_Male J6
-U 1 1 659B5004
-P 6375 4525
-F 0 "J6" H 6450 5000 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 6775 4050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 6375 4525 50  0001 C CNN
-F 3 "~" H 6375 4525 50  0001 C CNN
-	1    6375 4525
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR013
-U 1 1 659B500A
-P 6175 4125
-F 0 "#PWR013" H 6175 3875 50  0001 C CNN
-F 1 "GND" H 6150 4000 50  0000 C CNN
-F 2 "" H 6175 4125 50  0001 C CNN
-F 3 "" H 6175 4125 50  0001 C CNN
-	1    6175 4125
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	5950 4225 6175 4225
-Wire Wire Line
-	5950 4325 6175 4325
-Wire Wire Line
-	5950 4425 6175 4425
-Wire Wire Line
-	5950 4525 6175 4525
-Wire Wire Line
-	5950 4625 6175 4625
-Wire Wire Line
-	5950 4725 6175 4725
-Wire Wire Line
-	5950 4825 6175 4825
-Wire Wire Line
-	5950 4925 6175 4925
-$Comp
-L Connector:Conn_01x09_Male J8
-U 1 1 659BD6E4
-P 8375 4525
-F 0 "J8" H 8450 5000 50  0000 R CNN
-F 1 "Conn_01x09_Male" H 8775 4050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 8375 4525 50  0001 C CNN
-F 3 "~" H 8375 4525 50  0001 C CNN
-	1    8375 4525
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR017
-U 1 1 659BD6EA
-P 8175 4125
-F 0 "#PWR017" H 8175 3875 50  0001 C CNN
-F 1 "GND" H 8150 4000 50  0000 C CNN
-F 2 "" H 8175 4125 50  0001 C CNN
-F 3 "" H 8175 4125 50  0001 C CNN
-	1    8175 4125
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	7950 4225 8175 4225
-Wire Wire Line
-	7950 4325 8175 4325
-Wire Wire Line
-	7950 4425 8175 4425
-Wire Wire Line
-	7950 4525 8175 4525
-Wire Wire Line
-	7950 4625 8175 4625
-Wire Wire Line
-	7950 4725 8175 4725
-Wire Wire Line
-	7950 4825 8175 4825
-Wire Wire Line
-	7950 4925 8175 4925
 Wire Wire Line
 	2875 4325 3000 4325
 $Comp
@@ -2717,7 +2451,7 @@ Text Label 9525 5325 0    50   ~ 0
 ~Bank1
 Wire Wire Line
 	9525 5325 9775 5325
-Text Notes 3950 6975 0    200  ~ 0
+Text Notes 4775 7200 0    200  ~ 0
 Bank0\nArithmetic\nregisters
 Text Notes 14225 3675 0    100  ~ 0
 Z
@@ -2768,4 +2502,242 @@ Text Label 2200 3550 0    50   ~ 0
 R0.6
 Text Label 2200 3750 0    50   ~ 0
 R0.7
+$Comp
+L Connector:Conn_01x15_Female J2
+U 1 1 683E87A9
+P 2000 5825
+F 0 "J2" H 2025 6500 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 2050 5425 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 2000 5825 50  0001 C CNN
+F 3 "~" H 2000 5825 50  0001 C CNN
+	1    2000 5825
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 2200 5225
+NoConn ~ 2200 5425
+NoConn ~ 2200 5625
+NoConn ~ 2200 5825
+NoConn ~ 2200 6025
+NoConn ~ 2200 6225
+NoConn ~ 2200 6425
+Text Label 2200 5125 0    50   ~ 0
+R1.0
+Text Label 2200 5325 0    50   ~ 0
+R1.1
+Text Label 2200 5525 0    50   ~ 0
+R1.2
+Text Label 2200 5725 0    50   ~ 0
+R1.3
+Text Label 2200 5925 0    50   ~ 0
+R1.4
+Text Label 2200 6125 0    50   ~ 0
+R1.5
+Text Label 2200 6325 0    50   ~ 0
+R1.6
+Text Label 2200 6525 0    50   ~ 0
+R1.7
+$Comp
+L Connector:Conn_01x15_Female J3
+U 1 1 6850A3AF
+P 4000 3050
+F 0 "J3" H 4025 3725 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 4050 2650 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 4000 3050 50  0001 C CNN
+F 3 "~" H 4000 3050 50  0001 C CNN
+	1    4000 3050
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 4200 2450
+NoConn ~ 4200 2650
+NoConn ~ 4200 2850
+NoConn ~ 4200 3050
+NoConn ~ 4200 3250
+NoConn ~ 4200 3450
+NoConn ~ 4200 3650
+Text Label 4200 2350 0    50   ~ 0
+R2.0
+Text Label 4200 2550 0    50   ~ 0
+R2.1
+Text Label 4200 2750 0    50   ~ 0
+R2.2
+Text Label 4200 2950 0    50   ~ 0
+R2.3
+Text Label 4200 3150 0    50   ~ 0
+R2.4
+Text Label 4200 3350 0    50   ~ 0
+R2.5
+Text Label 4200 3550 0    50   ~ 0
+R2.6
+Text Label 4200 3750 0    50   ~ 0
+R2.7
+$Comp
+L Connector:Conn_01x15_Female J4
+U 1 1 68629CD2
+P 4000 5825
+F 0 "J4" H 4025 6500 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 4050 5425 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 4000 5825 50  0001 C CNN
+F 3 "~" H 4000 5825 50  0001 C CNN
+	1    4000 5825
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 4200 5225
+NoConn ~ 4200 5425
+NoConn ~ 4200 5625
+NoConn ~ 4200 5825
+NoConn ~ 4200 6025
+NoConn ~ 4200 6225
+NoConn ~ 4200 6425
+Text Label 4200 5125 0    50   ~ 0
+R3.0
+Text Label 4200 5325 0    50   ~ 0
+R3.1
+Text Label 4200 5525 0    50   ~ 0
+R3.2
+Text Label 4200 5725 0    50   ~ 0
+R3.3
+Text Label 4200 5925 0    50   ~ 0
+R3.4
+Text Label 4200 6125 0    50   ~ 0
+R3.5
+Text Label 4200 6325 0    50   ~ 0
+R3.6
+Text Label 4200 6525 0    50   ~ 0
+R3.7
+$Comp
+L Connector:Conn_01x15_Female J5
+U 1 1 687F3AA6
+P 6000 3050
+F 0 "J5" H 6025 3725 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 6050 2650 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 6000 3050 50  0001 C CNN
+F 3 "~" H 6000 3050 50  0001 C CNN
+	1    6000 3050
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 6200 2450
+NoConn ~ 6200 2650
+NoConn ~ 6200 2850
+NoConn ~ 6200 3050
+NoConn ~ 6200 3250
+NoConn ~ 6200 3450
+NoConn ~ 6200 3650
+Text Label 6200 2350 0    50   ~ 0
+R4.0
+Text Label 6200 2550 0    50   ~ 0
+R4.1
+Text Label 6200 2750 0    50   ~ 0
+R4.2
+Text Label 6200 2950 0    50   ~ 0
+R4.3
+Text Label 6200 3150 0    50   ~ 0
+R4.4
+Text Label 6200 3350 0    50   ~ 0
+R4.5
+Text Label 6200 3550 0    50   ~ 0
+R4.6
+Text Label 6200 3750 0    50   ~ 0
+R4.7
+$Comp
+L Connector:Conn_01x15_Female J6
+U 1 1 688E5D7C
+P 6000 5825
+F 0 "J6" H 6025 6500 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 6050 5425 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 6000 5825 50  0001 C CNN
+F 3 "~" H 6000 5825 50  0001 C CNN
+	1    6000 5825
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 6200 5225
+NoConn ~ 6200 5425
+NoConn ~ 6200 5625
+NoConn ~ 6200 5825
+NoConn ~ 6200 6025
+NoConn ~ 6200 6225
+NoConn ~ 6200 6425
+Text Label 6200 5125 0    50   ~ 0
+R5.0
+Text Label 6200 5325 0    50   ~ 0
+R5.1
+Text Label 6200 5525 0    50   ~ 0
+R5.2
+Text Label 6200 5725 0    50   ~ 0
+R5.3
+Text Label 6200 5925 0    50   ~ 0
+R5.4
+Text Label 6200 6125 0    50   ~ 0
+R5.5
+Text Label 6200 6325 0    50   ~ 0
+R5.6
+Text Label 6200 6525 0    50   ~ 0
+R5.7
+$Comp
+L Connector:Conn_01x15_Female J7
+U 1 1 689C9008
+P 8000 3050
+F 0 "J7" H 8025 3725 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 8050 2650 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 8000 3050 50  0001 C CNN
+F 3 "~" H 8000 3050 50  0001 C CNN
+	1    8000 3050
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x15_Female J8
+U 1 1 689CD3AA
+P 8000 5825
+F 0 "J8" H 8025 6500 50  0000 L CNN
+F 1 "Conn_01x15_Female" V 8050 5425 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 8000 5825 50  0001 C CNN
+F 3 "~" H 8000 5825 50  0001 C CNN
+	1    8000 5825
+	-1   0    0    -1  
+$EndComp
+NoConn ~ 8200 5225
+NoConn ~ 8200 5425
+NoConn ~ 8200 5625
+NoConn ~ 8200 5825
+NoConn ~ 8200 6025
+NoConn ~ 8200 6225
+NoConn ~ 8200 6425
+NoConn ~ 8200 2450
+NoConn ~ 8200 2650
+NoConn ~ 8200 2850
+NoConn ~ 8200 3050
+NoConn ~ 8200 3250
+NoConn ~ 8200 3450
+NoConn ~ 8200 3650
+Text Label 8200 2350 0    50   ~ 0
+R6.0
+Text Label 8200 2550 0    50   ~ 0
+R6.1
+Text Label 8200 2750 0    50   ~ 0
+R6.2
+Text Label 8200 2950 0    50   ~ 0
+R6.3
+Text Label 8200 3150 0    50   ~ 0
+R6.4
+Text Label 8200 3350 0    50   ~ 0
+R6.5
+Text Label 8200 3550 0    50   ~ 0
+R6.6
+Text Label 8200 3750 0    50   ~ 0
+R6.7
+Text Label 8200 5125 0    50   ~ 0
+R7.0
+Text Label 8200 5325 0    50   ~ 0
+R7.1
+Text Label 8200 5525 0    50   ~ 0
+R7.2
+Text Label 8200 5725 0    50   ~ 0
+R7.3
+Text Label 8200 5925 0    50   ~ 0
+R7.4
+Text Label 8200 6125 0    50   ~ 0
+R7.5
+Text Label 8200 6325 0    50   ~ 0
+R7.6
+Text Label 8200 6525 0    50   ~ 0
+R7.7
 $EndSCHEMATC
