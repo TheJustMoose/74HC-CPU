@@ -747,7 +747,7 @@
     (descr "LED, diameter 5.0mm, 2 pins, http://cdn-reichelt.de/documents/datenblatt/A500/LL-504BC2E-009.pdf")
     (tags "LED diameter 5.0mm 2 pins")
     (path /684CDAAA)
-    (fp_text reference D1 (at 1.27 -3.96) (layer F.SilkS)
+    (fp_text reference D1 (at -3.4925 0) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value LED (at 1.27 3.96) (layer F.Fab)
