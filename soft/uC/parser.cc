@@ -8,6 +8,8 @@
 #include "lexer.h"
 #include "logical.h"
 #include "tag.h"
+#include "token.h"
+#include "unary.h"
 
 using namespace std;
 
@@ -263,7 +265,7 @@ Expr* Parser::term() {
 Expr* Parser::unary() {
   if (look_->ctag() == '-') {
     move();
-    return new Unary(Tag::tMINUS, unary());
+    return new Unary(Lexer::get_word("minus"), unary());
   } else if (look_->ctag() == '!') {
     Token* tok {look_};
     move();
@@ -276,7 +278,7 @@ Expr* Parser::unary() {
 Expr* Parser::factor() {
   Expr* x {nullptr};
   switch (look_->tag()) {
-    case '(':
+    case Tag::tPARENTHESES:
       move();
       x = boolean();
       match(')');

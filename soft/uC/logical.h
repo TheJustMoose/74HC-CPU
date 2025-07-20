@@ -18,6 +18,8 @@ class Or: public Logical {
 };
 
 class Not: public Logical {
+ public:
+  Not(Token* tok, Expr* x2);
 };
 
 class Rel: public Logical {

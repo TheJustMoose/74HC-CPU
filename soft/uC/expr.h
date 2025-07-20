@@ -34,7 +34,7 @@ class Expr: public Node {
 
   Type* type() { return type_; }
 
- private:
+ protected:
   Token* op_ {nullptr};
   Type* type_ {nullptr};
 };
