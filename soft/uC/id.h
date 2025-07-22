@@ -1,6 +1,9 @@
 #pragma once
 
 #include "expr.h"
+#include "word.h"
+
+class Type;
 
 class Id: public Expr {
  public:

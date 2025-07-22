@@ -2,8 +2,11 @@
 
 #include <string>
 
+#include "expr.h"
 #include "lexer.h"
 #include "node.h"
+#include "type.h"
+#include "word.h"
 
 // TODO: try to implement it:
 // std::string operator+(const char*, int);

@@ -6,8 +6,10 @@
 #include "id.h"
 #include "env.h"
 #include "lexer.h"
+#include "num.h"
 #include "op.h"
 #include "parser.h"
+#include "real.h"
 #include "token.h"
 
 using namespace std;

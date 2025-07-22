@@ -2,14 +2,20 @@
 
 #include <stdexcept>
 
+#include "and.h"
 #include "arith.h"
 #include "const.h"
 #include "env.h"
+#include "expr.h"
 #include "lexer.h"
 #include "logical.h"
+#include "or.h"
+#include "not.h"
+#include "rel.h"
 #include "tag.h"
 #include "token.h"
 #include "unary.h"
+#include "word.h"
 
 using namespace std;
 
@@ -292,7 +298,7 @@ Expr* Parser::factor() {
       move();
       return x;
     case Tag::tTRUE:
-      x = Constant.True;
+      x = Lexer::get_word("true");
       move();
       return x;
     case Tag::tFALSE:

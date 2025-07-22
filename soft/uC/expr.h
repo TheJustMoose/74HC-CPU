@@ -5,6 +5,9 @@
 #include "node.h"
 #include "token.h"
 
+class Token;
+class Type;
+
 class Expr: public Node {
  public:
   Expr(Token* tok, Type* t)

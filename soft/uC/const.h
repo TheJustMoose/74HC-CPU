@@ -1,6 +1,8 @@
 #pragma once
 
 #include "expr.h"
+#include "num.h"
+#include "type.h"
 
 class Constant: public Expr {
  public:
