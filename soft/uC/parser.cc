@@ -298,16 +298,16 @@ Expr* Parser::factor() {
       move();
       return x;
     case Tag::tTRUE:
-      x = Lexer::get_word("true");
+      x = Constant::True();
       move();
       return x;
     case Tag::tFALSE:
-      x = Constant.False;
+      x = Constant::False();
       move();
       return x;
-    case Tag::tID:
+    case Tag::tID: {
       //string s = look_->toString();
-      Id* id = top.get(look_);
+      Id* id = top_->get(look_);
       if (id == nullptr)
         error(look_->toString() + " undeclared");
       move();
@@ -315,6 +315,7 @@ Expr* Parser::factor() {
         return id;
       else
         return nullptr; //offset(id);
+    }
     default:
       error("syntax error");
       return x;

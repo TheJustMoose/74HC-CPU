@@ -1,6 +1,7 @@
 #include "temp.h"
 
 #include "token.h"
+#include "word.h"
 
 // static
 int Temp::count_ {0};

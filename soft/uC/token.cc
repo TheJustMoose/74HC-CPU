@@ -5,7 +5,11 @@
 #include <string>
 
 #include "lexer.h"
+#include "num.h"
+#include "real.h"
 #include "tag.h"
+#include "type.h"
+#include "word.h"
 
 using namespace std;
 
