@@ -14,15 +14,13 @@
 using namespace std;
 
 string Token::toString() {
-  return to_string((int)tag_);
-}
-
-string Num::toString() {
-  return to_string(value_);
-}
-
-string Real::toString() {
-  return to_string(value_);
+  if (isChar()) {
+    string res;
+    res = cTag();
+    return res;
+  } else {
+    return to_string(rawTag());
+  }
 }
 
 bool IsType(Token* t) {

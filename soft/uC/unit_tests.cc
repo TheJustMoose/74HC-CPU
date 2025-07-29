@@ -26,6 +26,20 @@ TEST_CASE("check cpp lib") {
   CHECK( to_string(321) == "321");
 }
 
+TEST_CASE("check Tag") {
+  Token t1('a');
+  CHECK( t1.rawTag() > 0 );
+  CHECK( t1.isChar() );
+
+  CHECK( sizeof(Tag) > 1 );
+  CHECK( sizeof(Tag) < 4 );
+
+  Token t2(Tag::tWHILE);
+  CHECK( t2.rawTag() == 275 );
+  CHECK( ! t2.isChar() );
+  CHECK( t2.cTag() == 0 );
+}
+
 TEST_CASE("check Num") {
   Num n(1);
   CHECK( n.toString() == "1" );

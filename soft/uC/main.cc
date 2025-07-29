@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <memory>
 
 #include "lexer.h"
@@ -20,8 +21,26 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  Lexer lex(cin);
+  if (argc != 2) {
+    cout << "To use type: 74hc-uC.exe <source file name>" << endl;
+    return 1;
+  }
+
+  string name(argv[1]);
+  cout << "Processing: " << name << endl;
+
+  ifstream f;
+  f.open(name, ios::in);
+  if (!f) {
+    cout << "Error. Can't open file: " << name << endl;
+    return 1;
+  }
+
+  Lexer lex(f);
   Parser parse(&lex);
   parse.program();
+
   cout << endl;
+
+  return 0;
 }
