@@ -2,7 +2,9 @@
 
 #include <string>
 
+#include "access.h"
 #include "expr.h"
+#include "id.h"
 #include "lexer.h"
 #include "node.h"
 #include "type.h"
@@ -75,12 +77,34 @@ class Else: public Stmt {
 
 class Do: public Stmt {
  public:
-  void init(Stmt* s, Expr* x);
+  Do() {}
+
+  void init(Stmt* s, Expr* x) {
+    expr_ = x;
+    stmt_ = s;
+    if (expr_->type() != Type::Bool())
+       expr_->error("boolean required in do");
+  }
+
+ public:
+  Expr* expr_ {nullptr};
+  Stmt* stmt_ {nullptr};
 };
 
 class While: public Stmt {
  public:
-  void init(Expr* x, Stmt* s);
+  While() {}
+
+  void init(Expr* x, Stmt* s) {
+    expr_ = x;
+    stmt_ = s;
+    if (expr_->type() != Type::Bool())
+      expr_->error("boolean required in while");
+  }
+
+ public:
+  Expr* expr_ {nullptr};
+  Stmt* stmt_ {nullptr};
 };
 
 class Break: public Stmt {
@@ -101,10 +125,10 @@ class Break: public Stmt {
 
 class Set: public Stmt {
  public:
-  Set(Id* id, Expr* x);
+  Set(Id* id, Expr* x) {}
 };
 
 class SetElem: public Stmt {
  public:
-  SetElem(Access* x, Expr* y);
+  SetElem(Access* x, Expr* y) {}
 };
