@@ -46,8 +46,11 @@ void Parser::match(Tag t)  {
 void Parser::match(char c) {
   if (tag::cTag(look_->tag()) == c)
     move();
-  else
-    error("syntax error");
+  else {
+    string s;
+    s += c;
+    error("syntax error, waiting for: " + s);
+  }
 }
 
 void Parser::program() {
