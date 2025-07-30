@@ -28,16 +28,16 @@ TEST_CASE("check cpp lib") {
 
 TEST_CASE("check Tag") {
   Token t1('a');
-  CHECK( t1.rawTag() > 0 );
-  CHECK( t1.isChar() );
+  CHECK( tag::rawTag(t1.tag()) > 0 );
+  CHECK( tag::isChar(t1.tag()) );
 
   CHECK( sizeof(Tag) > 1 );
   CHECK( sizeof(Tag) < 4 );
 
   Token t2(Tag::tWHILE);
-  CHECK( t2.rawTag() == 275 );
-  CHECK( ! t2.isChar() );
-  CHECK( t2.cTag() == 0 );
+  CHECK( tag::rawTag(t2.tag()) == 275 );
+  CHECK( ! tag::isChar(t2.tag()) );
+  CHECK( tag::cTag(t2.tag()) == 0 );
 }
 
 TEST_CASE("check Num") {

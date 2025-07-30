@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <stdexcept>
 
 #include "lexer.h"
 #include "parser.h"
@@ -36,9 +37,14 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  Lexer lex(f);
-  Parser parse(&lex);
-  parse.program();
+  try {
+    Lexer lex(f);
+    Parser parse(&lex);
+    parse.program();
+  } catch (const std::runtime_error& e) {
+      // Catch the runtime_error and print its message
+      cerr << "Caught runtime error: " << e.what() << endl;
+  }
 
   cout << endl;
 

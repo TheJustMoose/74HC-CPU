@@ -40,11 +40,11 @@ void Parser::match(Tag t)  {
   if (look_->tag() == t)
     move();
   else
-    error("syntax error");
+    error("syntax error, waiting for: " + tag::toString(t));
 }
 
 void Parser::match(char c) {
-  if (look_->cTag() == c)
+  if (tag::cTag(look_->tag()) == c)
     move();
   else
     error("syntax error");
@@ -92,7 +92,7 @@ void Parser::decls() {
 Type* Parser::type() {
   Type* p = IsType(look_) ? static_cast<Type*>(look_) : nullptr;  // expect look_->tag == Tag::tBASIC
   match(Tag::tBASIC);
-  if (look_->cTag() != '[')
+  if (tag::cTag(look_->tag()) != '[')
     return p;            // T -> basic
   else
     return nullptr; //dims(p);   // return array type
@@ -104,13 +104,13 @@ Type Parser::dims(Type p) {
   Token tok = look_;
   match(Tag::tNUM);
   match(']');
-  if (look_->cTag() == '[')
+  if (tag::cTag(look_->tag()) == '[')
     p = dims(p);
   return new Array(((Num)tok).value, p);
 }
 */
 Stmt* Parser::stmts() {
-  if (look_->cTag() == '}')
+  if (tag::cTag(look_->tag()) == '}')
     return Stmt::Null();
   else
     return nullptr;//new Seq(stmt(), stmts());
@@ -185,7 +185,7 @@ Stmt* Parser::assign() {
   if (id == nullptr)
     error(t->toString() + " undeclared");
 
-  if (look_->cTag() == '=') {       // S -> id = E ;
+  if (tag::cTag(look_->tag()) == '=') {       // S -> id = E ;
     move();
     stmt = new Set(id, boolean());
   } else {                        // S -> L = E ;
@@ -248,7 +248,8 @@ Expr* Parser::rel() {
 
 Expr* Parser::expr() {
   Expr* x = term();
-  while (look_->cTag() == '+' || look_->cTag() == '-') {
+  while (tag::cTag(look_->tag()) == '+' ||
+         tag::cTag(look_->tag()) == '-') {
     Token* tok {look_};
     move();
     x = new Arith(tok, x, term());
@@ -259,7 +260,8 @@ Expr* Parser::expr() {
 
 Expr* Parser::term() {
   Expr* x = unary();
-  while (look_->cTag() == '*' || look_->cTag() == '/') {
+  while (tag::cTag(look_->tag()) == '*' ||
+         tag::cTag(look_->tag()) == '/') {
     Token* tok {look_};
     move();
     x = new Arith(tok, x, unary());
@@ -269,10 +271,10 @@ Expr* Parser::term() {
 }
 
 Expr* Parser::unary() {
-  if (look_->cTag() == '-') {
+  if (tag::cTag(look_->tag()) == '-') {
     move();
     return new Unary(Lexer::get_word("minus"), unary());
-  } else if (look_->cTag() == '!') {
+  } else if (tag::cTag(look_->tag()) == '!') {
     Token* tok {look_};
     move();
     return new Not(tok, unary());
@@ -311,7 +313,7 @@ Expr* Parser::factor() {
       if (id == nullptr)
         error(look_->toString() + " undeclared");
       move();
-      if (look_->cTag() != '[')
+      if (tag::cTag(look_->tag()) != '[')
         return id;
       else
         return nullptr; //offset(id);
@@ -331,7 +333,7 @@ Access Parser::offset(Id a) {   // I -> [E] | [E] I
   w = new Constant(type.width);
   t1 = new Arith(new Token('*'), i, w);
   loc = t1;
-  while (look_->cTag() == '[') {      // multi-dimensional I -> [ E ] I
+  while (tag::cTag(look_->tag()) == '[') {      // multi-dimensional I -> [ E ] I
     match('['); i = boolean(); match(']');
     type = ((Array)type).of;
     w = new Constant(type.width);

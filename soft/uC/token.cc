@@ -14,13 +14,7 @@
 using namespace std;
 
 string Token::toString() {
-  if (isChar()) {
-    string res;
-    res = cTag();
-    return res;
-  } else {
-    return to_string(rawTag());
-  }
+  return tag::toString(tag_);
 }
 
 bool IsType(Token* t) {

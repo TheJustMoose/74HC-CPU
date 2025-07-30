@@ -12,4 +12,11 @@ enum class Tag: unsigned short {
   tOR    = 271,  tREAL  = 272,  tTEMP  = 273,  tTRUE = 274, tWHILE = 275
 };
 
-//std::string toString(Tag t);
+namespace tag {
+
+bool isChar(Tag t);
+char cTag(Tag t);
+int rawTag(Tag t);
+std::string toString(Tag t);
+
+}
