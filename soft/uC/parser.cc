@@ -4,6 +4,7 @@
 
 #include "and.h"
 #include "arith.h"
+#include "array.h"
 #include "const.h"
 #include "env.h"
 #include "expr.h"
@@ -12,6 +13,7 @@
 #include "or.h"
 #include "not.h"
 #include "rel.h"
+#include "seq.h"
 #include "tag.h"
 #include "token.h"
 #include "unary.h"
@@ -116,7 +118,7 @@ Stmt* Parser::stmts() {
   if (tag::cTag(look_->tag()) == '}')
     return Stmt::Null();
   else
-    return nullptr;//new Seq(stmt(), stmts());
+    return new Seq(stmt(), stmts());
 }
 
 Stmt* Parser::stmt() {
@@ -181,18 +183,18 @@ Stmt* Parser::stmt() {
 }
 
 Stmt* Parser::assign() {
-  Stmt* stmt;
+  Stmt* stmt {nullptr};
   Token* t {look_};
   match(Tag::tID);
   Id* id = top_->get(t);
   if (id == nullptr)
     error(t->toString() + " undeclared");
 
-  if (tag::cTag(look_->tag()) == '=') {       // S -> id = E ;
+  if (tag::cTag(look_->tag()) == '=') { // S -> id = E ;
     move();
     stmt = new Set(id, boolean());
   } else {                        // S -> L = E ;
-    Access* x = nullptr; // offset(id);
+    Access* x = offset(id);
     match('=');
     stmt = new SetElem(x, boolean());
   }
@@ -326,20 +328,24 @@ Expr* Parser::factor() {
       return x;
   }
 }
-/*
-Access Parser::offset(Id a) {   // I -> [E] | [E] I
-  Expr i; Expr w; Expr t1, t2; Expr loc;  // inherit id
 
-  Type type = a.type;
+Access* Parser::offset(Id* a) {   // I -> [E] | [E] I
+  Expr* i {nullptr};
+  Expr* w {nullptr};
+  Expr* t1 {nullptr};
+  Expr* t2 {nullptr};
+  Expr* loc {nullptr};  // inherit id
+
+  Type* type = a->type();
   match('['); i = boolean(); match(']');     // first index, I -> [ E ]
-  type = ((Array)type).of;
-  w = new Constant(type.width);
+  type = ((Array*)type)->of;
+  w = new Constant(type->width());
   t1 = new Arith(new Token('*'), i, w);
   loc = t1;
   while (tag::cTag(look_->tag()) == '[') {      // multi-dimensional I -> [ E ] I
     match('['); i = boolean(); match(']');
-    type = ((Array)type).of;
-    w = new Constant(type.width);
+    type = ((Array*)type)->of;
+    w = new Constant(type->width());
     t1 = new Arith(new Token('*'), i, w);
     t2 = new Arith(new Token('+'), loc, t1);
     loc = t2;
@@ -347,4 +353,3 @@ Access Parser::offset(Id a) {   // I -> [E] | [E] I
 
   return new Access(a, loc, type);
 }
-*/

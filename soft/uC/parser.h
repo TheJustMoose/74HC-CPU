@@ -37,7 +37,7 @@ class Parser {
   Expr* term();
   Expr* unary();
   Expr* factor();
-  //Access offset(Id a);
+  Access* offset(Id* a);
 
  private:
   Lexer* lex_ {nullptr};   // lexical analyzer for this parser

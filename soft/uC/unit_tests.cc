@@ -166,7 +166,7 @@ TEST_CASE("check Env class") {
 }
 
 TEST_CASE("check Parser") {
-  stringstream ss("{ int a; }");
+  stringstream ss("{ int a; a = 10; }");
   Lexer lex(ss);
   Parser p(&lex);
   p.program();
