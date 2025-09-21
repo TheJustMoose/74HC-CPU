@@ -88,7 +88,8 @@ TEST_CASE("check Lexer") {
 
   // end of file / stream /etc
   t = lex.scan();
-  CHECK( t == nullptr );
+  CHECK( t );
+  CHECK( t->tag() == Tag::tEOF );
 }
 
 TEST_CASE("check dictionary") {

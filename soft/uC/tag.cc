@@ -24,4 +24,4 @@ std::string toString(Tag t) {
   }
 }
 
-}
+}  // namespace tag

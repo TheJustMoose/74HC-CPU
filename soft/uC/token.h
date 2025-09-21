@@ -22,3 +22,9 @@ class Token {
  private:
   Tag tag_ { Tag::tEMPTY };
 };
+
+class NullToken: public Token {
+ public:
+  NullToken()
+    : Token(Tag::tEOF) {}
+};

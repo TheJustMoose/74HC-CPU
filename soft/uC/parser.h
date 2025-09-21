@@ -17,7 +17,7 @@ class Parser {
  public:
   Parser(Lexer* l);
 
-  void move();
+  void pmove();
   void error(std::string s);
   void match(Tag t);
   void match(char c);

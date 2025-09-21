@@ -79,7 +79,7 @@ void Lexer::readch() {
 
 bool Lexer::readch(char c) {
   readch();
-  if( peek_ != c )
+  if (peek_ != c)
    return false;
 
   peek_ = ' ';
@@ -93,7 +93,7 @@ Token* Lexer::scan() {
     else if (peek_ == '\n')
       line_++;
     else if (peek_ == 0)
-      return nullptr;
+      return new NullToken();
     else
       break;
   }
@@ -153,7 +153,7 @@ Token* Lexer::scan() {
   } 
 
   if (peek_ == 0)
-    return nullptr;
+    return new NullToken();
 
   Token* tok = reserve(new Token(peek_));
   peek_ = ' ';

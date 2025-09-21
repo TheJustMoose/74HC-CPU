@@ -23,15 +23,17 @@ using namespace std;
 
 Parser::Parser(Lexer* l)
   : lex_(l) {
-  move();
+  cout << __func__ << endl;
+  pmove();
 }
 
-void Parser::move() {
+void Parser::pmove() {
+  cout << __func__ << endl;
   look_ = lex_->scan();
   if (look_)
     cout << "look_: " << look_->toString() << endl;
   else
-    cout << "look_: nullptr" << endl;
+    error("look_ == nullptr is not acceptable");
 }
 
 void Parser::error(string s) {
@@ -39,15 +41,17 @@ void Parser::error(string s) {
 }
 
 void Parser::match(Tag t)  {
+  cout << __func__ << endl;
   if (look_->tag() == t)
-    move();
+    pmove();
   else
     error("syntax error, waiting for: " + tag::toString(t));
 }
 
 void Parser::match(char c) {
+  cout << __func__ << endl;
   if (tag::cTag(look_->tag()) == c)
-    move();
+    pmove();
   else {
     string s;
     s += c;
@@ -56,6 +60,7 @@ void Parser::match(char c) {
 }
 
 void Parser::program() {
+  cout << __func__ << endl;
   Stmt* s = block();
   if (!s)
     return;
@@ -68,6 +73,7 @@ void Parser::program() {
 }
 
 Stmt* Parser::block() {  // block -> { decls stmts }
+  cout << __func__ << endl;
   match('{');
   Env* savedEnv = top_;
   top_ = new Env(top_);
@@ -80,10 +86,11 @@ Stmt* Parser::block() {  // block -> { decls stmts }
 }
 
 void Parser::decls() {
+  cout << __func__ << endl;
   while (look_ && (look_->tag() == Tag::tBASIC)) {   // D -> type ID ;
     Type* p = type();
     if (!p)
-      cout << "p is null" << endl;
+      error("p is null");
     Token* tok = look_;
     match(Tag::tID);
     match(';');
@@ -95,6 +102,7 @@ void Parser::decls() {
 }
 
 Type* Parser::type() {
+  cout << __func__ << endl;
   Type* p = IsType(look_) ? static_cast<Type*>(look_) : nullptr;  // expect look_->tag == Tag::tBASIC
   match(Tag::tBASIC);
   if (tag::cTag(look_->tag()) != '[')
@@ -115,13 +123,17 @@ Type Parser::dims(Type p) {
 }
 */
 Stmt* Parser::stmts() {
+  cout << __func__ << endl;
   if (tag::cTag(look_->tag()) == '}')
     return Stmt::Null();
-  else
-    return new Seq(stmt(), stmts());
+  else {
+    Stmt* tmp = stmt();  // C++ optimizer can call stmts() before stmt()
+    return new Seq(tmp, stmts());  // so I try to repair call order
+  }
 }
 
 Stmt* Parser::stmt() {
+  cout << __func__ << endl;
   Expr* x {nullptr};
   Stmt* s {nullptr};
   Stmt* s1 {nullptr};
@@ -130,7 +142,7 @@ Stmt* Parser::stmt() {
 
   switch (look_->tag()) {
     case Tag::tSEMI: {
-      move();
+      pmove();
       return Stmt::Null();
     }
 
@@ -154,7 +166,7 @@ Stmt* Parser::stmt() {
       Stmt::Enclosing = savedStmt;  // reset Stmt.Enclosing
       return whilenode;
     }
-
+/* Do not required yet.
     case Tag::tDO: {
       Do* donode = new Do();
       savedStmt = Stmt::Enclosing;
@@ -166,13 +178,13 @@ Stmt* Parser::stmt() {
       Stmt::Enclosing = savedStmt;  // reset Stmt.Enclosing
       return donode;
     }
-
+*/
     case Tag::tBREAK: {
       match(Tag::tBREAK); match(';');
       return new Break();
     }
 
-    case Tag::tLBRACE: {
+    case Tag::tLBRACE: {  // '{'
       return block();
     }
 
@@ -183,6 +195,7 @@ Stmt* Parser::stmt() {
 }
 
 Stmt* Parser::assign() {
+  cout << __func__ << endl;
   Stmt* stmt {nullptr};
   Token* t {look_};
   match(Tag::tID);
@@ -191,7 +204,7 @@ Stmt* Parser::assign() {
     error(t->toString() + " undeclared");
 
   if (tag::cTag(look_->tag()) == '=') { // S -> id = E ;
-    move();
+    pmove();
     stmt = new Set(id, boolean());
   } else {                        // S -> L = E ;
     Access* x = offset(id);
@@ -206,7 +219,7 @@ Expr* Parser::boolean() {
   Expr* x = join();
   while (look_->tag() == Tag::tOR) {
     Token* tok {look_};
-    move();
+    pmove();
     x = new Or(tok, x, join());
   }
 
@@ -217,7 +230,7 @@ Expr* Parser::join() {
   Expr* x = equality();
   while (look_->tag() == Tag::tAND) {
     Token* tok {look_};
-    move();
+    pmove();
     x = new And(tok, x, equality());
   }
 
@@ -228,7 +241,7 @@ Expr* Parser::equality() {
   Expr* x = rel();
   while (look_->tag() == Tag::tEQ || look_->tag() == Tag::tNE) {
     Token* tok {look_};
-    move();
+    pmove();
     x = new Rel(tok, x, rel());
   }
 
@@ -243,7 +256,7 @@ Expr* Parser::rel() {
     case Tag::tGE:
     case Tag::tMore: {
       Token* tok {look_};
-      move();
+      pmove();
       return new Rel(tok, x, expr());
     }
     default:
@@ -256,7 +269,7 @@ Expr* Parser::expr() {
   while (tag::cTag(look_->tag()) == '+' ||
          tag::cTag(look_->tag()) == '-') {
     Token* tok {look_};
-    move();
+    pmove();
     x = new Arith(tok, x, term());
   }
 
@@ -268,7 +281,7 @@ Expr* Parser::term() {
   while (tag::cTag(look_->tag()) == '*' ||
          tag::cTag(look_->tag()) == '/') {
     Token* tok {look_};
-    move();
+    pmove();
     x = new Arith(tok, x, unary());
   }
 
@@ -277,11 +290,11 @@ Expr* Parser::term() {
 
 Expr* Parser::unary() {
   if (tag::cTag(look_->tag()) == '-') {
-    move();
+    pmove();
     return new Unary(Lexer::get_word("minus"), unary());
   } else if (tag::cTag(look_->tag()) == '!') {
     Token* tok {look_};
-    move();
+    pmove();
     return new Not(tok, unary());
   }
   else
@@ -291,33 +304,33 @@ Expr* Parser::unary() {
 Expr* Parser::factor() {
   Expr* x {nullptr};
   switch (look_->tag()) {
-    case Tag::tPARENTHESES:
-      move();
+    case Tag::tPARENTHESES:  // '('
+      pmove();
       x = boolean();
       match(')');
       return x;
     case Tag::tNUM:
       x = new Constant(look_, Type::Int());
-      move();
+      pmove();
       return x;
     case Tag::tREAL:
       x = new Constant(look_, Type::Float());
-      move();
+      pmove();
       return x;
     case Tag::tTRUE:
       x = Constant::True();
-      move();
+      pmove();
       return x;
     case Tag::tFALSE:
       x = Constant::False();
-      move();
+      pmove();
       return x;
     case Tag::tID: {
       //string s = look_->toString();
       Id* id = top_->get(look_);
       if (id == nullptr)
         error(look_->toString() + " undeclared");
-      move();
+      pmove();
       if (tag::cTag(look_->tag()) != '[')
         return id;
       else
