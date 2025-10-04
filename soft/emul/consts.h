@@ -3,13 +3,13 @@
 #include <cstdint>
 
 enum class Flags : uint8_t {
-  CF = 0x01,
-  ZF = 0x02,
-  LF = 0x04,
-  EF = 0x08,
-  GF = 0x10,
-  BF = 0x20,
-  IF = 0x80
+  CF = 0x01,  // carry
+  ZF = 0x02,  // zero
+  LF = 0x04,  // less than
+  EF = 0x08,  // equal
+  GF = 0x10,  // great than
+  BF = 0x20,  // bank flag
+  IF = 0x80   // interrupt flag
 };
 
 enum class Cops : uint8_t {
