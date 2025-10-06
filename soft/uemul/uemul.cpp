@@ -44,6 +44,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <iostream>
+#include <iomanip>
 #include <stack>
 
 using namespace std;
@@ -53,8 +54,8 @@ enum FLAGS {
 };
 
 uint16_t cmds[256] = {
-  0xFF00,
-  0xFF00,
+  0x7122,  // MOV R0, 22h
+  0x7F33,  // MOV R7, 33h
   0xFF00,
   0xFD00
 };
@@ -81,9 +82,15 @@ uint16_t GetX() {
   return res;
 }
 
+void PrintRegs() {
+  for (int i = 0; i < 8; i++)
+    cout << hex << setw(2) << (uint16_t)regs0[i] << " ";
+  cout << endl;
+}
+
 void step(uint16_t cmd, uint16_t &ip) {
   uint8_t op = (cmd >> 8) & 0xFF;
-  if (cmd & 0xF000)  // branches
+  if ((cmd & 0xF000) == 0xF000)  // branches
     ;
   else  // arithm instructions
     op &= 0xF0;  // have to clean low bits
@@ -128,6 +135,7 @@ void step(uint16_t cmd, uint16_t &ip) {
     ip++;
     if (op < 0xA0)  // только эти операции изменяют регистры
       regs[dst] = rdst;
+    PrintRegs();
   } else if (op >= 0xF0 && op <= 0xFF) {
     uint8_t offset = cmd & 0xFF;
     cout << "offset: " << hex << (uint16_t)offset << endl;
@@ -148,8 +156,8 @@ void step(uint16_t cmd, uint16_t &ip) {
       case 0xFE: stck.push(ip); ip = offset << 8; break;  // AFCALL
       case 0xFF: ip++; break;                             // NOP
     }
-  } else {
-    cout << "WTF?! Error opcode" << endl;
+  } else {  // it's impossible I hope
+    cout << "WTF?! Error opcode: " << op << endl;
   }
 }
 
