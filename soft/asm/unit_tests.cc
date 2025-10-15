@@ -37,6 +37,9 @@ TEST_CASE("check preprocessor cleaner") {
   // check comment removing
   CHECK(pre.StripLine("LSR R0 ; comment ") == "LSR R0");
   CHECK(pre.StripLine("LSR R0;comment ") == "LSR R0");
+  CHECK(pre.StripLine("; comment ") == "");
+  CHECK(pre.StripLine(";") == "");
+  CHECK(pre.StripLine("\n;") == "");
 
   // check labels
   CHECK(pre.StripLine("label: mov  ax, bx  ; test cmd") == "label: mov ax, bx");
