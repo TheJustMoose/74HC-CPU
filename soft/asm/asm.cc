@@ -145,6 +145,21 @@ map<string, PTR> ptr_names {
   { "XD", rXD }, { "YD", rYD }, { "ZD", rZD }, { "SPD", rSPD },
 };
 
+map<string, uint16_t> port_names {
+  { "PORT0", 0 }, { "PINS0", 0 },
+  { "OMASK0", 1 },
+  { "PORT1", 2 }, { "PINS1", 2 },
+  { "OMASK0", 3 },
+  { "PORT2", 4 },
+  { "PORT3", 5 }, { "PINS3", 5 },
+  { "PORT4", 6 }, { "PINS4", 6 },
+  { "PORT5", 7 }, { "PINS5", 7 },
+  { "PORT6", 8 }, { "PINS6", 8 }, { "RAMP", 8 },
+  { "PORT7", 9 }, { "PINS7", 9 }, { "MSW", 9 },
+  { "PORT8", 10 }, { "PINS8", 10 }, { "FLAGS", 10 },
+  { "PORT9", 11 }, { "PINS9", 11 }, { "DAC", 11 },
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 
 string to_upper(string s) {
@@ -272,15 +287,17 @@ PTR CodeGen::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) 
 }
 
 uint16_t CodeGen::PortFromName(string name, string prefix) {
+  // port_names
   if (name.empty())
     return 0;
-  if (name.find(prefix) != 0) {
+  if (port_names.find(name) == port_names.end()) {
     err("Unknown port name: " + name);
     return 0;
   }
-  uint16_t res = stoi(&name[prefix.size()], nullptr, 10);
-  if (res > 63)
-    err("Port number should be in range 0-63");
+
+  uint16_t res = port_names[name];
+  if (res >= 32)
+    err("Port number should be in range 0-31");
   return res;
 }
 
