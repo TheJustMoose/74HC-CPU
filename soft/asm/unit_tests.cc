@@ -1,6 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest.h>
 
+#include "assm.h"
 #include "preprocessor.h"
 
 using namespace std;
@@ -128,4 +129,9 @@ TEST_CASE("check labels") {
   // now all string items separated by space
   CHECK(lines[1] == "label:ST SPD , r0");
   CHECK(lines[2] == "lsr r0");
+}
+
+TEST_CASE("check COPs") {
+  CodeLine cl(1, "NOP");
+  CHECK(cl.generate_machine_code() == 0xFFFF);
 }

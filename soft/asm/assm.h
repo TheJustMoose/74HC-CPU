@@ -1,9 +1,10 @@
 #pragma once
 
+#include <bitset>
+#include <map>
 #include <string>
+#include <sstream>
 #include <vector>
-
-using namespace std;
 
 typedef unsigned int UINT;
 
@@ -66,17 +67,17 @@ class CodeGen {
   virtual ~CodeGen() {}
 
   virtual uint16_t Emit() = 0;
-  virtual void update_machine_code(const map<string, UINT>& name_to_address) {}
+  virtual void update_machine_code(const std::map<std::string, UINT>& name_to_address) {}
 
-  virtual vector<int> get_blocks() { return {}; }
-  virtual string cop() {
-    stringstream s;
-    s << bitset<16>(Emit());
+  virtual std::vector<int> get_blocks() { return {}; }
+  virtual std::string cop() {
+    std::stringstream s;
+    s << std::bitset<16>(Emit());
     return s.str();
   }
-  string FormattedCOP() {
-    string res = cop();
-    vector<int> blocks = get_blocks();
+  std::string FormattedCOP() {
+    std::string res = cop();
+    std::vector<int> blocks = get_blocks();
     if (blocks.empty())
       return res;
 
@@ -97,39 +98,39 @@ class CodeGen {
     address_ = addr;
   }
 
-  void err(string msg);
+  void err(std::string msg);
   void clr_err();
-  vector<string> get_err() {
+  std::vector<std::string> get_err() {
     return errors_;
   }
 
-  REG RegFromName(string name);
-  PTR PtrFromName(string name, bool* inc, bool* dec);
-  uint16_t PortFromName(string name, string prefix);
+  REG RegFromName(std::string name);
+  PTR PtrFromName(std::string name, bool* inc, bool* dec);
+  uint16_t PortFromName(std::string name, std::string prefix);
 
  protected:
   UINT address_ {0};
   COP operation_ {cNO_OP};
-  vector<string> errors_ {};
+  std::vector<std::string> errors_ {};
 };
 
 class CodeLine {
  public:
-  CodeLine(int line_number, string line_text);
+  CodeLine(int line_number, std::string line_text);
 
   uint16_t generate_machine_code();
-  void update_machine_code(const map<string, UINT>& name_to_address);
-  string FormattedCOP();
+  void update_machine_code(const std::map<std::string, UINT>& name_to_address);
+  std::string FormattedCOP();
 
-  vector<string> get_labels() {
+  std::vector<std::string> get_labels() {
     return labels_;
   }
 
-  string get_labels_as_string() {
+  std::string get_labels_as_string() {
     if (!has_labels())
       return {};
 
-    string res;
+    std::string res;
     for (auto& l : labels_) {
       res += l;
       res += " ";
@@ -141,7 +142,7 @@ class CodeLine {
     return labels_.size() > 0;
   }
 
-  string get_line_text() {
+  std::string get_line_text() {
     return line_text_;
   }
 
@@ -154,7 +155,7 @@ class CodeLine {
       code_gen_->set_address(addr);
   }
 
-  vector<string> get_err() {
+  std::vector<std::string> get_err() {
     if (code_gen_)
       return code_gen_->get_err();
     else
@@ -168,34 +169,34 @@ class CodeLine {
  private:
   int line_number_ {0};
 
-  unique_ptr<CodeGen> code_gen_ {nullptr};
+  std::unique_ptr<CodeGen> code_gen_ {nullptr};
 
-  vector<string> labels_ {};
-  string line_text_ {};
+  std::vector<std::string> labels_ {};
+  std::string line_text_ {};
 };
 
 class StringConst {
  public:
   StringConst() = default;
-  StringConst(const string& str): str_(str) {}
+  StringConst(const std::string& str): str_(str) {}
   StringConst& operator=(const StringConst& rval);
 
   UINT get_size() const;
   UINT addr() const { return addr_; }
   void set_addr(UINT);
   void out_code() const;
-  string str() const {
+  std::string str() const {
     return str_;
   }
 
  private:
-  string str_ {};
+  std::string str_ {};
   UINT addr_ {0};
 };
 
 class Assembler {
  public:
-  int process(string fname, bool show_preprocess_out = false);
+  int process(std::string fname, bool show_preprocess_out = false);
 
  protected:
   void merge_code_with_labels();
@@ -211,9 +212,9 @@ class Assembler {
   void out_orgs();
 
  private:
-  map<int, string> lines_ {};
-  map<int, UINT> line_to_org_ {};
-  vector<CodeLine> code_ {};
-  map<string, UINT> name_to_address_ {};
-  map<string, StringConst> string_consts_ {};
+  std::map<int, std::string> lines_ {};
+  std::map<int, UINT> line_to_org_ {};
+  std::vector<CodeLine> code_ {};
+  std::map<std::string, UINT> name_to_address_ {};
+  std::map<std::string, StringConst> string_consts_ {};
 };
