@@ -44,7 +44,6 @@
 */
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <algorithm>
 #include <bitset>
 #include <cctype>
 #include <clocale>
@@ -59,6 +58,7 @@
 #include "assm.h"
 #include "file_reader.h"
 #include "preprocessor.h"
+#include "str_util.h"
 #include "trim.h"
 
 using namespace std;
@@ -161,91 +161,6 @@ map<string, uint16_t> port_names {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-string to_upper(string s) {
-  std::transform(s.begin(), s.end(), s.begin(), ::toupper);
-  return s;
-}
-
-// will remove leading spaces
-// also remove more than one space in a row
-string normalize_line(string s) {
-  string res;
-  bool skip_space {true};
-  bool in_string {false};
-  for (size_t i = 0; i < s.size(); i++) {
-    if (s[i] == '"')
-      in_string = !in_string;
-
-    if (!in_string) {
-      if (s[i] == ' ') {
-        if (skip_space)
-          continue;
-        else
-          skip_space = true;
-      } else {
-        skip_space = false;
-      }
-    }
-    res += s[i];
-  }
-
-  return res;
-}
-
-void remove_all_spaces(string& s) {
-  // try to remove all spaces
-  s.erase(remove_if(s.begin(), s.end(), isspace), s.end());
-}
-
-string remove_quotes(string s) {
-  if (s.size() <= 2)
-    return s;
-  return s.substr(1, s.size() - 2);
-}
-
-string sreplace(string where, string from, string to) {
-  size_t lpos = where.find(from);
-  if (lpos == string::npos)
-    return where;
-
-  string left = where.substr(0, lpos);
-
-  string right {};
-  size_t rpos = lpos + from.size();
-  if (rpos < where.size())
-    right = where.substr(rpos);
-
-  return left + to + right;
-}
-
-bool StrToInt(string val, int* pout, string* err = nullptr) {
-  int res = 0;
-  try {
-    if (val.find("0X") == 0)
-      res = stoi(&val[2], nullptr, 16);
-    else if (*val.rbegin() == 'h')
-      res = stoi(&val[0], nullptr, 16);
-    else if (val.find("0O") == 0)
-      res = stoi(&val[2], nullptr, 8);
-    else if (val.find("0B") == 0)
-      res = stoi(&val[2], nullptr, 2);
-    else {
-      res = stoi(val, nullptr, 10);
-    }
-  } catch(std::invalid_argument& e) {
-    if (err) {
-      *err += e.what();
-      *err += "\n";
-      *err += "arg: ";
-      *err += val;
-    }
-    return false;
-  }
-
-  if (pout)
-    *pout = res;
-  return true;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -372,7 +287,7 @@ class BinaryCodeGen: public CodeGen {
 
     map<string, UINT>::const_iterator it;
     for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
-      string t = to_upper(it->first);
+      string t = ToUpper(it->first);
       if (t == right_str_)
         break;
     }
@@ -566,7 +481,7 @@ class BranchCodeGen: public CodeGen {
   void update_machine_code(const map<string, UINT>& name_to_address) {
     map<string, UINT>::const_iterator it;
     for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
-      if (to_upper(it->first) == label_) {
+      if (ToUpper(it->first) == label_) {
         UINT label_addr = it->second;
         if (operation_ == bAFCALL) {
           if (label_addr % 256)
@@ -612,7 +527,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
   cout << "code line w/o label: " << line_text_ << endl;
 
-  stringstream ss(to_upper(line_text_));
+  stringstream ss(ToUpper(line_text_));
   // examples:
   // MOV R0, R1
   // JMP label
@@ -770,7 +685,7 @@ void Assembler::extract_orgs() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
     int line = it->first;
-    string org = normalize_line(it->second);
+    string org = NormalizeLine(it->second);
     if (org.find(".org") == 0) {
       cout << line << ":" << org << endl;
       org.erase(0, sizeof(".org"));
@@ -792,7 +707,7 @@ void Assembler::extract_orgs() {
 void Assembler::extract_string() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end();) {
-    string str = normalize_line(it->second);
+    string str = NormalizeLine(it->second);
     if (str.find(".str") == 0) {
       str.erase(0, sizeof(".str"));
 
@@ -802,7 +717,7 @@ void Assembler::extract_string() {
         cout << "Line: " << it->first << ". String value not found" << endl;
       } else if (pos < str.size()) {
         string str_name = trim(str.substr(0, pos));
-        string str_val = remove_quotes(trim(str.substr(pos + 1)));
+        string str_val = RemoveQuotes(trim(str.substr(pos + 1)));
         string_consts_[str_name] = StringConst(str_val);
         cout << "STR '" << str_name << "' = '" << str_val << "'" << endl;
       }
@@ -817,7 +732,7 @@ void Assembler::extract_string() {
 void Assembler::pass1() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end(); it++) {
-    code_.push_back(CodeLine(it->first, normalize_line(it->second)));
+    code_.push_back(CodeLine(it->first, NormalizeLine(it->second)));
   }
 }
 
