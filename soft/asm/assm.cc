@@ -813,20 +813,6 @@ void Assembler::extract_string() {
   }
 }
 
-string extract_arg(string& name_w_arg) {
-  size_t left = name_w_arg.find('(');
-  size_t right = name_w_arg.find(')');
-
-  if (left == string::npos || right == string::npos)
-    return {};
-  if (right < left)
-    return {};
-
-  string arg = name_w_arg.substr(left + 1, right - left - 1);
-  name_w_arg.resize(left);
-  return arg;
-}
-
 // generate machine code
 void Assembler::pass1() {
   map<int, string>::iterator it;
