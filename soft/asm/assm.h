@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bitset>
+#include <iostream>
 #include <map>
 #include <string>
 #include <sstream>
@@ -66,7 +67,7 @@ class CodeGen {
    : operation_(cop) {}
   virtual ~CodeGen() {}
 
-  virtual uint16_t Emit() = 0;
+  virtual uint16_t Emit() { return 0; }
   virtual void update_machine_code(const std::map<std::string, UINT>& name_to_address) {}
 
   virtual std::vector<int> get_blocks() { return {}; }
@@ -98,20 +99,33 @@ class CodeGen {
     address_ = addr;
   }
 
-  void err(std::string msg);
-  void clr_err();
-  std::vector<std::string> get_err() {
-    return errors_;
-  }
-
-  REG RegFromName(std::string name);
-  PTR PtrFromName(std::string name, bool* inc, bool* dec);
-  uint16_t PortFromName(std::string name, std::string prefix);
-
  protected:
   UINT address_ {0};
   COP operation_ {cNO_OP};
-  std::vector<std::string> errors_ {};
+};
+
+class Names {
+ public:
+  static REG RegFromName(std::string name);
+  static PTR PtrFromName(std::string name, bool* inc, bool* dec);
+  static uint16_t PortFromName(std::string name, std::string prefix);
+};
+
+class ErrorCollector {
+ public:
+  static void rep(std::string msg) {
+    std::cout << msg << std::endl;
+    ErrorCollector::errors_.push_back(msg);
+  }
+  static void clr() {
+    ErrorCollector::errors_.clear();
+  }
+  static std::vector<std::string> get() {
+    return ErrorCollector::errors_;
+  }
+
+ private:
+  static std::vector<std::string> errors_;
 };
 
 class CodeLine {
@@ -156,10 +170,11 @@ class CodeLine {
   }
 
   std::vector<std::string> get_err() {
-    if (code_gen_)
+    return ErrorCollector::get();
+    /*if (code_gen_)
       return code_gen_->get_err();
     else
-      return {};
+      return {};*/
   }
 
   int line_number() {
