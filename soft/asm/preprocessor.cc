@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "preprocessor.h"
+#include "str_util.h"
 #include "trim.h"
 
 using namespace std;
@@ -196,40 +197,6 @@ string Preprocessor::StripLine(string line) {
 
   if (res.size() && IsSpace(*res.rbegin()))
     res.resize(res.size() - 1);
-
-  return res;
-}
-
-bool Preprocessor::IsSpace(char ch) {
-  return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r';
-}
-
-bool Preprocessor::IsDelimeter(char ch) {
-  return ch == ',' || ch == '(' || ch == ')' || ch == '+' || ch == '-';
-}
-
-vector<string> Preprocessor::Split(string line) {
-  vector<string> res;
-
-  string str;
-  for (char ch : line) {
-    bool delim = IsDelimeter(ch);
-    if (IsSpace(ch) || delim) {
-      if (str.size()) {
-        res.push_back(str);
-        str = "";
-      }
-      if (delim) {
-        string dstr {ch};
-        res.push_back(dstr);
-      }
-    } else {
-      str += ch;
-    }
-  }
-
-  if (str.size())
-    res.push_back(str);
 
   return res;
 }

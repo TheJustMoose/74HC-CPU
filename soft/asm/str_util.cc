@@ -71,3 +71,62 @@ bool StrToInt(string val, int* pout, string* err) {
     *pout = res;
   return true;
 }
+
+bool IsSpace(char ch) {
+  return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r';
+}
+
+bool IsDelimeter(char ch) {
+  return ch == ',' || ch == '(' || ch == ')' || ch == '+' || ch == '-';
+}
+
+vector<string> Split(string line) {
+  vector<string> res;
+
+  string str;
+  for (char ch : line) {
+    bool delim = IsDelimeter(ch);
+    if (IsSpace(ch) || delim) {
+      if (str.size()) {
+        res.push_back(str);
+        str = "";
+      }
+      if (delim) {
+        string dstr {ch};
+        res.push_back(dstr);
+      }
+    } else {
+      str += ch;
+    }
+  }
+
+  if (str.size())
+    res.push_back(str);
+
+  return res;
+}
+
+vector<string> SplitToCmdParts(string text) {
+  vector<string> parts = Split(ToUpper(text));
+  // first part is operation name
+  // and it has only one word
+  string op_name;
+  if (parts.size() >= 1)
+    op_name = parts[0];
+
+  size_t i = 1;
+
+  string left;
+  for (; i < parts.size() && parts[i] != ","; i++) {
+    left += parts[i];  // R0 or XI or XI+5
+  }
+
+  if (parts[i] == ",")
+    i++;
+
+  string right;
+  for (; i < parts.size(); i++)
+    right += parts[i];  // R0 or XI or XI+5
+
+  return { op_name, left, right };
+}

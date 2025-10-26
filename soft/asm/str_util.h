@@ -1,8 +1,16 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
-std::string ToUpper(std::string s);
-std::string NormalizeLine(std::string s);
-std::string RemoveQuotes(std::string s);
+std::string ToUpper(std::string);
+std::string NormalizeLine(std::string);
+std::string RemoveQuotes(std::string);
+
 bool StrToInt(std::string val, int* pout, std::string* err = nullptr);
+
+bool IsSpace(char);
+bool IsDelimeter(char);
+
+std::vector<std::string> Split(std::string);
+std::vector<std::string> SplitToCmdParts(std::string);

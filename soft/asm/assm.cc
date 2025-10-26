@@ -519,31 +519,15 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
   cout << "code line w/o label: " << line_text_ << endl;
 
-  stringstream ss(ToUpper(line_text_));
-  // examples:
-  // MOV R0, R1
-  // JMP label
-  string op_name, left, right;
-  ss >> op_name;      // LD
-
-  ss >> left;
-  while (!ss.eof()) {
-    string t;
-    ss >> t;
-    if (t == ",")
-      break;
-    left += t;        // R0 or XI or XI+5
+  vector<string> cmd_parts = SplitToCmdParts(line_text_);
+  if (cmd_parts.size() != 3) {
+    cout << "Error. SplitToCmdParts should always return 3 items.";
+    return;
   }
 
-  ss >> right;
-  while (!ss.eof()) { // && t.size()
-    string t;
-    ss >> t;
-    right += t;       // XI or XI+10 or R0
-  }
-
-  //getline(ss, tail);  // right value may have offset, for example: XI + 10, so get full line: +10
-  //remove_all_spaces(tail);
+  string op_name( cmd_parts[0] );
+  string left( cmd_parts[1] );
+  string right( cmd_parts[2] );
 
   COP op {cNO_OP};
   if (cop_names.find(op_name) != cop_names.end()) {
@@ -570,7 +554,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   code_gen_.reset(cg);
 
-  cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
+  //cout << "GOT: |" << op_name << "|" << left << "|" << right << "|" << endl;
 }
 
 uint16_t CodeLine::generate_machine_code() {
