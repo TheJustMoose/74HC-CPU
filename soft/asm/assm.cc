@@ -665,10 +665,10 @@ void Assembler::merge_code_with_labels() {
   for (it = lines_.begin(); it != lines_.end();) {
     prev = it;
     it++;
-    if (*prev->second.rbegin() == ':' &&       // ok, comment was found
+    if (*prev->second.rbegin() == ':' &&       // ok, label was found
         it != lines_.end()) {                  // and we have some code on the next line
-      it->second = prev->second + it->second;  // move comment to the next line
-      lines_.erase(prev);                      // remove comment from curent line
+      it->second = prev->second + it->second;  // move label to the next line
+      lines_.erase(prev);                      // remove label from curent line
     }
   }
 }

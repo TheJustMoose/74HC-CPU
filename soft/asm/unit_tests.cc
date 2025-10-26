@@ -3,6 +3,7 @@
 
 #include "assm.h"
 #include "preprocessor.h"
+#include "str_util.h"
 
 using namespace std;
 
@@ -136,10 +137,52 @@ TEST_CASE("check names getter") {
   CHECK(Names::RegFromName("R7") == rR7);
 }
 
+TEST_CASE("check str_util") {
+  CHECK(NormalizeLine("  ADD   R0,   R1") == "ADD R0, R1");
+  CHECK(NormalizeLine("\"  ADD   R0,   R1\"") == "\"  ADD   R0,   R1\"");
+
+  int val;
+  CHECK(!StrToInt("", &val));
+  CHECK(!StrToInt("test", &val));
+
+  CHECK(StrToInt("1", &val));
+  CHECK(1 == val);
+
+  CHECK(StrToInt("10", &val));
+  CHECK(10 == val);
+
+  CHECK(StrToInt("999999", &val));
+  CHECK(999999 == val);
+
+  CHECK(StrToInt("10H", &val));
+  CHECK(16 == val);
+
+  CHECK(StrToInt("0X10", &val));
+  CHECK(16 == val);
+
+  CHECK(StrToInt("0X1FFF", &val));
+  CHECK(0x1FFF == val);
+
+  CHECK(StrToInt("0O177", &val));
+  CHECK(127 == val);
+
+  CHECK(StrToInt("0B1010", &val));
+  CHECK(10 == val);
+
+  CHECK(StrToInt("0B0000", &val));
+  CHECK(0 == val);
+
+  CHECK(StrToInt("0B1111", &val));
+  CHECK(15 == val);
+}
+
 TEST_CASE("check COPs") {
   CodeLine cl1(1, "NOP");
   CHECK(cl1.generate_machine_code() == 0xFFFF);
 
-  CodeLine cl2(1, "ADD R1, R2");
-  CHECK(cl2.generate_machine_code() == 0x0240);
+  CodeLine cl2(1, "ADD R0, R0");
+  CHECK(cl2.generate_machine_code() == 0x0000);
+
+  CodeLine cl3(1, "ADD R1, R2");
+  CHECK(cl3.generate_machine_code() == 0x0240);
 }

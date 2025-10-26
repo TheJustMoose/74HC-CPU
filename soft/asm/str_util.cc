@@ -48,7 +48,7 @@ bool StrToInt(string val, int* pout, string* err) {
   try {
     if (val.find("0X") == 0)
       res = stoi(&val[2], nullptr, 16);
-    else if (*val.rbegin() == 'h')
+    else if (*val.rbegin() == 'H')
       res = stoi(&val[0], nullptr, 16);
     else if (val.find("0O") == 0)
       res = stoi(&val[2], nullptr, 8);
