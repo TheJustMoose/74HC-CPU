@@ -34,6 +34,7 @@ enum COP {
   bSTOP = 0xFD00,
   bAFCALL = 0xFE00,
   bNOP = 0xFF00,    // processor operation
+  bERROR = 0xFFFF,  // we get some unknown name of operation
   cNO_OP = 0x10000  // just constant for "there is no operation here", for example for labels or error op names
 };
 
@@ -106,6 +107,7 @@ class CodeGen {
 
 class Names {
  public:
+  static COP CopFromName(std::string name);
   static REG RegFromName(std::string name);
   static PTR PtrFromName(std::string name, bool* inc, bool* dec);
   static uint16_t PortFromName(std::string name, std::string prefix);

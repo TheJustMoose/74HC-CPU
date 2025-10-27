@@ -160,9 +160,22 @@ map<string, uint16_t> port_names {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-/*static*/ std::vector<std::string> ErrorCollector::errors_ {};
+/*static*/
+std::vector<std::string> ErrorCollector::errors_ {};
 
 ///////////////////////////////////////////////////////////////////////////////
+
+COP Names::CopFromName(string name) {
+  if (name.empty())
+    return bNOP;
+
+  if (cop_names.find(name) != cop_names.end())
+    return cop_names[name];
+  else {
+    ErrorCollector::rep("Unknown operation: " + name);
+    return bERROR;
+  }
+}
 
 REG Names::RegFromName(string name) {
   if (name.empty())
@@ -241,7 +254,7 @@ class BinaryCodeGen: public CodeGen {
     }
 
     if (!immediate_)  // not val, try to check register name
-      right_op_ = Names::RegFromName(right);  // MOV R0, 10
+      right_op_ = Names::RegFromName(right);  // MOV R0, R1
 
     if (!immediate_ && right_op_ == rUnkReg)
       ErrorCollector::rep("You have to use Register name or immediate value as rval.");
@@ -528,10 +541,8 @@ CodeLine::CodeLine(int line_number, string line_text)
   string left( cmd_parts[1] );
   string right( cmd_parts[2] );
 
-  COP op {cNO_OP};
-  if (cop_names.find(op_name) != cop_names.end()) {
-    op = cop_names[op_name];
-  } else {
+  COP op = Names::CopFromName(op_name);
+  if (op == bERROR) {
     cout << "Error. Unknown operation: |" << op_name << "|" << endl;
     return;
   }

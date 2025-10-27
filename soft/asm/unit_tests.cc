@@ -209,4 +209,24 @@ TEST_CASE("check COPs") {
 
   CodeLine cl3(1, "ADD R1, R2");
   CHECK(cl3.generate_machine_code() == 0x0240);
+
+  // 0000 010 0 011 00000
+  CodeLine cl4(1, "ADD R2, R3");
+  CHECK(cl4.generate_machine_code() == 0x0460);
+
+  // 0001 010 0 011 00000
+  CodeLine cl5(1, "ADDC R2, R3");
+  CHECK(cl5.generate_machine_code() == 0x1460);
+
+  // 0010 011 0 100 00000
+  CodeLine cl6(1, "AND R3, R4");
+  CHECK(cl6.generate_machine_code() == 0x2680);
+
+  // 0011 100 0 101 00000
+  CodeLine cl7(1, "OR R4, R5");
+  CHECK(cl7.generate_machine_code() == 0x38A0);
+
+  // 0100 101 0 110 00000
+  CodeLine cl8(1, "XOR R5, R6");
+  CHECK(cl8.generate_machine_code() == 0x4AC0);
 }
