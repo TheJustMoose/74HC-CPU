@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "file_reader.h"
-#include "trim.h"
+#include "str_util.h"
 
 using namespace std;
 

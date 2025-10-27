@@ -3,7 +3,6 @@
 
 #include "preprocessor.h"
 #include "str_util.h"
-#include "trim.h"
 
 using namespace std;
 

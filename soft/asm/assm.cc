@@ -59,7 +59,6 @@
 #include "file_reader.h"
 #include "preprocessor.h"
 #include "str_util.h"
-#include "trim.h"
 
 using namespace std;
 
