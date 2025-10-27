@@ -131,7 +131,7 @@ vector<string> SplitToCmdParts(string text) {
   return { op_name, left, right };
 }
 
-string trim_right(string s) {
+string TrimRight(string s) {
   if (s.empty())
     return {};
 
@@ -149,7 +149,7 @@ string trim_right(string s) {
   return s;
 }
 
-string trim_left(string s) {
+string TrimLeft(string s) {
   if (s.empty())
     return {};
 
@@ -167,6 +167,6 @@ string trim_left(string s) {
   return s;
 }
 
-string trim(string s) {
-  return trim_left(trim_right(s));
+string Trim(string s) {
+  return TrimLeft(TrimRight(s));
 }

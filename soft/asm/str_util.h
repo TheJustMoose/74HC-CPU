@@ -15,6 +15,6 @@ bool IsDelimeter(char);
 std::vector<std::string> Split(std::string);
 std::vector<std::string> SplitToCmdParts(std::string);
 
-std::string trim_right(std::string s);
-std::string trim_left(std::string s);
-std::string trim(std::string s);
+std::string TrimRight(std::string s);
+std::string TrimLeft(std::string s);
+std::string Trim(std::string s);

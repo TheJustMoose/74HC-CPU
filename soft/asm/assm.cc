@@ -691,8 +691,8 @@ void Assembler::extract_string() {
         cout << "Error in string const: '" << it->second << "'" << endl;
         cout << "Line: " << it->first << ". String value not found" << endl;
       } else if (pos < str.size()) {
-        string str_name = trim(str.substr(0, pos));
-        string str_val = RemoveQuotes(trim(str.substr(pos + 1)));
+        string str_name = Trim(str.substr(0, pos));
+        string str_val = RemoveQuotes(Trim(str.substr(pos + 1)));
         string_consts_[str_name] = StringConst(str_val);
         cout << "STR '" << str_name << "' = '" << str_val << "'" << endl;
       }
