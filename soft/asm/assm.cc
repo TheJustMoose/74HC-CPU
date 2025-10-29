@@ -97,10 +97,10 @@ OP_TYPE CopToType(COP cop) {
 }
 
 map<string, uint16_t> unary_codes {
-  { "INV", 0x00 },
-  { "SWAP", 0x20 },
-  { "LSR", 0x40 },
-  { "LSRC", 0x60 },
+  { "INV", 0x00 },   // 00
+  { "SWAP", 0x20 },  // 01
+  { "LSR", 0x40 },   // 10
+  { "LSRC", 0x60 },  // 11
 };
 
 map<string, COP> cop_names {

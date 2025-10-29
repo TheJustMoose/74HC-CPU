@@ -229,4 +229,12 @@ TEST_CASE("check COPs") {
   // 0100 101 0 110 00000
   CodeLine cl8(1, "XOR R5, R6");
   CHECK(cl8.generate_machine_code() == 0x4AC0);
+
+  // 0101 110 0 111 00000
+  CodeLine cl9(1, "MUL R6, R7");
+  CHECK(cl9.generate_machine_code() == 0x5CE0);
+
+  // 0110 111 0 001 00000
+  CodeLine clA(1, "SWAP R7");
+  CHECK(clA.generate_machine_code() == 0x5CE0);
 }
