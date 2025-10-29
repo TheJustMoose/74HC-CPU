@@ -236,5 +236,17 @@ TEST_CASE("check COPs") {
 
   // 0110 111 0 001 00000
   CodeLine clA(1, "SWAP R7");
-  CHECK(clA.generate_machine_code() == 0x5CE0);
+  CHECK(clA.generate_machine_code() == 0x6E20);
+
+  // 0110 111 0 000 00000
+  CodeLine clB(1, "INV R7");
+  CHECK(clB.generate_machine_code() == 0x6E00);
+
+  // 0110 111 0 010 00000
+  CodeLine clC(1, "LSR R7");
+  CHECK(clC.generate_machine_code() == 0x6E40);
+
+  // 0110 111 0 011 00000
+  CodeLine clD(1, "LSRC R7");
+  CHECK(clD.generate_machine_code() == 0x6E60);
 }
