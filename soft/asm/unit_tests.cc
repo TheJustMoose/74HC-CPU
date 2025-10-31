@@ -249,4 +249,8 @@ TEST_CASE("check COPs") {
   // 0110 111 0 011 00000
   CodeLine clD(1, "LSRC R7");
   CHECK(clD.generate_machine_code() == 0x6E60);
+
+  // 0111 000 0 111 00000
+  CodeLine clE(1, "MOV R0, R7");
+  CHECK(clE.generate_machine_code() == 0x70E0);
 }
