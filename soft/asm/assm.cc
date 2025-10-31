@@ -50,6 +50,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <sstream>
 #include <string>
@@ -277,7 +278,7 @@ class BinaryCodeGen: public CodeGen {
     return cop;
   }
 
-  void update_machine_code(const map<string, UINT>& name_to_address) {
+  void update_machine_code(const map<string, uint16_t>& name_to_address) {
     if (right_str_.empty())
       return;
 
@@ -289,7 +290,7 @@ class BinaryCodeGen: public CodeGen {
       hi = true;
     }
 
-    map<string, UINT>::const_iterator it;
+    map<string, uint16_t>::const_iterator it;
     for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
       string t = ToUpper(it->first);
       if (t == right_str_)
@@ -379,7 +380,7 @@ class MemoryCodeGen: public CodeGen {
     }
   }
 
-  UINT parse_offset(string tail) {
+  uint16_t parse_offset(string tail) {
     if (tail.empty())
       return 0;
 
@@ -399,7 +400,7 @@ class MemoryCodeGen: public CodeGen {
       return 0;
     }
 
-    UINT res {0};
+    uint16_t res {0};
     int off = stoi(&tail[1], nullptr, 10);
     if (tail[0] == '-')
       off = -off;
@@ -432,7 +433,7 @@ class MemoryCodeGen: public CodeGen {
   PTR ptr_ {rUnkPtr};
   bool inc_ {false};  // post increment ptr_
   bool dec_ {false};  // post decrement ptr_
-  UINT offset_ {0};
+  uint16_t offset_ {0};
 };
 
 // IN R0, PORT1
@@ -482,11 +483,11 @@ class BranchCodeGen: public CodeGen {
     return cop;
   }
 
-  void update_machine_code(const map<string, UINT>& name_to_address) {
-    map<string, UINT>::const_iterator it;
+  void update_machine_code(const map<string, uint16_t>& name_to_address) {
+    map<string, uint16_t>::const_iterator it;
     for (it = name_to_address.begin(); it != name_to_address.end(); it++) {
       if (ToUpper(it->first) == label_) {
-        UINT label_addr = it->second;
+        uint16_t label_addr = it->second;
         if (operation_ == bAFCALL) {
           if (label_addr % 256)
             ErrorCollector::rep("Label address in far call must be a multiple of 256.");
@@ -511,7 +512,7 @@ class BranchCodeGen: public CodeGen {
 
  private:
   string label_;
-  UINT target_addr_ {0};
+  uint16_t target_addr_ {0};
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -575,7 +576,7 @@ uint16_t CodeLine::generate_machine_code() {
   return cop;
 }
 
-void CodeLine::update_machine_code(const map<string, UINT>& name_to_address) {
+void CodeLine::update_machine_code(const map<string, uint16_t>& name_to_address) {
   if (!code_gen_)
     return;
   code_gen_->update_machine_code(name_to_address);
@@ -595,11 +596,16 @@ StringConst& StringConst::operator=(const StringConst& rval) {
   return *this;
 }
 
-UINT StringConst::get_size() const {
-  return str_.size() + 1;
+uint16_t StringConst::get_size() const {
+  if (str_.size() >= numeric_limits<uint16_t>::max()) {
+    ErrorCollector::rep("String const is too long.");
+    return 0;
+  }
+
+  return static_cast<uint16_t>(str_.size()) + 1;
 }
 
-void StringConst::set_addr(UINT addr) {
+void StringConst::set_addr(uint16_t addr) {
   if (addr > 0xFFFF) {
     cout << "Address is too much: " << addr;
     return;
@@ -609,16 +615,16 @@ void StringConst::set_addr(UINT addr) {
 }
 
 void StringConst::out_code() const {
-  UINT addr = addr_;
+  uint16_t addr = addr_;
   for (size_t i = 0; i < str_.size(); i++)
     cout << "     " << hex
        << setw(4) << setfill('0') << right << addr++ << ": "
-       << setw(4) << setfill('0') << right << UINT(str_[i]) << " "
+       << setw(4) << setfill('0') << right << uint16_t(str_[i]) << " "
        << str_[i] << endl;
 
   cout << "     " << hex
        << setw(4) << setfill('0') << right << addr++ << ": "
-       << setw(4) << setfill('0') << right << UINT(0) << " "
+       << setw(4) << setfill('0') << right << uint16_t(0) << " "
        << "Zero" << endl;
 }
 
@@ -724,9 +730,9 @@ void Assembler::pass1() {
 
 // get real address of labels & string
 void Assembler::pass2() {
-  UINT addr = 0;
+  uint16_t addr = 0;
   vector<CodeLine>::iterator it;
-  map<int, UINT>::iterator oit = line_to_org_.begin();
+  map<int, uint16_t>::iterator oit = line_to_org_.begin();
   for (it = code_.begin(); it != code_.end(); it++, addr++) {
     if (oit != line_to_org_.end() &&
         it->line_number() > oit->first) {
@@ -746,7 +752,7 @@ void Assembler::pass2() {
       name_to_address_[*lit] = addr;
   }
 
-  UINT max_addr = get_max_address();
+  uint16_t max_addr = get_max_address();
   cout << "max_addr: " << max_addr << " (" << hex << max_addr << "h)" << endl;
 
   addr = max_addr + 1;
@@ -765,8 +771,8 @@ void Assembler::pass3() {
     it->update_machine_code(name_to_address_);
 }
 
-UINT Assembler::get_max_address() {
-  UINT max_addr {0};
+uint16_t Assembler::get_max_address() {
+  uint16_t max_addr {0};
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
     if (max_addr < it->address())

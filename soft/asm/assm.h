@@ -7,8 +7,6 @@
 #include <sstream>
 #include <vector>
 
-typedef unsigned int UINT;
-
 // Code Of Operation
 enum COP {
   cADD = 0x0000, cADDC = 0x1000,
@@ -69,7 +67,7 @@ class CodeGen {
   virtual ~CodeGen() {}
 
   virtual uint16_t Emit() { return 0; }
-  virtual void update_machine_code(const std::map<std::string, UINT>& name_to_address) {}
+  virtual void update_machine_code(const std::map<std::string, uint16_t>& name_to_address) {}
 
   virtual std::vector<int> get_blocks() { return {}; }
   virtual std::string cop() {
@@ -93,15 +91,15 @@ class CodeGen {
     }
     return res;
   }
-  UINT address() {
+  uint16_t address() {
     return address_;
   }
-  void set_address(UINT addr) {
+  void set_address(uint16_t addr) {
     address_ = addr;
   }
 
  protected:
-  UINT address_ {0};
+  uint16_t address_ {0};
   COP operation_ {cNO_OP};
 };
 
@@ -135,7 +133,7 @@ class CodeLine {
   CodeLine(int line_number, std::string line_text);
 
   uint16_t generate_machine_code();
-  void update_machine_code(const std::map<std::string, UINT>& name_to_address);
+  void update_machine_code(const std::map<std::string, uint16_t>& name_to_address);
   std::string FormattedCOP();
 
   std::vector<std::string> get_labels() {
@@ -162,11 +160,11 @@ class CodeLine {
     return line_text_;
   }
 
-  UINT address() {
+  uint16_t address() {
     return code_gen_ ? code_gen_->address() : 0;
   }
 
-  void set_address(UINT addr) {
+  void set_address(uint16_t addr) {
     if (code_gen_)
       code_gen_->set_address(addr);
   }
@@ -198,9 +196,9 @@ class StringConst {
   StringConst(const std::string& str): str_(str) {}
   StringConst& operator=(const StringConst& rval);
 
-  UINT get_size() const;
-  UINT addr() const { return addr_; }
-  void set_addr(UINT);
+  uint16_t get_size() const;
+  uint16_t addr() const { return addr_; }
+  void set_addr(uint16_t);
   void out_code() const;
   std::string str() const {
     return str_;
@@ -208,7 +206,7 @@ class StringConst {
 
  private:
   std::string str_ {};
-  UINT addr_ {0};
+  uint16_t addr_ {0};
 };
 
 class Assembler {
@@ -223,15 +221,15 @@ class Assembler {
   void pass1();
   void pass2();
   void pass3();
-  UINT get_max_address();
+  uint16_t get_max_address();
   void out_code();
   void out_labels();
   void out_orgs();
 
  private:
   std::map<int, std::string> lines_ {};
-  std::map<int, UINT> line_to_org_ {};
+  std::map<int, uint16_t> line_to_org_ {};
   std::vector<CodeLine> code_ {};
-  std::map<std::string, UINT> name_to_address_ {};
+  std::map<std::string, uint16_t> name_to_address_ {};
   std::map<std::string, StringConst> string_consts_ {};
 };
