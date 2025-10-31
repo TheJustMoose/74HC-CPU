@@ -9,7 +9,7 @@ void help() {
   const char* help_lines[] = {
       "74HCPU assembler v 0.4\n",
       "Support next operations:\n",
-      "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO, MOV\n",
+      "arithmetic: ADD, ADDC, AND, OR, XOR, MUL, UNO (SWAP, INV, LSR, LSRC), MOV\n",
       "memory: LPM, LD, ST\n",
       "port: IN, OUT\n",
       "compare: CMP, CMPC\n",
