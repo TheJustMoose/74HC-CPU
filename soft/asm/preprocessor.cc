@@ -6,18 +6,8 @@
 
 using namespace std;
 
-string join(vector<string> v, char del) {
-  string res {};
-  for (size_t i = 0; i < v.size(); i++) {
-    res += v[i];
-    if (i < v.size() - 1)
-      res += del;
-  }
-  return res;
-}
-
 string Define::Body() {
-  return join(body_, ' ');
+  return Join(body_, ' ');
 }
 
 vector<string> Define::BodyParts() {
@@ -25,7 +15,7 @@ vector<string> Define::BodyParts() {
 }
 
 string Define::BodyWoParams() {
-  return join(BodyPartsWoParam(), ' ');
+  return Join(BodyPartsWoParam(), ' ');
 }
 
 vector<string> Define::BodyPartsWoParam() {
@@ -159,7 +149,7 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     if (pit != defines_.end())
       if (pit->second.HasParams() && pit->second.IsValid() && parts.size() > 1) {
         vector<string> np = pit->second.BodyPartsWoParam();
-        cout << "replace: " << join(parts) << " <-- " << join(np) << endl;
+        cout << "replace: " << Join(parts) << " <-- " << Join(np) << endl;
         string param = parts[1];
         parts = np;
         for (size_t i = 0; i < parts.size(); i++)
@@ -170,7 +160,7 @@ void Preprocessor::ApplyDefines(map<int, string> *lines) {
     if (labels.size())  // return label back to string
       parts[0] = labels + parts[0];
 
-    it->second = join(parts, ' ');
+    it->second = Join(parts, ' ');
   }
 }
 

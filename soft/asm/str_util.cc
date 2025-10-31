@@ -170,3 +170,13 @@ string TrimLeft(string s) {
 string Trim(string s) {
   return TrimLeft(TrimRight(s));
 }
+
+string Join(vector<string> v, char del) {
+  string res {};
+  for (size_t i = 0; i < v.size(); i++) {
+    res += v[i];
+    if (i < v.size() - 1)
+      res += del;
+  }
+  return res;
+}

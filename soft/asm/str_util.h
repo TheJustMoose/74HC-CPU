@@ -18,3 +18,5 @@ std::vector<std::string> SplitToCmdParts(std::string);
 std::string TrimRight(std::string s);
 std::string TrimLeft(std::string s);
 std::string Trim(std::string s);
+
+std::string Join(std::vector<std::string> v, char del = '|');

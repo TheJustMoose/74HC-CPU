@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-std::string join(std::vector<std::string> v, char del = '|');
-
 class Define {
  public:
   Define() = default;
