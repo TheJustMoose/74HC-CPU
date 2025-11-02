@@ -276,4 +276,28 @@ TEST_CASE("check memory COPs") {
   // 1000 000 0 11 00 0000
   CodeLine cl5(1, "LPM R0, SP");
   CHECK(cl5.generate_machine_code() == 0x80C0);
+
+  // 1000 110 0 11 00 0001
+  CodeLine cl6(1, "LPM R6, SP+1");
+  CHECK(cl6.generate_machine_code() == 0x8CC1);
+
+  // 1000 110 0 11 00 0111
+  CodeLine cl7(1, "LPM R6, SP+7");
+  CHECK(cl7.generate_machine_code() == 0x8CC7);
+
+  // 1000 110 0 11 00 1111
+  CodeLine cl8(1, "LPM R6, SP-1");
+  CHECK(cl8.generate_machine_code() == 0x8CCF);
+
+  // 1000 110 0 11 00 1110
+  CodeLine cl9(1, "LPM R6, SP-2");
+  CHECK(cl9.generate_machine_code() == 0x8CCE);
+
+  // 1000 110 0 11 00 1001
+  CodeLine clA(1, "LPM R6, SP-7");
+  CHECK(clA.generate_machine_code() == 0x8CC9);
+
+  // 1000 110 0 11 00 1000
+  CodeLine clB(1, "LPM R6, SP-8");
+  CHECK(clB.generate_machine_code() == 0x8CC8);
 }
