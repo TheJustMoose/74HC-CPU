@@ -53,6 +53,7 @@ TEST_CASE("check preprocessor cleaner") {
 
   // check different spaces
   CHECK(pre.StripLine("\t\tLSR R0  \n") == "LSR R0");
+  CHECK(pre.StripLine("LSR\tR0") == "LSR\tR0");
 
   CHECK(pre.StripLine(";.org 1000h") == "");
 }
@@ -333,4 +334,11 @@ TEST_CASE("check RAM COPs") {
   // 1100 111 0 01 00 0000
   CodeLine cl4(1, "ST Y, R7");
   CHECK(cl4.generate_machine_code() == 0xCE40);
+}
+
+TEST_CASE("check I/O COPs") {
+  // IN   DST  PORT ZzIi
+  // 1010 011 00010 0000
+  CodeLine cl1(1, "IN R3, PINS1");
+  CHECK(cl1.generate_machine_code() == 0xA620);
 }
