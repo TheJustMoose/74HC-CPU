@@ -305,4 +305,32 @@ TEST_CASE("check memory COPs") {
   // 1000 101 0 00 01 0000
   CodeLine clC(1, "LPM R5, XI");  // R5 = *X++ in C++ notation (Load with post-increment)
   CHECK(clC.generate_machine_code() == 0x8A10);
+
+  // 1000 101 0 00 10 0000
+  CodeLine clD(1, "LPM R5, XD");  // R5 = *X-- in C++ notation (Load with post-decrement)
+  CHECK(clD.generate_machine_code() == 0x8A20);
+
+  // 1000 101 0 00 10 0001
+  CodeLine clE(1, "LPM R5, XD+1");  // R5 = *(X + 1); X--;  in C++ notation (Load with post-decrement and displacement)
+  CHECK(clE.generate_machine_code() == 0x8A21);
+}
+
+TEST_CASE("check RAM COPs") {
+  // LD   DST - SR DU OFST
+  // 1001 000 0 00 00 0000
+  CodeLine cl1(1, "LD R0, X");
+  CHECK(cl1.generate_machine_code() == 0x9000);
+
+  // ST   SRC - DS DU OFST
+  // 1100 000 0 00 00 0000
+  CodeLine cl2(1, "ST X, R0");
+  CHECK(cl2.generate_machine_code() == 0xC000);
+
+  // 1100 000 0 00 00 0101
+  CodeLine cl3(1, "ST X+5, R0");
+  CHECK(cl3.generate_machine_code() == 0xC005);
+
+  // 1100 111 0 01 00 0000
+  CodeLine cl4(1, "ST Y, R7");
+  CHECK(cl4.generate_machine_code() == 0xCE40);
 }

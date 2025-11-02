@@ -16,6 +16,8 @@ void help() {
       "jmp: CALL, JMP, RET, JZ, JL, JNE, JE, JG, JC, JNZ, JNC, JHC, JNHC, STOP, AFCALL, NOP\n",
       "Registers: R0, R1, R2, R3, R4, R5, R6, R7\n",
       "Register pointers: X(XL+XH), Y(YL+YH), Z(ZL+ZH), SP(SPL+SPH)\n",
+      "Auto-increment pointers: XI, YI, ZI, SPI\n",
+      "Auto-decrement pointers: XD, YD, ZD, SPD\n",
       "PORTS: PORT0-31, PIN0-31\n",
       "Macro: LO()/HI() for pointers, for example:\nmov YL, LO(StringName)\n",
       "Directives:\n.org 1000h\n.str S \"Some str\"\n.def FROM TO\n.def FROM(param) TO param, bla-bla\n",
