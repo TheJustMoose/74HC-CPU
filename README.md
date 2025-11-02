@@ -18,6 +18,8 @@ Not a very scary instruction set discrete logic processor.
 
 ## Instruction list
 
+```
+|----------------------------------------------|f|
 |   HIGH BYTE    |    LOW BYTE   |  HIGH BYTE  |a|
 |0 1 2 3  4 5 6 7 8 9 A B C D E F|   (again)   |g|
 |   4   +   3 + 1 + 3  +    5    = 16          |l|
@@ -54,3 +56,5 @@ Not a very scary instruction set discrete logic processor.
 | BRNCH |  JNHC  | 8 bit OFFSET  | FD 1111 1101| |
 | BRNCH | AFCALL | Hi 8 bit ADDR | FE 1111 1110| |
 | BRNCH |NOP/STOP|   1111 111x   | FF 1111 1111| |
+|----------------------------------------------|-|
+```
