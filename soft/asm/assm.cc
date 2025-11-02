@@ -207,7 +207,7 @@ PTR Names::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) {
       *inc = ptr & rInc;
     if (dec)
       *dec = ptr & rDec;
-    return (PTR)(ptr & 0x0F);
+    return (PTR)(ptr & rMask);
   } else {
     ErrorCollector::rep("Unknown pointer register: " + name);
     return rUnkPtr;

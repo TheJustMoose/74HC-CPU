@@ -300,4 +300,9 @@ TEST_CASE("check memory COPs") {
   // 1000 110 0 11 00 1000
   CodeLine clB(1, "LPM R6, SP-8");
   CHECK(clB.generate_machine_code() == 0x8CC8);
+
+  // LPM  DST W SR DU OFST
+  // 1000 101 0 00 01 0000
+  CodeLine clC(1, "LPM R5, XI");  // R5 = *X++ in C++ notation (Load with post-increment)
+  CHECK(clC.generate_machine_code() == 0x8A10);
 }

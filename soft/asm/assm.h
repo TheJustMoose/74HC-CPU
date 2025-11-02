@@ -51,6 +51,8 @@ enum REG : uint16_t {
 enum PTR : uint16_t {
   // Pointer register pairs
   rX = 0, rY = 1, rZ = 2, rSP = 3,
+  // Pointer register mask
+  rMask = 0x3,
   // Flags
   rInc = 0x10, rDec = 0x20,
   // Same pointers but with post increment
