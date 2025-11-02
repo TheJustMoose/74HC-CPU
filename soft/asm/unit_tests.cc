@@ -200,7 +200,7 @@ TEST_CASE("check str_util") {
   CHECK(15 == val);
 }
 
-TEST_CASE("check COPs") {
+TEST_CASE("check arithm COPs") {
   CodeLine cl1(1, "NOP");
   CHECK(cl1.generate_machine_code() == 0xFFFF);
 
@@ -253,4 +253,27 @@ TEST_CASE("check COPs") {
   // 0111 000 0 111 00000
   CodeLine clE(1, "MOV R0, R7");
   CHECK(clE.generate_machine_code() == 0x70E0);
+}
+
+TEST_CASE("check memory COPs") {
+  // LPM  DST W SR DU OFST
+  // 1000 000 0 00 00 0000
+  CodeLine cl1(1, "LPM R0, X");
+  CHECK(cl1.generate_machine_code() == 0x8000);
+
+  // 1000 101 0 00 00 0000
+  CodeLine cl2(1, "LPM R5, X");
+  CHECK(cl2.generate_machine_code() == 0x8A00);
+
+  // 1000 000 0 01 00 0000
+  CodeLine cl3(1, "LPM R0, Y");
+  CHECK(cl3.generate_machine_code() == 0x8040);
+
+  // 1000 000 0 10 00 0000
+  CodeLine cl4(1, "LPM R0, Z");
+  CHECK(cl4.generate_machine_code() == 0x8080);
+
+  // 1000 000 0 11 00 0000
+  CodeLine cl5(1, "LPM R0, SP");
+  CHECK(cl5.generate_machine_code() == 0x80C0);
 }
