@@ -205,9 +205,11 @@ TEST_CASE("check arithm COPs") {
   CodeLine cl1(1, "NOP");
   CHECK(cl1.generate_machine_code() == 0xFFFF);
 
+  // 0000 000 0 000 00000
   CodeLine cl2(1, "ADD R0, R0");
   CHECK(cl2.generate_machine_code() == 0x0000);
 
+  // 0000 001 0 010 00000
   CodeLine cl3(1, "ADD R1, R2");
   CHECK(cl3.generate_machine_code() == 0x0240);
 
@@ -235,13 +237,13 @@ TEST_CASE("check arithm COPs") {
   CodeLine cl9(1, "MUL R6, R7");
   CHECK(cl9.generate_machine_code() == 0x5CE0);
 
-  // 0110 111 0 001 00000
-  CodeLine clA(1, "SWAP R7");
-  CHECK(clA.generate_machine_code() == 0x6E20);
-
   // 0110 111 0 000 00000
   CodeLine clB(1, "INV R7");
   CHECK(clB.generate_machine_code() == 0x6E00);
+
+  // 0110 111 0 001 00000
+  CodeLine clA(1, "SWAP R7");
+  CHECK(clA.generate_machine_code() == 0x6E20);
 
   // 0110 111 0 010 00000
   CodeLine clC(1, "LSR R7");
@@ -256,7 +258,7 @@ TEST_CASE("check arithm COPs") {
   CHECK(clE.generate_machine_code() == 0x70E0);
 }
 
-TEST_CASE("check memory COPs") {
+TEST_CASE("check ROM COPs") {
   // LPM  DST W SR DU OFST
   // 1000 000 0 00 00 0000
   CodeLine cl1(1, "LPM R0, X");
@@ -271,7 +273,7 @@ TEST_CASE("check memory COPs") {
   CHECK(cl3.generate_machine_code() == 0x8040);
 
   // 1000 000 0 10 00 0000
-  CodeLine cl4(1, "LPM R0, Z");
+  CodeLine cl4(1, "LPM R0, Z");  // R0 = *Z;
   CHECK(cl4.generate_machine_code() == 0x8080);
 
   // 1000 000 0 11 00 0000
@@ -279,11 +281,11 @@ TEST_CASE("check memory COPs") {
   CHECK(cl5.generate_machine_code() == 0x80C0);
 
   // 1000 110 0 11 00 0001
-  CodeLine cl6(1, "LPM R6, SP+1");
+  CodeLine cl6(1, "LPM R6, SP+1");  // R6 = *(SP + 1);
   CHECK(cl6.generate_machine_code() == 0x8CC1);
 
   // 1000 110 0 11 00 0111
-  CodeLine cl7(1, "LPM R6, SP+7");
+  CodeLine cl7(1, "LPM R6, SP+7");  // R6 = *(SP + 7);
   CHECK(cl7.generate_machine_code() == 0x8CC7);
 
   // 1000 110 0 11 00 1111
@@ -304,11 +306,11 @@ TEST_CASE("check memory COPs") {
 
   // LPM  DST W SR DU OFST
   // 1000 101 0 00 01 0000
-  CodeLine clC(1, "LPM R5, XI");  // R5 = *X++ in C++ notation (Load with post-increment)
+  CodeLine clC(1, "LPM R5, XI");  // R5 = *X++; in C++ notation (Load with post-increment)
   CHECK(clC.generate_machine_code() == 0x8A10);
 
   // 1000 101 0 00 10 0000
-  CodeLine clD(1, "LPM R5, XD");  // R5 = *X-- in C++ notation (Load with post-decrement)
+  CodeLine clD(1, "LPM R5, XD");  // R5 = *X--; in C++ notation (Load with post-decrement)
   CHECK(clD.generate_machine_code() == 0x8A20);
 
   // 1000 101 0 00 10 0001
@@ -341,4 +343,9 @@ TEST_CASE("check I/O COPs") {
   // 1010 011 00010 0000
   CodeLine cl1(1, "IN R3, PINS1");
   CHECK(cl1.generate_machine_code() == 0xA620);
+
+  // OUT  SRC  PORT OoXx
+  // 1011 111 01011 0000  // PORT9 have number 11, see port_names
+  CodeLine cl2(1, "OUT PORT9, R7");
+  CHECK(cl2.generate_machine_code() == 0xBEB0);
 }
