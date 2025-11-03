@@ -36,7 +36,6 @@ void help() {
 }
 
 int main(int argc, char* argv[]) {
-  //locale::global(locale(""));
   SetConsoleOutputCP(CP_UTF8);
 
   if (argc < 2) {
@@ -56,8 +55,14 @@ int main(int argc, char* argv[]) {
       show_pre = true;
 
     // okay, probably cmd is file name ;)
-    Assembler assm;
-    return assm.process(cmd, show_pre);
+    try {
+      Assembler assm;
+      return assm.process(cmd, show_pre);
+    } catch (const char* e) {
+      cout << "Error: " << e << endl;
+    } catch (std::exception e) {
+      cout << "Error: " << e.what() << endl;
+    }
   }
 
   cout << "argc: " << argc << endl;
