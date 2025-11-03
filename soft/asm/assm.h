@@ -19,21 +19,22 @@ enum COP {
   bCALL = 0xF000,
   bJMP = 0xF100,
   bRET = 0xF200,
-  bJZ = 0xF300,
+  bRETI = 0xF300,
   bJL = 0xF400,
-  bJNE = 0xF500,
-  bJE = 0xF600,
+  bJE = 0xF500,
+  bJNE = 0xF600,
   bJG = 0xF700,
-  bJC = 0xF800,
+  bJZ = 0xF800,
   bJNZ = 0xF900,
-  bJNC = 0xFA00,
-  bJHC = 0xFB00,
-  bJNHC = 0xFC00,
-  bSTOP = 0xFD00,
+  bJC = 0xFA00,
+  bJNC = 0xFB00,
+  bJHC = 0xFC00,
+  bJNHC = 0xFD00,
   bAFCALL = 0xFE00,
-  bNOP = 0xFF00,    // processor operation
-  bERROR = 0xFFFF,  // we get some unknown name of operation
-  cNO_OP = 0x10000  // just constant for "there is no operation here", for example for labels or error op names
+  bNOP = 0xFFFF,
+  bSTOP = 0xFFFE,  // processor operation
+  bERROR = 0x10000,  // we get some unknown name of operation
+  cNO_OP = 0x20000  // just constant for "there is no operation here", for example for labels or error op names
 };
 
 enum OP_TYPE {

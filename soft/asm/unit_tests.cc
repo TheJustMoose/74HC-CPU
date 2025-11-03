@@ -375,4 +375,12 @@ TEST_CASE("check branches COPs") {
   // Try to set LBL offset (from current address)
   cl4.update_machine_code( map<string, uint16_t> { { "LBL", 0x000Fu } } );
   CHECK(cl4.generate_machine_code() == 0xF1FF);  // jmp to previous instruction
+
+  // 1111 0010 00000000
+  CodeLine cl5(1, "RET");
+  CHECK(cl5.generate_machine_code() == 0xF200);
+
+  // 1111 0011 00000000
+  CodeLine cl6(1, "RETI");
+  CHECK(cl6.generate_machine_code() == 0xF300);
 }
