@@ -724,7 +724,10 @@ void Assembler::extract_string() {
 void Assembler::pass1() {
   map<int, string>::iterator it;
   for (it = lines_.begin(); it != lines_.end(); it++) {
-    code_.push_back(CodeLine(it->first, NormalizeLine(it->second)));
+    string nl = NormalizeLine(it->second);
+    if (nl.size() == 0)
+      continue;
+    code_.push_back(CodeLine(it->first, nl));
   }
 }
 
