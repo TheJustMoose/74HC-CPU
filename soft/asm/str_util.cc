@@ -108,6 +108,9 @@ vector<string> Split(string line) {
 
 vector<string> SplitToCmdParts(string text) {
   vector<string> parts = Split(ToUpper(text));
+  if (parts.size() == 0)
+    return { "", "", "" };
+
   // first part is operation name
   // and it has only one word
   string op_name;
