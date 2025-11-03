@@ -383,4 +383,56 @@ TEST_CASE("check branches COPs") {
   // 1111 0011 00000000
   CodeLine cl6(1, "RETI");
   CHECK(cl6.generate_machine_code() == 0xF300);
+
+  // 1111 0100 00000000
+  CodeLine cl7(1, "JL TST");
+  CHECK(cl7.generate_machine_code() == 0xF400);
+
+  // 1111 0101 00000000
+  CodeLine cl8(1, "JE TST");
+  CHECK(cl8.generate_machine_code() == 0xF500);
+
+  // 1111 0110 00000000
+  CodeLine cl9(1, "JNE TST");
+  CHECK(cl9.generate_machine_code() == 0xF600);
+
+  // 1111 0111 00000000
+  CodeLine clA(1, "JG TST");
+  CHECK(clA.generate_machine_code() == 0xF700);
+
+  // 1111 1000 00000000
+  CodeLine clB(1, "JZ TST");
+  CHECK(clB.generate_machine_code() == 0xF800);
+
+  // 1111 1001 00000000
+  CodeLine clC(1, "JNZ TST");
+  CHECK(clC.generate_machine_code() == 0xF900);
+
+  // 1111 1010 00000000
+  CodeLine clD(1, "JC TST");
+  CHECK(clD.generate_machine_code() == 0xFA00);
+
+  // 1111 1011 00000000
+  CodeLine clE(1, "JNC TST");
+  CHECK(clE.generate_machine_code() == 0xFB00);
+
+  // 1111 1100 00000000
+  CodeLine clF(1, "JHC TST");
+  CHECK(clF.generate_machine_code() == 0xFC00);
+
+  // 1111 1101 00000000
+  CodeLine clG(1, "JNHC TST");
+  CHECK(clG.generate_machine_code() == 0xFD00);
+
+  // 1111 1110 00000000
+  CodeLine clH(1, "AFCALL TST");
+  CHECK(clH.generate_machine_code() == 0xFE00);
+
+  // 1111 1111 11111111
+  CodeLine clI(1, "NOP");
+  CHECK(clI.generate_machine_code() == 0xFFFF);
+
+  // 1111 1111 11111110
+  CodeLine clJ(1, "STOP");
+  CHECK(clJ.generate_machine_code() == 0xFFFE);
 }
