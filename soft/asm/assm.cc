@@ -496,11 +496,11 @@ class BranchCodeGen: public CodeGen {
           int offset = label_addr;
           offset -= address_;         // offset from current address
           if (offset > 127 || offset < -128)
-            ErrorCollector::rep("Error: Label " + label_ + " is too far from this instruction");
+            ErrorCollector::rep("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset));
           else
             target_addr_ = offset & 0xFF;
         }
-        cout << "new target address: " << hex << target_addr_ << endl;
+        //cout << "new target address: " << hex << target_addr_ << endl;
       }
     }
   }
@@ -525,12 +525,12 @@ CodeLine::CodeLine(int line_number, string line_text)
     string label = line_text_.substr(0, pos);
     if (!label.empty()) {
       labels_.push_back(label);
-      cout << "label: " << label << endl;
+      //cout << "label: " << label << endl;
     }
     line_text_.erase(0, pos + 1);
     pos = line_text_.find(":");
   }
-  cout << "code line w/o label: " << line_text_ << endl;
+  //cout << "code line w/o label: " << line_text_ << endl;
 
   vector<string> cmd_parts = SplitToCmdParts(line_text_);
   if (cmd_parts.size() != 3) {
@@ -549,7 +549,7 @@ CodeLine::CodeLine(int line_number, string line_text)
   }
 
   OP_TYPE opt = CopToType(op);
-  cout << "Operation type: " << opt << endl;
+  //cout << "Operation type: " << opt << endl;
 
   CodeGen* cg {nullptr};
   switch (opt) {

@@ -202,9 +202,7 @@ class StringConst {
   uint16_t addr() const { return addr_; }
   void set_addr(uint16_t);
   void out_code() const;
-  std::string str() const {
-    return str_;
-  }
+  std::string str() const { return str_; }
 
  private:
   std::string str_ {};

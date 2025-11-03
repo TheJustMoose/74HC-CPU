@@ -1,6 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest.h>
 
+#include <map>
+#include <string>
+
 #include "assm.h"
 #include "preprocessor.h"
 #include "str_util.h"
@@ -348,4 +351,26 @@ TEST_CASE("check I/O COPs") {
   // 1011 111 01011 0000  // PORT9 have number 11, see port_names
   CodeLine cl2(1, "OUT PORT9, R7");
   CHECK(cl2.generate_machine_code() == 0xBEB0);
+}
+
+TEST_CASE("check branches COPs") {
+  // 1111 0010 00000000
+  CodeLine cl1(1, "LBL: RET");
+  CHECK(cl1.generate_machine_code() == 0xF200);
+  // 1111 0000 00000000
+  CodeLine cl2(2, "CALL LBL");  // fortunately, LBL address is 0
+  CHECK(cl2.generate_machine_code() == 0xF000);
+
+  // 1111 0001 00001010
+  CodeLine cl3(1, "JMP LBL");
+  // Try to set LBL offset (from current address)
+  cl3.update_machine_code( map<string, uint16_t> { {"LBL", 10} } );
+  CHECK(cl3.generate_machine_code() == 0xF10A);
+
+  // 1111 0001 11111111
+  CodeLine cl4(1, "JMP LBL");
+  cl4.set_address(0x0010);
+  // Try to set LBL offset (from current address)
+  cl4.update_machine_code( map<string, uint16_t> { {"LBL", 0x000F} } );
+  CHECK(cl4.generate_machine_code() == 0xF1FF);  // jmp to previous instruction
 }
