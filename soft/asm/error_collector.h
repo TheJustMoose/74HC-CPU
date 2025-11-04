@@ -7,12 +7,13 @@
 class ErrorCollector {
  public:
   static void rep(std::string msg, int line) {
-    std::cout << msg << std::endl;
     ErrorCollector::errors_[line] = msg;
   }
 
-  static void clr() {
-    ErrorCollector::errors_.clear();
+  static void clr(int line) {
+    if (ErrorCollector::errors_.find(line) !=
+        ErrorCollector::errors_.end())
+      ErrorCollector::errors_[line] = "";
   }
 
   static std::map<int, std::string> get() {

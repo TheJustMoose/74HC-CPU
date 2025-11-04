@@ -254,9 +254,6 @@ class BinaryCodeGen: public CodeGen {
   }
 
   uint16_t Emit() {
-    //ARITHM res;
-    //res.cop = operation_;
-    //return res;
     uint16_t cop = operation_;
     cop |= left_op_ << 9;  // don't forget about C bit
     if (immediate_) {
@@ -287,12 +284,11 @@ class BinaryCodeGen: public CodeGen {
         break;
     }
 
-    if (it == name_to_address.end()) {
-      //ErrorCollector::rep("Name " + right_str_ + " not found in symbol list", line_number());
+    if (it == name_to_address.end())
       return;
-    }
 
-    ErrorCollector::clr();
+    ErrorCollector::clr(line_number());  // have to remove previous messages
+                                         // cause RegFromName know nothing about labels and LO/HI macro
     ErrorCollector::rep("Replace " + it->first + " to " + to_string(it->second), line_number());
 
     right_val_ = it->second;
