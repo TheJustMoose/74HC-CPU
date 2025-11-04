@@ -169,10 +169,8 @@ COP Names::CopFromName(string name) {
 
   if (cop_names.find(name) != cop_names.end())
     return cop_names[name];
-  else {
-    ErrorCollector::rep("Unknown operation: " + name);
+  else
     return bERROR;
-  }
 }
 
 REG Names::RegFromName(string name) {
@@ -181,10 +179,8 @@ REG Names::RegFromName(string name) {
 
   if (reg_names.find(name) != reg_names.end())
     return reg_names[name];
-  else {
-    ErrorCollector::rep("Unknown register: " + name);
+  else
     return rUnkReg;
-  }
 }
 
 PTR Names::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) {
@@ -206,24 +202,18 @@ PTR Names::PtrFromName(string name, bool* inc = nullptr, bool* dec = nullptr) {
       *dec = ptr & rDec;
     return (PTR)(ptr & rMask);
   } else {
-    ErrorCollector::rep("Unknown pointer register: " + name);
     return rUnkPtr;
   }
 }
 
-uint16_t Names::PortFromName(string name, string prefix) {
-  // port_names
+int Names::PortFromName(string name, string prefix) {
   if (name.empty())
-    return 0;
-  if (port_names.find(name) == port_names.end()) {
-    ErrorCollector::rep("Unknown port name: " + name);
-    return 0;
-  }
+    return -1;
 
-  uint16_t res = port_names[name];
-  if (res >= 32)
-    ErrorCollector::rep("Port number should be in range 0-31");
-  return res;
+  if (port_names.find(name) == port_names.end())
+    return -1;
+
+  return port_names[name];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -232,9 +222,11 @@ uint16_t Names::PortFromName(string name, string prefix) {
 // ADD R2, 10
 class BinaryCodeGen: public CodeGen {
  public:
-  BinaryCodeGen(COP cop, string left, string right)
-    : CodeGen(cop), right_str_(right) {
+  BinaryCodeGen(int line_number, COP cop, string left, string right)
+    : CodeGen(line_number, cop), right_str_(right) {
     left_op_ = Names::RegFromName(left);
+    if (left_op_ == rUnkReg)
+      ErrorCollector::rep("Unknown register: " + left, line_number);
     TryImmediate(right);
   }
 
@@ -248,16 +240,17 @@ class BinaryCodeGen: public CodeGen {
         right_val_ = t;
 
       if (right_val_> 0xFF)
-        ErrorCollector::rep("Error. Immediate value should have 8 bit only (0 - 255). Got: " + right);
+        ErrorCollector::rep("Error. Immediate value should have 8 bit only (0 - 255). Got: " + right, line_number());
     }
 
-    if (!immediate_)  // not val, try to check register name
+    if (!immediate_) {  // not val, try to check register name
       right_op_ = Names::RegFromName(right);  // MOV R0, R1
-
-    if (!immediate_ && right_op_ == rUnkReg)
-      ErrorCollector::rep("You have to use Register name or immediate value as rval.");
-    else
-      right_str_ = "";
+      if (right_op_ == rUnkReg) {
+        ErrorCollector::rep("Unknown register: " + right_str_, line_number());
+        ErrorCollector::rep("You have to use Register name or immediate value as rval.", line_number());
+      } else
+        right_str_ = "";
+    }
   }
 
   uint16_t Emit() {
@@ -295,12 +288,12 @@ class BinaryCodeGen: public CodeGen {
     }
 
     if (it == name_to_address.end()) {
-      ErrorCollector::rep("Name " + right_str_ + " not found in symbol list");
+      ErrorCollector::rep("Name " + right_str_ + " not found in symbol list", line_number());
       return;
     }
 
     ErrorCollector::clr();
-    ErrorCollector::rep("Replace " + it->first + " to " + to_string(it->second));
+    ErrorCollector::rep("Replace " + it->first + " to " + to_string(it->second), line_number());
 
     right_val_ = it->second;
     if (hi)
@@ -323,20 +316,22 @@ class BinaryCodeGen: public CodeGen {
   REG right_op_ {rUnkReg};
   uint16_t right_val_ {0};
   bool immediate_ {false};
-  string right_str_ {};
+  string right_str_ {};  // TODO: try to remove it later
 };
 
 // LSR R7
 class UnaryCodeGen: public CodeGen {
  public:
-  UnaryCodeGen(string op_name, string reg)
-    : CodeGen(cUNO), op_name_(op_name) {
+  UnaryCodeGen(int line_number, string op_name, string reg)
+    : CodeGen(line_number, cUNO), op_name_(op_name) {
     reg_ = Names::RegFromName(reg);
+    if (reg_ == rUnkReg)
+      ErrorCollector::rep("Unknown register: " + reg, line_number);
     if (unary_codes.find(op_name) != unary_codes.end())
       ucode_ = unary_codes[op_name];
     else {
       ucode_ = 0;
-      ErrorCollector::rep("Unknown unary operation ");
+      ErrorCollector::rep("Unknown unary operation ", line_number);
     }
   }
 
@@ -362,18 +357,26 @@ class UnaryCodeGen: public CodeGen {
 // LD R1, XI + 10
 class MemoryCodeGen: public CodeGen {
  public:
-  MemoryCodeGen(COP cop, string left, string right)
-    : CodeGen(cop) {
+  MemoryCodeGen(int line_number, COP cop, string left, string right)
+    : CodeGen(line_number, cop) {
     if (cop == cLD || cop == cLPM || cop == cLPMW) {
       reg_ = Names::RegFromName(left);
+      if (reg_ == rUnkReg)
+        ErrorCollector::rep("Unknown register: " + left, line_number);
       ptr_ = Names::PtrFromName(right, &inc_, &dec_);
+      if (ptr_ == rUnkPtr)
+        ErrorCollector::rep("Unknown pointer register: " + right, line_number);
       offset_ = parse_offset(right);
     } else if (cop == cST) {
       ptr_ = Names::PtrFromName(left, &inc_, &dec_);
+      if (ptr_ == rUnkPtr)
+        ErrorCollector::rep("Unknown pointer register: " + left, line_number);
       reg_ = Names::RegFromName(right);
+      if (reg_ == rUnkReg)
+        ErrorCollector::rep("Unknown register: " + right, line_number);
       offset_ = parse_offset(left);
     } else {
-      ErrorCollector::rep("Unknown memory operation. Should be LD or ST or LPM.");
+      ErrorCollector::rep("Unknown memory operation. Should be LD or ST or LPM.", line_number);
     }
   }
 
@@ -388,12 +391,12 @@ class MemoryCodeGen: public CodeGen {
       return 0;
 
     if (tail[0] != '+' && tail[0] != '-') {
-      ErrorCollector::rep("You can add or substract offset from pointer register. No other operations.");
+      ErrorCollector::rep("You can add or substract offset from pointer register. No other operations.", line_number());
       return 0;
     }
 
     if (tail.size() < 2) {
-      ErrorCollector::rep("You lost offset value.");
+      ErrorCollector::rep("You lost offset value.", line_number());
       return 0;
     }
 
@@ -402,9 +405,9 @@ class MemoryCodeGen: public CodeGen {
     if (tail[0] == '-')
       off = -off;
     if (off > 7)
-      ErrorCollector::rep("Offset has to be <= 7.");
+      ErrorCollector::rep("Offset has to be <= 7.", line_number());
     else if (off < -8)
-      ErrorCollector::rep("Offset has to be >= -8.");
+      ErrorCollector::rep("Offset has to be >= -8.", line_number());
     else
       res = off & 0x0F;  // we need only 4 bits
     return res;
@@ -436,16 +439,34 @@ class MemoryCodeGen: public CodeGen {
 // IN R0, PORT1
 class IOCodeGen: public CodeGen {
  public:
-  IOCodeGen(COP cop, string left, string right)
-    : CodeGen(cop) {
+  IOCodeGen(int line_number, COP cop, string left, string right)
+    : CodeGen(line_number, cop) {
     if (cop == cIN) {
       reg_ = Names::RegFromName(left);
-      port_ = Names::PortFromName(right, "PIN");
+      if (reg_ == rUnkReg)
+        ErrorCollector::rep("Unknown register: " + left, line_number);
+
+      int p = Names::PortFromName(right, "PIN");
+      if (p == -1)
+        ErrorCollector::rep("Unknown port name: " + right, line_number);
+      else if (p >= 32)
+        ErrorCollector::rep("Port number should be in range 0-31", line_number);
+      else
+        port_ = p;
     } else if (cop == cOUT || cop == cTOGL) {
-      port_ = Names::PortFromName(left, "PORT");
+      int p = Names::PortFromName(left, "PORT");
+      if (p == -1)
+        ErrorCollector::rep("Unknown port name: " + left, line_number);
+      else if (p >= 32)
+        ErrorCollector::rep("Port number should be in range 0-31", line_number);
+      else
+        port_ = p;
+
       reg_ = Names::RegFromName(right);
+      if (reg_ == rUnkReg)
+        ErrorCollector::rep("Unknown register: " + right, line_number);
     } else {
-      ErrorCollector::rep("Unknown IO operation. Should be IN or OUT.");
+      ErrorCollector::rep("Unknown IO operation. Should be IN or OUT.", line_number);
     }
   }
 
@@ -469,8 +490,8 @@ class IOCodeGen: public CodeGen {
 
 class BranchCodeGen: public CodeGen {
  public:
-  BranchCodeGen(COP cop, string label)
-    : CodeGen(cop), label_(label) {}
+  BranchCodeGen(int line_number, COP cop, string label)
+    : CodeGen(line_number, cop), label_(label) {}
 
   uint16_t Emit() {
     uint16_t cop = operation_;
@@ -487,13 +508,13 @@ class BranchCodeGen: public CodeGen {
         uint16_t label_addr = it->second;
         if (operation_ == bAFCALL) {
           if (label_addr % 256)
-            ErrorCollector::rep("Label address in far call must be a multiple of 256.");
+            ErrorCollector::rep("Label address in far call must be a multiple of 256.", line_number());
           target_addr_ = label_addr >> 8;  // absolute address divided by 256
         } else {
           int offset = label_addr;
           offset -= address_;         // offset from current address
           if (offset > 127 || offset < -128)
-            ErrorCollector::rep("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset));
+            ErrorCollector::rep("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset), line_number());
           else
             target_addr_ = offset & 0xFF;
         }
@@ -541,6 +562,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   COP op = Names::CopFromName(op_name);
   if (op == bERROR) {
+    ErrorCollector::rep("Unknown operation: " + op_name, line_number);
     cout << "Error. Unknown operation: |" << op_name << "|" << endl;
     return;
   }
@@ -550,11 +572,11 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   CodeGen* cg {nullptr};
   switch (opt) {
-    case tBINARY: cg = new BinaryCodeGen(op, left, right); break;
-    case tUNARY: cg = new UnaryCodeGen(op_name, left); break;
-    case tMEMORY: cg = new MemoryCodeGen(op, left, right); break;
-    case tIO: cg = new IOCodeGen(op, left, right); break;
-    case tBRANCH: cg = new BranchCodeGen(op, left); break;
+    case tBINARY: cg = new BinaryCodeGen(line_number_, op, left, right); break;
+    case tUNARY: cg = new UnaryCodeGen(line_number_, op_name, left); break;
+    case tMEMORY: cg = new MemoryCodeGen(line_number_, op, left, right); break;
+    case tIO: cg = new IOCodeGen(line_number_, op, left, right); break;
+    case tBRANCH: cg = new BranchCodeGen(line_number_, op, left); break;
     case tNO_OP:
     default:
       cout << "No operation is required" << endl;
@@ -599,7 +621,7 @@ StringConst& StringConst::operator=(const StringConst& rval) {
 
 uint16_t StringConst::get_size() const {
   if (str_.size() >= numeric_limits<uint16_t>::max()) {
-    ErrorCollector::rep("String const is too long.");
+    //ErrorCollector::rep("String const is too long.");
     return 0;
   }
 

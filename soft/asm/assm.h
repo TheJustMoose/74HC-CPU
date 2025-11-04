@@ -62,10 +62,18 @@ enum PTR : uint16_t {
   rUnkPtr = 0x100
 };
 
+class Names {
+ public:
+  static COP CopFromName(std::string name);
+  static REG RegFromName(std::string name);
+  static PTR PtrFromName(std::string name, bool* inc, bool* dec);
+  static int PortFromName(std::string name, std::string prefix);
+};
+
 class CodeGen {
  public:
-  CodeGen(COP cop)
-   : operation_(cop) {}
+  CodeGen(int line_number, COP cop)
+   : line_number_(line_number), operation_(cop) {}
   virtual ~CodeGen() {}
 
   virtual uint16_t Emit() { return 0; }
@@ -100,17 +108,14 @@ class CodeGen {
     address_ = addr;
   }
 
+  int line_number() {
+    return line_number_;
+  }
+
  protected:
+  int line_number_ {0};
   uint16_t address_ {0};
   COP operation_ {cNO_OP};
-};
-
-class Names {
- public:
-  static COP CopFromName(std::string name);
-  static REG RegFromName(std::string name);
-  static PTR PtrFromName(std::string name, bool* inc, bool* dec);
-  static uint16_t PortFromName(std::string name, std::string prefix);
 };
 
 class CodeLine {

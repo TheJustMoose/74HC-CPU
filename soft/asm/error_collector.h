@@ -6,10 +6,9 @@
 
 class ErrorCollector {
  public:
-  static void rep(std::string msg, int line = 0) {
+  static void rep(std::string msg, int line) {
     std::cout << msg << std::endl;
-    static int dummy = 1;
-    ErrorCollector::errors_[dummy++] = msg;
+    ErrorCollector::errors_[line] = msg;
   }
   static void clr() {
     ErrorCollector::errors_.clear();
