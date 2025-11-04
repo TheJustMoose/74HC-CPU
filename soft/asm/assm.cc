@@ -671,9 +671,10 @@ int Assembler::process(string fname, bool show_preprocess_out) {
   pass1();
   pass2();
   pass3();
+  out_code();
+
   out_labels();
   out_orgs();
-  out_code();
 
   return 0;
 }
@@ -833,6 +834,8 @@ void Assembler::out_code() {
   }
 
   cout << "STRINGS:" << endl;
+  if (string_consts_.empty())
+    cout << " empty" << endl;
   for (auto& s : string_consts_) {
     cout << s.first << ":" << endl;
     s.second.addr();
@@ -842,6 +845,8 @@ void Assembler::out_code() {
 
 void Assembler::out_labels() {
   cout << "LABELS:" << endl;
+  if (name_to_address_.empty())
+    cout << " empty" << endl;
   for (auto v : name_to_address_)
     //    line number        line code
     cout << v.first << " " << v.second << endl;
@@ -849,6 +854,8 @@ void Assembler::out_labels() {
 
 void Assembler::out_orgs() {
   cout << "ORGS:" << endl;
+  if (line_to_org_.empty())
+    cout << " empty" << endl;
   for (auto v : line_to_org_)
     cout << v.first << " " << v.second << endl;
 }
