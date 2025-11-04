@@ -585,7 +585,7 @@ string CodeLine::FormattedCOP() {
   return code_gen_->FormattedCOP();
 }
 
-vector<string> CodeLine::get_err() {
+map<int, string> CodeLine::get_err() {
   return ErrorCollector::get();
 }
 
@@ -640,13 +640,8 @@ int Assembler::process(string fname, bool show_preprocess_out) {
   Preprocessor pre;
   pre.Preprocess(&lines_);
 
-  if (show_preprocess_out) {
-    cout << "-------- preprocessed source: --------" << endl;
-    map<int, string>::iterator it;
-    for (it = lines_.begin(); it != lines_.end(); it++)
-      cout << it->second << endl;
-    cout << "-------- end of preprocessed source --------" << endl;
-  }
+  if (show_preprocess_out)
+    print_preprocessed();
 
   merge_code_with_labels();
   extract_orgs();
@@ -659,6 +654,14 @@ int Assembler::process(string fname, bool show_preprocess_out) {
   out_code();
 
   return 0;
+}
+
+void Assembler::print_preprocessed() {
+  cout << "-------- preprocessed source: --------" << endl;
+  map<int, string>::iterator it;
+  for (it = lines_.begin(); it != lines_.end(); it++)
+    cout << it->second << endl;
+  cout << "-------- end of preprocessed source --------" << endl;
 }
 
 void Assembler::merge_code_with_labels() {

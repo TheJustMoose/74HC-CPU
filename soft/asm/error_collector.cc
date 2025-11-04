@@ -1,4 +1,4 @@
 #include "error_collector.h"
 
 // static
-std::vector<std::string> ErrorCollector::errors_ {};
+std::map<int, std::string> ErrorCollector::errors_ {};

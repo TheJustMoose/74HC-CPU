@@ -154,7 +154,7 @@ class CodeLine {
       code_gen_->set_address(addr);
   }
 
-  std::vector<std::string> get_err();
+  std::map<int, std::string> get_err();
 
   int line_number() {
     return line_number_;
@@ -191,6 +191,7 @@ class Assembler {
   int process(std::string fname, bool show_preprocess_out = false);
 
  protected:
+  void print_preprocessed();
   void merge_code_with_labels();
   void extract_orgs();
   void extract_string();

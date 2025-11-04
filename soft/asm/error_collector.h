@@ -3,21 +3,21 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <vector>
 
 class ErrorCollector {
  public:
-  static void rep(std::string msg) {
+  static void rep(std::string msg, int line = 0) {
     std::cout << msg << std::endl;
-    ErrorCollector::errors_.push_back(msg);
+    static int dummy = 1;
+    ErrorCollector::errors_[dummy++] = msg;
   }
   static void clr() {
     ErrorCollector::errors_.clear();
   }
-  static std::vector<std::string> get() {
+  static std::map<int, std::string> get() {
     return ErrorCollector::errors_;
   }
 
  private:
-  static std::vector<std::string> errors_;
+  static std::map<int, std::string> errors_;
 };
