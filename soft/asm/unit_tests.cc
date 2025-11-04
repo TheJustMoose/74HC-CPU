@@ -436,3 +436,25 @@ TEST_CASE("check branches COPs") {
   CodeLine clJ(1, "STOP");
   CHECK(clJ.generate_machine_code() == 0xFFFE);
 }
+
+TEST_CASE("check jump distance") {
+  // 1111 0001 00000000
+  CodeLine cl1(1, "JMP L1");
+  // Try to set L1 label offset (from current address)
+  cl1.update_machine_code( map<string, uint16_t> { {"L1", 0} } );  // no jmp (jmp to same command)
+  CHECK(cl1.generate_machine_code() == 0xF100);
+
+  // 1111 0001 11111111
+  CodeLine cl2(1, "JMP L1");
+  cl2.set_address(0x000Au);
+  // Try to set L1 label offset (from current address)
+  cl2.update_machine_code( map<string, uint16_t> { { "L1", 0x0009u } } );  // jmp to previous cmd
+  CHECK(cl2.generate_machine_code() == 0xF1FF);
+
+  // 1111 0001 11111110
+  CodeLine cl3(1, "JMP L1");
+  cl3.set_address(0x000Au);
+  // Try to set L1 label offset (from current address)
+  cl3.update_machine_code( map<string, uint16_t> { { "L1", 0x0008u } } );  // jmp two cmd back
+  CHECK(cl3.generate_machine_code() == 0xF1FE);
+}
