@@ -57,6 +57,7 @@
 #include <vector>
 
 #include "assm.h"
+#include "error_collector.h"
 #include "file_reader.h"
 #include "preprocessor.h"
 #include "str_util.h"
@@ -159,11 +160,6 @@ map<string, uint16_t> port_names {
   { "PORT8", 10 }, { "PINS8", 10 }, { "FLAGS", 10 },
   { "PORT9", 11 }, { "PINS9", 11 }, { "DAC", 11 },
 };
-
-///////////////////////////////////////////////////////////////////////////////
-
-/*static*/
-std::vector<std::string> ErrorCollector::errors_ {};
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -587,6 +583,10 @@ string CodeLine::FormattedCOP() {
   if (!code_gen_)
     return {};
   return code_gen_->FormattedCOP();
+}
+
+vector<string> CodeLine::get_err() {
+  return ErrorCollector::get();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

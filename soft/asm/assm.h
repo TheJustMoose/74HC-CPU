@@ -1,7 +1,6 @@
 #pragma once
 
 #include <bitset>
-#include <iostream>
 #include <map>
 #include <string>
 #include <sstream>
@@ -114,23 +113,6 @@ class Names {
   static uint16_t PortFromName(std::string name, std::string prefix);
 };
 
-class ErrorCollector {
- public:
-  static void rep(std::string msg) {
-    std::cout << msg << std::endl;
-    ErrorCollector::errors_.push_back(msg);
-  }
-  static void clr() {
-    ErrorCollector::errors_.clear();
-  }
-  static std::vector<std::string> get() {
-    return ErrorCollector::errors_;
-  }
-
- private:
-  static std::vector<std::string> errors_;
-};
-
 class CodeLine {
  public:
   CodeLine(int line_number, std::string line_text);
@@ -172,13 +154,7 @@ class CodeLine {
       code_gen_->set_address(addr);
   }
 
-  std::vector<std::string> get_err() {
-    return ErrorCollector::get();
-    /*if (code_gen_)
-      return code_gen_->get_err();
-    else
-      return {};*/
-  }
+  std::vector<std::string> get_err();
 
   int line_number() {
     return line_number_;

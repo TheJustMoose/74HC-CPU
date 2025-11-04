@@ -8,6 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "../Release")
 project(asm CXX)
 add_executable(74hc-asm
 	assm.cc
+	error_collector.cc
 	file_reader.cc
 	main.cc
 	preprocessor.cc
@@ -19,6 +20,7 @@ include_directories("doctest/doctest")
 project(unit_tests CXX)
 add_executable(unit_tests
 	assm.cc
+	error_collector.cc
 	file_reader.cc
 	preprocessor.cc
 	str_util.cc
