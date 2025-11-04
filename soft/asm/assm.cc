@@ -288,7 +288,7 @@ class BinaryCodeGen: public CodeGen {
     }
 
     if (it == name_to_address.end()) {
-      ErrorCollector::rep("Name " + right_str_ + " not found in symbol list", line_number());
+      //ErrorCollector::rep("Name " + right_str_ + " not found in symbol list", line_number());
       return;
     }
 
@@ -827,9 +827,9 @@ void Assembler::out_code() {
          << setw(16) << setfill(' ') << left << it->FormattedCOP()
          << endl;
 
-    vector<string> el;// = it->ErrorCollector::get();  ?????????
-    for (auto& e : el)
-      cout << "         > " << e << endl;
+    string el = ErrorCollector::get(it->line_number());
+    if (el.size())  // for (auto& e : el)
+      cout << "         > " << el << endl;
   }
 
   cout << "STRINGS:" << endl;

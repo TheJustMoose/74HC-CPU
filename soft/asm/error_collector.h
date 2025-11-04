@@ -10,11 +10,21 @@ class ErrorCollector {
     std::cout << msg << std::endl;
     ErrorCollector::errors_[line] = msg;
   }
+
   static void clr() {
     ErrorCollector::errors_.clear();
   }
+
   static std::map<int, std::string> get() {
     return ErrorCollector::errors_;
+  }
+
+  static std::string get(int line) {
+    if (ErrorCollector::errors_.find(line) !=
+        ErrorCollector::errors_.end())
+      return ErrorCollector::errors_[line];
+    else
+      return "";
   }
 
  private:
