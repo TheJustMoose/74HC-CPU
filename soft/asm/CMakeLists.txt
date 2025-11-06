@@ -25,5 +25,5 @@ add_executable(unit_tests
 	preprocessor.cc
 	str_util.cc
 	unit_tests.cc
-	util_unit_tests.cc
+	unit_tests_util.cc
 )
