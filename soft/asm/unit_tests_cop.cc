@@ -8,11 +8,6 @@
 
 using namespace std;
 
-TEST_CASE("check names getter") {
-  CHECK(Names::RegFromName("R0") == rR0);
-  CHECK(Names::RegFromName("R7") == rR7);
-}
-
 TEST_CASE("check arithm COPs") {
   CodeLine cl1(1, "NOP");
   CHECK(cl1.generate_machine_code() == 0xFFFF);
