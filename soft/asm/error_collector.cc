@@ -1,12 +1,7 @@
 #include "error_collector.h"
 
 // static
-ErrorCollector* Singleton::GetInstance() {
-  if (!instance_)
-    instance_ = new ErrorCollector();
-
-  return instance_;
+ErrorCollector& Singleton::GetInstance() {
+  static ErrorCollector instance;
+  return instance;
 }
-
-// static
-ErrorCollector* Singleton::instance_ {nullptr};

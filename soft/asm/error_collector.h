@@ -36,8 +36,5 @@ class ErrorCollector {
 
 class Singleton {
  public:
-  static ErrorCollector* GetInstance();
-
- private:
-  static ErrorCollector* instance_;
+  static ErrorCollector& GetInstance();
 };
