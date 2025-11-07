@@ -194,6 +194,7 @@ class StringConst {
 class Assembler {
  public:
   int process(std::string fname, bool show_preprocess_out = false);
+  void write_binary(std::string fname);
 
  protected:
   void print_preprocessed();
@@ -206,6 +207,7 @@ class Assembler {
   void pass3();
   uint16_t get_max_address();
   void out_code();
+  void out_code(std::vector<uint16_t>& code);
   void out_labels();
   void out_orgs();
 

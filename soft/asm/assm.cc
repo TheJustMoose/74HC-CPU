@@ -50,6 +50,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 #include <limits>
 #include <map>
 #include <sstream>
@@ -837,6 +838,40 @@ void Assembler::out_code() {
     s.second.addr();
     s.second.out_code();
   }
+}
+
+void Assembler::out_code(std::vector<uint16_t>& code) {
+  code.clear();
+
+  uint16_t max_addr = get_max_address();
+  if (!max_addr) {
+    cout << "No code to output" << endl;
+    return;
+  }
+
+  code.resize(max_addr, 0U);
+
+  vector<CodeLine>::iterator it;
+  for (it = code_.begin(); it != code_.end(); it++)
+    code[it->address()] = it->generate_machine_code();
+}
+
+void Assembler::write_binary(std::string fname) {
+  std::vector<uint16_t> code;
+  out_code(code);
+  if (!code.size())
+    return;
+
+  ofstream f;
+  f.open(fname, ios::binary);
+  if (!f) {
+    cout << "Error. Can't open file " << fname << endl;
+    return;
+  }
+
+  f.write(reinterpret_cast<const char*>(code.data()),
+          code.size()*sizeof(uint16_t));
+  f.close();
 }
 
 void Assembler::out_labels() {
