@@ -849,7 +849,8 @@ void Assembler::out_code(std::vector<uint16_t>& code) {
     return;
   }
 
-  code.resize(max_addr, 0U);
+  // numbers from 0 to 5 have 6 pcs (max + 1)
+  code.resize(max_addr + 1, 0U);
 
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
