@@ -24,7 +24,7 @@ add_executable(unit_tests
 	file_reader.cc
 	preprocessor.cc
 	str_util.cc
-	unit_tests.cc
+	unit_tests_cop.cc
 	unit_tests_preprocessor.cc
 	unit_tests_util.cc
 )

@@ -504,8 +504,9 @@ class BranchCodeGen: public CodeGen {
       if (ToUpper(it->first) == label_) {
         uint16_t label_addr = it->second;
         if (operation_ == bAFCALL) {
-          if (label_addr % 256)
-            ErrorCollector::rep("Label address in far call must be a multiple of 256.", line_number());
+          if (label_addr % 256) {
+            ErrorCollector::rep("Label address in far call must be a multiple of 256. Now addr: " + to_string(label_addr), line_number());
+          }
           target_addr_ = label_addr >> 8;  // absolute address divided by 256
         } else {
           int offset = label_addr;
@@ -724,7 +725,7 @@ void Assembler::extract_orgs() {
 
       int val {0};
       string msg_err;
-      if (StrToInt(org, &val, &msg_err)) {
+      if (StrToInt(ToUpper(org), &val, &msg_err)) {
         line_to_org_[line] = val;
         cout << "now line " << line << " has address " << val << endl;
       } else
