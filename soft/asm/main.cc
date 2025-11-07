@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     try {
       Assembler assm;
       bool res = assm.process(cmd, show_pre);
-      if (!res && argc >= 3 && argv[2])
+      if (/*!res &&*/ argc >= 3 && argv[2])
         assm.write_binary(argv[2]);
       return res;
     } catch (const char* e) {

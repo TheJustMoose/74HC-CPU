@@ -1,4 +1,12 @@
 #include "error_collector.h"
 
 // static
-std::map<int, std::string> ErrorCollector::errors_ {};
+ErrorCollector* Singleton::GetInstance() {
+  if (!instance_)
+    instance_ = new ErrorCollector();
+
+  return instance_;
+}
+
+// static
+ErrorCollector* Singleton::instance_ {nullptr};
