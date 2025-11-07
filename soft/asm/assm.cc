@@ -648,6 +648,22 @@ void StringConst::out_code() const {
        << "Zero" << endl;
 }
 
+void StringConst::out_code(vector<uint16_t>& code) const {
+  if (!str_.size())
+    return;
+
+  // string with str_.size() == 1 will store char at addr_
+  // and trailing zero at address addr_ + 1, so:
+  uint16_t max_str_addr = addr_ + static_cast<uint16_t>(str_.size());
+
+  if (max_str_addr + 1 > code.size())
+    code.resize(max_str_addr + 1, 0U);
+
+  for (size_t i = 0; i < str_.size(); i++)
+    code[addr_ + i] = str_[i];
+  code[max_str_addr] = 0;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 int Assembler::process(string fname, bool show_preprocess_out) {
@@ -840,7 +856,7 @@ void Assembler::out_code() {
   }
 }
 
-void Assembler::out_code(std::vector<uint16_t>& code) {
+void Assembler::out_code(vector<uint16_t>& code) {
   code.clear();
 
   uint16_t max_addr = get_max_address();
@@ -855,10 +871,14 @@ void Assembler::out_code(std::vector<uint16_t>& code) {
   vector<CodeLine>::iterator it;
   for (it = code_.begin(); it != code_.end(); it++)
     code[it->address()] = it->generate_machine_code();
+
+  // StringConst::out_code will resize 'code' if required
+  for (auto& s : string_consts_)
+    s.second.out_code(code);
 }
 
-void Assembler::write_binary(std::string fname) {
-  std::vector<uint16_t> code;
+void Assembler::write_binary(string fname) {
+  vector<uint16_t> code;
   out_code(code);
   if (!code.size())
     return;

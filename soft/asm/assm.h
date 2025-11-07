@@ -184,6 +184,7 @@ class StringConst {
   uint16_t addr() const { return addr_; }
   void set_addr(uint16_t);
   void out_code() const;
+  void out_code(std::vector<uint16_t>& code) const;
   std::string str() const { return str_; }
 
  private:
