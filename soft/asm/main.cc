@@ -24,7 +24,9 @@ void help() {
       ".def push(r) ST SPD, r ; example for .def with param\n",
       "\nRun:\n",
       "74hc-asm.exe src.asm [-pre]\n",
-      "-pre will print preprocessed src.asm\n",
+      " -pre will print preprocessed src.asm\n",
+      "74hc-asm.exe src.asm out.hex\n",
+      " will create result binary out.hex\n",
       nullptr
   };
 
@@ -58,7 +60,7 @@ int main(int argc, char* argv[]) {
     try {
       Assembler assm;
       bool res = assm.process(cmd, show_pre);
-      if (/*!res &&*/ argc >= 3 && argv[2])
+      if (argc > 2 && argv[2] && !show_pre && !res)
         assm.write_binary(argv[2]);
       return res;
     } catch (const char* e) {
