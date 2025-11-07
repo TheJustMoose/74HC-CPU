@@ -227,7 +227,7 @@ class BinaryCodeGen: public CodeGen {
     : CodeGen(line_number, cop), right_str_(right) {
     left_op_ = Names::RegFromName(left);
     if (left_op_ == rUnkReg)
-      Singleton::GetInstance().rep("Unknown register: " + left, line_number);
+      ErrorCollector::GetInstance().rep("Unknown register: " + left, line_number);
     TryImmediate(right);
   }
 
@@ -241,14 +241,14 @@ class BinaryCodeGen: public CodeGen {
         right_val_ = t;
 
       if (right_val_> 0xFF)
-        Singleton::GetInstance().rep("Error. Immediate value should have 8 bit only (0 - 255). Got: " + right, line_number());
+        ErrorCollector::GetInstance().rep("Error. Immediate value should have 8 bit only (0 - 255). Got: " + right, line_number());
     }
 
     if (!immediate_) {  // not val, try to check register name
       right_op_ = Names::RegFromName(right);  // MOV R0, R1
       if (right_op_ == rUnkReg) {
-        Singleton::GetInstance().rep("Unknown register: " + right_str_, line_number());
-        Singleton::GetInstance().rep("You have to use Register name or immediate value as rval.", line_number());
+        ErrorCollector::GetInstance().rep("Unknown register: " + right_str_, line_number());
+        ErrorCollector::GetInstance().rep("You have to use Register name or immediate value as rval.", line_number());
       } else
         right_str_ = "";
     }
@@ -288,9 +288,9 @@ class BinaryCodeGen: public CodeGen {
     if (it == name_to_address.end())
       return;
 
-    Singleton::GetInstance().clr(line_number());  // have to remove previous messages
+    ErrorCollector::GetInstance().clr(line_number());  // have to remove previous messages
                                          // cause RegFromName know nothing about labels and LO/HI macro
-    Singleton::GetInstance().rep("Replace " + it->first + " to " + to_string(it->second), line_number());
+    ErrorCollector::GetInstance().rep("Replace " + it->first + " to " + to_string(it->second), line_number());
 
     right_val_ = it->second;
     if (hi)
@@ -323,12 +323,12 @@ class UnaryCodeGen: public CodeGen {
     : CodeGen(line_number, cUNO), op_name_(op_name) {
     reg_ = Names::RegFromName(reg);
     if (reg_ == rUnkReg)
-      Singleton::GetInstance().rep("Unknown register: " + reg, line_number);
+      ErrorCollector::GetInstance().rep("Unknown register: " + reg, line_number);
     if (unary_codes.find(op_name) != unary_codes.end())
       ucode_ = unary_codes[op_name];
     else {
       ucode_ = 0;
-      Singleton::GetInstance().rep("Unknown unary operation ", line_number);
+      ErrorCollector::GetInstance().rep("Unknown unary operation ", line_number);
     }
   }
 
@@ -359,21 +359,21 @@ class MemoryCodeGen: public CodeGen {
     if (cop == cLD || cop == cLPM || cop == cLPMW) {
       reg_ = Names::RegFromName(left);
       if (reg_ == rUnkReg)
-        Singleton::GetInstance().rep("Unknown register: " + left, line_number);
+        ErrorCollector::GetInstance().rep("Unknown register: " + left, line_number);
       ptr_ = Names::PtrFromName(right, &inc_, &dec_);
       if (ptr_ == rUnkPtr)
-        Singleton::GetInstance().rep("Unknown pointer register: " + right, line_number);
+        ErrorCollector::GetInstance().rep("Unknown pointer register: " + right, line_number);
       offset_ = parse_offset(right);
     } else if (cop == cST) {
       ptr_ = Names::PtrFromName(left, &inc_, &dec_);
       if (ptr_ == rUnkPtr)
-        Singleton::GetInstance().rep("Unknown pointer register: " + left, line_number);
+        ErrorCollector::GetInstance().rep("Unknown pointer register: " + left, line_number);
       reg_ = Names::RegFromName(right);
       if (reg_ == rUnkReg)
-        Singleton::GetInstance().rep("Unknown register: " + right, line_number);
+        ErrorCollector::GetInstance().rep("Unknown register: " + right, line_number);
       offset_ = parse_offset(left);
     } else {
-      Singleton::GetInstance().rep("Unknown memory operation. Should be LD or ST or LPM.", line_number);
+      ErrorCollector::GetInstance().rep("Unknown memory operation. Should be LD or ST or LPM.", line_number);
     }
   }
 
@@ -388,12 +388,12 @@ class MemoryCodeGen: public CodeGen {
       return 0;
 
     if (tail[0] != '+' && tail[0] != '-') {
-      Singleton::GetInstance().rep("You can add or substract offset from pointer register. No other operations.", line_number());
+      ErrorCollector::GetInstance().rep("You can add or substract offset from pointer register. No other operations.", line_number());
       return 0;
     }
 
     if (tail.size() < 2) {
-      Singleton::GetInstance().rep("You lost offset value.", line_number());
+      ErrorCollector::GetInstance().rep("You lost offset value.", line_number());
       return 0;
     }
 
@@ -402,9 +402,9 @@ class MemoryCodeGen: public CodeGen {
     if (tail[0] == '-')
       off = -off;
     if (off > 7)
-      Singleton::GetInstance().rep("Offset has to be <= 7.", line_number());
+      ErrorCollector::GetInstance().rep("Offset has to be <= 7.", line_number());
     else if (off < -8)
-      Singleton::GetInstance().rep("Offset has to be >= -8.", line_number());
+      ErrorCollector::GetInstance().rep("Offset has to be >= -8.", line_number());
     else
       res = off & 0x0F;  // we need only 4 bits
     return res;
@@ -441,29 +441,29 @@ class IOCodeGen: public CodeGen {
     if (cop == cIN) {
       reg_ = Names::RegFromName(left);
       if (reg_ == rUnkReg)
-        Singleton::GetInstance().rep("Unknown register: " + left, line_number);
+        ErrorCollector::GetInstance().rep("Unknown register: " + left, line_number);
 
       int p = Names::PortFromName(right, "PIN");
       if (p == -1)
-        Singleton::GetInstance().rep("Unknown port name: " + right, line_number);
+        ErrorCollector::GetInstance().rep("Unknown port name: " + right, line_number);
       else if (p >= 32)
-        Singleton::GetInstance().rep("Port number should be in range 0-31", line_number);
+        ErrorCollector::GetInstance().rep("Port number should be in range 0-31", line_number);
       else
         port_ = p;
     } else if (cop == cOUT || cop == cTOGL) {
       int p = Names::PortFromName(left, "PORT");
       if (p == -1)
-        Singleton::GetInstance().rep("Unknown port name: " + left, line_number);
+        ErrorCollector::GetInstance().rep("Unknown port name: " + left, line_number);
       else if (p >= 32)
-        Singleton::GetInstance().rep("Port number should be in range 0-31", line_number);
+        ErrorCollector::GetInstance().rep("Port number should be in range 0-31", line_number);
       else
         port_ = p;
 
       reg_ = Names::RegFromName(right);
       if (reg_ == rUnkReg)
-        Singleton::GetInstance().rep("Unknown register: " + right, line_number);
+        ErrorCollector::GetInstance().rep("Unknown register: " + right, line_number);
     } else {
-      Singleton::GetInstance().rep("Unknown IO operation. Should be IN or OUT.", line_number);
+      ErrorCollector::GetInstance().rep("Unknown IO operation. Should be IN or OUT.", line_number);
     }
   }
 
@@ -505,14 +505,14 @@ class BranchCodeGen: public CodeGen {
         uint16_t label_addr = it->second;
         if (operation_ == bAFCALL) {
           if (label_addr % 256) {
-            Singleton::GetInstance().rep("Label address in far call must be a multiple of 256. Now addr: " + to_string(label_addr), line_number());
+            ErrorCollector::GetInstance().rep("Label address in far call must be a multiple of 256. Now addr: " + to_string(label_addr), line_number());
           }
           target_addr_ = label_addr >> 8;  // absolute address divided by 256
         } else {
           int offset = label_addr;
           offset -= address_;         // offset from current address
           if (offset > 127 || offset < -128)
-            Singleton::GetInstance().rep("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset), line_number());
+            ErrorCollector::GetInstance().rep("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset), line_number());
           else
             target_addr_ = offset & 0xFF;
         }
@@ -560,7 +560,7 @@ CodeLine::CodeLine(int line_number, string line_text)
 
   COP op = Names::CopFromName(op_name);
   if (op == bERROR) {
-    Singleton::GetInstance().rep("Unknown operation: " + op_name, line_number);
+    ErrorCollector::GetInstance().rep("Unknown operation: " + op_name, line_number);
     cout << "Error. Unknown operation: |" << op_name << "|" << endl;
     return;
   }
@@ -606,7 +606,7 @@ string CodeLine::FormattedCOP() {
 }
 
 map<int, string> CodeLine::get_err() {
-  return Singleton::GetInstance().get();
+  return ErrorCollector::GetInstance().get();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -619,7 +619,7 @@ StringConst& StringConst::operator=(const StringConst& rval) {
 
 uint16_t StringConst::get_size() const {
   if (str_.size() >= numeric_limits<uint16_t>::max()) {
-    //Singleton::GetInstance().rep("String const is too long.");
+    //ErrorCollector::GetInstance().rep("String const is too long.");
     return 0;
   }
 
@@ -690,7 +690,7 @@ int Assembler::process(string fname, bool show_preprocess_out) {
   out_labels();
   out_orgs();
 
-  return Singleton::GetInstance().have_errors();
+  return ErrorCollector::GetInstance().have_errors();
 }
 
 void Assembler::print_preprocessed() {
@@ -842,7 +842,7 @@ void Assembler::out_code() {
          << setw(16) << setfill(' ') << left << it->FormattedCOP()
          << endl;
 
-    string el = Singleton::GetInstance().get(it->line_number());
+    string el = ErrorCollector::GetInstance().get(it->line_number());
     if (el.size())  // for (auto& e : el)
       cout << "         > " << el << endl;
   }

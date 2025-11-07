@@ -6,6 +6,8 @@
 
 class ErrorCollector {
  public:
+  static ErrorCollector& GetInstance();
+
   void rep(std::string msg, int line) {
     errors_[line] = msg;
   }
@@ -32,9 +34,4 @@ class ErrorCollector {
 
  private:
   std::map<int, std::string> errors_;
-};
-
-class Singleton {
- public:
-  static ErrorCollector& GetInstance();
 };
