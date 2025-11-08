@@ -26,12 +26,39 @@ TEST_CASE("check names getter") {
   CHECK(Names::RegFromName("SPH") == rSPH);
 
   bool inc, dec;
+  CHECK(Names::PtrFromName("X", &inc, &dec) == rX);
+  CHECK(!inc); CHECK(!dec);
+
+  CHECK(Names::PtrFromName("XI", &inc, &dec) == rX);
+  CHECK(inc); CHECK(!dec);  // post increment
+
+  CHECK(Names::PtrFromName("XD", &inc, &dec) == rX);
+  CHECK(!inc); CHECK(dec);  // post decrement
+
+  CHECK(Names::PtrFromName("Y", &inc, &dec) == rY);
+  CHECK(!inc); CHECK(!dec);
+
+  CHECK(Names::PtrFromName("YI", &inc, &dec) == rY);
+  CHECK(inc); CHECK(!dec);  // post increment
+
+  CHECK(Names::PtrFromName("YD", &inc, &dec) == rY);
+  CHECK(!inc); CHECK(dec);  // post decrement
+
+  CHECK(Names::PtrFromName("Z", &inc, &dec) == rZ);
+  CHECK(!inc); CHECK(!dec);
+
+  CHECK(Names::PtrFromName("ZI", &inc, &dec) == rZ);
+  CHECK(inc); CHECK(!dec);  // post increment
+
+  CHECK(Names::PtrFromName("ZD", &inc, &dec) == rZ);
+  CHECK(!inc); CHECK(dec);  // post decrement
+
   CHECK(Names::PtrFromName("SP", &inc, &dec) == rSP);
   CHECK(!inc); CHECK(!dec);
 
   CHECK(Names::PtrFromName("SPI", &inc, &dec) == rSP);
-  CHECK(inc); CHECK(!dec);
+  CHECK(inc); CHECK(!dec);  // post increment
 
   CHECK(Names::PtrFromName("SPD", &inc, &dec) == rSP);
-  CHECK(!inc); CHECK(dec);
+  CHECK(!inc); CHECK(dec);  // post decrement
 }
