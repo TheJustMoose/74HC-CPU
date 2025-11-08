@@ -186,6 +186,34 @@ void Step(uint16_t cmd, uint16_t &ip) {
   }
 }
 
+bool ReadHex(std::string fname, vector<uint16_t>& buf) {
+  ifstream f;
+  f.open(fname, ios::binary);
+  if (!f) {
+    cout << "Error. Can't open file " << fname << endl;
+    return false;
+  }
+
+  f.seekg(0, ios::end);
+  streamsize fileSize = f.tellg();
+  f.seekg(0, ios::beg);
+
+  if (fileSize % sizeof(uint16_t)) {
+    cout << "The file size should be even." << endl;
+    return false;
+  }
+
+  buf.resize(fileSize / sizeof(uint16_t), 0U);
+
+  f.read(reinterpret_cast<char *>(buf.data()),
+         buf.size()*sizeof(uint16_t));
+  f.close();
+
+  cout << fname << " file was loaded. Size: " << fileSize << endl << endl;
+
+  return true;
+}
+
 int main(int argc, char* argv[]) {
   if (sizeof(uint16_t) != 2) {
     cout << "Strange system parameters detected. Word size should be 16 bits." << endl;
@@ -194,35 +222,12 @@ int main(int argc, char* argv[]) {
 
   if (argc >= 2 && argv[1]) {
     string fname(argv[1]);
-
-    ifstream f;
-    f.open(fname, ios::binary);
-    if (!f) {
-      cout << "Error. Can't open file " << fname << endl;
+    if (!ReadHex(fname, Cmds))
       return 1;
-    }
-
-    f.seekg(0, ios::end);
-    streamsize fileSize = f.tellg();
-    f.seekg(0, ios::beg);
-
-    if (fileSize % sizeof(uint16_t)) {
-      cout << "The file size should be even." << endl;
-      return 1;
-    }
-
-    vector<uint16_t> buf(fileSize / sizeof(uint16_t));
-    f.read(reinterpret_cast<char *>(buf.data()),
-           buf.size()*sizeof(uint16_t));
-
-    f.close();
-
-    Cmds = std::move(buf);
   }
 
-  for (uint16_t ip = 0; ip < Cmds.size() && !Stop;) {
+  for (uint16_t ip = 0; ip < Cmds.size() && !Stop;)
     Step(Cmds[ip], ip);
-  }
 
   return 0;
 }
