@@ -43,9 +43,11 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
@@ -53,7 +55,7 @@ enum FLAGS {
   HCF = 0, CF = 1, ZF = 2, LF = 3, EF = 4, GF = 5, BF = 6, RSRV = 7, FLAGS_CNT = 8
 };
 
-uint16_t Cmds[256] = {
+vector<uint16_t> Cmds {
   0x7140,  // MOV R0, 0x40  ; BF = 1
   0xB0A0,  // out FLAGS, R0 ; FLAGS = 10; 1011 000 01010 0000 ; B0A0
   0x7DFF,  // MOV SPL, 0xFF
@@ -185,7 +187,40 @@ void Step(uint16_t cmd, uint16_t &ip) {
 }
 
 int main(int argc, char* argv[]) {
-  for (uint16_t ip = 0; ip < 256 && !Stop;) {
+  if (sizeof(uint16_t) != 2) {
+    cout << "Strange system parameters detected. Word size should be 16 bits." << endl;
+    return 1;
+  }
+
+  if (argc >= 2 && argv[1]) {
+    string fname(argv[1]);
+
+    ifstream f;
+    f.open(fname, ios::binary);
+    if (!f) {
+      cout << "Error. Can't open file " << fname << endl;
+      return 1;
+    }
+
+    f.seekg(0, ios::end);
+    streamsize fileSize = f.tellg();
+    f.seekg(0, ios::beg);
+
+    if (fileSize % sizeof(uint16_t)) {
+      cout << "The file size should be even." << endl;
+      return 1;
+    }
+
+    vector<uint16_t> buf(fileSize / sizeof(uint16_t));
+    f.read(reinterpret_cast<char *>(buf.data()),
+           buf.size()*sizeof(uint16_t));
+
+    f.close();
+
+    Cmds = std::move(buf);
+  }
+
+  for (uint16_t ip = 0; ip < Cmds.size() && !Stop;) {
     Step(Cmds[ip], ip);
   }
 
