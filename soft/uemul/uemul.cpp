@@ -51,6 +51,24 @@
 
 using namespace std;
 
+const char* OpNames[] {
+  // 0       1      2     3      4      5      6      7
+  "ADD", "ADDC", "AND", "OR", "XOR", "MUL", "UNO", "MOV",
+  // 8     9     A      B     C      D       E        F
+  "LPM", "LD", "IN", "OUT", "ST", "CMP", "CMPC", "BRNCH"
+};
+
+const char* BranchNames[] {
+  //  0      1      2       3     4     5      6     7
+  "CALL", "JMP", "RET", "RETI", "JL", "JE", "JNE", "JG",
+  // 8     9     A      B      C       D         E      F
+  "JZ", "JNZ", "JC", "JNC", "JHC", "JNHC", "AFCALL", "NOP"
+};
+
+const char* Op(uint8_t op) {
+  return (op & 0xF0) == 0xF0 ? BranchNames[op & 0x0F] : OpNames[op >> 4];
+}
+
 enum FLAGS {
   HCF = 0, CF = 1, ZF = 2, LF = 3, EF = 4, GF = 5, BF = 6, RSRV = 7, FLAGS_CNT = 8
 };
@@ -95,9 +113,8 @@ void PrintRegs() {
   cout << "Regs: ";
   for (int i = 0; i < 8; i++)
     cout << hex << setw(2) << (uint16_t)RegsBank0[i] << " ";
-  cout << endl;
 
-  cout << "Ptrs: " << setfill('0');
+  cout << " Ptrs: " << setfill('0');
   cout << hex << setw(2) << (uint16_t)RegsBank1[7] << hex << setw(2) << (uint16_t)RegsBank1[6] << " ";
   cout << hex << setw(2) << (uint16_t)RegsBank1[5] << hex << setw(2) << (uint16_t)RegsBank1[4] << " ";
   cout << hex << setw(2) << (uint16_t)RegsBank1[3] << hex << setw(2) << (uint16_t)RegsBank1[2] << " ";
@@ -121,7 +138,8 @@ void Step(uint16_t cmd, uint16_t &ip) {
 
   cout << "IP: " << hex << ip
        << ", cmd: " << cmd
-       << ", op: " << (uint16_t)op << endl;
+       << ", op: " << (uint16_t)op
+       << " " << Op(op) << endl;
 
   if (op >= 0x00 && op <= 0xE0) {
     uint8_t dst = (cmd >> 9) & 0x07;
@@ -226,6 +244,7 @@ int main(int argc, char* argv[]) {
       return 1;
   }
 
+  PrintRegs();
   for (uint16_t ip = 0; ip < Cmds.size() && !Stop;)
     Step(Cmds[ip], ip);
 
