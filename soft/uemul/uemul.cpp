@@ -45,6 +45,7 @@
 #include <stdint.h>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <iomanip>
 #include <stack>
 #include <vector>
@@ -63,6 +64,10 @@ const char* BranchNames[] {
   "CALL", "JMP", "RET", "RETI", "JL", "JE", "JNE", "JG",
   // 8     9     A      B      C       D         E      F
   "JZ", "JNZ", "JC", "JNC", "JHC", "JNHC", "AFCALL", "NOP"
+};
+
+const char* RegNames[] {
+  "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7"
 };
 
 const char* Op(uint8_t op) {
@@ -129,6 +134,26 @@ void SyncFlags(uint8_t port) {
     Flags[BF] = PORTS[10] & 0x40;
 }
 
+string BranchAddr(uint16_t cmd, uint16_t ip) {
+  cmd &= 0xFF;  // 8 low bits have offset value
+  uint16_t branch_addr = ip + cmd;
+  stringstream ss;
+  ss << " " << hex << setw(2) << branch_addr;
+  return ss.str();
+}
+
+string ArithmParams(uint16_t cmd) {
+  uint8_t dst = (cmd >> 9) & 0x07;
+  uint8_t rdst = ActiveRegsBank()[dst];
+  uint8_t cnst = (cmd >> 8) & 0x01;
+  uint8_t cnst_val = (cmd & 0xFF);
+  uint8_t src = (cmd >> 5) & 0x07;
+  uint8_t rsrc = cnst ? (cmd & 0xFF) : ActiveRegsBank()[src];
+
+  return string(" ") + RegNames[dst] + string(", ")
+           + (cnst ? to_string(cnst_val) : RegNames[src]);
+}
+
 void Step(uint16_t cmd, uint16_t &ip) {
   uint8_t op = (cmd >> 8) & 0xFF;
   if ((cmd & 0xF000) == 0xF000)  // branches
@@ -138,10 +163,10 @@ void Step(uint16_t cmd, uint16_t &ip) {
 
   cout << "IP: " << hex << ip
        << ", cmd: " << cmd
-       << ", op: " << (uint16_t)op
-       << " " << Op(op) << endl;
+       << ", " << Op(op);
 
   if (op >= 0x00 && op <= 0xE0) {
+    cout << ArithmParams(cmd) << endl;
     uint8_t dst = (cmd >> 9) & 0x07;
     uint8_t rdst = ActiveRegsBank()[dst];
     uint8_t cnst = (cmd >> 8) & 0x01;
@@ -180,8 +205,8 @@ void Step(uint16_t cmd, uint16_t &ip) {
       ActiveRegsBank()[dst] = rdst;
     PrintRegs();
   } else if (op >= 0xF0 && op <= 0xFF) {
+    cout << BranchAddr(cmd, ip) << endl;
     uint8_t offset = cmd & 0xFF;
-    cout << "offset: " << hex << (uint16_t)offset << endl;
     switch (op) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
       case 0xF1: ip += offset; break;                     // JMP
