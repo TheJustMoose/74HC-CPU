@@ -172,7 +172,6 @@ class MemoryCmd: public Cmd {
   }
 };
 
-
 //|0 1 2 3  4 5 6 7 8 9 A B C D E F|
 //|    IN |  DST |  PORT   |Z|z|I|i| A0 1010 0000| |
 //|   OUT |  SRC |  PORT   |O|o|X|x| B0 1011 0000| |
@@ -275,7 +274,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
     ip++;
   } else if (op >= 0x00 && op <= 0x80) {  // ARITHM
     ArithmCmd acmd(cmd);
-    cout << acmd.Params() << endl;
+    cout << acmd.Params() << "  -->  ";
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
     uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
     switch (op) {
@@ -295,28 +294,28 @@ void Step(uint16_t cmd, uint16_t &ip) {
     ip++;
   } else if (op == 0x90) {  // LD
     MemoryCmd mcmd(cmd);
-    cout << mcmd.Params() << endl;
+    cout << mcmd.Params() << "  -->  ";
     uint8_t val = RAM[GetPtr(mcmd.ptr()) + (op & 0x0F)];
     ActiveRegsBank()[mcmd.reg()] = val;
     PrintRegs();
     ip++;
   } else if (op == 0xA0) {  // IN
     PortCmd pcmd(cmd);
-    cout << pcmd.Params() << endl;
+    cout << pcmd.Params() << "  -->  ";
     uint8_t rdst = PINS[(op >> 4) & 0x1F];
     ActiveRegsBank()[pcmd.reg()] = rdst;
     PrintRegs();
     ip++;
   } else if (op == 0xB0) {  // OUT
     PortCmd pcmd(cmd);
-    cout << pcmd.Params() << endl;
+    cout << pcmd.Params() << "  -->  ";
     PORTS[pcmd.port()] = ActiveRegsBank()[pcmd.reg()];
     SyncFlags(pcmd.port());
     PrintPorts();
     ip++;
   } else if (op == 0xC0) {  // ST
     MemoryCmd mcmd(cmd);
-    cout << mcmd.Params() << endl;
+    cout << mcmd.Params() << "  -->  ";
     uint8_t val = ActiveRegsBank()[mcmd.reg()];
     RAM[GetPtr(mcmd.ptr()) + (op & 0x0F)] = val;
     PrintRegs();
@@ -324,7 +323,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
   } else if (op == 0xD0 || op == 0xE0) {  // CMP
     // CMP implementation, CPMC has not implemented yet
     ArithmCmd acmd(cmd);
-    cout << acmd.Params() << endl;
+    cout << acmd.Params() << "  -->  ";
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
     uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
     if (rdst < rsrc) {
@@ -336,7 +335,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
     }
     ip++;
   } else if (op >= 0xF0 && op <= 0xFF) {  // BRANCH
-    cout << "" << endl;
+    cout << BranchAddr(cmd, ip) << endl;
     uint8_t offset = cmd & 0xFF;
     switch (op) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
