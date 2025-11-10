@@ -155,8 +155,6 @@ class PortCmd: public Cmd {
       return "error";
   }
 };
-//      case 0xA0: rdst = PINS[(op >> 4) & 0x1F]; break;
-//      case 0xB0: PORTS[port] = ActiveRegsBank()[acmd.dst()]; SyncFlags(port); break;  // Yes! dst, not src
 
 uint16_t GetX() {
   uint16_t res = RegsBank1[1];
@@ -204,10 +202,18 @@ void Step(uint16_t cmd, uint16_t &ip) {
        << ", cmd: " << cmd
        << ", " << Op(op);
 
-  if (op == 0xA0 || op == 0xB0) {
+  if (op == 0xA0) {
     PortCmd pcmd(cmd);
     cout << pcmd.Params() << endl;
+    uint8_t rdst = PINS[(op >> 4) & 0x1F];
+    ActiveRegsBank()[pcmd.reg()] = rdst;
     PrintRegs();
+    ip++;
+  } else if (op == 0xB0) {
+    PortCmd pcmd(cmd);
+    cout << pcmd.Params() << endl;
+    PORTS[pcmd.port()] = ActiveRegsBank()[pcmd.reg()];
+    SyncFlags(pcmd.port());
     ip++;
   } else if (op >= 0x00 && op <= 0xE0) {
     ArithmCmd acmd(cmd);
