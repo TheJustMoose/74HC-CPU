@@ -210,45 +210,10 @@ void Step(uint16_t cmd, uint16_t &ip) {
        << ", cmd: " << cmd
        << ", " << Op(op);
 
-  if (op == 0xA0) {  // IN
-    PortCmd pcmd(cmd);
-    cout << pcmd.Params() << endl;
-    uint8_t rdst = PINS[(op >> 4) & 0x1F];
-    ActiveRegsBank()[pcmd.reg()] = rdst;
-    PrintRegs();
-    ip++;
-  } else if (op == 0xB0) {  // OUT
-    PortCmd pcmd(cmd);
-    cout << pcmd.Params() << endl;
-    PORTS[pcmd.port()] = ActiveRegsBank()[pcmd.reg()];
-    SyncFlags(pcmd.port());
-    PrintPorts();
-    ip++;
-  } else if (op == 0x60) {  // UNO
+  if (op == 0x60) {  // UNO
     // unary operation must be here
     ip++;
-  } else if (op == 0xD0 || op == 0xE0) {  // CMP
-    // CMP implementation, CPMC has not implemented yet
-    ArithmCmd acmd(cmd);
-    cout << acmd.Params() << endl;
-    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
-    uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
-    if (rdst < rsrc) {
-      Flags[LF] = true; Flags[EF] = false; Flags[GF] = false;
-    } else if (rdst == rsrc) {
-      Flags[LF] = false; Flags[EF] = true; Flags[GF] = false;
-    } else if (rdst > rsrc) {
-      Flags[LF] = false; Flags[EF] = false; Flags[GF] = true;
-    }
-    ip++;
-  } else if (op == 0xC0) {  // ST
-    ArithmCmd acmd(cmd);
-    cout << acmd.Params() << endl;
-    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
-    RAM[GetX() + (op & 0x0F)] = rdst;
-    PrintRegs();
-    ip++;
-  } else if (op >= 0x00 && op <= 0xE0) {  // ARITHM
+  } else if (op >= 0x00 && op <= 0x90) {  // ARITHM
     ArithmCmd acmd(cmd);
     cout << acmd.Params() << endl;
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
@@ -267,6 +232,41 @@ void Step(uint16_t cmd, uint16_t &ip) {
     }
     ActiveRegsBank()[acmd.dst()] = rdst;
     PrintRegs();
+    ip++;
+  } else if (op == 0xA0) {  // IN
+    PortCmd pcmd(cmd);
+    cout << pcmd.Params() << endl;
+    uint8_t rdst = PINS[(op >> 4) & 0x1F];
+    ActiveRegsBank()[pcmd.reg()] = rdst;
+    PrintRegs();
+    ip++;
+  } else if (op == 0xB0) {  // OUT
+    PortCmd pcmd(cmd);
+    cout << pcmd.Params() << endl;
+    PORTS[pcmd.port()] = ActiveRegsBank()[pcmd.reg()];
+    SyncFlags(pcmd.port());
+    PrintPorts();
+    ip++;
+  } else if (op == 0xC0) {  // ST
+    ArithmCmd acmd(cmd);
+    cout << acmd.Params() << endl;
+    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
+    RAM[GetX() + (op & 0x0F)] = rdst;
+    PrintRegs();
+    ip++;
+  } else if (op == 0xD0 || op == 0xE0) {  // CMP
+    // CMP implementation, CPMC has not implemented yet
+    ArithmCmd acmd(cmd);
+    cout << acmd.Params() << endl;
+    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
+    uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
+    if (rdst < rsrc) {
+      Flags[LF] = true; Flags[EF] = false; Flags[GF] = false;
+    } else if (rdst == rsrc) {
+      Flags[LF] = false; Flags[EF] = true; Flags[GF] = false;
+    } else if (rdst > rsrc) {
+      Flags[LF] = false; Flags[EF] = false; Flags[GF] = true;
+    }
     ip++;
   } else if (op >= 0xF0 && op <= 0xFF) {  // BRANCH
     cout << "" << endl;
