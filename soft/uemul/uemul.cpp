@@ -126,12 +126,12 @@ class ArithmCmd: public Cmd {
   ArithmCmd(uint16_t cmd): Cmd(cmd) {}
 
   uint8_t dst() { return (cmd_ >> 9) & 0x07; }
-  bool cnst() { return (cmd_ >> 8) & 0x01; }
-  uint8_t cnst_val() { return (cmd_ & 0xFF); }
+  bool is_cnst() { return (cmd_ >> 8) & 0x01; }
+  uint8_t cnst() { return (cmd_ & 0xFF); }
   uint8_t src() { return (cmd_ >> 5) & 0x07; }
 
   virtual string Params() {
-    string rsrc = cnst() ? to_string(cmd_ & 0xFF) : RegNames[src()];
+    string rsrc = is_cnst() ? to_string(cmd_ & 0xFF) : RegNames[src()];
     return string(" ") + RegNames[dst()] + string(", ") + rsrc;
   }
 };
@@ -177,8 +177,16 @@ void PrintRegs() {
   cout << endl << endl;
 }
 
+void PrintPorts() {
+  cout << "Ports: ";
+  for (int i = 0; i < 8; i++)
+    cout << hex << setw(2) << (uint16_t)PORTS[i] << " ";
+
+  cout << endl << endl;
+}
+
 void SyncFlags(uint8_t port) {
-  cout << "port: " << dec << (uint16_t)port << endl;
+  //cout << "port: " << dec << (uint16_t)port << endl;
   if (port == 10)
     Flags[BF] = PORTS[10] & 0x40;
 }
@@ -202,59 +210,66 @@ void Step(uint16_t cmd, uint16_t &ip) {
        << ", cmd: " << cmd
        << ", " << Op(op);
 
-  if (op == 0xA0) {
+  if (op == 0xA0) {  // IN
     PortCmd pcmd(cmd);
     cout << pcmd.Params() << endl;
     uint8_t rdst = PINS[(op >> 4) & 0x1F];
     ActiveRegsBank()[pcmd.reg()] = rdst;
     PrintRegs();
     ip++;
-  } else if (op == 0xB0) {
+  } else if (op == 0xB0) {  // OUT
     PortCmd pcmd(cmd);
     cout << pcmd.Params() << endl;
     PORTS[pcmd.port()] = ActiveRegsBank()[pcmd.reg()];
     SyncFlags(pcmd.port());
+    PrintPorts();
     ip++;
-  } else if (op >= 0x00 && op <= 0xE0) {
+  } else if (op == 0x60) {  // UNO
+    // unary operation must be here
+    ip++;
+  } else if (op == 0xD0 || op == 0xE0) {  // CMP
+    // CMP implementation, CPMC has not implemented yet
     ArithmCmd acmd(cmd);
     cout << acmd.Params() << endl;
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
-    uint8_t cnst = (cmd >> 8) & 0x01;
-    uint8_t src = (cmd >> 5) & 0x07;
-    uint8_t rsrc = cnst ? (cmd & 0xFF) : ActiveRegsBank()[src];
-    uint8_t port = (cmd >> 4) & 0x1F;
-    switch (op) {
-      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; break;
-      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; break;
-      case 0x20: rdst &= rsrc; break;
-      case 0x30: rdst |= rsrc; break;
-      case 0x40: rdst ^= rsrc; break;
-      case 0x50: rdst *= rsrc; break;
-      case 0x60:
-        break;  // unary operation must be here
-      case 0x70: rdst = rsrc; ActiveRegsBank()[acmd.dst()] = rsrc; break;
-      case 0x80:
-        break;  // LPM operation must be here
-      case 0x90: rdst = RAM[GetX() + (op & 0x0F)]; break;
-      case 0xC0: RAM[GetX() + (op & 0x0F)] = rdst; break;
-      case 0xD0:
-      case 0xE0: // CMP implementation, CPMC has not implemented yet
-        if (rdst < rsrc) {
-          Flags[LF] = true; Flags[EF] = false; Flags[GF] = false;
-        } else if (rdst == rsrc) {
-          Flags[LF] = false; Flags[EF] = true; Flags[GF] = false;
-        } else if (rdst > rsrc) {
-          Flags[LF] = false; Flags[EF] = false; Flags[GF] = true;
-        }
-        break;
+    uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
+    if (rdst < rsrc) {
+      Flags[LF] = true; Flags[EF] = false; Flags[GF] = false;
+    } else if (rdst == rsrc) {
+      Flags[LF] = false; Flags[EF] = true; Flags[GF] = false;
+    } else if (rdst > rsrc) {
+      Flags[LF] = false; Flags[EF] = false; Flags[GF] = true;
     }
     ip++;
-    if (op < 0xA0)  // только эти операции изменяют регистры
-      ActiveRegsBank()[acmd.dst()] = rdst;
+  } else if (op == 0xC0) {  // ST
+    ArithmCmd acmd(cmd);
+    cout << acmd.Params() << endl;
+    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
+    RAM[GetX() + (op & 0x0F)] = rdst;
     PrintRegs();
-  } else if (op >= 0xF0 && op <= 0xFF) {
-    //PortCmd pcmd(cmd);
-    //cout << pcmd.Params() << endl;
+    ip++;
+  } else if (op >= 0x00 && op <= 0xE0) {  // ARITHM
+    ArithmCmd acmd(cmd);
+    cout << acmd.Params() << endl;
+    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
+    uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
+    switch (op) {
+      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; break;  // ADD
+      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; break;  // ADDC
+      case 0x20: rdst &= rsrc; break;  // AND
+      case 0x30: rdst |= rsrc; break;  // OR
+      case 0x40: rdst ^= rsrc; break;  // XOR
+      case 0x50: rdst *= rsrc; break;  // MUL
+      case 0x70: rdst = rsrc; break;  // MOV
+      case 0x80: break;  // LPM operation must be here
+      case 0x90: rdst = RAM[GetX() + (op & 0x0F)]; break;
+      default: cout << "Unknown op for this switch: " << op << endl; break;
+    }
+    ActiveRegsBank()[acmd.dst()] = rdst;
+    PrintRegs();
+    ip++;
+  } else if (op >= 0xF0 && op <= 0xFF) {  // BRANCH
+    cout << "" << endl;
     uint8_t offset = cmd & 0xFF;
     switch (op) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
