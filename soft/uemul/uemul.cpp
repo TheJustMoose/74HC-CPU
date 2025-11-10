@@ -70,6 +70,10 @@ const char* RegNames[] {
   "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7"
 };
 
+const char* PtrNames[] {
+  "X", "Y", "Z", "SP"
+};
+
 const char* Op(uint8_t op) {
   return (op & 0xF0) == 0xF0 ? BranchNames[op & 0x0F] : OpNames[op >> 4];
 }
@@ -127,14 +131,47 @@ class ArithmCmd: public Cmd {
 
   uint8_t dst() { return (cmd_ >> 9) & 0x07; }
   bool is_cnst() { return (cmd_ >> 8) & 0x01; }
-  uint8_t cnst() { return (cmd_ & 0xFF); }
   uint8_t src() { return (cmd_ >> 5) & 0x07; }
+  uint8_t cnst() { return (cmd_ & 0xFF); }
 
   virtual string Params() {
     string rsrc = is_cnst() ? to_string(cmd_ & 0xFF) : RegNames[src()];
     return string(" ") + RegNames[dst()] + string(", ") + rsrc;
   }
 };
+
+//|    LD |  DST |0|EXT|D|U|OFFSET4| 90 1001 0000| |
+//|    ST |  SRC |0|EXT|D|U|OFFSET4| C0 1100 0000| |
+class MemoryCmd: public Cmd {
+ public:
+  MemoryCmd(uint16_t cmd): Cmd(cmd) {}
+
+  uint8_t reg() { return (cmd_ >> 9) & 0x07; }
+  uint8_t ptr() { return (cmd_ >> 6) & 0x03; }
+  uint8_t autodec() { return (cmd_ >> 5) & 0x01; }
+  uint8_t autoinc() { return (cmd_ >> 4) & 0x01; }
+  uint8_t offs() { return cmd_ & 0x0F; }
+
+  virtual string Params() {
+    string suffix;
+    if (autodec())
+      suffix += "D";
+    if (autoinc())
+      suffix += "I";
+    if (offs()) {
+      suffix += " + ";
+      suffix += to_string(offs());  // offs may have value from -8 to +7 so I have to convert it to "int"
+    }
+
+    if (op() == 0x90)  // LD
+      return string(" ") + RegNames[reg()] + string(", ") + PtrNames[ptr()] + suffix;
+    else if (op() == 0xC0)  // ST
+      return string(" ") + PtrNames[ptr()] + suffix + string(", ") + RegNames[reg()];
+    else
+      return "error";
+  }
+};
+
 
 //|0 1 2 3  4 5 6 7 8 9 A B C D E F|
 //|    IN |  DST |  PORT   |Z|z|I|i| A0 1010 0000| |
@@ -157,10 +194,33 @@ class PortCmd: public Cmd {
 };
 
 uint16_t GetX() {
-  uint16_t res = RegsBank1[1];
-  res <<= 8;
-  res += RegsBank1[0];
+  uint16_t res = RegsBank1[1]; res <<= 8; res += RegsBank1[0];
   return res;
+}
+
+uint16_t GetY() {
+  uint16_t res = RegsBank1[3]; res <<= 8; res += RegsBank1[2];
+  return res;
+}
+
+uint16_t GetZ() {
+  uint16_t res = RegsBank1[5]; res <<= 8; res += RegsBank1[4];
+  return res;
+}
+
+uint16_t GetSP() {
+  uint16_t res = RegsBank1[7]; res <<= 8; res += RegsBank1[6];
+  return res;
+}
+
+uint16_t GetPtr(uint8_t ptr) {
+  switch (ptr) {
+    case 0: return GetX();
+    case 1: return GetY();
+    case 2: return GetZ();
+    case 3: return GetSP();
+    default: cout << "Error pointer register number: " << ptr << endl; return 0;
+  }
 }
 
 void PrintRegs() {
@@ -213,7 +273,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
   if (op == 0x60) {  // UNO
     // unary operation must be here
     ip++;
-  } else if (op >= 0x00 && op <= 0x90) {  // ARITHM
+  } else if (op >= 0x00 && op <= 0x80) {  // ARITHM
     ArithmCmd acmd(cmd);
     cout << acmd.Params() << endl;
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
@@ -225,12 +285,19 @@ void Step(uint16_t cmd, uint16_t &ip) {
       case 0x30: rdst |= rsrc; break;  // OR
       case 0x40: rdst ^= rsrc; break;  // XOR
       case 0x50: rdst *= rsrc; break;  // MUL
-      case 0x70: rdst = rsrc; break;  // MOV
+      // 0x60 is UNO op
+      case 0x70: rdst = rsrc; break;   // MOV
       case 0x80: break;  // LPM operation must be here
-      case 0x90: rdst = RAM[GetX() + (op & 0x0F)]; break;
       default: cout << "Unknown op for this switch: " << op << endl; break;
     }
     ActiveRegsBank()[acmd.dst()] = rdst;
+    PrintRegs();
+    ip++;
+  } else if (op == 0x90) {  // LD
+    MemoryCmd mcmd(cmd);
+    cout << mcmd.Params() << endl;
+    uint8_t val = RAM[GetPtr(mcmd.ptr()) + (op & 0x0F)];
+    ActiveRegsBank()[mcmd.reg()] = val;
     PrintRegs();
     ip++;
   } else if (op == 0xA0) {  // IN
@@ -248,10 +315,10 @@ void Step(uint16_t cmd, uint16_t &ip) {
     PrintPorts();
     ip++;
   } else if (op == 0xC0) {  // ST
-    ArithmCmd acmd(cmd);
-    cout << acmd.Params() << endl;
-    uint8_t rdst = ActiveRegsBank()[acmd.dst()];
-    RAM[GetX() + (op & 0x0F)] = rdst;
+    MemoryCmd mcmd(cmd);
+    cout << mcmd.Params() << endl;
+    uint8_t val = ActiveRegsBank()[mcmd.reg()];
+    RAM[GetPtr(mcmd.ptr()) + (op & 0x0F)] = val;
     PrintRegs();
     ip++;
   } else if (op == 0xD0 || op == 0xE0) {  // CMP
