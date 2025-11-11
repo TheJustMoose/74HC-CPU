@@ -250,9 +250,23 @@ void SyncFlags(uint8_t port) {
     Flags[BF] = PORTS[10] & 0x40;
 }
 
+int16_t OffsetToInt(uint8_t offset) {
+  uint16_t res = offset;
+  if (offset & 0x08)  // offset is 4 bit two's complement value
+    res |= 0xFFF0;    // so bit 3 is the sign bit and we have to extend it to high bits
+  return res;  // now it's int!
+}
+
+int16_t ByteOffsetToInt(uint8_t offset) {
+  uint16_t res = offset;
+  if (offset & 0x80)  // offset is 4 bit two's complement value
+    res |= 0xFF00;    // so bit 3 is the sign bit and we have to extend it to high bits
+  return (uint32_t)res;  // now it's int!
+}
+
 string BranchAddr(uint16_t cmd, uint16_t ip) {
   cmd &= 0xFF;  // 8 low bits have offset value
-  uint16_t branch_addr = ip + cmd;
+  uint16_t branch_addr = ip + ByteOffsetToInt(cmd);
   stringstream ss;
   ss << " " << hex << setw(2) << branch_addr;
   return ss.str();
@@ -335,8 +349,9 @@ void Step(uint16_t cmd, uint16_t &ip) {
     }
     ip++;
   } else if (op >= 0xF0 && op <= 0xFF) {  // BRANCH
-    cout << BranchAddr(cmd, ip) << endl;
-    uint8_t offset = cmd & 0xFF;
+    int16_t offset = ByteOffsetToInt(cmd & 0xFF);
+    cout << BranchAddr(cmd, ip) << ", offs: " << offset << endl;
+    cout << "new ip: " << (ip + offset) << endl;
     switch (op) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
       case 0xF1: ip += offset; break;                     // JMP
