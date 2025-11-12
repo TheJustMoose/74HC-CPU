@@ -284,7 +284,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
        << ", " << Op(op);
 
   if (op == 0x60) {  // UNO
-    // unary operation must be here
+    // TODO: unary operation must be here
     ip++;
   } else if (op >= 0x00 && op <= 0x80) {  // ARITHM
     ArithmCmd acmd(cmd);
@@ -292,12 +292,12 @@ void Step(uint16_t cmd, uint16_t &ip) {
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
     uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
     switch (op) {
-      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; break;  // ADD
-      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; break;  // ADDC
-      case 0x20: rdst &= rsrc; break;  // AND
-      case 0x30: rdst |= rsrc; break;  // OR
-      case 0x40: rdst ^= rsrc; break;  // XOR
-      case 0x50: rdst *= rsrc; break;  // MUL
+      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; Flags[ZF] = (rdst == 0); break;  // ADD
+      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; Flags[ZF] = (rdst == 0); break;  // ADDC
+      case 0x20: rdst &= rsrc; Flags[ZF] = (rdst == 0); break;  // AND
+      case 0x30: rdst |= rsrc; Flags[ZF] = (rdst == 0); break;  // OR
+      case 0x40: rdst ^= rsrc; Flags[ZF] = (rdst == 0); break;  // XOR
+      case 0x50: rdst *= rsrc; Flags[ZF] = (rdst == 0); break;  // MUL
       // 0x60 is UNO op
       case 0x70: rdst = rsrc; break;   // MOV
       case 0x80: break;  // LPM operation must be here
@@ -356,15 +356,15 @@ void Step(uint16_t cmd, uint16_t &ip) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
       case 0xF1: ip += offset; break;                     // JMP
       case 0xF2: ip = Stack.top(); Stack.pop(); break;    // RET
-      case 0xF3: if (Flags[ZF]) ip += offset; break;      // JZ
-      case 0xF4: if (Flags[LF]) ip += offset; break;      // JL
-      case 0xF5: if (Flags[EF]) ip += offset; break;      // JE
-      case 0xF6: if (!Flags[EF]) ip += offset; break;     // JNE
-      case 0xF8: if (!Flags[ZF]) ip += offset; break;     // JNZ
-      case 0xF9: if (Flags[CF]) ip += offset; break;      // JC
-      case 0xFA: if (!Flags[CF]) ip += offset; break;     // JNC
-      case 0xFB: if (Flags[HCF]) ip += offset; break;     // JHC
-      case 0xFC: if (!Flags[HCF]) ip += offset; break;    // JHNC
+      case 0xF3: if (Flags[ZF]) ip += offset; else ip++; break;      // JZ
+      case 0xF4: if (Flags[LF]) ip += offset; else ip++; break;      // JL
+      case 0xF5: if (Flags[EF]) ip += offset; else ip++; break;      // JE
+      case 0xF6: if (!Flags[EF]) ip += offset; else ip++; break;     // JNE
+      case 0xF8: if (!Flags[ZF]) ip += offset; else ip++; break;     // JNZ
+      case 0xF9: if (Flags[CF]) ip += offset; else ip++; break;      // JC
+      case 0xFA: if (!Flags[CF]) ip += offset; else ip++; break;     // JNC
+      case 0xFB: if (Flags[HCF]) ip += offset; else ip++; break;     // JHC
+      case 0xFC: if (!Flags[HCF]) ip += offset; else ip++; break;    // JHNC
       case 0xFD: Stop = true; break;                      // STOP
       case 0xFE: Stack.push(ip); ip = offset << 8; break; // AFCALL
       case 0xFF: ip++; break;                             // NOP
@@ -403,6 +403,8 @@ bool ReadHex(std::string fname, vector<uint16_t>& buf) {
 }
 
 int main(int argc, char* argv[]) {
+  // TODO: fix flags storing
+
   if (sizeof(uint16_t) != 2) {
     cout << "Strange system parameters detected. Word size should be 16 bits." << endl;
     return 1;
