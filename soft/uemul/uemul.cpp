@@ -366,21 +366,22 @@ void Step(uint16_t cmd, uint16_t &ip) {
     int16_t offset = ByteOffsetToInt(cmd & 0xFF);
     cout << BranchAddr(cmd, ip) << ", offs: " << offset << endl;
     switch (op) {
-      case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
-      case 0xF1: ip += offset; break;                     // JMP
-      case 0xF2: ip = Stack.top(); Stack.pop(); break;    // RET
-      case 0xF3: if (Flags[ZF]) ip += offset; else ip++; break;      // JZ
+      case 0xF0: Stack.push(ip); ip += offset; break;                // CALL
+      case 0xF1: ip += offset; break;                                // JMP
+      case 0xF2: ip = Stack.top(); Stack.pop(); break;               // RET
+      case 0xF3: ip = Stack.top(); Stack.pop(); break;               // RETI
       case 0xF4: if (Flags[LF]) ip += offset; else ip++; break;      // JL
       case 0xF5: if (Flags[EF]) ip += offset; else ip++; break;      // JE
       case 0xF6: if (!Flags[EF]) ip += offset; else ip++; break;     // JNE
-      case 0xF8: if (!Flags[ZF]) ip += offset; else ip++; break;     // JNZ
-      case 0xF9: if (Flags[CF]) ip += offset; else ip++; break;      // JC
-      case 0xFA: if (!Flags[CF]) ip += offset; else ip++; break;     // JNC
-      case 0xFB: if (Flags[HCF]) ip += offset; else ip++; break;     // JHC
-      case 0xFC: if (!Flags[HCF]) ip += offset; else ip++; break;    // JHNC
-      case 0xFD: Stop = true; break;                      // STOP
-      case 0xFE: Stack.push(ip); ip = offset << 8; break; // AFCALL
-      case 0xFF: ip++; break;                             // NOP
+      case 0xF7: if (Flags[ZF]) ip += offset; else ip++; break;      // JG
+      case 0xF8: if (Flags[ZF]) ip += offset; else ip++; break;      // JZ
+      case 0xF9: if (!Flags[ZF]) ip += offset; else ip++; break;     // JNZ
+      case 0xFA: if (Flags[CF]) ip += offset; else ip++; break;      // JC
+      case 0xFB: if (!Flags[CF]) ip += offset; else ip++; break;     // JNC
+      case 0xFC: if (Flags[HCF]) ip += offset; else ip++; break;     // JHC
+      case 0xFD: if (!Flags[HCF]) ip += offset; else ip++; break;    // JHNC
+      case 0xFE: Stack.push(ip); ip = offset << 8; break;            // AFCALL
+      case 0xFF: ip++; if ((offset & 0x01) == 0) Stop = true; break; // NOP/STOP
     }
     cout << "new ip: " << ip << endl;
   } else {  // it's impossible I hope
