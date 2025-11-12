@@ -97,6 +97,10 @@ enum FLAGS {
   HCF = 0, CF = 1, ZF = 2, LF = 3, EF = 4, GF = 5, BF = 6, RSRV = 7, FLAGS_CNT = 8
 };
 
+const char* FlagNames[FLAGS_CNT] {
+  "HCF", "CF", "ZF", "LF", "EF", "GF", "BF", "R"
+};
+
 bool Flags[FLAGS_CNT];  // CPU flags
 
 uint8_t RegsBank0[8];
@@ -222,6 +226,12 @@ uint16_t GetPtr(uint8_t ptr) {
   }
 }
 
+void PrintFlags() {
+  cout << "Flags: ";
+  for (int i = 0; i < FLAGS_CNT; i++)
+    cout << (Flags[i] ? FlagNames[i] : "--") << " ";
+}
+
 void PrintRegs() {
   cout << "Regs: ";
   for (int i = 0; i < 8; i++)
@@ -232,6 +242,8 @@ void PrintRegs() {
   cout << hex << setw(2) << (uint16_t)RegsBank1[5] << hex << setw(2) << (uint16_t)RegsBank1[4] << " ";
   cout << hex << setw(2) << (uint16_t)RegsBank1[3] << hex << setw(2) << (uint16_t)RegsBank1[2] << " ";
   cout << hex << setw(2) << (uint16_t)RegsBank1[1] << hex << setw(2) << (uint16_t)RegsBank1[0] << " ";
+
+  PrintFlags();
 
   cout << endl << endl;
 }
@@ -292,17 +304,19 @@ void Step(uint16_t cmd, uint16_t &ip) {
     uint8_t rdst = ActiveRegsBank()[acmd.dst()];
     uint8_t rsrc = acmd.is_cnst() ? acmd.cnst() : ActiveRegsBank()[acmd.src()];
     switch (op) {
-      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; Flags[ZF] = (rdst == 0); break;  // ADD
-      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; Flags[ZF] = (rdst == 0); break;  // ADDC
-      case 0x20: rdst &= rsrc; Flags[ZF] = (rdst == 0); break;  // AND
-      case 0x30: rdst |= rsrc; Flags[ZF] = (rdst == 0); break;  // OR
-      case 0x40: rdst ^= rsrc; Flags[ZF] = (rdst == 0); break;  // XOR
-      case 0x50: rdst *= rsrc; Flags[ZF] = (rdst == 0); break;  // MUL
+      case 0x00: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc; break;  // ADD
+      case 0x10: Flags[CF] = (rdst + rsrc > 255); rdst += rsrc + Flags[CF]; break;  // ADDC
+      case 0x20: rdst &= rsrc; break;  // AND
+      case 0x30: rdst |= rsrc; break;  // OR
+      case 0x40: rdst ^= rsrc; break;  // XOR
+      case 0x50: rdst *= rsrc; break;  // MUL
       // 0x60 is UNO op
       case 0x70: rdst = rsrc; break;   // MOV
       case 0x80: break;  // LPM operation must be here
       default: cout << "Unknown op for this switch: " << op << endl; break;
     }
+    if (op != 0x70)
+      Flags[ZF] = (rdst == 0);
     ActiveRegsBank()[acmd.dst()] = rdst;
     PrintRegs();
     ip++;
@@ -351,7 +365,6 @@ void Step(uint16_t cmd, uint16_t &ip) {
   } else if (op >= 0xF0 && op <= 0xFF) {  // BRANCH
     int16_t offset = ByteOffsetToInt(cmd & 0xFF);
     cout << BranchAddr(cmd, ip) << ", offs: " << offset << endl;
-    cout << "new ip: " << (ip + offset) << endl;
     switch (op) {
       case 0xF0: Stack.push(ip); ip += offset; break;     // CALL
       case 0xF1: ip += offset; break;                     // JMP
@@ -369,6 +382,7 @@ void Step(uint16_t cmd, uint16_t &ip) {
       case 0xFE: Stack.push(ip); ip = offset << 8; break; // AFCALL
       case 0xFF: ip++; break;                             // NOP
     }
+    cout << "new ip: " << ip << endl;
   } else {  // it's impossible I hope
     cout << "WTF?! Error opcode: " << op << endl;
   }
