@@ -505,14 +505,18 @@ class BranchCodeGen: public CodeGen {
         uint16_t label_addr = it->second;
         if (operation_ == bAFCALL) {
           if (label_addr % 256) {
-            ErrorCollector::GetInstance().err("Label address in far call must be a multiple of 256. Now addr: " + to_string(label_addr), line_number());
+            ErrorCollector::GetInstance().err(
+                "Label address in far call must be a multiple of 256. Now addr: "
+                + to_string(label_addr), line_number());
           }
           target_addr_ = label_addr >> 8;  // absolute address divided by 256
         } else {
           int offset = label_addr;
           offset -= address_;         // offset from current address
           if (offset > 127 || offset < -128)
-            ErrorCollector::GetInstance().err("Error: Label " + label_ + " is too far from this instruction: " + to_string(offset), line_number());
+            ErrorCollector::GetInstance().err(
+                "Error: Label " + label_ + " is too far from this instruction: "
+                + to_string(offset), line_number());
           else
             target_addr_ = offset & 0xFF;
         }
