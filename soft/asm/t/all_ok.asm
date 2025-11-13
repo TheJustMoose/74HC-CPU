@@ -23,7 +23,7 @@ lpmw r2, XI  ; r3:r2 := *X++
 ld   r3, Y
 ld   r3, YD - 4
 ld   r3, YI + 4
-in   r4, pin0
+in   r4, pins0
 out  port0, r5
 togl port1, r7
 st   ZI, r6

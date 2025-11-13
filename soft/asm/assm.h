@@ -159,8 +159,6 @@ class CodeLine {
       code_gen_->set_address(addr);
   }
 
-  std::map<int, std::string> get_err();
-
   int line_number() {
     return line_number_;
   }

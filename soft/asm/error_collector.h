@@ -8,13 +8,21 @@ class ErrorCollector {
  public:
   static ErrorCollector& GetInstance();
 
-  void rep(std::string msg, int line) {
+  void err(std::string msg, int line) {
     errors_[line] = msg;
+  }
+  void rep(std::string msg, int line) {
+    msgs_[line] = msg;
   }
 
   void clr(int line) {
-    if (errors_.find(line) != errors_.end())
-      errors_[line] = "";
+    auto eit = errors_.find(line);
+    if (eit != errors_.end())
+      errors_.erase(eit);
+
+    auto mit = msgs_.find(line);
+    if (msgs_.find(line) != msgs_.end())
+      msgs_.erase(mit);
   }
 
   std::map<int, std::string> get() {
@@ -24,6 +32,8 @@ class ErrorCollector {
   std::string get(int line) {
     if (errors_.find(line) != errors_.end())
       return errors_[line];
+    else if (msgs_.find(line) != msgs_.end())
+      return msgs_[line];
     else
       return "";
   }
@@ -34,4 +44,5 @@ class ErrorCollector {
 
  private:
   std::map<int, std::string> errors_;
+  std::map<int, std::string> msgs_;
 };
